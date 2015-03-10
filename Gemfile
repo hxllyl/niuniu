@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sprockets', '~> 3.0.0.beta'
 gem 'sprockets-es6', '~> 0.6.0'
 
+# 图片处理gem
+gem 'carrierwave'
+
 # code formatter
 # gem 'rubocop'
 

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # validates
 
   # tables relation
+  has_many :photos, as: :owner # 与图片类关联起来 处理用户图片
 
   # constants
 
