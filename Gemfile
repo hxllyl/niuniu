@@ -54,6 +54,11 @@ group :development, :test do
   
   gem 'rspec-rails', '~> 3.0'
   gem 'pry-rails'
+  
+  # fixtures replacement 
+  gem 'factory_girl_rails', '1.4.0'
+  gem 'database_cleaner'
+  gem 'capybara', '~> 2.3.0'
 
 end
 
