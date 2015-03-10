@@ -6,8 +6,8 @@
 class CreateBrands < ActiveRecord::Migration
   def change
     create_table :brands do |t|
-      t.column :name, String, limit: 40, null: false # 车辆名称
-      t.column :status, Integer
+      t.column :name, :string, limit: 40, null: false # 车辆名称
+      t.column :status, :integer
       t.timestamps null: false
     end
   end
