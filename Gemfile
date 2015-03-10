@@ -53,5 +53,15 @@ group :development, :test do
   #gem 'rubocop', git: 'git@github.com:bbatsov/rubocop.git', require: false
   
   gem 'rspec-rails', '~> 3.0'
+  gem 'pry-rails'
+
 end
 
+group :development do 
+  # A static analysis security vulnerability scanner 
+  gem 'brakeman', :require => false
+  # check N + 1 query
+  gem "bullet"
+  # find the dead routes and actions
+  gem 'traceroute'
+end
