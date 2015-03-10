@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310035022) do
+ActiveRecord::Schema.define(version: 20150310065452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,57 @@ ActiveRecord::Schema.define(version: 20150310035022) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id_id"
+    t.integer  "resource_id"
+    t.string   "resource_type", limit: 30
+    t.string   "content",       limit: 225, null: false
+    t.integer  "parent_id_id"
+    t.integer  "status"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",       limit: 225, null: false
+    t.integer  "area_id_id"
+    t.integer  "status"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "complaints", force: :cascade do |t|
+    t.integer  "resource_id"
+    t.string   "resource_type", limit: 30
+    t.integer  "user_id_id"
+    t.integer  "status"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "follow_ships", force: :cascade do |t|
     t.integer  "follower_id_id"
     t.integer  "following_id_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "history_lists", force: :cascade do |t|
+    t.integer  "user_id_id"
+    t.integer  "resource_id"
+    t.string   "resource_type", limit: 30
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "nodifications", force: :cascade do |t|
+    t.integer  "user_id_id"
+    t.string   "content",       limit: 225
+    t.integer  "status"
+    t.integer  "resource_id"
+    t.string   "resource_type", limit: 30
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -105,6 +151,15 @@ ActiveRecord::Schema.define(version: 20150310035022) do
     t.string   "encrpt_password", limit: 50
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+  end
+
+  create_table "valid_codes", force: :cascade do |t|
+    t.string   "mobile",     limit: 15, null: false
+    t.string   "code",       limit: 10, null: false
+    t.integer  "_type"
+    t.integer  "status"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end
