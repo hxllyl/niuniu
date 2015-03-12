@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310065452) do
+ActiveRecord::Schema.define(version: 20150311091518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,20 +138,41 @@ ActiveRecord::Schema.define(version: 20150310065452) do
     t.datetime "updated_at",                          null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name",            limit: 15,              null: false
-    t.string   "mobile",          limit: 15,              null: false
-    t.integer  "_type"
-    t.string   "company",         limit: 225
-    t.string   "role",            limit: 30
-    t.integer  "area_id_id"
-    t.integer  "level",                       default: 0
-    t.integer  "status",                      default: 0
-    t.string   "salt",            limit: 45,              null: false
-    t.string   "encrpt_password", limit: 50
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+  create_table "tokens", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "value",      limit: 50, null: false
+    t.datetime "expired_at"
+    t.integer  "status"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                   limit: 15,               null: false
+    t.string   "mobile",                 limit: 15,               null: false
+    t.integer  "_type"
+    t.string   "company",                limit: 225
+    t.string   "role",                   limit: 30
+    t.integer  "area_id_id"
+    t.integer  "level",                              default: 0
+    t.integer  "status",                             default: 0
+    t.string   "salt",                   limit: 45,               null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "valid_codes", force: :cascade do |t|
     t.string   "mobile",     limit: 15, null: false
