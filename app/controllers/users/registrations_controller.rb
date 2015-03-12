@@ -1,7 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
-
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  
   # GET /resource/sign_up
   # def new
   #   super
@@ -36,7 +37,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+  
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :mobile, :role, :company, :area_id) }
+  end
 
   # You can put the params you want to permit in the empty array.
   # def configure_sign_up_params
@@ -57,4 +62,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
 end

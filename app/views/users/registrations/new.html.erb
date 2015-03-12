@@ -11,7 +11,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 个字符以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>

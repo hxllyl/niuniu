@@ -1,0 +1,83 @@
+<div class="col-md-3 mainRight">
+	<div class="panel panel-default contentBox bgf8">
+		<div class="panel-body indexUser">
+			<div class="userInfo clearfix">
+				<div class="photo bfL"><a href="#"><%= image_tag("index/user_photo.jpg", alt: "")%></a></div>
+				<div class="name">
+					<h5><a href="#">李木子(上海)</a></h5>
+					<div class="clearfix"><span class="tag">个人</span></div>
+				</div>
+			</div>
+			<ul class="row userData">
+				<li class="col-md-4">
+					<p class="data"><a href="#">8888</a></p>
+					<p class="tt">我的寻车</p>
+				</li>
+				<li class="col-md-4">
+					<p class="data"><a href="#">8888</a></p>
+					<p class="tt">我的报价</p>
+				</li>
+				<li class="col-md-4 last">
+					<p class="data"><a href="#">8888</a></p>
+					<p class="tt">我的关注</p>
+				</li>
+			</ul>
+			<div class="userSubBtn">
+				<button type="button" class="btn btn-default btn-block red"><span class="icon"></span>发布寻车</button>
+				<button type="button" class="btn btn-default btn-block blue"><span class="icon"></span>发布资源</button>
+			</div>
+			<div class="userArr"></div>
+		</div>
+	</div>
+	<div class="panel panel-default contentBox bgf9">
+		<div class="panel-heading lineTitle">
+			<h3 class="panel-title">官方APP</h3>
+		</div>
+		<div class="panel-body indexAppDL">
+			<div class="appQR"></div>
+			<ul class="row appLink">
+				<li class="col-md-6">
+					<a class="btn btn-default" href="#" role="button">iPhone</a>
+				</li>
+				<li class="col-md-6">
+					<a class="btn btn-default" href="#" role="button">Android</a>
+				</li>
+			</ul>
+			<div class="tel clearfix">
+				<div class="icon"></div>
+				<div class="info">
+					<p><%= t('server_photo') %></p>
+					<p><strong>021-54843638</strong></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default contentBox">
+		<div class="panel-heading lineTitle">
+			<h3 class="panel-title">一键找车</h3>
+		</div>
+		<div class="panel-body">
+			<div class="indexSearch clearfix">
+				<input type="text" class="form-control input bfL" placeholder="品牌 车型 款式 指导价 …" />
+				<input type="submit" class="subBtn bfR" value="搜索" />
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default contentBox">
+		<div class="panel-heading lineTitle">
+			<h3 class="panel-title">品牌筛选</h3>
+		</div>
+		<div class="panel-body brandSelect">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">品牌<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
