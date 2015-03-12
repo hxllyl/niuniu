@@ -28,8 +28,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sprockets', '~> 3.0.0.beta'
 gem 'sprockets-es6', '~> 0.6.0'
 
-# 图片处理gem
+# 图片处理 gem
 gem 'carrierwave'
+gem 'mini_magick'
+
+# 用 devise 处理用户login
+gem 'devise'
 
 # code formatter
 # gem 'rubocop'
@@ -59,7 +63,7 @@ group :development, :test do
   gem 'pry-rails'
   
   # fixtures replacement 
-  gem 'factory_girl_rails', '1.4.0'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'database_cleaner'
   gem 'capybara', '~> 2.3.0'
 
