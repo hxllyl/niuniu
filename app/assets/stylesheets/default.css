@@ -1,0 +1,140 @@
+@charset "utf-8";
+/* CSS Document */
+body, dl, dd, h1, h2, h3, h4, h5, h6, p, form { margin: 0; }
+ol, ul, textarea { margin: 0; padding: 0; }
+body { font: 14px "Microsoft Yahei", Arial, Helvetica, sans-serif; line-height: normal!important; -webkit-text-size-adjust: none; color: #808080; background-color: #dadada; }
+dl, dt, dd, ul, ol, li { list-style-type: none; }
+h5, h6 { font-size: 100%; font-weight: normal; }
+address, caption, cite, code, dfn, em, th, var { font-style: normal; font-weight: 500; }
+select, input { font-size: 12px; vertical-align: middle; _vertical-align: baseline; outline: none; }
+input { padding: 0; border-radius: 0; -webkit-appearance: none; }
+input[type="checkbox"] { -webkit-appearance: checkbox; }
+input[type="radio"] { -webkit-appearance: radio; }
+textarea { resize: none; outline: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: none; }
+a { color: #808080; text-decoration: none; }
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+audio, canvas, video { display: inline-block; }
+audio:not([controls]) { display: none; }
+input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {
+border:none;
+padding:0;
+}/*firefox input text-align center*/
+.clearfix:after { content: "."; display: block; clear: both; height: 0; visibility: hidden; }
+.clearfix { zoom: 1; }
+/*
+**styles reset end && page style begin**
+*/
+.container { padding: 0; }
+/*top style*/
+#topBar { height: 47px; min-height: inherit; margin-bottom: 10px; border-width: 0 0 1px; border-radius: 0; box-shadow: none; background-color: #ededed; background-image: none; }
+#topBar .container { background-color: #ededed; }
+#topBar .nav li { padding: 0 2px; }
+#topBar .nav li a { height: 46px; line-height: 46px; padding: 0 18px; color: #808080; }
+#topBar .nav li a:hover { color: #f4621b; }
+#topBar .nav li a .icon { float: left; width: 26px; height: 46px; text-align: center; }
+#topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
+#topBar .navbar-nav-right { font-size: 12px; }
+#topBar .navbar-nav-right li { padding: 0; background: url(../imgs/line1x8.gif) no-repeat right center; }
+#topBar .navbar-nav-right li.last { background: none; }
+#topBar .navbar-nav-right li a { padding: 0 8px; }
+#topBar .navbar-nav-right li a .icon { width: 20px; }
+#topBar .navbar-nav-right li a .caret { margin-left: 8px; }
+#topBar .navbar-nav-right li.open>a { box-shadow: none; }
+/*index style*/
+.mainBox { padding-right: 5px; }
+.contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
+.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
+.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; }
+.carInfoTabs li a:hover { color: #f4621b; }
+.carInfoTabs li a .icon { float: left; width: 24px; height: 38px; }
+.carInfoTabs li.active a, .carInfoTabs li.active a:hover { padding: 0 22px; border-width: 0; border-top-width: 4px; border-color: #f4621b; color: #f4621b; }
+.contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
+.contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
+.carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
+.carInfoList li .logo { width: 46px; }
+.carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
+.carInfoList li .info .tt { margin-bottom: 8px; font-size: 14px; }
+.carInfoList li .info .tt a { color: #666666; }
+.hotCar { }
+.hotCar li { margin: 8px auto; }
+.hotCar li .box { padding: 5px; margin-bottom: 0; border-color: #e9e9e9; border-radius: 0; box-shadow: none; }
+.hotCar li .box img { border: 1px solid #e6e6e6; }
+.hotCar li .intro { line-height: 20px; padding: 4px; margin-top: 8px; font-size: 12px; color: #999999; }
+.hotCar li .intro .name { font-size: 14px; color: #666666; }
+.hotCar li .intro .name a { color: #666666; }
+.hotCar li .intro .price { font-size: 14px; color: #ff791f; }
+.newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
+.newCarSelect .dropdown-toggle { height: 34px; }
+.indexListTab { }
+.indexListTab th { height: 42px; border-bottom: 2px solid #e6e6e6; color: #333; }
+.indexListTab td { height: 38px; border-bottom: 1px solid #e6e6e6; color: #666; }
+.indexListTab tr.trBg { background-color: #f9f9f9; }
+.indexListTab a { color: #458cc7; }
+.indexListTab .sepLine { margin: 0 4px; color: #458cc7; }
+.moreLink { margin-top: 14px; font-size: 12px; }
+.moreLink a { color: #458cc7; }
+.mainRight { padding-left: 5px; }
+.indexUser { position: relative; }
+.indexUser .userInfo { margin-bottom: 30px; }
+.indexUser .userInfo .photo { width: 75px; height: 75px; margin-right: 16px; border-radius: 50%; overflow: hidden; }
+.indexUser .userInfo .name { display: table-cell; height: 75px; vertical-align: middle; }
+.indexUser .userInfo .name h5 a { color: #323232; }
+.indexUser .userInfo .name .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 8px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }
+.indexUser .userData { margin-bottom: 16px; }
+.indexUser .userData li { padding: 0 10px; text-align: center; background: url(../imgs/line1x20.gif) no-repeat right center; }
+.indexUser .userData li.last { background: none; }
+.indexUser .userData .data { font-size: 18px; color: #323232; }
+.indexUser .userData .data a { color: #323232; }
+.indexUser .userData .tt { font-size: 12px; color: #353535; }
+.indexUser .userSubBtn { }
+.indexUser .userSubBtn .btn { margin-bottom: 10px; border: none; font-size: 16px; }
+.indexUser .userSubBtn .btn .icon { }
+.indexUser .userSubBtn .btn.red { color: #FFF; background-color: #fd6443; }
+.indexUser .userSubBtn .btn.blue { color: #FFF; background-color: #5ac0de; }
+.indexUser .userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
+.indexAppDL .appQR { width: 114px; height: 114px; padding: 10px; margin: 0 auto 18px; border: 1px solid #e6e6e6; border-radius: 8px; background-color: #FFF; }
+.indexAppDL .appLink { margin: 0 -4px }
+.indexAppDL .appLink li { padding: 0 4px; }
+.indexAppDL .appLink li .btn { width: 100%; border-color: #e6e6e6; color: #1a1a1a; background-color: #f8f8f8; }
+.indexAppDL .tel { padding-bottom: 8px; margin-top: 24px; }
+.indexAppDL .tel .icon { }
+.indexAppDL .tel .info { line-height: 24px; color: #666; }
+.indexSearch { padding: 1px; border: 1px solid #cccccc; border-radius: 4px; }
+.indexSearch .input { width: 80%; line-height: 34px; border-width: 0; font-size: 12px; }
+.indexSearch .subBtn { width: 20%; height: 34px; line-height: 34px; border: 1px solid #46b8da; border-radius: 3px; text-align: center; color: #FFF; background-color: #5ac0de; }
+.brandSelect .btn-group { width: 100%; }
+.brandSelect .btn { width: 100%; text-align: left; }
+.brandSelect .btn .caret { float: right; margin-top: 8px; }
+/*foot style*/
+#foot { padding-bottom: 40px; }
+.copyright p { line-height: 24px; font-size: 12px; color: #1a1a1a; }
+.copyright p a { color: #1a1a1a; }
+/*
+**page style end && class reset begin**
+*/
+.hide { display: none; }
+.show { display: block; }
+.pRel { position: relative; }
+.pAbs { position: absolute; }
+.t0 { top: 0; }
+.r0 { right: 0; }
+.b0 { bottom: 0; }
+.l0 { left: 0; }
+.bfL { float: left; }
+.bfR { float: right; }
+.mt10 { margin-top: 10px; }
+.mt30 { margin-top: 30px; }
+.mr20 { margin-right: 20px; }
+.mb10 { margin-bottom: 10px; }
+.txtL { text-align: left; }
+.txtC { text-align: center; }
+.txtR { text-align: right; }
+.bgf8 { background-color: #f8f8f8; }
+.bgf9 { background-color: #f9f9f9; }
+/*
+**class reset end**
+*/
