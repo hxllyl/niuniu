@@ -28,6 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sprockets', '~> 3.0.0.beta'
 gem 'sprockets-es6', '~> 0.6.0'
 
+
 # code formatter
 # gem 'rubocop'
 

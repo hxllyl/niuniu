@@ -1,14 +1,50 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>NiuNiu</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<title>牛牛汽车</title>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
 </head>
 <body>
-
+<nav id="topBar" class="navbar navbar-default">
+	<div class="container topContent clearfix">
+		<h1 class="logo bfL"><a href="#"></a></h1>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#"><span class="icon"></span>首页</a></li>
+			<li><a href="#"><span class="icon"></span>我的资源</a></li>
+			<li><a href="#"><span class="icon"></span>市场资源</a></li>
+			<li><a href="#"><span class="icon"></span>我要寻车</a></li>
+			<li><a href="#"><span class="icon"></span>寻车信息</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-nav-right bfR">
+			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon"></span>李木子<span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Action</a></li>
+				</ul>
+			</li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon"></span>使用帮助<span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Action</a></li>
+				</ul>
+			</li>
+			<li class="last"><a href="#">联系客服</a></li>
+		</ul>
+	</div>
+</nav>
 <%= yield %>
-
+<footer id="foot">
+	<div class="container copyright">
+		<p>北京市公安局海淀分局网监中心备案编号：<a href="#" target="_blank">1101081535</a> | 电信与信息服务业务经营许可证：京ICP证070240号 | 中国互联网协会会员单位</p>
+		<p>京ICP备09113703号-1 | 信息网络传播视听节目许可证0110553号 | 广播电视节目制作经营许可证（京）字第1125号 | 测绘资质证</p>
+		<p>网站违法和不良信息举报电话：(86)-010-5985 7000</p>
+		<p>© 2004-2015 <a href="http://www.autohome.com.cn/" target="_blank">www.autohome.com.cn</a> All Rights Reserved. 汽车之家 版权所有</p>
+	</div>
+</footer>
+<script src="/assets/bootstrap.min.js"></script>
 </body>
 </html>
