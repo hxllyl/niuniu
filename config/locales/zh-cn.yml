@@ -3,5 +3,18 @@
 # author: depp.yu
 
 zh-CN:
-  niuniu: 牛牛汽车
+  default_title: 牛牛汽车
+  navigation: 导航
+  index:  首页
+  my_sources:  我的资源
+  market_sources: 市场资源
+  post: 我要寻车
+  post_info: 寻车信息
+  
+  # 首页文字信息
+  hot_resources: 热门车源
+  new_resources: 最新车源
+  resources_list: 资源表
+  server_photo: 欢迎拨打服务电话
+    
     
