@@ -59,7 +59,6 @@ padding:0;
 .carInfoTabs li.active a, .carInfoTabs li.active a:hover { padding: 0 22px; border-width: 0; border-top-width: 4px; border-color: #f4621b; color: #f4621b; }
 .contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
 .contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
-.carInfoList { height: 330px; }
 .carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
 .carInfoList li .logo { width: 46px; text-align: center; }
 .carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
@@ -102,12 +101,11 @@ padding:0;
 .indexUser .userSubBtn .btn.red { color: #FFF; background-color: #fd6443; }
 .indexUser .userSubBtn .btn.blue { color: #FFF; background-color: #5ac0de; }
 .indexUser .userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
-.indexAppDL { height: 278px; }
 .indexAppDL .appQR { width: 114px; height: 114px; padding: 10px; margin: 0 auto 18px; border: 1px solid #e6e6e6; border-radius: 8px; background-color: #FFF; }
 .indexAppDL .appLink { margin: 0 -4px }
 .indexAppDL .appLink li { padding: 0 4px; }
 .indexAppDL .appLink li .btn { width: 100%; border-color: #e6e6e6; color: #1a1a1a; background-color: #f8f8f8; }
-.indexAppDL .tel { padding-bottom: 8px; margin-top: 24px; }
+.indexAppDL .tel { padding-bottom: 4px; margin-top: 16px; }
 .indexAppDL .tel .icon { }
 .indexAppDL .tel .info { line-height: 24px; color: #666; }
 .indexSearch { padding: 1px; border: 1px solid #cccccc; border-radius: 4px; }

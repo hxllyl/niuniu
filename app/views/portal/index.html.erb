@@ -2,21 +2,15 @@
 	<div class="row">
 		<div class="col-md-9 mainBox">
 			<div class="banner mb10"><a href="#" target="_blank"><%= image_tag("index/banner.jpg", alt: "", width: "100%")%></a></div>
-
 			<%= render 'post_infos' %>
-
 			<%= render 'hot_resources' %>
-
 			<%= render 'new_resources' %>
-
 			<%= render 'resources' %>
-
 			<%= render 'right_bar' %>
 		</div>
 	</div>
-
-	<%= javascript_tag do %> 
-	$(document).ready(function(){
+<%= javascript_tag do %> 
+$(document).ready(function(){
 	$(".indexListTab").find("tr:odd").addClass("trBg");
 });
 <% end -%>  
