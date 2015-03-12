@@ -1,0 +1,51 @@
+# encoding: utf-8
+
+# author: depp.yu
+
+defaults: &defaults
+  token_expire_time: 1 # 单位（天）
+  navigations:
+    index: 
+      url: ''
+      name: 首页
+      position: 0
+    my_sources:
+      url: ''
+      name: 我的资源
+      position: 1
+    market_sources:
+      url: ''
+      name: 市场资源
+      position: 2
+    post:
+      url: ''
+      name: 我要寻车
+      position: 3
+    post_info:
+      url: ''
+      name: 寻车信息
+      position: 4
+  
+  user_info_dropmenus:
+    one:
+      url: ''
+      name: one
+    two:
+      url: ''
+      name: two
+    three:
+      url: ''
+      name: three 
+  
+development:
+  <<: *defaults
+  host: localhost:3000
+  
+test:
+  <<: *defaults
+  
+production:
+  <<: *defaults
+  host: localhost:3000    
+  
+    
