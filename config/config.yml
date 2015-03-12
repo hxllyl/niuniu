@@ -6,36 +6,33 @@ defaults: &defaults
   token_expire_time: 1 # 单位（天）
   navigations:
     index: 
-      url: ''
+      url: '#'
       name: 首页
       position: 0
     my_sources:
-      url: ''
+      url: '#'
       name: 我的资源
       position: 1
     market_sources:
-      url: ''
+      url: '#'
       name: 市场资源
       position: 2
     post:
-      url: ''
+      url: '#'
       name: 我要寻车
       position: 3
     post_info:
-      url: ''
+      url: '#'
       name: 寻车信息
       position: 4
   
   user_info_dropmenus:
     one:
-      url: ''
+      url: '#'
       name: one
     two:
-      url: ''
+      url: '#'
       name: two
-    three:
-      url: ''
-      name: three 
   
 development:
   <<: *defaults

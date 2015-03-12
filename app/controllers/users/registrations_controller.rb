@@ -1,7 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-# before_filter :configure_sign_up_params, only: [:create]
-# before_filter :configure_account_update_params, only: [:update]
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_filter :configure_sign_up_params, only: [:create]
+  before_filter :configure_account_update_params, only: [:update]
   
   # GET /resource/sign_up
   # def new
@@ -10,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super
+  #  super
   # end
 
   # GET /resource/edit
@@ -39,14 +38,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :mobile, :role, :company, :area_id) }
-  end
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :mobile, :role, :company, :area_id) }
+  # end
 
   # You can put the params you want to permit in the empty array.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.for(:sign_up) << :attribute
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:password, :password_confirmation, :name, 
+                                                            :email, :mobile, :role, :company, :role, 
+                                                            :area_id )
+                                             }
+  end
 
   # You can put the params you want to permit in the empty array.
   # def configure_account_update_params
@@ -54,9 +56,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    request.referer || '/'
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

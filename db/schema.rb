@@ -11,22 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312060231) do
+ActiveRecord::Schema.define(version: 20150311091518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "areas", force: :cascade do |t|
-    t.string   "name",         limit: 20, null: false
+    t.string   "name",       limit: 20, null: false
     t.integer  "level"
-    t.integer  "parent_id_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "parent_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "base_cars", force: :cascade do |t|
     t.decimal  "base_price",             precision: 10, scale: 2
-    t.integer  "brand_id_id"
+    t.integer  "brand_id"
     t.string   "outer_color", limit: 20
     t.string   "model",       limit: 30,                          null: false
     t.string   "inner_color", limit: 20
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150312060231) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
     t.string   "content",       limit: 225, null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150312060231) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 225, null: false
-    t.integer  "area_id_id"
+    t.integer  "area_id"
     t.integer  "status"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -67,21 +67,21 @@ ActiveRecord::Schema.define(version: 20150312060231) do
   create_table "complaints", force: :cascade do |t|
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.integer  "status"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
 
   create_table "follow_ships", force: :cascade do |t|
-    t.integer  "follower_id_id"
-    t.integer  "following_id_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "history_lists", force: :cascade do |t|
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
     t.datetime "created_at",               null: false
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20150312060231) do
   end
 
   create_table "nodifications", force: :cascade do |t|
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.string   "content",       limit: 225
     t.integer  "status"
     t.integer  "resource_id"
@@ -110,28 +110,28 @@ ActiveRecord::Schema.define(version: 20150312060231) do
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id_id"
     t.integer  "_type"
-    t.integer  "brand_id_id"
+    t.integer  "brand_id"
     t.string   "remark",            limit: 160
-    t.integer  "base_car_id_id"
-    t.integer  "standard",                                                           null: false
-    t.string   "model",             limit: 40,                                       null: false
+    t.integer  "base_car_id"
+    t.integer  "standard",                                                            null: false
+    t.string   "model",             limit: 40,                                        null: false
     t.string   "style",             limit: 60
-    t.string   "outer_color",       limit: 20,                                       null: false
-    t.string   "inner_color",       limit: 20,                                       null: false
-    t.string   "car_license_areas", limit: 60,                                       null: false
-    t.string   "car_in_areas",      limit: 60,                                       null: false
+    t.string   "outer_color",       limit: 20,                                        null: false
+    t.string   "inner_color",       limit: 20,                                        null: false
+    t.string   "car_license_areas", limit: 60,                                        null: false
+    t.string   "car_in_areas",                                           default: [], null: false, array: true
     t.integer  "take_car_date",                                          default: 0
     t.decimal  "expect_price",                  precision: 10, scale: 2
-    t.integer  "discouts_way",                                                       null: false
+    t.integer  "discouts_way",                                                        null: false
     t.decimal  "discounts_content",             precision: 10, scale: 2
     t.integer  "status"
-    t.datetime "created_at",                                                         null: false
-    t.datetime "updated_at",                                                         null: false
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
   end
 
   create_table "tenders", force: :cascade do |t|
-    t.integer  "post_id_id"
-    t.integer  "user_id_id"
+    t.integer  "post_id"
+    t.integer  "user_id"
     t.decimal  "price",      precision: 10, scale: 2
     t.integer  "status"
     t.datetime "created_at",                          null: false
@@ -153,10 +153,10 @@ ActiveRecord::Schema.define(version: 20150312060231) do
     t.integer  "_type"
     t.string   "company",                limit: 225
     t.string   "role",                   limit: 30
-    t.integer  "area_id_id"
+    t.integer  "area_id"
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
-    t.string   "salt",                   limit: 45,               null: false
+    t.jsonb    "contact"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "email",                              default: ""
@@ -171,7 +171,8 @@ ActiveRecord::Schema.define(version: 20150312060231) do
     t.inet     "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["mobile"], name: "index_users_on_mobile", unique: true, using: :btree
+  add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "valid_codes", force: :cascade do |t|

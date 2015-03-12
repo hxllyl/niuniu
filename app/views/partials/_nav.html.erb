@@ -3,15 +3,17 @@
 		<h1 class="logo bfL"><a href="#"><%= image_tag("logo.png", alt: "")%></a></h1>
 		<ul class="nav navbar-nav">
 			<% APP_CONFIG['navigations'].each do |k, v| %>
-			<li class=''><a href= <%= v['url'] %> ><span class='icon' ></span><%= v['name'] %></a></li>
+  			<li class=''><a href= <%= v['url'] %> ><span class='icon' ></span><%= v['name'] %></a></li>
 			<% end -%>
 		</ul>
 		<ul class="nav navbar-nav navbar-nav-right bfR">
 			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon"></span>李木子<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<% APP_CONFIG['user_info_dropmenus'].each do |k, v|%>
-					<li><a href= <%= v['url'] %> ><%= v['name'] %></a></li>
+					  <li><a href= <%= v['url'] %> ><%= v['name'] %></a></li>
 					<% end-%>
+          
+          <%= link_to t('sign_out'),  destroy_user_session_path(:html, current_user), method: :delete %>
 				</ul>
 			</li>
 			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon"></span>使用帮助<span class="caret"></span></a>

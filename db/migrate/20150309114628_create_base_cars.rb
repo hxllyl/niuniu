@@ -7,7 +7,7 @@ class CreateBaseCars < ActiveRecord::Migration
   def change
     create_table :base_cars do |t|
       t.column :base_price, :decimal, precision: 10, scale: 2 # 知道价钱，单位（元）
-      t.references :brand_id, class_name: 'Brand' # 车辆品牌
+      t.references :brand, class_name: 'Brand' # 车辆品牌
       t.column :outer_color, :string, limit: 20 # 外观
       t.column :model, :string, limit: 30, null: false # 车型
       t.column :inner_color, :string, limit: 20 # 内饰

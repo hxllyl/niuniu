@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, stretches: 20 
+         :recoverable, :rememberable, :trackable, :validatable 
 
   # validates
   validates :name, presence: true, length: { maximum: 30 }
@@ -42,5 +42,9 @@ class User < ActiveRecord::Base
   # class methods
 
   # instance methods
+  # devise 不用email
+  def email_required?
+    false
+  end
 
 end

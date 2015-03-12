@@ -6,7 +6,7 @@
 class CreateNodifications < ActiveRecord::Migration
   def change
     create_table :nodifications do |t|
-      t.references :user_id, class_name: 'User' # 被通知人
+      t.references :user, class_name: 'User' # 被通知人
       t.column :content, :string, limit: 225 # 通知内容
       t.column :status, :integer # 通知状态
       t.column :resource_id, :integer # 多态 object的id
