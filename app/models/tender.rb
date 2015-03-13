@@ -3,5 +3,5 @@
 class Tender < ActiveRecord::Base
 
   # relations
-  belongs: user, class_name: 'User'
+  belongs_to :user, class_name: 'User'
 end

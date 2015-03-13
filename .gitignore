@@ -17,7 +17,6 @@
 /config/unicorn.rb
 /config/mongoid.yml
 /config/uas.yml
-/config/services.yml
 /config/organization_structure.yml
 /config/*.sample
 /public/system
@@ -29,7 +28,6 @@
 /public/tmp
 .idea/
 unicorn.sh
-/public/tmp
 /TAGS
 /config/backup/.tmp
 /config/backup/.cache
@@ -39,6 +37,7 @@ unicorn.sh
 /config/conf/dk/.cdn_token_file.example
 .ruby-version
 .ruby-gemset
+.gitignore.swp
 
 # emacs
 \#*
