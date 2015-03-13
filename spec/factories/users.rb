@@ -8,8 +8,7 @@ FactoryGirl.define do
   trait :common do
     name
     mobile
-    salt "--test--"
-    encrpt_password Digest::SHA1.hexdigest("--test--")
+    # encrpt_password Digest::SHA1.hexdigest("--test--")
   end
   
   factory :personal_user do
