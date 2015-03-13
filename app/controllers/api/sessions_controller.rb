@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+# 用户登录
 class Api::SessionController < Devise::SessionsController
 
   # 用户登录
