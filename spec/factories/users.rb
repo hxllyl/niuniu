@@ -1,6 +1,6 @@
 require 'digest'
 
-FactoryGirl.define do
+FactoryGirl.define  do
   sequence(:mobile, 1000) {|n| "131#{n}#{n}"}
   sequence(:name){|n| "test#{n}" }
 
@@ -8,10 +8,12 @@ FactoryGirl.define do
   trait :common do
     name
     mobile
+    company 'lankr'
+    role 'normal'
     # encrpt_password Digest::SHA1.hexdigest("--test--")
   end
   
-  factory :personal_user do
+  factory :personal_user, class: User do
     common
     level 1
   end
