@@ -39,6 +39,7 @@ unicorn.sh
 /config/conf/dk/.cdn_token_file.example
 .ruby-version
 .ruby-gemset
+.gitignore.swp
 
 # emacs
 \#*
