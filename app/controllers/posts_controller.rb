@@ -5,6 +5,8 @@ class PostsController < ApplicationController
   end
 
   def new
+    # params[:_type] 资源类型 0 => 资源， 1 => 寻车
+    @post = Post.new(_type: params[:_type])
   end
 
   def create
