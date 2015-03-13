@@ -1,0 +1,27 @@
+# encoding: utf-8
+
+zh-CN:
+  activerecord:
+    models:
+      user: 用户
+    attributes:
+      user:
+        name: 用户名
+        mobile: 手机号码
+        company: 公司名称
+        area_id: 所在地
+        role: 用户角色
+        password: 登录密码
+        password_confirmation: 重复登录密码
+        
+     errors:
+       models:
+         user:
+           attributes:
+             name:
+               blank: 用户名不能未空
+               too_long: 用户名太长
+                
+         
+             
+      

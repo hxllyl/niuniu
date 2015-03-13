@@ -35,6 +35,9 @@ gem 'mini_magick'
 # 用 devise 处理用户login
 gem 'devise'
 
+# authorization user
+gem 'cancan'
+
 # code formatter
 # gem 'rubocop'
 

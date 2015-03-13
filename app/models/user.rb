@@ -42,9 +42,15 @@ class User < ActiveRecord::Base
   # class methods
 
   # instance methods
+  
   # devise 不用email
   def email_required?
     false
+  end
+  
+  # 判断是不是admin
+  def is_admin?
+    self.role == 'admin'
   end
 
 end
