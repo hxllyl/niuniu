@@ -4,13 +4,44 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
-/.bundle
-
-# Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
-/tmp
-config/database.yml
+.DS_Store
+.bundle
+.powrc
 .rvmrc
-public/uploads
+*~
+*.swp
+.code_swarm
+/config/database.yml
+/config/config.yml
+/config/services.yml
+/config/unicorn.rb
+/config/mongoid.yml
+/config/uas.yml
+/config/services.yml
+/config/organization_structure.yml
+/config/*.sample
+/public/system
+/public/uploads
+/public/kindeditor_uploads
+/public/assets
+/log/*
+/tmp/*
+/public/tmp
+.idea/
+unicorn.sh
+/public/tmp
+/TAGS
+/config/backup/.tmp
+/config/backup/.cache
+/config/backup/data
+/config/backup/log
+/.cdn_token_file
+/config/conf/dk/.cdn_token_file.example
+.ruby-version
+.ruby-gemset
+
+# emacs
+\#*
+\.\#*
+\~*
+
