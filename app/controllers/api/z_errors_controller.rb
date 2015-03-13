@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 # 错误码说明
 class Api::ZErrorsController < Api::BaseController
   # 错误码说明
