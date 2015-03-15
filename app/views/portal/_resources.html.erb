@@ -1,11 +1,11 @@
-<div class="panel panel-default contentBox">
-	<ul class="nav nav-tabs carInfoTabs">
-		<li role="presentation" class="active"><a href="#"><%= t('resources_list') %></a></li>
-		<li role="presentation"><a href="#">公司</a></li>
-		<li role="presentation"><a href="#">个人</a></li>
+<div role="tabpanel" class="panel panel-default contentBox">
+	<ul role="tablist" class="nav nav-tabs carInfoTabs">
+		<li role="presentation" class="active"><a href="#indexSTab"><%= t('resources_list') %></a></li>
+		<li role="presentation"><a href="#indexSTab_c">公司</a></li>
+		<li role="presentation"><a href="#indexSTab_p">个人</a></li>
 	</ul>
 	<div class="panel-body">
-		<div class="indexListTab">
+		<div role="tabpanel" class="tab-pane indexListTab active" id="indexSTab">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
 				<thead>
 					<tr>
@@ -89,6 +89,12 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div role="tabpanel" class="tab-pane indexListTab" id="indexSTab_c">
+			暂无数据
+		</div>
+		<div role="tabpanel" class="tab-pane indexListTab" id="indexSTab_p">
+			暂无数据
 		</div>
 		<div class="moreLink text-right"><a href="#">更多 >></a></div>
 	</div>

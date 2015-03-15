@@ -50,20 +50,22 @@ padding:0;
 .mainBox { padding-right: 5px; }
 .contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
 .banner { height: 152px; overflow: hidden; }
-.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
-.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; }
-.carInfoTabs li a:hover { color: #f4621b; }
-.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
-.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
-.carInfoTabs li.active a, .carInfoTabs li.active a:hover { padding: 0 22px; border-width: 0; border-top-width: 4px; border-color: #f4621b; color: #f4621b; }
-.contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
-.contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
+.nav-tabs.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
+.nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; }
+.nav-tabs.carInfoTabs li a:hover { color: #f4621b; }
+.nav-tabs.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
+.nav-tabs.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
+.nav-tabs.carInfoTabs li.active a { padding: 0 22px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.carInfoPane { min-height: 264px; }
 .carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
 .carInfoList li .logo { width: 46px; text-align: center; }
 .carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
 .carInfoList li .info .tt { margin-bottom: 8px; font-size: 14px; }
 .carInfoList li .info .tt a { color: #666666; }
-.hotCar { }
+.contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
+.contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
 .hotCar li { margin: 8px auto; }
 .hotCar li .box { padding: 5px; margin-bottom: 0; border-color: #e9e9e9; border-radius: 0; box-shadow: none; }
 .hotCar li .box img { border: 1px solid #e6e6e6; }
@@ -73,7 +75,7 @@ padding:0;
 .hotCar li .intro .price { font-size: 14px; color: #ff791f; }
 .newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
 .newCarSelect .dropdown-toggle { height: 34px; }
-.indexListTab { }
+.indexListTab { min-height: 434px; }
 .indexListTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
 .indexListTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
 .indexListTab a { color: #458cc7; }
@@ -93,12 +95,14 @@ padding:0;
 .indexUser .userData .data { font-size: 18px; color: #323232; }
 .indexUser .userData .data a { color: #323232; }
 .indexUser .userData .tt { font-size: 12px; color: #353535; }
-.indexUser .userSubBtn { }
 .indexUser .userSubBtn .btn { margin-bottom: 10px; border: none; font-size: 16px; }
 .indexUser .userSubBtn .btn .icon { }
 .indexUser .userSubBtn .btn.red { color: #FFF; background-color: #fd6443; }
 .indexUser .userSubBtn .btn.blue { color: #FFF; background-color: #5ac0de; }
 .indexUser .userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
+.indexLogin .form-group { margin: 0 0 10px; }
+.indexLogin .checkbox { padding-top: 0; color: #666; }
+.indexLogin .checkbox .forget a { text-decoration: underline; color: #ff791f; }
 .indexAppDL .appQR { width: 114px; height: 114px; padding: 10px; margin: 0 auto 18px; border: 1px solid #e6e6e6; border-radius: 8px; background-color: #FFF; }
 .indexAppDL .appLink { margin: 0 -4px }
 .indexAppDL .appLink li { padding: 0 4px; }
@@ -124,12 +128,12 @@ padding:0;
 .sourceForm .form-group .dropdown { margin-right: 60px; }
 .sourceForm .methodSelect { padding: 16px 0; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
 .sourceForm .methodSelect .tt { margin-bottom: 6px; color: #666; }
-.sourceForm .methodSelect .form-group { padding: 4px 0; }
+.sourceForm .methodSelect .form-group { height: 38px; padding: 4px 0; }
 .sourceForm .methodSelect .selectTag { float: left; font-weight: normal; color: #666; }
 .sourceForm .methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
 .sourceForm .methodSelect .selectTag span { float: left; width: 80px; }
 .sourceForm .methodSelect .selectTag span.current { color: #f4621b; }
-.sourceForm .methodSelect .selectInput { position: relative; margin-bottom: 0; }
+.sourceForm .methodSelect .selectInput { display: none; position: relative; margin-bottom: 0; }
 .sourceForm .methodSelect .selectInput .units { position: absolute; top: 0; right: 4px; height: 30px; line-height: 30px; font-size: 11px; -webkit-transform: scale(0.9); -o-transform: scale(1); -webkit-transform-origin: center; color: #9a9a9a; }
 .sourceForm .methodSelect .form-control { float: left; width: 162px; padding-right: 32px; border-color: #f4621b; }
 .sourceForm .sFormBox { padding: 20px 0; }
@@ -152,6 +156,9 @@ padding:0;
 /*input style*/
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
+.btn.w100p { width: 100%; }
+.btn.orange { border-color: #ff791f; color: #FFF; background-color: #ff791f; }
+.btn_spacing { padding-right: 2px; letter-spacing: 10px; }
 /*
 **page style end && class reset begin**
 */
