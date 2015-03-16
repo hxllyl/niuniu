@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/a', as: 'rails_admin'
   root 'portal#index'
 
   devise_for :users, controllers: {
