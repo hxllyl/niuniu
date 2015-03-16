@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # validates
   validates :name, presence: true, length: { maximum: 30 }
   validates :mobile, presence: true, format: { with:  /\A1(3|4|5|8|)\d{9}\z/ } 
-  validates :role, inclusion: { in: %w(normal admin) }
+  validates :role,  presence: true , inclusion: { in: %w(normal admin) }
   validates :company, presence: true, length: { maximum: 100 }
   validates :level, numericality: true, inclusion: { in: 0..3 }  
 
