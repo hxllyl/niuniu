@@ -64,6 +64,7 @@ padding:0;
 .carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
 .carInfoList li .info .tt { margin-bottom: 8px; font-size: 14px; }
 .carInfoList li .info .tt a { color: #666666; }
+.lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; font-size: 14px; font-weight: normal; background-color: #ededed; background-image: none; }
 .contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
 .contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
 .hotCar li { margin: 8px auto; }
@@ -76,10 +77,11 @@ padding:0;
 .newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
 .newCarSelect .dropdown-toggle { height: 34px; }
 .indexListTab { min-height: 434px; }
-.indexListTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
-.indexListTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
-.indexListTab a { color: #458cc7; }
-.indexListTab .sepLine { margin: 0 4px; color: #458cc7; }
+.sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
+.sourceTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
+.sourceTab td .price { color: #ff791f; }
+.sourceTab td a { color: #458cc7; }
+.sourceTab .sepLine { margin: 0 4px; color: #458cc7; }
 .moreLink { height: 18px; line-height: 18px; margin-top: 14px; font-size: 12px; }
 .moreLink a { color: #458cc7; }
 .mainRight { padding-left: 5px; }
@@ -110,9 +112,11 @@ padding:0;
 .indexAppDL .tel { padding-bottom: 4px; margin-top: 16px; }
 .indexAppDL .tel .icon { }
 .indexAppDL .tel .info { line-height: 24px; color: #666; }
-.indexSearch { padding: 1px; border: 1px solid #cccccc; border-radius: 4px; }
-.indexSearch .input { width: 80%; line-height: 34px; border-width: 0; font-size: 12px; }
-.indexSearch .subBtn { width: 20%; height: 34px; line-height: 34px; border: 1px solid #46b8da; border-radius: 3px; text-align: center; color: #FFF; background-color: #5ac0de; }
+.buttonInput { position: relative; }
+.buttonInput .input { font-size: 12px; }
+.buttonInput .subBtn { position: absolute; top: 2px; right: 2px; height: 30px; line-height: 30px; padding: 0 8px; border: 1px solid #46b8da; border-radius: 3px; text-align: center; color: #FFF; background-color: #5ac0de; }
+.brandSelect { padding-top: 5px; }
+.brandSelect .dropdown { margin-top: 10px; }
 /*subPage style*/
 .breadcrumb { padding: 0 15px; margin-bottom: 10px; color: #666; background-color: transparent; }
 .breadcrumb>li+li:before { color: #666; }
@@ -166,6 +170,19 @@ padding:0;
 .sourceForm .sFormBox .sFormArea .fileBtn .button { position: absolute; top: 0; left: 0; width: 100%; height: 34px; overflow: hidden; opacity: 0; filter: alpha(opacity=0); cursor: pointer; }
 .sourceForm .subGroup { padding-left: 64px; }
 .sourceForm .subGroup .btn-default.red { width: 200px; margin-right: 8px; border: none; font-size: 16px; color: #FFF; background-color: #f4621b; }
+/*modal style*/
+.modal.box { }
+.modal.box .modal-sm { width: 364px; }
+.modal.box .modal-content { border: 1px solid #ccc; border-radius: 0; box-shadow: none; background-color: #f8f8f8; }
+.modal.box .modal-header { padding: 0; }
+.modal.box .modal-header .modal-title .lineTitle { color: #333; }
+.modal.box .modal-header .close { margin: 8px 8px 0 0; }
+.modal.box .modal-body { padding: 15px 44px; }
+.modal.box .modal-body .dropdown .dropdown-toggle { font-size: 12px; color: #999; }
+.modal.box .modal-body .checkbox a { padding-left: 20px; text-decoration: underline; color: #ff791f; }
+.modal.box .modal-body .checkbox input { margin-left: 0; }
+.modal.box .modal-body input { font-size: 12px; }
+.modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 10px; -webkit-transform: scale(0.8); -o-transform: scale(1); -webkit-transform-origin: left top; }
@@ -194,6 +211,8 @@ padding:0;
 .l0 { left: 0; }
 .bfL { float: left; }
 .bfR { float: right; }
+.pr50 { padding-right: 50px; }
+.pr84 { padding-right: 84px; }
 .mt-20 { margin-top: -20px; }
 .mt10 { margin-top: 10px; }
 .mt30 { margin-top: 30px; }
