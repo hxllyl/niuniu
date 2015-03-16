@@ -17,5 +17,8 @@ zh-CN:
   resources_list: 资源表
   server_photo: 欢迎拨打服务电话
   sign_out: 安全退出账号
+  datetime:
+    distance_in_words:
+      about_x_hours: "%{count}小时"
     
     

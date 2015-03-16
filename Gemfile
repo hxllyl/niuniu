@@ -90,3 +90,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'quiet_assets'
 end
+
+
+# simple admin
+gem 'rails_admin', git: "https://github.com/sferik/rails_admin.git", branch: 'master'
