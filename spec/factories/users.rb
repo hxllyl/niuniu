@@ -9,6 +9,7 @@ FactoryGirl.define  do
     name
     mobile
     company 'lankr'
+    password '12345678'
     role 'normal'
     # encrpt_password Digest::SHA1.hexdigest("--test--")
   end
