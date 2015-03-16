@@ -4,7 +4,7 @@ require 'pty'
 
 namespace :init_data do
   
-  # init database and run migrations
+  desc "init database and run migrations"
   task create_database: :environment do
     cmds = ['rake db:drop', 'rake db:create', 'rake db:migrate']
     

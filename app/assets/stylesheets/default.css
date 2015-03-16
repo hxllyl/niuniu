@@ -118,7 +118,24 @@ padding:0;
 .breadcrumb>li+li:before { color: #666; }
 .breadcrumb>.active { color: #666; }
 .breadcrumb a { color: #428cca; }
-/*sourcePost style*/
+/*source style*/
+.mySourceOpe .updateTime { line-height: 34px; font-size: 12px; color: #313131; }
+.mySourceTab { margin: auto -15px; border-bottom: 1px solid #e6e6e6; }
+.mySourceTab .table { margin-bottom: 0; }
+.mySourceTab .table>tbody>tr>td { position: relative; line-height: 24px; padding: 8px 15px; color: #666; }
+.mySourceTab .box { position: relative; }
+.mySourceTab .infoM { padding-right: 180px; }
+.mySourceTab .infoM .name { line-height: 24px; }
+.mySourceTab .infoM .name a { font-weight: bold; color: #333; }
+.mySourceTab .infoPrice { position: absolute; top: 0; right: 0; width: 180px; text-align: right; }
+.mySourceTab .infoPrice .price { margin-right: 8px; font-size: 18px; font-weight: bold; color: #ff791f; }
+.mySourceTab .infoPrice .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; }
+.mySourceTab .remark .info { min-height: 24px; margin-left: 50px; }
+.mySourceTab .table>tbody>tr>td .btnGroups { display: none; position: absolute; top: 50%; right: 170px; margin-top: -11px; }
+.mySourceTab .table>tbody>tr>td .btnGroups .btn { padding: 1px 10px; margin: auto 4px; }
+.pageList { position: relative; left: 50%; margin-top: 15px; margin-bottom: 0; margin-left: -122px; }
+.pageList li a { color: #428cca; }
+.pageList>.active>a, .pageList>.active>a:focus, .pageList>.active>a:hover, .pageList>.active>span, .pageList>.active>span:focus, .pageList>.active>span:hover { border: 1px solid #ddd; color: #2a6496; background-color: #ebebeb; }
 .sourceForm { margin: -16px 0 0; }
 .sourceForm .row { margin: 0; border-top: 1px solid #e6e6e6; }
 .sourceForm .row.first { border-top: none; }
@@ -128,6 +145,7 @@ padding:0;
 .sourceForm .form-group .dropdown { margin-right: 60px; }
 .sourceForm .methodSelect { padding: 16px 0; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
 .sourceForm .methodSelect .tt { margin-bottom: 6px; color: #666; }
+.sourceForm .methodSelect .tt .col-md-6 { padding: 0; }
 .sourceForm .methodSelect .form-group { height: 38px; padding: 4px 0; }
 .sourceForm .methodSelect .selectTag { float: left; font-weight: normal; color: #666; }
 .sourceForm .methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
@@ -156,9 +174,13 @@ padding:0;
 /*input style*/
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
+.btn .icon { display: inline-block; width: 22px; height: 22px; margin-top: -2px; margin-right: 8px; margin-bottom: -2px; vertical-align: middle; }
+.btn .caret { margin-left: 8px; }
 .btn.w100p { width: 100%; }
 .btn.orange { border-color: #ff791f; color: #FFF; background-color: #ff791f; }
+.btn.blue { border-color: #5ac0de; color: #FFF; background-color: #5ac0de; }
 .btn_spacing { padding-right: 2px; letter-spacing: 10px; }
+.btn.p0 { padding-right: 0; padding-left: 0; }
 /*
 **page style end && class reset begin**
 */
@@ -175,6 +197,7 @@ padding:0;
 .mt-20 { margin-top: -20px; }
 .mt10 { margin-top: 10px; }
 .mt30 { margin-top: 30px; }
+.mr14 { margin-right: 14px; }
 .mr20 { margin-right: 20px; }
 .mb10 { margin-bottom: 10px; }
 .txtL { text-align: left; }

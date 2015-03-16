@@ -59,10 +59,10 @@
 		<div class="appQR"><%= image_tag("index/app_qr.jpg", alt: "", width: "100%")%></div>
 		<ul class="row appLink">
 			<li class="col-md-6">
-				<a class="btn btn-default" href="#" role="button">iPhone</a>
+				<a class="btn btn-default p0" href="#" role="button"><span class="icon"></span>iPhone</a>
 			</li>
 			<li class="col-md-6">
-				<a class="btn btn-default" href="#" role="button">Android</a>
+				<a class="btn btn-default p0" href="#" role="button"><span class="icon"></span>Android</a>
 			</li>
 		</ul>
 		<div class="tel clearfix">
@@ -90,9 +90,15 @@
 		<h3 class="panel-title">品牌筛选</h3>
 	</div>
 	<div class="panel-body">
-    <select name="" class="selectpicker" data-width="100%">
-			<option value="奔驰">奔驰</option>
-			<option value="宝马">宝马</option>
-		</select>
+    <div class="dropdown w100p">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">品牌<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+      </ul>
+    </div>
 	</div>
 </div>
