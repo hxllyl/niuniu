@@ -9,5 +9,5 @@ class Post < ActiveRecord::Base
   
   # relations
   belongs_to :user, class_name: 'User'
-  has_many :tenders, class_name: 'Tender'
+  has_many :tenders, -> {where(_type: TYPES[2])}, class_name: 'Tender'
 end
