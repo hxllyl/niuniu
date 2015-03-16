@@ -12,8 +12,10 @@ Rails.application.routes.draw do
                                   }
 
   resources :users do
-    resources :posts
+    resources :my_posts
   end
+
+  resources :posts
 
   namespace :api do
     devise_scope :user do
