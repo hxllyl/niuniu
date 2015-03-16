@@ -5,7 +5,8 @@ require 'util'
 
 namespace :util do
   include ::Util::ImportFile
-  
+
+  desc "数据导入"
   task import: :environment do
     file_path = "#{Rails.root}/doc/base_car_data.xlsx"
 
