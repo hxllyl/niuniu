@@ -24,4 +24,18 @@ namespace :init_data do
 
   end
   
+  task init_test_data: :environment do
+    ha = {
+      name: 'test',
+      role: User::ROLES[0],
+      level: User::LEVELS[0],
+      status: User::STATUS[0],
+      password: '123456',
+      company: 'test'
+    }
+    user = User.create( ha )
+    
+    admin = User.create( ha.merge!(role: User::ROLES[1]))
+  end
+  
 end
