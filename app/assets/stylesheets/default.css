@@ -33,10 +33,9 @@ padding:0;
 #topBar { height: 47px; min-height: inherit; margin-bottom: 10px; border-width: 0 0 1px; border-radius: 0; box-shadow: none; background-color: #ededed; background-image: none; }
 #topBar.fixed { position: fixed; top: 0; left: 0; z-index: 100; width: 100%; box-shadow: 0px 4px 4px #c7c7c7; }
 #topBar .container { background-color: #ededed; }
-#topBar .logo { width: 96px; height: 46px; }
-#topBar .logo a { display: table-cell; width: 96px; height: 46px; text-align: center; vertical-align: middle; }
-#topBar .nav li { padding: 0 2px; }
-#topBar .nav li a { height: 46px; line-height: 46px; padding: 0 18px; color: #808080; }
+#topBar .logo { width: 160px; height: 46px; }
+#topBar .logo a { display: table-cell; width: 160px; height: 46px; text-align: center; vertical-align: middle; }
+#topBar .nav li a { height: 46px; line-height: 46px; padding: 0 16px; color: #808080; }
 #topBar .nav li a:hover { color: #f4621b; }
 #topBar .nav li a .icon { float: left; width: 26px; height: 46px; text-align: center; }
 #topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
@@ -51,20 +50,22 @@ padding:0;
 .mainBox { padding-right: 5px; }
 .contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
 .banner { height: 152px; overflow: hidden; }
-.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
-.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; }
-.carInfoTabs li a:hover { color: #f4621b; }
-.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
-.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
-.carInfoTabs li.active a, .carInfoTabs li.active a:hover { padding: 0 22px; border-width: 0; border-top-width: 4px; border-color: #f4621b; color: #f4621b; }
-.contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
-.contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
+.nav-tabs.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
+.nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; }
+.nav-tabs.carInfoTabs li a:hover { color: #f4621b; }
+.nav-tabs.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
+.nav-tabs.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
+.nav-tabs.carInfoTabs li.active a { padding: 0 22px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.carInfoPane { min-height: 264px; }
 .carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
 .carInfoList li .logo { width: 46px; text-align: center; }
 .carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
 .carInfoList li .info .tt { margin-bottom: 8px; font-size: 14px; }
 .carInfoList li .info .tt a { color: #666666; }
-.hotCar { }
+.contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
+.contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
 .hotCar li { margin: 8px auto; }
 .hotCar li .box { padding: 5px; margin-bottom: 0; border-color: #e9e9e9; border-radius: 0; box-shadow: none; }
 .hotCar li .box img { border: 1px solid #e6e6e6; }
@@ -74,16 +75,15 @@ padding:0;
 .hotCar li .intro .price { font-size: 14px; color: #ff791f; }
 .newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
 .newCarSelect .dropdown-toggle { height: 34px; }
-.indexListTab { }
-.indexListTab th { height: 42px; border-bottom: 2px solid #e6e6e6; color: #333; }
-.indexListTab td { height: 38px; border-bottom: 1px solid #e6e6e6; color: #666; }
-.indexListTab tr.trBg { background-color: #f9f9f9; }
+.indexListTab { min-height: 434px; }
+.indexListTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
+.indexListTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
 .indexListTab a { color: #458cc7; }
 .indexListTab .sepLine { margin: 0 4px; color: #458cc7; }
 .moreLink { height: 18px; line-height: 18px; margin-top: 14px; font-size: 12px; }
 .moreLink a { color: #458cc7; }
 .mainRight { padding-left: 5px; }
-.indexUser { position: relative; height: 274px; }
+.indexUser { position: relative; }
 .indexUser .userInfo { margin-bottom: 30px; }
 .indexUser .userInfo .photo { width: 75px; height: 75px; margin-right: 16px; border-radius: 50%; overflow: hidden; }
 .indexUser .userInfo .name { display: table-cell; height: 75px; vertical-align: middle; }
@@ -95,12 +95,14 @@ padding:0;
 .indexUser .userData .data { font-size: 18px; color: #323232; }
 .indexUser .userData .data a { color: #323232; }
 .indexUser .userData .tt { font-size: 12px; color: #353535; }
-.indexUser .userSubBtn { }
 .indexUser .userSubBtn .btn { margin-bottom: 10px; border: none; font-size: 16px; }
 .indexUser .userSubBtn .btn .icon { }
 .indexUser .userSubBtn .btn.red { color: #FFF; background-color: #fd6443; }
 .indexUser .userSubBtn .btn.blue { color: #FFF; background-color: #5ac0de; }
 .indexUser .userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
+.indexLogin .form-group { margin: 0 0 10px; }
+.indexLogin .checkbox { padding-top: 0; color: #666; }
+.indexLogin .checkbox .forget a { text-decoration: underline; color: #ff791f; }
 .indexAppDL .appQR { width: 114px; height: 114px; padding: 10px; margin: 0 auto 18px; border: 1px solid #e6e6e6; border-radius: 8px; background-color: #FFF; }
 .indexAppDL .appLink { margin: 0 -4px }
 .indexAppDL .appLink li { padding: 0 4px; }
@@ -111,13 +113,52 @@ padding:0;
 .indexSearch { padding: 1px; border: 1px solid #cccccc; border-radius: 4px; }
 .indexSearch .input { width: 80%; line-height: 34px; border-width: 0; font-size: 12px; }
 .indexSearch .subBtn { width: 20%; height: 34px; line-height: 34px; border: 1px solid #46b8da; border-radius: 3px; text-align: center; color: #FFF; background-color: #5ac0de; }
-.brandSelect .btn-group { width: 100%; }
-.brandSelect .btn { width: 100%; text-align: left; }
-.brandSelect .btn .caret { float: right; margin-top: 8px; }
+/*subPage style*/
+.breadcrumb { padding: 0 15px; margin-bottom: 10px; color: #666; background-color: transparent; }
+.breadcrumb>li+li:before { color: #666; }
+.breadcrumb>.active { color: #666; }
+.breadcrumb a { color: #428cca; }
+/*sourcePost style*/
+.sourceForm { margin: -16px 0 0; }
+.sourceForm .row { margin: 0; border-top: 1px solid #e6e6e6; }
+.sourceForm .row.first { border-top: none; }
+.sourceForm .form-group { padding: 16px 0; margin: 0; }
+.sourceForm .form-group .control-label { width: 64px; line-height: 30px; padding: 0 4px; text-align: left; font-weight: normal; color: #666; }
+.sourceForm .form-group .inputBox { padding: 0; }
+.sourceForm .form-group .dropdown { margin-right: 60px; }
+.sourceForm .methodSelect { padding: 16px 0; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
+.sourceForm .methodSelect .tt { margin-bottom: 6px; color: #666; }
+.sourceForm .methodSelect .form-group { height: 38px; padding: 4px 0; }
+.sourceForm .methodSelect .selectTag { float: left; font-weight: normal; color: #666; }
+.sourceForm .methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
+.sourceForm .methodSelect .selectTag span { float: left; width: 80px; }
+.sourceForm .methodSelect .selectTag span.current { color: #f4621b; }
+.sourceForm .methodSelect .selectInput { display: none; position: relative; margin-bottom: 0; }
+.sourceForm .methodSelect .selectInput .units { position: absolute; top: 0; right: 4px; height: 30px; line-height: 30px; font-size: 11px; -webkit-transform: scale(0.9); -o-transform: scale(1); -webkit-transform-origin: center; color: #9a9a9a; }
+.sourceForm .methodSelect .form-control { float: left; width: 162px; padding-right: 32px; border-color: #f4621b; }
+.sourceForm .sFormBox { padding: 20px 0; }
+.sourceForm .sFormBox .sFormTag { width: 64px; padding-top: 8px; color: #666; }
+.sourceForm .sFormBox .sFormArea { margin-left: 64px; }
+.sourceForm .sFormBox .addImgGroups li { padding-right: 24px; }
+.sourceForm .sFormBox .addImgGroups li .box { padding: 0; margin-bottom: 0; margin-left: -15px; border: none; box-shadow: none; background-color: transparent; }
+.sourceForm .sFormBox .addImgGroups li .box .img { position: relative; width: 100%; min-height: 80px; color: #666; background-color: #e6e6e6; }
+.sourceForm .sFormBox .addImgGroups li .box .img .alt { position: absolute; z-index: 0; top: 50%; left: 0; width: 100%; height: 20px; line-height: 20px; margin-top: -10px; text-align: center; }
+.sourceForm .sFormBox .addImgGroups li .box .img img { position: relative; z-index: 1; }
+.sourceForm .sFormBox .sFormArea .fileBtn { position: relative; height: 34px; line-height: 34px; margin-top: 6px; border: 1px solid #e6e6e6; border-radius: 4px; text-align: center; background-color: #f8f8f8; }
+.sourceForm .sFormBox .sFormArea .fileBtn .button { position: absolute; top: 0; left: 0; width: 100%; height: 34px; overflow: hidden; opacity: 0; filter: alpha(opacity=0); cursor: pointer; }
+.sourceForm .subGroup { padding-left: 64px; }
+.sourceForm .subGroup .btn-default.red { width: 200px; margin-right: 8px; border: none; font-size: 16px; color: #FFF; background-color: #f4621b; }
 /*foot style*/
 #foot { padding-bottom: 40px; }
-.copyright p { line-height: 24px; font-size: 12px; color: #1a1a1a; }
+.copyright { font-size: 10px; -webkit-transform: scale(0.8); -o-transform: scale(1); -webkit-transform-origin: left top; }
+.copyright p { line-height: 24px; color: #1a1a1a; }
 .copyright p a { color: #1a1a1a; }
+/*input style*/
+.dropdown.w100p .btn { width: 100%; text-align: left; }
+.dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
+.btn.w100p { width: 100%; }
+.btn.orange { border-color: #ff791f; color: #FFF; background-color: #ff791f; }
+.btn_spacing { padding-right: 2px; letter-spacing: 10px; }
 /*
 **page style end && class reset begin**
 */
@@ -131,6 +172,7 @@ padding:0;
 .l0 { left: 0; }
 .bfL { float: left; }
 .bfR { float: right; }
+.mt-20 { margin-top: -20px; }
 .mt10 { margin-top: 10px; }
 .mt30 { margin-top: 30px; }
 .mr20 { margin-right: 20px; }

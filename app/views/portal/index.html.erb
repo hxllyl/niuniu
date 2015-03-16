@@ -6,11 +6,16 @@
 			<%= render 'hot_resources' %>
 			<%= render 'new_resources' %>
 			<%= render 'resources' %>
+		</div>
+		<div class="col-md-3 mainRight">
 			<%= render 'right_bar' %>
 		</div>
 	</div>
-<%= javascript_tag do %> 
-$(document).ready(function(){
-	$(".indexListTab").find("tr:odd").addClass("trBg");
-});
-<% end -%>  
+</div>
+<%= javascript_tag do %>
+$(".nav-tabs a").click(function (e) {
+	e.preventDefault();
+	$(this).tab("show");
+})
+$(".selectpicker").selectpicker();
+<% end -%>
