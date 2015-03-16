@@ -1,21 +1,38 @@
 # encoding: utf-8
 
-# 用户登录
-class Api::SessionController < Devise::SessionsController
+class Api::SessionsController < Devise::SessionsController
+  skip_before_filter  :verify_authenticity_token
 
-  # 用户登录
-  #
-  # Params:
-  #   mobile:       [String] 存档键
-  #   password:     [String] 存档值
-  #
-  # Return:
-  #   success: [JSON] {:status=>true}
-  #   fail:    [JSON] {:status=>false, :error=> 1000}
+  respond_to :json
+
   def create
-    resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#new")
-    set_flash_message(:notice, :signed_in) if is_navigational_format?
-    sign_in(resource_name, resource)
+    warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
+    render json:  {
+                    status:   200,
+                    success:  true,
+                    info:     "Logged in",
+                    data:     {auth_token: current_user.authentication_token}
+                  }
+  end
+
+  def destroy
+    warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
+    current_user.update_column(:authentication_token, nil)
+    render json:  {
+                    status:   200,
+                    success:  true,
+                    info:     "Logged out",
+                    data:     {}
+                  }
+  end
+
+  def failure
+    render json:  {
+                    status:   401,
+                    success:  false,
+                    info:     "Login Failed",
+                    data:     {}
+                  }
   end
 
 end
