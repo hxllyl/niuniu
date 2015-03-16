@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
   has_many :tenders, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
   has_many :tokens, class_name: 'Token' # 用于api验证
+  has_many :follower_ships, foreign_key: :following_id, class_name: 'FollowShip' # 关注关系
+  has_many :followers, through: :follower_ships, source: :follower
+  has_many :following_ships, foreign_key: :follower_id, class_name: 'FollowShip' # 关注关系
+  has_many :followings, through: :following_ships, source: :following 
   
   belongs_to :area, class_name: 'Area'
   
