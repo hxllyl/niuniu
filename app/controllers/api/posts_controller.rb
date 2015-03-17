@@ -26,4 +26,15 @@ class Api::PostsController < Api::BaseController
       render json: {status: true, notice: 'not_found', data: {}}
     end
   end
+
+  # 创建资源或寻车
+  def create
+    post = Post.new(params[:post])
+
+    if post.create
+      render json: {status: true, notice: 'successed'}
+    else
+      render json: {status: false, notice: 'failure', data: {errors: post.errors}}
+    end
+  end
 end

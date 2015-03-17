@@ -28,9 +28,17 @@ Rails.application.routes.draw do
       post    'registrations' => 'registrations#create',  :as => 'register'
     end
     namespace :posts do
-      get :list
-      get :my_list
-      get :show
+      get   :list
+      get   :my_list
+      get   :show
+      post  :create
+    end
+
+    namespace :follow_ships do
+      get :my_followers
+      get :my_followings
+      get :joint_followers
+      get :joint_followings
     end
   end
 

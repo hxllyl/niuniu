@@ -48,26 +48,26 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
-  
+
   # class methods
-  
-    
-  
+
+
+
   # instance methods
-  
+
   # 定义用户的各种类型图片
   %w(avatar identity hand_id visiting room_outer room_inner license).each do |m|
     unless User.respond_to?(m.to_sym)
       User.class_eval do
-        case m 
+        case m
         when 'avatar' then
-          define_method m.to_sym do  
+          define_method m.to_sym do
             self.photos.where(_type: m).first || AVATAR
           end
         else
-          define_method m.to_sym do  
-            self.photos.where(_type: m) 
-          end   
+          define_method m.to_sym do
+            self.photos.where(_type: m)
+          end
         end
       end
     end
@@ -87,18 +87,18 @@ class User < ActiveRecord::Base
   def token
     self.tokens.first
   end
-  
+
   # 我的资源和寻车
   def resources(type)
     type == :source ? ::Post::TYPES.keys[0] : ::Post::TYPES.keys[1]
     self.posts.where(_type: type)
   end
-  
+
   # 我的等级
   def i_level
     ::User::LEVELS[self.level]
   end
-   
+
   # callback define codes bottom
   after_create :gen_token # 在用户完成注册时生成一个token
   def gen_token
@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
     token = self.tokens.build(value: Digest::SHA1.hexdigest(salt))
     token.save
   end
-  
+
   # token 用于api验证 目前使用第一个
   def token
     self.tokens.first
@@ -114,6 +114,16 @@ class User < ActiveRecord::Base
 
   def skip_confirmation!
     self.current_sign_in_at = Time.now
+  end
+
+  # 关注我的人
+  def followers
+    FollowShip.where(following_id: id).map(&:follower)
+  end
+
+  # 我关注的人
+  def followings
+    FollowShip.where(follower_id: id).map(&:following)
   end
 
 end
