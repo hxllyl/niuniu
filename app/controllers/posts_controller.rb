@@ -8,6 +8,12 @@ class PostsController < ApplicationController
     @posts = Post.where(_type: params[:_type])
   end
 
+  # 资源列表点击品牌进入资源列表页
+  def resources_list
+
+  end
+
   def show
+    @_type = params[:_type]
   end
 end
