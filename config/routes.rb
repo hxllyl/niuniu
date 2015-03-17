@@ -33,6 +33,13 @@ Rails.application.routes.draw do
       get   :show
       post  :create
     end
+
+    namespace :follow_ships do
+      get :my_followers
+      get :my_followings
+      get :joint_followers
+      get :joint_followings
+    end
   end
 
 end
