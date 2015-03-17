@@ -1,0 +1,14 @@
+# encoding: utf-8
+
+zh-CN:
+  i_post: 我的寻车
+  i_tender: 我的报价
+  i_following: 我的关注
+  post: 发布寻车
+  resource: 发布资源
+  
+  login: 请您登录
+  remember_me: 记住用户名
+  forget_pw: 忘记密码
+  select_brand: 品牌筛选
+  brand: 品牌

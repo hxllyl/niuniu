@@ -2,7 +2,7 @@
 
 # author: depp.yu
 
-zh-CN:
+zh-CN:      
   activerecord:
     models:
       user: 用户
@@ -14,7 +14,7 @@ zh-CN:
         area_id: 所在地
         role: 用户角色
         password: 登录密码
-        password_confirmation: 重复登录密码
+        password_confirmation: 重复登录密码  
       
     errors:
       models:
@@ -36,6 +36,7 @@ zh-CN:
               confirmation: 两次密码输入不一致
             role:
               inclusion: 用户角色不正确
+              
                    
          
              

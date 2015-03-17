@@ -5,6 +5,12 @@ require 'util'
 
 namespace :util do
   include ::Util::ImportFile
+  
+  desc '系统初始化数据'
+  task import_init_datas: :environment do
+    Rake::Task["util:import"].invoke
+    Rake::Task["util:import_areas"].invoke
+  end
 
   desc "数据导入"
   task import: :environment do

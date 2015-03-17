@@ -19,6 +19,5 @@ zh-CN:
   sign_out: 安全退出账号
   datetime:
     distance_in_words:
-      about_x_hours: "%{count}小时"
-    
+      about_x_hours: "%{count}小时"     
     
