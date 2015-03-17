@@ -64,6 +64,9 @@ padding:0;
 .carInfoList li .info .tt { margin-bottom: 8px; font-size: 14px; }
 .carInfoList li .info .tt a { color: #666666; }
 .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; font-size: 14px; font-weight: normal; background-color: #ededed; background-image: none; }
+.lineTitle .more { font-size: 12px; color: #458cc7; }
+.lineTitle .link { padding: 0 4px; font-size: 18px; color: #ff791f; }
+.lineTitle .date { font-size: 12px; color: #666; }
 .contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
 .contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
 .hotCar li { margin: 8px auto; }
@@ -90,7 +93,10 @@ padding:0;
 .indexUser .userInfo .photo { width: 75px; height: 75px; margin-right: 16px; border-radius: 50%; overflow: hidden; }
 .indexUser .userInfo .name { display: table-cell; height: 75px; vertical-align: middle; }
 .indexUser .userInfo .name h5 a { color: #323232; }
-.indexUser .userInfo .name .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 8px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }
+.indexUser .userInfo .name .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }
+.indexUser .userInfo .glyphicon { margin-right: 6px; }
+.indexUser .userDetail { line-height: 24px; color: #666; }
+.indexUser .userDetail p span, .indexUser .userDetail p strong { color: #ff791f; }
 .indexUser .userData { margin-bottom: 16px; }
 .indexUser .userData li { padding: 0 10px; text-align: center; background: url(../imgs/line1x20.gif) no-repeat right center; }
 .indexUser .userData li.last { background: none; }
@@ -157,17 +163,20 @@ padding:0;
 .sourceForm .form-group .control-label { width: 64px; line-height: 30px; padding: 0 4px; text-align: left; font-weight: normal; color: #666; }
 .sourceForm .form-group .inputBox { padding: 0; }
 .sourceForm .form-group .dropdown { margin-right: 60px; }
-.sourceForm .methodSelect { padding: 16px 0; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
-.sourceForm .methodSelect .tt { margin-bottom: 6px; color: #666; }
-.sourceForm .methodSelect .tt .col-md-6 { padding: 0; }
-.sourceForm .methodSelect .form-group { height: 38px; padding: 4px 0; }
-.sourceForm .methodSelect .selectTag { float: left; font-weight: normal; color: #666; }
-.sourceForm .methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
-.sourceForm .methodSelect .selectTag span { float: left; width: 80px; }
-.sourceForm .methodSelect .selectTag span.current { color: #f4621b; }
-.sourceForm .methodSelect .selectInput { display: none; position: relative; margin-bottom: 0; }
-.sourceForm .methodSelect .selectInput .units { position: absolute; top: 0; right: 4px; height: 30px; line-height: 30px; font-size: 11px; -webkit-transform: scale(0.9); -o-transform: scale(1); -webkit-transform-origin: center; color: #9a9a9a; }
-.sourceForm .methodSelect .form-control { float: left; width: 162px; padding-right: 32px; border-color: #f4621b; }
+.methodSelect { padding: 16px 0; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7 !important; }
+.methodSelect .tt { margin-bottom: 6px; color: #666; }
+.methodSelect .tt .sm { font-size: 12px; }
+.methodSelect .tt .col-md-6 { padding: 0; }
+.methodSelect .form-group { height: 38px; padding: 4px 0; margin: 0; }
+.methodSelect .selectTag { float: left; font-weight: normal; color: #666; }
+.methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
+.methodSelect .selectTag span { float: left; width: 80px; }
+.methodSelect .selectTag span.current { color: #f4621b; }
+.methodSelect .selectInput { display: none; position: relative; margin-bottom: 0; }
+.methodSelect .selectInput .units { position: absolute; top: 0; right: 4px; height: 30px; line-height: 30px; font-size: 11px; -webkit-transform: scale(0.9); -o-transform: scale(1); -webkit-transform-origin: center; color: #9a9a9a; }
+.methodSelect .form-control { float: left; width: 162px; padding-right: 32px; border-color: #f4621b; }
+.methodSelect.quote .selectTag { line-height: 30px; }
+.methodSelect.quote .selectTag input { float: left; margin: 8px 12px 0 0; }
 .sourceForm .sFormBox { padding: 20px 0; }
 .sourceForm .sFormBox .sFormTag { width: 64px; padding-top: 8px; color: #666; }
 .sourceForm .sFormBox .sFormArea { margin-left: 64px; }
@@ -180,6 +189,39 @@ padding:0;
 .sourceForm .sFormBox .sFormArea .fileBtn .button { position: absolute; top: 0; left: 0; width: 100%; height: 34px; overflow: hidden; opacity: 0; filter: alpha(opacity=0); cursor: pointer; }
 .sourceForm .subGroup { padding-left: 64px; }
 .sourceForm .subGroup .btn-default.orange { width: 200px; margin-right: 8px; border: none; font-size: 16px; }
+.sourceDetail { line-height: 24px; color: #666; }
+.sourceDetail .row { padding-bottom: 16px; margin: 0; border-bottom: 1px solid #e6e6e6; }
+.sourceDetail .row .con { padding: 0; }
+.sourceDetail .name { line-height: 24px; font-weight: bold; }
+.sourceDetail .price { margin-right: 8px; }
+.sourceDetail .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
+.sourceDetail .price .num { font-size: 18px; font-weight: bold; color: #ff791f; }
+.sourceDetail .reportLink { position: absolute; top: 0; right: 0; }
+.sourceDetail .remark { line-height: 24px; padding: 10px 0; color: #666; }
+.sourceDetail .remark .info { margin-left: 50px; }
+.sourceGallery { }
+.sourceGallery li { position: relative; min-height: 460px; margin-bottom: 10px; background-color: #e6e6e6; }
+.sourceGallery li .alt { position: absolute; z-index: 0; top: 20px; left: 20px; }
+.followList li { padding: 8px 0; border-top: 1px solid #e6e6e6; }
+.followList li.first { border-top: none; }
+.followList li .photo { width: 44px; height: 44px; margin-right: 20px; border-radius: 50%; overflow: hidden; }
+.followList li .detail { display: table-cell; height: 44px; line-height: 22px; vertical-align: middle; color: #666; }
+.followList li .name a { color: #666; }
+.followList li .tel { font-size: 12px; }
+.quoteForm { }
+.quoteForm .tips { margin-left: 14px; color: #f4621b; }
+.boardForm { padding: 14px 0; }
+.boardForm .tt { margin-bottom: 12px; color: #666; }
+.boardForm .sub { margin-top: 12px; color: #f4621b; }
+.boardList { }
+.boardList li { padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
+.boardList li .photo { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; }
+.boardList li .detail { line-height: 24px; margin-left: 64px; color: #666; }
+.boardList li .detail .name { font-weight: bold; color: #343434; }
+.boardList li .detail .name a { color: #343434; }
+.boardList li .detail .info { }
+.boardList li .detail .time { text-align: right; }
+.boardList li .detail .time .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
 /*posts style*/
 .selectCrumb { }
 .selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }
@@ -190,11 +232,13 @@ padding:0;
 .carList .list { margin-left: 100px; }
 .carList .list li { float: left; margin-right: 20px; }
 .carList .list li a { color: #458cc7; }
-.carSourceHis li { line-height: 24px; padding: 4px 0; border-top: 1px solid #e6e6e6; color: #666; }
+.carSourceHis li { position: relative; line-height: 24px; padding: 4px 0; border-top: 1px solid #e6e6e6; color: #666; }
 .carSourceHis li.first { border-top: none; }
 .carSourceHis li .name { line-height: 24px; }
 .carSourceHis li .name a { color: #666; }
 .carSourceHis li .info .price { color: #ff791f; }
+.carSourceHis li .seal { position: absolute; top: 0; right: 0; }
+.carSourceHis li .seal.seal_done_sm { top: 2px; right: -10px; width: 58px; height: 44px; background: url(seal_done_sm.png) no-repeat center; }
 /*modal style*/
 .modal.box { }
 .modal.box .modal-sm { width: 364px; }
@@ -219,6 +263,7 @@ padding:0;
 .btn .icon { display: inline-block; width: 22px; height: 22px; margin-top: -2px; margin-right: 8px; margin-bottom: -2px; vertical-align: middle; }
 .btn .caret { margin-left: 8px; }
 .btn.w100p { width: 100%; }
+.btn.btnW200 { width: 200px; }
 .btn.orange { border-color: #ff791f; color: #FFF; background-color: #ff791f; }
 .btn.orange:hover { border-color: #c8621d; background-color: #c8621d; }
 .btn.blue { border-color: #5ac0de; color: #FFF; background-color: #5ac0de; }
@@ -241,6 +286,7 @@ padding:0;
 .pr50 { padding-right: 50px; }
 .pr84 { padding-right: 84px; }
 .mt-20 { margin-top: -20px; }
+.mt6 { margin-top: 6px; }
 .mt10 { margin-top: 10px; }
 .mt30 { margin-top: 30px; }
 .mr14 { margin-right: 14px; }
