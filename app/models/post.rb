@@ -17,10 +17,17 @@ class Post < ActiveRecord::Base
 
 
   # instance methods
-  def to_hash
+  def to_0_hash
     {
       id: id,
       user_id: user_id
+    }
+  end
+
+  def to_1_hash
+    {
+      id: id,
+      user_ids: user_id
     }
   end
 end
