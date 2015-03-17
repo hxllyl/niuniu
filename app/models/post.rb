@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
   # relations
   belongs_to :user, class_name: 'User'
   has_many :tenders, -> {where(_type: TYPES[2])}, class_name: 'Tender'
+  belongs_to :brand, class_name: 'Brand'
 
   # class methods
   scope :resources, -> {where(_type: 0)}
@@ -20,14 +21,15 @@ class Post < ActiveRecord::Base
   def to_0_hash
     {
       id: id,
-      user_id: user_id
+      user_id: user_id,
+      brand:   brand.name
     }
   end
 
   def to_1_hash
     {
       id: id,
-      user_ids: user_id
+      user_id: user_id
     }
   end
 end

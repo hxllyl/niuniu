@@ -18,6 +18,12 @@ class Api::PostsController < Api::BaseController
 
   # 单独的资源，寻车
   def show
-    post = Post.find(params[:id])
+    type = params[:_type]
+    post = Post.find_by_id(params[:id])
+    if post
+      render json: {status: true, data: {post: post.send("to_#{type}_hash".to_sym)}}
+    else
+      render json: {status: true, notice: 'not_found', data: {}}
+    end
   end
 end

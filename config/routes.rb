@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     namespace :posts do
       get :list
       get :my_list
+      get :show
     end
   end
 
