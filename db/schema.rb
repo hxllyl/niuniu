@@ -115,8 +115,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "brand_id"
     t.string   "remark",            limit: 160
     t.integer  "base_car_id"
-    t.integer  "standard_id",                                                         null: false
-    t.integer  "integer_id",                                                          null: false
+    t.integer  "standard_id"
     t.string   "model",             limit: 40,                                        null: false
     t.string   "style",             limit: 60
     t.string   "outer_color",       limit: 20,                                        null: false
