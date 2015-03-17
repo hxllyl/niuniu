@@ -23,6 +23,10 @@ Rails.application.routes.draw do
       delete  'sessions'      => 'sessions#destroy',      :as => 'logout'
       post    'registrations' => 'registrations#create',  :as => 'register'
     end
+    namespace :posts do
+      get :list
+      get :my_list
+    end
   end
 
 end

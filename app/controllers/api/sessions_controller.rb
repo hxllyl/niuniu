@@ -8,9 +8,7 @@ class Api::SessionsController < Devise::SessionsController
   def create
     warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
     render json:  {
-                    status:   200,
-                    success:  true,
-                    info:     "Logged in",
+                    status:   true,
                     data:     {auth_token: current_user.authentication_token}
                   }
   end
@@ -19,18 +17,14 @@ class Api::SessionsController < Devise::SessionsController
     warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
     current_user.update_column(:authentication_token, nil)
     render json:  {
-                    status:   200,
-                    success:  true,
-                    info:     "Logged out",
+                    status:   true,
                     data:     {}
                   }
   end
 
   def failure
     render json:  {
-                    status:   401,
-                    success:  false,
-                    info:     "Login Failed",
+                    status:   false,
                     data:     {}
                   }
   end

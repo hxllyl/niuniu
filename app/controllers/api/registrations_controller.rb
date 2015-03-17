@@ -10,9 +10,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
     if resource.save
       sign_in resource
       render json:  {
-                      status:   200,
-                      success:  true,
-                      info:     'Registered',
+                      status:   true,
                       data:     {
                                   user:       resource,
                                   auth_token: current_user.authentication_token
@@ -20,9 +18,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
                     }
     else
       render json:  {
-                      status:   :unprocessable_entity,
-                      success:  false,
-                      info:     resource.errors,
+                      status:   false,
                       data:     {}
                     }
     end
