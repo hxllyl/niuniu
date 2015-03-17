@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   create_table "base_cars", force: :cascade do |t|
     t.decimal  "base_price",             precision: 10, scale: 2
     t.integer  "brand_id"
-    t.string   "outer_color",                                                  array: true
+    t.string   "outer_color", limit: 20
     t.string   "model",       limit: 30,                          null: false
-    t.string   "inner_color",                                                  array: true
-    t.integer  "standard_id"
+    t.string   "inner_color", limit: 20
+    t.integer  "standard"
     t.string   "style",       limit: 60
     t.string   "NO",          limit: 12
     t.integer  "status"
@@ -39,12 +39,10 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   end
 
   create_table "brands", force: :cascade do |t|
-    t.string   "name",        limit: 40, null: false
-    t.integer  "standard_id"
-    t.string   "regions",                             array: true
+    t.string   "name",       limit: 40, null: false
     t.integer  "status"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -110,12 +108,12 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id_id"
     t.integer  "_type"
     t.integer  "brand_id"
     t.string   "remark",            limit: 160
     t.integer  "base_car_id"
-    t.integer  "standard_id"
+    t.integer  "standard",                                                            null: false
     t.string   "model",             limit: 40,                                        null: false
     t.string   "style",             limit: 60
     t.string   "outer_color",       limit: 20,                                        null: false

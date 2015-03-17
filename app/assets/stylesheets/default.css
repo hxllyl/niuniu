@@ -58,7 +58,6 @@ padding:0;
 .nav-tabs.carInfoTabs li.active a { padding: 0 22px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
-.carInfoPane { min-height: 264px; }
 .carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
 .carInfoList li .logo { width: 46px; text-align: center; }
 .carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
@@ -76,7 +75,7 @@ padding:0;
 .hotCar li .intro .price { font-size: 14px; color: #ff791f; }
 .newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
 .newCarSelect .dropdown-toggle { height: 34px; }
-.indexListTab { min-height: 434px; }
+.sourceTab .table { margin-bottom: 0; }
 .sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
 .sourceTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
 .sourceTab td .price { color: #ff791f; }
@@ -110,13 +109,16 @@ padding:0;
 .indexAppDL .appQR { width: 114px; height: 114px; padding: 10px; margin: 0 auto 18px; border: 1px solid #e6e6e6; border-radius: 8px; background-color: #FFF; }
 .indexAppDL .appLink { margin: 0 -4px }
 .indexAppDL .appLink li { padding: 0 4px; }
-.indexAppDL .appLink li .btn { width: 100%; border-color: #e6e6e6; color: #1a1a1a; background-color: #f8f8f8; }
+.indexAppDL .appLink li .btn { width: 100%; }
 .indexAppDL .tel { padding-bottom: 4px; margin-top: 16px; }
 .indexAppDL .tel .icon { }
 .indexAppDL .tel .info { line-height: 24px; color: #666; }
+.carSearch { position: relative; }
+.carSearch .input { float: left; width: 74%; margin-right: 4%; font-size: 12px; }
+.carSearch .subBtn { float: right; width: 22%; }
 .buttonInput { position: relative; }
-.buttonInput .input { float: left; width: 74%; margin-right: 4%; font-size: 12px; }
-.buttonInput .subBtn { float: right; width: 22%; }
+.buttonInput .input { font-size: 12px; }
+.buttonInput .subBtn { position: absolute; top: 2px; right: 2px; height: 30px; line-height: 30px; padding: 0 8px; border-radius: 3px; text-align: center; }
 .brandSelect { }
 .brandSelect .dropdown { float: left; width: 74%; margin-right: 4%; }
 .brandSelect .subBtn { float: right; width: 22%; }
@@ -173,6 +175,20 @@ padding:0;
 .sourceForm .sFormBox .sFormArea .fileBtn .button { position: absolute; top: 0; left: 0; width: 100%; height: 34px; overflow: hidden; opacity: 0; filter: alpha(opacity=0); cursor: pointer; }
 .sourceForm .subGroup { padding-left: 64px; }
 .sourceForm .subGroup .btn-default.orange { width: 200px; margin-right: 8px; border: none; font-size: 16px; }
+/*posts style*/
+.carList { line-height: 26px; padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
+.carList.last { border-bottom: none; }
+.carList .tt { float: left; width: 50px; color: #333; }
+.carList .list { margin-left: 50px; }
+.carList .list li { float: left; margin-right: 20px; }
+.carList .list li a { color: #458cc7; }
+.carSourceHis { }
+.carSourceHis li { line-height: 24px; padding: 4px 0; border-top: 1px solid #e6e6e6; color: #666; }
+.carSourceHis li.first { border-top: none; }
+.carSourceHis li .name { line-height: 24px; }
+.carSourceHis li .name a { color: #666; }
+.carSourceHis li .info { }
+.carSourceHis li .info .price { color: #ff791f; }
 /*modal style*/
 .modal.box { }
 .modal.box .modal-sm { width: 364px; }
