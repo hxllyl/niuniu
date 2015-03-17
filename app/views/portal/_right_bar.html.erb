@@ -1,10 +1,10 @@
 <div class="panel panel-default contentBox bgf8">
 	<div class="panel-body indexUser">
 		<div class="userInfo clearfix">
-			<div class="photo bfL"><a href="#"><%= image_tag("index/user_photo.jpg", alt: "")%></a></div>
+			<div class="photo bfL"><a href="#"><%= image_tag  current_user.avatar, alt: "我的头像" -%></a></div>
 			<div class="name">
-				<h5><a href="#">李木子(上海)</a></h5>
-				<div class="clearfix"><span class="tag">个人</span></div>
+				<h5><a href="#"></a></h5>
+				<div class="clearfix"><span class="tag"><%= current_user.i_level%></span></div>
 			</div>
 		</div>
 		<ul class="row userData">

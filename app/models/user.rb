@@ -47,8 +47,27 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
+  
   # class methods
-
+  
+  # 定义用户的各种类型图片  
+  %w(avatar identity hand_id visiting room_outer room_inner license).each do |m|
+    unless User.respond_to?(m.to_sym)
+      User.class_eval do
+        case m 
+        when 'avatar' then
+          define_method m.to_sym do  
+            self.photos.where(_type: m).first || 'index/user_photo.jpg'
+          end
+        else
+          define_method m.to_sym do  
+            self.photos.where(_type: m) 
+          end   
+        end
+      end
+    end
+  end
+  
   # instance methods
 
   # devise 不用email
@@ -60,18 +79,34 @@ class User < ActiveRecord::Base
   def is_admin?
     self.role == 'admin'
   end
+<<<<<<< Updated upstream
 
   # token 用于api验证 目前使用第一个
   def token
     self.tokens.first
   end
 
+=======
+  
+  # 我的资源和寻车
+    
+  # 我的等级
+  def i_level
+    ::User::LEVELS[self.level]
+  end
+   
+>>>>>>> Stashed changes
   # callback define codes bottom
   after_create :gen_token # 在用户完成注册时生成一个token
   def gen_token
     salt  = "#{self.mobile}--#{self.password}"
     token = self.tokens.build(value: Digest::SHA1.hexdigest(salt))
     token.save
+  end
+  
+  # token 用于api验证 目前使用第一个
+  def token
+    self.tokens.first
   end
 
   def skip_confirmation!
