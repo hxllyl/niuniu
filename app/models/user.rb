@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   # constants
   ROLES = %w(normal admin)
+  AVATAR = 'index/user_photo.jpg'
 
   STATUS = {
     0  => 'unapproved',
@@ -50,14 +51,18 @@ class User < ActiveRecord::Base
   
   # class methods
   
-  # 定义用户的各种类型图片  
+    
+  
+  # instance methods
+  
+  # 定义用户的各种类型图片
   %w(avatar identity hand_id visiting room_outer room_inner license).each do |m|
     unless User.respond_to?(m.to_sym)
       User.class_eval do
         case m 
         when 'avatar' then
           define_method m.to_sym do  
-            self.photos.where(_type: m).first || 'index/user_photo.jpg'
+            self.photos.where(_type: m).first || AVATAR
           end
         else
           define_method m.to_sym do  
@@ -67,8 +72,6 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
-  # instance methods
 
   # devise 不用email
   def email_required?
@@ -79,23 +82,23 @@ class User < ActiveRecord::Base
   def is_admin?
     self.role == 'admin'
   end
-<<<<<<< Updated upstream
 
   # token 用于api验证 目前使用第一个
   def token
     self.tokens.first
   end
-
-=======
   
   # 我的资源和寻车
-    
+  def resources(type)
+    type == :source ? ::Post::TYPES.keys[0] : ::Post::TYPES.keys[1]
+    self.posts.where(_type: type)
+  end
+  
   # 我的等级
   def i_level
     ::User::LEVELS[self.level]
   end
    
->>>>>>> Stashed changes
   # callback define codes bottom
   after_create :gen_token # 在用户完成注册时生成一个token
   def gen_token
