@@ -11,7 +11,7 @@ class CreatePosts < ActiveRecord::Migration
       t.references :brand, class_name: 'Brand' # 所属品牌
       t.column :remark, :string, limit: 160 # 备注
       t.references :base_car, class_name: 'BaseCar' # 基础数据
-      t.column :standard, :integer, null: false # 规格 中规 美规等
+      t.references :standard, :integer, null: false # 规格 中规 美规等
       t.column :model, :string, limit: 40, null: false # 车型
       t.column :style, :string, limit: 60 # 款式
       t.column :outer_color, :string, limit: 20, null: false # 外观
