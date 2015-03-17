@@ -36,7 +36,7 @@
 	<div class="panel-heading lineTitle">
 		<h3 class="panel-title"><%= t('login') %></h3>
 	</div>
-  <%= form_for(User.new, as: :user, url: session_path(:user), 
+  <%= form_for(User.new, as: :user, url: session_path(:user),
                html: {class: 'panel-body form-horizontal indexLogin'}) do |f| %>
 		<div class="form-group">
 			<%= f.text_field :mobile, class: "form-control input-sm", id: "", placeholder: "请输入手机号", value: cookies[:user_name] %>
@@ -104,13 +104,11 @@
 	</div>
 	<div class="panel-body brandSelect">
     <div class="dropdown w100p">
-      <button class="btn btn-default dropdown-toggle" type="button" id="car_brandMenu" data-toggle="dropdown" aria-expanded="true"><%= t('brand') %><span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="car_brandMenu">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">品牌1</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">品牌2</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">品牌3</a></li>
-      </ul>
+      <select name="" class="form-control" id="car_brandMenu">
+        <option value="品牌1"><%= t('brand') %></option>
+        <option value="品牌2">品牌2</option>
+        <option value="品牌3">品牌3</option>
+      </select>
     </div>
     <input type="submit" class="btn btn-primary subBtn" value="提交">
 	</div>
@@ -156,14 +154,13 @@
 				</div>
 				<div class="form-group">
 					<div class="dropdown w100p">
-			      <button class="btn btn-default dropdown-toggle" type="button" id="" data-toggle="dropdown" aria-expanded="true">注册省市<span class="caret"></span>
-			      </button>
-			      <ul class="dropdown-menu" role="menu" aria-labelledby="">
-			        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-			        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-			        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-			        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-			      </ul>
+            <select name="" class="form-control" id="car_brandMenu">
+              <option value="注册省市">注册省市</option>
+              <option value="北京">北京</option>
+              <option value="上海">上海</option>
+              <option value="北京">北京</option>
+              <option value="上海">上海</option>
+            </select>
 			    </div>
 				</div>
 				<div class="checkbox">

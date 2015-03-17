@@ -80,6 +80,7 @@ padding:0;
 .sourceTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
 .sourceTab td .price { color: #ff791f; }
 .sourceTab td a { color: #458cc7; }
+.sourceTab a.name { color: #666; }
 .sourceTab .sepLine { margin: 0 4px; color: #458cc7; }
 .moreLink { height: 18px; line-height: 18px; margin-top: 14px; font-size: 12px; }
 .moreLink a { color: #458cc7; }
@@ -136,9 +137,13 @@ padding:0;
 .mySourceTab .infoM { padding-right: 180px; }
 .mySourceTab .infoM .name { line-height: 24px; }
 .mySourceTab .infoM .name a { font-weight: bold; color: #333; }
+.mySourceTab .infoM .info { }
+.mySourceTab .infoM .info .m { float: left; margin-right: 24px; }
+.mySourceTab .infoM .info .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }
+.mySourceTab .infoM .info .statu { margin-left: 6px; color: #1f8eff; }
 .mySourceTab .infoPrice { position: absolute; top: 0; right: 0; width: 180px; text-align: right; }
 .mySourceTab .infoPrice .price { margin-right: 8px; font-size: 18px; font-weight: bold; color: #ff791f; }
-.mySourceTab .infoPrice .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; }
+.mySourceTab .infoPrice .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
 .mySourceTab .remark .info { min-height: 24px; margin-left: 50px; }
 .mySourceTab .table>tbody>tr>td .btnGroups { display: none; position: absolute; top: 50%; right: 170px; margin-top: -11px; }
 .mySourceTab .table>tbody>tr>td .btnGroups .btn { padding: 1px 10px; margin: auto 4px; }
@@ -176,18 +181,19 @@ padding:0;
 .sourceForm .subGroup { padding-left: 64px; }
 .sourceForm .subGroup .btn-default.orange { width: 200px; margin-right: 8px; border: none; font-size: 16px; }
 /*posts style*/
+.selectCrumb { }
+.selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }
+.selectCrumb li .close { margin: 3px 0 0 8px; }
 .carList { line-height: 26px; padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
 .carList.last { border-bottom: none; }
-.carList .tt { float: left; width: 50px; color: #333; }
-.carList .list { margin-left: 50px; }
+.carList .tt { float: left; width: 100px; color: #333; }
+.carList .list { margin-left: 100px; }
 .carList .list li { float: left; margin-right: 20px; }
 .carList .list li a { color: #458cc7; }
-.carSourceHis { }
 .carSourceHis li { line-height: 24px; padding: 4px 0; border-top: 1px solid #e6e6e6; color: #666; }
 .carSourceHis li.first { border-top: none; }
 .carSourceHis li .name { line-height: 24px; }
 .carSourceHis li .name a { color: #666; }
-.carSourceHis li .info { }
 .carSourceHis li .info .price { color: #ff791f; }
 /*modal style*/
 .modal.box { }
