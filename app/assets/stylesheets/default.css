@@ -280,10 +280,28 @@ padding:0;
 .userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
 .userDataTag .link a:hover { color: #f4621b; }
 /*accounts style*/
-.accountsSetting { margin-bottom: 10px; }
-.accountsSetting .row { margin: 0; background-color: #ededed; }
+.accountsSetting { margin-bottom: 10px; background-color: #ededed; }
+.accountsSetting .row { margin: 0; }
 .accountsMenu { padding: 0; background-color: #ededed; }
-.accountsMain { height: 500px; padding: 0; background-color: #FFF; }
+.accountsMenu .title { height: 38px; border-bottom: 1px solid #ccc; }
+.accountsMenu .title .tt { position: relative; bottom: -30px; left: 14px; padding: 0 4px; color: #808080; background-color: #ededed; }
+.accountsMenu .list { margin-top: 34px; }
+.accountsMenu .list li { margin-bottom: 10px; }
+.accountsMenu .list li a { display: block; height: 34px; line-height: 34px; padding-left: 14px; color: #6c6c6c; }
+.accountsMenu .list li a:hover, .accountsMenu .list li.active a { padding-left: 10px; border-left: 4px solid #f4621b; text-decoration: none; color: #f4621b; background-color: #FFF; }
+.accountsMenu .list li .icon { float: left; width: 20px; height: 34px; line-height: 34px; margin-right: 10px; text-align: center; font-size: 18px; }
+.accountsMain { padding: 0 20px; background-color: #FFF; }
+.accountsMain .title { height: 38px; line-height: 38px; border-bottom: 2px solid #e6e6e6; color: #333; }
+.accountsMain .row { padding: 30px 0; }
+.accountsMain .photoArea .photo { width: 180px; height: 180px; margin: 0 auto; border-radius: 50%; overflow: hidden; }
+.accountsMain .photoArea .tips { line-height: 24px; padding: 0 10px; margin: 10px 0; text-align: center; color: #808080; }
+.accountsMain .formArea { min-height: 300px; padding: 0 30px; border-left: 1px solid #e6e6e6; }
+.accountsMain .formArea .box { padding: 20px 0; border-bottom: 1px dashed #e6e6e6; }
+.accountsMain .formArea .box.last { border-bottom: none; }
+.accountsMain .formArea .form-group { padding: 4px 0; margin-bottom: 0; }
+.accountsMain .formArea .control-label { line-height: 34px; font-weight: normal; color: #808080; }
+.level { width: 75px; height: 30px; background-repeat: no-repeat; background-position: left top; }
+.level.vip2 { background-image: url(level_vip2.png); }
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 12px; }
@@ -292,6 +310,7 @@ padding:0;
 /*input style*/
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
+.btn { text-shadow: none; }
 .btn .icon { display: inline-block; width: 22px; height: 22px; margin-top: -2px; margin-right: 8px; margin-bottom: -2px; vertical-align: middle; }
 .btn .caret { margin-left: 8px; }
 .btn.w100p { width: 100%; }
@@ -300,6 +319,8 @@ padding:0;
 .btn.orange:hover { border-color: #c8621d; background-color: #c8621d; }
 .btn.blue { border-color: #5ac0de; color: #FFF; background-color: #5ac0de; }
 .btn.blue:hover { border-color: #489bb3; background-color: #489bb3; }
+.btn.black { color: #FFF; background-color: #6d6d6d; }
+.btn.black:hover { background-color: #5b5b5b; }
 .btn_spacing { padding-right: 2px; letter-spacing: 10px; }
 .btn.p0 { padding-right: 0; padding-left: 0; }
 /*
@@ -315,6 +336,7 @@ padding:0;
 .l0 { left: 0; }
 .bfL { float: left; }
 .bfR { float: right; }
+.prl0 { padding-right: 0; padding-left: 0; }
 .pr50 { padding-right: 50px; }
 .pr84 { padding-right: 84px; }
 .mt-20 { margin-top: -20px; }
