@@ -1,10 +1,4 @@
 GIT
-  remote: git@github.com:season/rails_api_doc_generation.git
-  revision: 62c70f941b2f01632c3b491e28dea615d62b7cde
-  specs:
-    api_doc_generation (0.4.4)
-
-GIT
   remote: https://github.com/sferik/rails_admin.git
   revision: e4db31e7bae8b422cc9fe9b247a7c29483b2c384
   branch: master
@@ -301,7 +295,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  api_doc_generation!
   better_errors
   binding_of_caller
   brakeman

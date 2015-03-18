@@ -37,7 +37,7 @@ padding:0;
 #topBar .logo a { display: table-cell; width: 160px; height: 46px; text-align: center; vertical-align: middle; }
 #topBar .nav li a { height: 46px; line-height: 46px; padding: 0 16px; color: #808080; }
 #topBar .nav li a:hover { color: #f4621b; }
-#topBar .nav li a .icon { float: left; width: 26px; height: 46px; text-align: center; }
+#topBar .nav li a .icon { float: left; width: 26px; height: 46px; line-height: 46px; text-align: center; font-size: 20px; }
 #topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
 #topBar .navbar-nav-right { font-size: 12px; }
 #topBar .navbar-nav-right li { padding: 0; background: url(../imgs/line1x8.gif) no-repeat right center; }
@@ -279,6 +279,11 @@ padding:0;
 .userDataTag .list li.active a { padding-bottom: 6px; border-bottom: 2px solid #f4621b; color: #f4621b; }
 .userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
 .userDataTag .link a:hover { color: #f4621b; }
+/*accounts style*/
+.accountsSetting { margin-bottom: 10px; }
+.accountsSetting .row { margin: 0; background-color: #ededed; }
+.accountsMenu { padding: 0; background-color: #ededed; }
+.accountsMain { height: 500px; padding: 0; background-color: #FFF; }
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 12px; }

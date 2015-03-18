@@ -3,7 +3,7 @@
 		<h1 class="logo bfL"><a href="#"><%= image_tag("logo.png", alt: "")%></a></h1>
 		<ul class="nav navbar-nav">
 			<% APP_CONFIG['navigations'].each do |k, v| %>
-				<li class=""><a href= <%= v['url'] %> ><span class="icon"></span><%= v['name'] %></a></li>
+				<li class=""><a href= <%= v['url'] %> ><span class= <%= v['icon'] -%> ></span><%= v['name'] %></a></li>
 			<% end -%>
 		</ul>
 		<ul class="nav navbar-nav navbar-nav-right bfR">
