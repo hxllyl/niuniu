@@ -41,6 +41,8 @@ gem 'devise'
 # authorization user
 gem 'cancan'
 
+gem 'httpclient'
+
 # 导入导出
 gem 'roo', '~> 1.13.2'
 gem 'writeexcel', '~> 1.0.5'

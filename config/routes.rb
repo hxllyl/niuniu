@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       get :user_list
     end
   end
+  
+  resources :valid_codes do
+    get :_valid, on: :collection
+  end
 
   namespace :api do
     devise_scope :user do
