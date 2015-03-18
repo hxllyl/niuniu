@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  mount RailsAdmin::Engine => '/a', as: 'rails_admin'
   root 'portal#index'
 
   devise_for :users, controllers: {
@@ -25,6 +24,8 @@ Rails.application.routes.draw do
   resources :valid_codes do
     get :_valid, on: :collection
   end
+  
+  resources :areas, only: [:show] 
 
   namespace :api do
     devise_scope :user do
@@ -46,5 +47,7 @@ Rails.application.routes.draw do
       get :joint_followings
     end
   end
+  
+  mount RailsAdmin::Engine => '/a', as: 'rails_admin'
 
 end

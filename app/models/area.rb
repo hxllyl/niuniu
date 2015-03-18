@@ -9,8 +9,11 @@ class Area < ActiveRecord::Base
   }
   
   has_many :users, class_name: 'User' # 和用户关联
-  has_many :children, class_name: 'Area' # 自关联
-  belongs_to :parent, class_name: 'Area', foreign_key: :parent_id # 自关联
+  has_many :children, class_name: 'Area', foreign_key: :parent_id # 自关联
+  belongs_to :parent, class_name: 'Area' # 自关联
+  
+  # scopes
+  [:provinces, :cities].each { |a| scope a, -> { where(level: LEVELS[a.to_s.singularize.to_sym]) }}
   
   # instance_method
 end

@@ -13,9 +13,6 @@
 	</div>
 </div>
 
-<%= javascript_tag do %>
-$(".nav-tabs a").click(function (e) {
-	e.preventDefault();
-	$(this).tab("show");
-})
+<%= content_for :footers do %>
+  <%= javascript_include_tag 'portal', 'data-turbolinks-track' => true %>
 <% end -%>

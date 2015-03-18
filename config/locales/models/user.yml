@@ -32,10 +32,12 @@ zh-CN:
               too_long: 公司名称太长
             password:
               too_short: 密码长度过短
+              blank: 密码不能为空
             password_confirmation:
               confirmation: 两次密码输入不一致
             role:
               inclusion: 用户角色不正确
+              blank: 角色不能为空
               
                    
          
