@@ -37,7 +37,7 @@ padding:0;
 #topBar .logo a { display: table-cell; width: 160px; height: 46px; text-align: center; vertical-align: middle; }
 #topBar .nav li a { height: 46px; line-height: 46px; padding: 0 16px; color: #808080; }
 #topBar .nav li a:hover { color: #f4621b; }
-#topBar .nav li a .icon { float: left; width: 26px; height: 46px; text-align: center; }
+#topBar .nav li a .icon { float: left; width: 26px; height: 46px; line-height: 46px; text-align: center; font-size: 20px; }
 #topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
 #topBar .navbar-nav-right { font-size: 12px; }
 #topBar .navbar-nav-right li { padding: 0; background: url(../imgs/line1x8.gif) no-repeat right center; }
@@ -52,7 +52,7 @@ padding:0;
 .contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
 .banner { height: 152px; overflow: hidden; }
 .nav-tabs.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
-.nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; }
+.nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; color: #333; }
 .nav-tabs.carInfoTabs li a:hover { color: #f4621b; }
 .nav-tabs.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
 .nav-tabs.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
@@ -116,7 +116,7 @@ padding:0;
 .indexUser .userSubBtn .btn.blue { color: #FFF; background-color: #36a3c3; }
 .indexUser .userSubBtn .btn.red:hover { background-color: #da573b; }
 .indexUser .userSubBtn .btn.blue:hover { background-color: #2d859f; }
-.indexUser .userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
+.userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
 .indexLogin .form-group { margin: 0 0 10px; }
 .indexLogin .checkbox { padding-top: 0; color: #666; }
 .indexLogin .checkbox .forget a { text-decoration: underline; color: #ff791f; }
@@ -261,15 +261,32 @@ padding:0;
 .modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 url(user/bannerBg.jpg) no-repeat right bottom; }
-.userDataTag { position: absolute; bottom: 0; left: 0; width: 100%; height: 56px; border: 1px solid #ccc; }
-.userDataTag .list { position: absolute; bottom: 0; }
-.userDataTag .list li { float:left; width:90px; text-align:center; }
-.userDataTag .list li .num { }
-.userDataTag .list li a { }
-.userDataTag .list li a:hover { }
+.userOverview .userInfo { padding: 20px; }
+.userOverview .userInfo .photo { width: 118px; height: 118px; border: 5px solid #d3d3d3; border-radius: 50%; overflow: hidden; }
+.userOverview .userInfo .detail { display: inline-block; line-height: 20px; margin-left: 40px; }
+.userOverview .userInfo .detail .name { float: left; line-height: 22px; margin-right: 8px; font-size: 18px; font-weight: bold; color: #323232; }
+.userOverview .userInfo .detail .type { float: left; height: 22px; line-height: 22px; padding: 0 10px; margin-right: 8px; border-radius: 11px; font-size: 13px; color: #FFF; background-color: #b3b3b3; }
+.userOverview .userInfo .detail .btn { color: #FFF; text-shadow: none; background-color: #6d6d6d; }
+.userOverview .userInfo .detail .btn:hover { background-color: #4b4b4b; }
+.userOverview .userInfo .detailTab { margin-top: 8px; color: #666; }
+.userOverview .userInfo .detailTab .tip { color: #ff791f; }
+.userDataTag { position: absolute; bottom: 0; left: 0; width: 100%; height: 56px; border: 1px solid #ccc; background: url(user/dataTagBg.png) repeat left top; }
+.userDataTag .list { position: absolute; bottom: 0; left: 50%; margin-left: -255px; }
+.userDataTag .list li { float: left; padding: 0 40px; }
+.userDataTag .list li a { display: block; width: 90px; padding-bottom: 8px; text-align: center; color: #7d7d7d; }
+.userDataTag .list li a .num { font-size: 24px; color: #323232; }
+.userDataTag .list li a:hover { text-decoration: none; color: #f4621b; }
+.userDataTag .list li.active a { padding-bottom: 6px; border-bottom: 2px solid #f4621b; color: #f4621b; }
+.userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
+.userDataTag .link a:hover { color: #f4621b; }
+/*accounts style*/
+.accountsSetting { margin-bottom: 10px; }
+.accountsSetting .row { margin: 0; background-color: #ededed; }
+.accountsMenu { padding: 0; background-color: #ededed; }
+.accountsMain { height: 500px; padding: 0; background-color: #FFF; }
 /*foot style*/
 #foot { padding-bottom: 40px; }
-.copyright { font-size: 10px; -webkit-transform: scale(0.8); -o-transform: scale(1); -webkit-transform-origin: left top; }
+.copyright { font-size: 12px; }
 .copyright p { line-height: 24px; color: #1a1a1a; }
 .copyright p a { color: #1a1a1a; }
 /*input style*/
