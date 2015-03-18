@@ -20,18 +20,6 @@
 <%= render partial: 'partials/footer' %>
 <%= yield :footers %>
 <script type="text/javascript" src="/assets/bootstrap.min.js"></script>
-<%= javascript_tag do %> 
-$(document).ready(function(){
-	$(window).scroll(function(){
-		var scrollTop = $(this).scrollTop();
-		if(scrollTop > 0){
-			$("#topBar").addClass("fixed");
-		}else{
-			$("#topBar").removeClass("fixed");	
-		};
-	});
-});
-<% end -%>
-
+<script type="text/javascript" src="/assets/basic.js"></script>
 </body>
 </html>

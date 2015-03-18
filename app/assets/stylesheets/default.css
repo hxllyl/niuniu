@@ -57,6 +57,9 @@ padding:0;
 .nav-tabs.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
 .nav-tabs.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
 .nav-tabs.carInfoTabs li.active a { padding: 0 22px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
+.nav-tabs.carInfoTabs.sm { height: 34px; }
+.nav-tabs.carInfoTabs.sm li a { height: 32px; line-height: 28px; }
+.nav-tabs.carInfoTabs.sm li a .icon { height: 28px; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 .carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
@@ -82,12 +85,13 @@ padding:0;
 .sourceTab .table { margin-bottom: 0; }
 .sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
 .sourceTab .table>tbody>tr>td { position: relative; height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
-.sourceTab td .price { color: #ff791f; }
+.sourceTab td .price, .sourceTab td .num { color: #ff791f; }
 .sourceTab td a { color: #458cc7; }
 .sourceTab a.name { color: #666; }
 .sourceTab .sepLine { margin: 0 4px; color: #458cc7; }
 .sourceTab .table>tbody>tr.done { background-color: #fcf1ea; }
 .sourceTab .table>tbody>tr>td .seal.seal_done_part { top: 0; right: 10px; width: 64px; height: 39px; background: url(seal_done_part.png) no-repeat center; }
+.sourceTab td .del { color: #b3b3b3; }
 .moreLink { height: 18px; line-height: 18px; margin-top: 14px; font-size: 12px; }
 .moreLink a { color: #458cc7; }
 .mainRight { padding-left: 5px; }
@@ -255,6 +259,14 @@ padding:0;
 .modal.box .modal-body .checkbox input { margin-left: 0; }
 .modal.box .modal-body input { font-size: 12px; }
 .modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
+/*userCenter style*/
+.userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 url(user/bannerBg.jpg) no-repeat right bottom; }
+.userDataTag { position: absolute; bottom: 0; left: 0; width: 100%; height: 56px; border: 1px solid #ccc; }
+.userDataTag .list { position: absolute; bottom: 0; }
+.userDataTag .list li { float:left; width:90px; text-align:center; }
+.userDataTag .list li .num { }
+.userDataTag .list li a { }
+.userDataTag .list li a:hover { }
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 10px; -webkit-transform: scale(0.8); -o-transform: scale(1); -webkit-transform-origin: left top; }
