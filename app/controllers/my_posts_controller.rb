@@ -2,6 +2,7 @@
 
 class MyPostsController < ApplicationController
   def index
+    @_type = params[:_type]
   end
 
   def new
