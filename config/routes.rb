@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :posts do
     collection do
       get :resources_list
+      get :user_list
     end
   end
 

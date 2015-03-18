@@ -16,4 +16,11 @@ class PostsController < ApplicationController
   def show
     @_type = params[:_type]
   end
+
+  def user_list
+    # params[:_type] 资源类型 0 => 资源， 1 => 寻车
+    # params[:user_id] 某用户
+    @_type = params[:_type]
+    @posts = Post.where(_type: params[:_type], user_id: params[:user_id])
+  end
 end
