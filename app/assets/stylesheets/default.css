@@ -41,6 +41,7 @@ padding:0;
 #topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
 #topBar .navbar-nav-right { font-size: 12px; }
 #topBar .navbar-nav-right li { padding: 0; background: url(../imgs/line1x8.gif) no-repeat right center; }
+#topBar .navbar-nav-right li .dropdown-menu li { background-image: none; }
 #topBar .navbar-nav-right li.last { background: none; }
 #topBar .navbar-nav-right li a { padding: 0 8px; }
 #topBar .navbar-nav-right li a .icon { width: 20px; }
@@ -80,11 +81,13 @@ padding:0;
 .newCarSelect .dropdown-toggle { height: 34px; }
 .sourceTab .table { margin-bottom: 0; }
 .sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
-.sourceTab .table>tbody>tr>td { height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
+.sourceTab .table>tbody>tr>td { position: relative; height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
 .sourceTab td .price { color: #ff791f; }
 .sourceTab td a { color: #458cc7; }
 .sourceTab a.name { color: #666; }
 .sourceTab .sepLine { margin: 0 4px; color: #458cc7; }
+.sourceTab .table>tbody>tr.done { background-color: #fcf1ea; }
+.sourceTab .table>tbody>tr>td .seal.seal_done_part { top: 0; right: 10px; width: 64px; height: 39px; background: url(seal_done_part.png) no-repeat center; }
 .moreLink { height: 18px; line-height: 18px; margin-top: 14px; font-size: 12px; }
 .moreLink a { color: #458cc7; }
 .mainRight { padding-left: 5px; }
@@ -237,7 +240,7 @@ padding:0;
 .carSourceHis li .name { line-height: 24px; }
 .carSourceHis li .name a { color: #666; }
 .carSourceHis li .info .price { color: #ff791f; }
-.carSourceHis li .seal { position: absolute; top: 0; right: 0; }
+.seal { position: absolute; top: 0; right: 0; }
 .carSourceHis li .seal.seal_done_sm { top: 2px; right: -10px; width: 58px; height: 44px; background: url(seal_done_sm.png) no-repeat center; }
 /*modal style*/
 .modal.box { }
