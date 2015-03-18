@@ -34,6 +34,12 @@ defaults: &defaults
       url: '#'
       name: two
   
+  # 企信通配置
+  qx_id: 2062569
+  qx_login: 2062569822
+  qx_password: 202084
+  qx_tip: 欢迎您加入牛牛汽车，您的验证码是：     
+  
 development:
   <<: *defaults
   host: localhost:3000

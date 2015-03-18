@@ -8,4 +8,5 @@ module Errors
       super msg
     end
   end
+  class InValidValidCodeError < StandardError;end
 end

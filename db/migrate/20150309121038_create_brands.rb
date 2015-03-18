@@ -10,6 +10,7 @@ class CreateBrands < ActiveRecord::Migration
       t.references :standard,  class_name: 'Standard' # 与规格关联
       t.column :regions, :string, array: true #
       t.column :status, :integer
+      t.column :click_counter, :integer, default: 0 # 点击次数
       t.timestamps null: false
     end
   end

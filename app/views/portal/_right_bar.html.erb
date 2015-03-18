@@ -5,7 +5,7 @@
 			<div class="photo bfL"><a href="#"><%= image_tag  current_user.avatar, alt: "我的头像" -%></a></div>
 			<div class="name">
 				<h5><a href="#"><%= current_user.name %>(<%= current_user.area.try(:name) %>)</a></h5>
-				<div class="clearfix"><span class="tag"><%= current_user.i_level%></span></div>
+				<div class="clearfix"><span class="tag"><%= current_user.i_level %></span></div>
 			</div>
 		</div>
 		<ul class="row userData">
@@ -113,6 +113,7 @@
     <input type="submit" class="btn btn-primary subBtn" value="提交">
 	</div>
 </div>
+
 <div class="modal box bs-example-modal-sm" id="reg_step1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -173,3 +174,4 @@
     </div>
   </div>
 </div>
+
