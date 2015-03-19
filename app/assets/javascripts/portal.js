@@ -5,15 +5,19 @@ $(function(){
   // 用户获取手机验证码
   var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
+  var nextStep = $('#next-step');
   
   validCodeBut.on('click', function(event){
     event.preventDefault();
     
-    var mobile = $('#mobile').val();
+    var mobile = $('#mobile');
     
-    $.post('/valid_codes.json', { mobile: mobile, type: 0 }, function(data){
+    $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
        if(data.status == 'success'){
          validCode.val(data.code);
+         
+         validCode.prop('disabled', true);
+         nextStep.prop('disabled', false);
        }else{
          alert(data.error_msg);
        }

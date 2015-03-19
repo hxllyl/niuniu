@@ -26,8 +26,8 @@ class ValidCode < ActiveRecord::Base
   scope :actives, ->{ where(status: STATUS.keys[0]) }
   
   # instance_method
-  def is_invalid?
-    self.status == STATUS.keys[1]
+  def is_valid?
+    self.status == STATUS.keys[0]
   end
 
   # 对手机发送消息
@@ -35,17 +35,14 @@ class ValidCode < ActiveRecord::Base
   def send_code
     raise InvaildVaildCodeError, "#{self.code}已经被使用过" if self.is_invalid?
     
-    corp_id, login_name, password = APP_CONFIG['qx_id'], APP_CONFIG['qx_login'], APP_CONFIG['qx_password']
-    msg  = APP_CONFIG['qx_tip'] + "#{self.code}"
-    clnt = HTTPClient.new
-    service_url = "http://api.cosms.cn/sms/putMt/?msgFormat=2&corpId=#{corp_id}&loginName=#{login_name}
-                   &password=#{password}&Mobs=#{self.mobile}&msg=#{msg}&mtLevel=1&MD5str="
-    json        = clnt.get_content(URI.encode(service_url), {}, { :Accept=> 'application/json' })
-
-    logger.info "*" * 10
-    logger.info json
-    logger.info "*" * 10
-    json
+    flag = generate_notify(
+                           APP_CONFIG['qx_id'].to_s, 
+                           APP_CONFIG['qx_login'].to_s, 
+                           APP_CONFIG['qx_password'].to_s,
+                           self.mobile, 
+                           APP_CONFIG['qx_tip'] + self.code
+                           )
+    return unless flag                       
   end
 
   # 设置默认值
@@ -54,5 +51,16 @@ class ValidCode < ActiveRecord::Base
     self.status ||= STATUS.keys[0]
     self.code ||= rand(36**CODE_SIZE).to_s(36)
   end
-
+  
+  private
+  def generate_notify(corp_id, login_name, password, mobile, msg)
+    clnt = HTTPClient.new
+    service_url = "http://api.cosms.cn/sms/putMt/?msgFormat=2&corpId=#{corp_id}&loginName=#{login_name}&password=#{password}&Mobs=#{mobile}&msg=#{msg}&mtLevel=1&MD5str="
+    json        = clnt.get_content(URI.encode(service_url), {}, { :Accept=> 'application/json' })
+    status = json.split('\n').first
+    
+    logger.info status.to_s + status.class.to_s 
+    true if status == '100'
+  end
+  
 end
