@@ -125,8 +125,8 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.string   "car_in_areas",                                           default: [], null: false, array: true
     t.integer  "take_car_date",                                          default: 0
     t.decimal  "expect_price",                  precision: 10, scale: 2
-    t.integer  "discouts_way",                                                        null: false
-    t.decimal  "discounts_content",             precision: 10, scale: 2
+    t.integer  "discount_way",                                                        null: false
+    t.decimal  "discount_content",              precision: 10, scale: 2
     t.integer  "status"
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
@@ -141,12 +141,12 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   create_table "tenders", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.decimal  "price",             precision: 10, scale: 2
-    t.integer  "discouts_way",                               null: false
-    t.decimal  "discounts_content", precision: 10, scale: 2
+    t.decimal  "price",            precision: 10, scale: 2
+    t.integer  "discount_way",                              null: false
+    t.decimal  "discount_content", precision: 10, scale: 2
     t.integer  "status"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   create_table "tokens", force: :cascade do |t|

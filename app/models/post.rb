@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Post < ActiveRecord::Base
 
+  before_create :get_expect_price
+
   # constants
   TYPES = {
     1 => '资源',
@@ -15,17 +17,39 @@ class Post < ActiveRecord::Base
     4 => '已删除'
   }
 
+  DISCOUT_WAYS ={
+    1 => '优惠点数',
+    2 => '优惠金额',
+    3 => '加价金额',
+    4 => '直接报价',
+    5 => '电议'
+  }
+
   # relations
-  belongs_to :user, class_name: 'User'
-  has_many :tenders, -> {where(_type: TYPES[2])}, class_name: 'Tender'
-  belongs_to :brand, class_name: 'Brand'
+  has_many    :tenders, class_name: 'Tender'
+  belongs_to  :user,    class_name: 'User'
+  belongs_to  :brand,   class_name: 'Brand'
+  belongs_to  :base_car,class_name: 'BaseCar'
 
   # class methods
-  scope :resources, -> {where(_type: 0)}
-  scope :needs,     -> {where(_type: 1)}
+  # 资源
+  scope :resources, -> { where(_type: 0) }
+  # 寻车
+  scope :needs,     -> { where(_type: 1) }
+  # 已成交
+  scope :completed, -> { where(status: 3) }
 
 
   # instance methods
+  def get_expect_price
+    self.expect_price =  case discount_way
+                      when 1 then (base_car.base_price * discount_content).to_f
+                      when 2 then (base_car.base_price - discount_content).to_f
+                      when 3 then (base_car.base_price + discount_content).to_f
+                      when 4 then discount_content.to_f
+                    end
+  end
+
   def to_0_hash
     {
       id: id,
