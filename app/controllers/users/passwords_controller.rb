@@ -1,4 +1,7 @@
 class Users::PasswordsController < Devise::PasswordsController
+  
+  before_filter :require_no_authentication, except: [:edit]
+  before_filter :assert_reset_token_passed, except: [:edit]
   # GET /resource/password/new
   # def new
   #   super

@@ -8,15 +8,28 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    super
-    if params[:remember_name]
-      cookies[:user_name] = {
-        value: params[:user][:mobile],
-        expires: 1.month.from_now
-      }
+    self.resource = warden.authenticate(auth_options)
+
+    if self.resource
+      set_flash_message(:notice, :signed_in) if is_flashing_format?
+      sign_in(resource_name, resource)
+      yield resource if block_given?
+      respond_with resource, location: after_sign_in_path_for(resource)
+      
+      if params[:remember_name]
+        cookies[:user_name] = {
+          value: params[:user][:mobile],
+          expires: 1.month.from_now
+        }
+      else
+        cookies[:user_name] = nil
+      end
+      
     else
-      cookies[:user_name] = nil
+      # Authentication fails, redirect the user to the root page     
+      redirect_to request.referrer || '/'
     end
+
   end
 
   # DELETE /resource/sign_out
@@ -38,7 +51,7 @@ class Users::SessionsController < Devise::SessionsController
   
   # configure redirect to viewer after devise destory
   def after_sign_out_path_for(resource_or_scope)
-    new_user_session_path
+    request.referrer || '/'
   end
    
 end
