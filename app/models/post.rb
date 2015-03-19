@@ -43,10 +43,10 @@ class Post < ActiveRecord::Base
   # instance methods
   def get_expect_price
     self.expect_price =  case discount_way
-                      when 1 then base_car.base_price * discount_content
-                      when 2 then base_car.base_price - discount_content * 10000
-                      when 3 then base_car.base_price + discount_content * 10000
-                      when 4 then discount_content
+                      when 1 then (base_car.base_price * discount_content).to_f
+                      when 2 then (base_car.base_price - discount_content).to_f
+                      when 3 then (base_car.base_price + discount_content).to_f
+                      when 4 then discount_content.to_f
                     end
   end
 

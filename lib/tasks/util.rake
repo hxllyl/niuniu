@@ -9,12 +9,14 @@ namespace :util do
 
   desc '系统初始化数据'
   task init: :environment do
-    Rake::Task["util:import"].invoke
-    Rake::Task["util:import_areas"].invoke
+    Rake::Task["util:base_cars"].invoke
+    Rake::Task["util:areas"].invoke
+    # Rake::Task["util:brands"].invoke
+
   end
 
   desc "数据导入"
-  task import: :environment do
+  task base_cars: :environment do
     file_path = "#{Rails.root}/doc/base_car_data.xlsx"
 
     import_data(file_path) { |roo|
@@ -26,7 +28,7 @@ namespace :util do
        st = Standard.find_or_initialize_by( name: columns[0] )
        br = Brand.find_or_initialize_by( name: columns[1] )
        bc = BaseCar.find_or_initialize_by( model: columns[2], style: columns[3],
-                                 NO: columns[4].to_i.to_s, base_price: columns[5].scan(/\d+\.\d+/).first.to_f*10000
+                                 NO: columns[4].to_i.to_s, base_price: columns[5].scan(/\d+\.\d+/).first.to_f
                                 )
 
        st.save
@@ -45,7 +47,7 @@ namespace :util do
   end
 
   desc "import chinese province and city data"
-  task import_areas: :environment do
+  task areas: :environment do
     file_path = "#{Rails.root}/doc/areas.xls"
 
     import_data(file_path) { |roo|
@@ -66,7 +68,7 @@ namespace :util do
   end
 
   desc "导入汽车品牌（临时任务）"
-  task import_brands: :environment do
+  task brands: :environment do
     domain  = 'iniuniu.com.cn'
     tmp_dir = Rails.root + 'public' + 'uploads'
 
