@@ -32,8 +32,12 @@ class Post < ActiveRecord::Base
   belongs_to  :base_car,class_name: 'BaseCar'
 
   # class methods
-  scope :resources, -> {where(_type: 0)}
-  scope :needs,     -> {where(_type: 1)}
+  # 资源
+  scope :resources, -> { where(_type: 0) }
+  # 寻车
+  scope :needs,     -> { where(_type: 1) }
+  # 已成交
+  scope :completed, -> { where(status: 3) }
 
 
   # instance methods
