@@ -2,6 +2,7 @@
 
 # author: depp.yu
 require 'util'
+require 'csv'
 
 namespace :util do
   include ::Util::ImportFile
@@ -62,6 +63,25 @@ namespace :util do
         child.save
       end
     }
+  end
+  
+  desc "导入汽车品牌（临时任务）"
+  task import_brands: :environment do
+    domain  = 'iniuniu.com.cn'
+    tmp_dir = Rails.root + 'public' + 'uploads'
+    
+    csv_file = '/Users/depp/brands.csv'
+    csv_text = File.read(csv_file)
+    
+    csv = CSV.parse(csv_text, headers: true)
+    csv.each_with_index do |row, i|
+      ha = row.to_hash
+      brand = Brand.find_or_initialize_by(name: ha["name"])
+      
+      system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
+      brand.photo = Photo.new image: File.open("#{tmp_dir}/#{i}.jpg")
+      brand.save!
+    end
   end
     
 end

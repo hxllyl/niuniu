@@ -10,7 +10,7 @@ class Brand < ActiveRecord::Base
   
   # relations
   belongs_to :standard, class_name: 'Standard' # 属于那种标准
-  has_one :photo, polymorphic: true # 品牌图片
+  has_one :photo, as: :owner, autosave: true # 品牌图片
   has_many :base_cars, class_name: 'BaseCar' # 拥有多种基础车辆
   
   
