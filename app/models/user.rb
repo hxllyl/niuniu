@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   validates :level, numericality: true, inclusion: { in: 0..3 }
 
   # tables relation
-  has_many :photos, as: :owner # 与图片类关联起来 处理用户图片
+  has_many :photos, as: :owner, dependent: :nullify # 与图片类关联起来 处理用户图片
   has_many :posts, class_name: 'Post' # 需求和寻车
   has_many :tenders, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
@@ -44,7 +44,8 @@ class User < ActiveRecord::Base
   has_many :followers, through: :follower_ships, source: :follower
   has_many :following_ships, foreign_key: :follower_id, class_name: 'FollowShip' # 关注关系
   has_many :followings, through: :following_ships, source: :following
-
+  has_many :nodifications, class_name: 'Nodification'
+  
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}

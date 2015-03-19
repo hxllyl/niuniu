@@ -6,6 +6,8 @@ $(function(){
   var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
   var nextStep = $('#next-step');
+  var codeBut  = $('#valid_code_but');
+  var countdowner = $('#countdowner');
   
   validCodeBut.on('click', function(event){
     event.preventDefault();
@@ -14,9 +16,8 @@ $(function(){
     
     $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
        if(data.status == 'success'){
-         validCode.val(data.code);
          
-         validCode.prop('disabled', true);
+         codeBut.prop('disabled', true);
          nextStep.prop('disabled', false);
        }else{
          alert(data.error_msg);

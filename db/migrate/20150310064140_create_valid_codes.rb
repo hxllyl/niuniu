@@ -9,7 +9,7 @@ class CreateValidCodes < ActiveRecord::Migration
       t.column :mobile, :string, limit: 15, null: false # 关联手机
       t.column :code, :string, limit: 10, null: false # 验证码
       t.column :_type, :integer # 验证码用于什么用途
-      t.column :status, :integer # 验证码状态   
+      t.column :status, :integer, default: 0 # 验证码状态 0 未使用 1 已使用   
       t.timestamps null: false
     end
   end

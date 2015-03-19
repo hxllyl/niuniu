@@ -27,22 +27,22 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   create_table "base_cars", force: :cascade do |t|
     t.decimal  "base_price",             precision: 10, scale: 2
     t.integer  "brand_id"
-    t.string   "outer_color",                                                  array: true
-    t.string   "model",       limit: 30,                          null: false
-    t.string   "inner_color",                                                  array: true
+    t.string   "outer_color",                                                              array: true
+    t.string   "model",       limit: 30,                                      null: false
+    t.string   "inner_color",                                                              array: true
     t.integer  "standard_id"
     t.string   "style",       limit: 60
     t.string   "NO",          limit: 12
-    t.integer  "status"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.integer  "status",                                          default: 0
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
   end
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",          limit: 40,             null: false
     t.integer  "standard_id"
     t.string   "regions",                                           array: true
-    t.integer  "status"
+    t.integer  "status",                   default: 0
     t.integer  "click_counter",            default: 0
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
@@ -60,20 +60,20 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",       limit: 225, null: false
+    t.string   "name",       limit: 225,             null: false
     t.integer  "area_id"
-    t.integer  "status"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "status",                 default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "complaints", force: :cascade do |t|
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
     t.integer  "user_id"
-    t.integer  "status"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "status",                   default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "follow_ships", force: :cascade do |t|
@@ -94,11 +94,11 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   create_table "nodifications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "content",       limit: 225
-    t.integer  "status"
+    t.integer  "status",                    default: 0
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.decimal  "expect_price",                  precision: 10, scale: 2
     t.integer  "discount_way",                                                        null: false
     t.decimal  "discount_content",              precision: 10, scale: 2
-    t.integer  "status"
+    t.integer  "status",                                                 default: 1
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
   end
@@ -151,11 +151,11 @@ ActiveRecord::Schema.define(version: 20150313092115) do
 
   create_table "tokens", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "value",      limit: 50, null: false
+    t.string   "value",      limit: 50,             null: false
     t.datetime "expired_at"
-    t.integer  "status"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "status",                default: 0
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -187,12 +187,12 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "valid_codes", force: :cascade do |t|
-    t.string   "mobile",     limit: 15, null: false
-    t.string   "code",       limit: 10, null: false
+    t.string   "mobile",     limit: 15,             null: false
+    t.string   "code",       limit: 10,             null: false
     t.integer  "_type"
-    t.integer  "status"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "status",                default: 0
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
 end

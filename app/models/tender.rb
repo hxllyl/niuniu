@@ -21,6 +21,7 @@ class Tender < ActiveRecord::Base
   # relations
   belongs_to :user, class_name: 'User'
   belongs_to :post, class_name: 'Post'
+  has_many :comments, as: :resources
 
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
