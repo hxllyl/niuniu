@@ -142,11 +142,11 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.decimal  "price",            precision: 10, scale: 2
-    t.integer  "discount_way",                              null: false
+    t.integer  "discount_way",                                          null: false
     t.decimal  "discount_content", precision: 10, scale: 2
-    t.integer  "status"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.integer  "status",                                    default: 0
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   create_table "tokens", force: :cascade do |t|

@@ -10,11 +10,11 @@ class Post < ActiveRecord::Base
   }
 
   STATUS = {
-    0 => '未审核',
-    1 => '已审核', # 默认状态
-    2 => '已过期',
-    3 => '已成交', # 仅限寻车
-    4 => '已删除'
+    0  => '未审核',
+    1  => '已审核', # 默认状态
+    2  => '已过期',
+    3  => '已成交', # 仅限寻车
+    -1 => '已删除'
   }
 
   DISCOUT_WAYS ={
@@ -42,12 +42,20 @@ class Post < ActiveRecord::Base
 
   # instance methods
   def get_expect_price
-    self.expect_price =  case discount_way
-                      when 1 then (base_car.base_price * discount_content).to_f
-                      when 2 then (base_car.base_price - discount_content).to_f
-                      when 3 then (base_car.base_price + discount_content).to_f
-                      when 4 then discount_content.to_f
-                    end
+    self.expect_price = case discount_way
+                          when 1 then (base_car.base_price * discount_content).to_f
+                          when 2 then (base_car.base_price - discount_content).to_f
+                          when 3 then (base_car.base_price + discount_content).to_f
+                          when 4 then discount_content.to_f
+                        end
+  end
+
+  def complete(tender_id: tender_id)
+    tender = self.tenders.find_by_id(tender_id)
+    if tender
+      self.update_attributes(status: 3)
+      tender.update_attributes(status: 1)
+    end
   end
 
   def to_0_hash

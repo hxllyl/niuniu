@@ -49,6 +49,8 @@ Rails.application.routes.draw do
       get   :my_list
       get   :show
       post  :create
+      post  :tender
+      put   :complete
     end
 
     namespace :follow_ships do
