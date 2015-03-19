@@ -11,7 +11,18 @@ Rails.application.routes.draw do
                                   }
 
   resources :users do
-    resources :my_posts
+    member do
+      get :my_tenders
+      get :my_followers
+      get :system_infos
+      get :my_level
+      get :edit_my_level
+      put :update_my_level
+      get :about_us
+    end
+    resources :my_posts do
+      resources :tenders
+    end
   end
 
   resources :posts do
@@ -20,12 +31,12 @@ Rails.application.routes.draw do
       get :user_list
     end
   end
-  
+
   resources :valid_codes do
     get :_valid, on: :collection
   end
-  
-  resources :areas, only: [:show] 
+
+  resources :areas, only: [:show]
 
   namespace :api do
     devise_scope :user do
@@ -47,7 +58,7 @@ Rails.application.routes.draw do
       get :joint_followings
     end
   end
-  
+
   mount RailsAdmin::Engine => '/a', as: 'rails_admin'
 
 end

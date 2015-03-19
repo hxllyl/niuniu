@@ -60,7 +60,7 @@ namespace :init_data do
                  standard_id: standard.id,
                  brand_id: brand.id,
                  user_id: user.id,
-                 model: case_car.model,
+                 model: base_car.model,
                  outer_color: base_car.outer_color.sample,
                  inner_color: base_car.inner_color.sample,
                  car_license_areas: Area.first.name,
