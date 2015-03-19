@@ -7,14 +7,15 @@ class Brand < ActiveRecord::Base
     0 => '激活',
     1 => '未激活'
   }
-  
+
   # relations
-  belongs_to :standard, class_name: 'Standard' # 属于那种标准
-  has_one :photo, polymorphic: true # 品牌图片
-  has_many :base_cars, class_name: 'BaseCar' # 拥有多种基础车辆
-  
-  
-  
+  belongs_to :standard,  class_name: 'Standard' # 属于那种标准
+  has_many   :base_cars, class_name: 'BaseCar' # 拥有多种基础车辆
+
+  has_one    :photo,     polymorphic: true # 品牌图片
+
+
+
   # 初始化 object 状态
   after_initialize :init
   def init
