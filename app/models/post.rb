@@ -7,6 +7,14 @@ class Post < ActiveRecord::Base
     2 => '寻车'
   }
 
+  STATUS = {
+    0 => '未审核',
+    1 => '已审核', # 默认状态
+    2 => '已过期',
+    3 => '已成交', # 仅限寻车
+    4 => '已删除'
+  }
+
   # relations
   belongs_to :user, class_name: 'User'
   has_many :tenders, -> {where(_type: TYPES[2])}, class_name: 'Tender'
