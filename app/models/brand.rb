@@ -14,8 +14,6 @@ class Brand < ActiveRecord::Base
 
   has_one    :photo,     polymorphic: true # 品牌图片
 
-
-
   # 初始化 object 状态
   after_initialize :init
   def init
