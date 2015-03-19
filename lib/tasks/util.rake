@@ -80,7 +80,7 @@ namespace :util do
       brand = Brand.find_or_initialize_by(name: ha["name"])
 
       system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
-'
+
       brand.save!
     end
   end
