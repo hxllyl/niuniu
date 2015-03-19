@@ -79,7 +79,7 @@ namespace :util do
       brand = Brand.find_or_initialize_by(name: ha["name"])
       
       system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
-      brand.photo = Photo.new image: File.open("#{tmp_dir}/#{i}.jpg")
+'
       brand.save!
     end
   end
