@@ -99,7 +99,7 @@ padding:0;
 .indexUser .userInfo { margin-bottom: 30px; }
 .indexUser .userInfo .photo { width: 75px; height: 75px; margin-right: 16px; border-radius: 50%; overflow: hidden; }
 .indexUser .userInfo .name { display: table-cell; height: 75px; vertical-align: middle; }
-.indexUser .userInfo .name h5 a { color: #323232; }
+.indexUser .userInfo .name h5 a { font-weight: bold; color: #323232; }
 .indexUser .userInfo .name .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }
 .indexUser .userInfo .glyphicon { margin-right: 6px; }
 .indexUser .userDetail { line-height: 24px; color: #666; }
