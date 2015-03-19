@@ -12,7 +12,6 @@ namespace :util do
     Rake::Task["util:base_cars"].invoke
     Rake::Task["util:areas"].invoke
     # Rake::Task["util:brands"].invoke
-
   end
 
   desc "数据导入"
