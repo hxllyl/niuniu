@@ -59,6 +59,10 @@ Rails.application.routes.draw do
       get :joint_followers
       get :joint_followings
     end
+
+    namespace :complaints do
+      post :create
+    end
   end
 
   mount RailsAdmin::Engine => '/a', as: 'rails_admin'

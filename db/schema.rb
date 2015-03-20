@@ -71,9 +71,10 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
     t.integer  "user_id"
-    t.integer  "status",                   default: 0
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "status",                    default: 0
+    t.string   "content",       limit: 225
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "follow_ships", force: :cascade do |t|
