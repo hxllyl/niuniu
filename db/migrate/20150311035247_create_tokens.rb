@@ -8,7 +8,7 @@ class CreateTokens < ActiveRecord::Migration
       t.references :user, class_name: 'User'
       t.column :value, :string, limit: 50, null: false # token 值
       t.column :expired_at, :datetime # 过期日期
-      t.column :status, :integer  
+      t.column :status, :integer, default: 0  
       t.timestamps null: false
     end
   end

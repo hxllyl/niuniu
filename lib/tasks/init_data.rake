@@ -55,20 +55,22 @@ namespace :init_data do
     standard = Standard.first
     brand    = standard.brands.first
     base_car = brand.base_cars.first
-    post     = Post.create(
-                 _type: 0,
-                 standard_id: standard.id,
-                 brand_id: brand.id,
-                 user_id: user.id,
-                 model: base_car.model,
-                 outer_color: base_car.outer_color.sample,
-                 inner_color: base_car.inner_color.sample,
+    post     = Post.new(
+                 _type:             [0, 1].sample,
+                 standard_id:       standard.id,
+                 brand_id:          brand.id,
+                 user_id:           user.id,
+                 model:             base_car.model,
+                 outer_color:       base_car.outer_color.sample,
+                 inner_color:       base_car.inner_color.sample,
                  car_license_areas: Area.first.name,
-                 car_in_areas: brand.regions.sample(2),
-                 expect_price: 19.4,
-                 style: base_car.style,
-                 discouts_way: 4
+                 car_in_areas:      brand.regions.sample(2),
+                 style:             base_car.style,
+                 discount_way:      1,
+                 discount_content:  0.9
                )
+    post.base_car = base_car
+    post.save
   end
 
 end

@@ -14,7 +14,7 @@ class CreateBaseCars < ActiveRecord::Migration
       t.references :standard, class_name: 'Standard' # 规格与基础数据关联
       t.column :style, :string, limit: 60 # 车辆款式
       t.column :NO, :string, limit: 12 # 行话(e: 9876)
-      t.column :status, :integer 
+      t.column :status, :integer, default: 0 # 0 激活 1 未激活 
       t.timestamps null: false
     end
   end

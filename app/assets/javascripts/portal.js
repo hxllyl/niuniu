@@ -6,6 +6,8 @@ $(function(){
   var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
   var nextStep = $('#next-step');
+  var codeBut  = $('#valid_code_but');
+  var countdown = $("#countdown");
   
   validCodeBut.on('click', function(event){
     event.preventDefault();
@@ -14,9 +16,11 @@ $(function(){
     
     $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
        if(data.status == 'success'){
-         validCode.val(data.code);
+         validCodeBut.hide();
+         countdown.show();
          
-         validCode.prop('disabled', true);
+         updateCountdown(60, countdown);
+         codeBut.prop('disabled', true);
          nextStep.prop('disabled', false);
        }else{
          alert(data.error_msg);
@@ -48,3 +52,14 @@ $(function(){
   });
   
 });
+
+function updateCountdown(seconds, selected) {
+    seconds--;
+    if (seconds > 0) {
+       selected.text(seconds);
+       setTimeout(updateCountdown(seconds, selected), 1000);
+    } else {
+      selected.hide();
+      return 0;
+    }
+}

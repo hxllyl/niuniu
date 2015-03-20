@@ -82,4 +82,63 @@ class Api::PostsController < Api::BaseController
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
   end
+
+  # 报价
+  #
+  # Params:
+  #   token:                      [String]    valid token
+  #   tender[:post_id]:           [Integer]   post ID
+  #   tender[:discount_way]:      [Integer]   报价方式
+  #   tender[:discount_content]:  [Float]     报价详情
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
+  def tender
+    post = Post.find_by_id_and__type(params[:tender][:post_id], 1)
+
+    raise 'not found' unless post
+
+    params.require(:tender).permit!
+    tender = Tender.new(params[:tender].merge(user_id: @user.id))
+
+    if tender.save
+      render json: {status: 200, notice: 'success', data: {tender: tender}}
+    else
+      render json: {status: 400, notice: '请重试'}
+    end
+
+    # rescue => e
+    # render json: {status: false, error: e.message}
+  end
+
+  # 成交寻车
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   post_id:  [Integer]   post ID
+  #   tender_id:[Integer]   tender ID
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
+  def complete
+    post = @user.posts.needs.find_by_id(params[:post_id])
+
+    raise 'not found' unless post
+
+    tender = post.tenders.find_by_id(params[:tender_id])
+
+    raise 'not found' unless tender
+
+    post.complete(tender.id)
+
+    render json: {status: 200, notice: 'success', data: {post: post, tender: tender}}
+  end
 end

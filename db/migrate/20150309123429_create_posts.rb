@@ -18,11 +18,11 @@ class CreatePosts < ActiveRecord::Migration
       t.column :inner_color, :string, limit: 20, null: false # 内饰
       t.column :car_license_areas, :string, limit: 60, null: false # 车辆上牌区域
       t.column :car_in_areas, :string, array: true, null: false, default: [] # 车辆所在区域
-      t.column :take_car_date, :integer, default: 0 # 提车日期 
+      t.column :take_car_date, :integer, default: 0 # 提车日期
       t.column :expect_price, :decimal, precision: 10, scale: 2 # 期望成交价格
-      t.column :discouts_way, :integer, null: false # 出价方式 1 优惠点数 2 优惠金额 3 加价金额 4 直接报价
-      t.column :discounts_content, :decimal, precision: 10, scale: 2 # 出价内容
-      t.column :status, :integer   
+      t.column :discount_way, :integer, null: false # 出价方式 1 优惠点数 2 优惠金额 3 加价金额 4 直接报价 5 电议
+      t.column :discount_content, :decimal, precision: 10, scale: 2 # 出价内容
+      t.column :status, :integer, default: 1 # 状态 0 未审核 1 已审核  2 已过期 3 已成交 -1 已删除
       t.timestamps null: false
     end
   end

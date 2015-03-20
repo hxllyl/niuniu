@@ -19,8 +19,24 @@ class PortalController < BaseController
       @user = User.new
     end
     
-    @posts  = Post.where(_type: Post::TYPES.keys[1]).order("updated_at desc")
-                         
+    post_conditions = {_type: Post::TYPES.keys[1]}
+    post_conditions.merge!({brand_id: params[:brand_id]}) if params[:brand_id]
+    @posts  = Post.where(post_conditions).order("updated_at desc")                     
+    
+    
+  end
+  
+  # 首页搜索
+  # 参数：
+  #   channel: 搜索入口
+  #   key: 关键字
+  def search
+    case params[:channel]
+    when 'all' then
+      
+    when 'brand' then
+        
+    end
   end
   
 end

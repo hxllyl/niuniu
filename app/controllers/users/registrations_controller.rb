@@ -9,7 +9,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-   super
+   #super
+   build_resource(sign_up_params)
+
+   resource.save
+   yield resource if block_given?
+   if resource.persisted?
+     if resource.active_for_authentication?
+       set_flash_message :notice, :signed_up if is_flashing_format?
+       sign_up(resource_name, resource)
+       respond_with resource, location: after_sign_up_path_for(resource)
+     else
+       set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+       expire_data_after_sign_in!
+       respond_with resource, location: after_inactive_sign_up_path_for(resource)
+     end
+     valid_code = ValidCode.find_by(mobile: resource[:mobile], status: ValidCode::STATUS.keys[0])
+     valid_code.update(status: ValidCode::STATUS.keys[1])
+   else
+     clean_up_passwords resource
+     # set_minimum_password_length
+     # respond_with resource
+     redirect_to request.referrer || '/'
+   end
   end
 
   # GET /resource/edit
