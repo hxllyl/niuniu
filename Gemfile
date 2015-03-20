@@ -58,6 +58,7 @@ gem 'writeexcel', '~> 1.0.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
 # Deploy
 gem 'rvm'
 #gem 'rvm-capistrano'
