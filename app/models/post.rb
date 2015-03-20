@@ -5,8 +5,8 @@ class Post < ActiveRecord::Base
 
   # constants
   TYPES = {
-    1 => '资源',
-    2 => '寻车'
+    0 => '资源',
+    1 => '寻车'
   }
 
   STATUS = {
@@ -31,7 +31,8 @@ class Post < ActiveRecord::Base
   belongs_to  :brand,   class_name: 'Brand'
   belongs_to  :base_car,class_name: 'BaseCar'
   belongs_to  :standard,class_name: 'Standard'
-
+  has_many    :post_photos, as: :owner, dependent: :nullify, autosave: true # 资源图片
+  
   # class methods
   # 资源
   scope :resources, -> { where(_type: 0) }

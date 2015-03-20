@@ -33,7 +33,8 @@ namespace :init_data do
       level:    User::LEVELS.keys[0],
       status:   User::STATUS.keys[1],
       password: '123456',
-      company: 'test'
+      company: 'test',
+      area: Area.last
     }
     user = User.create(ha) unless User.find_by_mobile(ha[:mobile])
 
@@ -44,7 +45,8 @@ namespace :init_data do
       level:    User::LEVELS.keys[0],
       status:   User::STATUS.keys[1],
       password: '123456',
-      company: 'test'
+      company: 'test',
+      area: Area.last
     }
 
     admin = User.create(ha_1) unless User.find_by_mobile(ha_1[:mobile])

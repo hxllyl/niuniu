@@ -11,6 +11,12 @@ class BaseCar < ActiveRecord::Base
   
   belongs_to :standard, class_name: 'Standard' # 属于那种规格
   belongs_to :brand, class_name: 'Brand' # 属于那种车辆品牌
+  has_many   :car_photos, as: :owner, dependent: :nullify, autosave: true # 图片数据
   
+  
+  # instance_methods
+  def to_human_name
+    self.brand.name << self.model << self.NO  
+  end
   
 end
