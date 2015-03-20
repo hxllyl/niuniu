@@ -74,4 +74,5 @@ class Post < ActiveRecord::Base
       user_id: user_id
     }
   end
+  
 end

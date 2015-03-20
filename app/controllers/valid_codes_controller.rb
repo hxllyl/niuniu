@@ -2,7 +2,7 @@
 
 class ValidCodesController < BaseController
   
-  skip_before_action :authenticate_user!, only: [:create]
+  skip_before_action :authenticate_user!, only: [:create, :_valid]
   
   # 生成valid_code
   # params:
@@ -32,7 +32,7 @@ class ValidCodesController < BaseController
   #   success
   #   failed
   def _valid
-    valid_code = ValidCode.where(mobile: params[:mobile], code: params[:code]).first
+    valid_code = ValidCode.where(mobile: params[:mobile], code: params[:valid_code]).first
     
     respond_to do |format|
       format.json {

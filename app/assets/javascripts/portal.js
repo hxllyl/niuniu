@@ -16,16 +16,26 @@ $(function(){
     
     $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
        if(data.status == 'success'){
-         validCodeBut.hide();
-         countdown.show();
-         
-         updateCountdown(60, countdown);
-         codeBut.prop('disabled', true);
-         nextStep.prop('disabled', false);
        }else{
          alert(data.error_msg);
        }
      });
+  });
+  
+  validCode.keyup(function(event){
+    event.preventDefault();
+    
+    if(validCode.val().length == 6){
+      $.get('/valid_codes/_valid.json?mobile='+$('#mobile').val()+'&valid_code=' + validCode.val(),
+            function(data){
+              if(data.status == 'success'){
+                nextStep.prop('disabled', false);
+              }else{
+                nextStep.prop('disabled', true);
+                alert("手机或验证码输入错误！");
+              }
+            })
+    }
   });
   
   // 用户获取省市

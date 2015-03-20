@@ -1,0 +1,115 @@
+<% if current_user %>
+<div class="panel panel-default contentBox bgf8">
+	<div class="panel-body indexUser">
+		<div class="userInfo clearfix">
+			<div class="photo bfL"><a href="#"><%= image_tag current_user.avatar, size: '78x78', alt: "我的头像" -%></a></div>
+			<div class="name">
+				<%= link_to current_user.name + '(' + current_user.area.try(:name).to_s + ')', current_user %>
+				<div class="clearfix"><span class="tag"><%= current_user.i_level %></span></div>
+			</div>
+		</div>
+		<ul class="row userData">
+			<li class="col-md-4">
+				<p class="data"><a href="#"><%= current_user.posts.where(_type: Post::TYPES.keys[1]).count %></a></p>
+				<p class="tt"><%= I18n.t('i_post')%></p>
+			</li>
+			<li class="col-md-4">
+				<p class="data"><a href="#"><%= current_user.tenders.count %></a></p>
+				<p class="tt"><%= I18n.t('i_tender') %></p>
+			</li>
+			<li class="col-md-4 last">
+				<p class="data"><a href="#"><%= current_user.followings.count %></a></p>
+				<p class="tt"><%= I18n.t('i_following') %></p>
+			</li>
+		</ul>
+		<div class="userSubBtn">
+			<button type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span><%= I18n.t('post') %></button>
+			<button type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span><%= I18n.t('resource') %></button>
+		</div>
+		<div class="userArr"><span class="icon icon-user"></span></div>
+	</div>
+</div>
+<% end %>
+
+<% unless current_user %>
+<div class="panel panel-default contentBox bgf8">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title"><%= t('login') %></h3>
+	</div>
+  <%= form_for(User.new, as: :user, url: session_path(:user),
+               html: {class: 'panel-body form-horizontal indexLogin'}) do |f| %>
+		<div class="form-group">
+			<%= f.text_field :mobile, class: "form-control input-sm", id: "", placeholder: "请输入手机号", value: cookies[:user_name] %>
+		</div>
+		<div class="form-group">
+			<%= f.password_field :password, class: "form-control input-sm", id: "", placeholder: "请输入密码" %>
+		</div>
+		<div class="checkbox">
+	    <label class="bfL">
+	      <%= check_box_tag :remember_name %><%= t('remember_me')%>
+	    </label>
+	    <div class="forget bfR"><a href="#"><%= t('forget_pw') %></a></div>
+	  </div>
+	  <ul class="subGroup row">
+	  	<li class="col-md-6">
+	  		<input type="submit" class="btn btn-default w100p orange btn_spacing" value="登录" />
+	  	</li>
+	  	<li class="col-md-6">
+	  		<button type="button" class="btn btn-default w100p btn_spacing" role="button" data-toggle="modal" data-target="#reg_step1"><%= t('register_but') %></button>
+	  	</li>
+	  </ul>
+    <% end -%>
+</div>
+<% end -%>
+
+<div class="panel panel-default contentBox bgf9">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title">官方APP</h3>
+	</div>
+	<div class="panel-body indexAppDL">
+		<div class="appQR"><%= image_tag("index/app_qr.jpg", alt: "", width: "100%")%></div>
+		<ul class="row appLink">
+			<li class="col-md-6">
+				<a class="btn btn-default p0" href="#" role="button"><span class="icon icon-apple"></span>iPhone</a>
+			</li>
+			<li class="col-md-6">
+				<a class="btn btn-default p0" href="#" role="button"><span class="icon icon-andriod"></span>Android</a>
+			</li>
+		</ul>
+		<div class="tel clearfix">
+			<div class="icon bfL"></div>
+			<div class="info">
+				<p><%= t('server_photo') %></p>
+				<p><strong>021-54843638</strong></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default contentBox">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title">一键找车</h3>
+	</div>
+	<div class="panel-body">
+		<form class="searchBox">
+			<input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
+			<input type="submit" class="btn btn-primary subBtn" value="搜索" />
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default contentBox">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title"><%= t('select_brand') %></h3>
+	</div>
+	<div class="panel-body brandSelect">
+    <div class="dropdown w100p">
+      <select name="" class="form-control" id="car_brandMenu">
+        <option value="品牌1"><%= t('brand') %></option>
+        <option value="品牌2">品牌2</option>
+        <option value="品牌3">品牌3</option>
+      </select>
+    </div>
+    <input type="submit" class="btn btn-primary subBtn" value="提交">
+	</div>
+</div>

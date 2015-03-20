@@ -58,6 +58,15 @@ gem 'writeexcel', '~> 1.0.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# Deploy
+gem 'rvm'
+#gem 'rvm-capistrano'
+gem 'capistrano','3.2.1'
+gem 'capistrano-ext'
+gem 'capistrano-unicorn', :require => false
+gem 'capistrano-rails', '~> 1.0.0'
+gem 'capistrano-bundler'
+gem 'capistrano-rvm'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
