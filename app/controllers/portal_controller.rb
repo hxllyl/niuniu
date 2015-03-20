@@ -19,7 +19,10 @@ class PortalController < BaseController
       @user = User.new
     end
     
-    @posts  = Post.where(_type: Post::TYPES.keys[1]).order("updated_at desc")                     
+    post_conditions = {_type: Post::TYPES.keys[1]}
+    post_conditions.merge!({brand_id: params[:brand_id]}) if params[:brand_id]
+    @posts  = Post.where(post_conditions).order("updated_at desc")                     
+    
     
   end
   

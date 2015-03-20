@@ -30,6 +30,7 @@ class Post < ActiveRecord::Base
   belongs_to  :user,    class_name: 'User'
   belongs_to  :brand,   class_name: 'Brand'
   belongs_to  :base_car,class_name: 'BaseCar'
+  belongs_to  :standard,class_name: 'Standard'
 
   # class methods
   # 资源
