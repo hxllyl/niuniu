@@ -10,6 +10,13 @@ line-height: 1;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
+.icon-level:before { content: "\e605"; }
+.icon-logo:before { content: "\e606"; }
+.icon-pw:before { content: "\e607"; }
+.icon-quit:before { content: "\e608"; }
+.icon-upgrade:before { content: "\e609"; }
+.icon-user:before { content: "\e60a"; }
+.icon-userInfo:before { content: "\e60b"; }
 .icon-carInfo:before { content: "\e600"; }
 .icon-home:before { content: "\e601"; }
 .icon-market:before { content: "\e602"; }

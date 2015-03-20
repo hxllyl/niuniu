@@ -54,8 +54,8 @@ padding:0;
 .nav-tabs.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
 .nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; color: #333; }
 .nav-tabs.carInfoTabs li a:hover { color: #f4621b; }
-.nav-tabs.carInfoTabs li a .icon { float: left; width: 30px; height: 38px; background-repeat: no-repeat; background-position: center; }
-.nav-tabs.carInfoTabs li a .icon.bmw { background-image: url(index/car_tag_logo1.jpg); }
+.nav-tabs.carInfoTabs li a .icon { display: inline-block; width: 30px; margin-top: -4px; text-align: center; vertical-align: middle; }
+.nav-tabs.carInfoTabs li a .icon img { width: 80%; }
 .nav-tabs.carInfoTabs li.active a { padding: 0 22px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
 .nav-tabs.carInfoTabs.sm { height: 34px; }
 .nav-tabs.carInfoTabs.sm li a { height: 32px; line-height: 28px; }
@@ -66,7 +66,8 @@ padding:0;
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 .carInfoList li { float: left; width: 50%; padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
-.carInfoList li .logo { width: 46px; text-align: center; }
+.carInfoList li .logo { width: 46px; margin-right: 8px; text-align: center; }
+.carInfoList li .logo img { width: 80%; }
 .carInfoList li .info { padding-right: 20px; margin-left: 46px; font-size: 12px; color: #999; }
 .carInfoList li .info .tt { margin-bottom: 8px; font-size: 14px; }
 .carInfoList li .info .tt a { color: #666666; }
@@ -123,7 +124,8 @@ padding:0;
 .indexUser .userSubBtn .btn.blue { color: #FFF; background-color: #36a3c3; }
 .indexUser .userSubBtn .btn.red:hover { background-color: #da573b; }
 .indexUser .userSubBtn .btn.blue:hover { background-color: #2d859f; }
-.userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; background: url(index/arr_bg.png) no-repeat left top; }
+.userArr { position: absolute; top: 0px; right: 0px; width: 44px; height: 44px; padding: 4px; text-align: right; color: #FFF; background: url(index/arr_bg.png) no-repeat left top; }
+.userArr .icon { font-size: 20px; }
 .indexLogin .form-group { margin: 0 0 10px; }
 .indexLogin .checkbox { padding-top: 0; color: #666; }
 .indexLogin .checkbox .forget a { text-decoration: underline; color: #ff791f; }
@@ -364,7 +366,9 @@ padding:0;
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
 .btn { text-shadow: none; }
-.btn .icon { display: inline-block; width: 20px; height: 22px; margin-top: -2px; margin-bottom: -2px; text-align: center; vertical-align: middle; }
+.btn .icon { display: inline-block; width: 20px; height: 22px; margin-top: -4px; margin-bottom: 0px; text-align: left; vertical-align: bottom; font-size: 22px; }
+.btn.btn-sm .icon { margin-top: -4px; margin-bottom: -4px; font-size: 16px; }
+.btn.btn-xs .icon { margin-top: -4px; margin-bottom: -4px; font-size: 16px; }
 .btn .caret { margin-left: 8px; }
 .btn.w100p { width: 100%; }
 .btn.btnW200 { width: 200px; }

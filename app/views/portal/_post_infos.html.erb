@@ -1,10 +1,10 @@
 <div role="tabpanel" class="panel panel-default contentBox">
 	<ul role="tablist" class="nav nav-tabs carInfoTabs">
 		<li role="presentation" class="active"><a href="#allCarInfo"><%= t('post_info') %></a></li>
-		<li role="presentation"><a href="#carBrand1"><span class="icon bmw"></span>宝马</a></li>
-		<li role="presentation"><a href="#carBrand2"><span class="icon bmw"></span>奔驰</a></li>
-		<li role="presentation"><a href="#carBrand3"><span class="icon bmw"></span>路虎</a></li>
-		<li role="presentation"><a href="#carBrand4"><span class="icon bmw"></span>福特</a></li>
+		<li role="presentation"><a href="#carBrand1"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>宝马</a></li>
+		<li role="presentation"><a href="#carBrand2"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>奔驰</a></li>
+		<li role="presentation"><a href="#carBrand3"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>路虎</a></li>
+		<li role="presentation"><a href="#carBrand4"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>福特</a></li>
 	</ul>
 
 	<div class="panel-body">
@@ -14,7 +14,7 @@
 				<li>
 					<div class="logo bfL"><%= image_tag( post.brand.photo.image.thumb, alt: "")%></div>
 					<div class="info">
-						<h5 class="tt"><a href="#"><%= post.%></a></h5>
+						<h5 class="tt"><a href="#"><%= post.brand.name%></a></h5>
 						<p class="clearfix"><span class="bfL"></span><%= %>/<%= %><span class="bfR">李木子(上海)  16:20</span></p>
 					</div>
         </li>

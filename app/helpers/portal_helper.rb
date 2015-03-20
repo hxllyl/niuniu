@@ -20,7 +20,7 @@ module PortalHelper
 
   # post在首页的名称显示
   def post_name(post)
-    "寻" post.standard.name
+    "寻" + post.standard.name
   end
 
 end
