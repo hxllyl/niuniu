@@ -2,7 +2,7 @@
   <div class="userInfo clearfix">
     <div class="photo bfL"><%= image_tag("_temp/userPhoto.jpg", alt: "")%></div>
     <div class="detail">
-      <div class="clearfix"><span class="name">李木子</span><span class="type">个人</span><a href="#" class="btn btn-default btn-xs"><span class="glyphicon"></span>升级</a></div>
+      <div class="clearfix"><span class="name">李木子</span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon_upgrade"></span>升级</a></div>
       <div class="detailTab">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -52,7 +52,7 @@
     </ul>
     <div class="link"><a href="#">系统消息</a></div>
   </div>
-  <div class="userArr"></div>
+  <div class="userArr"><span class="icon icon_user"></span></div>
 </div>
 <div class="container">
   <div class="row">
@@ -186,7 +186,7 @@
           <h3 class="panel-title">一键找车</h3>
         </div>
         <div class="panel-body">
-          <form class="carSearch">
+          <form class="searchBox">
             <input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
             <input type="submit" class="btn btn-primary subBtn" value="搜索" />
           </form>
