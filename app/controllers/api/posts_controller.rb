@@ -137,7 +137,7 @@ class Api::PostsController < Api::BaseController
 
     raise 'not found' unless tender
 
-    post.complete(tender_id: tender.id)
+    post.complete(tender.id)
 
     render json: {status: 200, notice: 'success', data: {post: post, tender: tender}}
   end

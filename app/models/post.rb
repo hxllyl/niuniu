@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
                         end
   end
 
-  def complete(tender_id: tender_id)
+  def complete(tender_id)
     tender = self.tenders.find_by_id(tender_id)
     if tender
       self.update_attributes(status: 3)
