@@ -1,1 +1,62 @@
-编辑我的等级
+<div class="container accountsSetting">
+  <div class="row">
+    <div class="col-md-2 accountsMenu">
+      <h5 class="title"><span class="tt">帐号管理</span></h5>
+      <ul class="list">
+        <li><a href="#"><span class="icon icon_userInfo"></span>个人信息</a></li>
+        <li class="active"><a href="#"><span class="icon icon_level"></span>认证等级</a></li>
+        <li><a href="#"><span class="icon icon_pw"></span>修改密码</a></li>
+        <li><a href="#"><span class="icon icon_logo"></span>关于我们</a></li>
+        <li><a href="#"><span class="icon icon_quit"></span>安全退出</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10 accountsMain">
+      <h5 class="title">认证升级</h5>
+      <div class="panel panel-default levelBox">
+        <div class="backLink"><a href="#">&lt;&lt;返回上一级</a></div>
+        <div class="panel-body">
+          <ul class="row addImgGroups">
+            <li class="col-md-3">
+              <div class="thumbnail box">
+                <h5 class="tt">展厅门头</h5>
+                <div class="img"><span class="alt">照片示例</span></div>
+                <div class="fileInput">
+                  <div class="fileBtn">添加照片<input type="file" class="button" /></div>
+                </div>
+              </div>
+            </li>
+            <li class="col-md-3">
+              <div class="thumbnail box">
+                <h5 class="tt">展厅内部</h5>
+                <div class="img"><span class="alt">照片示例</span><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></div>
+                <div class="fileInput">
+                  <div class="fileBtn">添加照片<input type="file" class="button" /></div>
+                </div>
+              </div>
+            </li>
+            <li class="col-md-3">
+              <div class="thumbnail box">
+                <h5 class="tt">营业执照原件</h5>
+                <div class="img"><span class="alt">照片示例</span><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></div>
+                <div class="fileInput">
+                  <div class="fileBtn">添加照片<input type="file" class="button" /></div>
+                </div>
+              </div>
+            </li>
+            <li class="col-md-3">
+              <div class="thumbnail box">
+                <h5 class="tt">个人名片</h5>
+                <div class="img"><span class="alt">照片示例</span><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></div>
+                <div class="fileInput">
+                  <div class="fileBtn">添加照片<input type="file" class="button" /></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="tips">我们将会严格保密您提交的所有信息</div>
+          <input type="submit" class="btn btn-default orange btn_spacing subBtn" value="提交" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

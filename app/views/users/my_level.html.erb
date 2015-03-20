@@ -1,1 +1,48 @@
-我的等级
+<div class="container accountsSetting">
+  <div class="row">
+    <div class="col-md-2 accountsMenu">
+      <h5 class="title"><span class="tt">帐号管理</span></h5>
+      <ul class="list">
+        <li><a href="#"><span class="icon icon_userInfo"></span>个人信息</a></li>
+        <li class="active"><a href="#"><span class="icon icon_level"></span>认证等级</a></li>
+        <li><a href="#"><span class="icon icon_pw"></span>修改密码</a></li>
+        <li><a href="#"><span class="icon icon_logo"></span>关于我们</a></li>
+        <li><a href="#"><span class="icon icon_quit"></span>安全退出</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10 accountsMain">
+      <h5 class="title">认证升级</h5>
+      <div class="panel panel-default levelBox">
+        <ul role="tablist" class="nav nav-tabs carInfoTabs noBg">
+          <li role="presentation" class="active"><a href="#tabpanel1">经销商认证流程</a></li>
+          <li role="presentation"><a href="#tabpanel2">4S店认证流程</a></li>
+        </ul>
+        <div class="panel-body">
+          <div role="tabpanel" class="levelProcess clearfix tab-pane active" id="tabpanel1">
+            <div class="col-md-3 process">
+              <p>个人手机（认证）<span class="next_arr"></span></p>
+              <p>个人身份（认证）<span class="next_arr"></span></p>
+              <p>资源公司（认证）<span class="next_arr"></span></p>
+              <p>综合展厅（认证）<span class="next_arr_r"></span></p>
+            </div>
+            <div class="col-md-3 level">
+              <p><%= image_tag("user/icon_vip1.png", alt: "")%></p>
+              <p><%= image_tag("user/icon_vip2.png", alt: "")%></p>
+              <p><%= image_tag("user/icon_vip3_dis.png", alt: "")%></p>
+              <p><%= image_tag("user/icon_vip4_dis.png", alt: "")%></p>
+            </div>
+            <div class="col-md-6 status">
+              <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span>已完成</p>
+              <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span>已完成</p>
+              <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon_upgrade"></span>升级</a></p>
+              <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon_upgrade"></span>升级</a></p>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tabpanel2">
+            暂无数据
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
