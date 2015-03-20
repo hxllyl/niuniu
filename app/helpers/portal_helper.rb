@@ -3,11 +3,11 @@
 # author: depp.yu
 
 module PortalHelper
-  
+
   def all_brand
     brands = Brand.all.collect{|b| [b.name, b.id] }
   end
-  
+
   # 选择省市
   def areas(opt = {})
     case opt[:level]
@@ -17,10 +17,10 @@ module PortalHelper
       Area.cities.collect { |c| [c.name, c.id]}
     end
   end
-  
+
   # post在首页的名称显示
   def post_name(post)
     "寻" post.standard.name
   end
-  
+
 end

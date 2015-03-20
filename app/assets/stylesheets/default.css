@@ -215,6 +215,8 @@ padding:0;
 .sourceDetail .reportLink { position: absolute; top: 0; right: 0; }
 .sourceDetail .remark { line-height: 24px; padding: 10px 0; color: #666; }
 .sourceDetail .remark .info { margin-left: 50px; }
+.sourceDetail .dealBox { padding-top: 10px; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
+.sourceDetail .dealBox .subBtn { width: 200px; margin-top: 20px; }
 .sourceGallery { }
 .sourceGallery li { position: relative; min-height: 460px; margin-bottom: 10px; background-color: #e6e6e6; }
 .sourceGallery li .alt { position: absolute; z-index: 0; top: 20px; left: 20px; }
@@ -313,7 +315,7 @@ padding:0;
 .accountsMenu .list li a:hover, .accountsMenu .list li.active a { padding-left: 10px; border-left: 4px solid #f4621b; text-decoration: none; color: #f4621b; background-color: #FFF; }
 .accountsMenu .list li.active a { font-weight: bold; }
 .accountsMenu .list li .icon { float: left; width: 20px; height: 34px; line-height: 34px; margin-right: 10px; text-align: center; font-size: 18px; }
-.accountsMain { padding: 0 20px; background-color: #FFF; }
+.accountsMain { min-height: 300px; padding: 0 20px; background-color: #FFF; }
 .accountsMain .title { height: 38px; line-height: 38px; border-bottom: 2px solid #e6e6e6; color: #333; }
 .accountsMain .row { padding: 30px 0; }
 .accountsMain .photoArea .photo { width: 180px; height: 180px; margin: 0 auto; border-radius: 50%; overflow: hidden; }
@@ -323,24 +325,28 @@ padding:0;
 .accountsMain .formArea .box.last { border-bottom: none; }
 .accountsMain .formArea .form-group { padding: 4px 0; margin-bottom: 0; }
 .accountsMain .formArea .control-label { line-height: 34px; font-weight: normal; color: #808080; }
+.accountsMain .levelBox { padding-bottom: 80px; margin: 4px 30px 0 0; border: none; border-radius: 0; }
+.accountsMain .levelBox .levelProcess p { height: 34px; line-height: 34px; margin: 12px 0; }
+.accountsMain .levelBox .process p { position: relative; float: left; margin: 6px 0; color: #808080; }
+.accountsMain .levelBox .process p .next_arr { position: absolute; bottom: -20px; left: 50%; width: 8px; height: 26px; margin-left: -4px; background: url(user/processArr.png) no-repeat left top; }
+.accountsMain .levelBox .process p .next_arr_r { position: absolute; bottom: 12px; right: -20px; width: 24px; height: 99px; background: url(user/processArr_r.png) no-repeat left top; }
+.accountsMain .levelBox .status p { text-align: right; }
+.accountsMain .levelBox .status p .icon_done { margin-right: 8px; }
+.accountsMain .levelBox .backLink { padding: 8px 0; }
+.accountsMain .levelBox .backLink a { color: #428cca; }
+.accountsMain .levelBox .addImgGroups li .box .img .alt { font-size: 24px; }
+.accountsMain .levelBox .fileBtn { width: 80px; margin-top: 20px; }
+.accountsMain .levelBox .tips { color: #f4621b; }
+.accountsMain .levelBox .subBtn { width: 200px; margin-top: 16px; }
+.accountsMain .passwordForm { line-height: 34px; padding: 30px; }
+.accountsMain .passwordForm .form-group { margin-bottom: 10px; }
+.accountsMain .passwordForm .tips { color: #ff791f; }
+.accountsMain .passwordForm .tips a { text-decoration: underline; color: #ff791f; }
 .aboutUsMain.row { padding: 16px; margin: 30px 40px 0 0; border: 1px solid #ccc; border-radius: 8px; background: url(user/aboutUsBg.jpg) repeat left top; }
 .aboutUsMain.row .photoBox { text-align: center; }
 .aboutUsMain.row .photoBox .photo { width: 78px; height: 78px; margin: 0 auto; border-radius: 50%; overflow: hidden; }
 .aboutUsMain.row .photoBox .name { margin: 8px 0; font-size: 12px; color: #323232; }
 .aboutUsMain.row .photoBox .name span { margin-right: 6px; font-size: 14px; }
-.levelBox { padding-bottom: 80px; margin: 4px 30px 0 0; border: none; border-radius: 0; }
-.levelBox .levelProcess p { height: 34px; line-height: 34px; margin: 12px 0; }
-.levelBox .process p { position: relative; float: left; margin: 6px 0; color: #808080; }
-.levelBox .process p .next_arr { position: absolute; bottom: -20px; left: 50%; width: 8px; height: 26px; margin-left: -4px; background: url(user/processArr.png) no-repeat left top; }
-.levelBox .process p .next_arr_r { position: absolute; bottom: 12px; right: -20px; width: 24px; height: 99px; background: url(user/processArr_r.png) no-repeat left top; }
-.levelBox .status p { text-align: right; }
-.levelBox .status p .icon_done { margin-right: 8px; }
-.levelBox .backLink { padding: 8px 0; }
-.levelBox .backLink a { color: #428cca; }
-.levelBox .addImgGroups li .box .img .alt { font-size: 24px; }
-.levelBox .fileBtn { width: 80px; margin-top: 20px; }
-.levelBox .tips { color: #f4621b; }
-.levelBox .subBtn { width: 200px; margin-top: 16px; }
 /*.aboutUsMain.row .photoBox .tag { display: block; width: 36px; height: 14px; line-height: 14px; margin: 0 auto; border-radius: 7px; text-align: center; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .aboutUsMain.row .photoBox .tag { display: block; width: 35px; height: 14px; margin: 0 auto; }
 .aboutUsMain.row .infoBox { color: #323232; }
@@ -390,6 +396,7 @@ padding:0;
 .mt-20 { margin-top: -20px; }
 .mt6 { margin-top: 6px; }
 .mt10 { margin-top: 10px; }
+.mt20 { margin-top: 20px; }
 .mt30 { margin-top: 30px; }
 .mr14 { margin-right: 14px; }
 .mr20 { margin-right: 20px; }
