@@ -15,7 +15,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    store_path = "uploads/#{model.class.to_s.underscore}/#{model._type}/#{Digest::MD5.hexdigest(String(model.id))}"
+    store_path = "uploads/#{model.class.to_s.underscore}/#{model.class.to_s.underscore}/#{model._type}/#{Digest::MD5.hexdigest(String(model.id))}"
     store_path
   end
 
@@ -43,11 +43,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :medium do
     process :resize_to_fit => [180, 120]
   end
-  
-  version :large do
-    process :resize_to_fit => [270, 180]
-  end
-  
+    
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list

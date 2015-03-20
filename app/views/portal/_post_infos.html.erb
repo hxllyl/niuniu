@@ -1,38 +1,83 @@
 <div role="tabpanel" class="panel panel-default contentBox">
 	<ul role="tablist" class="nav nav-tabs carInfoTabs">
+    
 		<li role="presentation" class="active"><a href="#allCarInfo"><%= t('post_info') %></a></li>
-		<li role="presentation"><a href="#carBrand1"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>宝马</a></li>
-		<li role="presentation"><a href="#carBrand2"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>奔驰</a></li>
-		<li role="presentation"><a href="#carBrand3"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>路虎</a></li>
-		<li role="presentation"><a href="#carBrand4"><span class="icon"><%= image_tag("index/car_tag_logo1.jpg", alt: "")%></span>福特</a></li>
-	</ul>
+    <% @hot_brands.each_with_index do |brand, i| %>
+		  <li role="presentation"><a href="#carBrand<%= i + 1%>"><span class="icon"><%= image_tag(brand.car_photo.image.thumb, alt: "")%></span><%= brand.name %></a></li>
+	  <% end-%>
+    
+  </ul>
 
 	<div class="panel-body">
-		<div role="tabpanel" class="tab-pane active" id="allCarInfo">
+		<div role="tabpanel" class="tab-pane active" id="carBrand0">
 			<ul class="carInfoList clearfix">
         <% @posts.each do |post| %>
 				<li>
-					<div class="logo bfL"><%= image_tag( post.brand.photo.image.thumb, alt: "")%></div>
+					<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
 					<div class="info">
-						<h5 class="tt"><a href="#"><%= post.brand.name%></a></h5>
-						<p class="clearfix"><span class="bfL"></span><%= %>/<%= %><span class="bfR">李木子(上海)  16:20</span></p>
-					</div>
-        </li>
-        <% end -%>
-			</ul>
+						<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
+						<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
 
+					</div>
+				</li>
+				<% end -%>
+			</ul>
 		</div>
+    
+    
 		<div role="tabpanel" class="tab-pane" id="carBrand1">
-			暂无数据
+      <ul class="carInfoList clearfix">
+      <% @posts_with_brands.values[0].each do |post| %>
+  			<li>
+  				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
+  				<div class="info">
+  					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
+  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+
+  				</div>
+  			</li>
+			<% end -%>
+    </ul>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="carBrand2">
-			暂无数据
+      <ul class="carInfoList clearfix">
+      <% @posts_with_brands.values[1].each do |post| %>
+  			<li>
+  				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
+  				<div class="info">
+  					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
+  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+        </li>
+       <% end -%>
+     </ul>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="carBrand3">
-			暂无数据
+      <ul class="carInfoList clearfix">
+      <% @posts_with_brands.values[2].each do |post| %>
+  			<li>
+  				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
+  				<div class="info">
+  					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
+  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+
+  				</div>
+  			</li>
+			<% end -%>
+    </ul>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="carBrand4">
-			暂无数据
+      <ul class="carInfoList clearfix">
+      <% @posts_with_brands.values[3].each do |post| %>
+  			<li>
+  				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
+  				<div class="info">
+  					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
+  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+
+  				</div>
+  			</li>
+			<% end -%>
+    </ul>
 		</div>
 		<div class="moreLink text-right"><a href="#">更多 >></a></div>
 	</div>

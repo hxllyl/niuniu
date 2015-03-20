@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   validates :level, numericality: true, inclusion: { in: 0..3 }
 
   # tables relation
-  has_many :photos, as: :owner, dependent: :nullify # 与图片类关联起来 处理用户图片
+  has_many :photos, as: :owner, dependent: :nullify, autosave: true # 与图片类关联起来 处理用户图片
   has_many :posts, class_name: 'Post' # 需求和寻车
   has_many :tenders, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'

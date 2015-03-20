@@ -7,11 +7,11 @@ class Photo < ActiveRecord::Base
   
   # contants
   # 图片类型,依次：头像 身份证 手持身份证 名片 展厅门头 展厅内部 营业执照 品牌
-  TYPES = %w(avatar identity hand_id visiting room_outer room_inner license brand)
+  TYPES = %w(avatar identity hand_id visiting room_outer room_inner license)
   
   # validates
   validates  :image, presence: true
-  validates  :_type, presence: true, inclusion: { in: TYPES }
+  validates  :_type, presence: true, inclusion: { in: ->(clazz){ clazz.class::TYPES} }
   
   # relations
   belongs_to  :owner, polymorphic: true
@@ -21,5 +21,5 @@ class Photo < ActiveRecord::Base
   
   # instance_methods
   
-  
 end
+

@@ -33,7 +33,7 @@ class ValidCode < ActiveRecord::Base
   # 对手机发送消息
   before_create :send_code
   def send_code
-    raise InvaildVaildCodeError.new, "#{self.code}已经被使用过" unless self.is_valid?
+    raise Errors::InvaildVaildCodeError.new, "#{self.code}已经被使用过" unless self.is_valid?
     
     flag = generate_notify(
                            APP_CONFIG['qx_id'].to_s, 
