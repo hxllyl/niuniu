@@ -71,7 +71,7 @@ namespace :util do
     domain  = 'iniuniu.com.cn'
     tmp_dir = Rails.root + 'public' + 'uploads'
 
-    csv_file = '/Users/depp/brands.csv'
+    csv_file = "#{Rails.root}/doc/brands.csv"
     csv_text = File.read(csv_file)
 
     csv = CSV.parse(csv_text, headers: true)
