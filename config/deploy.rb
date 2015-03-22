@@ -6,7 +6,7 @@ set :keep_releases, 3
 set :rvm_ruby_version, "2.1"
 
 set :linked_files, %w{config/config.yml config/database.yml config/unicorn.rb}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index}
 
 
 namespace :deploy do
