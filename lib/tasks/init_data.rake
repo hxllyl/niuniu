@@ -56,8 +56,8 @@ namespace :init_data do
     user_ids = User.all.map(&:id)
     100.times do
       standard = Standard.all.sample
-      brand    = standard.brands.first
-      base_car = brand.base_cars.first
+      brand    = standard.brands.sample
+      base_car = brand.base_cars.sample
       post     = Post.new(
                  _type:             [0, 1].sample,
                  standard_id:       standard.id,
