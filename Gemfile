@@ -109,7 +109,7 @@ end
 
 
 # simple admin
-gem 'rails_admin', git: "https://github.com/sferik/rails_admin.git", branch: 'master'
+# gem 'rails_admin', git: "https://github.com/sferik/rails_admin.git", branch: 'master'
 
 #api doc
 # gem 'api_doc_generation', :git => 'git@github.com:season/rails_api_doc_generation.git'

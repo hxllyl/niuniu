@@ -65,6 +65,6 @@ Rails.application.routes.draw do
     end
   end
 
-  mount RailsAdmin::Engine => '/a', as: 'rails_admin'
+  # mount RailsAdmin::Engine => '/a', as: 'rails_admin'
 
 end
