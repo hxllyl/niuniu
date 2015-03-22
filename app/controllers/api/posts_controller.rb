@@ -79,7 +79,7 @@ class Api::PostsController < Api::BaseController
     post.user = @user
 
     if post.save
-      render json: {status: 200, notice: 'success', data: {post: post.send("to_#{post.type}_hash".to_sym)}}
+      render json: {status: 200, notice: 'success', data: {post: post.send("to_#{post._type}_hash".to_sym)}}
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
