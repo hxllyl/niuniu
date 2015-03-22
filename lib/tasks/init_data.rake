@@ -58,7 +58,7 @@ namespace :init_data do
     brand    = standard.brands.first
     base_car = brand.base_cars.first
     post     = Post.new(
-                 _type:             [0, 1].sample,
+                 _type:             [1].sample,
                  standard_id:       standard.id,
                  brand_id:          brand.id,
                  user_id:           user.id,
