@@ -9,5 +9,5 @@ class PostPhoto < Photo
   
   belongs_to :owner, polymorphic: true
   
-  mount_uploader :image, PostPhotoUploader
+  mount_uploader :image, PostImageUploader
 end

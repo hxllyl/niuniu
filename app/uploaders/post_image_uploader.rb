@@ -2,7 +2,7 @@
 
 # author: depp.yu
 
-class PostPhotoImageUploader < ImageUploader
+class PostImageUploader < ImageUploader
   
   version :large do
     process :resize_to_fit => [450, 360]
