@@ -104,11 +104,7 @@
 	</div>
 	<div class="panel-body brandSelect">
     <div class="dropdown w100p">
-      <select name="" class="form-control" id="car_brandMenu">
-        <option value="品牌1"><%= t('brand') %></option>
-        <option value="品牌2">品牌2</option>
-        <option value="品牌3">品牌3</option>
-      </select>
+      <%= select_tag 'brand', options_for_select(all_brand, params[:brand]), class: 'form-control', id: 'car_brandMenu', prompt: '请选择品牌' -%>
     </div>
     <input type="submit" class="btn btn-primary subBtn" value="提交">
 	</div>
