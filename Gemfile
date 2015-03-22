@@ -55,17 +55,19 @@ gem 'writeexcel', '~> 1.0.5'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Deploy
 gem 'rvm'
+
 #gem 'rvm-capistrano'
 gem 'capistrano','3.2.1'
 gem 'capistrano-ext'
 gem 'capistrano-unicorn', :require => false
-gem 'capistrano-rails', '~> 1.0.0'
+gem 'capistrano-rails'
 gem 'capistrano-bundler'
 gem 'capistrano-rvm'
 
