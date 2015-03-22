@@ -7,8 +7,8 @@ class Api::SessionsController < Devise::SessionsController # Api::BaseController
   # 用户登陆
   #
   # Params:
-  #   mobile:       [String] 手机号
-  #   password:     [String] 密码
+  #   user[mobile]:       [String] 手机号
+  #   user[password]:     [String] 密码
   #
   # Return:
   #   status: [Integer] 200
