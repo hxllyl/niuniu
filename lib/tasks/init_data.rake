@@ -53,15 +53,16 @@ namespace :init_data do
   end
 
   task posts: :environment do
-    user     = User.first
-    standard = Standard.first
-    brand    = standard.brands.first
-    base_car = brand.base_cars.first
-    post     = Post.new(
+    user_ids = User.all.map(&:id)
+    100.times do
+      standard = Standard.all.sample
+      brand    = standard.brands.first
+      base_car = brand.base_cars.first
+      post     = Post.new(
                  _type:             [0, 1].sample,
                  standard_id:       standard.id,
                  brand_id:          brand.id,
-                 user_id:           user.id,
+                 user_id:           user_ids.sample,
                  model:             base_car.model,
                  outer_color:       base_car.outer_color.sample,
                  inner_color:       base_car.inner_color.sample,
@@ -71,8 +72,9 @@ namespace :init_data do
                  discount_way:      1,
                  discount_content:  0.9
                )
-    post.base_car = base_car
-    post.save
+      post.base_car = base_car
+      post.save
+    end
   end
 
 end
