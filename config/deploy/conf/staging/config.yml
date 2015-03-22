@@ -1,0 +1,59 @@
+# encoding: utf-8
+
+# author: depp.yu
+
+defaults: &defaults
+  token_expire_time: 1 # 单位（天）
+  navigations:
+    index:
+      url: '#'
+      name: 首页
+      position: 0
+      icon: icon-home
+    my_sources:
+      url: '#'
+      name: 我的资源
+      position: 1
+      icon: icon-source
+    market_sources:
+      url: '#'
+      name: 市场资源
+      position: 2
+      icon: icon-market
+    post:
+      url: '#'
+      name: 我要寻车
+      position: 3
+      icon: icon-search
+    post_info:
+      url: '#'
+      name: 寻车信息
+      position: 4
+      icon: icon-carInfo
+
+  user_info_dropmenus:
+    one:
+      url: '#'
+      name: one
+    two:
+      url: '#'
+      name: two
+
+  # 企信通配置
+  qx_id: 2062569
+  qx_login: 2062569822
+  qx_password: 202084
+  qx_tip: 欢迎您加入牛牛汽车，您的验证码是：
+
+development:
+  <<: *defaults
+  host: localhost:3000
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  host: localhost:3000
+
+
