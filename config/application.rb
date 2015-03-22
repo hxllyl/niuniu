@@ -36,6 +36,9 @@ module NiuNiu
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+    
+    config.assets.paths << Rails.root.join("app", "assets")
+  
   end
 end
 
