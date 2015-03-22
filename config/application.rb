@@ -43,24 +43,6 @@ module NiuNiu
     config.assets.enabled = true
     config.assets.version = '1.0'
     
-    config.assets.precompile += [Proc.new { |path| File.basename(path) =~ /^[^_][a-z0-9-]+\.css$/ }]
-
-    config.assets.precompile << Proc.new do |path|
-       if path =~ /\.(css|js|scss|png|jpg|gif|json)\z/
-         full_path = Rails.application.assets.resolve(path).to_path
-        app_assets_path = Rails.root.join('app', 'assets').to_path
-        if full_path.starts_with? app_assets_path
-          puts "including asset: " + full_path
-          true
-        else
-          puts "excluding asset: " + full_path
-          false
-        end
-      else
-        false
-      end
-    end
-    
   end
 end
 
