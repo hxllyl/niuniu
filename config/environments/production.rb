@@ -80,7 +80,7 @@ Rails.application.configure do
   
   config.assets.precompile << Proc.new { |path|
     if path =~ /\.(css|js|scss|png|jpg|gif|json)\z/
-      full_path = Rails.application.assets.resolve(path).to_path
+      full_path = Rails.application.assets.resolve(path)
       app_assets_path = Rails.root.join('app', 'assets').to_path
       full_path.starts_with?(app_assets_path)
     else
