@@ -11,7 +11,7 @@ namespace :util do
   task init: :environment do
     Rake::Task["util:base_cars"].invoke
     Rake::Task["util:areas"].invoke
-    # Rake::Task["util:brands"].invoke
+    Rake::Task["util:brands"].invoke
   end
 
   desc "数据导入"
@@ -68,7 +68,7 @@ namespace :util do
 
   desc "导入汽车品牌（临时任务）"
   task brands: :environment do
-    domain  = '121.40.204.159:8080'
+    domain  = 'http://121.40.204.159:8080'
     tmp_dir = Rails.root + 'public' + 'uploads'
 
     csv_file = "#{Rails.root}/doc/brands.csv"
@@ -81,8 +81,12 @@ namespace :util do
 
       system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
 
-      brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/#{i}.jpg"))
-      brand.save!
+      brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/0.jpg"))
+      begin
+        brand.save!
+      rescue ActiveRecord::RecordNotSaved => e
+        brand.errors.full_messages
+      end
     end
   end
 

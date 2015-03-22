@@ -10,7 +10,7 @@ class Tender < ActiveRecord::Base
     -1 => '已删除'
   }
 
-  DISCOUT_WAYS ={
+  DISCOUNT_WAYS ={
     1 => '优惠点数',
     2 => '优惠金额',
     3 => '加价金额',

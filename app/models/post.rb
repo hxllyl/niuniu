@@ -17,7 +17,7 @@ class Post < ActiveRecord::Base
     -1 => '已删除'
   }
 
-  DISCOUT_WAYS ={
+  DISCOUNT_WAYS ={
     1 => '优惠点数',
     2 => '优惠金额',
     3 => '加价金额',
@@ -32,7 +32,12 @@ class Post < ActiveRecord::Base
   belongs_to  :base_car,class_name: 'BaseCar'
   belongs_to  :standard,class_name: 'Standard'
   has_many    :post_photos, as: :owner, dependent: :nullify, autosave: true # 资源图片
-  
+
+  USER_METHODS = [:name, :mobile, :level, :company]
+
+  delegate :name, to: :brand, prefix: true
+  delegate *USER_METHODS, to: :user, prefix: true
+
   # class methods
   # 资源
   scope :resources, -> { where(_type: 0) }
@@ -64,15 +69,45 @@ class Post < ActiveRecord::Base
     {
       id: id,
       user_id: user_id,
-      brand:   brand.name
+      user_name: user_name,
+      user_mobile: user_mobile,
+      user_company: user_company,
+      user_level: User::LEVELS[user_level],
+      brand:   brand_name,
+      model: model,
+      style: style,
+      outer_color: outer_color,
+      inner_color: inner_color,
+      car_license_areas:  car_license_areas,
+      car_in_areas:  car_in_areas,
+      expect_price: expect_price.to_f,
+      discount_way:  DISCOUNT_WAYS[discount_way],
+      discount_content: discount_content.to_f,
+      updated_at: updated_at.to_s(:db)
     }
   end
 
   def to_1_hash
     {
       id: id,
-      user_id: user_id
+      user_id: user_id,
+      user_name: user_name,
+      user_mobile: user_mobile,
+      user_company: user_company,
+      user_level: User::LEVELS[user_level],
+      brand:   brand_name,
+      model: model,
+      style: style,
+      outer_color: outer_color,
+      inner_color: inner_color,
+      car_license_areas:  car_license_areas,
+      car_in_areas:  car_in_areas,
+      take_car_date: take_car_date,
+      expect_price: expect_price.to_f,
+      discount_way:  DISCOUNT_WAYS[discount_way],
+      discount_content: discount_content.to_f,
+      updated_at: updated_at.to_s(:db)
     }
   end
-  
+
 end
