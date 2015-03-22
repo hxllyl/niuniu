@@ -78,14 +78,12 @@ class Api::PostsController < Api::BaseController
     post = Post.new(params[:post])
     post.user = @user
 
-    if post.create
+    if post.save
       render json: {status: 200, notice: 'success', data: {post: post.send("to_#{post.type}_hash".to_sym)}}
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
 
-    rescue => e
-    render json: {status: false, error: e.message}
   end
 
   # 报价
