@@ -54,6 +54,8 @@ namespace :init_data do
 
   task posts: :environment do
     user_ids = User.all.map(&:id)
+    pics     = Array(0..4)
+    pics_dir = Rails.root + 'public' + 'cars'
     100.times do
       standard = Standard.all.sample
       brand    = standard.brands.sample
@@ -72,6 +74,11 @@ namespace :init_data do
                  discount_way:      1,
                  discount_content:  0.9
                )
+      if post._type == 0
+        %w(front side obverse inner).each do |ele|
+          post.post_photos.new(_type: ele, image: File.open("#{pics_dir}/#{pics.sample}.jpg"))
+        end
+      end
       post.base_car = base_car
       post.save
     end
