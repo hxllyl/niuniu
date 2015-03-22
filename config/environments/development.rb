@@ -41,8 +41,5 @@ Rails.application.configure do
   
   # devise development configuretion
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  
-  config.assets.paths << Rails.root.join('app','assets')
-  config.assets.precompile += %w(.svg .eot .woff .ttf)
-  config.assets.precompile =  ['*.js', '*.css', '*.css.erb']
+
 end
