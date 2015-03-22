@@ -14,7 +14,7 @@ namespace :deploy do
     on roles(:app) do
       within release_path do
         set :rvm_path, "~/.rvm"
-        execute :bundle, "exec", "unicorn", "-c", File.join(release_path, "config/unicorn.rb"), "-E production", "-D"
+        execute :bundle, "exec", "unicorn_rails", "-c", File.join(release_path, "config/unicorn.rb"), "-E production", "-D"
       end
     end
   end
