@@ -74,7 +74,7 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  failure
   #   data:   [Hash]    {errors: post.errors}
   def create
-    params.require(:tender).permit!
+    params.require(:post).permit!
     post = Post.new(params[:post])
     post.user = @user
 
