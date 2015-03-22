@@ -74,7 +74,9 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  failure
   #   data:   [Hash]    {errors: post.errors}
   def create
+    params.require(:tender).permit!
     post = Post.new(params[:post])
+    post.user = @user
 
     if post.create
       render json: {status: 200, notice: 'success', data: {post: post.send("to_#{post.type}_hash".to_sym)}}
