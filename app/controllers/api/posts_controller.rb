@@ -83,6 +83,9 @@ class Api::PostsController < Api::BaseController
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 报价
