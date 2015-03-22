@@ -11,7 +11,7 @@ namespace :util do
   task init: :environment do
     Rake::Task["util:base_cars"].invoke
     Rake::Task["util:areas"].invoke
-    Rake::Task["util:brands"].invoke
+    # Rake::Task["util:brands"].invoke
   end
 
   desc "数据导入"
@@ -80,7 +80,7 @@ namespace :util do
       brand = Brand.find_or_initialize_by(name: ha["name"])
 
       system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
-      
+
       brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/#{i}.jpg"))
       brand.save!
     end
