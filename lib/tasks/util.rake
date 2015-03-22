@@ -68,7 +68,7 @@ namespace :util do
 
   desc "导入汽车品牌（临时任务）"
   task brands: :environment do
-    domain  = 'iniuniu.com.cn'
+    domain  = '121.40.204.159:8080'
     tmp_dir = Rails.root + 'public' + 'uploads'
 
     csv_file = "#{Rails.root}/doc/brands.csv"
