@@ -16,4 +16,13 @@ class Area < ActiveRecord::Base
   [:provinces, :cities].each { |a| scope a, -> { where(level: LEVELS[a.to_s.singularize.to_sym]) }}
   
   # instance_method
+  #
+  def as_api
+    {
+     id:       self.id,
+     name:     self.name,
+     level:    self.level
+    }
+  end
+  
 end
