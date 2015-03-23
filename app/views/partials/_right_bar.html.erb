@@ -10,16 +10,22 @@
 		</div>
 		<ul class="row userData">
 			<li class="col-md-4">
-				<p class="data"><a href="#"><%= current_user.posts.where(_type: Post::TYPES.keys[1]).count %></a></p>
-				<p class="tt"><%= I18n.t('i_post')%></p>
+				<a href="#">
+					<p class="data"><%= current_user.posts.where(_type: Post::TYPES.keys[1]).count %></p>
+					<p class="tt"><%= I18n.t('i_post')%></p>
+				</a>
 			</li>
 			<li class="col-md-4">
-				<p class="data"><a href="#"><%= current_user.tenders.count %></a></p>
-				<p class="tt"><%= I18n.t('i_tender') %></p>
+				<a href="#">
+					<p class="data"><%= current_user.tenders.count %></p>
+					<p class="tt"><%= I18n.t('i_tender') %></p>
+				</a>
 			</li>
 			<li class="col-md-4 last">
-				<p class="data"><a href="#"><%= current_user.followings.count %></a></p>
-				<p class="tt"><%= I18n.t('i_following') %></p>
+				<a href="#">
+					<p class="data"><%= current_user.followings.count %></p>
+					<p class="tt"><%= I18n.t('i_following') %></p>
+				</a>
 			</li>
 		</ul>
 		<div class="userSubBtn">
@@ -73,7 +79,7 @@
 				<a class="btn btn-default p0" href="#" role="button"><span class="icon icon-apple"></span>iPhone</a>
 			</li>
 			<li class="col-md-6">
-				<a class="btn btn-default p0" href="#" role="button"><span class="icon icon-andriod"></span>Android</a>
+				<a class="btn btn-default p0" href="#" role="button"><span class="icon icon-android"></span>Android</a>
 			</li>
 		</ul>
 		<div class="tel clearfix">
