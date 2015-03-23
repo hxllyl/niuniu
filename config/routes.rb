@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :follow_ships, only: [ :create, :destroy ]
+
   resources :valid_codes, only: [ :create ] do
     get :_valid, on: :collection
   end
