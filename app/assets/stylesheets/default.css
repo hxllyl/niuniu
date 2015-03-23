@@ -389,6 +389,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .btn.p0 { padding-right: 0; padding-left: 0; }
 .icon.icon-money { font-size: 26px; color: #ff791f; }
 .icon.icon-message { font-size: 24px; }
+.icon.icon-refresh { margin-right: 6px; }
 /*
 **page style end && class reset begin**
 */
