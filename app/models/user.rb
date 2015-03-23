@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   has_many :nodifications, class_name: 'Nodification'
   has_many :prosecutions, class_name: 'Complaint', as: :resource # 被投诉列表
   has_many :complaints, class_name: 'Complaint'
-  
+
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
