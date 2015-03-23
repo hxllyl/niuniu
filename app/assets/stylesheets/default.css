@@ -115,9 +115,8 @@ padding:0;
 .indexUser .userData { margin-bottom: 16px; }
 .indexUser .userData li { padding: 0 10px; text-align: center; background: url(../imgs/line1x20.gif) no-repeat right center; }
 .indexUser .userData li.last { background: none; }
-.indexUser .userData .data { font-size: 18px; color: #323232; }
-.indexUser .userData .data a { color: #323232; }
-.indexUser .userData .tt { font-size: 12px; color: #353535; }
+.indexUser .userData a .data { font-size: 18px; color: #323232; }
+.indexUser .userData a .tt { font-size: 12px; color: #353535; }
 .indexUser .userSubBtn .btn { margin-bottom: 10px; border: none; font-size: 16px; }
 .indexUser .userSubBtn .btn .icon { position: relative; top: -2px; left: -50px; font-size: 26px; }
 .indexUser .userSubBtn .btn .glyphicon { position: relative; top: 2px; left: -46px; }
@@ -192,11 +191,13 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
 .methodSelect .selectTag span { float: left; width: 80px; }
 .methodSelect .selectTag span.current { color: #f4621b; }
-.methodSelect .selectInput { display: none; position: relative; margin-bottom: 0; }
+.methodSelect .selectInput { position: relative; margin-bottom: 0; opacity: 0; filter: alpha(opacity=0); }
 .methodSelect .selectInput .units { position: absolute; top: 0; right: 4px; height: 30px; line-height: 30px; font-size: 11px; -webkit-transform: scale(0.9); -o-transform: scale(1); -webkit-transform-origin: center; color: #9a9a9a; }
 .methodSelect .form-control { float: left; width: 162px; padding-right: 32px; border-color: #f4621b; }
 .methodSelect.quote .selectTag { line-height: 30px; }
 .methodSelect.quote .selectTag input { float: left; margin: 8px 12px 0 0; }
+.methodSelect .selectTag.active { color: #ff791f; }
+.methodSelect .selectInput.active { opacity: 1; filter: alpha(opacity=100); }
 .sourceForm .sFormBox { padding: 20px 0; }
 .sourceForm .sFormBox .sFormTag { width: 64px; padding-top: 8px; color: #666; }
 .sourceForm .sFormBox .sFormArea { margin-left: 64px; }
@@ -294,7 +295,6 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .userDataTag .list li a { display: block; width: 90px; padding-bottom: 4px; text-align: center; color: #7d7d7d; }
 .userDataTag .list li a .num { font-size: 24px; color: #323232; }
 .userDataTag .list li a:hover { text-decoration: none; color: #f4621b; }
-.userDataTag .list li.active a { padding-bottom: 2px; border-bottom: 2px solid #f4621b; color: #f4621b; }
 .userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
 .userDataTag .link a:hover { color: #f4621b; }
 .systemMesList li { line-height: 24px; padding: 10px 0 10px 30px; border-bottom: 1px solid #e6e6e6; color: #818181; background: url(dot9x9.png) no-repeat 4px 18px; }
