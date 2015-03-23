@@ -113,15 +113,6 @@ class User < ActiveRecord::Base
     self.current_sign_in_at = Time.now
   end
 
-  # 关注我的人
-  def followers
-    FollowShip.where(following_id: id).map(&:follower)
-  end
-
-  # 我关注的人
-  def followings
-    FollowShip.where(follower_id: id).map(&:following)
-  end
 
   def posts_with_type(type)
     posts.where(_type: type)
