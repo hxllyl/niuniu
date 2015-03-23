@@ -3,7 +3,7 @@
 
 		<li role="presentation" class="active"><a href="#allCarInfo"><%= t('post_info') %></a></li>
     <% @hot_brands.each_with_index do |brand, i| %>
-		  <li role="presentation"><a href="#carBrand<%= i + 1%>"><span class="icon"><%= image_tag(brand[:image], alt: "")%></span><%= brand[:name] %></a></li>
+		  <li role="presentation"><a href="#carBrand<%= i + 1%>"><span class="icon"><%= image_tag(brand.car_photo.try(:image).try(:thumb), alt: "")%></span><%= brand.name %></a></li>
 	  <% end-%>
 
   </ul>
