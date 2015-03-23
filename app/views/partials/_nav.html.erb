@@ -8,16 +8,9 @@
       <% else %>
           <li class=""><a href='#'><span class="icon icon-source"></span>我的资源</a></li>
       <% end %>
-
-<<<<<<< HEAD
-      <li class=""><a href="/posts?_type=0"><span class="icon icon-market"></span>市场资源</a></li>
+      <li class=""><a href=<%= posts_path(_type: 0)%>><span class="icon icon-market"></span>市场资源</a></li>
       <li class=""><a href="#"><span class="icon icon-search"></span>我要寻车</a></li>
-      <li class=""><a href="/posts?_type=1"><span class="icon icon-carInfo"></span>寻车信息</a></li>
-=======
-      <li class=""><a href=<%= posts_path(_type: 0)%>><span class="icon  icon-market"></span>市场资源</a></li>
-      <li class=""><a href="#"><span class="icon  icon-search"></span>我要寻车</a></li>
-      <li class=""><a href=<%= posts_path(_type: 1)%>><span class="icon  icon-carInfo"></span>寻车信息</a></li>
->>>>>>> cd59d2e731c5b66f3f3f246c9d22648ad51afecb
+      <li class=""><a href=<%= posts_path(_type: 1)%>><span class="icon icon-carInfo"></span>寻车信息</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-nav-right bfR">
       <% if current_user %>
