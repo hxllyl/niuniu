@@ -209,31 +209,51 @@ $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
   $(this).next(".selectInput").addClass("active").focus();
 });
 
-$(".selectInput").find("input.form-control").keydown(function(){
-  onlyNum();
+$(".selectInput").find("input.form-control").keyup(function(){
+  clearNoNum(this);
 });
 
 $("#methodVal1").keyup(function(){
-  //alert(msVal1);
-  autoSyncVal();
+  autoSyncVal1();
 });
 
-function autoSyncVal(){
+$("#methodVal4").keyup(function(){
+  autoSyncVal3();
+});
+
+function autoSyncVal1(){
   var msVal1 = $("#methodVal1").val();
   var msVal2 = $("#methodVal2").val();
   var msVal3 = $("#methodVal3").val();
   var msVal4 = $("#methodVal4").val();
-  $("#methodVal2").val((parseFloat(gpVal * msVal1/100)).toFixed(2));
+  if (msVal1 > 100){
+    msVal1 = 100;
+  }
+  $("#methodVal2").val(parseFloat(gpVal * msVal1/100).toFixed(2));
   msVal2 = $("#methodVal2").val();
-  $("#methodVal4").val((parseFloat(gpVal - msVal2)).toFixed(2));
+  $("#methodVal4").val(parseFloat(gpVal - msVal2).toFixed(2));
+  if (msVal2 <= 0 || msVal2 == ""){
+    $("#methodVal2").val("");
+  }
+}
+function autoSyncVal3(){
+  var msVal1 = $("#methodVal1").val();
+  var msVal2 = $("#methodVal2").val();
+  var msVal3 = $("#methodVal3").val();
+  var msVal4 = $("#methodVal4").val();
+
+  $("#methodVal2").val(parseFloat(gpVal - msVal4).toFixed(2));
+  msVal2 = $("#methodVal2").val();
+  $("#methodVal1").val(parseFloat((msVal2 / gpVal)*100).toFixed(1));
+  msVal1 = $("#methodVal1").val();
   if (msVal2 <= 0 || msVal2 == ""){
     $("#methodVal2").val("");
   }
 }
 
-function onlyNum(){
-  if(!(event.keyCode==46) && !(event.keyCode==8) && !(event.keyCode==37) && !(event.keyCode==39))
-  if(!((event.keyCode>=48 && event.keyCode<=57) || (event.keyCode>=96 && event.keyCode<=105)))
-    event.returnValue=false;
+function clearNoNum(obj){
+  obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
+  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d).*$/,'$1$2.$3'); //只能输入两个小数
 }
 <% end -%>

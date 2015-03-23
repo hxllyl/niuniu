@@ -14,7 +14,7 @@ class PortalController < BaseController
 
     @hot_brands = Brand.includes(:car_photo).order(click_counter: :desc).limit(4)
 
-    @posts      = Post.needs.order(updated_at: :desc).limit(8)
+    @posts      = Post.needs.includes(:user, brand: [:car_photo]).order(updated_at: :desc).limit(8)
 
     @posts_with_brands = @hot_brands.each_with_object({}) do |brand, ha|
                             posts = Post.where(_type: 1, brand_id: brand.id).order(updated_at: :desc).limit(8)
