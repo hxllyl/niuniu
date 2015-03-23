@@ -201,15 +201,16 @@
 var gPrice = $("#guidePrice").html();
 var gpVal = parseFloat(gPrice);
 $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-  //alert($(this).next(".selectInput").find("input.form-control").val());
-  //alert(parseFloat($("#guidePrice").html()));
-  //if ($(this).find("input[type=radio]").attr("checked", this.checked)){
   $(".selectInput").find("input.form-control").attr("disabled","true");
   $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
   $(".selectTag").removeClass("active");
   $(".selectInput").removeClass("active");
   $(this).addClass("active");
   $(this).next(".selectInput").addClass("active").focus();
+});
+
+$(".selectInput").find("input.form-control").keydown(function(){
+  onlyNum();
 });
 
 $("#methodVal1").keyup(function(){
@@ -222,12 +223,17 @@ function autoSyncVal(){
   var msVal2 = $("#methodVal2").val();
   var msVal3 = $("#methodVal3").val();
   var msVal4 = $("#methodVal4").val();
-  $("#methodVal2").val((parseFloat(gpVal / msVal1)).toFixed(2));
+  $("#methodVal2").val((parseFloat(gpVal * msVal1/100)).toFixed(2));
   msVal2 = $("#methodVal2").val();
   $("#methodVal4").val((parseFloat(gpVal - msVal2)).toFixed(2));
-  //alert(msVal2);
   if (msVal2 <= 0 || msVal2 == ""){
     $("#methodVal2").val("");
   }
+}
+
+function onlyNum(){
+  if(!(event.keyCode==46) && !(event.keyCode==8) && !(event.keyCode==37) && !(event.keyCode==39))
+  if(!((event.keyCode>=48 && event.keyCode<=57) || (event.keyCode>=96 && event.keyCode<=105)))
+    event.returnValue=false;
 }
 <% end -%>
