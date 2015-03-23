@@ -62,8 +62,22 @@ class Api::PostsController < Api::BaseController
   # 创建资源或寻车
   #
   # Params:
-  #   token: [String] valid token
-  #   post:  [Hash]   post attrs
+  #   token:                    [String]      valid token
+  #   post[_type]:              [Integer]     类型 0 资源 1 寻车
+  #   post[standard_id]:        [Integer]     规格 ID select
+  #   post[brand_id]:           [Integer]     品牌 ID select
+  #   post[model]:              [String]      车型
+  #   post[style]:              [String]      款式
+  #   post[outer_color]:        [String]      外观颜色
+  #   post[inner_color]:        [String]      内饰颜色
+  #   post[base_car_id]:        [Integer]     基本库 ID 匹配
+  #   post[car_license_areas]:  [String]      上牌区域
+  #   post[car_in_areas]:       [Array]       车辆所在地
+  #   post[take_car_date]:      [Integer]     提车日期 select
+  #   post[discount_way]:       [Integer]     出价方式 select
+  #   post[discount_content]:   [Integer]     出价详情
+  #   post[post_photos]:        [File Array]  资源图片
+  #   post[remark]:             [String]      备注
   #
   # Return:
   #   status: [Integer] 200
