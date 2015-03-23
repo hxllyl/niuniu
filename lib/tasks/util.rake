@@ -81,7 +81,7 @@ namespace :util do
 
       system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
 
-      brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/0.jpg"))
+      brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/#{i}.jpg"))
       begin
         brand.save!
       rescue ActiveRecord::RecordNotSaved => e
