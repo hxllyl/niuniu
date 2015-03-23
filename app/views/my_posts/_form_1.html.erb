@@ -10,9 +10,9 @@
           <div class="col-md-9 inputBox">
             <div class="dropdown w100p">
               <select name="" class="form-control input-sm" id="car_standard">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <%= @car_infos.each do |standard| %>
+                  <option value="#{standard[:id]}"><%= standard[:name]%></option>
+                <% end %>
               </select>
             </div>
           </div>

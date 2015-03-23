@@ -8,6 +8,7 @@ class MyPostsController < ApplicationController
   def new
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     @post = Post.new(_type: params[:_type])
+    @car_infos = Standard.includes(brands: [:car_photo, :base_cars]).map(&:to_hash)
   end
 
   def create

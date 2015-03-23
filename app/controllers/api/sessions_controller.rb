@@ -25,7 +25,7 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
                     notice:   'success',
                     data:     {
                                 token:      current_user.token,
-                                car_infos:  Standard.all.map(&:to_hash),
+                                car_infos:  Standard.includes(brands: [:car_photo, :base_cars]).map(&:to_hash),
                                 updated_at: [Standard.all.map(&:updated_at), Brand.all.map(&:updated_at), BaseCar.all.map(&:updated_at)].flatten.max
                               }
                   }
