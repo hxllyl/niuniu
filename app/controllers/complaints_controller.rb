@@ -15,6 +15,6 @@ class ComplaintsController < BaseController
   end
 
   def complaint_params
-    params.permit(:resource_type, :resource_id, :content)
+    params[:complaint].permit(:resource_type, :resource_id, :content)
   end
 end
