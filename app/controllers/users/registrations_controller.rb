@@ -24,7 +24,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
        expire_data_after_sign_in!
        respond_with resource, location: after_inactive_sign_up_path_for(resource)
      end
-     valid_code = ValidCode.find_by(mobile: resource[:mobile], status: ValidCode::STATUS.keys[0])
+     valid_code = ValidCode.where(mobile: resource[:mobile], code: params[:valid_code], \
+                                  status: ValidCode::STATUS.keys[0]).first
+     raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') if valid_code.blank?                             
      valid_code.update(status: ValidCode::STATUS.keys[1])
    else
      clean_up_passwords resource
@@ -32,6 +34,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
      # respond_with resource
      redirect_to request.referrer || '/'
    end
+  rescue Errors::ValidCodeNotFoundError => vc_error
+    flash[:error] = vc_error and redirect_to request.referrer || '/'
+  rescue ActiveModel::Errors => ex
+    flash[:error] = resource.errors.full_messages.join('\n') and redirect_to request.referrer || '/'
   end
 
   # GET /resource/edit

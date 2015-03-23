@@ -20,4 +20,7 @@ zh-CN:
   user_protocol: 用户协议
   
   find: 寻
-  sale: 卖 
+  sale: 卖
+  
+  exceps:
+    not_found_valid_code: 请检查手机号码或验证码输入是否正确 

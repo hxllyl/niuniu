@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   # validates
   validates :name, presence: true, length: { maximum: 30 }
-  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }
+  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: true
   validates :role,  presence: true , inclusion: { in: %w(normal admin) }
   validates :company, presence: true, length: { maximum: 100 }
   validates :level, numericality: true, inclusion: { in: 0..3 }
@@ -45,14 +45,14 @@ class User < ActiveRecord::Base
   has_many :following_ships, foreign_key: :follower_id, class_name: 'FollowShip' # 关注关系
   has_many :followings, through: :following_ships, source: :following
   has_many :nodifications, class_name: 'Nodification'
+  has_many :prosecutions, class_name: 'Complaint', as: :resource # 被投诉列表
+  has_many :complaints, class_name: 'Complaint'
   
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
 
   # class methods
-
-
 
   # instance methods
 
