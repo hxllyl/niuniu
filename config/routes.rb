@@ -57,6 +57,9 @@ Rails.application.routes.draw do
     resources :valid_codes, only: [:index] do
       get :validate_code, on: :collection
     end
+    
+    resources :areas, only: [:index] do
+    end
 
     namespace :follow_ships do
       get   :my_followers
