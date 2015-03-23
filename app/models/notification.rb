@@ -2,7 +2,7 @@
 
 # author: depp.yu
 
-class Nodification < ActiveRecord::Base
+class Notification < ActiveRecord::Base
   
   STATUS = {
     0 => '未读',

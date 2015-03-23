@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "user_id"
     t.integer  "status",                    default: 0
     t.string   "content",       limit: 225
+    t.integer  "operator_id"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
@@ -92,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "nodifications", force: :cascade do |t|
+  create_table "notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "content",       limit: 225
     t.integer  "status",                    default: 0

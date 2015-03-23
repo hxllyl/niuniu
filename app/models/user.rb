@@ -44,9 +44,10 @@ class User < ActiveRecord::Base
   has_many :followers, through: :follower_ships, source: :follower
   has_many :following_ships, foreign_key: :follower_id, class_name: 'FollowShip' # 关注关系
   has_many :followings, through: :following_ships, source: :following
-  has_many :nodifications, class_name: 'Nodification'
+  has_many :notifications, class_name: 'Notification'
   has_many :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
   has_many :complaints, class_name: 'Complaint'
+  has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
 
   belongs_to :area, class_name: 'Area'
 

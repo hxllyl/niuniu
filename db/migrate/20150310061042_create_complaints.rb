@@ -11,6 +11,7 @@ class CreateComplaints < ActiveRecord::Migration
       t.references :user, class_name: 'User' # 投诉人
       t.column :status, :integer, default: 0 # 0 未处理 1 已处理
       t.column :content,:string, limit: 225 # 评论内容
+      t.references :operator, class_name: 'User' # 操作人
       t.timestamps null: false
     end
   end

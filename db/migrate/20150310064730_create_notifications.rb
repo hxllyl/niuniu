@@ -3,9 +3,9 @@
 # author: depp.yu
 # 通知在database mapper
 
-class CreateNodifications < ActiveRecord::Migration
+class CreateNotifications < ActiveRecord::Migration
   def change
-    create_table :nodifications do |t|
+    create_table :notifications do |t|
       t.references :user, class_name: 'User' # 被通知人
       t.column :content, :string, limit: 225 # 通知内容
       t.column :status, :integer, default: 0 # 通知状态 0 未读 1 已读
