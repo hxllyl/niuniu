@@ -10,7 +10,7 @@ Rails.application.routes.draw do
                                     unlocks:       'users/unlocks'
                                   }
 
-  resources :users do
+  resources :users, only: [ :show, :edit, :update ] do
     member do
       get :my_tenders
       get :my_followers
@@ -20,19 +20,19 @@ Rails.application.routes.draw do
       put :update_my_level
       get :about_us
     end
-    resources :my_posts do
-      resources :tenders
+    resources :my_posts, except: [ :destroy ] do
+      resources :tenders, only: [ :show ]
     end
   end
 
-  resources :posts do
+  resources :posts, only: [ :index, :show ] do
     collection do
       get :resources_list
       get :user_list
     end
   end
 
-  resources :valid_codes do
+  resources :valid_codes, only: [ :create ] do
     get :_valid, on: :collection
   end
 
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
       put   :complete
     end
 
-    resources :valid_codes do
+    resources :valid_codes, only: [:index] do
     end
 
     namespace :follow_ships do
