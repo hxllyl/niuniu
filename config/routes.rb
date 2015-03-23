@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :areas, only: [:show]
+  resources :complaints, only: [ :create ]
 
   namespace :api do
     devise_scope :user do
