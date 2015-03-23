@@ -1,8 +1,8 @@
 <div class="container userOverview">
   <div class="userInfo clearfix">
-    <div class="photo bfL"><%= image_tag("_temp/userPhoto.jpg", alt: "")%></div>
+    <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "")%></div>
     <div class="detail">
-      <div class="clearfix"><span class="name">李木子</span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span>升级</a></div>
+      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span>升级</a></div>
       <div class="detailTab">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -15,7 +15,7 @@
             <td colspan="2"><strong class="tip">最近三个月成交3台，累计成交3台</strong></td>
           </tr>
           <tr>
-            <td width="250">公司名称：</td>
+            <td width="250">公司名称：<%= current_user.company %></td>
             <td width="250">职位：</td>
           </tr>
           <tr>
@@ -23,7 +23,7 @@
             <td>QQ：</td>
           </tr>
           <tr>
-            <td colspan="2">联系电话：<span class="tip">66668888</span></td>
+            <td colspan="2">联系电话：<span class="tip"><%= current_user.mobile %></span></td>
           </tr>
         </table>
       </div>
@@ -33,19 +33,19 @@
     <ul class="list clearfix">
       <li class="active">
         <a href="#">
-          <p class="num">8888</p>
+          <p class="num"><%= current_user.posts.needs.count %></p>
           <p>我的寻车</p>
         </a>
       </li>
       <li>
         <a href="#">
-          <p class="num">8888</p>
+          <p class="num"><%= current_user.tenders.count %></p>
           <p>我的报价</p>
         </a>
       </li>
       <li>
         <a href="#">
-          <p class="num">8888</p>
+          <p class="num"><%= current_user.followings.count %></p>
           <p>我的关注</p>
         </a>
       </li>
@@ -77,91 +77,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">3</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
+                  <%- @uncompleted_posts.each do |post| %>
+                    <tr>
+                      <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
+                      <td><span class="num"><%= post.tenders.count %></span></td>
+                      <td><%= post.car_license_areas %></td>
+                      <td><%= post.color %></td>
+                      <td><%= post.publish_time %></td>
+                      <td><%= link_to '删除', user_my_post_path(current_user, post), method: :delete, class: 'del' %></td>
+                      <!-- <td><a href="javascript:;" class="del">删除</a></td> -->
+                    </tr>
+                  <% end %>
                 </tbody>
               </table>
             </div>
             <nav>
-              <ul class="pagination pageList">
+              <%= paginate @uncompleted_posts %>
+              <!-- <ul class="pagination pageList">
                 <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
                 </li>
                 <li class="active"><a href="#">1</a></li>
@@ -171,7 +103,7 @@
                 <li><a href="#">10</a></li>
                 <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
                 </li>
-              </ul>
+              </ul> -->
             </nav>
           </div>
           <div role="tabpanel" class="tab-pane" id="tabpanel2">

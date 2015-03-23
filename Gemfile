@@ -47,6 +47,8 @@ gem 'httpclient'
 gem 'roo', '~> 1.13.2'
 gem 'writeexcel', '~> 1.0.5'
 
+gem 'kaminari'
+
 # code formatter
 # gem 'rubocop'
 

@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @uncompleted_posts = current_user.posts.needs.where(status: 1).order(updated_at: :desc).page(params[:page]).per(10)
+    @completed_posts   = current_user.posts.needs.completed.order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def my_tenders

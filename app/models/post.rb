@@ -107,7 +107,11 @@ class Post < ActiveRecord::Base
   end
 
   def owner_detail
-    "#{user_name}(#{user_area.name})#{updated_at < Date.today ? updated_at.strftime("%m/%d %H:%M") : updated_at.strftime("%H:%M")}"
+    "#{user_name}(#{user_area.name})#{publish_time}"
+  end
+
+  def publish_time
+    updated_at < Date.today ? updated_at.strftime("%m/%d %H:%M") : updated_at.strftime("%H:%M")
   end
 
 end
