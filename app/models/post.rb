@@ -38,6 +38,7 @@ class Post < ActiveRecord::Base
 
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true
+  delegate :NO, to: :base_car, prefix: true
 
   # class methods
   # 资源
@@ -96,6 +97,7 @@ class Post < ActiveRecord::Base
       discount_way:  DISCOUNT_WAYS[discount_way],
       discount_content: discount_content.to_f,
       photos:           photos,
+      short_name:       base_car_NO,
       updated_at:       updated_at
     }
   end

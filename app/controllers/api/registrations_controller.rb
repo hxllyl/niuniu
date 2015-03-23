@@ -3,7 +3,7 @@
 class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseController #
   skip_before_filter :verify_authenticity_token
   respond_to :json
-  
+
   # before_filter :configure_register_params, only: [:create]
   skip_before_filter :auth_user, only: [:create]
 
@@ -31,17 +31,17 @@ class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseC
   #   notice: [String] 手机号码为空或者手机号码不正确
   # ActiveModelError
   #   status: [Integer] 500
-  #   notice: [String] 用户保存的字段验证错误信息  
+  #   notice: [String] 用户保存的字段验证错误信息
   def create
-    params.require(:user).permit!
+    # curl -v -H 'Content-Type: application/json' -H 'Accept: application/json' -X POST http://localhost:3000/api/v1/registrations -d "{\"user\":{\"mobile\":\"15899008877\",\"name\":\"evan\",\"password\":\"123456\",\"password_confirmation\":\"123456\"}}"
     build_resource
-    
+
     if resource.save
-      valid_code = ValidCode.where(mobile: resource[:mobile], code: params[:valid_code], 
+      valid_code = ValidCode.where(mobile: resource[:mobile], code: params[:valid_code],
                                    status: ValidCode::STATUS.keys[0]).first
       raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') if valid_code.blank?
-      valid_code.update(status: ValidCode::STATUS.keys[1])                            
-      
+      valid_code.update(status: ValidCode::STATUS.keys[1])
+
       sign_in resource
       render json:  {
                       status:   200,
