@@ -32,6 +32,7 @@ class Post < ActiveRecord::Base
   belongs_to  :base_car,class_name: 'BaseCar'
   belongs_to  :standard,class_name: 'Standard'
   has_many    :post_photos, as: :owner, dependent: :nullify, autosave: true # 资源图片
+  has_many    :prosecutions, class_name: 'Complaint', as: :resource # 被投诉列表
 
   USER_METHODS = [:name, :mobile, :level, :company]
 
