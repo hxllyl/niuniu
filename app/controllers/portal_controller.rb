@@ -4,29 +4,28 @@
 # 网站首页（目前是这个，如有需要，以后可以修改)
 
 class PortalController < BaseController
-  
+
   skip_before_action :authenticate_user!
-  
+
   # 系统首页
   # 参数：
   def index
     @user = User.new unless current_user
-    
-    @hot_brands = Brand.includes(:car_photo).order("click_counter desc").limit(4)
-                        
-    @posts  = Post.where(_type: Post::TYPES.keys[1]).order('updated_at desc').limit(8)
-    
+
+    @hot_brands = Brand.includes(:car_photo).order(click_counter: :desc).limit(4)
+
+    @posts      = Post.needs.order(updated_at: :desc).limit(8)
+
     @posts_with_brands = @hot_brands.each_with_object({}) do |brand, ha|
-                            posts = Post.where("_type = ? and brand_id = ?", Post::TYPES.keys[1], brand.id) \
-                            .order("updated_at desc").limit(8)                                    
+                            posts = Post.where(_type: 1, brand_id: brand.id).order(updated_at: :desc).limit(8)
                             ha.merge!({brand.id => posts})
                             ha
                          end
     # 最新车源
-    @newest_resouces = Post.where(_type: Post::TYPES.keys[0]).order('updated_at desc').limit(10)                     
-                           
+    @newest_resouces = Post.resources.order(updated_at: :desc).limit(10)
+
   end
-  
+
   # 首页搜索
   # 参数：
   #   channel: 搜索入口
@@ -34,12 +33,12 @@ class PortalController < BaseController
   def search
     case params[:channel]
     when 'all' then
-      
+
     when 'brand' then
-        
+
     end
   end
-  
+
 end
 
 
