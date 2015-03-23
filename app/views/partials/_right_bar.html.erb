@@ -11,7 +11,7 @@
 		<ul class="row userData">
 			<li class="col-md-4">
 				<a href="#">
-					<p class="data"><%= current_user.posts.where(_type: Post::TYPES.keys[1]).count %></p>
+					<p class="data"><%= current_user.posts_with_type(Post::TYPES.keys[1]).count %></p>
 					<p class="tt"><%= I18n.t('i_post')%></p>
 				</a>
 			</li>

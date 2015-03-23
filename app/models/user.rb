@@ -127,4 +127,8 @@ class User < ActiveRecord::Base
     FollowShip.where(follower_id: id).map(&:following)
   end
 
+  def posts_with_type(type)
+    posts.where(_type: type)
+  end
+
 end
