@@ -100,4 +100,12 @@ class Post < ActiveRecord::Base
     }
   end
 
+  def color
+    "#{outer_color}/#{inner_color}"
+  end
+
+  def owner_detail
+    "#{user_name}(#{user_area.name})"
+  end
+
 end
