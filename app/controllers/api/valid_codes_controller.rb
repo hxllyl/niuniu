@@ -52,15 +52,15 @@ class Api::ValidCodesController < Api::BaseController
   #   notice:    [String]  消息('failed')
   def validate_code
     raise Errors::ArgumentsError.new, t('error_msgs.arguments_errors') \
-            if is_legal?(params[:mobile], :mobile) or is_legal?(params[:valid_code], :code) 
-    valid_code = ValidCode.where(mobile: params[mobile], code: params[:valid_code]).first
+            unless is_legal?(params[:mobile], :mobile) and is_legal?(params[:valid_code], :code) 
+    valid_code = ValidCode.where(mobile: params[:mobile], code: params[:valid_code]).first
     
     json = if valid_code and valid_code.is_valid?
              { status: 200, notice: 'success' }
            else
              { status: 500, notice: 'failed' }
            end
-    render json: jsoon
+    render json: json
   rescue Errors::ArgumentsError => error
     render json: { status: 500, notice: 'failed', error_msg: error.message }         
   end
