@@ -52,6 +52,9 @@ Rails.application.routes.draw do
       post  :tender
       put   :complete
     end
+    
+    resources :valid_codes do
+    end
 
     namespace :follow_ships do
       get :my_followers

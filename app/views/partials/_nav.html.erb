@@ -2,16 +2,15 @@
   <div class="container topContent clearfix">
     <h1 class="logo bfL"><a href="#"><%= image_tag("logo.png", alt: "") %></a></h1>
     <ul class="nav navbar-nav">
-      <li class=""><a href="#"><span class="icon  icon-home"></span>首页</a></li>
+      <li class=<%= active?('portal', params[:controller]) %>><a href="#"><span class="icon icon-home"></span>首页</a></li>
       <% if current_user %>
-          <li class=""><a href=<%= user_my_posts(current_user) %><span class="icon  icon-source"></span>我的资源</a></li>
+          <li class=<%= active?('my_posts', params[:controller]) %>><a href=<%= user_my_posts_path(current_user, _type: 0) %>><span class="icon icon-source"></span>我的资源</a></li>
       <% else %>
-          <li class=""><a href='#'><span class="icon  icon-source"></span>我的资源</a></li>
+          <li class=""><a href='#'><span class="icon icon-source"></span>我的资源</a></li>
       <% end %>
-
-      <li class=""><a href=<%= posts_path(_type: 0)%>><span class="icon  icon-market"></span>市场资源</a></li>
-      <li class=""><a href="#"><span class="icon  icon-search"></span>我要寻车</a></li>
-      <li class=""><a href=<%= posts_path(_type: 1)%>><span class="icon  icon-carInfo"></span>寻车信息</a></li>
+      <li class=""><a href=<%= posts_path(_type: 0)%>><span class="icon icon-market"></span>市场资源</a></li>
+      <li class=""><a href="#"><span class="icon icon-search"></span>我要寻车</a></li>
+      <li class=""><a href=<%= posts_path(_type: 1)%>><span class="icon icon-carInfo"></span>寻车信息</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-nav-right bfR">
       <% if current_user %>
