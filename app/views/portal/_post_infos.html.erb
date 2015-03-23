@@ -16,7 +16,7 @@
 					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image).try(:thumb), alt: "")  %></div>
 					<div class="info">
 						<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-						<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= [post.owner_detail, human_time(post.updated_at)].join %></span></p>
+						<p class="clearfix"><span class="bfL"><%= post.color %></span><span class="bfR"><%= post.owner_detail %></span></p>
 					</div>
 				</li>
 				<% end -%>
@@ -31,8 +31,7 @@
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
   				<div class="info">
   					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-  					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= [post.owner_detail, human_time(post.updated_at)].join
-            %></span></p>
+  					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
 
   				</div>
   			</li>
@@ -46,7 +45,7 @@
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
   				<div class="info">
   					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+  					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
         </li>
        <% end -%>
      </ul>
@@ -58,7 +57,7 @@
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
   				<div class="info">
   					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+  					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
 
   				</div>
   			</li>
@@ -69,10 +68,10 @@
       <ul class="carInfoList clearfix">
       <% @posts_with_brands.values[3].each do |post| %>
   			<li>
-  				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
+  				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image).try(:thumb), alt: "")  %></div>
   				<div class="info">
   					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+  					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
 
   				</div>
   			</li>

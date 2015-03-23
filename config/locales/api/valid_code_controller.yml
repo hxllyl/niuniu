@@ -5,3 +5,4 @@
 zh-CN:
   error_msgs:
     mobile_blank_or_not_formatted: 手机号码为空或者手机号码不正确
+    arguments_errors: 参数错误
