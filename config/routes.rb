@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       put :update_my_level
       get :about_us
     end
-    resources :my_posts, except: [ :destroy ] do
+    resources :my_posts do
       resources :tenders, only: [ :show ]
     end
   end
@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     resources :valid_codes, only: [:index] do
       get :validate_code, on: :collection
     end
-    
+
     resources :areas, only: [:index] do
     end
 

@@ -24,4 +24,12 @@ class MyPostsController < ApplicationController
     @post  = Post.find_by_id(params[:id])
     @_type = params[:_type]
   end
+
+  def destroy
+    post  = Post.find_by_id(params[:id])
+
+    post.update_attributes(status: -1)
+
+    redirect_to user_path
+  end
 end
