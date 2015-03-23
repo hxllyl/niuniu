@@ -18,6 +18,8 @@ class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseC
   #  status: [Integer] 400
   #  notice: [String]  注册失败，请重新注册
   def create
+    # curl -v -H 'Content-Type: application/json' -H 'Accept: application/json' -X POST http://localhost:3000/api/v1/registrations -d "{\"user\":{\"mobile\":\"15899008877\",\"name\":\"evan\",\"password\":\"123456\",\"password_confirmation\":\"123456\"}}"
+
     build_resource
     resource.skip_confirmation!
     if resource.save
