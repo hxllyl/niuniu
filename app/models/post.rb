@@ -32,9 +32,9 @@ class Post < ActiveRecord::Base
   belongs_to  :base_car,class_name: 'BaseCar'
   belongs_to  :standard,class_name: 'Standard'
   has_many    :post_photos, as: :owner, dependent: :nullify, autosave: true # 资源图片
-  has_many    :prosecutions, class_name: 'Complaint', as: :resource # 被投诉列表
+  has_many    :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
 
-  USER_METHODS = [:name, :mobile, :level, :company]
+  USER_METHODS = [:name, :mobile, :level, :company, :area]
 
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true
@@ -98,6 +98,14 @@ class Post < ActiveRecord::Base
       photos:           photos,
       updated_at:       updated_at
     }
+  end
+
+  def color
+    "#{outer_color}/#{inner_color}"
+  end
+
+  def owner_detail
+    "#{user_name}(#{user_area.name})"
   end
 
 end

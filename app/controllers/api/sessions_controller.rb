@@ -1,6 +1,6 @@
 # encoding: utf-8
 # 用户登陆、注销
-class Api::SessionsController < Devise::SessionsController # Api::BaseController #
+class Api::SessionsController < Devise::SessionsController #Api::BaseController #
   skip_before_filter :verify_authenticity_token
   respond_to :json
 

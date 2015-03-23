@@ -11,13 +11,12 @@
 	<div class="panel-body">
 		<div role="tabpanel" class="tab-pane active" id="allCarInfo">
 			<ul class="carInfoList clearfix">
-        <% @posts.each do |post| %>
+        <%- @posts.each do |post| %>
 				<li>
-					<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
+					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image).try(:thumb), alt: "")  %></div>
 					<div class="info">
 						<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-						<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
-
+						<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= [post.owner_detail, human_time(post.updated_at)].join %></span></p>
 					</div>
 				</li>
 				<% end -%>
@@ -32,7 +31,8 @@
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.image.thumb , alt: "")  %></div>
   				<div class="info">
   					<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-  					<p class="clearfix"><span class="bfL"></span><%= post.outer_color %>/<%= post.inner_color %><span class="bfR"><%= post.user.name %>(<%= post.user.area.name %>)  <%= human_time(post.updated_at)%></span></p>
+  					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= [post.owner_detail, human_time(post.updated_at)].join
+            %></span></p>
 
   				</div>
   			</li>
