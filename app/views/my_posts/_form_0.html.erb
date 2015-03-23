@@ -106,7 +106,7 @@
             <input type="radio" name="methodRadios" id="methodRadios1" value="option1"><span>优惠点数</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="methodVal1" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal1" placeholder="" disabled="true">
             <div class="units"></div>
           </label>
         </div>
@@ -115,7 +115,7 @@
             <input type="radio" name="methodRadios" id="methodRadios2" value="option2"><span>优惠金额</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="methodVal2" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal2" placeholder="" disabled="true">
             <div class="units">万元</div>
           </label>
         </div>
@@ -124,7 +124,7 @@
             <input type="radio" name="methodRadios" id="methodRadios3" value="option3"><span>加价金额</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="methodVal3" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal3" placeholder="" disabled="true">
             <div class="units">万元</div>
           </label>
         </div>
@@ -133,7 +133,7 @@
             <input type="radio" name="methodRadios" id="methodRadios4" value="option4"><span>直接报价</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="methodVal4" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal4" placeholder="" disabled="true">
             <div class="units">万元</div>
           </label>
         </div>
@@ -142,7 +142,7 @@
             <input type="radio" name="methodRadios" id="methodRadios5" value="option5"><span>电话联系</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="methodVal5" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal5" placeholder="" disabled="true">
             <div class="units"></div>
           </label>
         </div>
@@ -198,15 +198,35 @@
   </div>
 </div>
 <%= javascript_tag do %>
+var gPrice = $("#guidePrice").html();
+var gpVal = parseFloat(gPrice);
 $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
   //alert($(this).next(".selectInput").find("input.form-control").val());
   //alert(parseFloat($("#guidePrice").html()));
   //if ($(this).find("input[type=radio]").attr("checked", this.checked)){
-  var aa = parseFloat($("#guidePrice").html());
+  $(".selectInput").find("input.form-control").attr("disabled","true");
+  $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
   $(".selectTag").removeClass("active");
   $(".selectInput").removeClass("active");
   $(this).addClass("active");
   $(this).next(".selectInput").addClass("active").focus();
-  $("#methodVal1").val(aa);
-})
+});
+
+$("#methodVal1").keyup(function(){
+  //alert(msVal1);
+  autoSyncVal();
+});
+
+function autoSyncVal(){
+  var msVal1 = $("#methodVal1").val();
+  var msVal2 = $("#methodVal2").val();
+  var msVal3 = $("#methodVal3").val();
+  var msVal4 = $("#methodVal4").val();
+  $("#methodVal2").val((parseFloat(gpVal / msVal1)).toFixed(2));
+  msVal2 = $("#methodVal2").val();
+  //alert(msVal2);
+  if (msVal2 <= 0 || msVal2 == ""){
+    $("#methodVal2").val("");
+  }
+}
 <% end -%>
