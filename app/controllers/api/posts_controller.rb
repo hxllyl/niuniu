@@ -5,18 +5,21 @@ class Api::PostsController < Api::BaseController
   # 市场资源列表，寻车列表
   #
   # Params:
-  #   token:        [String]  valid token
-  #   _type:        [Integer] 0|1
+  #   token:        [String]    valid token
+  #   _type:        [Integer]   0 资源 1 寻车
+  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
-  #   data:   [Hash]    {posts: posts_hash}
+  #   data:   [JSON]    posts json
   # Error
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def list
-    posts = Post.where(_type: params[:_type])
+    conds = {_type: params[:_type]}
+    conds.merge!(:updated_at.gt => DateTime.parse(params[:updated_at])) if params[:updated_at]
+    posts = Post.where(conds).order(updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -24,16 +27,22 @@ class Api::PostsController < Api::BaseController
   # 我的资源列表，寻车列表
   #
   # Params:
-  #   token: [String] valid token
+  #   token:        [String]    valid token
+  #   _type:        [Integer]   0 资源 1 寻车
+  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   #
   # Return:
-  #   success: [JSON] {:status=>true}
-  #   fail:    [JSON] {:status=>false, :error=> 1003}
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  #   data:   [JSON]    my_posts json
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
   def my_list
-    posts = @user.posts.where(_type: params[:_type])
+    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
 
-    render json: {status: 200, notice: 'success', data: {posts: posts.map(&"to_#{params[:type]}_hash".to_sym)}}
+    render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
   # 单独的资源，寻车
