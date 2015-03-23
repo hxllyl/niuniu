@@ -16,7 +16,7 @@
 					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image).try(:thumb), alt: "")  %></div>
 					<div class="info">
 						<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-						<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= [post.owner_detail, human_time(post.updated_at)].join %></span></p>
+						<p class="clearfix"><span class="bfL"><%= post.color %></span><span class="bfR"><%= [post.owner_detail, human_time(post.updated_at)].join %></span></p>
 					</div>
 				</li>
 				<% end -%>

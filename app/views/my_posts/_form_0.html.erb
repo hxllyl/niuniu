@@ -107,7 +107,7 @@
           </label>
           <label class="selectInput">
             <input type="text" class="form-control input-sm" id="methodVal1" placeholder="" disabled="true">
-            <div class="units"></div>
+            <div class="units">点数</div>
           </label>
         </div>
         <div class="form-group form-inline col-md-6">
@@ -224,6 +224,7 @@ function autoSyncVal(){
   var msVal4 = $("#methodVal4").val();
   $("#methodVal2").val((parseFloat(gpVal / msVal1)).toFixed(2));
   msVal2 = $("#methodVal2").val();
+  $("#methodVal4").val((parseFloat(gpVal - msVal2)).toFixed(2));
   //alert(msVal2);
   if (msVal2 <= 0 || msVal2 == ""){
     $("#methodVal2").val("");
