@@ -50,6 +50,7 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token: [String]  valid token
   #   _type: [Integer] 0|1
+  #   id   : [Integer] post ID
   #
   # Return:
   #   status: [Integer] 200
