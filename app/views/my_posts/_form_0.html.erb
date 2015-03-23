@@ -99,14 +99,14 @@
       <div class="methodSelect row">
         <div class="tt clearfix">
           <h5 class="col-md-6">报价方式</h5>
-          <h5 class="col-md-6">指导价：39.68万</h5>
+          <h5 class="col-md-6">指导价：<span id="guidePrice">39.68</span>万</h5>
         </div>
         <div class="form-group form-inline col-md-6">
           <label class="radio selectTag">
             <input type="radio" name="methodRadios" id="methodRadios1" value="option1"><span>优惠点数</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal1" placeholder="">
             <div class="units"></div>
           </label>
         </div>
@@ -115,8 +115,8 @@
             <input type="radio" name="methodRadios" id="methodRadios2" value="option2"><span>优惠金额</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
-            <div class="units"></div>
+            <input type="text" class="form-control input-sm" id="methodVal2" placeholder="">
+            <div class="units">万元</div>
           </label>
         </div>
         <div class="form-group form-inline col-md-6">
@@ -124,8 +124,8 @@
             <input type="radio" name="methodRadios" id="methodRadios3" value="option3"><span>加价金额</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
-            <div class="units"></div>
+            <input type="text" class="form-control input-sm" id="methodVal3" placeholder="">
+            <div class="units">万元</div>
           </label>
         </div>
         <div class="form-group form-inline col-md-6">
@@ -133,7 +133,7 @@
             <input type="radio" name="methodRadios" id="methodRadios4" value="option4"><span>直接报价</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal4" placeholder="">
             <div class="units">万元</div>
           </label>
         </div>
@@ -142,7 +142,7 @@
             <input type="radio" name="methodRadios" id="methodRadios5" value="option5"><span>电话联系</span>
           </label>
           <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
+            <input type="text" class="form-control input-sm" id="methodVal5" placeholder="">
             <div class="units"></div>
           </label>
         </div>
@@ -199,9 +199,14 @@
 </div>
 <%= javascript_tag do %>
 $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-  //alert($(this).find("input:radio").val());
+  //alert($(this).next(".selectInput").find("input.form-control").val());
+  //alert(parseFloat($("#guidePrice").html()));
   //if ($(this).find("input[type=radio]").attr("checked", this.checked)){
-  $(".selectInput").hide();
-  $(this).next(".selectInput").show();
+  var aa = parseFloat($("#guidePrice").html());
+  $(".selectTag").removeClass("active");
+  $(".selectInput").removeClass("active");
+  $(this).addClass("active");
+  $(this).next(".selectInput").addClass("active").focus();
+  $("#methodVal1").val(aa);
 })
 <% end -%>
