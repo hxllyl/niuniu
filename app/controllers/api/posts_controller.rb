@@ -54,7 +54,7 @@ class Api::PostsController < Api::BaseController
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
-  #   data:   [Hash]    {post: post.attrs}
+  #   data:   [JSON]    post json
   # Error
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
@@ -62,7 +62,7 @@ class Api::PostsController < Api::BaseController
     type = params[:_type]
     post = Post.find_by_id(params[:id])
     if post
-      render json: {status: 200, data: {post: post.send("to_#{type}_hash".to_sym)}}
+      render json: {status: 200, data: {post: post.to_hash}}
     else
       render json: {status: 200, notice: 'not_found', data: {}}
     end
@@ -102,7 +102,7 @@ class Api::PostsController < Api::BaseController
     post.user = @user
 
     if post.save
-      render json: {status: 200, notice: 'success', data: {post: post.send("to_#{post._type}_hash".to_sym)}}
+      render json: {status: 200, notice: 'success', data: {post: post.to_hash}}
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end

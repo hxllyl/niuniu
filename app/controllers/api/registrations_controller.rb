@@ -1,6 +1,6 @@
 # encoding: utf-8
 # 用户注册
-class Api::RegistrationsController < Devise::RegistrationsController # Api::BaseController #
+class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseController #
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
@@ -13,7 +13,7 @@ class Api::RegistrationsController < Devise::RegistrationsController # Api::Base
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
-  #   data:   [Hash]    {user: user_attrs, token: token}
+  #   data:   [JSON]    user_attrs and token
   # Error
   #  status: [Integer] 400
   #  notice: [String]  注册失败，请重新注册
