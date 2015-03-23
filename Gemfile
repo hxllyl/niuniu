@@ -55,7 +55,6 @@ gem 'writeexcel', '~> 1.0.5'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -71,7 +70,10 @@ gem 'capistrano-rails'
 gem 'capistrano-bundler'
 gem 'capistrano-rvm'
 
-gem 'unicorn-rails', '~> 2.2.0'
+group :production do
+  gem 'unicorn-rails', '~> 2.2.0'
+  gem 'unicorn'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

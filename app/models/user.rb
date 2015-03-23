@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   # validates
   validates :name, presence: true, length: { maximum: 30 }
-  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }
+  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: true
   validates :role,  presence: true , inclusion: { in: %w(normal admin) }
   validates :company, presence: true, length: { maximum: 100 }
   validates :level, numericality: true, inclusion: { in: 0..3 }
@@ -84,10 +84,6 @@ class User < ActiveRecord::Base
     self.role == 'admin'
   end
 
-  # token 用于api验证 目前使用第一个
-  def token
-    self.tokens.first
-  end
 
   # 我的资源和寻车
   def resources(type)
@@ -125,6 +121,10 @@ class User < ActiveRecord::Base
   # 我关注的人
   def followings
     FollowShip.where(follower_id: id).map(&:following)
+  end
+
+  def posts_with_type(type)
+    posts.where(_type: type)
   end
 
 end

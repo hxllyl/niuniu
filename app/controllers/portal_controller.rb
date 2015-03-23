@@ -12,7 +12,7 @@ class PortalController < BaseController
   def index
     @user = User.new unless current_user
     
-    @hot_brands = Brand.order("click_counter desc").limit(4)
+    @hot_brands = Brand.includes(:car_photo).order("click_counter desc").limit(4)
                         
     @posts  = Post.where(_type: Post::TYPES.keys[1]).order('updated_at desc').limit(8)
     
