@@ -84,10 +84,6 @@ class User < ActiveRecord::Base
     self.role == 'admin'
   end
 
-  # token 用于api验证 目前使用第一个
-  def token
-    self.tokens.first
-  end
 
   # 我的资源和寻车
   def resources(type)
