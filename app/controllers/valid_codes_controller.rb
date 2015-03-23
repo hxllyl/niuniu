@@ -12,11 +12,13 @@ class ValidCodesController < BaseController
   def create
     @valid_code = ValidCode.where(mobile: params[:mobile], _type: params[:type]).first
     if @valid_code and @valid_code.is_valid?
+      @valid_code.send_code
       render json: { status: 'success', code: @valid_code.code } 
     else
       @valid_code = ValidCode.new(mobile: params[:mobile], _type: params[:type])
       
       if @valid_code.save
+        @valid_code.send_code
         render json: { status: 'success', code: @valid_code.code }
       else
         render json: { status: 'failed', error_msg: @valid_code.errors.full_messages.join('\n') }

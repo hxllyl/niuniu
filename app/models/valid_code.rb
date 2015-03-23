@@ -3,6 +3,9 @@
 # author: depp.yu
 
 class ValidCode < ActiveRecord::Base
+  
+  include ActiveSupport::Callbacks
+  define_callbacks :valid_code_send
 
   # constants
   STATUS = {
@@ -19,7 +22,7 @@ class ValidCode < ActiveRecord::Base
   
   # validates
   validates :code, presence: true, uniqueness: true, format: { with: /\A\w{6}\z/ }
-  validates :mobile, presence: true, format: { with:  /\A1(3|4|5|8|)\d{9}\z/ }, uniqueness: { if: Proc.new{ |code| code._type == TYPES.keys[0] } }
+  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: { if: Proc.new{ |code| code._type == TYPES.keys[0] } }
   validates :status, inclusion: { in: STATUS.keys }
   
   # scopes
@@ -31,7 +34,8 @@ class ValidCode < ActiveRecord::Base
   end
 
   # 对手机发送消息
-  before_create :send_code
+  # before_create :send_code 
+  
   def send_code
     raise Errors::InvaildVaildCodeError.new, "#{self.code}已经被使用过" unless self.is_valid?
     
@@ -44,7 +48,7 @@ class ValidCode < ActiveRecord::Base
                            )
     return unless flag                       
   end
-
+  
   # 设置默认值
   after_initialize :set_defaults
   def set_defaults
