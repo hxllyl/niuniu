@@ -19,10 +19,15 @@ class Api::SessionsController < Devise::SessionsController # Api::BaseController
   #  notice: [String]  请输入正确的帐号密码
   def create
     warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
+
     render json:  {
                     status:   200,
                     notice:   'success',
-                    data:     {token: current_user.token}
+                    data:     {
+                                token:      current_user.token,
+                                car_infos:  Standard.all.map(&:to_hash),
+                                updated_at: [Standard.all.map(&:updated_at), Brand.all.map(&:updated_at), BaseCar.all.map(&:updated_at)].flatten.max
+                              }
                   }
   end
 

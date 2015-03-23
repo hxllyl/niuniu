@@ -18,4 +18,16 @@ class Brand < ActiveRecord::Base
   def init
     self.status ||= STATUS.keys[0]
   end
+
+  def to_hash
+    {
+      id:             id,
+      resource_name:  'Brand',
+      name:           name,
+      image:          car_photo.image.url,
+      regions:        regions,
+      base_cars:      base_cars.map(&:to_hash)
+    }
+  end
+
 end
