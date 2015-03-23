@@ -16,7 +16,7 @@
 					<div class="logo bfL"><%= image_tag(post.brand.car_photo.image.thumb, alt: "")  %></div>
 					<div class="info">
 						<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
-						<p class="clearfix"><span class="bfL"></span><%= post.outer_color + '/' + post.inner_color %><span class="bfR"><%= post.user_name + '(' + post.user_area_name + ')' + human_time(post.updated_at) %></span></p>
+						<p class="clearfix"><span class="bfL"></span><%= post.outer_color + '/' + post.inner_color %><span class="bfR"><%= post.user_name + '(' + post.user_area.name + ')' + human_time(post.updated_at) %></span></p>
 
 					</div>
 				</li>
