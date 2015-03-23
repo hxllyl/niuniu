@@ -14,6 +14,8 @@ class ComplaintsController < BaseController
     render text: e.message
   end
 
+  private
+  
   def complaint_params
     params[:complaint].permit(:resource_type, :resource_id, :content)
   end
