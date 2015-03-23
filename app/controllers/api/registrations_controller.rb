@@ -36,7 +36,6 @@ class Api::RegistrationsController < Devise::RegistrationsController # Api::Base
     params.require(:user).permit!
     build_resource
     
-    binding.pry
     if resource.save
       valid_code = ValidCode.where(mobile: resource[:mobile], code: params[:valid_code], 
                                    status: ValidCode::STATUS.keys[0]).first
