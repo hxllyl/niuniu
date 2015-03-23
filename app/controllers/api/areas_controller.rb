@@ -16,11 +16,11 @@ class Api::AreasController < Api::BaseController
   #   notice: 消息('failed')
   #   error_msg: 错误信息
   def index
-    provinces = Area.provinces
-    data = provinces.each_with_object([]) do |p, a|
-              a << p.as_api
-              a
-            end
+    provinces = Area.includes(:children).provinces
+    data = provinces.each_with_object({}) do |p, h|
+             h[p.name] = p.children.map(&:as_api)
+           end
+           
     render json: { status: 200, notice: 'success', data: data }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }           
