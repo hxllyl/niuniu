@@ -18,7 +18,7 @@ class Api::PostsController < Api::BaseController
   def list
     posts = Post.where(_type: params[:_type])
 
-    render json: {status: 200, notice: 'success', data: {posts: posts.map(&"to_#{params[:_type]}_hash".to_sym)}}
+    render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
   # 我的资源列表，寻车列表

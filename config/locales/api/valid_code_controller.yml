@@ -1,0 +1,7 @@
+# encoding: utf-8
+
+# author: depp.yu
+
+zh-CN:
+  error_msgs:
+    mobile_blank_or_not_formatted: 手机号码为空或者手机号码不正确

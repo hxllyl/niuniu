@@ -37,5 +37,4 @@ class Api::RegistrationsController < Devise::RegistrationsController # Api::Base
                     }
     end
   end
-
 end

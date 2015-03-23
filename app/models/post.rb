@@ -65,29 +65,17 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def to_0_hash
-    {
-      id: id,
-      user_id: user_id,
-      user_name: user_name,
-      user_mobile: user_mobile,
-      user_company: user_company,
-      user_level: User::LEVELS[user_level],
-      brand:   brand_name,
-      model: model,
-      style: style,
-      outer_color: outer_color,
-      inner_color: inner_color,
-      car_license_areas:  car_license_areas,
-      car_in_areas:  car_in_areas,
-      expect_price: expect_price.to_f,
-      discount_way:  DISCOUNT_WAYS[discount_way],
-      discount_content: discount_content.to_f,
-      updated_at: updated_at.to_s(:db)
-    }
+  # {front: 'image_url', side: 'image_url', obverse: 'image_url', inner: 'image_url'}
+  def photos
+    hash = {}
+    post_photos.each do |ele|
+      hash[ele._type.to_sym] = ele.image.url
+    end
+
+    hash
   end
 
-  def to_1_hash
+  def to_hash
     {
       id: id,
       user_id: user_id,
@@ -106,7 +94,8 @@ class Post < ActiveRecord::Base
       expect_price: expect_price.to_f,
       discount_way:  DISCOUNT_WAYS[discount_way],
       discount_content: discount_content.to_f,
-      updated_at: updated_at.to_s(:db)
+      photos:           photos,
+      updated_at:       updated_at
     }
   end
 
