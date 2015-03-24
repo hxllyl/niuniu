@@ -42,6 +42,7 @@ class Post < ActiveRecord::Base
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true, allow_nil: true
   delegate :NO, to: :base_car, prefix: true
+  delegate :name, to: :car_model, prefix: true, allow_nil: true
 
   # class methods
   # 资源
