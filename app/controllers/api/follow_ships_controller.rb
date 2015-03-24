@@ -74,7 +74,6 @@ class Api::FollowShipsController < Api::BaseController
   #
   # Params:
   #   token:                      [String]  valid token
-  #   follow_ship[follower_id]:   [Integer] 关注人的ID
   #   follow_ship[following_id]:  [Integer] 被关注人的ID
   #
   # Return:
@@ -89,6 +88,8 @@ class Api::FollowShipsController < Api::BaseController
 
     params.require(:follow_ship).permit!
 
+    params[:follow_ship][:follower_id] = @user.id
+
     follow_ship = FollowShip.new(params[:follow_ship])
 
     if follow_ship.save
@@ -102,7 +103,7 @@ class Api::FollowShipsController < Api::BaseController
   #
   # Params:
   #   token:        [String]  valid token
-  #   user_id:      [Integer] 第三者用户ID
+  #   user_id:      [Integer] 被关注人的ID
   #
   # Return:
   #   status: [Integer] 200
