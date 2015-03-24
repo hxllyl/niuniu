@@ -134,7 +134,7 @@
                     <td><span class="price"><%= post.expect_price.to_f %></span></td>
                     <td><%= post.standard_name + '现车' %></td>
                     <td><%= post.owner %>icon</td>
-                    <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
+                    <td><%= link_to '浏览', user_my_posts_path(post.user, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
                     <td><%= post.publish_time %></td>
                   </tr>
                 <% end %>
