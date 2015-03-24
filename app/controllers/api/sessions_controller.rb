@@ -23,11 +23,7 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
     render json:  {
                     status:   200,
                     notice:   'success',
-                    data:     {
-                                token:      current_user.token,
-                                car_infos:  Standard.includes(brands: [:car_photo, :base_cars]).map(&:to_hash),
-                                updated_at: [Standard.all.map(&:updated_at), Brand.all.map(&:updated_at), BaseCar.all.map(&:updated_at)].flatten.max
-                              }
+                    data:     { token: current_user.token }
                   }
   end
 

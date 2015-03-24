@@ -36,6 +36,7 @@ class Post < ActiveRecord::Base
 
   USER_METHODS = [:name, :mobile, :level, :company, :area]
 
+  delegate :name, to: :standard, prefix: true
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true
   delegate :NO, to: :base_car, prefix: true
@@ -112,6 +113,10 @@ class Post < ActiveRecord::Base
 
   def publish_time
     updated_at < Date.today ? updated_at.strftime("%m/%d %H:%M") : updated_at.strftime("%H:%M")
+  end
+
+  def title
+    "#{_type == 0 ? '卖 ' : '寻 '}" + standard_name + brand_name + base_car_NO
   end
 
 end
