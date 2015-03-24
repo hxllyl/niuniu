@@ -5,12 +5,13 @@
 class BaseCar < ActiveRecord::Base
 
   STATUS = {
-    0 => '激活',
-    1 => '未激活'
+    1 => '激活',
+    0 => '未激活'
   }
 
-  belongs_to :standard, class_name: 'Standard' # 属于那种规格
-  belongs_to :brand, class_name: 'Brand' # 属于那种车辆品牌
+  belongs_to :standard,   class_name: 'Standard' # 属于那种规格
+  belongs_to :brand,      class_name: 'Brand' # 属于那种车辆品牌
+  belongs_to :car_model,  class_name: 'CarModel' # 属于那种车型
   has_many   :car_photos, as: :owner, dependent: :nullify, autosave: true # 图片数据
 
 
@@ -23,7 +24,6 @@ class BaseCar < ActiveRecord::Base
     {
       id:             id,
       resource_name:  'BaseCar',
-      model:          model,
       style:          style,
       number:         self.NO,
       outer_color:    outer_color,

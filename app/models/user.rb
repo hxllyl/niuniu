@@ -133,11 +133,9 @@ class User < ActiveRecord::Base
   
   # 用户成交量(包括寻车和报价成交总是)
   def dealeds(type)
-    way = type == :total ? '' : "and DATEDIFF('month', '#{self.updated_at}', '#{Time.now}') <＝3 "
-    query = "select count(*) from posts as p ,tenders as t where p._type = #{Post::TYPES.keys[1]} and " <<
-            "p.status = #{Post::STATUS.keys[4]} and p.user_id = #{self.id} and t.status = #{Tender::STATUS.keys[1]} " <<
-            "t.user_id = #{self.id} " << way
-    count = ActiveRecord::Base.connection.execute(query)
+    conditions = "user_id = #{self.id}"
+    conditions << " updated_at >= #{Time.now - 3.months}" if type == :month
+    Post.completed.where(conditions).count + Tender.completed.where(conditions).count
   end
 
 end
