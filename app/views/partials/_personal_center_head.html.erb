@@ -1,7 +1,7 @@
 
 <div class="container userOverview">
   <div class="userInfo clearfix">
-    <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "")%></div>
+    <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "", width: "108", height: "108")%></div>
     <div class="detail">
       <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></div>
       <div class="detailTab">
