@@ -84,7 +84,7 @@
                 <div class="info">
                   <p class="price"><i class="icon icon-money"></i>期望的成交价：<span class="num">37.68万</span></p>
                   <p>指导价：39.68万/下2万</p>
-                  <div class="reportLink"><a href="#">我要举报</a></div>
+                  <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
                 </div>
               </div>
             </div>
@@ -209,6 +209,43 @@
           </div>
           <input type="submit" class="btn btn-primary subBtn" value="提交">
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal box bs-example-modal-sm" id="myReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title lineTitle" id="">举报</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="radio-inline col-md-6">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">举报用户
+            </label>
+          </div>
+          <div class="radio-inline col-md-6">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">举报车源
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="radio-inline col-md-6">
+            <label>
+              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">举报寻车信息
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" rows="3" placeholder="输入详细内容"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default w100p orange btn_spacing"data-dismiss="modal" aria-label="Close" >提交</button>
       </div>
     </div>
   </div>
