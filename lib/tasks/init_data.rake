@@ -59,18 +59,18 @@ namespace :init_data do
     100.times do
       standard = Standard.all.sample
       brand    = standard.brands.sample
-      base_car = brand.base_cars.sample
+      car_model = brand.car_models.sample
+      base_car = car_model.base_cars.sample
       post     = Post.new(
                  _type:             [0, 1].sample,
                  standard_id:       standard.id,
                  brand_id:          brand.id,
                  user_id:           user_ids.sample,
-                 model:             base_car.model,
+                 car_model_id:             car_model.id,
                  outer_color:       base_car.outer_color.sample,
                  inner_color:       base_car.inner_color.sample,
                  car_license_areas: Area.first.name,
                  car_in_areas:      brand.regions.sample(2),
-                 style:             base_car.style,
                  discount_way:      1,
                  discount_content:  0.9
                )
