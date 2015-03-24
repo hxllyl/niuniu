@@ -48,6 +48,8 @@ class Post < ActiveRecord::Base
   scope :needs,     -> { where(_type: 1) }
   # 已成交
   scope :completed, -> { where(status: 3) }
+  # 未成交
+  scope :uncompleted, -> { where("status <> 3") }
 
 
   # instance methods

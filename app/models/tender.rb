@@ -23,6 +23,8 @@ class Tender < ActiveRecord::Base
   belongs_to :post, class_name: 'Post'
   has_many :comments, as: :resources
 
+  # 未成交的报价
+  scope :uncompleted, -> { where(status: 0) }
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
 
