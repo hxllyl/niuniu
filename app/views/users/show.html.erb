@@ -6,24 +6,24 @@
       <div class="detailTab">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td colspan="2">自我评价：</td>
+            <td colspan="2"><%= t('self_introduction') -%>：</td>
           </tr>
           <tr>
-            <td colspan="2">注册地：</td>
+            <td colspan="2"><%= t('zc_place') -%>：</td>
           </tr>
           <tr>
             <td colspan="2"><strong class="tip">最近三个月成交3台，累计成交3台</strong></td>
           </tr>
           <tr>
-            <td width="250">公司名称：<%= current_user.company %></td>
-            <td width="250">职位：</td>
+            <td width="250"><%= t('company') -%>：<%= current_user.company %></td>
+            <td width="250"><%= t('position') -%>：</td>
           </tr>
           <tr>
-            <td>微信：</td>
+            <td><%= t('wei_xin')%>：</td>
             <td>QQ：</td>
           </tr>
           <tr>
-            <td colspan="2">联系电话：<span class="tip"><%= current_user.mobile %></span></td>
+            <td colspan="2"><%= t('mobile') -%>：<span class="tip"><%= current_user.mobile %></span></td>
           </tr>
         </table>
       </div>
@@ -34,19 +34,19 @@
       <li class="active">
         <a href="#">
           <p class="num"><%= current_user.posts.needs.count %></p>
-          <p>我的寻车</p>
+          <p><%= t('i_posts')%></p>
         </a>
       </li>
       <li>
         <a href="#">
           <p class="num"><%= current_user.tenders.count %></p>
-          <p>我的报价</p>
+          <p><%= t('i_tenders')%></p>
         </a>
       </li>
       <li>
         <a href="#">
           <p class="num"><%= current_user.followings.count %></p>
-          <p>我的关注</p>
+          <p><%= t('i_followings') %></p>
         </a>
       </li>
     </ul>
