@@ -4,9 +4,6 @@ class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseC
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
-  # before_filter :configure_register_params, only: [:create]
-  # skip_before_filter :auth_user, only: [:create]
-
   # 用户注册
   #
   # Params:
