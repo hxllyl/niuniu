@@ -3,6 +3,7 @@ $(document).ready(function(){
     e.preventDefault();
     $(this).tab("show");
   });
+  $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();
     if(scrollTop > 0){
