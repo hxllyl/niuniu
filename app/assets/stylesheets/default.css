@@ -279,10 +279,12 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .modal.box .modal-body .checkbox input { margin-left: 0; }
 .modal.box .modal-body input { font-size: 12px; }
 .modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
+#myReport .form-group { padding:10px 0; margin: 0; color: #666; }
+#myReport .form-group .col-md-6 { margin: 0; }
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 url(user/bannerBg.jpg) no-repeat right bottom; }
 .userOverview .userInfo { padding: 20px; }
-.userOverview .userInfo .photo { width: 118px; height: 118px; border: 5px solid #d3d3d3; border-radius: 50%; overflow: hidden; }
+.userOverview .userInfo .photo { width: 118px; height: 118px; border: 5px solid #d3d3d3; border-radius: 50%; text-align: center; overflow: hidden; }
 .userOverview .userInfo .detail { display: inline-block; line-height: 20px; margin-left: 40px; }
 .userOverview .userInfo .detail .name { float: left; line-height: 22px; margin-right: 8px; font-size: 18px; font-weight: bold; color: #323232; }
 /*.userOverview .userInfo .detail .type { float: left; height: 22px; line-height: 22px; padding: 0 10px; margin-right: 8px; border-radius: 11px; font-size: 13px; color: #FFF; background-color: #b3b3b3; }*/
