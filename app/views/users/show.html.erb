@@ -85,7 +85,33 @@
         </div>
       </div>
     </div>
-    
-    <%= render partial: 'partials/search'%>
+    <div class="col-md-3 mainRight">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">一键找车</h3>
+        </div>
+        <div class="panel-body">
+          <form class="searchBox">
+            <input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
+            <input type="submit" class="btn btn-primary subBtn" value="搜索" />
+          </form>
+        </div>
+      </div>
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">品牌筛选</h3>
+        </div>
+        <div class="panel-body brandSelect">
+          <div class="dropdown w100p">
+            <select name="" class="form-control">
+              <option value="品牌1">品牌1</option>
+              <option value="品牌2">品牌2</option>
+              <option value="品牌3">品牌3</option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-primary subBtn" value="提交">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
