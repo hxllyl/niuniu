@@ -142,19 +142,9 @@
               <a href="#" class="btn btn-default btn-xs cancelBtn">取消关注</a>
             </li>
           </ul>
-          <nav>
-            <ul class="pagination pageList">
-              <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-              </li>
-              <li class="active"><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">…</a></li>
-              <li><a href="#">10</a></li>
-              <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-              </li>
-            </ul>
-          </nav>
+          <div class="pageList">
+            <%= paginate @uncompleted_posts %>
+          </div>
         </div>
       </div>
     </div>

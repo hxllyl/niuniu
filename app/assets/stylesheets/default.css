@@ -172,9 +172,13 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .remark .info { min-height: 24px; margin-left: 50px; }
 .mySourceTab .table>tbody>tr>td .btnGroups { display: none; position: absolute; top: 50%; right: 170px; margin-top: -11px; }
 .mySourceTab .table>tbody>tr>td .btnGroups .btn { padding: 1px 10px; margin: auto 4px; }
-.pageList { position: relative; left: 50%; margin-top: 15px; margin-bottom: 0; margin-left: -122px; }
-.pageList li a { color: #428cca; }
-.pageList>.active>a, .pageList>.active>a:focus, .pageList>.active>a:hover, .pageList>.active>span, .pageList>.active>span:focus, .pageList>.active>span:hover { border: 1px solid #ddd; color: #2a6496; background-color: #ebebeb; }
+/*pagelist style*/
+.pageList { position: relative; left: 50%; float: left; margin-top: 15px; margin-bottom: 0; margin-left: -122px; }
+.pageList .pagination>span { display: inline; }
+.pageList .pagination>span>a { position: relative; float: left; padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #428cca; text-decoration: none; background-color: #fff; border: 1px solid #ddd; }
+.pageList .pagination>span:first-child>a, .pageList .pagination>span:first-child { margin-left: 0; border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
+.pageList .pagination>span:last-child>a, .pageList .pagination>span:last-child { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+.pageList .pagination>span.current { position: relative; float: left; padding: 6px 12px; margin-left: -1px; line-height: 1.42857143; color: #428cca; text-decoration: none; background-color: #fff; border: 1px solid #ddd; background-color: #ebebeb; }
 .sourceForm { margin: -16px 0 0; }
 .sourceForm .row { margin: 0; border-top: 1px solid #e6e6e6; }
 .sourceForm .row.first { border-top: none; }
@@ -279,7 +283,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .modal.box .modal-body .checkbox input { margin-left: 0; }
 .modal.box .modal-body input { font-size: 12px; }
 .modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
-#myReport .form-group { padding:10px 0; margin: 0; color: #666; }
+#myReport .form-group { padding: 10px 0; margin: 0; color: #666; }
 #myReport .form-group .col-md-6 { margin: 0; }
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 url(user/bannerBg.jpg) no-repeat right bottom; }
