@@ -198,8 +198,6 @@
   </div>
 </div>
 <%= javascript_tag do %>
-var gPrice = $("#guidePrice").html();
-var gpVal = parseFloat(gPrice);
 $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
   $(".selectInput").find("input.form-control").attr("disabled","true");
   $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
@@ -213,47 +211,8 @@ $(".selectInput").find("input.form-control").keyup(function(){
   clearNoNum(this);
 });
 
-$("#methodVal1").keyup(function(){
-  autoSyncVal1();
-});
-
-$("#methodVal4").keyup(function(){
-  autoSyncVal3();
-});
-
-function autoSyncVal1(){
-  var msVal1 = $("#methodVal1").val();
-  var msVal2 = $("#methodVal2").val();
-  var msVal3 = $("#methodVal3").val();
-  var msVal4 = $("#methodVal4").val();
-  if (msVal1 > 100){
-    msVal1 = 100;
-  }
-  $("#methodVal2").val(parseFloat(gpVal * msVal1/100).toFixed(2));
-  msVal2 = $("#methodVal2").val();
-  $("#methodVal4").val(parseFloat(gpVal - msVal2).toFixed(2));
-  if (msVal2 <= 0 || msVal2 == ""){
-    $("#methodVal2").val("");
-  }
-}
-function autoSyncVal3(){
-  var msVal1 = $("#methodVal1").val();
-  var msVal2 = $("#methodVal2").val();
-  var msVal3 = $("#methodVal3").val();
-  var msVal4 = $("#methodVal4").val();
-
-  $("#methodVal2").val(parseFloat(gpVal - msVal4).toFixed(2));
-  msVal2 = $("#methodVal2").val();
-  $("#methodVal1").val(parseFloat((msVal2 / gpVal)*100).toFixed(1));
-  msVal1 = $("#methodVal1").val();
-  if (msVal2 <= 0 || msVal2 == ""){
-    $("#methodVal2").val("");
-  }
-}
-
 function clearNoNum(obj){
   obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
-  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
-  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d).*$/,'$1$2.$3'); //只能输入两个小数
+  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
 }
 <% end -%>
