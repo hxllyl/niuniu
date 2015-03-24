@@ -4,20 +4,15 @@ class Brand < ActiveRecord::Base
 
   # constants
   STATUS = {
-    0 => '激活',
-    1 => '未激活'
+     1 => '激活',
+     0 => '未激活'
   }
 
   # relations
-  belongs_to :standard,  class_name: 'Standard' # 属于那种标准
-  has_many   :base_cars, class_name: 'BaseCar' # 拥有多种基础车辆
+  belongs_to :standard,   class_name: 'Standard' # 属于那种标准
+  has_many   :car_models, class_name: 'CarModel' # 拥有多种车型
+  has_many   :base_cars,  class_name: 'BaseCar'  # 拥有多种车款
   has_one    :car_photo, as: :owner, dependent: :nullify # 品牌图片
-
-  # 初始化 object 状态
-  after_initialize :init
-  def init
-    self.status ||= STATUS.keys[0]
-  end
 
   def to_hash
     {
@@ -26,7 +21,7 @@ class Brand < ActiveRecord::Base
       name:           name,
       image:          car_photo.image.url,
       regions:        regions,
-      base_cars:      base_cars.map(&:to_hash)
+      car_models:     car_models.map(&:to_hash)
     }
   end
 
