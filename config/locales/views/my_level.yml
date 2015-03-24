@@ -1,0 +1,10 @@
+# encoding: utf-8
+
+zh-CN:
+  custom_info: 个人信息
+  level_recon: 认证等级
+  password_change: 修改密码
+  about_us: 关于我们
+  safe_logout: 安全退出 
+  level_upgrade: 认证升级
+  completed: 已完成
