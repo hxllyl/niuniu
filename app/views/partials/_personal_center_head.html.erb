@@ -3,7 +3,7 @@
   <div class="userInfo clearfix">
     <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "", width: "108", height: "108")%></div>
     <div class="detail">
-      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></div>
+      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag(current_user.level_icon, alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></div>
       <div class="detailTab">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -13,7 +13,7 @@
             <td colspan="2"><%= t('zc_place') -%>：<%= current_user.area.name %></td>
           </tr>
           <tr>
-            <td colspan="2"><strong class="tip">最近三个月成交3台，累计成交3台</strong></td>
+            <td colspan="2"><strong class="tip">最近三个月成交<%= current_user.dealeds(:mouth) %>台，累计成交<%= current_user.dealeds(:total)%>台</strong></td>
           </tr>
           <tr>
             <td width="250"><%= t('company') -%>：<%= current_user.company %></td>

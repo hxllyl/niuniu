@@ -120,5 +120,5 @@ class Post < ActiveRecord::Base
   def title
     "#{_type == 0 ? '卖 ' : '寻 '}" + standard_name + brand_name + base_car_NO
   end
-
+  
 end

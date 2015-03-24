@@ -84,12 +84,14 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def create
-    user = User.find_by_id(params[:following_id])
+    args = params.require(:follow_ship).permit!
+    
+    user = User.find_by_id(args[:following_id])
     raise 'not found' unless user
 
-    params.require(:follow_ship).permit!
+    
 
-    follow_ship = FollowShip.new(params[:follow_ship])
+    follow_ship = FollowShip.new(args)
 
     if follow_ship.save
       render json: {status: 200, notice: 'success'}
@@ -120,6 +122,11 @@ class Api::FollowShipsController < Api::BaseController
     else
       render json: {status: 400, notice: '请重新再试'}
     end
+  end
+  
+  private
+  def follow_ship_params
+    params.require(:follow_ship).permit(:follower_id, :following_id)
   end
 
 

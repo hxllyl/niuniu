@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   has_many :posts, class_name: 'Post' # 需求和寻车
   has_many :tenders, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
-  has_many :tokens, class_name: 'Token' # 用于api验证
+  has_many :tokens, class_name: 'Token', dependent: :nullify # 用于api验证
   has_many :follower_ships, foreign_key: :following_id, class_name: 'FollowShip' # 关注关系
   has_many :followers, through: :follower_ships, source: :follower
   has_many :following_ships, foreign_key: :follower_id, class_name: 'FollowShip' # 关注关系
@@ -85,7 +85,6 @@ class User < ActiveRecord::Base
     self.role == 'admin'
   end
 
-
   # 我的资源和寻车
   def resources(type)
     type == :source ? ::Post::TYPES.keys[0] : ::Post::TYPES.keys[1]
@@ -113,10 +112,32 @@ class User < ActiveRecord::Base
   def skip_confirmation!
     self.current_sign_in_at = Time.now
   end
-
-
+  
   def posts_with_type(type)
     posts.where(_type: type)
+  end
+  
+  # 用户等级logo
+  def level_icon
+    case self.level
+    when (LEVELS.keys[0] or LEVELS.keys[1]) then
+      'user/typeIcon_p.png'
+    when LEVELS.keys[2] then
+      'user/typeIcon_s.png'
+    when LEVELS.key[3] then
+      'user/typeIcon_z.png'
+    when LEVELS.key[4] then      
+      'user/typeIcon_4s.png'
+    end
+  end
+  
+  # 用户成交量(包括寻车和报价成交总是)
+  def dealeds(type)
+    way = type == :total ? '' : "and DATEDIFF('month', '#{self.updated_at}', '#{Time.now}') <＝3 "
+    query = "select count(*) from posts as p ,tenders as t where p._type = #{Post::TYPES.keys[1]} and " <<
+            "p.status = #{Post::STATUS.keys[4]} and p.user_id = #{self.id} and t.status = #{Tender::STATUS.keys[1]} " <<
+            "t.user_id = #{self.id} " << way
+    count = ActiveRecord::Base.connection.execute(query)
   end
 
 end
