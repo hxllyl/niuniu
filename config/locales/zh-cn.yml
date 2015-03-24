@@ -10,7 +10,7 @@ zh-CN:
   market_sources: 市场资源
   post: 我要寻车
   post_info: 寻车信息
-  
+
   # 首页文字信息
   hot_resources: 热门车源
   new_resources: 最新车源
@@ -19,5 +19,14 @@ zh-CN:
   sign_out: 安全退出账号
   datetime:
     distance_in_words:
-      about_x_hours: "%{count}小时"     
-    
+      about_x_hours: "%{count}小时"
+
+  # pagination
+  views:
+    pagination:
+      first: "第一页"
+      last: "最后一页"
+      previous: "上一页"
+      next: "下一页"
+      truncate: "&hellip;"
+
