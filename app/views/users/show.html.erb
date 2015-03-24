@@ -1,59 +1,5 @@
-<div class="container userOverview">
-  <div class="userInfo clearfix">
-    <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "")%></div>
-    <div class="detail">
-      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></div>
-      <div class="detailTab">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td colspan="2"><%= t('self_introduction') -%>：</td>
-          </tr>
-          <tr>
-            <td colspan="2"><%= t('zc_place') -%>：<%= current_user.area.name %></td>
-          </tr>
-          <tr>
-            <td colspan="2"><strong class="tip">最近三个月成交3台，累计成交3台</strong></td>
-          </tr>
-          <tr>
-            <td width="250"><%= t('company') -%>：<%= current_user.company %></td>
-            <td width="250"><%= t('position') -%>：<%= current_user.contact['position']%></td>
-          </tr>
-          <tr>
-            <td><%= t('wei_xin')%>：<%= current_user.contact[:wx]%></td>
-            <td>QQ：</td>
-          </tr>
-          <tr>
-            <td colspan="2"><%= t('mobile') -%>：<span class="tip"><%= current_user.mobile %></span></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="userDataTag">
-    <ul class="list clearfix">
-      <li class="active">
-        <a href="#">
-          <p class="num"><%= current_user.posts.needs.count %></p>
-          <p><%= t('i_posts')%></p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <p class="num"><%= current_user.tenders.count %></p>
-          <p><%= t('i_tenders')%></p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <p class="num"><%= current_user.followings.count %></p>
-          <p><%= t('i_followings') %></p>
-        </a>
-      </li>
-    </ul>
-    <div class="link"><a href="#"><%= t('sys_msgs') -%></a></div>
-  </div>
-  <a href="#" class="userArr"><span class="icon icon-edit"></span></a>
-</div>
+<%= render partial: 'partials/personal_center_head' %>
+
 <div class="container">
   <div class="row">
     <div class="col-md-9 mainBox">
@@ -68,32 +14,30 @@
               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th width="40%">品牌/车型</th>
-                    <th width="16%">报价人数(人)</th>
-                    <th width="14%">上牌地点</th>
-                    <th width="14%">外观/内饰</th>
-                    <th width="10%">发布时间</th>
+                    <th width="30%">品牌/车型</th>
+                    <th width="13%">报价人数(人)</th>
+                    <th width="13%">上牌地点</th>
+                    <th width="24%">外观/内饰</th>
+                    <th width="14%">发布时间</th>
                     <th width="6%">操作</th>
                   </tr>
                 </thead>
                 <tbody>
                   <%- @uncompleted_posts.each do |post| %>
                     <tr>
-                      <!-- <td><a href="#" class="name"><%= post.title %></a></td> -->
                       <td><%= link_to post.title, user_my_post_path(current_user, post), class: 'name' %></td>
                       <td><span class="num"><%= post.tenders.count %></span></td>
                       <td><%= post.car_license_areas %></td>
                       <td><%= post.color %></td>
                       <td><%= post.publish_time %></td>
                       <td><%= link_to '删除', user_my_post_path(current_user, post), method: :delete, class: 'del' %></td>
-                      <!-- <td><a href="javascript:;" class="del">删除</a></td> -->
                     </tr>
                   <% end %>
                 </tbody>
               </table>
             </div>
+            <%= paginate @uncompleted_posts %>
             <nav>
-              <%= paginate @uncompleted_posts %>
               <!-- <ul class="pagination pageList">
                 <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
                 </li>
@@ -123,53 +67,25 @@
                 <tbody>
                   <%- @completed_posts.each do |post| %>
                     <tr>
-                      <!-- <td><a href="#" class="name"><%= post.title %></a></td> -->
                       <td><%= link_to post.title, user_my_post_path(current_user, post), class: 'name' %></td>
                       <td><span class="num"><%= post.tenders.count %></span></td>
                       <td><%= post.car_license_areas %></td>
                       <td><%= post.color %></td>
                       <td><%= post.publish_time %></td>
                       <td><%= link_to '删除', user_my_post_path(current_user, post), method: :delete, class: 'del' %></td>
-                      <!-- <td><a href="javascript:;" class="del">删除</a></td> -->
                     </tr>
                   <% end %>
                 </tbody>
               </table>
             </div>
+            <%= paginate @completed_posts %>
             <nav>
-              <%= paginate @completed_posts %>
             </nav>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3 mainRight">
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">一键找车</h3>
-        </div>
-        <div class="panel-body">
-          <form class="searchBox">
-            <input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
-            <input type="submit" class="btn btn-primary subBtn" value="搜索" />
-          </form>
-        </div>
-      </div>
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">品牌筛选</h3>
-        </div>
-        <div class="panel-body brandSelect">
-          <div class="dropdown w100p">
-            <select name="" class="form-control">
-              <option value="品牌1">品牌1</option>
-              <option value="品牌2">品牌2</option>
-              <option value="品牌3">品牌3</option>
-            </select>
-          </div>
-          <input type="submit" class="btn btn-primary subBtn" value="提交">
-        </div>
-      </div>
-    </div>
+    
+    <%= render partial: 'partials/search'%>
   </div>
 </div>
