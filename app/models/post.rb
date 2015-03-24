@@ -91,7 +91,7 @@ class Post < ActiveRecord::Base
       user_company: user_company,
       user_level: User::LEVELS[user_level],
       brand:   brand_name,
-      model: model,
+      model: car_model.name,
       style: style,
       outer_color: outer_color,
       inner_color: inner_color,

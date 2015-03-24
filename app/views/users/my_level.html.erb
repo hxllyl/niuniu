@@ -1,21 +1,12 @@
 <div class="container accountsSetting">
   <div class="row">
-    <div class="col-md-2 accountsMenu">
-      <h5 class="title"><span class="tt"><%= t('account_manage') %></span></h5>
-      <ul class="list">
-        <li><a href="#"><span class="icon icon-userInfo"></span><%= t('custom_info') -%></a></li>
-        <li class="active"><a href="#"><span class="icon icon-level"></span><%= t('level_recon') -%></a></li>
-        <li><a href="<%= %>"><span class="icon icon-pw"></span><%= t('change_password') -%></a></li>
-        <li><a href="#"><span class="icon icon-logo"></span><%= t('about_us') -%></a></li>
-        <li><a href="#"><span class="icon icon-quit"></span><%= t('safe_logout') -%></a></li>
-      </ul>
-    </div>
+    <%= render partial: 'left_bar' %>
     <div class="col-md-10 accountsMain">
       <h5 class="title"><%= t('level_upgrade') -%></h5>
       <div class="panel panel-default levelBox">
         <ul role="tablist" class="nav nav-tabs carInfoTabs noBg">
-          <li role="presentation" class="active"><a href="#tabpanel1">经销商认证流程</a></li>
-          <li role="presentation"><a href="#tabpanel2">4S店认证流程</a></li>
+          <li role="presentation" class="active"><a href="#tabpanel1"><%= t('saler_recon')%></a></li>
+          <li role="presentation"><a href="#tabpanel2"><%= t('4s_recon')%></a></li>
         </ul>
         <div class="panel-body">
           <div role="tabpanel" class="levelProcess clearfix tab-pane active" id="tabpanel1">

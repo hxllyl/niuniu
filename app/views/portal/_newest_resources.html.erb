@@ -33,7 +33,7 @@
 				<tbody>
 					<%- @newest_resouces.each do |post| %>
 					<tr>
-						<td><%= link_to post.model, post, class: 'name' %></td>
+						<td><%= link_to post.car_model.name, post, class: 'name' %></td>
 						<td><span class="price"><%= post.expect_price.to_f %></span></td>
 						<td><%= post.standard_name + '现车' %></td>
 						<td><%= post.user_company %></td>

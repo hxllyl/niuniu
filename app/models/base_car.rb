@@ -17,7 +17,7 @@ class BaseCar < ActiveRecord::Base
 
   # instance_methods
   def to_human_name
-    self.brand.name << self.model << self.NO
+    self.brand.name << self.car_model.name << self.NO
   end
 
   def to_hash
