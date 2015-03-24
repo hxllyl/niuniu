@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :areas, only: [:show]
   resources :complaints, only: [ :create ]
+  resources :comments, only: [ :create ]
 
   namespace :api do
     devise_scope :user do

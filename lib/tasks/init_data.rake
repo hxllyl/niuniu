@@ -31,6 +31,7 @@ namespace :init_data do
     Rake::Task["init_data:tenders"].invoke
   end
 
+  desc "生成用户数据"
   task users: :environment do
     # Users
     ha = {
@@ -59,6 +60,7 @@ namespace :init_data do
     admin = User.create(ha_1) unless User.find_by_mobile(ha_1[:mobile])
   end
 
+  desc "生成 post 数据"
   task posts: :environment do
     user_ids = User.all.map(&:id)
     pics     = Array(0..4)
@@ -91,6 +93,7 @@ namespace :init_data do
     end
   end
 
+  desc "生成 tenders 数据"
   task tenders: :environment do
 
     discount_hash = {
