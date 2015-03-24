@@ -36,11 +36,11 @@ class Post < ActiveRecord::Base
   has_many    :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
   has_many    :comments, as: :resource
 
-  USER_METHODS = [:name, :mobile, :level, :company, :area]
+  USER_METHODS = [:name, :mobile, :level, :company, :area, :area_name]
 
   delegate :name, to: :standard, prefix: true
   delegate :name, to: :brand, prefix: true
-  delegate *USER_METHODS, to: :user, prefix: true
+  delegate *USER_METHODS, to: :user, prefix: true, allow_nil: true
   delegate :NO, to: :base_car, prefix: true
 
   # class methods
@@ -112,11 +112,11 @@ class Post < ActiveRecord::Base
   end
 
   def owner
-    "#{user_name}(#{user_area.name})"
+    "#{user_name}(#{user_area_name})"
   end
 
   def owner_detail
-    "#{user_name}(#{user_area.name})#{publish_time}"
+    "#{user_name}(#{user_area_name})#{publish_time}"
   end
 
   def publish_time
