@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313092115) do
+ActiveRecord::Schema.define(version: 20150324084035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,27 +25,36 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   end
 
   create_table "base_cars", force: :cascade do |t|
-    t.decimal  "base_price",             precision: 10, scale: 2
-    t.integer  "brand_id"
-    t.string   "outer_color",                                                              array: true
-    t.string   "model",       limit: 30,                                      null: false
-    t.string   "inner_color",                                                              array: true
     t.integer  "standard_id"
-    t.string   "style",       limit: 60
-    t.string   "NO",          limit: 12
-    t.integer  "status",                                          default: 0
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.integer  "brand_id"
+    t.integer  "car_model_id"
+    t.decimal  "base_price",              precision: 10, scale: 2
+    t.string   "outer_color",                                                               array: true
+    t.string   "inner_color",                                                               array: true
+    t.string   "style",        limit: 60
+    t.string   "NO",           limit: 12
+    t.integer  "status",                                           default: 1
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
   end
 
   create_table "brands", force: :cascade do |t|
-    t.string   "name",          limit: 40,             null: false
     t.integer  "standard_id"
+    t.string   "name",          limit: 40,             null: false
     t.string   "regions",                                           array: true
-    t.integer  "status",                   default: 0
+    t.integer  "status",                   default: 1
     t.integer  "click_counter",            default: 0
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+  end
+
+  create_table "car_models", force: :cascade do |t|
+    t.integer  "standard_id"
+    t.integer  "brand_id"
+    t.string   "name",                    null: false
+    t.integer  "status",      default: 1
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -113,14 +122,13 @@ ActiveRecord::Schema.define(version: 20150313092115) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer  "standard_id"
+    t.integer  "brand_id"
+    t.integer  "car_model_id"
+    t.integer  "base_car_id"
     t.integer  "user_id"
     t.integer  "_type"
-    t.integer  "brand_id"
     t.string   "remark",            limit: 160
-    t.integer  "base_car_id"
-    t.integer  "standard_id"
-    t.string   "model",             limit: 40,                                        null: false
-    t.string   "style",             limit: 60
     t.string   "outer_color",       limit: 60,                                        null: false
     t.string   "inner_color",       limit: 60,                                        null: false
     t.string   "car_license_areas", limit: 60,                                        null: false
@@ -130,6 +138,8 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "discount_way",                                                        null: false
     t.decimal  "discount_content",              precision: 10, scale: 2
     t.integer  "status",                                                 default: 1
+    t.integer  "onwer_set_count",                                        default: 0
+    t.integer  "sys_set_count",                                          default: 0
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
   end

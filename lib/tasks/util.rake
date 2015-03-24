@@ -24,9 +24,10 @@ namespace :util do
           roo.cell(i,j)
         end
 
-       st = Standard.find_or_initialize_by( name: columns[0] )
-       br = Brand.find_or_initialize_by( name: columns[1] )
-       bc = BaseCar.find_or_initialize_by( model: columns[2], style: columns[3],
+       st = Standard.find_or_initialize_by(name: columns[0])
+       br = Brand.find_or_initialize_by(name: columns[1])
+       cm = CarModel.find_or_initialize_by(name: columns[2])
+       bc = BaseCar.find_or_initialize_by(style: columns[3],
                                  NO: columns[4].to_i.to_s, base_price: columns[5].to_f
                                 )
 
@@ -36,11 +37,14 @@ namespace :util do
        br.regions = columns[8].split('、') unless columns[8].blank?
        br.save
 
-       bc.brand, bc.standard = br, st
+       cm.standard = st
+       cm.brand = br
+       cm.save
+
+       bc.standard, bc.brand, bc.car_model = st, br, cm
        bc.outer_color = columns[6].split(' ')
        bc.inner_color = columns[7].split(' ')
        bc.save
-
      end
     }
   end

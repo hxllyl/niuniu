@@ -6,14 +6,14 @@
 class CreatePosts < ActiveRecord::Migration
   def change
     create_table :posts do |t|
-      t.references :user, class_name: 'User' # 资源或者寻车拥有者
-      t.column :_type, :integer # 资源类型 0 => 资源， 1 => 寻车
-      t.references :brand, class_name: 'Brand' # 所属品牌
-      t.column :remark, :string, limit: 160 # 备注
-      t.references :base_car, class_name: 'BaseCar' # 基础数据
       t.references :standard, class_name: 'Standard' # 规格 中规 美规等
-      t.column :model, :string, limit: 40, null: false # 车型
-      t.column :style, :string, limit: 60 # 款式
+      t.references :brand, class_name: 'Brand' # 所属品牌
+      t.references :car_model, class_name: 'CarModel' # 所属车型
+      t.references :base_car, class_name: 'BaseCar' # 所属车款
+      t.references :user, class_name: 'User' # 资源或者寻车拥有者
+
+      t.column :_type, :integer # 资源类型 0 => 资源， 1 => 寻车
+      t.column :remark, :string, limit: 160 # 备注
       t.column :outer_color, :string, limit: 60, null: false # 外观
       t.column :inner_color, :string, limit: 60, null: false # 内饰
       t.column :car_license_areas, :string, limit: 60, null: false # 车辆上牌区域
@@ -23,6 +23,8 @@ class CreatePosts < ActiveRecord::Migration
       t.column :discount_way, :integer, null: false # 出价方式 1 优惠点数 2 优惠金额 3 加价金额 4 直接报价 5 电议
       t.column :discount_content, :decimal, precision: 10, scale: 2 # 出价内容
       t.column :status, :integer, default: 1 # 状态 0 未审核 1 已审核  2 已过期 3 已成交 -1 已删除
+      t.column :onwer_set_count, :integer, default: 0 #个人用于手动置顶
+      t.column :sys_set_count,   :integer, default: 0 #系统用于手动置顶
       t.timestamps null: false
     end
   end
