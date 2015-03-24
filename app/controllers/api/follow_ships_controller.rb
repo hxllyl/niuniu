@@ -74,7 +74,6 @@ class Api::FollowShipsController < Api::BaseController
   #
   # Params:
   #   token:                      [String]  valid token
-  #   follow_ship[follower_id]:   [Integer] 关注人的ID
   #   follow_ship[following_id]:  [Integer] 被关注人的ID
   #
   # Return:
@@ -84,27 +83,20 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def create
-    args = params.require(:follow_ship).permit!
-    
-    user = User.find_by_id(args[:following_id])
+    user = User.find_by_id(params[:following_id])
     raise 'not found' unless user
+    @user.followings << user
 
-    
-
-    follow_ship = FollowShip.new(args)
-
-    if follow_ship.save
-      render json: {status: 200, notice: 'success'}
-    else
-      render json: {status: 400, notice: '请重新再试'}
-    end
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 400, notice: ex.message }
   end
 
   # 取消关注
   #
   # Params:
   #   token:        [String]  valid token
-  #   user_id:      [Integer] 第三者用户ID
+  #   user_id:      [Integer] 被关注人的ID
   #
   # Return:
   #   status: [Integer] 200

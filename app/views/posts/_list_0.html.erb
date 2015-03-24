@@ -112,7 +112,7 @@
       </div>
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">全部资源（100）</h3>
+          <h3 class="panel-title">全部资源（<%= @posts.total_count %>）</h3>
         </div>
         <div class="panel-body">
           <div class="sourceTab">
@@ -128,91 +128,21 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">路虎揽胜运动 3345</a></td>
-                  <td><span class="price">30.00</span></td>
-                  <td>中规现车</td>
-                  <td>李木子(上海)icon</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.model, post, class: 'name' %></td>
+                    <td><span class="price"><%= post.expect_price.to_f %></span></td>
+                    <td><%= post.standard_name + '现车' %></td>
+                    <td><%= post.owner %>icon</td>
+                    <td><%= link_to '浏览', user_list_posts_path(user_id: post.user_id, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
+                    <td><%= post.publish_time %></td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
           <div class="pageList">
-            <%= paginate @uncompleted_posts %>
+            <%= paginate @posts %>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     @_type = params[:_type]
-    @posts = Post.where(_type: params[:_type])
+    @posts = Post.where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   # 资源列表点击品牌进入资源列表页
@@ -20,7 +20,8 @@ class PostsController < ApplicationController
   def user_list
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     # params[:user_id] 某用户
-    @_type = params[:_type]
-    @posts = Post.where(_type: params[:_type], user_id: params[:user_id])
+    @_type    = params[:_type]
+    @someone  = User.find_by_id(params[:user_id])
+    @posts    = Post.where(user_id: params[:user_id], _type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 end
