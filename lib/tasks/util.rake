@@ -27,13 +27,13 @@ namespace :util do
        st = Standard.find_or_initialize_by( name: columns[0] )
        br = Brand.find_or_initialize_by( name: columns[1] )
        bc = BaseCar.find_or_initialize_by( model: columns[2], style: columns[3],
-                                 NO: columns[4].to_i.to_s, base_price: columns[5].scan(/\d+\.\d+/).first.to_f
+                                 NO: columns[4].to_i.to_s, base_price: columns[5].to_f
                                 )
 
        st.save
 
        br.standard = st
-       br.regions = columns[8].split('、')
+       br.regions = columns[8].split('、') unless columns[8].blank?
        br.save
 
        bc.brand, bc.standard = br, st

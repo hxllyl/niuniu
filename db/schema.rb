@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
     t.string   "content",       limit: 225, null: false
-    t.integer  "parent_id_id"
+    t.integer  "parent_id"
     t.integer  "status"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "area_id"
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
-    t.jsonb    "contact"
+    t.jsonb    "contact",                            default: {}
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "email",                              default: ""
