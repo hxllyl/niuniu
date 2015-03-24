@@ -89,7 +89,7 @@ class Post < ActiveRecord::Base
       user_name: user_name,
       user_mobile: user_mobile,
       user_company: user_company,
-      user_level: User::LE,VELS[user_level],
+      user_level: User::LEVELS[user_level],
       brand: brand_name,
       model: car_model.name,
       style: base_car.style,
