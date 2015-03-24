@@ -109,6 +109,10 @@ class Post < ActiveRecord::Base
     "#{outer_color}/#{inner_color}"
   end
 
+  def owner
+    "#{user_name}(#{user_area.name})"
+  end
+
   def owner_detail
     "#{user_name}(#{user_area.name})#{publish_time}"
   end
