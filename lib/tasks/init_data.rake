@@ -23,6 +23,13 @@ namespace :init_data do
     end
 
   end
+  
+  desc "准备的基础数据"
+  task init: :environment do
+    Rake::Task["init_data:users"].invoke
+    Rake::Task["init_data:posts"].invoke
+    Rake::Task["init_data:tenders"].invoke
+  end
 
   task users: :environment do
     # Users
