@@ -75,7 +75,7 @@ namespace :init_data do
                  standard_id:       standard.id,
                  brand_id:          brand.id,
                  user_id:           user_ids.sample,
-                 car_model_id:             car_model.id,
+                 car_model_id:      car_model.id,
                  outer_color:       base_car.outer_color.sample,
                  inner_color:       base_car.inner_color.sample,
                  car_license_areas: Area.first.name,

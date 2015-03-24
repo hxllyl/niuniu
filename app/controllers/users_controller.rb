@@ -33,4 +33,7 @@ class UsersController < ApplicationController
 
   def about_us
   end
+  
+  private
+  
 end

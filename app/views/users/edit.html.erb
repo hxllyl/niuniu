@@ -12,6 +12,7 @@
     </div>
     <div class="col-md-10 accountsMain">
       <h5 class="title"><%= t('custom_setting') -%></h5>
+      <%= form_for current_user, as: :user, url: user_path(current_user)%>
       <div class="row">
         <div class="col-md-3 photoArea">
           <div class="photo"><%= image_tag("_temp/userPhoto_b.jpg", alt: "")%></div>
