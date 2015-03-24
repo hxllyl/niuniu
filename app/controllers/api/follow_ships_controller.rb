@@ -74,7 +74,7 @@ class Api::FollowShipsController < Api::BaseController
   #
   # Params:
   #   token:                      [String]  valid token
-  #   follow_ship[following_id]:  [Integer] 被关注人的ID
+  #   following_id:               [Integer] 被关注人的ID
   #
   # Return:
   #   status: [Integer] 200
@@ -105,21 +105,15 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def unfollow
-    follow_ship = FollowShip.find_by_follower_id_and_following_id(@user.id, params[:user_id])
+    user = User.find_by_id params[:user_id]
 
-    raise 'not found' unless follow_ship
-
-    if follow_ship.delete
-      render json: {status: 200, notice: 'success'}
-    else
-      render json: {status: 400, notice: '请重新再试'}
-    end
+    raise 'user not found' unless user
+    
+    @user.followings.delete user
+    
+    render json: {status: 200, notice: 'success'}
+  rescue => ex
+    render json: {status: 400, notice: ex.message}
   end
   
-  private
-  def follow_ship_params
-    params.require(:follow_ship).permit(:follower_id, :following_id)
-  end
-
-
 end
