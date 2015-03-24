@@ -84,4 +84,34 @@ namespace :init_data do
     end
   end
 
+  task tenders: :environment do
+
+    discount_hash = {
+      1 => %w(0.99 0.94 0.9 0.87 0.8),
+      2 => %w(1 2 3 4),
+      3 => %w(1 2 3 4),
+      4 => %w(20 55 30.4),
+      5 => %w(电议)
+    }
+
+    Post.needs.each do |need|
+      if need != 3
+        user = User.where("id <> #{need.user_id}").first
+
+        discount_way            = discount_hash.keys.sample
+        discount_content        = discount_hash[discount_way].sample
+        tender                  = Tender.new
+        tender.post             = need
+        tender.discount_way     = discount_way
+        tender.discount_content = discount_content
+        tender.user             = user
+        tender.save
+      end
+    end
+
+    Post.needs.sample(10).each do |need|
+      need.complete(need.tenders.first.id)
+    end
+  end
+
 end
