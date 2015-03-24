@@ -1,0 +1,30 @@
+<% unless current_user %>
+<div class="panel panel-default contentBox bgf8">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title"><%= t('login') %></h3>
+	</div>
+  <%= form_for(User.new, as: :user, url: session_path(:user),
+               html: {class: 'panel-body form-horizontal indexLogin'}) do |f| %>
+		<div class="form-group">
+			<%= f.text_field :mobile, class: "form-control input-sm", id: "", placeholder: "请输入手机号", value: cookies[:user_name] %>
+		</div>
+		<div class="form-group">
+			<%= f.password_field :password, class: "form-control input-sm", id: "", placeholder: "请输入密码" %>
+		</div>
+		<div class="checkbox">
+	    <label class="bfL">
+	      <%= check_box_tag :remember_name %><%= t('remember_me')%>
+	    </label>
+	    <div class="forget bfR"><a href="#"><%= t('forget_pw') %></a></div>
+	  </div>
+	  <ul class="subGroup row">
+	  	<li class="col-md-6">
+	  		<input type="submit" class="btn btn-default w100p orange btn_spacing" value="登录" />
+	  	</li>
+	  	<li class="col-md-6">
+	  		<button type="button" class="btn btn-default w100p btn_spacing" role="button" data-toggle="modal" data-target="#reg_step1"><%= t('register_but') %></button>
+	  	</li>
+	  </ul>
+    <% end -%>
+</div>
+<% end -%>

@@ -1,0 +1,38 @@
+<% if current_user %>
+<div class="panel panel-default contentBox bgf8">
+	<div class="panel-body indexUser">
+		<div class="userInfo clearfix">
+			<div class="photo bfL"><a href="#"><%= image_tag current_user.avatar, size: '78x78', alt: "我的头像" -%></a></div>
+			<div class="name">
+				<h5><%= link_to current_user.name + '(' + current_user.area.try(:name).to_s + ')', current_user %></h5>
+				<div class="clearfix"><span class="tag"><%= current_user.i_level %></span></div>
+			</div>
+		</div>
+		<ul class="row userData">
+			<li class="col-md-4">
+				<a href="#">
+					<p class="data"><%= current_user.posts_with_type(Post::TYPES.keys[1]).count %></p>
+					<p class="tt"><%= I18n.t('i_post')%></p>
+				</a>
+			</li>
+			<li class="col-md-4">
+				<a href="#">
+					<p class="data"><%= current_user.tenders.count %></p>
+					<p class="tt"><%= I18n.t('i_tender') %></p>
+				</a>
+			</li>
+			<li class="col-md-4 last">
+				<a href="#">
+					<p class="data"><%= current_user.followings.count %></p>
+					<p class="tt"><%= I18n.t('i_following') %></p>
+				</a>
+			</li>
+		</ul>
+		<div class="userSubBtn">
+			<a href="#" type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span><%= I18n.t('post') %></a>
+			<a href="#" type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span><%= I18n.t('resource') %></a>
+		</div>
+		<div class="userArr"><span class="icon icon-user"></span></div>
+	</div>
+</div>
+<% end %>
