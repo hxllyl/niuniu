@@ -92,29 +92,7 @@
 	</div>
 </div>
 
-<div class="panel panel-default contentBox">
-	<div class="panel-heading lineTitle">
-		<h3 class="panel-title">一键找车</h3>
-	</div>
-	<div class="panel-body">
-		<form class="searchBox">
-			<input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
-			<input type="submit" class="btn btn-primary subBtn" value="搜索" />
-		</form>
-	</div>
-</div>
-
-<div class="panel panel-default contentBox">
-	<div class="panel-heading lineTitle">
-		<h3 class="panel-title"><%= t('select_brand') %></h3>
-	</div>
-	<div class="panel-body brandSelect">
-    <div class="dropdown w100p">
-      <%= select_tag 'brand', options_for_select(all_brand, params[:brand]), class: 'form-control', id: 'car_brandMenu', prompt: '请选择品牌' -%>
-    </div>
-    <input type="submit" class="btn btn-primary subBtn" value="提交">
-	</div>
-</div>
+<%= render partial: 'partials/search' -%>
 
 <div class="panel panel-default contentBox">
   <div class="panel-heading lineTitle">

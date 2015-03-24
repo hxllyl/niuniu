@@ -14,8 +14,8 @@ class CreatePosts < ActiveRecord::Migration
       t.references :standard, class_name: 'Standard' # 规格 中规 美规等
       t.column :model, :string, limit: 40, null: false # 车型
       t.column :style, :string, limit: 60 # 款式
-      t.column :outer_color, :string, limit: 20, null: false # 外观
-      t.column :inner_color, :string, limit: 20, null: false # 内饰
+      t.column :outer_color, :string, limit: 60, null: false # 外观
+      t.column :inner_color, :string, limit: 60, null: false # 内饰
       t.column :car_license_areas, :string, limit: 60, null: false # 车辆上牌区域
       t.column :car_in_areas, :string, array: true, null: false, default: [] # 车辆所在区域
       t.column :take_car_date, :integer, default: 0 # 提车日期

@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "standard_id"
     t.string   "model",             limit: 40,                                        null: false
     t.string   "style",             limit: 60
-    t.string   "outer_color",       limit: 20,                                        null: false
-    t.string   "inner_color",       limit: 20,                                        null: false
+    t.string   "outer_color",       limit: 60,                                        null: false
+    t.string   "inner_color",       limit: 60,                                        null: false
     t.string   "car_license_areas", limit: 60,                                        null: false
     t.string   "car_in_areas",                                           default: [], null: false, array: true
     t.integer  "take_car_date",                                          default: 0
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20150313092115) do
     t.integer  "area_id"
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
-    t.jsonb    "contact"
+    t.jsonb    "contact",                            default: {}
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "email",                              default: ""
