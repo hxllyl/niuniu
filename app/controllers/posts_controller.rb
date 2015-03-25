@@ -35,4 +35,10 @@ class PostsController < ApplicationController
     @someone = User.find_by_id(params[:user_id])
     @posts = Post.where(user_id: params[:user_id], _type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
+
+  # 资源表 首页中间最底部的链接
+  def user_resources_list
+
+  end
+
 end
