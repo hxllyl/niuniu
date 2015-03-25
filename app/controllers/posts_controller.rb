@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-
+    @posts = Post.all.page(params[:page]).per(10)
   end
 
 end
