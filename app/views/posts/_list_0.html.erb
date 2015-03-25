@@ -130,7 +130,7 @@
               <tbody>
                 <%- @posts.each do |post| %>
                   <tr>
-                    <td><%= link_to post.car_model_name, post, class: 'name' %></td>
+                    <td><%= link_to post.car_model_name, post_path(post.id, _type: 0), class: 'name' %></td>
                     <td><span class="price"><%= post.expect_price.to_f %></span></td>
                     <td><%= post.standard_name + '现车' %></td>
                     <td><%= post.owner %>icon</td>

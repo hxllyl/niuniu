@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @_type = params[:_type]
+    @post  = Post.find_by_id(params[:id])
   end
 
   def user_list
