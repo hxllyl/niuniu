@@ -54,11 +54,11 @@
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m"><%= post.outer_color %></div>
-                          <div class="m"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><span><a href="#">李木子(上海)</a></span><span class="statu"><%=following?(post.user)%></span></div>
+                          <div class="m"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><span><a href="#"><%= post.owner %></a></span><span class="statu"><%=following?(post.user)%></span></div>
                         </div>
                       </div>
                       <div class="infoPrice">
-                        <p><span class="price"><i class="icon icon-money"></i><%= post.get_expect_price %>万</span><span class="time"><%= post.publish_time %></span></p>
+                        <p><span class="price"><i class="icon icon-money"></i><%= post.expect_price.to_f %>万</span><span class="time"><%= post.publish_time %></span></p>
                         <p>指导价：<%= post.guiding_price.to_f%>万/下2万</p>
                       </div>
                     </div>
