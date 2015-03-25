@@ -14,9 +14,11 @@
       <h5 class="title"><%= t('custom_setting') -%></h5>
       <div class="row">
         <div class="col-md-3 photoArea">
-          <div class="photo"><%= image_tag(current_user.avatar, alt: "")%></div>
+          <div class="photo"><%= image_tag(current_user.avatar, alt: "", width: "180", height: "180")%></div>
           <div class="tips">你可以选择png/jpg图片(180*180)作为头像</div>
-          <div class="txtC"><a href="#" class="btn btn-default black">修改头像</a></div>
+          <div class="fileInput">
+            <div class="fileBtn black">修改头像<input type="file" class="button" /></div>
+          </div>
         </div>
         <div class="col-md-9 formArea">
           <%= form_for current_user, as: :user, url: user_path(current_user), method: :put do |f| -%>
@@ -31,19 +33,19 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">注&nbsp;&nbsp;册&nbsp;&nbsp;地：</label>
                 <div class="col-sm-10 prl0">
-       					<div class="row">
-                   <div class="dropdown col-md-6">
+                  <div class="row ptb0 mrl-15">
+                    <div class="dropdown col-md-6">
                      <%= select_tag 'province', options_for_select(areas(level: :provinces)), {class: 'form-control', id: 'province', prompt: '请选择省份'} -%>
-         			    </div>
-                   <div class="dropdown col-md-6">
+         			      </div>
+                    <div class="dropdown col-md-6">
                      <%= f.select :area_id, options_for_select([[current_user.area.name, current_user.area.id]]), { prompt: '请选择城市' }, {class: 'form-control', id: 'city'} %>
-                   </div>
-                 </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">自我评价：</label>
-                <div class="col-sm-10 prl0"> 
+                <div class="col-sm-10 prl0">
                   <%= f.fields_for :contact do |c_f| %>
                    <%= c_f.text_field 'self_introduction', class: 'form-control', value: current_user.contact["self_introduction"] -%>
                   <% end -%>
@@ -52,7 +54,7 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">认证等级：</label>
                 <div class="col-sm-10 prl0">
-                  <div class="level vip2 bfL"></div>
+                  <div class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></div>
                   <a href="#" class="btn btn-default black bfR"><span class="icon icon-upgrade"></span>升级</a>
                 </div>
               </div>
@@ -61,7 +63,7 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">公司名称：</label>
                 <div class="col-sm-10 prl0">
-                  <%= f.text_field :company, class: 'form-control' -%>  
+                  <%= f.text_field :company, class: 'form-control' -%>
                 </div>
               </div>
               <div class="form-group clearfix">
