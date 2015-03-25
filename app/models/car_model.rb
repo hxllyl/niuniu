@@ -12,6 +12,7 @@ class CarModel < ActiveRecord::Base
   belongs_to :standard,  class_name: 'Standard' # 属于那种标准
   belongs_to :brand,     class_name: 'Brand'    # 属于品牌
   has_many   :base_cars, class_name: 'BaseCar'  # 拥有多种基础车辆
+  has_many   :posts
 
   def to_hash
     {
