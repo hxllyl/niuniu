@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20150325033020) do
     t.integer  "discount_way",                                                        null: false
     t.decimal  "discount_content",              precision: 10, scale: 2
     t.integer  "status",                                                 default: 1
+    t.integer  "resource_type",                                                       null: false
     t.integer  "onwer_set_count",                                        default: 0
     t.integer  "sys_set_count",                                          default: 0
     t.datetime "created_at",                                                          null: false

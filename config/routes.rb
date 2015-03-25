@@ -37,6 +37,10 @@ Rails.application.routes.draw do
   resources :valid_codes, only: [ :create ] do
     get :_valid, on: :collection
   end
+  
+  resources :photos, only: [ :index ] do
+    post :level_uploads, on: :collection
+  end
 
   resources :areas, only: [:show]
   resources :complaints, only: [ :create ]
@@ -84,6 +88,10 @@ Rails.application.routes.draw do
       get  :list
       post :create
       post :reply
+    end
+
+    namespace :users do
+      get :list
     end
   end
 

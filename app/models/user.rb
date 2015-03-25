@@ -113,11 +113,11 @@ class User < ActiveRecord::Base
   def skip_confirmation!
     self.current_sign_in_at = Time.now
   end
-  
+
   def posts_with_type(type)
     posts.where(_type: type)
   end
-  
+
   # 用户等级logo
   def level_icon
     case self.level
@@ -131,7 +131,7 @@ class User < ActiveRecord::Base
         'user/typeIcon_4s.png'
     end
   end
-  
+
   # 用户成交量(包括寻车和报价成交总是)
   def dealeds(type)
     conditions = "user_id = #{self.id}"
@@ -139,8 +139,19 @@ class User < ActiveRecord::Base
     Post.completed.where(conditions).count + Tender.completed.where(conditions).count
   end
 
+
   def following?(user)
     followings.include?(user)
+  end
+
+  def to_hash
+    {
+      id:      id,
+      name:     name,
+      company: company,
+      mobile:  mobile,
+      avatar:  avatar
+    }
   end
 
 end

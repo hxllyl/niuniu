@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Post < ActiveRecord::Base
 
-  before_create :get_expect_price
+  before_create :get_some_must_attr
 
   # constants
   TYPES = {
@@ -22,7 +22,13 @@ class Post < ActiveRecord::Base
     2 => '优惠金额',
     3 => '加价金额',
     4 => '直接报价',
-    5 => '电议'
+    5 => '电议' # 寻车没有 电议
+  }
+
+  # 资源类型
+  RESOURCE_TYPE = {
+    0 => '现车',
+    1 => '期货'
   }
 
   # relations
@@ -58,13 +64,15 @@ class Post < ActiveRecord::Base
 
 
   # instance methods
-  def get_expect_price
+  def get_some_must_attr
     self.expect_price = case discount_way
                           when 1 then (base_car.base_price * discount_content).to_f
                           when 2 then (base_car.base_price - discount_content).to_f
                           when 3 then (base_car.base_price + discount_content).to_f
                           when 4 then discount_content.to_f
                         end
+
+    self.resource_type = -1 if _type == 1  #只有资源才有的条件，因为数据库设计不能为空，所以给寻车一个-1的值来区分
   end
 
   # alias method names
