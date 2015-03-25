@@ -25,19 +25,24 @@
               <p>资源公司（认证）<span class="next_arr"></span></p>
               <p>综合展厅（认证）<span class="next_arr_r"></span></p>
             </div>
+            
             <div class="col-md-3 level">
-              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></p>
-              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></p>
-              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_s_dis.png", alt: "", width: "100%")%></span></p>
-              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_z_dis.png", alt: "", width: "100%")%></span></p>
+              <% user_level_icons(current_user).each do |icon| %>
+                <p><span class="levelIcon bfL"><%= image_tag(icon, alt: "", width: "100%")%></span></p>
+              <% end -%>
             </div>
+            
             <div class="col-md-6 status">
-              <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
-              <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
-              <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
-              <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
+              <% 4.times do |i|%>
+                <% if current_user.level >= i %>
+                  <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
+                <% else %>
+                  <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
+                <% end -%>
+            <% end -%>  
             </div>
           </div>
+          
           <div role="tabpanel" class="levelProcess clearfix tab-pane" id="tabpanel2">
             <div class="col-md-3 process">
               <p>个人手机（认证）<span class="next_arr"></span></p>

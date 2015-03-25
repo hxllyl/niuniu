@@ -10,13 +10,8 @@ module PortalHelper
 
   # 选择省市
   def areas(opt = {})
-    case opt[:level]
-      when :provinces then
-        Area.pluck(:name, :id)
-      else
-        Area.cities.pluck(:name, :id)
-    end
-
+    opt[:level] ||= 'provinces' # provinces, cities
+    Area.send(opt[:level]).pluck(:name, :id)
   end
 
   # post在首页的名称显示

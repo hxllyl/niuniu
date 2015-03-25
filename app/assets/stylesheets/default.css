@@ -236,8 +236,8 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .sourceDetail .dealBox { padding-top: 10px; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
 .sourceDetail .dealBox .subBtn { width: 200px; margin-top: 20px; }
 .sourceGallery { }
-.sourceGallery li { position: relative; min-height: 460px; margin-bottom: 10px; background-color: #e6e6e6; }
-.sourceGallery li .alt { position: absolute; z-index: 0; top: 20px; left: 20px; }
+.sourceGallery li { width: 100%; margin-bottom: 10px; }
+.sourceGallery li img { width: 100%; }
 .followList li { padding: 8px 0; border-top: 1px solid #e6e6e6; }
 .followList li.first { border-top: none; }
 .followList li .photo { width: 44px; height: 44px; margin-right: 20px; border-radius: 50%; overflow: hidden; }
