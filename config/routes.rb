@@ -79,6 +79,12 @@ Rails.application.routes.draw do
     namespace :complaints do
       post :create
     end
+
+    namespace :comments do
+      get  :list
+      post :create
+      post :reply
+    end
   end
 
   # mount RailsAdmin::Engine => '/a', as: 'rails_admin'
