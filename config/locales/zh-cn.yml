@@ -23,7 +23,12 @@ zh-CN:
   
   success: 操作成功
   failed: 操作失败
-  commit: 提交    
+  commit: 提交
+  
+  discount: 下
+  add: 加
+  point: 点
+  wan: 万    
 
   # pagination
   views:
