@@ -126,6 +126,10 @@ class Post < ActiveRecord::Base
     "#{outer_color}/#{inner_color}"
   end
 
+  def standard_type
+    standard_name << '/' << RESOURCE_TYPE[resource_type]
+  end
+
   def owner
     "#{user_name}(#{user_area_name})"
   end
