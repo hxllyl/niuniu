@@ -34,7 +34,7 @@ class Api::FollowShipsController < Api::BaseController
     render json: {status: true, data: {followings: @user.followings}}
   end
 
-  # 共同关注的人
+  # 我关注的人也关注了他
   #
   # Params:
   #   token:        [String]  valid token
@@ -49,7 +49,7 @@ class Api::FollowShipsController < Api::BaseController
   #   notice: [String]  请重新再试
   def joint_followers
     user = User.find_by_id(params[:user_id])
-    render json: {status: true, data: {joint_followers: @user.followers & user.followers}}
+    render json: {status: true, data: {joint_followers: @user.followings & user.followers}}
   end
 
   # 共同的粉丝
@@ -108,12 +108,12 @@ class Api::FollowShipsController < Api::BaseController
     user = User.find_by_id params[:user_id]
 
     raise 'user not found' unless user
-    
+
     @user.followings.delete user
-    
+
     render json: {status: 200, notice: 'success'}
   rescue => ex
     render json: {status: 400, notice: ex.message}
   end
-  
+
 end

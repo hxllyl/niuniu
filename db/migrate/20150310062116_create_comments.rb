@@ -11,7 +11,7 @@ class CreateComments < ActiveRecord::Migration
       t.column :resource_type, :string, limit: 30 # 被评论对象的class 这里是string
       t.column :content, :string, limit: 225, null: false # 评论内容
       t.references :parent, class_name: 'Comment' # 自连接
-      t.column :status, :integer # 0 未删除 -1 删除
+      t.column :status, :integer, default: 0 # 0 未删除 -1 删除
       t.timestamps null: false
     end
   end
