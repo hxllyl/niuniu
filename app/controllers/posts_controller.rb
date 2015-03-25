@@ -31,6 +31,7 @@ class PostsController < ApplicationController
 
   def show
     @post  = Post.find_by_id(params[:id])
+    @someone  = @post.user
   end
 
   def user_list
