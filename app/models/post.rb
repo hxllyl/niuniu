@@ -141,5 +141,25 @@ class Post < ActiveRecord::Base
   def title
     "#{_type == 0 ? '卖 ' : '寻 '}" + standard_name + brand_name + base_car_NO
   end
+  
+  # 优惠方式
+  def human_discount
+    case self.discount_way
+    when DISCOUNT_WAYS.keys[0] then
+      I18n.t('discount') << discount_content.to_s << I18n.t('point') 
+    when DISCOUNT_WAYS.keys[1] then
+      I18n.t('discount') << discount_content.to_s << I18n.t('wan')
+    when DISCOUNT_WAYS.keys[2] then
+      I18n.t('add') << discount_content.to_s << I18n.t('wan')
+    when DISCOUNT_WAYS.keys[3] then
+      if expect_price < guiding_price
+        I18n.t('discount') << (guiding_price - expect_price).to_s << I18n.t('wan')
+      else
+        I18n.t('add') << (expect_price - guiding_price).to_s << I18n.t('wan')
+      end
+    else
+      guiding_price.to_s << I18n.t('wan')
+    end
+  end
 
 end
