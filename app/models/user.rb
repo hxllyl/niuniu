@@ -146,11 +146,16 @@ class User < ActiveRecord::Base
 
   def to_hash
     {
-      id:      id,
+      id:       id,
       name:     name,
-      company: company,
-      mobile:  mobile,
-      avatar:  avatar
+      company:  company,
+      mobile:   mobile,
+      _type:    _type,
+      level:    LEVELS[level],
+      area:     area_name,
+      avatar:   avatar,
+      contact:  contact,
+      dealt_infos: "最近三个月成交#{}, 累积成交#{}"
     }
   end
 
