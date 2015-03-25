@@ -2,11 +2,11 @@
 # 用户
 class Api::UsersController < Api::BaseController
 
-  # 某对象的评论列表
+  # 取部分用户的基本详情
   #
   # Params:
-  #   token:             [String]  valid token
-  #   user_ids           [Array]   user ids
+  #   token:    [String]  valid token
+  #   user_ids: [Array]   user ids
   #
   # Return:
   #   status: [Integer] 200
