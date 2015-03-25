@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require './lib/service_objects/resource_search'
+
 class PostsController < ApplicationController
 
   def index
@@ -11,9 +13,12 @@ class PostsController < ApplicationController
   # 资源列表点击品牌进入资源列表页
   def resources_list
     # LESLIE: 可以把这部分的逻辑放到 service object 中去（一个 action 最好只跟一个 model 关联）
-    @brand = Brand.first
+
+    rs = ResourceSearch.new(params)
+    car_model = rs.car_model
+    @brand = rs.brand || Brand.first
     @standards = Standard.where(id: @brand.standard_ids)
-    car_model = CarModel.where(:id => params[:model_id]).first
+
     if car_model.present?
       @resources = car_model.posts.resources
     else
@@ -25,7 +30,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @_type = params[:_type]
+    @post  = Post.find_by_id(params[:id])
   end
 
   def user_list

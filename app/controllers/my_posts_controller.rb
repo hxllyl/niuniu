@@ -3,6 +3,7 @@
 class MyPostsController < ApplicationController
   def index
     @_type = params[:_type]
+    @posts = current_user.posts.where(_type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def new

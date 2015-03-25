@@ -20,7 +20,7 @@
               <div class="tt"><%= std.name %></div>
               <% std.car_models.with_brand(@brand).each do |car_model|%>
                 <ul class="list">
-                  <li><a href="#"><%= car_model.name %></a></li>
+                  <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
                 </ul>
               <% end %>
             </div>
@@ -98,7 +98,7 @@
         </div>
       </div>
 
-      <%= render 'partials/search' %>
+      <%= render 'partials/right_search' %>
 
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
