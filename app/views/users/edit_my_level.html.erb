@@ -4,8 +4,9 @@
     <div class="col-md-10 accountsMain">
       <h5 class="title">认证升级</h5>
       <div class="panel panel-default levelBox">
-        <div class="backLink"><a href="#">&lt;&lt;返回上一级</a></div>
+        <div class="backLink"><a href="<%= my_level_user_path(current_user)%>">&lt;&lt;返回上一级</a></div>
         <div class="panel-body">
+         
           <ul class="row addImgGroups">
             <li class="col-md-3">
               <div class="thumbnail box">
@@ -16,6 +17,7 @@
                 </div>
               </div>
             </li>
+            
             <li class="col-md-3">
               <div class="thumbnail box">
                 <h5 class="tt">展厅内部</h5>
@@ -25,6 +27,7 @@
                 </div>
               </div>
             </li>
+            
             <li class="col-md-3">
               <div class="thumbnail box">
                 <h5 class="tt">营业执照原件</h5>
@@ -34,6 +37,7 @@
                 </div>
               </div>
             </li>
+            
             <li class="col-md-3">
               <div class="thumbnail box">
                 <h5 class="tt">个人名片</h5>
@@ -43,6 +47,7 @@
                 </div>
               </div>
             </li>
+            
           </ul>
           <div class="tips">我们将会严格保密您提交的所有信息</div>
           <input type="submit" class="btn btn-default orange btn_spacing subBtn" value="提交" />

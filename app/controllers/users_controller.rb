@@ -7,7 +7,16 @@ class UsersController < BaseController
 
   def update
     @user = User.find params[:id]
+    
     if @user.update_attributes user_params
+      if params[:_image].present?
+        unless @user.avatar.start_with?('/uploads')
+          @user.photos << Photo.new(image: params[:_image], _type: params[:_type])
+        else
+          avatar = @user.photos.where(_type: 'avatar').first
+          avatar.update(image: params[:_image], _type: params[:_type])
+        end
+      end
       flash[:notice] = @user.errors.full_messages.join('\n')
       render action: :edit
     else
@@ -46,7 +55,7 @@ class UsersController < BaseController
   private
   def user_params
     params.require(:user).permit(:name, :role, :company, :area_id, 
-                                 {contact: [:company_address, :self_introduction,
-                                            :finance_header, :photo, :wx]})  
+                                 { contact: [:company_address, :self_introduction,:finance_header, :photo, :wx]}
+                                )  
   end
 end

@@ -10,6 +10,7 @@
         <li><a href="<%= destroy_user_session_path(:html, current_user)%>" data-method='delete'><span class="icon icon-quit"></span><%= t('safe_logout') -%></a></li>
       </ul>
     </div>
+    <%= form_for current_user, as: :user, url: user_path(current_user), method: :put, html: { multipart: true } do |f| -%>
     <div class="col-md-10 accountsMain">
       <h5 class="title"><%= t('custom_setting') -%></h5>
       <div class="row">
@@ -18,14 +19,13 @@
           <div class="tips">你可以选择png/jpg图片(180*180)作为头像</div>
           <div class="fileInput">
             <div class="fileBtn black">修改头像
-              <%= f.field_for do %>
-                <%= file_field_tag '_img[image]', class: 'button user_image', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
-              <% end -%>
+              <%= file_field_tag :_image, type: :file, multiple: true, class: 'button user_image', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
+              <%= hidden_field_tag :_type, 'avatar' -%>
+
             </div>
           </div>
         </div>
         <div class="col-md-9 formArea">
-          <%= form_for current_user, as: :user, url: user_path(current_user), method: :put do |f| -%>
            <%= f.hidden_field :role, value: current_user.role %>
             <div class="box">
               <div class="form-group clearfix">
