@@ -87,26 +87,9 @@
               <div class="clearfix"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></div>
             </div>
           </div>
-          <ul class="row userData">
-            <li class="col-md-4">
-              <a href="#">
-                <p class="data">8888</p>
-                <p class="tt">我的寻车</p>
-              </a>
-            </li>
-            <li class="col-md-4">
-              <a href="#">
-                <p class="data">8888</p>
-                <p class="tt">我的报价</p>
-              </a>
-            </li>
-            <li class="col-md-4 last">
-              <a href="#">
-                <p class="data">8888</p>
-                <p class="tt">我的关注</p>
-              </a>
-            </li>
-          </ul>
+
+          <%= render 'partials/user_profile' %>
+
           <div class="userSubBtn">
             <button type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span>发布寻车</button>
             <button type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span>发布资源</button>

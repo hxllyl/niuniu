@@ -31,26 +31,7 @@
     </div>
   </div>
   <div class="userDataTag">
-    <ul class="list clearfix">
-      <li class="active">
-        <a href="#">
-          <p class="num"><%= current_user.posts.needs.count %></p>
-          <p><%= t('i_posts')%></p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <p class="num"><%= current_user.tenders.count %></p>
-          <p><%= t('i_tenders')%></p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <p class="num"><%= current_user.followings.count %></p>
-          <p><%= t('i_followings') %></p>
-        </a>
-      </li>
-    </ul>
+    <%= render 'partials/user_profile' %>
     <div class="link"><a href="#"><%= t('sys_msgs') -%></a></div>
   </div>
   <a href="#" class="userArr"><span class="icon icon-edit"></span></a>
