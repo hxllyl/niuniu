@@ -42,7 +42,7 @@ class Post < ActiveRecord::Base
   has_many    :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
   has_many    :comments, as: :resource
 
-  USER_METHODS = [:name, :mobile, :level, :company, :area, :area_name]
+  USER_METHODS = [:name, :mobile, :level, :company, :area, :area_name, :level_icon ]
 
   delegate :name, to: :standard, prefix: true
   delegate :name, to: :brand, prefix: true
