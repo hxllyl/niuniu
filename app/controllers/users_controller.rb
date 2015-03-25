@@ -56,6 +56,12 @@ class UsersController < BaseController
         current_user.photos << Photo.new(image: img_box[:_image], _typ: img_box[:_type])
       end
     end
+    respond_to do |format|
+      format.html {
+        flash[:notice] = t('success')
+        redirect_to my_level_user_path(current_user) 
+      }
+    end
   end
 
   def about_us
