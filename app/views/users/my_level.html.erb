@@ -26,10 +26,10 @@
               <p>综合展厅（认证）<span class="next_arr_r"></span></p>
             </div>
             <div class="col-md-3 level">
-              <p><%= image_tag("user/icon_vip1.png", alt: "")%></p>
-              <p><%= image_tag("user/icon_vip2.png", alt: "")%></p>
-              <p><%= image_tag("user/icon_vip3_dis.png", alt: "")%></p>
-              <p><%= image_tag("user/icon_vip4_dis.png", alt: "")%></p>
+              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></p>
+              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></p>
+              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_s_dis.png", alt: "", width: "100%")%></span></p>
+              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_z_dis.png", alt: "", width: "100%")%></span></p>
             </div>
             <div class="col-md-6 status">
               <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
@@ -38,8 +38,19 @@
               <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="tabpanel2">
-            暂无数据
+          <div role="tabpanel" class="levelProcess clearfix tab-pane" id="tabpanel2">
+            <div class="col-md-3 process">
+              <p>个人手机（认证）<span class="next_arr"></span></p>
+              <p>4s（认证）</p>
+            </div>
+            <div class="col-md-3 level">
+              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></p>
+              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_4s_dis.png", alt: "", width: "100%")%></span></p>
+            </div>
+            <div class="col-md-6 status">
+              <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
+              <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
+            </div>
           </div>
         </div>
       </div>
