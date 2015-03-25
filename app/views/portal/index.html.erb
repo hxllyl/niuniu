@@ -8,7 +8,9 @@
 			<%= render 'resources' %>
 		</div>
 		<div class="col-md-3 mainRight">
-			<%= render 'right_bar' %>
+			<%= render partial: current_user ? 'partials/right_mine' : 'partials/right_login' %>
+			<%= render partial: 'partials/right_app_icon' %>
+			<%= render partial: 'partials/right_search' %>
 		</div>
 	</div>
 </div>
