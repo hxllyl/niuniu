@@ -121,14 +121,14 @@ class User < ActiveRecord::Base
   # 用户等级logo
   def level_icon
     case self.level
-    when (LEVELS.keys[0] or LEVELS.keys[1]) then
-      'user/typeIcon_p.png'
-    when LEVELS.keys[2] then
-      'user/typeIcon_s.png'
-    when LEVELS.key[3] then
-      'user/typeIcon_z.png'
-    when LEVELS.key[4] then
-      'user/typeIcon_4s.png'
+      when (LEVELS.keys[0] or LEVELS.keys[1]) then
+        'user/typeIcon_p.png'
+      when LEVELS.keys[2] then
+        'user/typeIcon_s.png'
+      when LEVELS.keys[3] then
+        'user/typeIcon_z.png'
+      else
+        'user/typeIcon_4s.png'
     end
   end
 
@@ -137,6 +137,11 @@ class User < ActiveRecord::Base
     conditions = "user_id = #{self.id}"
     conditions << " updated_at >= #{Time.now - 3.months}" if type == :month
     Post.completed.where(conditions).count + Tender.completed.where(conditions).count
+  end
+
+
+  def following?(user)
+    followings.include?(user)
   end
 
   def to_hash

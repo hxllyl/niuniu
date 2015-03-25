@@ -47,7 +47,7 @@ class Post < ActiveRecord::Base
   delegate :name, to: :standard, prefix: true
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true, allow_nil: true
-  delegate :NO, to: :base_car, prefix: true
+  delegate :NO, :to_human_name, :base_price, to: :base_car, prefix: true
   delegate :name, to: :car_model, prefix: true, allow_nil: true
 
   # class methods
@@ -59,6 +59,8 @@ class Post < ActiveRecord::Base
   scope :completed, -> { where(status: 3) }
   # 未成交
   scope :uncompleted, -> { where("status <> 3") }
+
+  scope :with_brand, ->(brand) { where(brand_id: brand) }
 
 
   # instance methods
@@ -72,6 +74,10 @@ class Post < ActiveRecord::Base
 
     self.resource_type = -1 if _type == 1  #只有资源才有的条件，因为数据库设计不能为空，所以给寻车一个-1的值来区分
   end
+
+  # alias method names
+  # 别名
+  alias_method  :guiding_price, :base_car_base_price
 
   def complete(tender_id)
     tender = self.tenders.find_by_id(tender_id)

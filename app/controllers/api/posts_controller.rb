@@ -74,7 +74,7 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:                    [String]      valid token
   #   post[_type]:              [Integer]     类型 0 资源 1 寻车
-  #   post[resource_type]       [Integer]     资源类型(只有资源有) 0 现车 1 期货
+  #   post[resource_type]:      [Integer]     资源类型(只有资源有) 0 现车 1 期货
   #   post[standard_id]:        [Integer]     规格 ID select
   #   post[brand_id]:           [Integer]     品牌 ID select
   #   post[model]:              [String]      车型

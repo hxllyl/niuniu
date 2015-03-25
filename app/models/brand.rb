@@ -15,6 +15,7 @@ class Brand < ActiveRecord::Base
   has_many   :car_models, class_name: 'CarModel' # 拥有多种车型
   has_many   :base_cars,  class_name: 'BaseCar'  # 拥有多种车款
   has_one    :car_photo, as: :owner, dependent: :nullify # 品牌图片
+  has_many   :posts
 
   def to_hash
     {
