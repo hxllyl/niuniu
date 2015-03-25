@@ -85,6 +85,10 @@ Rails.application.routes.draw do
       post :create
       post :reply
     end
+
+    namespace :users do
+      get :list
+    end
   end
 
   # mount RailsAdmin::Engine => '/a', as: 'rails_admin'
