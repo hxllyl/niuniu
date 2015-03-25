@@ -92,11 +92,11 @@ class Api::PostsController < Api::BaseController
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
-  #   data:   [Hash]    {post: post.attrs}
+  #   data:   [JSON]    post attrs
   # Error
   #   status: [Integer] 400
   #   Notice: [String]  failure
-  #   data:   [Hash]    {errors: post.errors}
+  #   data:   [JSON]    post errors
   def create
     standard  = Standard.find_by_id(params[:post][:standard_id])
     brand     = Brand.find_by_id(params[:post][:brand_id])
@@ -122,7 +122,6 @@ class Api::PostsController < Api::BaseController
 
       params[:post][:car_model_id] = car_model.id
       params[:post][:base_car_id]  = base_car.id
-    end
 
     params.require(:post).permit!
 
