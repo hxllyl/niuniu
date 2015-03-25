@@ -16,7 +16,7 @@ module PortalHelper
 
   # post在首页的名称显示
   def post_name(post)
-    t('find') << post.base_car.to_human_name << ' ' << t('sale') << post.car_license_areas
+    t('find') << post.base_car_to_human_name << ' ' << t('sale') << post.car_license_areas
   end
 
 end
