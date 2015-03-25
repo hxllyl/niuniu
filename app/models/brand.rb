@@ -7,6 +7,8 @@ class Brand < ActiveRecord::Base
      1 => '激活',
      0 => '未激活'
   }
+  
+  validates :name, presence: true, uniqueness: true
 
   # relations
   has_and_belongs_to_many :standards, class_name: 'Standard' # 属于那种标准
