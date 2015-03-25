@@ -14,4 +14,8 @@ module ApplicationHelper
     'active' if controller_name == current_controller_name
   end
 
+  def post_active?(controller_name, current_controller_name, type, current_type)
+    'active' if controller_name == current_controller_name && type == current_type
+  end
+
 end

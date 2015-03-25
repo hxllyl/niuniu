@@ -207,27 +207,8 @@
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <div class="panel panel-default contentBox bgf8">
-        <div class="panel-body indexUser">
-          <div class="userInfo clearfix">
-            <div class="photo bfL"><a href="#"><%= image_tag("index/user_photo.jpg", alt: "")%></a></div>
-            <div class="name">
-              <h5><a href="#">李木子(上海)</a></h5>
-              <div class="clearfix"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></div>
-            </div>
-          </div>
-
-            <%= render 'partials/user_profile' %>
-
-          <div class="userSubBtn">
-            <button type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span>发布寻车</button>
-            <button type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span>发布资源</button>
-          </div>
-          <div class="userArr"><span class="icon icon-user"></span></div>
-        </div>
-      </div>
-
-      <%= render 'partials/search'  %>
+      <%= render partial: 'partials/right_mine' %>
+      <%= render partial: 'partials/right_search' %>
 
     </div>
   </div>
