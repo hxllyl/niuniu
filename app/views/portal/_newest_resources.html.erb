@@ -4,54 +4,14 @@
 	</div>
 	<div class="panel-body">
 		<ul class="newSourceIcon clearfix">
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>BMW</p>
-				</a>
+			<%- @hot_brands.each do |brand| %>
+				<li>
+					<a href="<%= posts_path(brand_id: brand.id, _type: 0) %>">
+						<p><%= image_tag(brand.car_photo.try(:image).try(:thumb), alt: "") %></p>
+						<p><%= brand.name %></p>
+					</a>
 			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>凯迪拉克</p>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>奔驰</p>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>德国大众</p>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>BMW</p>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>凯迪拉克</p>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>奔驰</p>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<p><%= image_tag("index/car_logo1.jpg", alt: "")%></p>
-					<p>德国大众</p>
-				</a>
-			</li>
+			<% end %>
 		</ul>
 		<div class="sourceTab">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
@@ -66,11 +26,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%- @newest_resouces.each do |post| %>
+					<%- @newest_resouces.each do |k, post| %>
 					<tr>
-						<td><%= link_to post.car_model.name, post, class: 'name' %></td>
+						<td><%= link_to post.brand_model_name, post_path(post, _type: 0), class: 'name' %></td>
 						<td><span class="price"><%= post.expect_price.to_f %></span></td>
-						<td><%= post.standard_name + '现车' %></td>
+						<td><%= post.standard_resource_type %></td>
 						<td><%= post.user_company %></td>
 						<td><%= link_to '浏览', user_list_posts_path(user_id: post.user_id, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
 						<td><%= post.publish_time %></td>
@@ -79,6 +39,6 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="moreLink text-right"><a href="#">更多 >></a></div>
+		<div class="moreLink text-right"><%= link_to '更多 >>', posts_path(_type: 0) %></div>
 	</div>
 </div>

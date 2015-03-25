@@ -34,30 +34,22 @@ namespace :database do
   desc "生成用户数据"
   task users: :environment do
     # Users
-    ha = {
-      name:     'test',
-      mobile:   '15802162343',
-      role:     User::ROLES[0],
-      level:    User::LEVELS.keys[0],
-      status:   User::STATUS.keys[1],
-      password: '123456',
-      company: 'test',
-      area: Area.last
-    }
-    user = User.create(ha) unless User.find_by_mobile(ha[:mobile])
-
-    ha_1 = {
-      name:     'admin',
-      mobile:   '15802162344',
-      role:     User::ROLES[1],
-      level:    User::LEVELS.keys[0],
-      status:   User::STATUS.keys[1],
-      password: '123456',
-      company: 'test',
-      area: Area.last
-    }
-
-    admin = User.create(ha_1) unless User.find_by_mobile(ha_1[:mobile])
+    mobiles = %w(15802162343 18963203800 15618863308 13564116412 13917745054 13564698682 18621569016 18758898760 15221339343 18257118550 13388037771 15201910579 15216623027 13611935984 15216613752 13332033337 18622477731 15900391764 18888959317 13301393651 13121783666)
+    companies = %w(流浪客ty晶晶 上海嘉玮汽车 中国大自然汽车有限责任公司 上海防冻汽车交易公司 上海嘉玮汽车 上海嘉玮汽车 旭日汽车 上海郎客 杭州鼎臻汽车销售有限公司 天津港宏顺通汽车销售有限公司 牛牛汽车0002 牛牛汽车 牛牛汽车 牛牛汽车 天津市晟信源汽车销售有限公司 天津路驰汽车贸易有限公司 天津路通世纪国际贸易有限公司 杭州鼎欧汽车销售有限公司 北京博辰骏达汽车销售有现公司 北京中汽顺合汽车)
+    names = %w(进口商 改名晶晶 吴嘉明 555 向顺 吴嘉明 周芳芳 洪旭 郭里 池姑娘 吴可嘉 韩健 石雨璐 张继兰 王西 杨光远 马清亮 于景欣 杭州鼎欧名车.沈忠 孙树毓 郭智东)
+    mobiles.each do |mobile|
+      ha = {
+        name:     names.sample,
+        mobile:   mobile,
+        role:     User::ROLES[[0, 1].sample],
+        level:    User::LEVELS.keys[0],
+        status:   User::STATUS.keys[1],
+        password: '123456',
+        company: companies.sample,
+        area_id: Area.all.sample.id
+      }
+      user = User.create(ha) unless User.find_by_mobile(mobile)
+    end
   end
 
   desc "生成 post 数据"

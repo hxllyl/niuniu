@@ -27,9 +27,15 @@ class PortalController < BaseController
 
     # 最热车源
     @hot_resources = Post.resources.order(sys_set_count: :desc).limit(8)
-    # 最新车源
-    @newest_resouces = Post.includes(:car_model).resources.order(updated_at: :desc).limit(10)
 
+    # 最新车源
+    newest_resouces   = Post.resources.includes(:user, :brand, :car_model).order(updated_at: :desc).group_by(&:user_id)
+    @newest_resouces  = {}
+
+    newest_resouces.each_with_index do |ele, i|
+      break if i == 10
+      @newest_resouces[ele.first] = ele.last.first
+    end
   end
 
   # 首页搜索

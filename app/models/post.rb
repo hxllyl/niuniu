@@ -146,6 +146,14 @@ class Post < ActiveRecord::Base
     brand_name << car_model_name << base_car_NO
   end
 
+  def brand_model_name
+    brand_name << " " << car_model_name.delete(brand_name)
+  end
+
+  def standard_resource_type
+    standard_name << RESOURCE_TYPE[resource_type]
+  end
+
   # 优惠方式
   def human_discount
     case self.discount_way
