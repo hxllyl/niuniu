@@ -4,86 +4,18 @@
 	</div>
 	<div class="panel-body">
 		<ul class="row hotCar">
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
+			<%- @hot_resources.each do |post| %>
+				<li class="col-md-3">
+					<div class="thumbnail box">
+						<a href="#"><%= image_tag(post.photos[:front], alt: "", width: "100%")%></a>
+						<div class="caption intro">
+							<h5 class="name"><%= post.portal_resource_title %></h5>
+							<p class="price"><%= post.expect_price.to_f %>万元</p>
+							<p><%= post.user_company %></p>
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
-			<li class="col-md-3">
-				<div class="thumbnail box">
-					<a href="#"><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></a>
-					<div class="caption intro">
-						<h5 class="name"><a href="#">宝马 320Li 3968</a></h5>
-						<p class="price">30.00万元</p>
-						<p>上海宝钢公司</p>
-					</div>
-				</div>
-			</li>
+				</li>
+			<% end %>
 		</ul>
 		<div class="moreLink text-right"><a href="#">更多 >></a></div>
 	</div>

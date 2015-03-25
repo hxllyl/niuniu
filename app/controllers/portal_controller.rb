@@ -15,13 +15,18 @@ class PortalController < BaseController
     # 最热品牌，寻车4个，资源8个
     @hot_brands = Brand.includes(:car_photo).order(click_counter: :desc).limit(8)
 
+    # 寻车列表
     @needs      = Post.needs.includes(:user, :car_model, :standard, brand: [:car_photo]).order(updated_at: :desc).limit(8)
 
+    # 四个品牌对就的寻车列表
     @posts_with_brands = @hot_brands[0..3].each_with_object({}) do |brand, ha|
-                            posts = Post.where(_type: 1, brand_id: brand.id).order(updated_at: :desc).limit(8)
+                            posts = brand.posts.resources.order(updated_at: :desc).limit(8)
                             ha.merge!({brand.id => posts})
                             ha
                          end
+
+    # 最热车源
+    @hot_resources = Post.resources.order(sys_set_count: :desc).limit(8)
     # 最新车源
     @newest_resouces = Post.includes(:car_model).resources.order(updated_at: :desc).limit(10)
 

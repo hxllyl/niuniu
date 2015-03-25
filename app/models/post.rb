@@ -141,12 +141,16 @@ class Post < ActiveRecord::Base
   def title
     "#{_type == 0 ? '卖 ' : '寻 '}" + standard_name + brand_name + base_car_NO
   end
-  
+
+  def portal_resource_title
+    brand_name << car_model_name << base_car_NO
+  end
+
   # 优惠方式
   def human_discount
     case self.discount_way
     when DISCOUNT_WAYS.keys[0] then
-      I18n.t('discount') << discount_content.to_s << I18n.t('point') 
+      I18n.t('discount') << discount_content.to_s << I18n.t('point')
     when DISCOUNT_WAYS.keys[1] then
       I18n.t('discount') << discount_content.to_s << I18n.t('wan')
     when DISCOUNT_WAYS.keys[2] then
