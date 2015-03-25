@@ -8,7 +8,11 @@
 			<%= render 'resources' %>
 		</div>
 		<div class="col-md-3 mainRight">
-			<%= render partial: current_user ? 'partials/right_mine' : 'partials/right_login' %>
+			<%- if current_user %>
+				<%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
+			<% else %>
+				<%= render partial: 'partials/right_login' %>
+			<% end %>
 			<%= render partial: 'partials/right_app_icon' %>
 			<%= render partial: 'partials/right_search' %>
 		</div>

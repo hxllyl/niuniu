@@ -27,10 +27,12 @@
         </a>
       </li>
     </ul>
-    <div class="userSubBtn">
-      <a href="<%= new_user_my_post_path(current_user, _type: 1) %>" type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span><%= I18n.t('post') %></a>
-      <a href="<%= new_user_my_post_path(current_user, _type: 0) %>" type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span><%= I18n.t('resource') %></a>
-    </div>
+    <%- if hidden_button %>
+      <div class="userSubBtn">
+        <a href="<%= new_user_my_post_path(current_user, _type: 1) %>" type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span><%= I18n.t('post') %></a>
+        <a href="<%= new_user_my_post_path(current_user, _type: 0) %>" type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span><%= I18n.t('resource') %></a>
+      </div>
+    <% end %>
     <div class="userArr"><span class="icon icon-user"></span></div>
   </div>
 </div>
