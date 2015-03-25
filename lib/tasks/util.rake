@@ -33,7 +33,7 @@ namespace :util do
 
        st.save
 
-       br.standard = st
+       br.standards << st
        br.regions = columns[8].split('、') unless columns[8].blank?
        br.save
 

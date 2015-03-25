@@ -10,5 +10,5 @@ class Comment < ActiveRecord::Base
   has_many :sub_comments, foreign_key: :parent_id, class_name: 'Comment'
 
 
-  validates_inclusion_of :resource_type,   in: %w[ Comment Post  ]
+  validates_inclusion_of :resource_type,   in: %w[ Comment Post User ]
 end
