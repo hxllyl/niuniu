@@ -86,7 +86,7 @@ class Api::PostsController < Api::BaseController
   #   post[car_in_areas]:       [Array]       车辆所在地
   #   post[take_car_date]:      [Integer]     提车日期 select
   #   post[discount_way]:       [Integer]     出价方式(电议只有资源有) select
-  #   post[discount_content]:   [Integer]     出价详情
+  #   post[discount_content]:   [Float]       出价详情
   #   post[post_photos]:        [File Array]  资源图片
   #   post[remark]:             [String]      备注
   #
