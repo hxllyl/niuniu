@@ -7,9 +7,9 @@
 			<%- @hot_resources.each do |post| %>
 				<li class="col-md-3">
 					<div class="thumbnail box">
-						<a href="#"><%= image_tag(post.photos[:front], alt: "", width: "100%")%></a>
+						<a href="#" class="imgBox"><%= image_tag(post.photos[:front], alt: "", width: "100%")%></a>
 						<div class="caption intro">
-							<h5 class="name"><%= post.portal_resource_title %></h5>
+							<h5 class="name"><a href="#"><%= post.portal_resource_title %></a></h5>
 							<p class="price"><%= post.expect_price.to_f %>万元</p>
 							<p><%= post.user_company %></p>
 						</div>
