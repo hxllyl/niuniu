@@ -201,7 +201,7 @@
             </table>
           </div>
           <div class="pageList">
-            <%= paginate @uncompleted_posts %>
+
           </div>
         </div>
       </div>
@@ -260,11 +260,7 @@
         </div>
         <div class="panel-body brandSelect">
           <div class="dropdown w100p">
-            <select name="" class="form-control">
-              <option value="品牌1">品牌1</option>
-              <option value="品牌2">品牌2</option>
-              <option value="品牌3">品牌3</option>
-            </select>
+            <%= select("brand", "id", Brand.all.pluck(:name, :id), { include_blank: true}, { :class => 'form-control' } )%>
           </div>
           <input type="submit" class="btn btn-primary subBtn" value="提交">
         </div>

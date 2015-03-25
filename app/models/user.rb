@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   # class methods
 
   # instance methods
+  delegate :name, to: :area, prefix: true, allow_nil: true
 
   # 定义用户的各种类型图片
   %w(avatar identity hand_id visiting room_outer room_inner license).each do |m|
