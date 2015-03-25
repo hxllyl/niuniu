@@ -30,11 +30,21 @@ class PortalController < BaseController
 
     # 最新车源
     newest_resouces   = Post.resources.includes(:user, :brand, :car_model).order(updated_at: :desc).group_by(&:user_id)
-    @newest_resouces  = {}
+    @newest_resouces  = []
 
     newest_resouces.each_with_index do |ele, i|
       break if i == 10
-      @newest_resouces[ele.first] = ele.last.first
+      @newest_resouces << ele.last.first
+    end
+
+    # 资源表
+    user_resources = Post.resources.includes(:user, :brand).order(updated_at: :desc).group_by(&:user_id)
+
+    @user_resources  = []
+
+    user_resources.each_with_index do |ele, i|
+      break if i == 10
+      @user_resources << {name: ele.last.first.user_name, id: ele.last.first.user_id, area: ele.last.first.user.area_name, time: ele.last.first.publish_time, brands: ele.last.map(&:brand_name).uniq.join(' ')}
     end
   end
 

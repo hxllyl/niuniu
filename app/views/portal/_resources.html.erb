@@ -15,79 +15,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="name">上海宝钢公司</a></td>
-						<td>上海</td>
-						<td>宝马 奔驰 路虎 福特</td>
-						<td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-						<td>16:30</td>
-					</tr>
+					<%- @user_resources.each do |ele| %>
+						<tr>
+							<td><a href="#" class="name">上海宝钢公司</a></td>
+							<td><%= ele[:area] %></td>
+							<td><%= ele[:brands] %></td>
+							<td><%= link_to '浏览', user_list_posts_path(user_id: ele[:user_id], _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
+							<td><%= ele[:time] %></td>
+						</tr>
+					<% end %>
 				</tbody>
 			</table>
 		</div>
-		<div class="moreLink text-right"><a href="#">更多 >></a></div>
+		<div class="moreLink text-right"><%= link_to '更多 >>', user_resources_list_posts_path %></div>
 	</div>
 </div>
