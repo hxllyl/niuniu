@@ -10,58 +10,22 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li>宝马<span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body">
-          <div class="carList clearfix">
-            <div class="tt">中规宝马：</div>
-            <ul class="list">
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马X1</a></li>
-            </ul>
-          </div>
-          <div class="carList clearfix">
-            <div class="tt">美规宝马：</div>
-            <ul class="list">
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马X1</a></li>
-            </ul>
-          </div>
-          <div class="carList clearfix">
-            <div class="tt">x规宝马：</div>
-            <ul class="list">
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马X1</a></li>
-            </ul>
-          </div>
-          <div class="carList clearfix">
-            <div class="tt">x规宝马：</div>
-            <ul class="list">
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马X1</a></li>
-            </ul>
-          </div>
-          <div class="carList clearfix">
-            <div class="tt">x规宝马：</div>
-            <ul class="list">
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马X1</a></li>
-            </ul>
-          </div>
-          <div class="carList last clearfix">
-            <div class="tt">x规宝马：</div>
-            <ul class="list">
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马X1</a></li>
-            </ul>
-          </div>
+
+          <% @standards.each do |std| %>
+            <div class="carList clearfix">
+              <div class="tt"><%= std.name %></div>
+              <% std.car_models.each do |car_model|%>
+                <ul class="list">
+                  <li><a href="#"><%= car_model.name %></a></li>
+                </ul>
+              <% end %>
+            </div>
+          <% end %>
+
         </div>
       </div>
       <div class="panel panel-default contentBox">
@@ -305,7 +269,6 @@
             </table>
           </div>
           <div class="pageList">
-            <%= paginate @uncompleted_posts %>
           </div>
         </div>
       </div>
