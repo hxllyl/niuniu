@@ -44,7 +44,7 @@ class PortalController < BaseController
 
     user_resources.each_with_index do |ele, i|
       break if i == 10
-      @user_resources << {name: ele.last.first.user_name, id: ele.last.first.user_id, area: ele.last.first.user.area_name, time: ele.last.first.publish_time, brands: ele.last.map(&:brand_name).uniq.join(' ')}
+      @user_resources << {name: ele.last.first.user_name, id: ele.last.first.user_id, area: ele.last.first.user_area_name, time: ele.last.first.publish_time, brands: ele.last.map(&:brand_name).uniq.join(' ')}
     end
   end
 
