@@ -14,8 +14,12 @@
       <h5 class="title"><%= t('level_upgrade') -%></h5>
       <div class="panel panel-default levelBox">
         <ul role="tablist" class="nav nav-tabs carInfoTabs noBg">
-          <li role="presentation" class="active"><a href="#tabpanel1"><%= t('saler_recon')%></a></li>
-          <li role="presentation"><a href="#tabpanel2"><%= t('4s_recon')%></a></li>
+          <li role="presentation" class="active"><a href="#tabpanel1"><%= t('saler_recon')%>
+          </a>
+        </li>
+          <li role="presentation"><a href="#tabpanel2"><%= t('4s_recon')%>
+          </a>
+        </li>
         </ul>
         <div class="panel-body">
           <div role="tabpanel" class="levelProcess clearfix tab-pane active" id="tabpanel1">
@@ -28,7 +32,10 @@
             
             <div class="col-md-3 level">
               <% user_level_icons(current_user).each do |icon| %>
-                <p><span class="levelIcon bfL"><%= image_tag(icon, alt: "", width: "100%")%></span></p>
+                <p><span class="levelIcon bfL">
+                  <%= image_tag(icon, alt: "", width: "100%")%>
+                </span>
+              </p>
               <% end -%>
             </div>
             
@@ -37,7 +44,7 @@
                 <% if current_user.level >= i %>
                   <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
                 <% else %>
-                  <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
+                  <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[i]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
                 <% end -%>
             <% end -%>  
             </div>

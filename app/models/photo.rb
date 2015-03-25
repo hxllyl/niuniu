@@ -21,8 +21,13 @@ class Photo < ActiveRecord::Base
   
   # instance_methods
   
-  def image_path
-    image.url
+  def image_path(version = nil)
+    if version.present?
+     image.send("#{version}")
+   else
+     image.url   
+   end 
   end
+  
 end
 

@@ -6,18 +6,18 @@ class UsersController < BaseController
     @user = User.find params[:id]
     if @user.update_attributes user_params
       if params[:_image].present?
-        unless @user.avatar.start_with?('/uploads')
+        if @user.avatar.blank?
           @user.photos << Photo.new(image: params[:_image], _type: params[:_type])
         else
-          avatar = @user.photos.where(_type: 'avatar').first
+          avatar = @user.photos.find_by(_type: 'avatar')
           avatar.update(image: params[:_image], _type: params[:_type])
         end
       end
-      flash[:notice] = @user.errors.full_messages.join('\n')
-      render action: :edit
-    else
       flash[:notice] = t('success')
       redirect_to my_level_user_path(@user)
+    else
+      flash[:notice] = @user.errors.full_messages.join('\n')
+      render action: :edit
     end
   end
 
@@ -40,10 +40,22 @@ class UsersController < BaseController
   end
 
   def edit_my_level
-    @level = params[:level]
+    @level = params[:level].to_i
   end
 
   def update_my_level
+    %w(avatar identity hand_id visiting room_outer room_inner license).each do |t|
+      photo = current_user.photos.find_by(_type: t)
+      
+      img_box = params[t.to_sym]
+      next if img_box.blank?
+      
+      if photo
+        photo.update(image: img_box[:_image], _typ: img_box[:_type])
+      else
+        current_user.photos << Photo.new(image: img_box[:_image], _typ: img_box[:_type])
+      end
+    end
   end
 
   def about_us

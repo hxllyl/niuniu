@@ -1,0 +1,59 @@
+<li class="col-md-3">
+  <div class="thumbnail box">
+    <h5 class="tt">展厅门头</h5>
+    <div class="img"><span class="alt">照片示例</span>
+    <%= image_tag(user.room_outer, alt: "", width: "100%") if current_user.room_outer %>
+    </div>
+    <div class="fileInput">
+      <div class="fileBtn">添加照片
+        <%= file_field_tag 'room_outer[_image]', type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
+        <%= hidden_field_tag 'room_outer[_type]', 'room_outer' %>
+      </div>
+    </div>
+  </div>
+</li>
+
+<li class="col-md-3">
+  <div class="thumbnail box">
+    <h5 class="tt">展厅内部</h5>
+    <div class="img"><span class="alt">照片示例</span>
+      <%= image_tag(current_user.room_inner, alt: "", width: "100%") if current_user.room_inner %>
+    </div>
+    <div class="fileInput">
+      <div class="fileBtn">添加照片
+        <%= file_field_tag 'room_inner[_image]', type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
+        <%= hidden_field_tag 'room_inner[_type]', 'room_inner' %>
+      </div>
+    </div>
+  </div>
+</li>
+
+<li class="col-md-3">
+  <div class="thumbnail box">
+    <h5 class="tt">营业执照原件</h5>
+    <div class="img"><span class="alt">照片示例</span>
+      <%= image_tag(current_user.license, alt: "", width: "100%") if current_user.license%>
+    </div>
+    <div class="fileInput">
+      <div class="fileBtn">添加照片
+        <%= file_field_tag 'license[_image]', type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
+        <%= hidden_field_tag 'license[_type]', 'license' %>
+      </div>
+    </div>
+  </div>
+</li>
+
+<li class="col-md-3">
+  <div class="thumbnail box">
+    <h5 class="tt">个人名片</h5>
+    <div class="img"><span class="alt">照片示例</span>
+      <%= image_tag(current_user.visiting, alt: "", width: "100%") if current_user.visiting %>
+    </div>
+    <div class="fileInput">
+      <div class="fileBtn">添加照片
+        <%= file_field_tag 'visiting[_image]', type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
+        <%= hidden_field_tag 'visiting[_type]', 'visiting' %>
+      </div>
+    </div>
+  </div>
+</li>

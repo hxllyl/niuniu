@@ -2,7 +2,7 @@
 	<ul role="tablist" class="nav nav-tabs carInfoTabs">
 		<li role="presentation" class="active"><a href="#allCarInfo"><%= t('post_info') %></a></li>
     <% @hot_brands[0..3].each_with_index do |brand, i| %>
-		  <li role="presentation"><a href="#carBrand<%= i + 1%>"><span class="icon"><%= image_tag(brand.car_photo.try(:image).try(:thumb), alt: "")%></span><%= brand.name %></a></li>
+		  <li role="presentation"><a href="#carBrand<%= i + 1%>"><span class="icon"><%= image_tag(brand.car_photo.image_path(:thumb), alt: "")%></span><%= brand.name %></a></li>
 	  <% end-%>
   </ul>
 
@@ -11,7 +11,7 @@
 			<ul class="carInfoList clearfix">
         <%- @needs.each do |post| %>
 				<li>
-					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image).try(:thumb), alt: "")  %></div>
+					<div class="logo bfL"><%= image_tag(post.brand.car_photo.image_path(:thumb), alt: "")  %></div>
 					<div class="info">
 						<h5 class="tt"><a href="#"><%= post_name(post) %></a></h5>
 						<p class="clearfix"><span class="bfL"><%= post.color %></span><span class="bfR"><%= post.owner_detail %></span></p>

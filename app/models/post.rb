@@ -30,6 +30,15 @@ class Post < ActiveRecord::Base
     0 => '现车',
     1 => '期货'
   }
+  
+  TAKE_DATES = {
+    1 => '当天',
+    2 => '三天内',
+    3 => '一周内',
+    4 => '两周内',
+    5 => '一月内',
+    6 => '一个月以上'
+  }
 
   # relations
   has_many    :tenders, class_name: 'Tender'

@@ -17,19 +17,19 @@
       <div class="panel panel-default levelBox">
         <div class="backLink"><a href="<%= my_level_user_path(current_user)%>">&lt;&lt;返回上一级</a></div>
         <div class="panel-body">
-         <%= form_tag update_my_level_user_path(current_user), method: :post, multipart: true do |f| %>
+         <%= form_tag update_my_level_user_path(current_user), method: :post, multipart: true do %>
           <ul class="row addImgGroups">
             <% case @level %>
             <% when User::LEVELS.keys[1] then %>
-              <%= render partial: 'identity_recon', f: f %>
+              <%= render partial: 'identity_recon' %>
             <% when User::LEVELS.keys[2] then %>
-              <%= render partial: 'resource_recon', f: f %>
+              <%= render partial: 'resource_recon' %>
             <% when User::LEVELS.keys[3] then %>
-              <%= render partial: 'zongzhan_recon', f: f %>
+              <%= render partial: 'zongzhan_recon' %>
             <% end -%>
           </ul>
           <div class="tips">我们将会严格保密您提交的所有信息</div>
-          <%= f.submit t('commit'), class: 'btn btn-default orange btn_spacing subBtn' -%>
+          <%= submit_tag t('commit'), class: 'btn btn-default orange btn_spacing subBtn' -%>
           <% end -%>
         </div>
       </div>
