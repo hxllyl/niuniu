@@ -178,4 +178,8 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def is_completed?
+    status == 3
+  end
+
 end

@@ -4,21 +4,13 @@
   </div>
   <div class="panel-body">
     <ul class="carSourceHis">
-      <li class="first">
-        <h5 class="name"><a href="#">路虎揽胜运动 3345</a></h5>
-        <div class="info clearfix"><span class="price bfL">37.68万</span><span class="bfR">中规/现车</span></div>
-        <div class="info clearfix"><span class="bfL">黑/白</span><span class="bfR">16:30</span></div>
-      </li>
-      <li>
-        <h5 class="name"><a href="#">路虎揽胜运动 3345</a></h5>
-        <div class="info clearfix"><span class="price bfL">37.68万</span><span class="bfR">中规/现车</span></div>
-        <div class="info clearfix"><span class="bfL">黑/白</span><span class="bfR">16:30</span></div>
-      </li>
-      <li>
-        <h5 class="name"><a href="#">路虎揽胜运动 3345</a></h5>
-        <div class="info clearfix"><span class="price bfL">37.68万</span><span class="bfR">中规/现车</span></div>
-        <div class="info clearfix"><span class="bfL">黑/白</span><span class="bfR">16:30</span></div>
-      </li>
+      <%- @someone.posts.resources[0..2].each_with_index do |post, index| %>
+        <li class=<%= "first" if index == 0 %>>
+          <h5 class="name"><%= link_to post.portal_resource_title, post_path(post.id, _type: 0)%></h5>
+          <div class="info clearfix"><span class="price bfL"><%= post.expect_price %>万</span><span class="bfR"><%= post.standard_type %></span></div>
+          <div class="info clearfix"><span class="bfL"><%= post.color %></span><span class="bfR"><%= post.publish_time %></span></div>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

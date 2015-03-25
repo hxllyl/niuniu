@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
-  
+
   accepts_nested_attributes_for :photos
 
   # class methods
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
         case m
         when 'avatar' then
           define_method m.to_sym do
-            self.photos.where(_type: m).first.image.url || AVATAR
+            self.photos.where(_type: m).try(:first).try(:image).try(:url) || AVATAR
           end
         else
           define_method m.to_sym do
@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
     conditions << " updated_at >= #{Time.now - 3.months}" if type == :month
     Post.completed.where(conditions).count + Tender.completed.where(conditions).count
   end
-  
+
   def following?(user)
     followings.include?(user)
   end
