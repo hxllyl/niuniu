@@ -17,7 +17,11 @@
           <div class="photo"><%= image_tag(current_user.avatar, alt: "", width: "180", height: "180")%></div>
           <div class="tips">你可以选择png/jpg图片(180*180)作为头像</div>
           <div class="fileInput">
-            <div class="fileBtn black">修改头像<input type="file" class="button" /></div>
+            <div class="fileBtn black">修改头像
+              <%= f.field_for do %>
+                <%= file_field_tag '_img[image]', class: 'button user_image', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
+              <% end -%>
+            </div>
           </div>
         </div>
         <div class="col-md-9 formArea">

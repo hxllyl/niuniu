@@ -21,4 +21,21 @@ $(function(){
     });
   
   });
+  
+  // 跟新头像
+  // $('.fileBtn').on('click', function(e){
+  //
+  //   var box = $('.user_image');
+  //   $.post("/photos/level_uploads", {'_img[image]': box.val(), '_img[type]': box.attr('data_bype'),
+  //                                    '_img[level]': box.attr('data_level')},
+  //                                    function(data){
+  //                                      if(data.status == 'success'){
+  //                                        location.reload();
+  //                                      }else{
+  //
+  //                                      }
+  //
+  //                                    });
+  // });
+  //
 })
