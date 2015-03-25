@@ -7,6 +7,7 @@ class PhotosController < BaseController
     case params[:level]
     when User::LEVELS.keys[1] then
       identity = params[:identity]
+      current_user.photos <<  
     else
       
     end
