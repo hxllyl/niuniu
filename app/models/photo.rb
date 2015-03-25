@@ -21,5 +21,8 @@ class Photo < ActiveRecord::Base
   
   # instance_methods
   
+  def image_path
+    image.url
+  end
 end
 

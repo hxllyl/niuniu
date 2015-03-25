@@ -2,12 +2,8 @@
 
 class UsersController < BaseController
   
-  def edit
-  end
-
   def update
     @user = User.find params[:id]
-    
     if @user.update_attributes user_params
       if params[:_image].present?
         unless @user.avatar.start_with?('/uploads')
@@ -44,6 +40,7 @@ class UsersController < BaseController
   end
 
   def edit_my_level
+    @level = params[:level]
   end
 
   def update_my_level
