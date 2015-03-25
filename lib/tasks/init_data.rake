@@ -81,7 +81,8 @@ namespace :database do
                  car_license_areas: Area.first.name,
                  car_in_areas:      brand.regions.sample(2),
                  discount_way:      1,
-                 discount_content:  0.9
+                 discount_content:  0.9,
+                 resource_type:     [0, 1].sample
                )
       if post._type == 0
         %w(front side obverse inner).each do |ele|
