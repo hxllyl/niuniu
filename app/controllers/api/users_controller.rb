@@ -17,7 +17,7 @@ class Api::UsersController < Api::BaseController
   #   notice: [String]  请重新再试
   def list
 
-    infos = User.where('id in (?)', params[:user_ids] ? params[:user_ids] : [])
+    infos = User.where('id in (?)', params[:user_ids] ? params[:user_ids] : []).map(&:to_hash)
 
     render json: {status: 200, notice: 'success', data: {users: infos}}
 
