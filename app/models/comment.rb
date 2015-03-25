@@ -21,4 +21,5 @@ class Comment < ActiveRecord::Base
       replies:    replies.order(updated_at: :desc).map(&:to_hash)
     }
   end
+
 end

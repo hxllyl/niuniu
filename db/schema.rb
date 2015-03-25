@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324084035) do
+ActiveRecord::Schema.define(version: 20150325033020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,11 @@ ActiveRecord::Schema.define(version: 20150324084035) do
     t.datetime "updated_at",                           null: false
   end
 
+  create_table "brands_standards", id: false, force: :cascade do |t|
+    t.integer "standard_id", null: false
+    t.integer "brand_id",    null: false
+  end
+
   create_table "car_models", force: :cascade do |t|
     t.integer  "standard_id"
     t.integer  "brand_id"
@@ -61,11 +66,11 @@ ActiveRecord::Schema.define(version: 20150324084035) do
     t.integer  "user_id"
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
-    t.string   "content",       limit: 225, null: false
+    t.string   "content",       limit: 225,             null: false
     t.integer  "parent_id"
-    t.integer  "status"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "status",                    default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "companies", force: :cascade do |t|

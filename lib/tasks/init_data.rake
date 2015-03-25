@@ -2,10 +2,10 @@
 # author: depp.yu
 require 'pty'
 
-namespace :init_data do
+namespace :database do
 
   desc "init database and run migrations"
-  task database: :environment do
+  task init: :environment do
     cmds = ['rake db:drop', 'rake db:create', 'rake db:migrate']
 
     cmds.each do |_cmd|
@@ -23,12 +23,12 @@ namespace :init_data do
     end
 
   end
-  
+
   desc "准备的基础数据"
-  task init: :environment do
-    Rake::Task["init_data:users"].invoke
-    Rake::Task["init_data:posts"].invoke
-    Rake::Task["init_data:tenders"].invoke
+  task base_infos: :environment do
+    Rake::Task["database:users"].invoke
+    Rake::Task["database:posts"].invoke
+    Rake::Task["database:tenders"].invoke
   end
 
   desc "生成用户数据"
