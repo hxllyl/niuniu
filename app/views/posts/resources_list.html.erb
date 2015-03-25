@@ -59,7 +59,7 @@
                       </div>
                       <div class="infoPrice">
                         <p><span class="price"><i class="icon icon-money"></i><%= post.expect_price.to_f %>万</span><span class="time"><%= post.publish_time %></span></p>
-                        <p>指导价：<%= post.guiding_price.to_f%>万/下2万</p>
+                        <p>指导价：<%= post.guiding_price.to_f%>万/<%= post.human_discount  %></p>
                       </div>
                     </div>
                     <div class="remark clearfix">
