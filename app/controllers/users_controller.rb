@@ -1,10 +1,19 @@
 # encoding: utf-8
 
-class UsersController < ApplicationController
+class UsersController < BaseController
+  
   def edit
   end
 
   def update
+    @user = User.find params[:id]
+    if @user.update_attributes user_params
+      flash[:notice] = @user.errors.full_messages.join('\n')
+      render action: :edit
+    else
+      flash[:notice] = t('success')
+      redirect_to my_level_user_path(@user)
+    end
   end
 
   def show
@@ -35,5 +44,9 @@ class UsersController < ApplicationController
   end
   
   private
-  
+  def user_params
+    params.require(:user).permit(:name, :role, :company, :area_id, 
+                                 {contact: [:company_address, :self_introduction,
+                                            :finance_header, :photo, :wx]})  
+  end
 end

@@ -73,7 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # You can put the params you want to permit in the empty array.
   def configure_sign_up_params
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:password, :password_confirmation, :name, 
-                                                            :email, :mobile, :role, :company, :role, 
+                                                            :email, :mobile, :role, :company, 
                                                             :area_id )
                                              }
   end
