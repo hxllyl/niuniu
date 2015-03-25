@@ -22,4 +22,9 @@ class CarModel < ActiveRecord::Base
     }
   end
 
+
+  def self.with_brand(brand)
+    where(brand_id: brand)
+  end
+
 end

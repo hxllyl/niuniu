@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
   delegate :name, to: :standard, prefix: true
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true, allow_nil: true
-  delegate :NO, to: :base_car, prefix: true
+  delegate :NO, :to_human_name, :base_price, to: :base_car, prefix: true
   delegate :name, to: :car_model, prefix: true, allow_nil: true
 
   # class methods
@@ -54,6 +54,8 @@ class Post < ActiveRecord::Base
   # 未成交
   scope :uncompleted, -> { where("status <> 3") }
 
+  scope :with_brand, ->(brand) { where(brand_id: brand) }
+
 
   # instance methods
   def get_expect_price
@@ -64,6 +66,10 @@ class Post < ActiveRecord::Base
                           when 4 then discount_content.to_f
                         end
   end
+
+  # alias method names
+  # 别名
+  alias_method  :guiding_price, :base_car_base_price
 
   def complete(tender_id)
     tender = self.tenders.find_by_id(tender_id)
@@ -127,5 +133,5 @@ class Post < ActiveRecord::Base
   def title
     "#{_type == 0 ? '卖 ' : '寻 '}" + standard_name + brand_name + base_car_NO
   end
-  
+
 end
