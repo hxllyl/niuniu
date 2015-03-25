@@ -12,11 +12,12 @@ class PortalController < BaseController
   def index
     @user = User.new unless current_user
 
-    @hot_brands = Brand.includes(:car_photo).order(click_counter: :desc).limit(4)
+    # 最热品牌，寻车4个，资源8个
+    @hot_brands = Brand.includes(:car_photo).order(click_counter: :desc).limit(8)
 
-    @posts      = Post.needs.includes(:user, :car_model, :standard, brand: [:car_photo]).order(updated_at: :desc).limit(8)
+    @needs      = Post.needs.includes(:user, :car_model, :standard, brand: [:car_photo]).order(updated_at: :desc).limit(8)
 
-    @posts_with_brands = @hot_brands.each_with_object({}) do |brand, ha|
+    @posts_with_brands = @hot_brands[0..3].each_with_object({}) do |brand, ha|
                             posts = Post.where(_type: 1, brand_id: brand.id).order(updated_at: :desc).limit(8)
                             ha.merge!({brand.id => posts})
                             ha

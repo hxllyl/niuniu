@@ -1,7 +1,7 @@
 <div role="tabpanel" class="panel panel-default contentBox">
 	<ul role="tablist" class="nav nav-tabs carInfoTabs">
 		<li role="presentation" class="active"><a href="#allCarInfo"><%= t('post_info') %></a></li>
-    <% @hot_brands.each_with_index do |brand, i| %>
+    <% @hot_brands[0..3].each_with_index do |brand, i| %>
 		  <li role="presentation"><a href="#carBrand<%= i + 1%>"><span class="icon"><%= image_tag(brand.car_photo.try(:image).try(:thumb), alt: "")%></span><%= brand.name %></a></li>
 	  <% end-%>
   </ul>
@@ -9,7 +9,7 @@
 	<div class="panel-body">
 		<div role="tabpanel" class="tab-pane active" id="allCarInfo">
 			<ul class="carInfoList clearfix">
-        <%- @posts.each do |post| %>
+        <%- @needs.each do |post| %>
 				<li>
 					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image).try(:thumb), alt: "")  %></div>
 					<div class="info">
@@ -76,6 +76,6 @@
 			<% end -%>
     </ul>
 		</div>
-		<div class="moreLink text-right"><a href="#">更多 >></a></div>
+		<div class="moreLink text-right"><%= link_to '更多 >>', posts_path(_type: 1) %></div>
 	</div>
 </div>
