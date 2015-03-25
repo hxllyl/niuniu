@@ -66,11 +66,11 @@ ActiveRecord::Schema.define(version: 20150325033020) do
     t.integer  "user_id"
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
-    t.string   "content",       limit: 225, null: false
+    t.string   "content",       limit: 225,             null: false
     t.integer  "parent_id"
-    t.integer  "status"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "status",                    default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20150325033020) do
     t.integer  "discount_way",                                                        null: false
     t.decimal  "discount_content",              precision: 10, scale: 2
     t.integer  "status",                                                 default: 1
+    t.integer  "resource_type",                                                       null: false
     t.integer  "onwer_set_count",                                        default: 0
     t.integer  "sys_set_count",                                          default: 0
     t.datetime "created_at",                                                          null: false

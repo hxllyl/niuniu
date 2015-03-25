@@ -10,7 +10,11 @@ class PostsController < ApplicationController
 
   # 资源列表点击品牌进入资源列表页
   def resources_list
+    @brand = Brand.first
+    @standards = Standard.includes(:car_models).where( id: @brand.standard_ids )
 
+  rescue => e
+    render json: { status: :not_ok, msg: e.message }
   end
 
   def show
