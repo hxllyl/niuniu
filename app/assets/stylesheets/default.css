@@ -87,7 +87,7 @@ padding:0;
 .newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
 .newCarSelect .dropdown-toggle { height: 34px; }
 .newSourceIcon { padding-bottom: 16px; }
-.newSourceIcon li { float: left; margin-right: 16px; text-align: center; font-size: 12px; }
+.newSourceIcon li { float: left; margin-right: 24px; text-align: center; font-size: 12px; }
 .newSourceIcon li a:hover { text-decoration: none; color: #ff791f; }
 .sourceTab .table { margin-bottom: 0; }
 .sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
