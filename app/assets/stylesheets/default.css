@@ -86,6 +86,9 @@ padding:0;
 .hotCar li .intro .price { font-size: 14px; color: #ff791f; }
 .newCarSelect { padding-bottom: 10px; border-bottom: 2px solid #e6e6e6; }
 .newCarSelect .dropdown-toggle { height: 34px; }
+.newSourceIcon { height: 34px; }
+.newSourceIcon li { float: left; margin-right: 16px; text-align: center; font-size: 12px; }
+.newSourceIcon li a:hover { text-decoration: none; color: #ff791f; }
 .sourceTab .table { margin-bottom: 0; }
 .sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0; border-bottom: 2px solid #e6e6e6; color: #333; }
 .sourceTab .table>tbody>tr>td { position: relative; height: 38px; line-height: 38px; padding: 0; border-bottom: 1px solid #e6e6e6; color: #666; }
