@@ -55,6 +55,9 @@ class Api::CommentsController < Api::BaseController
     else
       render json: {status: 400, notice: '请重新再试'}
     end
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
 
@@ -85,6 +88,9 @@ class Api::CommentsController < Api::BaseController
     else
       render json: {status: 400, notice: '请重新再试'}
     end
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
 end
