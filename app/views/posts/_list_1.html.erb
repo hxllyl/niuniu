@@ -7,16 +7,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9 mainBox">
-      <div role="tabpanel" class="panel panel-default contentBox">
-        <ul role="tablist" class="nav nav-tabs carInfoTabs">
-          <li role="presentation" class="active"><a href="#allCarInfo">寻车信息筛选</a></li>
-          <li role="presentation"><a href="#carBrand1"><span class="icon bmw"></span>宝马</a></li>
-          <li role="presentation"><a href="#carBrand2"><span class="icon bmw"></span>奔驰</a></li>
-          <li role="presentation"><a href="#carBrand3"><span class="icon bmw"></span>路虎</a></li>
-          <li role="presentation"><a href="#carBrand4"><span class="icon bmw"></span>福特</a></li>
-        </ul>
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">寻车信息筛选</h3>
+        </div>
         <div class="panel-body">
-          <div role="tabpanel" class="tab-pane active" id="allCarInfo">
+          <div class="souSelList">
             <div class="carList clearfix">
               <div class="tt">规格：</div>
               <ul class="list">
@@ -96,18 +92,6 @@
               </ul>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="carBrand1">
-            暂无数据
-          </div>
-          <div role="tabpanel" class="tab-pane" id="carBrand2">
-            暂无数据
-          </div>
-          <div role="tabpanel" class="tab-pane" id="carBrand3">
-            暂无数据
-          </div>
-          <div role="tabpanel" class="tab-pane" id="carBrand4">
-            暂无数据
-          </div>
         </div>
       </div>
       <div class="panel panel-default contentBox">
@@ -119,10 +103,10 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
               <thead>
                 <tr>
-                  <th width="40%">品牌/车型</th>
-                  <th width="12%">上牌地点</th>
-                  <th width="13%">外观/内饰</th>
-                  <th width="25%">发布人</th>
+                  <th width="34%">品牌/车型</th>
+                  <th width="10%">上牌地点</th>
+                  <th width="26%">外观/内饰</th>
+                  <th width="20%">发布人</th>
                   <th width="10%">发布时间</th>
                 </tr>
               </thead>
@@ -140,7 +124,7 @@
             </table>
           </div>
           <div class="pageList">
-
+            <%= paginate @posts %>
           </div>
         </div>
       </div>
