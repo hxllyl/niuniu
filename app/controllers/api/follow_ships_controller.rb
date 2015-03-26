@@ -16,6 +16,9 @@ class Api::FollowShipsController < Api::BaseController
   #   notice: [String]  请重新再试
   def my_followers
     render json: {status: true, data: {followers: @user.followers}}
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 我关注的人
@@ -32,6 +35,9 @@ class Api::FollowShipsController < Api::BaseController
   #   notice: [String]  请重新再试
   def my_followings
     render json: {status: true, data: {followings: @user.followings}}
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 我关注的人也关注了他
@@ -50,6 +56,9 @@ class Api::FollowShipsController < Api::BaseController
   def joint_followers
     user = User.find_by_id(params[:user_id])
     render json: {status: true, data: {joint_followers: @user.followings & user.followers}}
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 共同的粉丝
@@ -68,6 +77,9 @@ class Api::FollowShipsController < Api::BaseController
   def joint_followings
     user = User.find_by_id(params[:user_id])
     render json: {status: true, data: {joint_followings: @user.followings & user.followerings}}
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 关注

@@ -29,6 +29,9 @@ class Api::BaseCarsController < Api::BaseController
             end
 
     render json:  { status: 200, notice: 'success', data: data }
+
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
 end
