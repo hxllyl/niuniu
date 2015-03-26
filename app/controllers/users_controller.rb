@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class UsersController < BaseController
-  
+
   def update
     @user = User.find params[:id]
     if @user.update_attributes user_params
@@ -60,30 +60,30 @@ class UsersController < BaseController
     respond_to do |format|
       format.html {
         flash[:notice] = t('success')
-        redirect_to my_level_user_path(current_user) 
+        redirect_to my_level_user_path(current_user)
       }
     end
   rescue => ex
     format.html {
       flash[:failed] = t('failed')
-      render action: :edit_my_level 
-    }  
+      render action: :edit_my_level
+    }
   end
 
   def about_us
     @customer_service = current_user.customer_service
   end
-  
+
   private
   def user_params
-    params.require(:user).permit(:name, :role, :company, :area_id, 
+    params.require(:user).permit(:name, :role, :company, :area_id,
                                  { contact: [
-                                   :company_address, 
+                                   :company_address,
                                    :self_introduction,
-                                   :finance_header, 
-                                   :photo, 
+                                   :finance_header,
+                                   :photo,
                                    :wx]}
-                                )  
+                                )
   end
 
 end

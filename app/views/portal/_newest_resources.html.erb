@@ -6,7 +6,7 @@
 		<ul class="newSourceIcon clearfix">
 			<%- @hot_brands.each do |brand| %>
 				<li>
-					<a href="<%= posts_path(brand_id: brand.id, _type: 0) %>">
+					<a href="<%= resources_list_posts_path(brand_id: brand.id) %>">
 						<p><%= image_tag(brand.car_photo.try(:image).try(:thumb), alt: "") %></p>
 						<p><%= brand.name %></p>
 					</a>
