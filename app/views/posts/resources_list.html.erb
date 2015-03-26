@@ -14,7 +14,6 @@
           </ul>
         </div>
         <div class="panel-body">
-
           <% @standards.each do |std| %>
             <div class="carList clearfix">
               <div class="tt"><%= std.name %></div>
@@ -47,7 +46,6 @@
               <% @resources.each do |post| %>
                 <tr>
                   <td>
-
                     <div class="box clearfix">
                       <div class="infoM">
                         <h5 class="name"><a href="#"><%= post.base_car_to_human_name %></a></h5>
@@ -90,3 +88,11 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".souSelList").find(".list > li").click(function(){
+    $(".souSelList").find(".list > li").removeClass("current");
+    $(this).addClass("current");
+  });
+});
+</script>
