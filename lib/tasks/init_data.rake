@@ -29,6 +29,8 @@ namespace :database do
     Rake::Task["database:users"].invoke
     Rake::Task["database:posts"].invoke
     Rake::Task["database:tenders"].invoke
+    Rake::Task["database:posts_views"].invoke
+    Rake::Task["database:follow_ships"].invoke
   end
 
   desc "生成用户数据"
@@ -114,6 +116,26 @@ namespace :database do
 
     Post.needs.sample(10).each do |need|
       need.complete(need.tenders.first.id)
+    end
+  end
+
+  desc "生成post浏览记录"
+  task posts_views: :environment do
+    Post.all.sample(50).each do |post|
+      u_ids = User.where("id <> #{post.user_id}").map(&:id)
+      u_ids.sample(rand(20)).each do |user_id|
+        Log::Post.create(user_id: user_id, method_name: 'view', post_id: post.id)
+      end
+    end
+  end
+
+  desc "生成follow_ships"
+  task follow_ships: :environment do
+    u_ids = User.all.map(&:id)
+    100.times do
+      ids = u_ids.sample(2)
+      fs = FollowShip.find_or_initialize_by(follower_id: ids[0], following_id: ids[1])
+      fs.save
     end
   end
 

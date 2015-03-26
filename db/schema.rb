@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150326052044) do
     t.datetime "updated_at",   null: false
   end
 
+
   create_table "messages", force: :cascade do |t|
     t.string   "title",       limit: 100
     t.integer  "sender_id"
@@ -108,6 +109,14 @@ ActiveRecord::Schema.define(version: 20150326052044) do
     t.integer  "status",                  default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+  end
+  
+  create_table "log_posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.string   "method_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "notifications", force: :cascade do |t|

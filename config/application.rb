@@ -31,7 +31,7 @@ module NiuNiu
     config.i18n.default_locale = :"zh-CN"
     
     config.autoload_paths += %W(#{Rails.root}/app/models/errors)
-    config.autoload_paths += %W(#{Rails.root}/lib/service_objects/*.rb)
+    config.autoload_paths += %W(#{Rails.root}/app/services/*.rb)
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

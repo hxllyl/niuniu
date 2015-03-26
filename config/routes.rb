@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :posts, only: [ :index, :show ] do
     collection do
       get :resources_list
+      get :needs_list
       get :user_list
       get :user_resources_list
     end
