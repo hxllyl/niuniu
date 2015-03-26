@@ -1,5 +1,5 @@
 class ResourceSearch
-  attr_accessor :brand_id, :model_id
+  attr_reader :brand_id, :model_id
 
   def initialize(options = {})
     @brand_id = options[:brand_id]
