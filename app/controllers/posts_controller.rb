@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     if car_model.present?
       @resources = car_model.posts.resources
     else
-      @resources = Post.resources.with_brand(@brand)
+      @resources = Post.includes(:base_car, :user).resources.with_brand(@brand)
     end
 
   rescue => e

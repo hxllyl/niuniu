@@ -42,10 +42,10 @@ class Post < ActiveRecord::Base
 
   # relations
   has_many    :tenders, class_name: 'Tender'
-  belongs_to  :user,    class_name: 'User'
+  belongs_to  :user,  ->{ includes(:area) },  class_name: 'User' # 消除 N+1 查询
   belongs_to  :brand,   class_name: 'Brand'
   belongs_to  :car_model, class_name: 'CarModel'
-  belongs_to  :base_car,class_name: 'BaseCar'
+  belongs_to  :base_car, -> {includes(:brand, :car_model)}, class_name: 'BaseCar'
   belongs_to  :standard,class_name: 'Standard'
   has_many    :post_photos, as: :owner, dependent: :nullify, autosave: true # 资源图片
   has_many    :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
