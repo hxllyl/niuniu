@@ -12,7 +12,7 @@ class SearchResource
     elsif brand_id.present?
       Brand.find brand_id
     else
-      nil
+      Brand.first
     end
   end
 
@@ -20,6 +20,10 @@ class SearchResource
     if model_id.present?
       CarModel.find(model_id)
     end
+  end
+
+  def standards
+    Standard.where(id: brand.standard_ids)
   end
 
 end

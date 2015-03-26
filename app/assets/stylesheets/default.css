@@ -167,7 +167,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .infoM .info { }
 .mySourceTab .infoM .info .m { float: left; margin-right: 24px; }
 /*.mySourceTab .infoM .info .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
-.mySourceTab .infoM .info .tag { float: left; width: 35px; height: 14px; margin-top: 6px; }
+.mySourceTab .infoM .info .tag { float: left; width: 35px; height: 14px; margin-top: 5px; margin-right: 6px; }
 .mySourceTab .infoM .info .statu { margin-left: 6px; color: #1f8eff; }
 .mySourceTab .infoPrice { position: absolute; top: 0; right: 0; width: 180px; text-align: right; }
 .mySourceTab .infoPrice .price { margin-right: 8px; font-size: 18px; font-weight: bold; color: #ff791f; }

@@ -13,7 +13,7 @@
             <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
-        <div class="panel-body">
+        <div class="panel-body souSelList">
           <% @standards.each do |std| %>
             <div class="carList clearfix">
               <div class="tt"><%= std.name %></div>
@@ -91,8 +91,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $(".souSelList").find(".list > li").click(function(){
-    $(".souSelList").find(".list > li").removeClass("current");
-    $(this).addClass("current");
+    $(this).addClass("current").siblings().removeClass("current");
   });
 });
 </script>
