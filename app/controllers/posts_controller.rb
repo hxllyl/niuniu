@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 
     # LESLIE: 这个地方需根据 _type 决定用 resources 还是 needs
     if car_model.present?
-      @resources = car_model.posts.resources
+      @resources = car_model.posts.includes(:base_car, :user).resources
     else
       @resources = Post.includes(:base_car, :user).resources.with_brand(@brand)
     end
