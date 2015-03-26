@@ -1,7 +1,7 @@
 <div class="container">
   <ol class="breadcrumb">
     <li><a href="#">首页</a></li>
-    <li class="active">品牌筛选</li>
+    <li class="active">寻车列表</li>
   </ol>
 </div>
 <div class="container">
@@ -28,7 +28,7 @@
       </div>
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">全部资源（<%= @resources.count %>）</h3>
+          <h3 class="panel-title">全部寻车（<%= @needs.count %>）</h3>
         </div>
         <div class="panel-body">
           <div class="mySourceOpe">
@@ -43,7 +43,7 @@
           <div class="mySourceTab mt10">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
               <tbody>
-              <% @resources.each do |post| %>
+              <% @needs.each do |post| %>
                 <tr>
                   <td>
                     <div class="box clearfix">
