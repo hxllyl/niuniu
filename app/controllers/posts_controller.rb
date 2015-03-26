@@ -12,13 +12,12 @@ class PostsController < ApplicationController
 
   # 资源列表点击品牌进入资源列表页
   def resources_list
-    # LESLIE: 可以把这部分的逻辑放到 service object 中去（一个 action 最好只跟一个 model 关联）
-
     rs = ResourceSearch.new(params)
     car_model = rs.car_model
     @brand = rs.brand || Brand.first
     @standards = Standard.where(id: @brand.standard_ids)
 
+    # LESLIE: 这个地方需根据 _type 决定用 resources 还是 needs
     if car_model.present?
       @resources = car_model.posts.resources
     else
