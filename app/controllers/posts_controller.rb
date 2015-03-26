@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require_relative '../../app/services/resource_search'
+require_relative '../../app/services/search_resource'
 
 class PostsController < ApplicationController
 

@@ -1,4 +1,4 @@
-class ResourceSearch
+class SearchResource
   attr_reader :brand_id, :model_id
 
   def initialize(options = {})
