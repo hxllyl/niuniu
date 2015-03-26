@@ -48,9 +48,13 @@ class User < ActiveRecord::Base
   has_many :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
   has_many :complaints, class_name: 'Complaint'
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
+  # 用户专属于客服
   belongs_to :customer_service, class_name: 'User'
   has_many :customers, class_name: 'User', foreign_key: :customer_service_id 
 
+  has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :recevied_messages, class_name: 'Message', foreign_key: 'recevier_id'
+  
   belongs_to :area, class_name: 'Area'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
