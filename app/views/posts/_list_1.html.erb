@@ -112,7 +112,7 @@
       </div>
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">全部寻车（100）</h3>
+          <h3 class="panel-title">全部寻车（<%= @posts.total_count %>）</h3>
         </div>
         <div class="panel-body">
           <div class="sourceTab">
@@ -127,76 +127,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, post_path(post.id, _type: 1)%></td>
+                    <td><%= post.car_license_areas %></td>
+                    <td><%= post.color %></td>
+                    <td><%= post.owner %>icon</td>
+                    <td><%= post.publish_time %></td>
                 </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
