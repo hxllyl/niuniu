@@ -30,7 +30,7 @@ class Post < ActiveRecord::Base
     0 => '现车',
     1 => '期货'
   }
-  
+
   TAKE_DATES = {
     1 => '当天',
     2 => '三天内',
@@ -82,7 +82,10 @@ class Post < ActiveRecord::Base
                           when 4 then discount_content.to_f
                         end
 
-    self.resource_type = -1 if _type == 1  #只有资源才有的条件，因为数据库设计不能为空，所以给寻车一个-1的值来区分
+    # 只有资源才有的条件，因为数据库设计不能为空，所以给寻车一个-1的值来区分
+    self.resource_type = -1 if _type == 1
+    # 寻车的报价方式可以为空，当用户不选时，我们给其一个默认值
+    self.discount_way  = 5 unless discount_way
   end
 
   # alias method names
