@@ -71,6 +71,7 @@ class UsersController < BaseController
   end
 
   def about_us
+    @customer_service = current_user.customer_service
   end
   
   private
@@ -84,4 +85,5 @@ class UsersController < BaseController
                                    :wx]}
                                 )  
   end
+
 end

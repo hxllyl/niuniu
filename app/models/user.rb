@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # constants
-  ROLES = %w(normal admin)
+  ROLES = %w(normal)
   AVATAR = 'index/user_photo.jpg'
 
   STATUS = {
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   # validates
   validates :name, presence: true, length: { maximum: 30 }
   validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: true
-  validates :role,  presence: true , inclusion: { in: %w(normal admin) }
+  validates :role,  presence: true , inclusion: { in: ->(clazz){ clazz.class::ROLES} }
   validates :company, presence: true, length: { maximum: 100 }
   validates :level, numericality: true, inclusion: { in: 0..3 }
 
@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
   belongs_to :customer_service, class_name: 'User'
-  has_many :customers, class_name: 'User', foreign_key: :customer_service_id 
+  has_many :customers, -> {where(role: 'staff')}, class_name: 'User', foreign_key: :customer_service_id 
 
   has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :recevied_messages, class_name: 'Message', foreign_key: 'recevier_id'
@@ -65,7 +65,9 @@ class User < ActiveRecord::Base
 
   # instance methods
   delegate :name, to: :area, prefix: true, allow_nil: true
-
+  
+  self.inheritance_column = :mask
+  
   # 定义用户的各种类型图片
   %w(avatar identity hand_id visiting room_outer room_inner license).each do |m|
     unless User.respond_to?(m.to_sym)

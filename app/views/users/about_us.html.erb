@@ -14,27 +14,30 @@
       <h5 class="title">您的专属客服经理</h5>
       <div class="row aboutUsMain">
         <div class="col-md-2 photoBox">
-          <div class="photo"><%= image_tag("_temp/userPhoto_s.jpg", alt: "")%></div>
-          <div class="name"><span>某某</span>经理</div>
-          <div class="clearfix"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></div>
+          <div class="photo"><%= image_tag(@customer_service.avatar, alt: "",size: '78x78')%></div>
+          <div class="name"><span><%= @customer_service.name%></span>经理</div>
+          <div class="clearfix">
+          <span class="tag">
+          </span>
+          </div>
         </div>
         <div class="col-md-10 infoBox">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td>联系电话：</td>
-              <td>公司地址：</td>
+              <td>联系电话： <%= @customer_service.mobile -%></td>
+              <td>公司地址： <%= @customer_service.contact['company_address']%></td>
             </tr>
             <tr>
-              <td>微信：</td>
-              <td>公司电话：</td>
+              <td>微信：<%= @customer_service.contact['wx']%></td>
+              <td>公司电话：<%= @customer_service.contact['phone']%></td>
             </tr>
             <tr>
-              <td>QQ：</td>
-              <td>公司网址：</td>
+              <td>QQ：<%= @customer_service.contact['qq'] %></td>
+              <td>公司网址：<%= @customer_service.contact['web_site'] %></td>
             </tr>
             <tr>
-              <td>备注：</td>
-              <td>公司邮箱：</td>
+              <td>备注：<%= @customer_service.contact['remark'] %></td>
+              <td>公司邮箱：<%= @customer_service.contact['company_email'] %></td>
             </tr>
           </table>
         </div>
@@ -44,13 +47,16 @@
           <label for="" class="control-label">意见反馈：</label>
         </div>
         <div class="col-md-10">
-          <form>
-            <textarea class="form-control" rows="4"></textarea>
+          <%= form_for Message.new, as: :message, url: users_messages_path, method: :post do |f| %>
+            <%= f.hidden_field :_type, value: Message::TYPES.keys[1] -%>
+            <%= f.hidden_field :sender_id, value: current_user.id -%>
+            <%= f.hidden_field :receiver_id, value: @customer_service.id -%>
+            <%= f.text_area :content, class: 'form-control', row: 4, placeHolder: '输入反馈内容' -%>
             <div class="txtC mt10">
-              <input type="submit" class="btn btn-default orange" value="发送" />
+              <%= f.submit t('commit'), class: "btn btn-default orange" %>
               <input type="reset" class="btn btn-default" value="放弃" />
             </div>
-          </form>
+            <%end-%>
         </div>
       </div>
     </div>
