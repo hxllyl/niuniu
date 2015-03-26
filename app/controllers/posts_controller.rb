@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   # 资源列表点击品牌进入资源列表页
   def resources_list
-    rs = ResourceSearch.new(params)
+    rs = SearchResource.new(params)
     car_model = rs.car_model
     @brand = rs.brand || Brand.first
     @standards = Standard.where(id: @brand.standard_ids)
