@@ -41,7 +41,7 @@
             
             <div class="col-md-6 status">
               <% 4.times do |i|%>
-                <% if current_user.level >= i %>
+                <% if current_user.level >= i and current_user != User::LEVELS.keys[4]%>
                   <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
                 <% else %>
                   <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[i]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-6 status">
               <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
-              <% if current_user.level != User::LEVELS.keys[0] %>
+              <% unless current_user.can_upgrade_4s %>
               <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
               <p>

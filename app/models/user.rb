@@ -131,8 +131,10 @@ class User < ActiveRecord::Base
   # 用户等级logo
   def level_icon
     case self.level
-      when (LEVELS.keys[0] or LEVELS.keys[1]) then
+      when LEVELS.keys[0] then
         'user/typeIcon_p.png'
+      when LEVELS.keys[1] then
+        'user/typeIcon_p.png'  
       when LEVELS.keys[2] then
         'user/typeIcon_s.png'
       when LEVELS.keys[3] then
@@ -147,6 +149,10 @@ class User < ActiveRecord::Base
     conditions = "user_id = #{self.id}"
     conditions << " updated_at >= #{Time.now - 3.months}" if type == :month
     Post.completed.where(conditions).count + Tender.completed.where(conditions).count
+  end
+  
+  def can_upgrade_4s
+    !LEVELS.keys[2..4].include?(level)
   end
 
   def following?(user)
