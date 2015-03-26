@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :level, :integer, default: 0 # 用户等级 0 => 个人, 1 => 认证资源, 2 => 认证综展, 3 => 4S
       t.column :status, :integer, default: 0 # 新建状态, 1 => 后台审理通过, 2 => 后台审理未通过
       t.column :contact, :jsonb, default: {} # 联系方式 qq wx
+      t.references :customer_service, class_name: 'User'
       t.timestamps null: false
     end
   end
