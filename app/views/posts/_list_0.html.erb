@@ -15,79 +15,26 @@
           <div class="carList clearfix">
             <div class="tt">规格：</div>
             <ul class="list">
-              <li><a href="#">全部</a></li>
-              <li><a href="#">国产</a></li>
-              <li><a href="#">中规</a></li>
-              <li><a href="#">美规</a></li>
-              <li><a href="#">中东</a></li>
-              <li><a href="#">加版</a></li>
-              <li><a href="#">欧版</a></li>
+              <li><%= link_to '全部', resources_list_posts_path %></li>
+              <%- @standards.each do |sd| %>
+                <li><%= link_to sd.name, resources_list_posts_path(standard_id: sd.id) %></li>
+              <% end %>
             </ul>
           </div>
           <div class="carList clearfix">
             <div class="tt">品牌：</div>
             <ul class="list">
-              <li><a href="#">奔驰</a></li>
-              <li><a href="#">奥迪</a></li>
-              <li><a href="#">宝马</a></li>
-              <li><a href="#">保时捷</a></li>
-              <li><a href="#">北京汽车</a></li>
-              <li><a href="#">奔腾</a></li>
-              <li><a href="#">本田</a></li>
-              <li><a href="#">别克</a></li>
-              <li><a href="#">宾利</a></li>
-              <li><a href="#">长安</a></li>
-              <li><a href="#">长城</a></li>
-              <li><a href="#">大众</a></li>
-              <li><a href="#">道奇</a></li>
-              <li><a href="#">东风</a></li>
-              <li><a href="#">东风小康</a></li>
-              <li><a href="#">丰田</a></li>
-              <li><a href="#">福特</a></li>
-              <li><a href="#">Jeep吉普</a></li>
-              <li><a href="#">捷豹</a></li>
-              <li><a href="#">凯迪拉克</a></li>
-              <li><a href="#">劳斯莱斯</a></li>
-              <li><a href="#">雷克萨斯</a></li>
-              <li><a href="#">林肯</a></li>
-              <li><a href="#">路虎</a></li>
-              <li><a href="#">马自达</a></li>
-              <li><a href="#">玛莎拉蒂</a></li>
+              <%- @brands.each do |br| %>
+                <li><%= link_to br.name, resources_list_posts_path(brand_id: br.id) %></li>
+              <% end %>
             </ul>
           </div>
           <div class="carList last clearfix">
             <div class="tt">车型：</div>
             <ul class="list">
-              <li><a href="#">宝马X5</a></li>
-              <li><a href="#">宝马X6</a></li>
-              <li><a href="#">宝马7系</a></li>
-              <li><a href="#">宝马3系</a></li>
-              <li><a href="#">宝马5系</a></li>
-              <li><a href="#">宝马5系GT</a></li>
-              <li><a href="#">宝马X3</a></li>
-              <li><a href="#">宝马3系(进口)</a></li>
-              <li><a href="#">宝马5系(进口)</a></li>
-              <li><a href="#">卡宴</a></li>
-              <li><a href="#">帕纳美拉Panamera</a></li>
-              <li><a href="#">保时捷911</a></li>
-              <li><a href="#">Cayman</a></li>
-              <li><a href="#">奔驰GL350</a></li>
-              <li><a href="#">奔驰S300</a></li>
-              <li><a href="#">奔驰GL450</a></li>
-              <li><a href="#">奔驰ML350</a></li>
-              <li><a href="#">奔驰CLS</a></li>
-              <li><a href="#">奔驰C级</a></li>
-              <li><a href="#">奔驰E级</a></li>
-              <li><a href="#">斯宾特Sprinter</a></li>
-              <li><a href="#">揽胜</a></li>
-              <li><a href="#">揽胜运动</a></li>
-              <li><a href="#">极光</a></li>
-              <li><a href="#">神行者2</a></li>
-              <li><a href="#">发现4</a></li>
-              <li><a href="#">捷豹XJ</a></li>
-              <li><a href="#">奥迪A6</a></li>
-              <li><a href="#">奥迪A8</a></li>
-              <li><a href="#">奥迪Q7</a></li>
+              <%- @car_models.each do |cm|%>
+                <li><%= link_to cm.name, resources_list_posts_path(car_model_id: cm.id) %></li>
+              <% end %>
             </ul>
           </div>
         </div>

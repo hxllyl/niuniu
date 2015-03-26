@@ -56,10 +56,11 @@ ActiveRecord::Schema.define(version: 20150326094131) do
   create_table "car_models", force: :cascade do |t|
     t.integer  "standard_id"
     t.integer  "brand_id"
-    t.string   "name",                    null: false
-    t.integer  "status",      default: 1
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",                      null: false
+    t.integer  "status",        default: 1
+    t.integer  "click_counter", default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "comments", force: :cascade do |t|
