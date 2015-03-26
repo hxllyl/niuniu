@@ -3,6 +3,7 @@
 class Tender < ActiveRecord::Base
 
   before_create :get_price
+  after_create  :gen_tender_log
 
   STATUS = {
     0  => '未成交',
@@ -35,6 +36,10 @@ class Tender < ActiveRecord::Base
                     when 3 then (post.base_car.base_price + discount_content).to_f
                     when 4 then discount_content.to_f
                   end
+  end
+
+  def gen_tender_log
+    Log::Post.create(user_id: user_id, post_id: post_id, method_name: 'tender')
   end
 
 end

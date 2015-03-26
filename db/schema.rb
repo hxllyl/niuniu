@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325033020) do
+ActiveRecord::Schema.define(version: 20150326051443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20150325033020) do
     t.integer  "brand_id"
     t.integer  "car_model_id"
     t.decimal  "base_price",              precision: 10, scale: 2
-    t.string   "outer_color",                                                               array: true
-    t.string   "inner_color",                                                               array: true
+    t.string   "outer_color",                                                                array: true
+    t.string   "inner_color",                                                                array: true
     t.string   "style",        limit: 60
-    t.string   "NO",           limit: 12
+    t.string   "NO",           limit: 12,                          default: ""
     t.integer  "status",                                           default: 1
-    t.datetime "created_at",                                                   null: false
-    t.datetime "updated_at",                                                   null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
   end
 
   create_table "brands", force: :cascade do |t|
@@ -99,12 +99,12 @@ ActiveRecord::Schema.define(version: 20150325033020) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "history_lists", force: :cascade do |t|
+  create_table "log_posts", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "resource_id"
-    t.string   "resource_type", limit: 30
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "post_id"
+    t.string   "method_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "notifications", force: :cascade do |t|

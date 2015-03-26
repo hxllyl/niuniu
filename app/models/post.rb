@@ -98,6 +98,10 @@ class Post < ActiveRecord::Base
       self.update_attributes(status: 3)
       tender.update_attributes(status: 1)
     end
+    Log::Post.create(user_id: user_id, post_id: id, method_name: 'post_completed')
+    tender_log = Log::Post.find_or_initialize_by(user_id: tender.user_id, post_id: id, method_name: 'tender')
+    tender_log.method_name = 'tender_completed'
+    tender_log.save
   end
 
   # {front: 'image_url', side: 'image_url', obverse: 'image_url', inner: 'image_url'}
