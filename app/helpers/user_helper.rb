@@ -18,9 +18,9 @@ module UserHelper
   
   def recon_icons(user)
     if user.level == User::LEVELS.keys[4]
-      %w(user/typeIcon_p.png user/typeIcon_z.png)                                                         
+      %w(user/typeIcon_p.png user/typeIcon_4s.png)                                                         
     else
-      %w(user/typeIcon_p.png user/typeIcon_z_dis.png)
+      %w(user/typeIcon_p.png user/typeIcon_4s_dis.png)
     end 
   end
 

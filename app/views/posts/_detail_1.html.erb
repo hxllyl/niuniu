@@ -271,9 +271,8 @@
 $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
   $(".selectInput").find("input.form-control").attr("disabled","true");
   $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
-  $(".selectTag").removeClass("active");
   $(".selectInput").removeClass("active");
-  $(this).addClass("active");
+  $(this).addClass("active").siblings().removeClass("active");
   $(this).next(".selectInput").addClass("active").focus();
 });
 

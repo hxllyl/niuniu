@@ -41,7 +41,7 @@
             
             <div class="col-md-6 status">
               <% 4.times do |i|%>
-                <% if current_user.level >= i %>
+                <% if current_user.level >= i and current_user != User::LEVELS.keys[4]%>
                   <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
                 <% else %>
                   <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[i]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
@@ -56,12 +56,22 @@
               <p>4s（认证）</p>
             </div>
             <div class="col-md-3 level">
-              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></p>
-              <p><span class="levelIcon bfL"><%= image_tag("user/typeIcon_4s_dis.png", alt: "", width: "100%")%></span></p>
+             <% recon_icons(current_user).each do |icon| %>
+               <p><span class="levelIcon bfL">
+                 <%= image_tag(icon, alt: "", width: "100%")%>
+               </span>
+             </p>
+             <% end -%>
             </div>
             <div class="col-md-6 status">
               <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
-              <p><a class="btn btn-default black" href="#" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
+              <% unless current_user.can_upgrade_4s %>
+              <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
+              <% else %>
+              <p>
+                <a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
+              </p>
+              <% end -%>
             </div>
           </div>
         </div>

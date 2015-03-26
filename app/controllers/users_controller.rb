@@ -46,15 +46,16 @@ class UsersController < BaseController
   def update_my_level
     %w(avatar identity hand_id visiting room_outer room_inner license).each do |t|
       photo = current_user.photos.find_by(_type: t)
-      
       img_box = params[t.to_sym]
       next if img_box.blank?
-      
       if photo
-        photo.update(image: img_box[:_image], _typ: img_box[:_type])
+        photo.update(image: img_box[:_image], _type: img_box[:_type])
       else
-        current_user.photos << Photo.new(image: img_box[:_image], _typ: img_box[:_type])
+        current_user.photos << Photo.new(image: img_box[:_image], _type: img_box[:_type])
       end
+      current_user.level = params[:level].to_i
+      current_user.save
+      current_user.reload
     end
     respond_to do |format|
       format.html {
@@ -62,15 +63,27 @@ class UsersController < BaseController
         redirect_to my_level_user_path(current_user) 
       }
     end
+  rescue => ex
+    format.html {
+      flash[:failed] = t('failed')
+      render action: :edit_my_level 
+    }  
   end
 
   def about_us
+    @customer_service = current_user.customer_service
   end
   
   private
   def user_params
     params.require(:user).permit(:name, :role, :company, :area_id, 
-                                 { contact: [:company_address, :self_introduction,:finance_header, :photo, :wx]}
+                                 { contact: [
+                                   :company_address, 
+                                   :self_introduction,
+                                   :finance_header, 
+                                   :photo, 
+                                   :wx]}
                                 )  
   end
+
 end

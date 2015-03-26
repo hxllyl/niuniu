@@ -20,6 +20,7 @@ class Photo < ActiveRecord::Base
   # class_methods
   
   # instance_methods
+  self.inheritance_column = :mask
   
   def image_path(version = nil)
     if version.present?

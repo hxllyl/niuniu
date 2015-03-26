@@ -9,7 +9,12 @@ Rails.application.routes.draw do
                                     passwords:     'users/passwords',
                                     unlocks:       'users/unlocks'
                                   }
-
+   
+  namespace :users do
+    resources :messages do
+    end
+  end                               
+  
   resources :users, only: [ :show, :edit, :update ] do
     member do
       get :my_tenders

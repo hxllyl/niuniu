@@ -10,6 +10,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.column :owner_type, :string, limit: 20 # 所属object的class_name 在这里是个string
       t.column :image, :string, limit: 60 # 图片的路径
       t.column :_type, :string, limit: 30 # 图片的种类 例如：avatar
+      t.column :mask, :string, limit: 10 # 却别用户 继承关系
       t.timestamps null: false
     end
   end

@@ -1,0 +1,27 @@
+# encoding: utf-8
+
+zh-CN:
+  activerecord:
+    models:
+      message: 消息
+    attributes:
+      message:
+        title: 消息标题
+        status: 消息状态
+        _type: 消息类型
+        content: 消息内容
+    
+    errors:
+      models:
+        message:
+          attributes:
+            title:
+              too_long: 长度太长
+            status:
+              inclusion: 状态不正确  
+            _type:
+              inclusion: 类型不正确
+            
+            
+            
+      

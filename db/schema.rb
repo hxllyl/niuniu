@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326051443) do
+ActiveRecord::Schema.define(version: 20150326094131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20150326051443) do
   end
 
   create_table "brands_standards", id: false, force: :cascade do |t|
-    t.integer "standard_id", null: false
-    t.integer "brand_id",    null: false
+    t.integer "brand_id"
+    t.integer "standard_id"
   end
 
   create_table "car_models", force: :cascade do |t|
@@ -107,6 +107,17 @@ ActiveRecord::Schema.define(version: 20150326051443) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string   "title",       limit: 100
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.integer  "_type",                   default: 0
+    t.string   "content",                             null: false
+    t.integer  "status",                  default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "content",       limit: 225
@@ -122,6 +133,7 @@ ActiveRecord::Schema.define(version: 20150326051443) do
     t.string   "owner_type", limit: 20
     t.string   "image",      limit: 60
     t.string   "_type",      limit: 30
+    t.string   "mask",       limit: 10
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
@@ -186,6 +198,9 @@ ActiveRecord::Schema.define(version: 20150326051443) do
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
     t.jsonb    "contact",                            default: {}
+    t.string   "job_number",             limit: 15
+    t.integer  "customer_service_id"
+    t.string   "mask",                   limit: 10
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "email",                              default: ""
