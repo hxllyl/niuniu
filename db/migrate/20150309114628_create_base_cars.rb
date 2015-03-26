@@ -14,7 +14,7 @@ class CreateBaseCars < ActiveRecord::Migration
       t.column :outer_color, :string, array: true # 外观
       t.column :inner_color, :string, array: true # 内饰
       t.column :style, :string, limit: 60 # 车辆款式
-      t.column :NO, :string, limit: 12 # 行话(e: 9876)
+      t.column :NO, :string, limit: 12 default: '' # 行话(e: 9876)
       t.column :status, :integer, default: 1 # 1 激活 0 未激活
 
       t.timestamps null: false

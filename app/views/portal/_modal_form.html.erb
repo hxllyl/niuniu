@@ -72,18 +72,18 @@
 var wait = 60;
 $("#valid_code_but").attr("disabled",false);
 function time(obj) {
-    if (wait == 0) {
-        $(obj).attr("disabled",false);
+  if (wait == 0) {
+    $(obj).attr("disabled",false);
     $(obj).val("获取动态码");
-        wait = 60;
-    } else {
-        $(obj).attr("disabled",true);
+    wait = 60;
+  } else {
+    $(obj).attr("disabled",true);
     $(obj).val(wait + "秒后重新获取");
-        wait--;
-        setTimeout(function() {
-            time(obj);
-        },1000)
-    }
+    wait--;
+    setTimeout(function() {
+      time(obj);
+    },1000)
+  }
 }
 $("#valid_code_but").click(function(){
   time($(this));

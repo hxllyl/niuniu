@@ -45,6 +45,35 @@ class Api::PostsController < Api::BaseController
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
+  # 他的资源列表，寻车列表
+  #
+  # Params:
+  #   token:        [String]    valid token
+  #   user_id:      [Integer]   user ID
+  #   _type:        [Integer]   0 资源 1 寻车
+  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
+  #
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  #   data:   [JSON]    his_posts json
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
+  def user_list
+    user = User.find_by_id(params[:user_id])
+
+    raise 'not found' unless user
+
+    posts = user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+
+    render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
+
+    rescue => e
+    render json: {status: false, error: e.message}
+  end
+
   # 单独的资源，寻车
   #
   # Params:

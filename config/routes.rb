@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     namespace :posts do
       get   :list
       get   :my_list
+      get   :user_list
       get   :show
       post  :create
       post  :tender

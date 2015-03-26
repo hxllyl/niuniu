@@ -158,8 +158,12 @@ class User < ActiveRecord::Base
       area:     area_name,
       avatar:   avatar,
       contact:  contact,
-      dealt_infos: "最近三个月成交#{}, 累积成交#{}"
+      dealt_infos: dealt_infos
     }
+  end
+
+  def dealt_infos
+    "最近三个月成交#{}, 累积成交#{}"
   end
 
 end

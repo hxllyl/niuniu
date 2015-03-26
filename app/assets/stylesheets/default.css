@@ -139,7 +139,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .indexAppDL .appLink li .btn { width: 100%; }
 .indexAppDL .appLink li .btn .icon { position: relative; left: -10px; }
 .indexAppDL .tel { padding-bottom: 4px; margin-top: 16px; }
-.indexAppDL .tel .icon { width: 64px; height: 48px; background: url(icon_tel.png) no-repeat center; }
+.indexAppDL .tel .icon { width: 64px; height: 40px; padding-top: 8px; text-align: center; }
 .indexAppDL .tel .info { line-height: 24px; color: #666; }
 .searchBox { position: relative; }
 .searchBox .input { float: left; width: 74%; margin-right: 4%; font-size: 12px; }
