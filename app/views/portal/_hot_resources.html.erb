@@ -9,7 +9,7 @@
 					<div class="thumbnail box">
 						<a href="#" class="imgBox"><%= image_tag(post.photos[:front], alt: "", width: "100%")%></a>
 						<div class="caption intro">
-							<h5 class="name"><a href="#"><%= post.portal_resource_title %></a></h5>
+							<h5 class="name"><%= link_to post.portal_resource_title, post_path(post, {_type: 0}) %></h5>
 							<p class="price"><%= post.expect_price.to_f %>万元</p>
 							<p><%= post.user_company %></p>
 						</div>
