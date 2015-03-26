@@ -55,7 +55,7 @@ class PostsController < ApplicationController
   def show
     @post     = Post.find_by_id(params[:id])
     @someone  = @post.user
-    @follows  = current_user.followings & @someone.followers
+    @follows  = current_user.followings & @someone.followers if current_user
   end
 
   def user_list

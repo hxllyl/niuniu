@@ -125,7 +125,9 @@
     </div>
     <div class="col-md-3 mainRight">
       <%= render partial: 'partials/right_user' %>
-      <%= render partial: 'partials/right_joint_followings' %>
+      <%- if current_user %>
+        <%= render partial: 'partials/right_joint_followings' %>
+      <% end %>
       <%= render partial: 'partials/right_his_resources' %>
       <%= render partial: 'partials/right_his_needs' %>
     </div>
