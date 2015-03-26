@@ -1,0 +1,98 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="#">首页</a></li>
+    <li class="active">寻车列表</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div role="tabpanel" class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <ul class="selectCrumb clearfix">
+            <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
+          </ul>
+        </div>
+        <div class="panel-body">
+          <% @standards.each do |std| %>
+            <div class="carList clearfix">
+              <div class="tt"><%= std.name %></div>
+              <% std.car_models.with_brand(@brand).each do |car_model|%>
+                <ul class="list">
+                  <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
+                </ul>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">全部寻车（<%= @needs.count %>）</h3>
+        </div>
+        <div class="panel-body">
+          <div class="mySourceOpe">
+            <div class="btn-group">
+              <select name="" class="form-control">
+                <option value="排序方式">排序方式</option>
+                <option value="order1">默认排序</option>
+                <option value="order2">价格排序</option>
+              </select>
+            </div>
+          </div>
+          <div class="mySourceTab mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <tbody>
+              <% @needs.each do |post| %>
+                <tr>
+                  <td>
+                    <div class="box clearfix">
+                      <div class="infoM">
+                        <h5 class="name"><a href="#"><%= post.base_car_to_human_name %></a></h5>
+                        <div class="info clearfix">
+                          <div class="m">中规/现车</div>
+                          <div class="m"><%= post.outer_color %></div>
+                          <div class="m"><span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%")%></span><span><a href="#"><%= post.owner %></a></span><span class="statu"><%=following?(post.user)%></span></div>
+                        </div>
+                      </div>
+                      <div class="infoPrice">
+                        <p><span class="price"><i class="icon icon-money"></i><%= post.expect_price.to_f %>万</span><span class="time"><%= post.publish_time %></span></p>
+                        <p>指导价：<%= post.guiding_price.to_f%>万/<%= post.human_discount  %></p>
+                      </div>
+                    </div>
+                    <div class="remark clearfix">
+                      <div class="tt bfL">备注：</div>
+                      <div class="info"><%= post.remark %></div>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+
+      <%- if current_user %>
+          <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
+      <% else %>
+          <%= render partial: 'partials/right_login' %>
+      <% end %>
+
+      <%= render 'partials/right_search' %>
+      <%= render 'partials/right_history_list' %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".souSelList").find(".list > li").click(function(){
+    $(".souSelList").find(".list > li").removeClass("current");
+    $(this).addClass("current");
+  });
+});
+</script>
