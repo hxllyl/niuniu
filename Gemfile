@@ -117,3 +117,6 @@ end
 
 #api doc
 # gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
+
+# Plain Old Ruby Object
+gem 'virtus'

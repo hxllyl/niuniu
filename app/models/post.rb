@@ -86,6 +86,7 @@ class Post < ActiveRecord::Base
     self.resource_type = -1 if _type == 1
     # 寻车的报价方式可以为空，当用户不选时，我们给其一个默认值
     self.discount_way  = 5 unless discount_way
+    self.car_license_areas = '' if _type == 0
   end
 
   # alias method names

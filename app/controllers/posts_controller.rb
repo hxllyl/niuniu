@@ -7,15 +7,15 @@ class PostsController < ApplicationController
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     @_type = params[:_type]
-    @posts = Post.where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @posts = Post.includes(:base_car, :post_photos, :standards).where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   # 市场资源点击品牌进入资源列表页
   def resources_list
     rs = SearchResource.new(params)
     car_model = rs.car_model
-    @brand = rs.brand || Brand.first
-    @standards = Standard.where(id: @brand.standard_ids)
+    @brand = rs.brand
+    @standards = rs.standards
 
     # LESLIE: 这个地方需根据 _type 决定用 resources 还是 needs
     if car_model.present?
