@@ -21,6 +21,8 @@ class Api::ComplaintsController < Api::BaseController
 
     raise 'not found' unless ele
 
+    params.require(:complaint).permit!
+
     complaint = @user.complaints.new(params[:complaint])
 
     if complaint.save

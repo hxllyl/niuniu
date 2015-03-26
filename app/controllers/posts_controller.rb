@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require_relative '../../app/services/resource_search'
+require_relative '../../app/services/search_resource'
 
 class PostsController < ApplicationController
 
@@ -10,9 +10,9 @@ class PostsController < ApplicationController
     @posts = Post.where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
-  # 资源列表点击品牌进入资源列表页
+  # 市场资源点击品牌进入资源列表页
   def resources_list
-    rs = ResourceSearch.new(params)
+    rs = SearchResource.new(params)
     car_model = rs.car_model
     @brand = rs.brand || Brand.first
     @standards = Standard.where(id: @brand.standard_ids)
@@ -26,6 +26,11 @@ class PostsController < ApplicationController
 
   rescue => e
     render json: {status: :not_ok, msg: e.message}
+  end
+
+  # 寻车信息点击品牌进入寻车列表页
+  def needs_list
+
   end
 
   def show
