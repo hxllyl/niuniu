@@ -50,12 +50,14 @@ class User < ActiveRecord::Base
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
   belongs_to :customer_service, class_name: 'User'
-  has_many :customers, -> {where(role: 'staff')}, class_name: 'User', foreign_key: :customer_service_id 
+  has_many :customers, -> {where(role: 'staff')}, class_name: 'User', foreign_key: :customer_service_id
 
   has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :recevied_messages, class_name: 'Message', foreign_key: 'recevier_id'
-  
+
   belongs_to :area, class_name: 'Area'
+
+  has_many :log_posts, class_name: 'Log::Post'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
 
@@ -65,9 +67,9 @@ class User < ActiveRecord::Base
 
   # instance methods
   delegate :name, to: :area, prefix: true, allow_nil: true
-  
+
   self.inheritance_column = :mask
-  
+
   # 定义用户的各种类型图片
   %w(avatar identity hand_id visiting room_outer room_inner license).each do |m|
     unless User.respond_to?(m.to_sym)
@@ -134,7 +136,7 @@ class User < ActiveRecord::Base
       when LEVELS.keys[0] then
         'user/typeIcon_p.png'
       when LEVELS.keys[1] then
-        'user/typeIcon_p.png'  
+        'user/typeIcon_p.png'
       when LEVELS.keys[2] then
         'user/typeIcon_s.png'
       when LEVELS.keys[3] then
@@ -150,7 +152,7 @@ class User < ActiveRecord::Base
     conditions << " updated_at >= #{Time.now - 3.months}" if type == :month
     Post.completed.where(conditions).count + Tender.completed.where(conditions).count
   end
-  
+
   def can_upgrade_4s
     !LEVELS.keys[2..4].include?(level)
   end
