@@ -11,4 +11,6 @@ class Log::Post < ActiveRecord::Base
 
   scope :completeds, -> { where(method_name: /completed/) }
 
+  scope :last_months, ->(num) { where("created_at > ? and created_at < ?", Time.now.ago(num.months), Time.now) }
+
 end

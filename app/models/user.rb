@@ -176,8 +176,21 @@ class User < ActiveRecord::Base
     }
   end
 
+  def last_month_dealt
+    "最近三个月成交#{log_posts.completeds.last_months(3).count}"
+  end
+
+  def sum_dealt
+    "累积成交#{log_posts.completeds.count}"
+  end
+
   def dealt_infos
-    "最近三个月成交#{}, 累积成交#{}"
+    [last_month_dealt, sum_dealt].join(',')
+  end
+
+
+  def name_area
+    name << "(" << area_name << ")"
   end
 
 end

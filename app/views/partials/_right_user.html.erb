@@ -1,9 +1,9 @@
 <div class="panel panel-default contentBox bgf8">
 	<div class="panel-body indexUser">
 		<div class="userInfo clearfix">
-			<div class="photo bfL"><a href="#"><%= image_tag("index/user_photo.jpg", alt: "", size: '78x78')%></a></div>
+			<div class="photo bfL"><a href="#"><%= image_tag(@someone.avatar, alt: "", size: '78x78')%></a></div>
 			<div class="name">
-				<h5><a href="#">李木子(上海)</a></h5>
+				<h5><%= @someone.name_area %></h5>
 				<div class="clearfix"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></div>
 				<a class="btn btn-success btn-xs mt6" href="#" role="button"><span class="glyphicon glyphicon-plus"></span>加关注</a>
 			</div>
@@ -11,13 +11,13 @@
 		<div class="userDetail">
 			<p>自我评价：<span></span></p>
 			<p>注册地：<span></span></p>
-			<p><strong>最近三个月成交3台</strong></p>
-			<p><strong>累计成交3台</strong></p>
-			<p>公司名称：<span></span></p>
+			<p><strong><%= @someone.last_month_dealt %></strong></p>
+			<p><strong><%= @someone.sum_dealt %></strong></p>
+			<p>公司名称：<span><%= @someone.company %></span></p>
 			<p>职位：<span></span></p>
 			<p>微信：<span></span></p>
 			<p>QQ：<span></span></p>
-			<p>联系电话：<span>66668888</span></p>
+			<p>联系电话：<span><%= @someone.mobile %></span></p>
 		</div>
 		<div class="userArr"><span class="icon icon-user"></span></div>
 	</div>
