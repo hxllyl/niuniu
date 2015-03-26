@@ -14,10 +14,14 @@ class BaseCar < ActiveRecord::Base
   belongs_to :car_model,  class_name: 'CarModel' # 属于那种车型
   has_many   :car_photos, as: :owner, dependent: :nullify, autosave: true # 图片数据
 
+  delegate :name, to: :standard,  prefix: true
+  delegate :name, to: :brand,     prefix: true
+  delegate :name, to: :car_model, prefix: true
+
 
   # instance_methods
   def to_human_name
-    self.brand.name << self.car_model.name << self.NO
+    brand_name << car_model_name << self.NO
   end
 
   def to_hash
