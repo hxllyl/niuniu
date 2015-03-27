@@ -20,7 +20,7 @@
 							<td><a href="#" class="name">上海宝钢公司</a></td>
 							<td><%= ele[:area] %></td>
 							<td><%= ele[:brands] %></td>
-							<td><%= link_to '浏览', user_list_posts_path(user_id: ele[:user_id], _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
+							<td><%= link_to '浏览', user_list_posts_path(user_id: ele[:id], _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
 							<td><%= ele[:time] %></td>
 						</tr>
 					<% end %>

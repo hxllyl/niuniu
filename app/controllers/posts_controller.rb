@@ -61,6 +61,7 @@ class PostsController < ApplicationController
     @_type = params[:_type]
     @someone = User.find_by_id(params[:user_id])
     @posts = Post.where(user_id: params[:user_id], _type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @follows  = current_user.followings & @someone.followers if current_user
   end
 
   # 资源表 首页中间最底部的链接
