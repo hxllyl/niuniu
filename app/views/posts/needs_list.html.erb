@@ -16,35 +16,28 @@
           </ul>
         </div>
         <div class="panel-body">
-          <% @standards.each do |std| %>
-            <div class="carList clearfix">
-              <div class="tt"><%= std.name %></div>
-              <% std.car_models.with_brand(@brand).each do |car_model|%>
-                <ul class="list">
-                  <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
-                </ul>
-              <% end %>
-            </div>
-          <% end %>
           <div class="carList clearfix">
             <div class="tt">规格</div>
             <ul class="list">
-              <li><a href="#">中规</a></li>
-              <li><a href="#">美规</a></li>
+              <% @rs.all_standards.each do |std| %>
+                <li><a href=<%= needs_list_posts_path(standard_id: std.id) %>><%= std.name %></a></li>
+              <% end %>
             </ul>
           </div>
           <div class="carList clearfix">
             <div class="tt">品牌</div>
             <ul class="list">
-              <li><a href="#">宝马</a></li>
-              <li><a href="#">奔驰</a></li>
+              <% @rs.all_brands.each do |brand| %>
+                  <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
+              <% end %>
             </ul>
           </div>
           <div class="carList clearfix">
             <div class="tt">型号</div>
             <ul class="list">
-              <li><a href="#">宝马X5</a></li>
-              <li><a href="#">宝马X6</a></li>
+              <% @rs.all_car_models.each do |car_model| %>
+                  <li><a href=<%= needs_list_posts_path(car_model_id: car_model.id) %>><%= car_model.name %></a></li>
+              <% end %>
             </ul>
           </div>
         </div>
