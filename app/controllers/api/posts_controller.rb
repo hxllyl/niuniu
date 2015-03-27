@@ -183,7 +183,7 @@ class Api::PostsController < Api::BaseController
     post = Post.new(params[:post])
 
     # 资源传图
-    post._type == 0 && photos.each do |ele|
+    photos && photos.each do |ele|
       img = ele['file'].match(/<(.*)>/)[1]
       File.open('test.png', 'wb'){|f| f.write [img.gsub(/\s+/, '')].pack('H*')}
       post.post_photos.new(_type: ele['_type'], image: File.open("#{Rails.root}/test.png"))
