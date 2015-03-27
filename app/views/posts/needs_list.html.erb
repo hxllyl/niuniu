@@ -28,23 +28,29 @@
           </div>
           <div class="carList clearfix">
             <div class="tt">品牌</div>
-            <div class="listBox toggle">
-              <ul class="selectTag clearfix">
-                <li class="active"><a href="#">全部</a></li>
-                <li><a href="#">a</a></li>
-                <li><a href="#">b</a></li>
-                <li><a href="#">c</a></li>
-                <li><a href="#">d</a></li>
-                <li><a href="#">e</a></li>
-                <li><a href="#">f</a></li>
-                <li><a href="#">g</a></li>
-                <li><a href="#">h</a></li>
+            <div role="tabpanel" class="listBox toggle">
+              <ul class="selectTag nav-tabs clearfix" role="tablist">
+                <li role="presentation" class="active"><a href="#allBrand" aria-controls="allBrand" role="tab" data-toggle="tab">全部</a></li>
+                <li role="presentation"><a href="#brand_a" aria-controls="brand_a" role="tab" data-toggle="tab">a</a></li>
+                <li role="presentation"><a href="#brand_b" aria-controls="brand_b" role="tab" data-toggle="tab">b</a></li>
+                <li role="presentation"><a href="#brand_c" aria-controls="brand_c" role="tab" data-toggle="tab">c</a></li>
               </ul>
-              <ul class="list clearfix">
-                <% @rs.all_brands.each do |brand| %>
-                  <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
-                <% end %>
-              </ul>
+              <div class="tab-content">
+                <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
+                  <% @rs.all_brands.each do |brand| %>
+                    <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
+                  <% end %>
+                </ul>
+                <ul role="tabpanel" class="list tab-pane clearfix" id="brand_a">
+                  <li><a href="#">奥迪</a></li>
+                </ul>
+                <ul role="tabpanel" class="list tab-pane clearfix" id="brand_b">
+                  <li><a href="#">宝马</a></li>
+                </ul>
+                <ul role="tabpanel" class="list tab-pane clearfix" id="brand_c">
+                  <li><a href="#">昌河</a></li>
+                </ul>
+              </div>
               <div class="toggleBtn">[更多]</div>
             </div>
           </div>
@@ -141,9 +147,6 @@ $(document).ready(function(){
       $(this).html("[收起]");
       $(this).parents(".listBox").addClass("current");
     }
-  });
-  $(".selectTag").find("li").click(function(){
-    $(this).addClass("active").siblings().removeClass("active");
   });
 });
 </script>

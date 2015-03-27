@@ -267,10 +267,11 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .carList .tt { float: left; width: 100px; color: #333; }
 .carList .listBox { position: relative; margin-left: 100px; }
 .carList .listBox.toggle { padding-bottom: 20px; }
-.carList .selectTag { margin-bottom: 6px; }
+.carList .selectTag { margin-bottom: 6px; border: none; }
 .carList .listBox.toggle .selectTag { display: none; }
 .carList .listBox.toggle.current .selectTag { display: block; }
-.carList .selectTag li { float: left; height: 20px; line-height: 18px; padding: 0 6px; margin-right: 8px; border: 1px solid transparent; text-transform: capitalize; font-size: 12px; }
+.carList .selectTag li { float: left; height: 20px; line-height: 18px; padding: 0 6px; margin-right: 8px; margin-bottom: 0; border: 1px solid transparent; text-transform: capitalize; font-size: 12px; }
+.carList .selectTag li a, .carList .selectTag li.active a { margin: 0; border: none; border-radius: 0; }
 .carList .selectTag li a:hover { color: #f4621b; }
 .carList .selectTag li.active { line-height: 18px; color: #f4621b; border: 1px solid #f4621b; }
 .carList .selectTag li.active a { color: #f4621b; }
@@ -324,7 +325,8 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .userDataTag .list li a:hover, .userDataTag .list li.current a { text-decoration: none; color: #f4621b; }
 .userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
 .userDataTag .link a:hover { color: #f4621b; }
-.systemMesList li { line-height: 24px; padding: 10px 0 10px 30px; border-bottom: 1px solid #e6e6e6; color: #818181; background: url(dot9x9.png) no-repeat 4px 18px; }
+.systemMesList li { line-height: 24px; padding: 10px 0 10px 30px; border-bottom: 1px solid #e6e6e6; color: #818181; background-repeat: no-repeat; background-position: 4px 18px; }
+.systemMesList li.unread { background-image: url(dot9x9.png); }
 .systemMesList li .del { line-height: 24px; padding: 0; color: #9a9a9a; }
 .followersList { margin: 14px 0 0; border-top: 1px solid #e6e6e6; }
 .followersList li { position: relative; padding: 12px; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; }
