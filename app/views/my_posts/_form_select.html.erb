@@ -81,7 +81,7 @@
     <label for="car_address" class="col-md-4 control-label">上牌地点</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <input type="text" class="form-control input-sm" name="">
+        <input type="text" class="form-control input-sm" name="post[car_license_areas]">
       </div>
     </div>
   </div>
@@ -115,41 +115,41 @@
 <div class="methodSelect row">
   <div class="tt clearfix">
     <h5 class="col-md-6">报价方式</h5>
-    <h5 class="col-md-6">指导价：<span id="guidePrice">39.68</span>万</h5>
+    <h5 class="col-md-6">指导价：<span id="guidePrice"><%= price %></span>万</h5>
   </div>
   <div class="form-group form-inline col-md-6">
     <label class="radio disabled selectTag">
-      <input type="radio" name="methodRadios" id="methodRadios1" value="option1" disabled><span>优惠点数</span>
+      <input type="radio" name="post[discount_way]" id="methodRadios1" value="1" disabled><span>优惠点数</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
       <div class="units">点数</div>
     </label>
   </div>
   <div class="form-group form-inline col-md-6">
     <label class="radio selectTag">
-      <input type="radio" name="methodRadios" id="methodRadios2" value="option2"><span>优惠金额</span>
+      <input type="radio" name="post[discount_way]" id="methodRadios2" value="2"><span>优惠金额</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
       <div class="units">万元</div>
     </label>
   </div>
   <div class="form-group form-inline col-md-6">
     <label class="radio selectTag">
-      <input type="radio" name="methodRadios" id="methodRadios3" value="option3"><span>加价金额</span>
+      <input type="radio" name="post[discount_way]" id="methodRadios3" value="3"><span>加价金额</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
       <div class="units">万元</div>
     </label>
   </div>
   <div class="form-group form-inline col-md-6">
     <label class="radio selectTag">
-      <input type="radio" name="methodRadios" id="methodRadios4" value="option4"><span>直接报价</span>
+      <input type="radio" name="post[discount_way]" id="methodRadios4" value="4"><span>直接报价</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
       <div class="units">万元</div>
     </label>
   </div>

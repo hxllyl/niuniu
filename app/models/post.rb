@@ -78,9 +78,9 @@ class Post < ActiveRecord::Base
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way
-                          when 1 then (base_car.base_price * discount_content).to_f
-                          when 2 then (base_car.base_price - discount_content).to_f
-                          when 3 then (base_car.base_price + discount_content).to_f
+                          when 1 then base_car.base_price.to_f * discount_content
+                          when 2 then base_car.base_price.to_f - discount_content
+                          when 3 then base_car.base_price.to_f + discount_content
                           when 4 then discount_content.to_f
                         end
 

@@ -3,13 +3,14 @@
     <h3 class="panel-title">我要寻车</h3>
   </div>
   <div class="panel-body">
-    <form class="form-horizontal sourceForm">
+    <form class="form-horizontal sourceForm"action="<%= user_my_posts_path %>" method="post">
       <div id='form_select'>
-        <%= render partial: 'form_select', locals: {standards: @standards, brands: @brands, car_models: @car_models, base_cars: @base_cars, outer_colors: @outer_colors, inner_colors: @inner_colors, areas: @areas} %>
+        <%= render partial: 'form_select', locals: {standards: @standards, brands: @brands, car_models: @car_models, base_cars: @base_cars, outer_colors: @outer_colors, inner_colors: @inner_colors, areas: @areas, price: @price} %>
       </div>
       <div class="sFormBox clearfix">
         <div class="sFormTag bfL">备注</div>
-        <div class="sFormArea"><textarea class="form-control" rows="3"></textarea></div>
+        <div class="sFormArea"><textarea class="form-control" rows="3" name="post[remark]"></textarea></div>
+        <input class='hide' name="post[_type]" value="<%= @post._type %>">
       </div>
       <div class="subGroup row">
         <div class="form-group">
