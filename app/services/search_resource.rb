@@ -3,7 +3,7 @@ class SearchResource
 
   def initialize(options = {})
     @brand_id = options[:brand_id]
-    @model_id = options[:model_id]
+    @model_id = options[:car_model_id]
   end
 
   def brand
@@ -24,6 +24,18 @@ class SearchResource
 
   def standards
     Standard.where(id: brand.standard_ids)
+  end
+
+  def all_standards
+    Standard.all
+  end
+
+  def all_brands
+    Brand.all
+  end
+
+  def all_car_models
+    CarModel.all
   end
 
 end
