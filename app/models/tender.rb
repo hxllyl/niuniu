@@ -28,6 +28,8 @@ class Tender < ActiveRecord::Base
   scope :uncompleted, -> { where(status: 0) }
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
+  
+  delegate :car_license_areas, :color, :publish_time, :title, to: :post, prefix: true, allow_nil: true
 
   def get_price
     self.price =  case discount_way
@@ -40,6 +42,13 @@ class Tender < ActiveRecord::Base
 
   def gen_tender_log
     Log::Post.create(user_id: user_id, post_id: post_id, method_name: 'tender')
+  end
+  
+  # 逻辑删除 物理删除用real_delete
+  alias :real_delete :delete
+  
+  def delete
+    self.update(status: STATUS.keys[2])
   end
 
   def to_hash
