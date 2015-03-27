@@ -1,66 +1,12 @@
-<div class="container userOverview">
-  <div class="userInfo clearfix">
-    <div class="photo bfL"><%= image_tag("_temp/userPhoto.jpg", alt: "")%></div>
-    <div class="detail">
-      <div class="clearfix"><span class="name">李木子</span><span class="type"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span><a href="#" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span>升级</a></div>
-      <div class="detailTab">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td colspan="2">自我评价：</td>
-          </tr>
-          <tr>
-            <td colspan="2">注册地：</td>
-          </tr>
-          <tr>
-            <td colspan="2"><strong class="tip">最近三个月成交3台，累计成交3台</strong></td>
-          </tr>
-          <tr>
-            <td width="250">公司名称：</td>
-            <td width="250">职位：</td>
-          </tr>
-          <tr>
-            <td>微信：</td>
-            <td>QQ：</td>
-          </tr>
-          <tr>
-            <td colspan="2">联系电话：<span class="tip">66668888</span></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="userDataTag">
-    <ul class="list clearfix">
-      <li>
-        <a href="#">
-          <p class="num">8888</p>
-          <p>我的寻车</p>
-        </a>
-      </li>
-      <li class="active">
-        <a href="#">
-          <p class="num">8888</p>
-          <p>我的报价</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <p class="num">8888</p>
-          <p>我的关注</p>
-        </a>
-      </li>
-    </ul>
-    <div class="link"><a href="#">系统消息</a></div>
-  </div>
-  <a href="#" class="userArr"><span class="icon icon-edit"></span></a>
-</div>
+<%= render partial: 'partials/personal_center_head' %>
+
 <div class="container">
   <div class="row">
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <ul role="tablist" class="nav nav-tabs carInfoTabs sm">
-          <li role="presentation" class="active"><a href="#tabpanel1">未成交</a></li>
-          <li role="presentation"><a href="#tabpanel2">已成交</a></li>
+          <li role="presentation" class="active"><a href="#tabpanel1"><%= t('undone')%></a></li>
+          <li role="presentation"><a href="#tabpanel2"><%= t('done')%></a></li>
         </ul>
         <div class="panel-body">
           <div role="tabpanel" class="tab-pane active" id="tabpanel1">
@@ -78,136 +24,71 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr class="recall">
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a><div class="seal seal_recall_part"></div></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                    <td><span class="num">13.0</span></td>
-                    <td>河南</td>
-                    <td>黑/白</td>
-                    <td>李木子(上海)icon</td>
-                    <td>16:30</td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
-                  </tr>
+                  <% @uncompleted_tenders.each do |tender|%>
+                    <tr>
+                      <td><a href="#" class="name"><%= tender.post_title %></a></td>
+                      <td><span class="num"><%= tender.price %></span></td>
+                      <td><%= tender.post_car_license_areas -%></td>
+                      <td><%= tender.post_color -%></td>
+                      <td><%= tender.post.try(:user_name) -%>
+                          <%= image_tag(tender.post.user.level_icon, size: '50x20') -%>
+                      </td>
+                      <td><%= human_time(tender.updated_at) %></td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除
+                          </a>
+                      </td>
+                    </tr>
+                  <% end -%>
                 </tbody>
               </table>
             </div>
             <div class="pageList">
-              <%= paginate @uncompleted_posts %>
+              <%= paginate @uncompleted_tenders %>
             </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="tabpanel2">
-            暂无数据
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="30%">品牌/车型</th>
+                  <th width="12%">报价(万元)</th>
+                  <th width="12%">上牌地点</th>
+                  <th width="12%">外观/内饰</th>
+                  <th width="18%">发布人</th>
+                  <th width="10%">发布时间</th>
+                  <th width="6%">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @completed_tenders.each do |tender|%>
+                  <tr>
+                    <td><a href="#" class="name"><%= tender.post_title %></a></td>
+                    <td><span class="num"><%= tender.price %></span></td>
+                    <td><%= tender.post_car_license_areas -%></td>
+                    <td><%= tender.post_color -%></td>
+                    <td><%= tender.post.try(:user_name) %>
+                        <%= image_tag(tender.post.user.level_icon, size: '50x20') %>
+                    </td>
+                      
+                    <td><%= human_time(tender.updated_at) %></td>
+                    <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除</a></td>
+                  </tr>
+                <% end -%>
+              </tbody>
+            </table>
           </div>
+
         </div>
       </div>
     </div>
+    
     <div class="col-md-3 mainRight">
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">一键找车</h3>
-        </div>
-        <div class="panel-body">
-          <form class="searchBox">
-            <input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
-            <input type="submit" class="btn btn-primary subBtn" value="搜索" />
-          </form>
-        </div>
-      </div>
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">品牌筛选</h3>
-        </div>
-        <div class="panel-body brandSelect">
-          <div class="dropdown w100p">
-            <select name="" class="form-control">
-              <option value="品牌1">品牌1</option>
-              <option value="品牌2">品牌2</option>
-              <option value="品牌3">品牌3</option>
-            </select>
-          </div>
-          <input type="submit" class="btn btn-primary subBtn" value="提交">
-        </div>
-      </div>
+      <%= render partial: 'partials/right_search' -%>
     </div>
+    
   </div>
 </div>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>

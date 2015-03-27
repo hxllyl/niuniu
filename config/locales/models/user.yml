@@ -38,6 +38,8 @@ zh-CN:
             role:
               inclusion: 用户角色不正确
               blank: 角色不能为空
+            level:
+              inclusion: 用户等级不正确  
               
                    
          

@@ -32,12 +32,12 @@ class User < ActiveRecord::Base
   validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: true
   validates :role,  presence: true , inclusion: { in: ->(clazz){ clazz.class::ROLES} }
   validates :company, presence: true, length: { maximum: 100 }
-  validates :level, numericality: true, inclusion: { in: 0..3 }
+  validates :level, numericality: true, inclusion: { in: 0..4 }
 
   # tables relation
   has_many :photos, as: :owner, dependent: :nullify, autosave: true # 与图片类关联起来 处理用户图片
-  has_many :posts, class_name: 'Post' # 需求和寻车
-  has_many :tenders, class_name: 'Tender' # 报价
+  has_many :posts, ->{where("status != #{Post::STATUS.keys[4]}")}, class_name: 'Post' # 需求和寻车
+  has_many :tenders, ->{where("status != #{Tender::STATUS.keys[2]}")}, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
   has_many :tokens, class_name: 'Token', dependent: :nullify # 用于api验证
   has_many :follower_ships, foreign_key: :following_id, class_name: 'FollowShip' # 关注关系
@@ -49,11 +49,11 @@ class User < ActiveRecord::Base
   has_many :complaints, class_name: 'Complaint'
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
-  belongs_to :customer_service, class_name: 'User'
-  has_many :customers, -> {where(role: 'staff')}, class_name: 'User', foreign_key: :customer_service_id
+  
+  belongs_to :customer_service, class_name: 'Staff' 
 
   has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
-  has_many :recevied_messages, class_name: 'Message', foreign_key: 'recevier_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
 
   belongs_to :area, class_name: 'Area'
 

@@ -22,20 +22,25 @@ $(function(){
   
   });
   
-  // 跟新头像
-  // $('.fileBtn').on('click', function(e){
-  //
-  //   var box = $('.user_image');
-  //   $.post("/photos/level_uploads", {'_img[image]': box.val(), '_img[type]': box.attr('data_bype'),
-  //                                    '_img[level]': box.attr('data_level')},
-  //                                    function(data){
-  //                                      if(data.status == 'success'){
-  //                                        location.reload();
-  //                                      }else{
-  //
-  //                                      }
-  //
-  //                                    });
-  // });
-  //
+  // 取消用户
+  var cancelBtn = $('.cancelBtn');
+  
+  cancelBtn.on('click', function(e){
+    e.preventDefault();
+    
+    var cancel = $(this);
+    var id = cancel.attr('data-id');
+    var clazz = cancel.attr('data-clazz');
+    var type = cancel.attr('data-type');
+    var ban = cancel.attr('data-update');
+
+    var query = "?id=" + id + "&clazz=" + clazz + "&type=" + type ;
+    
+    $.get('/users/delete_relation.json' + query, function(data){
+      if(data.status == 'success'){
+        cancel.parent().parent().hide();
+        $('#'+ban).text(data.number);
+      }
+    });
+  });
 })

@@ -18,4 +18,15 @@ class Message < ActiveRecord::Base
   
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
+  
+  belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
+  
+  def for_api
+    {
+      title: title,
+      content: content,
+      status: status,
+      _type: _type
+    }
+  end
 end

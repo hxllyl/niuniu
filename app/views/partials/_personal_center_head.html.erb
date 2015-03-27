@@ -32,7 +32,7 @@
   </div>
   <div class="userDataTag">
     <%= render 'partials/user_profile' %>
-    <div class="link"><a href="#"><%= t('sys_msgs') -%></a></div>
+    <div class="link"><a href="<%= system_infos_user_path(current_user)%>"><%= t('sys_msgs') -%></a></div>
   </div>
   <a href="#" class="userArr"><span class="icon icon-edit"></span></a>
 </div>

@@ -78,9 +78,9 @@ class Post < ActiveRecord::Base
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way
-                          when 1 then (base_car.base_price * discount_content).to_f
-                          when 2 then (base_car.base_price - discount_content).to_f
-                          when 3 then (base_car.base_price + discount_content).to_f
+                          when 1 then base_car.base_price.to_f * discount_content
+                          when 2 then base_car.base_price.to_f - discount_content
+                          when 3 then base_car.base_price.to_f + discount_content
                           when 4 then discount_content.to_f
                         end
 
@@ -203,6 +203,13 @@ class Post < ActiveRecord::Base
 
   def is_completed?
     status == 3
+  end
+  
+  # 逻辑删除 物理删除用real_delete
+  alias :real_delete :delete
+  
+  def delete
+    self.update(status: STATUS.keys[4])
   end
 
   def url

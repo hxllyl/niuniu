@@ -1,0 +1,64 @@
+<div class="container accountsSetting">
+  <div class="row">
+    <div class="col-md-2 accountsMenu">
+      <h5 class="title"><span class="tt"><%= t('account_manage') %></span></h5>
+      <ul class="list">
+        <li><a href="<%= edit_user_path(current_user)%>"><span class="icon icon-userInfo"></span><%= t('custom_info') -%></a></li>
+        <li><a href="<%= my_level_user_path(current_user)%>"><span class="icon icon-level"></span><%= t('level_recon') -%></a></li>
+        <li><a href="<%= edit_user_password_path(current_user)%>"><span class="icon icon-pw"></span><%= t('password_change') -%></a></li>
+        <li class='active'><a href="<%= about_us_user_path(current_user)%>"><span class="icon icon-logo"></span><%= t('about_us') -%></a></li>
+        <li><a href="<%= destroy_user_session_path(:html, current_user)%>" data-method='delete'><span class="icon icon-quit"></span><%= t('safe_logout') -%></a></li>
+      </ul>
+    </div>
+    <div class="col-md-10 accountsMain">
+      <h5 class="title">您的专属客服经理</h5>
+      <div class="row aboutUsMain">
+        <div class="col-md-2 photoBox">
+          <div class="photo"><%= image_tag(@customer_service.avatar, alt: "",size: '78x78')%></div>
+          <div class="name"><span><%= @customer_service.name%></span>经理</div>
+          <div class="clearfix">
+          <span class="tag">
+          </span>
+          </div>
+        </div>
+        <div class="col-md-10 infoBox">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td>联系电话： <%= @customer_service.mobile -%></td>
+              <td>公司地址： <%= @customer_service.contact['company_address']%></td>
+            </tr>
+            <tr>
+              <td>微信：<%= @customer_service.contact['wx']%></td>
+              <td>公司电话：<%= @customer_service.contact['phone']%></td>
+            </tr>
+            <tr>
+              <td>QQ：<%= @customer_service.contact['qq'] %></td>
+              <td>公司网址：<%= @customer_service.contact['web_site'] %></td>
+            </tr>
+            <tr>
+              <td>备注：<%= @customer_service.contact['remark'] %></td>
+              <td>公司邮箱：<%= @customer_service.contact['company_email'] %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row aboutUsForm">
+        <div class="col-md-2">
+          <label for="" class="control-label">意见反馈：</label>
+        </div>
+        <div class="col-md-10">
+          <%= form_for Message.new, as: :message, url: users_messages_path, method: :post do |f| %>
+            <%= f.hidden_field :_type, value: Message::TYPES.keys[1] -%>
+            <%= f.hidden_field :sender_id, value: current_user.id -%>
+            <%= f.hidden_field :receiver_id, value: @customer_service.id -%>
+            <%= f.text_area :content, class: 'form-control', row: 4, placeHolder: '输入反馈内容' -%>
+            <div class="txtC mt10">
+              <%= f.submit t('commit'), class: "btn btn-default orange" %>
+              <input type="reset" class="btn btn-default" value="放弃" />
+            </div>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
