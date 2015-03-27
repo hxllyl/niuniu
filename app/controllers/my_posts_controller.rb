@@ -1,6 +1,8 @@
 # encoding: utf-8
-
 class MyPostsController < ApplicationController
+
+  skip_before_filter :verify_authenticity_token
+
   def index
     @_type = params[:_type]
     @posts = current_user.posts.where(_type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
@@ -16,6 +18,8 @@ class MyPostsController < ApplicationController
     @outer_colors = @base_cars.first.outer_color
     @inner_colors = @base_cars.first.inner_color
     @areas     = @brands.first.regions
+    @price     = nil
+    @flash     = params[:flash]
   end
 
   def get_select_infos
@@ -28,6 +32,7 @@ class MyPostsController < ApplicationController
       @outer_colors = @base_cars.first.outer_color
       @inner_colors = @base_cars.first.inner_color
       @areas     = @brands.first.regions
+      @price     = nil
     end
     if params[:post][:brand_id]
       @ele = Brand.find_by_id(params[:post][:brand_id])
@@ -38,6 +43,7 @@ class MyPostsController < ApplicationController
       @outer_colors = @base_cars.first.outer_color
       @inner_colors = @base_cars.first.inner_color
       @areas     = @brands.first.regions
+      @price     = nil
     end
     if params[:post][:car_model_id]
       @ele = CarModel.find_by_id(params[:post][:car_model_id])
@@ -48,6 +54,7 @@ class MyPostsController < ApplicationController
       @outer_colors = @base_cars.first.outer_color
       @inner_colors = @base_cars.first.inner_color
       @areas     = @brands.first.regions
+      @price     = @ele.base_cars.count == 1 ? @ele.base_cars.first.base_price : nil
     end
     if params[:post][:base_car_id]
       @ele = BaseCar.find_by_id(params[:post][:base_car_id])
@@ -58,6 +65,7 @@ class MyPostsController < ApplicationController
       @outer_colors = @base_cars.first.outer_color
       @inner_colors = @base_cars.first.inner_color
       @areas     = @brands.first.regions
+      @price     = ele.base_price
     end
 
 
@@ -67,6 +75,17 @@ class MyPostsController < ApplicationController
   end
 
   def create
+    params.require(:post).permit!
+    params[:post][:car_in_areas] = [params[:post][:car_in_areas]]
+    @post = Post.new(params[:post])
+
+    @post.user = current_user
+
+    if @post.save
+      redirect_to current_user
+    else
+      render action: new, flash: @post.errors
+    end
   end
 
   def edit
