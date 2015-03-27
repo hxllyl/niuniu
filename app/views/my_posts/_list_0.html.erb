@@ -318,9 +318,22 @@ $(".mySourceTab .table").find("tr").hover(function(){
 },function(){
   $(this).find(".btnGroups").hide();
 });
-$(".btnGroups").find(".upBtn").click(function(){
-  var aa = $(this).parents("tr").index();
-  $(this).parents("tr").index(aa - 1);
-  alert($(this).parents("tr").index());
+
+var trLength = $(".btnGroups").find(".downBtn").length;
+$(".btnGroups").find(".upBtn").each(function(){
+  $(this).click(function(){
+    var $tr = $(this).parents("tr");
+    if ($tr.index() != 0){
+      $tr.prev().before($tr);
+    }
+  });
+});
+$(".btnGroups").find(".downBtn").each(function(){
+  $(this).click(function(){
+    var $tr = $(this).parents("tr");
+    if ($tr.index() != trLength - 1){
+      $tr.next().after($tr);
+    }
+  });
 });
 <% end -%>
