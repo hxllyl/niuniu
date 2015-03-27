@@ -82,9 +82,10 @@
       <% else %>
           <%= render partial: 'partials/right_login' %>
       <% end %>
-
       <%= render 'partials/right_search' %>
-      <%= render 'partials/right_history_list' %>
+      <%- if current_user %>
+        <%= render 'partials/right_history_list' %>
+      <% end %>
     </div>
   </div>
 </div>
