@@ -136,7 +136,8 @@ class Post < ActiveRecord::Base
       discount_content: discount_content.to_f,
       photos:           photos,
       short_name:       base_car_NO,
-      updated_at:       updated_at
+      updated_at:       updated_at,
+      brand_image:      brand.car_photo.image.url
     }
   end
 
