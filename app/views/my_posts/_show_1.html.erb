@@ -17,25 +17,25 @@
           <div class="sourceDetail">
             <div class="row">
               <div class="col-md-6 con">
-                <h5 class="name">寻中规路虎揽胜运动 款式 3345</h5>
+                <h5 class="name"><%= @post.title %></h5>
                 <div class="info">
-                  <p>卖河南</p>
-                  <p>黑/白</p>
-                  <p>车辆所在区域要求：</p>
-                  <p>提车时间：</p>
+                  <p><%= @post.app_area %></p>
+                  <p><%= @post.color %></p>
+                  <p>车辆所在区域要求：<%= @post.car_in_areas %></p>
+                  <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date] %></p>
                 </div>
               </div>
               <div class="col-md-6 con">
                 <div class="info">
-                  <p class="price"><i class="icon icon-money"></i>期望的成交价：<span class="num">37.68万</span></p>
-                  <p>指导价：39.68万/下2万</p>
+                  <p class="price"><i class="icon icon-money"></i>期望的成交价：<span class="num"><%= @post.expect_price.to_f %>万</span></p>
+                  <p>指导价：<%= @post.base_car_base_price.to_f %>万/<%= @post.human_discount %></p>
                   <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
                 </div>
               </div>
             </div>
             <div class="row remark">
               <div class="tt bfL">备注：</div>
-              <div class="info">北京市公安局海淀分局网监中心备案编号：1101081535 |电信与信息服务业务经营许可证：京ICP证070240号|中国互联网协会会员单位。</div>
+              <div class="info"><%= @post.remark %></div>
             </div>
           </div>
           <div class="sourceTab">
@@ -49,139 +49,26 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr class="recall">
-                  <td><a href="#" class="name">李木子(上海)icon</a><div class="seal seal_recall_part"></div></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">李木子(上海)icon</a></td>
-                  <td><span class="num">13.0</span></td>
-                  <td>16:30</td>
-                  <td><a href="javascript:;" class="del">删除</a></td>
-                </tr>
+                <%- @post.tenders.each do |tender| %>
+                  <tr>
+                    <td><%= link_to tender.user.name, user_list_posts_path(tender.user, _type: 1) %></td>
+                    <td><span class="num"><%= tender.price.to_f %></span></td>
+                    <td><%= tender.publish_time %></td>
+                    <td><a href="javascript:;" class="del">删除</a></td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
           <div class="pageList">
-            <%= paginate @uncompleted_posts %>
+            <%=  %>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">一键找车</h3>
-        </div>
-        <div class="panel-body">
-          <form class="searchBox">
-            <input type="text" class="form-control input pr50" placeholder="品牌 车型 款式 指导价 …" />
-            <input type="submit" class="btn btn-primary subBtn" value="搜索" />
-          </form>
-        </div>
-      </div>
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">品牌筛选</h3>
-        </div>
-        <div class="panel-body brandSelect">
-          <div class="dropdown w100p">
-            <select name="" class="form-control">
-              <option value="品牌1">品牌1</option>
-              <option value="品牌2">品牌2</option>
-              <option value="品牌3">品牌3</option>
-            </select>
-          </div>
-          <input type="submit" class="btn btn-primary subBtn" value="提交">
-        </div>
-      </div>
+      <%= render partial: 'partials/right_search' %>
     </div>
   </div>
 </div>
-<div class="modal box bs-example-modal-sm" id="myReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title lineTitle" id="">举报</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group row">
-          <div class="radio-inline col-md-6">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">举报用户
-            </label>
-          </div>
-          <div class="radio-inline col-md-6">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">举报车源
-            </label>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="radio-inline col-md-6">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">举报寻车信息
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" rows="3" placeholder="输入详细内容"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="" class="btn btn-default w100p orange btn_spacing"data-dismiss="modal" aria-label="Close" >提交</button>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render partial: 'partials/complaint', locals: {resource_type: 'post', resource_id: post.id} %>

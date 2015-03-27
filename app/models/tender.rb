@@ -28,7 +28,7 @@ class Tender < ActiveRecord::Base
   scope :uncompleted, -> { where(status: 0) }
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
-  
+
   delegate :car_license_areas, :color, :publish_time, :title, to: :post, prefix: true, allow_nil: true
 
   def get_price
@@ -43,10 +43,10 @@ class Tender < ActiveRecord::Base
   def gen_tender_log
     Log::Post.create(user_id: user_id, post_id: post_id, method_name: 'tender')
   end
-  
+
   # 逻辑删除 物理删除用real_delete
   alias :real_delete :delete
-  
+
   def delete
     self.update(status: STATUS.keys[2])
   end
@@ -61,6 +61,10 @@ class Tender < ActiveRecord::Base
       time:   post.publish_time,
       tender: price
     }
+  end
+
+  def publish_time
+    updated_at < Date.today ? updated_at.strftime("%m/%d %H:%M") : updated_at.strftime("%H:%M")
   end
 
 end
