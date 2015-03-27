@@ -122,8 +122,8 @@
     <h5 class="col-md-6">指导价：<span id="guidePrice"><%= price %></span>万</h5>
   </div>
   <div class="form-group form-inline col-md-6">
-    <label class="radio disabled selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios1" value="1" disabled><span>优惠点数</span>
+    <label class="radio selectTag">
+      <input type="radio" name="post[discount_way]" id="methodRadios1" value="1"><span>优惠点数</span>
     </label>
     <label class="selectInput">
       <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
@@ -175,13 +175,13 @@ $(".selectInput").find("input.form-control").keyup(function(){
   clearNoNum(this);
 });
 
-$("#car_appearance").change(function(){
-  var aa = $("#car_appearance option:selected").val();
-  if (aa == "柚木棕"){
-    $(this).attr("disabled","true").hide();
-    $(this).next("input.form-control").removeClass("hide");
+/*$("#car_model_id").change(function(){
+  var aa = $("#car_model_id option:selected").val();
+  if (aa == "set_car_model"){
+    alert($(this).prevAll().attr("id"));
+    $(this).prevAll().attr("disabled","true").hide();
   }
-});
+});*/
 
 function clearNoNum(obj){
   obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
