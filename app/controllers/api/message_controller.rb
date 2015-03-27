@@ -27,7 +27,7 @@ class Api::MessagesController < Api::BaseController
     @msg = @user.send("#{method}").where("_type = ? and updated_at >= ?", type, date).order('updated_at desc')
     render json: { status: 200, notice: 'success', data: @msg.map(&:as_api) }
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: }
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
   
   # 反馈意见
@@ -44,6 +44,7 @@ class Api::MessagesController < Api::BaseController
   #   status: 500
   #   notice: failed
   #   error_msg: 错误信息
+  
   def create
     @message = Message.new message_params
     if @message.save
@@ -59,4 +60,5 @@ class Api::MessagesController < Api::BaseController
   def message_params
     params.require(:message).permit(:sender_id, :receiver_id, :title, :content, :_type)
   end
+  
 end
