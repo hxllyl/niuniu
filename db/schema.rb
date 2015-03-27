@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150326094131) do
     t.integer  "standard_id"
     t.string   "name",          limit: 40,             null: false
     t.string   "regions",                                           array: true
-    t.integer  "status",                   default: 1
+    t.integer  "status",                   default: 0
     t.integer  "click_counter",            default: 0
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false

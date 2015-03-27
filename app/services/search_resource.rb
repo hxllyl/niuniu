@@ -3,7 +3,7 @@ class SearchResource
 
   def initialize(options = {})
     @brand_id = options[:brand_id]
-    @model_id = options[:model_id]
+    @model_id = options[:car_model_id]
   end
 
   def brand
@@ -24,6 +24,22 @@ class SearchResource
 
   def standards
     Standard.where(id: brand.standard_ids)
+  end
+
+  def all_standards
+    @all_stands ||= Standard.all
+  end
+
+  def all_brands
+    @all_brands ||= Brand.all
+  end
+
+  def all_car_models
+    @all_car_models ||= CarModel.all
+  end
+
+  def brands_ordered_by_pinyin
+    all_brands.group_by { |e| Pinyin.t(e.name)[0].upcase }
   end
 
 end

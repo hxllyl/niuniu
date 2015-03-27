@@ -7,7 +7,7 @@ class Brand < ActiveRecord::Base
      1 => '激活',
      0 => '未激活'
   }
-  
+
   validates :name, presence: true, uniqueness: true
 
   # relations
@@ -16,6 +16,8 @@ class Brand < ActiveRecord::Base
   has_many   :base_cars,  class_name: 'BaseCar'  # 拥有多种车款
   has_one    :car_photo, as: :owner, dependent: :nullify # 品牌图片
   has_many   :posts
+
+  scope :valid, -> { where(status: 1) }
 
   def to_hash
     {

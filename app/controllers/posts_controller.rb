@@ -36,9 +36,9 @@ class PostsController < ApplicationController
 
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
-    rs = SearchResource.new(params)
-    car_model = rs.car_model
-    @brand = rs.brand || Brand.first
+    @rs = SearchResource.new(params)
+    car_model = @rs.car_model
+    @brand = @rs.brand
     @standards = Standard.where(id: @brand.standard_ids)
 
     # LESLIE: 这个地方需根据 _type 决定用 resources 还是 needs

@@ -33,8 +33,9 @@ namespace :util do
 
        st.save
 
-       br.standards << st unless br.standards.include?(st) 
+       br.standards << st unless br.standards.include?(st)
        br.regions = columns[8].split('、') unless columns[8].blank?
+       br.status = 1
        br.save
 
        cm.standard = st
