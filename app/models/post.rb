@@ -72,6 +72,8 @@ class Post < ActiveRecord::Base
 
   scope :with_brand, ->(brand) { where(brand_id: brand) }
 
+  scope :with_standard, ->(std) { where(standard_id: std) }
+
 
   # instance methods
   def get_some_must_attr
