@@ -119,29 +119,29 @@ class Post < ActiveRecord::Base
 
   def to_hash
     {
-      id: id,
-      user_id: user_id,
-      user_name: user_name,
-      user_mobile: user_mobile,
-      user_company: user_company,
-      user_level: User::LEVELS[user_level],
-      brand: brand_name,
-      model: car_model.name,
-      style: base_car.style,
-      outer_color: outer_color,
-      inner_color: inner_color,
+      id:                 id,
+      user_id:            user_id,
+      user_name:          user_name,
+      user_mobile:        user_mobile,
+      user_company:       user_company,
+      user_level:         User::LEVELS[user_level],
+      brand:              brand_name,
+      model:              car_model.name,
+      style:              base_car.style,
+      outer_color:        outer_color,
+      inner_color:        inner_color,
       car_license_areas:  car_license_areas,
-      car_in_areas:  car_in_areas,
-      take_car_date: take_car_date,
-      expect_price: expect_price.to_f,
-      discount_way:  DISCOUNT_WAYS[discount_way],
-      discount_content: discount_content.to_f,
-      photos:           photos,
-      short_name:       base_car_NO,
-      updated_at:       updated_at,
-      brand_image:      brand.car_photo.image.url,
-      base_path:              url,
-      tenders_count:    tenders.count
+      car_in_areas:       car_in_areas,
+      take_car_date:      take_car_date,
+      expect_price:       expect_price.to_f,
+      discount_way:       DISCOUNT_WAYS[discount_way],
+      discount_content:   discount_content.to_f,
+      photos:             photos,
+      short_name:         base_car_NO,
+      updated_at:         updated_at,
+      brand_image:        brand.car_photo.image.url,
+      base_path:          url,
+      tenders_count:      tenders.count
     }
   end
 
@@ -166,7 +166,7 @@ class Post < ActiveRecord::Base
   end
 
   def title
-    "#{_type == 0 ? '卖 ' : '寻 '}" + standard_name + brand_name + base_car_NO
+    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << brand_name << base_car_NO
   end
 
   def portal_resource_title
