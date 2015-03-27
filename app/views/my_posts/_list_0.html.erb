@@ -35,7 +35,7 @@
                   <td>
                     <div class="box clearfix">
                       <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
+                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 11111</a></h5>
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m">黑/白</div>
@@ -62,7 +62,7 @@
                   <td>
                     <div class="box clearfix">
                       <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
+                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 22222</a></h5>
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m">黑/白</div>
@@ -89,7 +89,7 @@
                   <td>
                     <div class="box clearfix">
                       <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
+                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 333</a></h5>
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m">黑/白</div>
@@ -116,7 +116,7 @@
                   <td>
                     <div class="box clearfix">
                       <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
+                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 444</a></h5>
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m">黑/白</div>
@@ -143,7 +143,7 @@
                   <td>
                     <div class="box clearfix">
                       <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
+                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 5555</a></h5>
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m">黑/白</div>
@@ -170,7 +170,7 @@
                   <td>
                     <div class="box clearfix">
                       <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
+                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 666</a></h5>
                         <div class="info clearfix">
                           <div class="m">中规/现车</div>
                           <div class="m">黑/白</div>
@@ -321,5 +321,10 @@ $(".mySourceTab .table").find("tr").hover(function(){
   $(this).find(".btnGroups").show();
 },function(){
   $(this).find(".btnGroups").hide();
+});
+$(".btnGroups").find(".upBtn").click(function(){
+  var aa = $(this).parents("tr").index();
+  $(this).parents("tr").index(aa - 1);
+  alert($(this).parents("tr").index());
 });
 <% end -%>
