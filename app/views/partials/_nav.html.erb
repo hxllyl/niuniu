@@ -23,7 +23,7 @@
             <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">个人中心</a></li>
-            <li><%= link_to t('sign_out'), destroy_user_session_path(:html, current_user), method: :delete %></li>
+            <li><%= link_to t('sign_out'), destroy_user_session_path, method: :delete %></li>
           </ul>
         </li>
       <% end -%>
