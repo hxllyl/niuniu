@@ -25,7 +25,7 @@
                 <tbody>
                   <%- @uncompleted_posts.each do |post| %>
                     <tr>
-                      <td><%= link_to post.title, user_my_post_path(current_user, post), class: 'name' %></td>
+                      <td><%= link_to post.title, user_my_post_path(current_user, post, _type: 1), class: 'name' %></td>
                       <td><span class="num"><%= post.tenders.count %></span></td>
                       <td><%= post.car_license_areas %></td>
                       <td><%= post.color %></td>
@@ -71,11 +71,11 @@
         </div>
       </div>
     </div>
-    
+
     <div class="col-md-3 mainRight">
       <%= render partial: 'partials/right_search' -%>
     </div>
-    
+
   </div>
 </div>
 
