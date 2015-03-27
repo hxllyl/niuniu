@@ -10,14 +10,14 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li>中规<span class="close" aria-label="Close">&times;</span></li>
-            <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
-            <li>宝马X5<span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.standard.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.brand.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body">
           <div class="carList clearfix">
-            <div class="tt">规格</div>
+            <div class="tt"></div>
             <ul class="list">
               <% @rs.all_standards.each do |std| %>
                 <li><a href=<%= needs_list_posts_path(standard_id: std.id) %>><%= std.name %></a></li>
