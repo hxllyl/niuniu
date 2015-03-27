@@ -10,9 +10,9 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li>中规<span class="close" aria-label="Close">&times;</span></li>
-            <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
-            <li>宝马X5<span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.standard.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.brand.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body">
