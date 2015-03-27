@@ -10,35 +10,53 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li>中规<span class="close" aria-label="Close">&times;</span></li>
-            <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
-            <li>宝马X5<span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.standard.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.brand.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body">
           <div class="carList clearfix">
             <div class="tt">规格</div>
-            <ul class="list">
-              <% @rs.all_standards.each do |std| %>
-                <li><a href=<%= needs_list_posts_path(standard_id: std.id) %>><%= std.name %></a></li>
-              <% end %>
-            </ul>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <% @rs.all_standards.each do |std| %>
+                  <li><a href=<%= needs_list_posts_path(standard_id: std.id) %>><%= std.name %></a></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
           <div class="carList clearfix">
             <div class="tt">品牌</div>
-            <ul class="list">
-              <% @rs.all_brands.each do |brand| %>
+            <div class="listBox toggle">
+              <ul class="selectTag clearfix">
+                <li class="active"><a href="#">全部</a></li>
+                <li><a href="#">a</a></li>
+                <li><a href="#">b</a></li>
+                <li><a href="#">c</a></li>
+                <li><a href="#">d</a></li>
+                <li><a href="#">e</a></li>
+                <li><a href="#">f</a></li>
+                <li><a href="#">g</a></li>
+                <li><a href="#">h</a></li>
+              </ul>
+              <ul class="list clearfix">
+                <% @rs.all_brands.each do |brand| %>
                   <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
-              <% end %>
-            </ul>
+                <% end %>
+              </ul>
+              <div class="toggleBtn">[更多]</div>
+            </div>
           </div>
           <div class="carList clearfix">
             <div class="tt">型号</div>
-            <ul class="list">
-              <% @rs.all_car_models.each do |car_model| %>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <% @rs.all_car_models.each do |car_model| %>
                   <li><a href=<%= needs_list_posts_path(car_model_id: car_model.id) %>><%= car_model.name %></a></li>
-              <% end %>
-            </ul>
+                <% end %>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -107,8 +125,25 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+  var winUrl = window.location.href;
   $(".souSelList").find(".list > li").click(function(){
+    alert(winUrl);
     $(this).addClass("current").siblings().removeClass("current");
+  });
+
+  $(".carList > .listBox").find(".toggleBtn").click(function(){
+    if ($(this).hasClass("active")){
+      $(this).removeClass("active").html("[更多]");
+      $(this).parents(".listBox").removeClass("current");
+    }
+    else {
+      $(this).addClass("active");
+      $(this).html("[收起]");
+      $(this).parents(".listBox").addClass("current");
+    }
+  });
+  $(".selectTag").find("li").click(function(){
+    $(this).addClass("active").siblings().removeClass("active");
   });
 });
 </script>

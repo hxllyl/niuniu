@@ -7,7 +7,7 @@ class Standard < ActiveRecord::Base
 
   has_many :base_cars, class_name: 'BaseCar' # 多种基础车辆数据
   has_and_belongs_to_many :brands, class_name: 'Brand' # 多种车辆品牌
-  has_many :car_models
+  has_many :car_models, class_name: 'CarModel' # 多种车型
 
   def to_hash
     {

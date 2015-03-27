@@ -1,0 +1,156 @@
+<div class="row first">
+  <div class="form-group col-md-6">
+    <label for="car_standard" class="col-md-4 control-label">规格</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[standard_id]" class="form-control input-sm" id="standard_id", data-remote="true", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <%- standards.each do |standard| %>
+          <option value="<%= standard.id %>"><%= standard[:name]%></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_brand" class="col-md-4 control-label">品牌</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[brand_id]" class="form-control input-sm" id="brand_id", data-remote="true", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> >
+          <%- brands.each do |brand| %>
+          <option value="<%= brand.id %>"><%= brand.name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_model" class="col-md-4 control-label">车型</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[car_model_id]" class="form-control input-sm" id="car_model_id", data-remote="true", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <%- car_models.each do |car_model| %>
+            <option value="<%= car_model.id %>"><%= car_model.name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_style" class="col-md-4 control-label">款式</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[base_car_id]" class="form-control input-sm" id="base_car_id", data-remote="true", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <%- base_cars.each do |base_car| %>
+            <option value="<%= base_car.id %>"><%= base_car.style %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_appearance" class="col-md-4 control-label">外观</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
+          <%- outer_colors.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_interior" class="col-md-4 control-label">内饰</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
+          <%- inner_colors.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_address" class="col-md-4 control-label">上牌地点</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <input type="text" class="form-control input-sm" name="">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_area" class="col-md-4 control-label">区域要求</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[car_in_areas]" class="form-control input-sm" id="car_area">
+          <%- areas.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_date" class="col-md-4 control-label">提车时间</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[take_car_date]" class="form-control input-sm" id="car_date">
+          <%- Post::TAKE_DATES.each do |k, v|%>
+            <option value="<%= k %>"><%= v%></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="methodSelect row">
+  <div class="tt clearfix">
+    <h5 class="col-md-6">报价方式</h5>
+    <h5 class="col-md-6">指导价：<span id="guidePrice">39.68</span>万</h5>
+  </div>
+  <div class="form-group form-inline col-md-6">
+    <label class="radio disabled selectTag">
+      <input type="radio" name="methodRadios" id="methodRadios1" value="option1" disabled><span>优惠点数</span>
+    </label>
+    <label class="selectInput">
+      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <div class="units">点数</div>
+    </label>
+  </div>
+  <div class="form-group form-inline col-md-6">
+    <label class="radio selectTag">
+      <input type="radio" name="methodRadios" id="methodRadios2" value="option2"><span>优惠金额</span>
+    </label>
+    <label class="selectInput">
+      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <div class="units">万元</div>
+    </label>
+  </div>
+  <div class="form-group form-inline col-md-6">
+    <label class="radio selectTag">
+      <input type="radio" name="methodRadios" id="methodRadios3" value="option3"><span>加价金额</span>
+    </label>
+    <label class="selectInput">
+      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <div class="units">万元</div>
+    </label>
+  </div>
+  <div class="form-group form-inline col-md-6">
+    <label class="radio selectTag">
+      <input type="radio" name="methodRadios" id="methodRadios4" value="option4"><span>直接报价</span>
+    </label>
+    <label class="selectInput">
+      <input type="text" class="form-control input-sm" id="" placeholder="">
+      <div class="units">万元</div>
+    </label>
+  </div>
+</div>

@@ -14,28 +14,34 @@
         <div class="panel-body souSelList">
           <div class="carList clearfix">
             <div class="tt">规格：</div>
-            <ul class="list">
-              <li><%= link_to '全部', needs_list_posts_path %></li>
-              <%- @standards.each do |sd| %>
-                <li><%= link_to sd.name, needs_list_posts_path(standard_id: sd.id) %></li>
-              <% end %>
-            </ul>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <li><%= link_to '全部', needs_list_posts_path %></li>
+                <%- @standards.each do |sd| %>
+                  <li><%= link_to sd.name, needs_list_posts_path(standard_id: sd.id) %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
           <div class="carList clearfix">
             <div class="tt">品牌：</div>
-            <ul class="list">
-              <%- @brands.each do |br| %>
-                <li><%= link_to br.name, needs_list_posts_path(brand_id: br.id) %></li>
-              <% end %>
-            </ul>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <%- @brands.each do |br| %>
+                  <li><%= link_to br.name, needs_list_posts_path(brand_id: br.id) %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
           <div class="carList last clearfix">
             <div class="tt">车型：</div>
-            <ul class="list">
-              <%- @car_models.each do |cm|%>
-                <li><%= link_to cm.name, needs_list_posts_path(car_model_id: cm.id) %></li>
-              <% end %>
-            </ul>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <%- @car_models.each do |cm|%>
+                  <li><%= link_to cm.name, needs_list_posts_path(car_model_id: cm.id) %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

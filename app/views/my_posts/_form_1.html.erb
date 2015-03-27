@@ -4,165 +4,8 @@
   </div>
   <div class="panel-body">
     <form class="form-horizontal sourceForm">
-      <div class="row first">
-        <div class="form-group col-md-6">
-          <label for="car_standard" class="col-md-4 control-label">规格</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_standard">
-                <%= @car_infos.each do |standard| %>
-                  <option value="#{standard[:id]}"><%= standard[:name]%></option>
-                <% end %>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="car_brand" class="col-md-4 control-label">品牌</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_brand">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="car_model" class="col-md-4 control-label">车型</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_model">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="car_style" class="col-md-4 control-label">款式</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_style">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="car_appearance" class="col-md-4 control-label">外观</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_appearance">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="car_interior" class="col-md-4 control-label">内饰</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_interior">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="car_address" class="col-md-4 control-label">上牌地点</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_address">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="car_area" class="col-md-4 control-label">区域要求</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_area">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="car_date" class="col-md-4 control-label">提车时间</label>
-          <div class="col-md-9 inputBox">
-            <div class="dropdown w100p">
-              <select name="" class="form-control input-sm" id="car_date">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="methodSelect row">
-        <div class="tt clearfix">
-          <h5 class="col-md-6">报价方式</h5>
-          <h5 class="col-md-6">指导价：<span id="guidePrice">39.68</span>万</h5>
-        </div>
-        <div class="form-group form-inline col-md-6">
-          <label class="radio selectTag">
-            <input type="radio" name="methodRadios" id="methodRadios1" value="option1"><span>优惠点数</span>
-          </label>
-          <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
-            <div class="units">点数</div>
-          </label>
-        </div>
-        <div class="form-group form-inline col-md-6">
-          <label class="radio selectTag">
-            <input type="radio" name="methodRadios" id="methodRadios2" value="option2"><span>优惠金额</span>
-          </label>
-          <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
-            <div class="units">万元</div>
-          </label>
-        </div>
-        <div class="form-group form-inline col-md-6">
-          <label class="radio selectTag">
-            <input type="radio" name="methodRadios" id="methodRadios3" value="option3"><span>加价金额</span>
-          </label>
-          <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
-            <div class="units">万元</div>
-          </label>
-        </div>
-        <div class="form-group form-inline col-md-6">
-          <label class="radio selectTag">
-            <input type="radio" name="methodRadios" id="methodRadios4" value="option4"><span>直接报价</span>
-          </label>
-          <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="">
-            <div class="units">万元</div>
-          </label>
-        </div>
+      <div id='form_select'>
+        <%= render partial: 'form_select', locals: {standards: @standards, brands: @brands, car_models: @car_models, base_cars: @base_cars, outer_colors: @outer_colors, inner_colors: @inner_colors, areas: @areas} %>
       </div>
       <div class="sFormBox clearfix">
         <div class="sFormTag bfL">备注</div>
@@ -178,10 +21,13 @@
   </div>
 </div>
 <%= javascript_tag do %>
+$(".selectInput").find("input.form-control").attr("disabled","true");
 $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
+  if ($(this).hasClass("disabled")) return false;
   $(".selectInput").find("input.form-control").attr("disabled","true");
   $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
   $(".selectInput").removeClass("active");
+  $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
   $(this).addClass("active").siblings().removeClass("active");
   $(this).next(".selectInput").addClass("active").focus();
 });

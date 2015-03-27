@@ -14,6 +14,12 @@ class CarModel < ActiveRecord::Base
   has_many   :base_cars, class_name: 'BaseCar'  # 拥有多种基础车辆
   has_many   :posts
 
+
+  # scopes
+
+  scope :with_brand, ->(brand) { where(brand_id: brand) }
+  scope :with_standard, ->(std) { where(standard_id: std) }
+
   def to_hash
     {
       id:             id,
@@ -21,11 +27,6 @@ class CarModel < ActiveRecord::Base
       name:           name,
       base_cars:      base_cars.map(&:to_hash)
     }
-  end
-
-
-  def self.with_brand(brand)
-    where(brand_id: brand)
   end
 
 end

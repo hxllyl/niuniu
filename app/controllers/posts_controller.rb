@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require_relative '../../app/services/search_resource'
+require_relative '../../app/services/list_resources'
 
 class PostsController < ApplicationController
 
@@ -20,17 +21,13 @@ class PostsController < ApplicationController
 
   # 市场资源点击品牌进入资源列表页
   def resources_list
-    rs = SearchResource.new(params)
-    car_model = rs.car_model
-    @brand = rs.brand
-    @standards = rs.standards
+    @rs = ListResources.new(params)
 
-    # LESLIE: 这个地方需根据 _type 决定用 resources 还是 needs
-    if car_model.present?
-      @resources = car_model.posts.includes(:base_car, :user).resources
-    else
-      @resources = Post.includes(:base_car, :user).resources.with_brand(@brand)
-    end
+    @resources = if @rs.car_model.present?
+                   @rs.car_model.posts.includes(:base_car, :user).resources
+                 else
+                   Post.includes(:base_car, :user).resources.with_brand(@rs.brand)
+                 end
 
   rescue => e
     render json: {status: :not_ok, msg: e.message}
@@ -39,19 +36,17 @@ class PostsController < ApplicationController
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
     @rs = SearchResource.new(params)
-    car_model = @rs.car_model
-    @brand = @rs.brand
-    @standards = Standard.where(id: @brand.standard_ids)
-
-    # LESLIE: 这个地方需根据 _type 决定用 resources 还是 needs
-    if car_model.present?
-      @needs = car_model.posts.needs
-    else
-      @needs = Post.needs.with_brand(@brand)
-    end
-
-  rescue => e
-    render json: {status: :not_ok, msg: e.message}
+    @needs = if @rs.car_model.present?
+               @rs.car_model.posts.needs
+             elsif @rs.brand.present?
+               Post.needs.with_brand(@rs.brand)
+             elsif @rs.standard.present?
+               Post.with_standard(@rs.standard).needs
+             else
+               Post.needs
+             end
+  # rescue => e
+  #   render json: {status: :not_ok, msg: e.message}
   end
 
   def show

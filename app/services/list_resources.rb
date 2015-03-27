@@ -1,4 +1,5 @@
-class SearchResource
+class ListResources
+
   attr_reader :brand_id, :model_id, :standard_id
 
   def initialize(options = {})
@@ -13,7 +14,7 @@ class SearchResource
     elsif brand_id.present?
       Brand.find brand_id
     else
-      nil
+      Brand.first
     end
   end
 
@@ -29,12 +30,12 @@ class SearchResource
     elsif car_model.present?
       car_model.standard
     else
-      nil
+      brand.standards.first
     end
   end
 
   def standards
-    Standard.where(id: brand.standard_ids) if brand.present?
+    Standard.where(id: brand.standard_ids)
   end
 
   def all_standards

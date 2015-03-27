@@ -121,7 +121,7 @@ namespace :database do
 
   desc "生成post浏览记录"
   task posts_views: :environment do
-    Post.all.sample(50).each do |post|
+    Post.resources.sample(50).each do |post|
       u_ids = User.where("id <> #{post.user_id}").map(&:id)
       u_ids.sample(rand(20)).each do |user_id|
         Log::Post.create(user_id: user_id, method_name: 'view', post_id: post.id)

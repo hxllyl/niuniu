@@ -45,6 +45,30 @@ class Api::PostsController < Api::BaseController
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
+  # 我的报价列表
+  #
+  # Params:
+  #   token:        [String]    valid token
+  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
+  #
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  #   data:   [JSON]    uncompleted and completed json
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
+  def my_tenders
+    uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).map(&:to_hash)
+    completed   = @user.tenders.completed.order(updated_at: :desc).map(&:to_hash)
+
+    render json: {status: 200, notice: 'success', data: {uncompleted: completed, completed: completed}}
+
+    rescue => e
+    render json: {status: false, error: e.message}
+  end
+
   # 他的资源列表，寻车列表
   #
   # Params:
@@ -152,9 +176,19 @@ class Api::PostsController < Api::BaseController
       params[:post][:car_model_id] = car_model.id
       params[:post][:base_car_id]  = base_car.id
 
+    photos = params.delete(params[:post][:post_photos])
+
     params.require(:post).permit!
 
     post = Post.new(params[:post])
+
+    # 资源传图
+    post._type == 0 && photos.each do |ele|
+      img = ele['file'].match(/<(.*)>/)[1]
+      File.open('test.png', 'wb'){|f| f.write [img.gsub(/\s+/, '')].pack('H*')}
+      post.post_photos.new(_type: ele['_type'], image: File.open("#{Rails.root}/test.png"))
+    end
+
     post.user = @user
 
     if post.save
@@ -162,7 +196,8 @@ class Api::PostsController < Api::BaseController
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
-
+    rescue => e
+    render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
   end
 
   # 报价

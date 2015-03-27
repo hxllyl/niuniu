@@ -9,12 +9,12 @@ Rails.application.routes.draw do
                                     passwords:     'users/passwords',
                                     unlocks:       'users/unlocks'
                                   }
-   
+
   namespace :users do
     resources :messages do
     end
-  end                               
-  
+  end
+
   resources :users, only: [ :show, :edit, :update ] do
     member do
       get :my_tenders
@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     get :delete_relation, on: :collection
     
     resources :my_posts do
+      collection do
+        get :get_select_infos
+      end
       resources :tenders, only: [ :show ]
     end
   end
@@ -71,6 +74,7 @@ Rails.application.routes.draw do
     namespace :posts do
       get   :list
       get   :my_list
+      get   :my_tenders
       get   :user_list
       get   :show
       post  :create

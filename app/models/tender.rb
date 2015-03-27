@@ -50,4 +50,17 @@ class Tender < ActiveRecord::Base
   def delete
     self.update(status: STATUS.keys[2])
   end
+
+  def to_hash
+    {
+      id:     id,
+      title:  post.title,
+      area:   post.app_area,
+      color:  post.color,
+      owner:  post.owner,
+      time:   post.publish_time,
+      tender: price
+    }
+  end
+
 end

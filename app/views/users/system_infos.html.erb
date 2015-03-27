@@ -9,13 +9,13 @@
         <div class="panel-body">
           <ul class="systemMesList">
             <% @sys_messages.each do |message|%>
-            <li>
+            <li class="<%= 'unread' if message.status == Message::STATUS.keys[0] %>">
               <div class="info"><%= message.content %></div>
               <div class="clearfix">
                 <div class="date bfL"><%= human_time(message.updated_at)%></div>
-                <div>
-                <a href="#" class="btn btn-link del bfR"><span class="icon icon-del"></span>删除</a>
-              </div>
+                
+                <a href="#" class="btn btn-link del bfR cancelBtn" data-id="<%= message.id %>" data-type="received_messages" data-clazz="message" data-update='messages'><span class="icon icon-del"></span>删除</a>
+                
               </div>
             </li>
             <% end -%>
@@ -56,3 +56,7 @@
     </div>
   </div>
 </div>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>
