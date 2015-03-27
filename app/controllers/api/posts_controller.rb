@@ -185,7 +185,8 @@ class Api::PostsController < Api::BaseController
     # 资源传图
     post._type == 0 && photos.each do |ele|
       img = ele['file'].match(/<(.*)>/)[1]
-      post.post_photos.new(_type: ele['_type'], image: File.open('test.png', 'wb'){|f| f.write [img.gsub(/\s+/, '')].pack('H*')})
+      File.open('test.png', 'wb'){|f| f.write [img.gsub(/\s+/, '')].pack('H*')}
+      post.post_photos.new(_type: ele['_type'], image: File.open("#{Rails.root}/test.png"))
     end
 
     post.user = @user
@@ -195,7 +196,8 @@ class Api::PostsController < Api::BaseController
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
-
+    rescue => e
+    render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
   end
 
   # 报价
