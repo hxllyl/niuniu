@@ -33,6 +33,7 @@
           <%- car_models.each do |car_model| %>
             <option value="<%= car_model.id %>"><%= car_model.name %></option>
           <% end %>
+          <option value="set_car_model">自定义</option>
         </select>
       </div>
     </div>
@@ -45,6 +46,7 @@
           <%- base_cars.each do |base_car| %>
             <option value="<%= base_car.id %>"><%= base_car.style %></option>
           <% end %>
+          <option value="set_base_car">自定义</option>
         </select>
       </div>
     </div>
