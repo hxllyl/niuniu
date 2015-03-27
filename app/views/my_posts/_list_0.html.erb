@@ -16,11 +16,7 @@
             <div class="bfL">
               <a class="btn btn-default orange mr14" href="#" role="button">添加资源</a>
               <div class="btn-group">
-                <select name="" class="form-control">
-                  <option value="筛选品牌">筛选品牌</option>
-                  <option value="品牌1">品牌1</option>
-                  <option value="品牌2">品牌2</option>
-                </select>
+                <%= select_tag 'brand', options_for_select(all_brand, @brand_id), class: 'form-control', prompt:  '筛选品牌'%>
               </div>
             </div>
             <div class="bfR">
