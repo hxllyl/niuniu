@@ -50,7 +50,7 @@ class SearchResource
   end
 
   def brands_ordered_by_pinyin
-    all_brands.group_by { |e| Pinyin.t(e.name)[0].upcase }
+    @ordered_brands = all_brands.group_by { |e| Pinyin.t(e.name)[0].upcase }
   end
 
 end
