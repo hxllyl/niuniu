@@ -114,7 +114,9 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+  var winUrl = window.location.href;
   $(".souSelList").find(".list > li").click(function(){
+    alert(winUrl);
     $(this).addClass("current").siblings().removeClass("current");
   });
 });
