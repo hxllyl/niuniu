@@ -26,6 +26,46 @@
               </div>
             </div>
           <% end %>
+          <div class="carList clearfix">
+            <div class="tt">规格</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <li><a href="#">中规</a></li>
+                <li><a href="#">美规</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="carList clearfix">
+            <div class="tt">品牌</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <li><a href="#">宝马</a></li>
+                <li><a href="#">奔驰</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="carList clearfix">
+            <div class="tt">车型</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <li><a href="#">宝马X5</a></li>
+                <li><a href="#">宝马X6</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="carList clearfix">
+            <div class="tt">车款</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <li><a href="#">宝马X5</a></li>
+                <li><a href="#">宝马X6</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="carList clearfix">
+            <div class="tt"></div>
+            <div class="listBox"><input type="submit" class="btn btn-default btn_spacing" value="搜索"></div>
+          </div>
         </div>
       </div>
       <div class="panel panel-default contentBox">
@@ -95,7 +135,7 @@
 $(document).ready(function(){
   var winUrl = window.location.search;
   $(".souSelList").find(".list > li >a").click(function(){
-    alert($.getUrlParam("model_id"));
+    //alert($.getUrlParam("model_id"));
     $(this).addClass("current").siblings().removeClass("current");
   });
 });

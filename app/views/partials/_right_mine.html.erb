@@ -1,7 +1,7 @@
 <div class="panel panel-default contentBox bgf8">
   <div class="panel-body indexUser">
     <div class="userInfo clearfix">
-      <div class="photo bfL"><a href="#"><%= image_tag current_user.avatar, size: '78x78', alt: "我的头像" -%></a></div>
+      <div class="photo bfL"><a href="<%= user_path(current_user) %>"><%= image_tag current_user.avatar, size: '78x78', alt: "我的头像" -%></a></div>
       <div class="name">
         <h5><%= link_to current_user.name + '(' + current_user.area.try(:name).to_s + ')', current_user %></h5>
         <div class="clearfix"><span class="tag"><%= image_tag current_user.level_icon, alt: "", width: '100%' %></span></div>
@@ -9,19 +9,19 @@
     </div>
     <ul class="row userData">
       <li class="col-md-4">
-        <a href="#">
+        <a href="<%= user_path(current_user) %>">
           <p class="data"><%= current_user.posts_with_type(Post::TYPES.keys[1]).count %></p>
           <p class="tt"><%= I18n.t('i_post')%></p>
         </a>
       </li>
       <li class="col-md-4">
-        <a href="#">
+        <a href="<%= my_tenders_user_path(current_user) %>">
           <p class="data"><%= current_user.tenders.count %></p>
           <p class="tt"><%= I18n.t('i_tender') %></p>
         </a>
       </li>
       <li class="col-md-4 last">
-        <a href="#">
+        <a href="<%= my_followers_user_path(current_user) %>">
           <p class="data"><%= current_user.followings.count %></p>
           <p class="tt"><%= I18n.t('i_following') %></p>
         </a>
