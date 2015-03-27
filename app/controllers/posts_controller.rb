@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     @_type = params[:_type]
-    @posts = Post.includes(:base_car, :post_photos, :standards).where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @posts = Post.includes(:base_car, :post_photos, :standard).where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   # 市场资源点击品牌进入资源列表页

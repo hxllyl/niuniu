@@ -6,10 +6,10 @@ class UsersController < BaseController
     @user = User.find params[:id]
     if @user.update_attributes user_params
       if params[:_image].present?
-        if @user.avatar.blank?
+        avatar = @user.photos.find_by(_type: 'avatar')
+        unless avatar
           @user.photos << Photo.new(image: params[:_image], _type: params[:_type])
         else
-          avatar = @user.photos.find_by(_type: 'avatar')
           avatar.update(image: params[:_image], _type: params[:_type])
         end
       end
@@ -54,7 +54,7 @@ class UsersController < BaseController
         current_user.photos << Photo.new(image: img_box[:_image], _type: img_box[:_type])
       end
       current_user.level = params[:level].to_i
-      current_user.save
+      current_user.save!
       current_user.reload
     end
     respond_to do |format|
@@ -64,10 +64,12 @@ class UsersController < BaseController
       }
     end
   rescue => ex
-    format.html {
-      flash[:failed] = t('failed')
-      render action: :edit_my_level
-    }
+    respond_to do |format|
+      format.html {
+        flash[:failed] = t('failed')
+        render action: :edit_my_level
+      }
+    end
   end
 
   def about_us
