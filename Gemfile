@@ -120,3 +120,7 @@ end
 
 # Plain Old Ruby Object
 gem 'virtus'
+
+# translate chinese to Pinyin
+gem 'chinese_pinyin'
+

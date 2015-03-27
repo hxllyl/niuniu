@@ -100,6 +100,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    chinese_pinyin (0.7.0)
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -329,6 +330,7 @@ DEPENDENCIES
   capistrano-unicorn
   capybara (~> 2.3.0)
   carrierwave
+  chinese_pinyin
   database_cleaner
   devise
   factory_girl_rails (~> 4.0)
