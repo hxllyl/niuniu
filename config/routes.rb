@@ -25,6 +25,9 @@ Rails.application.routes.draw do
       put :update_my_level
       get :about_us
     end
+    
+    get :delete_relation, on: :collection
+    
     resources :my_posts do
       resources :tenders, only: [ :show ]
     end

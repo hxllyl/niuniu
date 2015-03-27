@@ -199,5 +199,12 @@ class Post < ActiveRecord::Base
   def is_completed?
     status == 3
   end
+  
+  # 逻辑删除 物理删除用real_delete
+  alias :real_delete :delete
+  
+  def delete
+    self.update(status: STATUS.keys[4])
+  end
 
 end

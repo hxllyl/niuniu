@@ -23,17 +23,47 @@ class UsersController < BaseController
 
   def show
     @uncompleted_posts = current_user.posts.needs.where(status: 1).order(updated_at: :desc).page(params[:page]).per(10)
-    @completed_posts   = current_user.posts.needs.completed.order(updated_at: :desc).page(params[:page]).per(10)
+    @completed_posts   = current_user.posts.needs.completed.order(updated_at: :desc)
     @done_months       = current_user.posts.needs.where("updated_at >= ?", 3.months.from_now)
   end
 
   def my_tenders
+    @uncompleted_tenders = Tender.includes(:post).uncompleted.where(user_id: current_user.id).order('updated_at desc').page(params[:page]).per(10)
+    @completed_tenders = Tender.includes(:post).completed.where(user_id: current_user.id).order('updated_at desc')
   end
 
   def my_followers
+    @key = params[:key]
+    if @key
+      query = "mobile like ? or name like ?"
+      @followings = current_user.followings.where("#{query}", "%#{@key}%", "%#{@key}%").page(params[:page]).per(30)
+    else
+      @followings = current_user.followings.page(params[:page]).per(30)
+    end
+  end
+  
+  def delete_relation
+    clazz = params[:clazz].classify.constantize
+    
+    object = clazz.find params[:id]
+    if clazz == Post
+     current_user.send("#{params[:type]}").needs.delete object
+     new_counter = current_user.send("#{params[:type]}").needs.count
+    else
+     current_user.send("#{params[:type]}").delete object
+     new_counter = current_user.send("#{params[:type]}").count
+    end
+    
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: { status: 'success', number: new_counter }
+      }
+    end
   end
 
   def system_infos
+    @sys_messages = current_user.received_messages.where(_type: Message::TYPES.keys[0]).order('updated_at desc').page(params[:page]).per(10)
   end
 
   def my_level
@@ -53,9 +83,6 @@ class UsersController < BaseController
       else
         current_user.photos << Photo.new(image: img_box[:_image], _type: img_box[:_type])
       end
-      current_user.level = params[:level].to_i
-      current_user.save!
-      current_user.reload
     end
     respond_to do |format|
       format.html {

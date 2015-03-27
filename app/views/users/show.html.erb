@@ -30,7 +30,7 @@
                       <td><%= post.car_license_areas %></td>
                       <td><%= post.color %></td>
                       <td><%= post.publish_time %></td>
-                      <td><%= link_to '删除', user_my_post_path(current_user, post), method: :delete, class: 'del' %></td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts"> 删除 </td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -61,14 +61,11 @@
                       <td><%= post.car_license_areas %></td>
                       <td><%= post.color %></td>
                       <td><%= post.publish_time %></td>
-                      <td><%= link_to '删除', user_my_post_path(current_user, post), method: :delete, class: 'del' %></td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts">删除</td></td>
                     </tr>
                   <% end %>
                 </tbody>
               </table>
-            </div>
-            <div class="pageList">
-              <%= paginate @uncompleted_posts %>
             </div>
           </div>
         </div>
@@ -81,3 +78,7 @@
     
   </div>
 </div>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>
