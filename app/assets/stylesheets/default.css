@@ -265,7 +265,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .selectCrumb li.active { display: block; }
 .carList { padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
 .carList.last { border-bottom: none; }
-.carList .tt { float: left; width: 100px; color: #333; }
+.carList .tt { float: left; width: 100px; line-height: 26px; color: #333; }
 .carList .listBox { position: relative; margin-left: 100px; }
 .carList .listBox.toggle { padding-bottom: 20px; }
 .carList .selectTag { margin-bottom: 6px; border: none; }
