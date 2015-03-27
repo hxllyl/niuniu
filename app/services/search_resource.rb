@@ -27,15 +27,19 @@ class SearchResource
   end
 
   def all_standards
-    Standard.all
+    @all_stands ||= Standard.all
   end
 
   def all_brands
-    Brand.all
+    @all_brands ||= Brand.all
   end
 
   def all_car_models
-    CarModel.all
+    @all_car_models ||= CarModel.all
+  end
+
+  def brands_ordered_by_pinyin
+    all_brands.group_by { |e| Pinyin.t(e.name)[0].upcase }
   end
 
 end
