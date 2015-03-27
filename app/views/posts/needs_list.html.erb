@@ -47,7 +47,7 @@
                 <% @rs.brands_ordered_by_pinyin.each do |(letter, brands)| %>
                     <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
                       <% brands.each do |brand| %>
-                          <li><a href="#"><%= brand.name %></a></li>
+                          <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
                       <% end %>
                     </ul>
                 <% end %>
