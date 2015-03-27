@@ -17,11 +17,13 @@
           <% @standards.each do |std| %>
             <div class="carList clearfix">
               <div class="tt"><%= std.name %></div>
-              <% std.car_models.with_brand(@brand).each do |car_model|%>
-                <ul class="list">
-                  <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
+              <div class="listBox">
+                <ul class="list clearfix">
+                  <% std.car_models.with_brand(@brand).each do |car_model|%>
+                    <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
+                  <% end %>
                 </ul>
-              <% end %>
+              </div>
             </div>
           <% end %>
         </div>

@@ -262,14 +262,26 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .selectCrumb { }
 .selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; margin-right: 6px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }
 .selectCrumb li .close { margin: 1px 0 0 8px; }
-.carList { line-height: 26px; padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
+.carList { padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
 .carList.last { border-bottom: none; }
 .carList .tt { float: left; width: 100px; color: #333; }
-.carList .list { margin-left: 100px; }
-.carList .list li { float: left; height: 26px; padding: 0 6px; margin-right: 20px; border: 1px solid transparent; }
+.carList .listBox { position: relative; margin-left: 100px; }
+.carList .listBox.toggle { padding-bottom: 20px; }
+.carList .selectTag { margin-bottom: 6px; }
+.carList .listBox.toggle .selectTag { display: none; }
+.carList .listBox.toggle.current .selectTag { display: block; }
+.carList .selectTag li { float: left; height: 20px; line-height: 18px; padding: 0 6px; margin-right: 8px; border: 1px solid transparent; text-transform: capitalize; font-size: 12px; }
+.carList .selectTag li a:hover { color: #f4621b; }
+.carList .selectTag li.active { line-height: 18px; color: #f4621b; border: 1px solid #f4621b; }
+.carList .selectTag li.active a { color: #f4621b; }
+.carList .list { }
+.carList .listBox.toggle .list { height: 104px; overflow: hidden; }
+.carList .listBox.toggle.current .list { height: auto; }
+.carList .list li { float: left; height: 26px; line-height: 26px; padding: 0 6px; margin-right: 20px; border: 1px solid transparent; }
 .carList .list li.current { line-height: 26px; border: 1px solid #f4621b; }
 .carList .list li a { color: #458cc7; }
 .carList .list li.current a { color: #f4621b; }
+.carList .listBox .toggleBtn { position: absolute; bottom: 0; right: 0; height: 20px; line-height: 20px; font-size: 12px; color: #458cc7; cursor: pointer; }
 .carSourceHis li { position: relative; line-height: 24px; padding: 4px 0; border-top: 1px solid #e6e6e6; color: #666; }
 .carSourceHis li.first { border-top: none; }
 .carSourceHis li .name { line-height: 24px; }
