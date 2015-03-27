@@ -49,8 +49,8 @@ class User < ActiveRecord::Base
   has_many :complaints, class_name: 'Complaint'
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
-  
-  belongs_to :customer_service, class_name: 'Staff' 
+
+  belongs_to :customer_service, class_name: 'Staff'
 
   has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
@@ -191,6 +191,14 @@ class User < ActiveRecord::Base
 
   def name_area
     name << "(" << area_name << ")"
+  end
+
+  def brands_ary
+    posts.resources.map(&:brand_name).uniq.join(' ')
+  end
+
+  def heading_show
+    %w(2 3 4).include?(level) ? company : name
   end
 
 end

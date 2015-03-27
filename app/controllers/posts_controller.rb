@@ -12,11 +12,8 @@ class PostsController < ApplicationController
     @standards  = Standard.all
     @brands     = Brand.order(click_counter: :desc).limit(20)
     @car_models = CarModel.order(click_counter: :desc).limit(40)
-
-    # posts   = Post.includes(:base_car, :post_photos, :standard, :brand).where(_type: params[:_type]).order(updated_at: :desc).select(:user_id).distinct
     posts   = Post.includes(:base_car, :post_photos, :standard, :brand).where(_type: params[:_type]).order(updated_at: :desc).group_by(&:user_id).collect{|k, v| v.first}
     @posts  =  Kaminari.paginate_array(posts).page(params[:page]).per(10)
-
   end
 
   # 市场资源点击品牌进入资源列表页
@@ -61,11 +58,12 @@ class PostsController < ApplicationController
     @_type = params[:_type]
     @someone = User.find_by_id(params[:user_id])
     @posts = Post.where(user_id: params[:user_id], _type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @follows  = current_user.followings & @someone.followers if current_user
   end
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-    @posts = Post.all.page(params[:page]).per(10)
+    @users = User.where("id" => Post.resources.map(&:user_id)).page(params[:page]).per(10)
   end
 
 end
