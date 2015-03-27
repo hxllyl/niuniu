@@ -10,16 +10,16 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li><%= @brand.name %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.brand.name %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body souSelList">
-          <% @standards.each do |std| %>
+          <% @rs.standards.each do |std| %>
             <div class="carList clearfix">
               <div class="tt"><%= std.name %></div>
               <div class="listBox">
                 <ul class="list clearfix">
-                  <% std.car_models.with_brand(@brand).each do |car_model|%>
+                  <% std.car_models.with_brand(@rs.brand).each do |car_model|%>
                     <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
                   <% end %>
                 </ul>
