@@ -6,6 +6,7 @@ class CreateCarModels < ActiveRecord::Migration
 
       t.column :name,   :string, null: false # 车型
       t.column :status, :integer, default: 1 # 1 激活 0 未激活
+      t.column :click_counter, :integer, default: 0 #点击率，用于排序
       t.timestamps null: false
     end
   end
