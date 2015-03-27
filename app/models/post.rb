@@ -139,7 +139,9 @@ class Post < ActiveRecord::Base
       photos:           photos,
       short_name:       base_car_NO,
       updated_at:       updated_at,
-      brand_image:      brand.car_photo.image.url
+      brand_image:      brand.car_photo.image.url,
+      base_path:              url,
+      tenders_count:    tenders.count
     }
   end
 
@@ -201,6 +203,14 @@ class Post < ActiveRecord::Base
 
   def is_completed?
     status == 3
+  end
+
+  def url
+    "#{APP_CONFIG['host']}/posts/#{id}?_type=#{_type}"
+  end
+
+  def app_area
+    "#{_type == 0 ? '卖 ' : '寻 '}" + car_license_areas
   end
 
 end

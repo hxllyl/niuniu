@@ -42,4 +42,16 @@ class Tender < ActiveRecord::Base
     Log::Post.create(user_id: user_id, post_id: post_id, method_name: 'tender')
   end
 
+  def to_hash
+    {
+      id:     id,
+      title:  post.title,
+      area:   post.app_area,
+      color:  post.color,
+      owner:  post.owner,
+      time:   post.publish_time,
+      tender: price
+    }
+  end
+
 end
