@@ -29,7 +29,7 @@
             <div class="tt">品牌</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <% @rs.standard.brands.each do |brand| %>
+                <% Array(@rs.standard.try(:brands)).each do |brand| %>
                     <li>
                       <a href=<%= resources_list_posts_path(brand_id: brand.id) %>>
                         <%= brand.name %>
@@ -57,7 +57,7 @@
             <div class="tt">车款</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <% @rs.styles.each do |style| %>
+                <% Array(@rs.styles).each do |style| %>
                     <li>
                       <a href=<%= resources_list_posts_path(base_car_id: style.id) %>>
                         <%= style.style %>

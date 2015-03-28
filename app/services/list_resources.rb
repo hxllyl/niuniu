@@ -1,15 +1,18 @@
 class ListResources
 
-  attr_reader :brand_id, :model_id, :standard_id
+  attr_reader :brand_id, :model_id, :standard_id, :base_car_id
 
   def initialize(options = {})
     @brand_id = options[:brand_id]
     @model_id = options[:car_model_id]
     @standard_id = options[:standard_id]
+    @base_car_id = options[:base_car_id]
   end
 
   def brand
-    if car_model.present?
+    if base_car_id.present?
+      BaseCar.find(base_car_id).brand
+    elsif car_model.present?
       car_model.brand
     elsif brand_id.present?
       Brand.find brand_id
@@ -34,7 +37,7 @@ class ListResources
     if car_model.present?
       car_model.base_cars
     else
-      brand.car_models.first.base_cars
+      brand.car_models.first.try(:base_cars)
     end
   end
 
