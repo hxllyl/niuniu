@@ -36,8 +36,8 @@ class User < ActiveRecord::Base
 
   # tables relation
   has_many :photos, as: :owner, dependent: :nullify, autosave: true # 与图片类关联起来 处理用户图片
-  has_many :posts, ->{where("status != #{Post::STATUS.keys[4]}")}, class_name: 'Post' # 需求和寻车
-  has_many :tenders, ->{where("status != #{Tender::STATUS.keys[2]}")}, class_name: 'Tender' # 报价
+  has_many :posts, ->{where("posts.status != #{Post::STATUS.keys[4]}")}, class_name: 'Post' # 需求和寻车
+  has_many :tenders, ->{where("tenders.status != #{Tender::STATUS.keys[2]}")}, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
   has_many :tokens, class_name: 'Token', dependent: :nullify # 用于api验证
   has_many :follower_ships, foreign_key: :following_id, class_name: 'FollowShip' # 关注关系
@@ -187,7 +187,6 @@ class User < ActiveRecord::Base
   def dealt_infos
     [last_month_dealt, sum_dealt].join(',')
   end
-
 
   def name_area
     name << "(" << area_name << ")"

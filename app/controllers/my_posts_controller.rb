@@ -5,8 +5,16 @@ class MyPostsController < ApplicationController
 
   def index
     @_type = params[:_type]
-    @brand_id = params[:brand_id]
-    @posts = current_user.posts.where(_type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @brand_id = params[:brand_id] 
+    unless @brand_id.blank?
+      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order(updated_at: :desc).page(params[:page]).per(10)
+    else
+      @posts = current_user.posts.where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
+    end
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   def new
