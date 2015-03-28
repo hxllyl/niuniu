@@ -24,6 +24,20 @@ class ListResources
     end
   end
 
+  def car_models
+    if brand.present?
+      brand.car_models
+    end
+  end
+
+  def styles
+    if car_model.present?
+      car_model.base_cars
+    else
+      brand.car_models.first.base_cars
+    end
+  end
+
   def standard
     if standard_id.present?
       Standard.find standard_id
