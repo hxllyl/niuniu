@@ -14,24 +14,14 @@
           </ul>
         </div>
         <div class="panel-body souSelList">
-          <% @rs.standards.each do |std| %>
-            <div class="carList clearfix">
-              <div class="tt"><%= std.name %></div>
-              <div class="listBox">
-                <ul class="list clearfix">
-                  <% std.car_models.with_brand(@rs.brand).each do |car_model|%>
-                    <li><a href=<%= resources_list_posts_path(model_id: car_model.id) %> ><%= car_model.name %></a></li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          <% end %>
+
           <div class="carList clearfix">
             <div class="tt">规格</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <li><a href="#">中规</a></li>
-                <li><a href="#">美规</a></li>
+                <% @rs.all_standards.each do |std| %>
+                    <li><a href=<%= resources_list_posts_path(standard_id: std.id) %>><%= std.name %></li>
+                <% end %>
               </ul>
             </div>
           </div>
@@ -39,8 +29,13 @@
             <div class="tt">品牌</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <li><a href="#">宝马</a></li>
-                <li><a href="#">奔驰</a></li>
+                <% Array(@rs.standard.try(:brands)).each do |brand| %>
+                    <li>
+                      <a href=<%= resources_list_posts_path(brand_id: brand.id) %>>
+                        <%= brand.name %>
+                      </a>
+                    </li>
+                <% end %>
               </ul>
             </div>
           </div>
@@ -48,8 +43,13 @@
             <div class="tt">车型</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <li><a href="#">宝马X5</a></li>
-                <li><a href="#">宝马X6</a></li>
+                <% @rs.brand.car_models.each do |car_model| %>
+                    <li>
+                      <a href=<%= resources_list_posts_path(car_model_id: car_model.id) %>>
+                        <%= car_model.name %>
+                      </a>
+                    </li>
+                <% end %>
               </ul>
             </div>
           </div>
@@ -57,65 +57,22 @@
             <div class="tt">车款</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <li><a href="#">宝马X5</a></li>
-                <li><a href="#">宝马X6</a></li>
+                <% Array(@rs.styles).each do |style| %>
+                    <li>
+                      <a href=<%= resources_list_posts_path(base_car_id: style.id) %>>
+                        <%= style.style %>
+                      </a>
+                    </li>
+                <% end %>
               </ul>
             </div>
           </div>
-          <div class="carList clearfix">
-            <div class="tt"></div>
-            <div class="listBox"><input type="submit" class="btn btn-default btn_spacing" value="搜索"></div>
-          </div>
         </div>
       </div>
-      <div class="panel panel-default contentBox">
-        <div class="panel-heading lineTitle">
-          <h3 class="panel-title">全部资源（<%= @resources.count %>）</h3>
-        </div>
-        <div class="panel-body">
-          <div class="mySourceOpe">
-            <div class="btn-group">
-              <select name="" class="form-control">
-                <option value="排序方式">排序方式</option>
-                <option value="order1">默认排序</option>
-                <option value="order2">价格排序</option>
-              </select>
-            </div>
-          </div>
-          <div class="mySourceTab mt10">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
-              <tbody>
-              <% @resources.each do |post| %>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#"><%= post.base_car_to_human_name %></a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m"><%= post.outer_color %></div>
-                          <div class="m"><span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%")%></span><span><a href="#"><%= post.owner %></a></span><span class="statu"><%=following?(post.user)%></span></div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price"><i class="icon icon-money"></i><%= post.expect_price.to_f %>万</span><span class="time"><%= post.publish_time %></span></p>
-                        <p>指导价：<%= post.guiding_price.to_f%>万/<%= post.human_discount  %></p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"><%= post.remark %></div>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="pageList">
-          </div>
-        </div>
-      </div>
+
+      <% if params[:base_car_id] %>
+          <%= render partial: 'resources_list', locals: { resources: @resources } %>
+      <% end %>
     </div>
     <div class="col-md-3 mainRight">
 
@@ -126,25 +83,26 @@
       <% end %>
       <%= render 'partials/right_search' %>
       <%- if current_user %>
-        <%= render 'partials/right_history_list' %>
+          <%= render 'partials/right_history_list' %>
       <% end %>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){
-  var winUrl = window.location.search;
-  $(".souSelList").find(".list > li >a").click(function(){
-    //alert($.getUrlParam("model_id"));
-    $(this).addClass("current").siblings().removeClass("current");
-  });
-});
+    $(document).ready(function () {
+        var winUrl = window.location.search;
+        $(".souSelList").find(".list > li >a").click(function () {
+            //alert($.getUrlParam("model_id"));
+            $(this).addClass("current").siblings().removeClass("current");
+        });
+    });
 
-(function($){
-  $.getUrlParam = function(name){
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r!=null) return unescape(r[2]); return null;
-  }
-})(jQuery);
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+    })(jQuery);
 </script>
