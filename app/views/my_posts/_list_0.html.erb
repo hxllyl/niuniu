@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="bfR">
-              <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.publish_time %></span></div>
+              <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.try(:publish_time) %></span></div>
               <button class="btn btn-default bfR" type="button"><span class="icon icon-refresh"></span>全部更新</button>
             </div>
           </div>
