@@ -20,10 +20,8 @@ class PostsController < ApplicationController
   def resources_list
     @rs = ListResources.new(params)
 
-    @resources = if @rs.car_model.present?
-                   @rs.car_model.posts.includes(:base_car, :user).resources
-                 else
-                   Post.includes(:base_car, :user).resources.with_brand(@rs.brand)
+    @resources = if params[:base_car_id].present?
+                   Post.resources.where(base_car_id: params[:base_car_id])
                  end
 
   rescue => e
