@@ -133,12 +133,6 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-  var winUrl = window.location.href;
-  $(".souSelList").find(".list > li").click(function(){
-    alert(winUrl);
-    $(this).addClass("current").siblings().removeClass("current");
-  });
-
   $(".carList > .listBox").find(".toggleBtn").click(function(){
     if ($(this).hasClass("active")){
       $(this).removeClass("active").html("[更多]");

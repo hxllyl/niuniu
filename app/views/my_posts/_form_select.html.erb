@@ -144,7 +144,7 @@
       <input type="radio" name="post[discount_way]" id="methodRadios1" value="1"><span>优惠点数</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
+      <input type="text" class="form-control input-sm" id="methodVal1" placeholder="" name="post[discount_content]">
       <div class="units">点数</div>
     </label>
   </div>
@@ -153,7 +153,7 @@
       <input type="radio" name="post[discount_way]" id="methodRadios2" value="2"><span>优惠金额</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
+      <input type="text" class="form-control input-sm" id="methodVal2" placeholder="" name="post[discount_content]">
       <div class="units">万元</div>
     </label>
   </div>
@@ -162,7 +162,7 @@
       <input type="radio" name="post[discount_way]" id="methodRadios3" value="3"><span>加价金额</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
+      <input type="text" class="form-control input-sm" id="methodVal3" placeholder="" name="post[discount_content]">
       <div class="units">万元</div>
     </label>
   </div>
@@ -171,131 +171,117 @@
       <input type="radio" name="post[discount_way]" id="methodRadios4" value="4"><span>直接报价</span>
     </label>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="" placeholder="" name="post[discount_content]">
+      <input type="text" class="form-control input-sm" id="methodVal4" placeholder="" name="post[discount_content]">
       <div class="units">万元</div>
     </label>
   </div>
 </div>
 
-<script>
-  $(function() {
-    $('body').on('change', '#post_standard_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
+<script type="text/javascript">
+$(document).ready(function(){
+  $('body').on('change', '#post_standard_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
 
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id
         }
-      });
-    });
-
-    $('body').on('change', '#post_brand_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
-      var brand_id = $('#brand_id').val();
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id,
-            brand_id: brand_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
-        }
-      });
-    });
-
-    $('body').on('change', '#post_car_model_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
-      var brand_id = $('#post_brand_id').val();
-      var car_model_id = $('#post_car_model_id').val();
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id,
-            brand_id: brand_id,
-            car_model_id: car_model_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
-        }
-      });
-    });
-
-    $('body').on('change', '#post_base_car_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
-      var brand_id = $('#post_brand_id').val();
-      var car_model_id = $('#post_car_model_id').val();
-      var base_car_id = $('#post_base_car_id').val();
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id,
-            brand_id: brand_id,
-            car_model_id: car_model_id,
-            base_car_id: bae_car_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
-        }
-      });
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
     });
   });
 
-$(".selectInput").find("input.form-control").attr("disabled","true");
-$(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-  if ($(this).hasClass("disabled")) return false;
+  $('body').on('change', '#post_brand_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
+    var brand_id = $('#brand_id').val();
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id,
+          brand_id: brand_id
+        }
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
+    });
+  });
+
+  $('body').on('change', '#post_car_model_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
+    var brand_id = $('#post_brand_id').val();
+    var car_model_id = $('#post_car_model_id').val();
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id,
+          brand_id: brand_id,
+          car_model_id: car_model_id
+        }
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
+    });
+  });
+
+  $('body').on('change', '#post_base_car_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
+    var brand_id = $('#post_brand_id').val();
+    var car_model_id = $('#post_car_model_id').val();
+    var base_car_id = $('#post_base_car_id').val();
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id,
+          brand_id: brand_id,
+          car_model_id: car_model_id,
+          base_car_id: bae_car_id
+        }
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
+    });
+  });
+
   $(".selectInput").find("input.form-control").attr("disabled","true");
-  $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
-  $(".selectInput").removeClass("active");
-  $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
-  $(this).addClass("active").siblings().removeClass("active");
-  $(this).next(".selectInput").addClass("active").focus();
-});
+  $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
+    if ($(this).hasClass("disabled")) return false;
+    $(".selectInput").find("input.form-control").attr("disabled","true");
+    $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
+    $(".selectInput").removeClass("active");
+    $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
+    $(this).addClass("active").siblings().removeClass("active");
+    $(this).next(".selectInput").addClass("active").focus();
+  });
 
-$(".selectInput").find("input.form-control").keyup(function(){
-  clearNoNum(this);
+  $(".selectInput").find("input.form-control").keyup(function(){
+    clearNoNum(this);
+  });
 });
-
-function selectArr(thisObj,selectOpt){
-  var objSelect = thisObj.find("option:selected").val();
-  var objSelectArr = new Array();
-  if (objSelect == selectOpt){
-    thisObj.parents(".form-group").prevAll(".form-group").find("select").each(function(){
-      objSelectArr.push($(this).attr("id"));
-    });
-    thisObj.parents(".row").prevAll(".row").find("select").each(function(){
-      objSelectArr.push($(this).attr("id"));
-    });
-  }
-  alert(objSelectArr[0]);
-}
 
 function clearNoNum(obj){
   obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
