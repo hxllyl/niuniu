@@ -33,59 +33,21 @@ class MyPostsController < ApplicationController
     @inner_colors = @base_cars.first.inner_color
     @areas     = @brands.first.regions
     @price     = nil
-    @flash     = params[:flash]
   end
 
   def get_select_infos
-    if params[:post][:standard_id]
-      @ele = Standard.find_by_id(params[:post][:standard_id])
-      @standards = Standard.all
-      @brands = @ele.brands.valid
-      @car_models = CarModel.where(standard_id: @ele.id, brand_id: @ele.brands.first.id)
-      @base_cars = @car_models.first.base_cars
-      @outer_colors = @base_cars.first.outer_color
-      @inner_colors = @base_cars.first.inner_color
-      @areas     = @brands.first.regions
-      @price     = nil
-    end
-    if params[:post][:brand_id]
-      @ele = Brand.find_by_id(params[:post][:brand_id])
-      @standards = @ele.standards
-      @brands = Brand.valid
-      @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @ele.id)
-      @base_cars = @car_models.first ? @car_models.first.base_cars : []
-      @outer_colors = @base_cars.first.outer_color
-      @inner_colors = @base_cars.first.inner_color
-      @areas     = @brands.first.regions
-      @price     = nil
-    end
-    if params[:post][:car_model_id]
-      @ele = CarModel.find_by_id(params[:post][:car_model_id])
-      @standards = Standard.all
-      @brands = @ele.standard.brands.valid
-      @car_models = CarModel.where(standard_id: @ele.standard_id, brand_id: @ele.brand_id)
-      @base_cars = @ele.base_cars
-      @outer_colors = @base_cars.first.outer_color
-      @inner_colors = @base_cars.first.inner_color
-      @areas     = @brands.first.regions
-      @price     = @ele.base_cars.count == 1 ? @ele.base_cars.first.base_price : nil
-    end
-    if params[:post][:base_car_id]
-      @ele = BaseCar.find_by_id(params[:post][:base_car_id])
-      @standards = Standard.all
-      @brands = ele.standard.brands.valid
-      @car_models = CarModel.where(standard_id: @ele.standard_id, brand_id: @ele.brand_id)
-      @base_cars = @ele.car_model.base_cars
-      @outer_colors = @base_cars.first.outer_color
-      @inner_colors = @base_cars.first.inner_color
-      @areas     = @brands.first.regions
-      @price     = ele.base_price
-    end
+    @standards  = Standard.all
+    @standard   = Standard.find_by_id(params[:post][:standard_id])
+    @brands     = @standard.brands.valid
+    @brand      = params[:post][:brand_id] ? Brand.find_by_id(params[:post][:brand_id]) : nil
+    @car_models = @brand ? @brand.car_models.valid : @brands.first.car_models.valid
+    @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : nil
+    @base_cars  = @car_model ?  @car_model.base_cars.valid : @car_models.first.base_cars.valid
 
+    @car_model = @base_car = @base_cars = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @car_model  == 'set_car_model'
+    @base_car = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @base_car  == 'set_base_car'
 
-    respond_to do |format|
-      format.js
-    end
+    render :partial => 'form_select'
   end
 
   def create
