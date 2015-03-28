@@ -159,110 +159,110 @@
   </div>
 </div>
 
-<script>
-  $(function() {
-    $('body').on('change', '#post_standard_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
+<script type="text/javascript">
+$(document).ready(function(){
+  $('body').on('change', '#post_standard_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
 
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id
         }
-      });
-    });
-
-    $('body').on('change', '#post_brand_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
-      var brand_id = $('#brand_id').val();
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id,
-            brand_id: brand_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
-        }
-      });
-    });
-
-    $('body').on('change', '#post_car_model_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
-      var brand_id = $('#post_brand_id').val();
-      var car_model_id = $('#post_car_model_id').val();
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id,
-            brand_id: brand_id,
-            car_model_id: car_model_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
-        }
-      });
-    });
-
-    $('body').on('change', '#post_base_car_id', function(){
-      var url = $(this).data('url');
-      var standard_id = $('#post_standard_id').val();
-      var brand_id = $('#post_brand_id').val();
-      var car_model_id = $('#post_car_model_id').val();
-      var base_car_id = $('#post_base_car_id').val();
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        data: {
-          post: {
-            standard_id: standard_id,
-            brand_id: brand_id,
-            car_model_id: car_model_id,
-            base_car_id: bae_car_id
-          }
-        },
-        success: function(data){
-          console.log('data')
-          $("#form_select").html(data)
-        }
-      });
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
     });
   });
 
-$(".selectInput").find("input.form-control").attr("disabled","true");
-$(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-  if ($(this).hasClass("disabled")) return false;
-  $(".selectInput").find("input.form-control").attr("disabled","true");
-  $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
-  $(".selectInput").removeClass("active");
-  $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
-  $(this).addClass("active").siblings().removeClass("active");
-  $(this).next(".selectInput").addClass("active").focus();
-});
+  $('body').on('change', '#post_brand_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
+    var brand_id = $('#brand_id').val();
 
-$(".selectInput").find("input.form-control").keyup(function(){
-  clearNoNum(this);
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id,
+          brand_id: brand_id
+        }
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
+    });
+  });
+
+  $('body').on('change', '#post_car_model_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
+    var brand_id = $('#post_brand_id').val();
+    var car_model_id = $('#post_car_model_id').val();
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id,
+          brand_id: brand_id,
+          car_model_id: car_model_id
+        }
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
+    });
+  });
+
+  $('body').on('change', '#post_base_car_id', function(){
+    var url = $(this).data('url');
+    var standard_id = $('#post_standard_id').val();
+    var brand_id = $('#post_brand_id').val();
+    var car_model_id = $('#post_car_model_id').val();
+    var base_car_id = $('#post_base_car_id').val();
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        post: {
+          standard_id: standard_id,
+          brand_id: brand_id,
+          car_model_id: car_model_id,
+          base_car_id: bae_car_id
+        }
+      },
+      success: function(data){
+        console.log('data')
+        $("#form_select").html(data)
+      }
+    });
+  });
+
+  $(".selectInput").find("input.form-control").attr("disabled","true");
+  $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
+    if ($(this).hasClass("disabled")) return false;
+    $(".selectInput").find("input.form-control").attr("disabled","true");
+    $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
+    $(".selectInput").removeClass("active");
+    $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
+    $(this).addClass("active").siblings().removeClass("active");
+    $(this).next(".selectInput").addClass("active").focus();
+  });
+
+  $(".selectInput").find("input.form-control").keyup(function(){
+    clearNoNum(this);
+  });
 });
 
 function clearNoNum(obj){

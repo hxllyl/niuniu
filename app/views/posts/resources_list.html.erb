@@ -10,11 +10,13 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li><%= @rs.brand.name %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.standard.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.brand.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body souSelList">
-
           <div class="carList clearfix">
             <div class="tt">规格</div>
             <div class="listBox">
@@ -67,19 +69,62 @@
               </ul>
             </div>
           </div>
-          <div class="carList clearfix">
-            <div class="tt"></div>
-            <div class="listBox"><input type="submit" class="btn btn-default btn_spacing" value="搜索"></div>
+          <div class="hideCarList">
+            <div class="carList clearfix">
+              <div class="tt">外观</div>
+              <div class="listBox">
+                <ul class="list clearfix">
+                  <li><a href="#">外观</a></li>
+                  <li><a href="#">外观</a></li>
+                  <li><a href="#">外观</a></li>
+                  <li><a href="#">外观</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="carList clearfix">
+              <div class="tt">内饰</div>
+              <div class="listBox">
+                <ul class="list clearfix">
+                  <li><a href="#">内饰</a></li>
+                  <li><a href="#">内饰</a></li>
+                  <li><a href="#">内饰</a></li>
+                  <li><a href="#">内饰</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="carList clearfix">
+              <div class="tt">车况</div>
+              <div class="listBox">
+                <ul class="list clearfix">
+                  <li><a href="#">车况</a></li>
+                  <li><a href="#">车况</a></li>
+                  <li><a href="#">车况</a></li>
+                  <li><a href="#">车况</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="carList clearfix">
+              <div class="tt">地区</div>
+              <div class="listBox">
+                <ul class="list clearfix">
+                  <li><a href="#">北京</a></li>
+                  <li><a href="#">上海</a></li>
+                  <li><a href="#">广州</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="carList clearfix">
+              <div class="tt"></div>
+              <div class="listBox"><input type="submit" class="btn btn-default btn_spacing" value="搜索"></div>
+            </div>
           </div>
         </div>
       </div>
-
       <% if params[:base_car_id] %>
-          <%= render partial: 'resources_list', locals: { resources: @resources } %>
+        <%= render partial: 'resources_list', locals: { resources: @resources } %>
       <% end %>
     </div>
     <div class="col-md-3 mainRight">
-
       <%- if current_user %>
           <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
       <% else %>
@@ -93,20 +138,20 @@
   </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var winUrl = window.location.search;
-        $(".souSelList").find(".list > li >a").click(function () {
-            //alert($.getUrlParam("model_id"));
-            $(this).addClass("current").siblings().removeClass("current");
-        });
-    });
+$(document).ready(function () {
+  var winUrl = window.location.search;
+  $(".souSelList").find(".list > li >a").click(function () {
+    //alert($.getUrlParam("brand_id"));
+    $(this).addClass("current").siblings().removeClass("current");
+  });
+});
 
-    (function ($) {
-        $.getUrlParam = function (name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]);
-            return null;
-        }
-    })(jQuery);
+(function ($) {
+  $.getUrlParam = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+  }
+})(jQuery);
 </script>
