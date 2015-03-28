@@ -18,6 +18,7 @@ class BaseCar < ActiveRecord::Base
   delegate :name, to: :brand,     prefix: true
   delegate :name, to: :car_model, prefix: true
 
+  scope :valid, -> { where(status: 1) }
 
   # instance_methods
   def to_human_name

@@ -20,6 +20,8 @@ class CarModel < ActiveRecord::Base
   scope :with_brand, ->(brand) { where(brand_id: brand) }
   scope :with_standard, ->(std) { where(standard_id: std) }
 
+  scope :valid, -> { where(status: 1) }
+
   def to_hash
     {
       id:             id,
