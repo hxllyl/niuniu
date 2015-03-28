@@ -6,7 +6,7 @@ class MyPostsController < ApplicationController
   def index
     @_type = params[:_type]
     @brand_id = params[:brand_id]
-    @posts = current_user.posts.where(_type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @posts = current_user.posts.where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def new
