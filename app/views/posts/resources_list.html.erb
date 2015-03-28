@@ -10,10 +10,10 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li><%= @rs.standard.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
-            <li><%= @rs.brand.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
-            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
-            <li><%= @rs.car_model.try(:name) %><span class="close" aria-label="Close">&times;</span></li>
+            <li><span class="name"><%= @rs.standard.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
+            <li><span class="name"><%= @rs.brand.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
+            <li><span class="name"><%= @rs.car_model.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
+            <li><span class="name"><%= @rs.car_model.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
           </ul>
         </div>
         <div class="panel-body souSelList">
@@ -69,7 +69,7 @@
               </ul>
             </div>
           </div>
-          <div class="hideCarList">
+          <div class="hideCarList hide">
             <div class="carList clearfix">
               <div class="tt">外观</div>
               <div class="listBox">
@@ -144,6 +144,12 @@ $(document).ready(function () {
     //alert($.getUrlParam("brand_id"));
     $(this).addClass("current").siblings().removeClass("current");
   });
+
+  $(".selectCrumb li .name").each(function(){
+    if($(this).text()==""){
+      $(this).parent().hide();
+    }
+  })
 });
 
 (function ($) {
