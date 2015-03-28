@@ -23,8 +23,16 @@ class MyPostsController < ApplicationController
   end
 
   def get_select_infos
-    if params[:post][:base_info]
-    end
+    @standards  = Standard.all
+    @standard   = Standard.find_by_id(params[:post][:standard_id])
+    @brands     = @standard.brands.valid
+    @brand      = params[:post][:brand_id] ? Brand.find_by_id(params[:post][:brand_id]) : nil
+    @car_models = @brand ? @brand.car_models.valid : @brands.first.car_models.valid
+    @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : nil
+    @base_cars  = @car_model ?  @car_model.base_cars.valid : @car_models.first.base_cars.valid
+
+    @car_model = @base_car = @base_cars = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @car_model  == 'set_car_model'
+    @base_car = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @base_car  == 'set_base_car'
 
     render :partial => 'form_select'
   end
