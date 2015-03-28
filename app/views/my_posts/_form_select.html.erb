@@ -178,9 +178,9 @@ $(".selectInput").find("input.form-control").keyup(function(){
 $("#car_model_id").change(function(){
   var aa = $("#car_model_id option:selected").val();
   if (aa == "set_car_model"){
-    $(this).prevAll().addClass("before");
-    alert($(this).prevAll().attr("id"));
-    $(this).prevAll().attr("disabled","true").hide();
+    $(this).parents(".row").prevAll(".row").find("select").addClass("before");
+    $(this).parents(".row").prevAll(".row").find("select").attr("id");
+    //$(this).prevAll().attr("disabled","true").hide();
   }
 });
 
