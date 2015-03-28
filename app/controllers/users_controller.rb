@@ -47,8 +47,12 @@ class UsersController < BaseController
     
     object = clazz.find params[:id]
     if clazz == Post
-     current_user.send("#{params[:type]}").needs.delete object
-     new_counter = current_user.send("#{params[:type]}").needs.count
+      if params[:way] == 'resources'
+        current_user.send("#{params[:type]}").resources.delete object
+      else
+        current_user.send("#{params[:type]}").needs.delete object
+        new_counter = current_user.send("#{params[:type]}").needs.count
+      end
     else
      current_user.send("#{params[:type]}").delete object
      new_counter = current_user.send("#{params[:type]}").count

@@ -24,88 +24,27 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">上海宝钢公司</a></td>
-                  <td>上海</td>
-                  <td>宝马 奔驰 路虎 福特</td>
-                  <td><a href="#">浏览</a><span class="sepLine">|</span><a href="#">下载</a></td>
-                  <td>16:30</td>
-                </tr>
+                <%- @users.each do |user| %>
+                  <tr>
+                    <td><%= user.heading_show %></td>
+                    <td><%= user.area_name %></td>
+                    <td><%= user.brands_ary %></td>
+                    <td><%= link_to '浏览', user_list_posts_path(user_id: user.id, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
+                    <td><%= user.posts.resources.order(updated_at: :desc).first.publish_time %></td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
           <div class="pageList">
-            <%= paginate @posts %>
+            <%= paginate @users %>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%= render partial: 'partials/right_mine' %>
-      <%= render partial: 'partials/search' %>
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+      <%= render partial: 'partials/right_search' %>
     </div>
   </div>
 </div>

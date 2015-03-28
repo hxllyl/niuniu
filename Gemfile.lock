@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_list (0.6.0)
+      activerecord (>= 3.0)
     arel (6.0.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -316,6 +318,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list
   better_errors
   binding_of_caller
   brakeman

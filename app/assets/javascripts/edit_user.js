@@ -22,7 +22,7 @@ $(function(){
   
   });
   
-  // 取消用户
+  // 个人删除操作
   var cancelBtn = $('.cancelBtn');
   
   cancelBtn.on('click', function(e){
@@ -33,8 +33,9 @@ $(function(){
     var clazz = cancel.attr('data-clazz');
     var type = cancel.attr('data-type');
     var ban = cancel.attr('data-update');
+    var way = cancel.attr('data-way');
 
-    var query = "?id=" + id + "&clazz=" + clazz + "&type=" + type ;
+    var query = "?id=" + id + "&clazz=" + clazz + "&type=" + type + '&way=' + way;
     
     $.get('/users/delete_relation.json' + query, function(data){
       if(data.status == 'success'){

@@ -24,9 +24,11 @@ class CreatePosts < ActiveRecord::Migration
       t.column :discount_content, :decimal, precision: 10, scale: 2 # 出价内容
       t.column :status, :integer, default: 1 # 状态 0 未审核 1 已审核  2 已过期 3 已成交 -1 已删除
       t.column :resource_type, :integer, null: false # 资源状态 0 现车 1 期货
-      t.column :onwer_set_count, :integer, default: 0 #个人用于手动置顶
-      t.column :sys_set_count,   :integer, default: 0 #系统用于手动置顶
+      #t.column :onwer_set_count, :integer, default: 0 #个人用于手动置顶
+      t.column :sys_set_count,   :integer, default: 0 #系统用于手动置顶 
+      t.column :position, :integer  # 客户定义资源位置
       t.timestamps null: false
     end
+    
   end
 end

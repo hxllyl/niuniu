@@ -49,6 +49,8 @@ gem 'writeexcel', '~> 1.0.5'
 
 gem 'kaminari'
 
+gem 'acts_as_list'
+
 # code formatter
 # gem 'rubocop'
 

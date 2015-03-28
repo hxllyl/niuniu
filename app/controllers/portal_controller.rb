@@ -38,14 +38,7 @@ class PortalController < BaseController
     end
 
     # 资源表
-    user_resources = Post.resources.includes(:user, :brand).order(updated_at: :desc).group_by(&:user_id)
-
-    @user_resources  = []
-
-    user_resources.each_with_index do |ele, i|
-      break if i == 10
-      @user_resources << {name: ele.last.first.user_name, id: ele.last.first.user_id, area: ele.last.first.user_area_name, time: ele.last.first.publish_time, brands: ele.last.map(&:brand_name).uniq.join(' ')}
-    end
+    @users = User.where("id" => Post.resources.order(updated_at: :desc).map(&:user_id).uniq[0..9])
   end
 
   # 首页搜索

@@ -168,7 +168,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .infoM .info .m { float: left; margin-right: 24px; }
 /*.mySourceTab .infoM .info .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .mySourceTab .infoM .info .tag { float: left; width: 35px; height: 14px; margin-top: 5px; margin-right: 6px; }
-.mySourceTab .infoM .info .statu { margin-left: 6px; color: #1f8eff; }
+.mySourceTab .infoM .info .statu { margin-left: 6px; color: #38a876; }
 .mySourceTab .infoPrice { position: absolute; top: 0; right: 0; width: 180px; text-align: right; }
 .mySourceTab .infoPrice .price { margin-right: 8px; font-size: 18px; font-weight: bold; color: #ff791f; }
 .mySourceTab .infoPrice .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
@@ -231,11 +231,11 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .sourceDetail .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
 .sourceDetail .price .num { font-size: 18px; font-weight: bold; color: #ff791f; }
 .sourceDetail .reportLink { position: absolute; top: 0; right: 0; }
-.sourceDetail .remark { line-height: 24px; padding: 10px 0; color: #666; }
-.sourceDetail .remark .info { margin-left: 50px; }
+.sourceDetail .remark { line-height: 24px; padding: 10px 0; border-bottom: 1px solid #f7d1b7; color: #666; }
+.sourceDetail .remark .info { min-height: 48px; margin-left: 50px; }
 .sourceDetail .dealBox { padding-top: 10px; border-top: 1px solid #f7d1b7; border-bottom: 1px solid #f7d1b7; }
 .sourceDetail .dealBox .subBtn { width: 200px; margin-top: 20px; }
-.sourceGallery { }
+.sourceGallery { margin-top: 20px; }
 .sourceGallery li { width: 100%; margin-bottom: 10px; }
 .sourceGallery li img { width: 100%; }
 .followList li { padding: 8px 0; border-top: 1px solid #e6e6e6; }
@@ -265,7 +265,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .selectCrumb li.active { display: block; }
 .carList { padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
 .carList.last { border-bottom: none; }
-.carList .tt { float: left; width: 100px; color: #333; }
+.carList .tt { float: left; width: 100px; line-height: 26px; color: #333; }
 .carList .listBox { position: relative; margin-left: 100px; }
 .carList .listBox.toggle { padding-bottom: 20px; }
 .carList .selectTag { margin-bottom: 6px; border: none; }
@@ -324,6 +324,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .userDataTag .list li a { display: block; width: 90px; padding-bottom: 4px; text-align: center; color: #7d7d7d; }
 .userDataTag .list li a .num { font-size: 24px; color: #323232; }
 .userDataTag .list li a:hover, .userDataTag .list li.current a { text-decoration: none; color: #f4621b; }
+.userDataTag .list li.current a { padding-bottom: 2px; border-bottom: 2px solid #f4621b; }
 .userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
 .userDataTag .link a:hover { color: #f4621b; }
 .systemMesList li { line-height: 24px; padding: 10px 0 10px 30px; border-bottom: 1px solid #e6e6e6; color: #818181; background-repeat: no-repeat; background-position: 4px 18px; }

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :my_posts do
       collection do
         get :get_select_infos
+        post :update_position
       end
       resources :tenders, only: [ :show ]
     end

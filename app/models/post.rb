@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Post < ActiveRecord::Base
-
+  
   before_create :get_some_must_attr
 
   # constants
@@ -74,7 +74,8 @@ class Post < ActiveRecord::Base
 
   scope :with_standard, ->(std) { where(standard_id: std) }
 
-
+  acts_as_list scope: :user
+  
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way

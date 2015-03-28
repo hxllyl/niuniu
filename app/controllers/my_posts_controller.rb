@@ -7,10 +7,15 @@ class MyPostsController < ApplicationController
     @_type = params[:_type]
     @brand_id = params[:brand_id] 
     unless @brand_id.blank?
-      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order(updated_at: :desc).page(params[:page]).per(10)
+      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order(position: :asc , updated_at: :desc).page(params[:page]).per(10)
     else
-      @posts = current_user.posts.where(_type: params[:_type]).order(updated_at: :desc).page(params[:page]).per(10)
+      @posts = current_user.posts.where(_type: @_type).order(position: :asc, updated_at: :desc).page(params[:page]).per(10)
     end
+    
+    if params[:update_all]
+      current_user.posts.where("posts._type = #{@_type} and posts.id in (?)", params[:resource_ids].split(' ')).update_all(updated_at: Time.now())
+    end
+    
     respond_to do |format|
       format.html {}
       format.js {}
@@ -114,5 +119,17 @@ class MyPostsController < ApplicationController
     post.update_attributes(status: -1)
 
     redirect_to user_path
+  end
+  
+  # 更新post位置
+  def update_position
+    post = current_user.posts.find params[:id]
+    params[:type] == 'up' ? post.move_higher : post.move_lower
+    respond_to do |format|
+      format.js {
+        render nothing: true
+      }
+    end
+    # render nothing
   end
 end
