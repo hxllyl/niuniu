@@ -39,6 +39,31 @@ class PostsController < ApplicationController
   #   render json: {status: :not_ok, msg: e.message}
   end
 
+  def get_resources
+    @standards  = Standard.all
+    @brands     = Brand.all
+    @car_models = CarModel.all
+    @base_cars  = BaseCar.all
+    @standard   = Standard.find_by_id(params[:post_standard_id])
+    @brand      = Brand.find_by_id(params[:post_brand_id])
+    @car_model  = CarModel.find_by_id(params[:post_car_model_id])
+    @base_car   = BaseCar.find_by_id(params[:post_base_car_id])
+
+    @standard   = Standard.find_by_id(params[:standard_id])   unless @standard
+    @brand      = Brand.find_by_id(params[:brand_id])         unless @brand
+    @car_model  = CarModel.find_by_id(params[:car_model_id])  unless @car_model
+    @base_car   = BaseCar.find_by_id(params[:base_car_id])    unless @base_car
+
+    conds = {}
+    conds[:outer_color]   = params[:outer_color]    if params[:outer_color]
+    conds[:inner_color]   = params[:inner_color]    if params[:inner_color]
+    conds[:resource_type] = params[:resource_type]  if params[:resource_type]
+
+    @posts = @base_car ? @base_car.posts.resources.where(conds).order(updated_at: :desc).page(params[:page]).per(10) : nil
+
+    render partial: 'resources_infos'
+  end
+
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
     @rs = SearchResource.new(params)

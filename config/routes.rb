@@ -25,9 +25,9 @@ Rails.application.routes.draw do
       put :update_my_level
       get :about_us
     end
-    
+
     get :delete_relation, on: :collection
-    
+
     resources :my_posts do
       collection do
         get :get_select_infos
@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get :needs_list
       get :user_list
       get :user_resources_list
+      get :get_resources
     end
   end
 
@@ -66,7 +67,7 @@ Rails.application.routes.draw do
       delete  'sessions'      => 'sessions#destroy',      :as => 'logout'
       post    'registrations' => 'registrations#create',  :as => 'register'
     end
-    
+
     resources :messages do
     end
 
