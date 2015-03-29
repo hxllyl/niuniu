@@ -302,7 +302,7 @@ class Api::PostsController < Api::BaseController
     params[:way] == 'up' ? resource.move_higher : resource.move_lower
 
     render json: { status: 200, notice: 'success' }
-  rescue =>
+  rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
