@@ -97,8 +97,10 @@ class Api::FollowShipsController < Api::BaseController
   def create
     user = User.find_by_id(params[:following_id])
     raise 'not found' unless user
+    raise '已经关注该用户' if @user.followings.include?user
+    
     @user.followings << user
-
+    
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 400, notice: ex.message }
@@ -117,11 +119,7 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def unfollow
-    user = User.find_by_id params[:user_id]
-
-    raise 'user not found' unless user
-
-    @user.followings.delete user
+    @user.followings.where(following_id: user.id).delete_all
 
     render json: {status: 200, notice: 'success'}
   rescue => ex

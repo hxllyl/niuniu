@@ -81,6 +81,7 @@ Rails.application.routes.draw do
       post  :create
       post  :tender
       put   :complete
+      post  :update_all
     end
 
     resources :valid_codes, only: [:index] do
@@ -111,6 +112,7 @@ Rails.application.routes.draw do
 
     namespace :users do
       get :list
+      get :has_updated, on: :collection
     end
   end
 

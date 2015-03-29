@@ -3,7 +3,11 @@
   <div class="userInfo clearfix">
     <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "", width: "108", height: "108")%></div>
     <div class="detail">
-      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag(current_user.level_icon, alt: "", width: "100%")%></span><a href="<%= my_level_user_path(current_user) -%>" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></div>
+      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag(current_user.level_icon, alt: "", width: "100%")%></span>
+        <% if current_user.can_upgrade %>
+          <a href="<%= my_level_user_path(current_user) -%>" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
+        <% end -%>
+      </div>
       <div class="detailTab">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -34,5 +38,5 @@
     <%= render 'partials/user_profile' %>
     <div class="link"><a href="<%= system_infos_user_path(current_user)%>"><%= t('sys_msgs') -%></a></div>
   </div>
-  <a href="#" class="userArr"><span class="icon icon-edit"></span></a>
+  <a href="<%= edit_user_path(current_user)%>" class="userArr"><span class="icon icon-edit"></span></a>
 </div>
