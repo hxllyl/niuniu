@@ -6,3 +6,9 @@ application up and running.
 * Ruby version 2.1.2
 
 * Database PostgreSQL 9.4
+
+* Api doc gen
+  gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
+
+  把api下sessions和registions类的继承关系换一下，运行rake doc:api会将生成文档输出路径
+
