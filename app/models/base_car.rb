@@ -13,6 +13,7 @@ class BaseCar < ActiveRecord::Base
   belongs_to :brand,      class_name: 'Brand' # 属于那种车辆品牌
   belongs_to :car_model,  class_name: 'CarModel' # 属于那种车型
   has_many   :car_photos, as: :owner, dependent: :nullify, autosave: true # 图片数据
+  has_many   :posts, class_name: 'Post'
 
   delegate :name, to: :standard,  prefix: true
   delegate :name, to: :brand,     prefix: true

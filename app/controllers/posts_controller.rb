@@ -18,14 +18,27 @@ class PostsController < ApplicationController
 
   # 市场资源点击品牌进入资源列表页
   def resources_list
+    @standards  = Standard.all
+    @brands     = Brand.all
+    @car_models = CarModel.all
+    @base_cars  = BaseCar.all
+
+    @standard   = Standard.find_by_id(params[:standard_id])
+    @brand      = Brand.find_by_id(params[:brand_id])
+    @car_model  = CarModel.find_by_id(params[:car_model_id])
+    @base_car   = BaseCar.find_by_id(params[:base_car_id])
+
     @rs = ListResources.new(params)
 
-    @resources = if params[:base_car_id].present?
-                   Post.resources.where(base_car_id: params[:base_car_id])
-                 end
+    conds = {}
+    conds[:outer_color]   = params[:outer_color]    if params[:outer_color]
+    conds[:inner_color]   = params[:inner_color]    if params[:inner_color]
+    conds[:resource_type] = params[:resource_type]  if params[:resource_type]
 
-  rescue => e
-    render json: {status: :not_ok, msg: e.message}
+    @posts = @base_car ? @base_car.posts.resources.where(conds).order(updated_at: :desc).page(params[:page]).per(10) : nil
+
+  # rescue => e
+  #   render json: {status: :not_ok, msg: e.message}
   end
 
   # 寻车信息点击品牌进入寻车列表页
