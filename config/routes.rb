@@ -82,6 +82,8 @@ Rails.application.routes.draw do
       post  :tender
       put   :complete
       post  :update_all
+      put  :change_position
+      delete :destroy
     end
 
     resources :valid_codes, only: [:index] do
