@@ -258,12 +258,12 @@ class Api::PostsController < Api::BaseController
 
     render json: {status: 200, notice: 'success', data: {post: post, tender: tender}}
   end
-  
+
   # 资源更新
   #
   # Params:
   #   token:    [String]    valid token
-  #   post_ids: [Array]     资源的id     
+  #   post_ids: [Array]     资源的id
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
@@ -271,22 +271,22 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 500
   #   notice: [String]  failed
   #   error_msg: 错误信息
-  
+
   def update_all
     posts = @user.posts.resources.where("id in (?)", params[:post_ids])
     posts.update_all(updated_at: Time.now)
-    
+
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
-  
+
   # 资源上移，下移
   #
   # Params:
   #   token:    [String]    valid token
   #   id:       [Integer]     资源的id
-  #   way:      [String]  up 或者 down     
+  #   way:      [String]  up 或者 down
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
@@ -294,23 +294,23 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 500
   #   notice: [String]  failed
   #   error_msg: 错误信息
-  
+
   def change_position
     resource = @user.posts.resources.find_by_id params[:id]
     raise 'user did not had the resource' if resource.blank?
-    
+
     params[:way] == 'up' ? resource.move_higher : resource.move_lower
-    
+
     render json: { status: 200, notice: 'success' }
-  rescue => 
+  rescue =>
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
-  
+
   # 删除资源
   #
   # Params:
   #   token:    [String]    valid token
-  #   id:       [Integer]     资源的id     
+  #   id:       [Integer]     资源的id
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
@@ -318,15 +318,15 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 500
   #   notice: [String]  failed
   #   error_msg: 错误信息
-  
+
   def destroy
     resource = @user.posts.resources.find_by_id params[:id]
     raise 'user did not had the resource' if resource.blank?
-    
+
     @user.posts.resources.delete resource
     render json: { status: 200, notice: 'success' }
-  rescue => 
-    render json: { status: 500, notice: 'failed', error_msg: ex.message}  
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
-  
+
 end
