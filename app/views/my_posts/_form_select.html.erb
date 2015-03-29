@@ -3,9 +3,13 @@
     <label for="car_standard" class="col-md-4 control-label">规格</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
           <%- @standards.each do |standard| %>
-          <option value="<%= standard.id %>"><%= standard[:name]%></option>
+            <%- if standard == @standard %>
+              <option value="<%= standard.id %>" selected="selected"><%= standard[:name]%></option>
+            <% else %>
+              <option value="<%= standard.id %>"><%= standard[:name]%></option>
+            <% end %>
           <% end %>
         </select>
       </div>
@@ -17,7 +21,11 @@
       <div class="dropdown w100p">
         <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> >
           <%- @brands.each do |brand| %>
-          <option value="<%= brand.id %>"><%= brand.name %></option>
+            <%- if brand == @brand %>
+              <option value="<%= brand.id %>" selected="selected"><%= brand.name %></option>
+            <% else %>
+              <option value="<%= brand.id %>"><%= brand.name %></option>
+            <% end %>
           <% end %>
         </select>
       </div>
@@ -31,7 +39,11 @@
       <div class="dropdown w100p">
         <select name="post[car_model_id]" class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
           <%- @car_models.each do |car_model| %>
-            <option value="<%= car_model.id %>"><%= car_model.name %></option>
+            <%- if @car_model == car_model %>
+              <option value="<%= car_model.id %>" selected="selected"><%= car_model.name %></option>
+            <% else %>
+              <option value="<%= car_model.id %>"><%= car_model.name %></option>
+            <% end %>
           <% end %>
           <option value="set_car_model">自定义</option>
         </select>
@@ -44,7 +56,11 @@
       <div class="dropdown w100p">
         <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
           <%- @base_cars.each do |base_car| %>
-            <option value="<%= base_car.id %>"><%= base_car.style %></option>
+            <%- if base_car == @base_car %>
+              <option value="<%= base_car.id %>" selected="selected"><%= base_car.style %></option>
+            <% else %>
+              <option value="<%= base_car.id %>"><%= base_car.style %></option>
+            <% end %>
           <% end %>
           <option value="set_base_car">自定义</option>
         </select>
