@@ -8,12 +8,33 @@
   <div class="row">
     <div class="col-md-9 mainBox">
       <div role="tabpanel" class="panel panel-default contentBox">
+        <input class="hide" id="current_resource_list" value="<%= resources_list_posts_path %>">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li><span class="name"><%= @rs.standard.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
-            <li><span class="name"><%= @rs.brand.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
-            <li><span class="name"><%= @rs.car_model.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
-            <li><span class="name"><%= @rs.base_car.try(:style) %></span><span class="close" aria-label="Close">&times;</span></li>
+            <%- if @standard %>
+            <li><span class="name">
+              <%= @standard.name %></span><span class="close" aria-label="Close">&times;
+              <input class="hide" id="standard_id" value="<%= @standard.id %>">
+            </span></li>
+            <% end %>
+            <%- if @brand %>
+            <li><span class="name" id="brand_id">
+              <%= @brand.name %></span><span class="close" aria-label="Close">&times;
+              <input class="hide" id="brand_id" value="<%= @brand.id %>">
+            </span></li>
+            <% end %>
+            <%- if @car_model %>
+            <li><span class="name" id="car_model_id">
+              <%= @car_model.name %></span><span class="close" aria-label="Close">&times;
+              <input class="hide" id="car_model_id" value="<%= @car_model.id %>">
+            </span></li>
+            <% end %>
+            <%- if @base_car %>
+            <li><span class="name" id="base_car_id">
+              <%= @base_car.style %></span><span class="close" aria-label="Close">&times;
+              <input class="hide" id="base_car_id" value="<%= @base_car.id %>">
+            </span></li>
+            <% end %>
           </ul>
         </div>
         <div class="panel-body souSelList">
@@ -122,4 +143,23 @@ $(document).ready(function () {
     return null;
   }
 })(jQuery);
+
+$('body').on('click', '#base_car_id', function(){
+    var url = $('current_resource_list').val();
+    var standard_id = $('#standard_id').val();
+    var brand_id = $('#brand_id').val();
+    var car_model_id = $('#car_model_id').val();
+    var base_car_id = $('#base_car_id').val();
+
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        standard_id: standard_id,
+        brand_id: brand_id,
+        car_model_id: car_model_id,
+        base_car_id: base_car_id,
+      }
+    });
+  });
 </script>

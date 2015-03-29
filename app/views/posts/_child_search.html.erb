@@ -2,10 +2,9 @@
   <div class="tt">外观</div>
   <div class="listBox">
     <ul class="list clearfix">
-      <li><a href="#">外观</a></li>
-      <li><a href="#">外观</a></li>
-      <li><a href="#">外观</a></li>
-      <li><a href="#">外观</a></li>
+      <%- @base_car.outer_color.each do |ele| %>
+        <li><a href="#"><%= ele %></a></li>
+      <% end %>
     </ul>
   </div>
 </div>
@@ -13,10 +12,9 @@
   <div class="tt">内饰</div>
   <div class="listBox">
     <ul class="list clearfix">
-      <li><a href="#">内饰</a></li>
-      <li><a href="#">内饰</a></li>
-      <li><a href="#">内饰</a></li>
-      <li><a href="#">内饰</a></li>
+      <%- @base_car.inner_color.each do |ele| %>
+        <li><a href="#"><%= ele %></a></li>
+      <% end %>
     </ul>
   </div>
 </div>
@@ -24,10 +22,9 @@
   <div class="tt">车况</div>
   <div class="listBox">
     <ul class="list clearfix">
-      <li><a href="#">车况</a></li>
-      <li><a href="#">车况</a></li>
-      <li><a href="#">车况</a></li>
-      <li><a href="#">车况</a></li>
+      <%- Post::RESOURCE_TYPE.each do |k, v| %>
+        <li><a href="#"><%= v %></a></li>
+      <% end %>
     </ul>
   </div>
 </div>

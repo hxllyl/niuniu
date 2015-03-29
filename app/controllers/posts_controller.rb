@@ -28,8 +28,6 @@ class PostsController < ApplicationController
     @car_model  = CarModel.find_by_id(params[:car_model_id])
     @base_car   = BaseCar.find_by_id(params[:base_car_id])
 
-    @rs = ListResources.new(params)
-
     conds = {}
     conds[:outer_color]   = params[:outer_color]    if params[:outer_color]
     conds[:inner_color]   = params[:inner_color]    if params[:inner_color]
