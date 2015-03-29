@@ -31,6 +31,7 @@ class MyPostsController < ApplicationController
     @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @standards.first.brands.first.id, status: 1)
     @base_cars = @car_models.first.base_cars
     @base_car  = @base_cars.first
+    @post_type = @post._type
   end
 
   def get_select_infos
@@ -39,7 +40,7 @@ class MyPostsController < ApplicationController
     @brands     = @standard.brands.valid
     @brand      = params[:post][:brand_id] ? Brand.find_by_id(params[:post][:brand_id]) : @brands.first
     @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id, status: 1)
-
+    @post_type  = params[:post][:_type].to_i
     if params[:post][:car_model_id]  == 'set_car_model'
       @car_model = 'set_car_model'
       @base_car  = 'set_base_car'

@@ -11,7 +11,9 @@
               <option value="<%= car_model.id %>"><%= car_model.name %></option>
             <% end %>
           <% end %>
-          <option value="set_car_model">自定义</option>
+          <%- if @post_type == 1 %>
+            <option value="set_car_model">自定义</option>
+          <% end %>
         </select>
       </div>
     </div>
