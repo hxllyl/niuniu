@@ -1,0 +1,44 @@
+<div class="carList clearfix">
+  <div class="tt">外观</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <%- @base_car.outer_color.each do |ele| %>
+        <li><a href="#"><%= ele %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="carList clearfix">
+  <div class="tt">内饰</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <%- @base_car.inner_color.each do |ele| %>
+        <li><a href="#"><%= ele %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="carList clearfix">
+  <div class="tt">车况</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <%- Post::RESOURCE_TYPE.each do |k, v| %>
+        <li><a href="#"><%= v %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="carList clearfix">
+  <div class="tt">地区</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <li><a href="#">北京</a></li>
+      <li><a href="#">上海</a></li>
+      <li><a href="#">广州</a></li>
+    </ul>
+  </div>
+</div>
+<div class="carList clearfix">
+  <div class="tt"></div>
+  <div class="listBox"><input type="submit" class="btn btn-default btn_spacing" value="搜索"></div>
+</div>

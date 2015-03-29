@@ -1,6 +1,6 @@
 <div class="panel panel-default contentBox">
   <div class="panel-heading lineTitle">
-    <h3 class="panel-title">全部资源（<%= resources.count %>）</h3>
+    <h3 class="panel-title">全部资源（<%= @posts.total_count %>）</h3>
   </div>
   <div class="panel-body">
     <div class="mySourceOpe">
@@ -15,18 +15,18 @@
     <div class="mySourceTab mt10">
       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
         <tbody>
-        <% Array(resources).each do |post| %>
+        <%- @posts.each do |post| %>
             <tr>
               <td>
                 <div class="box clearfix">
                   <div class="infoM">
-                    <h5 class="name"><a href="#"><%= post.base_car_to_human_name %></a></h5>
+                    <h5 class="name"><%= link_to post.base_car_to_human_name, post_path(post, {_type: 0}) %></a></h5>
 
                     <div class="info clearfix">
                       <div class="m">中规/现车</div>
                       <div class="m"><%= post.outer_color %></div>
                       <div class="m">
-                        <span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") %></span><span><a href="#"><%= post.owner %></a></span><span class="statu"><%= following?(post.user) %></span>
+                        <span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") %></span><span><%= link_to post.owner, user_list_posts_path(user_id: post.user_id, _type: 0) %></span><span class="statu"><%= following?(post.user) %></span>
                       </div>
                     </div>
                   </div>

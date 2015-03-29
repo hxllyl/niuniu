@@ -40,7 +40,7 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
   #   notice: [String]  请重试
   def destroy
     warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
-    current_user.token.update_attributes(value: nil)
+    @user.token.update_attributes(value: nil)
     render json:  {
                     status:   true,
                     data:     {}

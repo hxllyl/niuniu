@@ -140,7 +140,7 @@ class Post < ActiveRecord::Base
       inner_color:        inner_color,
       car_license_areas:  car_license_areas,
       car_in_areas:       car_in_areas,
-      take_car_date:      take_car_date,
+      take_car_date:      TAKE_DATES[take_car_date],
       expect_price:       expect_price.to_f,
       discount_way:       DISCOUNT_WAYS[discount_way],
       discount_content:   discount_content.to_f,
@@ -149,7 +149,9 @@ class Post < ActiveRecord::Base
       updated_at:         updated_at,
       brand_image:        brand.car_photo.image.url,
       base_path:          url,
-      tenders_count:      tenders.count
+      tenders_count:      tenders.count,
+      status:             STATUS[status],
+      resource_type:      RESOURCE_TYPE[resource_type]
     }
   end
 

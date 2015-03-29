@@ -71,4 +71,10 @@ class ListResources
     @ordered_brands = all_brands.group_by { |e| Pinyin.t(e.name)[0].upcase }
   end
 
+  def base_car
+    if base_car_id.present?
+      BaseCar.find(base_car_id)
+    end
+  end
+
 end
