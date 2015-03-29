@@ -39,18 +39,52 @@ class MyPostsController < ApplicationController
     @brands     = @standard.brands.valid
     @brand      = params[:post][:brand_id] ? Brand.find_by_id(params[:post][:brand_id]) : @brands.first
     @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id, status: 1)
-    @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : @car_models.first
-    @base_cars  = @car_model.base_cars.valid
-    @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
 
-    @car_model = @base_car = @base_cars = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @car_model  == 'set_car_model'
-    @base_car = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @base_car  == 'set_base_car'
+    if params[:post][:car_model_id]  == 'set_car_model'
+      @car_model = 'set_car_model'
+      @base_car  = 'set_base_car'
+    else
+      @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : @car_models.first
+      @base_cars  = @car_model.base_cars.valid
+      @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
+    end
+
+    if params[:post][:base_car_id]  == 'set_base_car'
+      @base_car  = 'set_base_car'
+      @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : @car_models.first
+      @base_cars  = @car_model.base_cars.valid
+    end
+
     render :partial => 'form_select'
   end
 
   def create
+    standard  = Standard.find_by_id(params[:post][:standard_id])
+    brand     = Brand.find_by_id(params[:post][:brand_id])
+    car_model = CarModel.find_by_id(params[:post][:car_model_id])
+    base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
+
+    car_model = CarModel.create(
+                  standard_id: standard.id,
+                  brand_id: brand.id,
+                  name: params[:post][:car_model_id],
+                  status: 0
+                ) unless car_model
+
+    base_car  = BaseCar.create(
+                  standard_id: standard.id,
+                  brand_id: brand.id,
+                  car_model_id: car_model.id,
+                  style: params[:post][:base_car_id],
+                  outer_color: [params[:post][:outer_color]],
+                  inner_color: [params[:post][:inner_color]],
+                  status: 0
+                ) unless base_car
+
     params.require(:post).permit!
     params[:post][:car_in_areas] = [params[:post][:car_in_areas]]
+    params[:post][:car_model_id] = car_model.id
+    params[:post][:base_car_id]  = base_car.id
     @post = Post.new(params[:post])
 
     @post.user = current_user
