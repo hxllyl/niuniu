@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20150326094131) do
     t.datetime "updated_at",                                                    null: false
   end
 
+  add_index "base_cars", ["style", "NO"], name: "index_base_cars_on_style_and_NO", using: :btree
+
   create_table "brands", force: :cascade do |t|
     t.integer  "standard_id"
     t.string   "name",          limit: 40,             null: false
@@ -158,6 +160,7 @@ ActiveRecord::Schema.define(version: 20150326094131) do
     t.integer  "status",                                                 default: 1
     t.integer  "resource_type",                                                       null: false
     t.integer  "sys_set_count",                                          default: 0
+    t.integer  "channel",                                                default: 0
     t.integer  "position"
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false

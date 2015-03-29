@@ -19,5 +19,7 @@ class CreateBaseCars < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    
+    add_index(:base_cars, [:style, :NO])
   end
 end

@@ -39,6 +39,11 @@ class Post < ActiveRecord::Base
     5 => '一月内',
     6 => '一个月以上'
   }
+  
+  CHANNELS = {
+    0 => '用户自建',
+    1 => '系统创建'
+  }
 
   PHOTOS = {
     front:    '正面',

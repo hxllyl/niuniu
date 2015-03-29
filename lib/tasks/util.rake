@@ -34,7 +34,7 @@ namespace :util do
        st.save
 
        br.standards << st unless br.standards.include?(st)
-       br.regions = columns[8].split('、') unless columns[8].blank?
+       br.regions = columns[8].split(' ') if columns[8]
        br.status = 1
        br.save
 
@@ -43,8 +43,8 @@ namespace :util do
        cm.save
 
        bc.standard, bc.brand, bc.car_model = st, br, cm
-       bc.outer_color = columns[6].split(' ')
-       bc.inner_color = columns[7].split(' ')
+       bc.outer_color = columns[6].split(' ') if columns[6]
+       bc.inner_color = columns[7].split(' ') if columns[7]
        bc.save
      end
     }
