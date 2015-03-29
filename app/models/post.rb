@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Post < ActiveRecord::Base
-  
+
   before_create :get_some_must_attr
 
   # constants
@@ -40,6 +40,13 @@ class Post < ActiveRecord::Base
     6 => '一个月以上'
   }
 
+  PHOTOS = {
+    front:    '正面',
+    side:     '侧面',
+    obverse:  '背面',
+    inner:    '里面'
+  }
+
   # relations
   has_many    :tenders, class_name: 'Tender'
   belongs_to  :user,  ->{ includes(:area) },  class_name: 'User' # 消除 N+1 查询
@@ -75,7 +82,7 @@ class Post < ActiveRecord::Base
   scope :with_standard, ->(std) { where(standard_id: std) }
 
   acts_as_list scope: :user
-  
+
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way
@@ -205,10 +212,10 @@ class Post < ActiveRecord::Base
   def is_completed?
     status == 3
   end
-  
+
   # 逻辑删除 物理删除用real_delete
   alias :real_delete :delete
-  
+
   def delete
     self.update(status: STATUS.keys[4])
   end
