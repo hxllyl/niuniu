@@ -24,7 +24,7 @@
 
 		<div role="tabpanel" class="tab-pane" id="carBrand1">
       <ul class="carInfoList clearfix">
-      <% @posts_with_brands.values[0].each do |post| %>
+      <% Array(@posts_with_brands.values[0]).each do |post| %>
   			<li>
   				<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image_path), alt: "") %></div>
   				<div class="info">
@@ -38,7 +38,7 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="carBrand2">
       <ul class="carInfoList clearfix">
-      <% @posts_with_brands.values[1].each do |post| %>
+      <% Array(@posts_with_brands.values[1]).each do |post| %>
   			<li>
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image_path) , alt: "")  %></div>
   				<div class="info">
@@ -50,7 +50,7 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="carBrand3">
       <ul class="carInfoList clearfix">
-      <% @posts_with_brands.values[2].each do |post| %>
+      <% Array(@posts_with_brands.values[2]).each do |post| %>
   			<li>
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image_path) , alt: "")  %></div>
   				<div class="info">
@@ -64,7 +64,7 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="carBrand4">
       <ul class="carInfoList clearfix">
-      <% @posts_with_brands.values[3].each do |post| %>
+      <% Array(@posts_with_brands.values[3]).each do |post| %>
   			<li>
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image_pat), alt: "")  %></div>
   				<div class="info">

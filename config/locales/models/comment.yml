@@ -17,4 +17,4 @@ zh-CN:
             blank: 留言对象不能为空
           content:
             blank: 留言内容不能为空
-            too_long: 留言内容过长             
+            too_long: 留言内容过长
