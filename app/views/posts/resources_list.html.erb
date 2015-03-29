@@ -42,9 +42,9 @@
           <div class="carList clearfix">
             <div class="tt">规格</div>
             <div class="listBox">
-              <ul class="list clearfix">
+              <ul class="list clearfix" id='standards_list'>
                 <% @standards.each do |std| %>
-                    <li><a href=<%= resources_list_posts_path(standard_id: std.id) %>><%= std.name %></li>
+                    <li><a href="javascript:void(0)" onclick="javascript:get_resource_list()"><%= std.name %></li>
                 <% end %>
               </ul>
             </div>
@@ -162,4 +162,8 @@ $('body').on('click', '#base_car_id', function(){
       }
     });
   });
+
+  (function get_resource_list(){
+
+  })
 </script>
