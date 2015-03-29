@@ -29,16 +29,12 @@
     <label for="car_model" class="col-md-4 control-label">车型</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <%- unless @car_models == 'set_it_itself' %>
-          <select name="post[car_model_id]" class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
-            <%- @car_models.each do |car_model| %>
-              <option value="<%= car_model.id %>"><%= car_model.name %></option>
-            <% end %>
-            <option value="set_car_model">自定义</option>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[car_model_id]">
-        <% end %>
+        <select name="post[car_model_id]" class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <%- @car_models.each do |car_model| %>
+            <option value="<%= car_model.id %>"><%= car_model.name %></option>
+          <% end %>
+          <option value="set_car_model">自定义</option>
+        </select>
       </div>
     </div>
   </div>
@@ -46,16 +42,12 @@
     <label for="car_style" class="col-md-4 control-label">款式</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <%- unless @base_cars == 'set_by_itself' %>
-          <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
-            <%- @base_cars.each do |base_car| %>
-              <option value="<%= base_car.id %>"><%= base_car.style %></option>
-            <% end %>
-            <option value="set_base_car">自定义</option>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[base_car_id]">
-        <% end %>
+        <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <%- @base_cars.each do |base_car| %>
+            <option value="<%= base_car.id %>"><%= base_car.style %></option>
+          <% end %>
+          <option value="set_base_car">自定义</option>
+        </select>
       </div>
     </div>
   </div>
@@ -65,15 +57,11 @@
     <label for="car_appearance" class="col-md-4 control-label">外观</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <%- unless @outer_colors == 'set_by_itself' %>
-          <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
-            <%- @outer_colors.each do |ele| %>
-              <option value="<%= ele %>"><%= ele %></option>
-            <% end %>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[outer_color]">
-        <% end %>
+        <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
+          <%- @base_car.outer_color.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+        </select>
       </div>
     </div>
   </div>
@@ -81,15 +69,11 @@
     <label for="car_interior" class="col-md-4 control-label">内饰</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <%- unless @inner_colors == 'set_by_itself' %>
-          <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
-            <%- @inner_colors.each do |ele| %>
-              <option value="<%= ele %>"><%= ele %></option>
-            <% end %>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[inner_color]">
-        <% end %>
+        <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
+          <%- @base_car.inner_color.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+        </select>
       </div>
     </div>
   </div>
@@ -107,15 +91,11 @@
     <label for="car_area" class="col-md-4 control-label">区域要求</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <%- unless @areas == 'set_by_itself' %>
-          <select name="post[car_in_areas]" class="form-control input-sm" id="car_area">
-            <%- @areas.each do |ele| %>
-              <option value="<%= ele %>"><%= ele %></option>
-            <% end %>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[car_in_areas]">
-        <% end %>
+        <select name="post[car_in_areas]" class="form-control input-sm" id="car_area">
+          <%- @brand.regions.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+        </select>
       </div>
     </div>
   </div>
@@ -137,7 +117,7 @@
 <div class="methodSelect row">
   <div class="tt clearfix">
     <h5 class="col-md-6">报价方式</h5>
-    <h5 class="col-md-6">指导价：<span id="guidePrice"><%= @price %></span>万</h5>
+    <h5 class="col-md-6">指导价：<span id="guidePrice"><%= @base_car.base_price.to_f %></span>万</h5>
   </div>
   <div class="form-group form-inline col-md-6">
     <label class="radio selectTag">
@@ -201,7 +181,7 @@ $(document).ready(function(){
   $('body').on('change', '#post_brand_id', function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
-    var brand_id = $('#brand_id').val();
+    var brand_id = $('#post_brand_id').val();
 
     $.ajax({
       method: "GET",

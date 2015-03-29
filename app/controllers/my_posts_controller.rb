@@ -5,17 +5,17 @@ class MyPostsController < ApplicationController
 
   def index
     @_type = params[:_type]
-    @brand_id = params[:brand_id] 
+    @brand_id = params[:brand_id]
     unless @brand_id.blank?
       @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order(position: :asc , updated_at: :desc).page(params[:page]).per(10)
     else
       @posts = current_user.posts.where(_type: @_type).order(position: :asc, updated_at: :desc).page(params[:page]).per(10)
     end
-    
+
     if params[:update_all]
       current_user.posts.where("posts._type = #{@_type} and posts.id in (?)", params[:resource_ids].split(' ')).update_all(updated_at: Time.now())
     end
-    
+
     respond_to do |format|
       format.html {}
       format.js {}
@@ -26,27 +26,25 @@ class MyPostsController < ApplicationController
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     @post = Post.new(_type: params[:_type])
     @standards = Standard.all
-    @brands    = Brand.valid
-    @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @standards.first.brands.first.id)
+    @brands    = @standards.first.brands.valid
+    @brand     = @brands.first
+    @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @standards.first.brands.first.id, status: 1)
     @base_cars = @car_models.first.base_cars
-    @outer_colors = @base_cars.first.outer_color
-    @inner_colors = @base_cars.first.inner_color
-    @areas     = @brands.first.regions
-    @price     = nil
+    @base_car  = @base_cars.first
   end
 
   def get_select_infos
     @standards  = Standard.all
     @standard   = Standard.find_by_id(params[:post][:standard_id])
     @brands     = @standard.brands.valid
-    @brand      = params[:post][:brand_id] ? Brand.find_by_id(params[:post][:brand_id]) : nil
-    @car_models = @brand ? @brand.car_models.valid : @brands.first.car_models.valid
-    @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : nil
-    @base_cars  = @car_model ?  @car_model.base_cars.valid : @car_models.first.base_cars.valid
+    @brand      = params[:post][:brand_id] ? Brand.find_by_id(params[:post][:brand_id]) : @brands.first
+    @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id, status: 1)
+    @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : @car_models.first
+    @base_cars  = @car_model.base_cars.valid
+    @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
 
     @car_model = @base_car = @base_cars = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @car_model  == 'set_car_model'
     @base_car = @outer_colors = @inner_colors = @areas = @price = 'set_by_itself' if @base_car  == 'set_base_car'
-
     render :partial => 'form_select'
   end
 
@@ -82,7 +80,7 @@ class MyPostsController < ApplicationController
 
     redirect_to user_path
   end
-  
+
   # 更新post位置
   def update_position
     post = current_user.posts.find params[:id]
