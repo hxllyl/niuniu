@@ -83,16 +83,18 @@
               </div>
             </form>
           </div>
-          <div class="boardForm clearfix">
-            <h5 class="tt">留言</h5>
-            <%= form_for Comment.new, as: :comment, url: comments_path, method: :post, remote: true do |f| %>
-              <%= f.hidden_field :resource_id, value: @post.id %>
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.hidden_field :resource_type, value: @post.class.to_s %>
-              <%= f.text_area :content, class: "form-control", placeHolder: '不能超过225个字' %>
-              <%= f.submit '留言', class: "btn btn-default input-sm btn_spacing sub bfR", id: "" %>
-            <% end -%>
-          </div>
+          <% if current_user %>
+            <div class="boardForm clearfix">
+              <h5 class="tt">留言</h5>
+              <%= form_for Comment.new, as: :comment, url: comments_path, method: :post, remote: true do |f| %>
+                <%= f.hidden_field :resource_id, value: @post.id %>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :resource_type, value: @post.class.to_s %>
+                <%= f.text_area :content, class: "form-control", placeHolder: '不能超过225个字' %>
+                <%= f.submit '留言', class: "btn btn-default input-sm btn_spacing sub bfR", id: "" %>
+              <% end -%>
+            </div>
+          <% end %>  
           <ul class="boardList">
             <% @post.comments.each do |comment| %>
             <li>
@@ -117,8 +119,9 @@
     </div>
   </div>
 </div>
-
-<%= render partial: 'complaints/complaint'%>
+<% if current_user %>
+  <%= render partial: 'complaints/complaint'%>
+<% end -%>  
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>

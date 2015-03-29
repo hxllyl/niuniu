@@ -51,7 +51,9 @@
     </div>
   </div>
 </div>
-<%= render partial: 'complaints/complaint'%>
+<% if current_user %>
+  <%= render partial: 'complaints/complaint'%>
+<% end -%>  
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
