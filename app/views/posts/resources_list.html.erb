@@ -7,106 +7,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9 mainBox">
-      <div role="tabpanel" class="panel panel-default contentBox">
-        <input class="hide" id="current_resource_list" value="<%= resources_list_posts_path %>">
-        <div class="panel-heading lineTitle">
-          <ul class="selectCrumb clearfix">
-            <%- if @standard %>
-            <li><span class="name">
-              <%= @standard.name %></span><span class="close" aria-label="Close">&times;
-              <input class="hide" id="standard_id" value="<%= @standard.id %>">
-            </span></li>
-            <% end %>
-            <%- if @brand %>
-            <li><span class="name" id="brand_id">
-              <%= @brand.name %></span><span class="close" aria-label="Close">&times;
-              <input class="hide" id="brand_id" value="<%= @brand.id %>">
-            </span></li>
-            <% end %>
-            <%- if @car_model %>
-            <li><span class="name" id="car_model_id">
-              <%= @car_model.name %></span><span class="close" aria-label="Close">&times;
-              <input class="hide" id="car_model_id" value="<%= @car_model.id %>">
-            </span></li>
-            <% end %>
-            <%- if @base_car %>
-            <li><span class="name" id="base_car_id">
-              <%= @base_car.style %></span><span class="close" aria-label="Close">&times;
-              <input class="hide" id="base_car_id" value="<%= @base_car.id %>">
-            </span></li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="panel-body souSelList">
-          <%- unless @standard %>
-          <div class="carList clearfix">
-            <div class="tt">规格</div>
-            <div class="listBox">
-              <ul class="list clearfix" id='standards_list'>
-                <% @standards.each do |std| %>
-                    <li><a href="javascript:void(0)" onclick="javascript:get_resource_list()"><%= std.name %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <% end %>
-          <%- unless @brand %>
-          <div class="carList clearfix">
-            <div class="tt">品牌</div>
-            <div class="listBox">
-              <ul class="list clearfix">
-                <% @brands.each do |brand| %>
-                    <li>
-                      <a href=<%= resources_list_posts_path(brand_id: brand.id) %>>
-                        <%= brand.name %>
-                      </a>
-                    </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <% end %>
-          <%- unless @car_model%>
-          <div class="carList clearfix">
-            <div class="tt">车型</div>
-            <div class="listBox">
-              <ul class="list clearfix">
-                <% @car_models.each do |car_model| %>
-                    <li>
-                      <a href=<%= resources_list_posts_path(car_model_id: car_model.id) %>>
-                        <%= car_model.name %>
-                      </a>
-                    </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <% end %>
-          <%- unless @base_car %>
-          <div class="carList clearfix">
-            <div class="tt">车款</div>
-            <div class="listBox">
-              <ul class="list clearfix">
-                <% @base_cars.each do |style| %>
-                    <li>
-                      <a href=<%= resources_list_posts_path(base_car_id: style.id) %>>
-                        <%= style.style %>
-                      </a>
-                    </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <% end %>
-          <%- if @standard && @brand && @car_model && @base_car %>
-            <%= render 'child_search' %>
-          <% end %>
-        </div>
+      <div id='current_infos'>
+        <%= render 'resources_infos' %>
       </div>
-      <% if @base_car %>
-        <%= render 'resources_list' %>
-      <% end %>
-    </div>
     <div class="col-md-3 mainRight">
       <%- if current_user %>
           <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
@@ -144,14 +47,13 @@ $(document).ready(function () {
   }
 })(jQuery);
 
-$('body').on('click', '#base_car_id', function(){
-    var url = $('current_resource_list').val();
-    var standard_id = $('#standard_id').val();
-    var brand_id = $('#brand_id').val();
-    var car_model_id = $('#car_model_id').val();
-    var base_car_id = $('#base_car_id').val();
+function get_resource_list(url){
+  var standard_id = $('#standard_id').val();
+  var brand_id = $('#brand_id').val();
+  var car_model_id = $('#car_model_id').val();
+  var base_car_id = $('#base_car_id').val();
 
-    $.ajax({
+  $.ajax({
       method: "GET",
       url: url,
       data: {
@@ -159,11 +61,10 @@ $('body').on('click', '#base_car_id', function(){
         brand_id: brand_id,
         car_model_id: car_model_id,
         base_car_id: base_car_id,
+      },
+      success: function(data){
+        $("#current_infos").html(data);
       }
     });
-  });
-
-  (function get_resource_list(){
-
-  })
+}
 </script>
