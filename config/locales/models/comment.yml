@@ -9,12 +9,12 @@ zh-CN:
         resource: 资源
         content: 留言内容
         
-   errors:
-     models:
-       comment:
-         attributes:
-           resource:
-             blank: 留言对象不能为空
-           content:
-             blank: 留言内容不能为空
-             too_long: 留言内容过长             
+  errors:
+    models:
+      comment:
+        attributes:
+          resource:
+            blank: 留言对象不能为空
+          content:
+            blank: 留言内容不能为空
+            too_long: 留言内容过长             
