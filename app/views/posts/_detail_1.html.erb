@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="#">首页</a></li>
+    <li><a href="/">首页</a></li>
     <li class="active">寻车详情</li>
   </ol>
 </div>
@@ -9,30 +9,30 @@
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">寻车详情<span class="date bfR">2015/3/12  16:30</span></h3>
+          <h3 class="panel-title">寻车详情<span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
         </div>
         <div class="panel-body sourceDetail">
           <div class="row">
             <div class="col-md-6 con">
-              <h5 class="name">寻中规路虎揽胜运动 款式 3345</h5>
+              <h5 class="name"><%= post_name(@post)%></h5>
               <div class="info">
-                <p>卖河南</p>
-                <p>黑/白</p>
-                <p>车辆所在区域要求：</p>
-                <p>提车时间：</p>
+                <p><%= @post.app_area %></p>
+                <p><%= @post.color %></p>
+                <p>车辆所在区域要求：<%= @post.car_in_areas.join(',')%></p>
+                <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date]%></p>
               </div>
             </div>
             <div class="col-md-6 con">
               <div class="info">
-                <p class="price"><i class="icon icon-money"></i>期望的成交价：<span class="num">37.68万</span></p>
-                <p>指导价：39.68万/下2万</p>
+                <p class="price"><i class="icon icon-money"></i>期望的成交价：<span class="num"><%= @post.expect_price %>万</span></p>
+                <p>指导价：<%= @post.guiding_price %>万/<%= @post.human_discount %></p>
                 <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
               </div>
             </div>
           </div>
           <div class="remark">
             <div class="tt bfL">备注：</div>
-            <div class="info">北京市公安局海淀分局网监中心备案编号：1101081535 |电信与信息服务业务经营许可证：京ICP证070240号|中国互联网协会会员单位。</div>
+            <div class="info"><%= @post.remark%></div>
           </div>
           <div class="methodSelect quote row">
             <div class="tt clearfix">
@@ -85,40 +85,24 @@
           </div>
           <div class="boardForm clearfix">
             <h5 class="tt">留言</h5>
-            <form>
-              <textarea class="form-control"></textarea>
-              <input type="submit" class="btn btn-default input-sm btn_spacing sub bfR" id="" value="留言" />
-            </form>
+            <%= form_for Comment.new, as: :comment, url: comments_path, method: :post, remote: true do |f| %>
+              <%= f.hidden_field :resource_id, value: @post.id %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.hidden_field :resource_type, value: @post.class.to_s %>
+              <%= f.text_area :content, class: "form-control", placeHolder: '不能超过225个字' %>
+              <%= f.submit '留言', class: "btn btn-default input-sm btn_spacing sub bfR", id: "" %>
+            <% end -%>
           </div>
           <ul class="boardList">
+            <% @post.comments.each do |comment| %>
             <li>
-              <div class="photo bfL"><a href="#"><%= image_tag("_temp/followPhoto.jpg", alt: "")%></a></div>
+              <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
               <div class="detail">
-                <div class="info"><span class="name"><a href="#">罗塞：</a></span>提到“声擎”，大多数人还会觉得有点儿陌生。“声情……并茂？”恐怕是不少人冒出来的第一个念头。事实上，声擎是由 Dave Evans 和 Brady Bargenquast 创建于 2006 年的一个音响设备品牌，最初主要生产专业录音室定 ...提到“声擎”，大多数人还会觉得有点儿陌生。</div>
-                <div class="time"><span class="icon icon-message"></span>16:30</div>
+                <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
+                <div class="time"><span class="icon icon-message"></span><%= human_time(comment.updated_at) %></div>
               </div>
             </li>
-            <li>
-              <div class="photo bfL"><a href="#"><%= image_tag("_temp/followPhoto.jpg", alt: "")%></a></div>
-              <div class="detail">
-                <div class="info"><span class="name"><a href="#">罗塞：</a></span>提到“声擎”，大多数人还会觉得有点儿陌生。“声情……并茂？”恐怕是不少人冒出来的第一个念头。事实上，声擎是由 Dave Evans 和 Brady Bargenquast 创建于 2006 年的一个音响设备品牌，最初主要生产专业录音室定 ...提到“声擎”，大多数人还会觉得有点儿陌生。</div>
-                <div class="time"><span class="icon icon-message"></span>16:30</div>
-              </div>
-            </li>
-            <li>
-              <div class="photo bfL"><a href="#"><%= image_tag("_temp/followPhoto.jpg", alt: "")%></a></div>
-              <div class="detail">
-                <div class="info"><span class="name"><a href="#">罗塞：</a></span>提到“声擎”，大多数人还会觉得有点儿陌生。“声情……并茂？”恐怕是不少人冒出来的第一个念头。事实上，声擎是由 Dave Evans 和 Brady Bargenquast 创建于 2006 年的一个音响设备品牌，最初主要生产专业录音室定 ...提到“声擎”，大多数人还会觉得有点儿陌生。</div>
-                <div class="time"><span class="icon icon-message"></span>16:30</div>
-              </div>
-            </li>
-            <li>
-              <div class="photo bfL"><a href="#"><%= image_tag("_temp/followPhoto.jpg", alt: "")%></a></div>
-              <div class="detail">
-                <div class="info"><span class="name"><a href="#">罗塞：</a></span>提到“声擎”，大多数人还会觉得有点儿陌生。“声情……并茂？”恐怕是不少人冒出来的第一个念头。事实上，声擎是由 Dave Evans 和 Brady Bargenquast 创建于 2006 年的一个音响设备品牌，最初主要生产专业录音室定 ...提到“声擎”，大多数人还会觉得有点儿陌生。</div>
-                <div class="time"><span class="icon icon-message"></span>16:30</div>
-              </div>
-            </li>
+            <% end -%>
           </ul>
         </div>
       </div>
@@ -133,58 +117,9 @@
     </div>
   </div>
 </div>
-<div class="modal box bs-example-modal-sm" id="myReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title lineTitle" id="">举报</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group row">
-          <div class="radio-inline col-md-6">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">举报用户
-            </label>
-          </div>
-          <div class="radio-inline col-md-6">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">举报车源
-            </label>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="radio-inline col-md-6">
-            <label>
-              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">举报寻车信息
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" rows="3" placeholder="输入详细内容"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="" class="btn btn-default w100p orange btn_spacing"data-dismiss="modal" aria-label="Close" >提交</button>
-      </div>
-    </div>
-  </div>
-</div>
-<%= javascript_tag do %>
-$(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-  $(".selectInput").find("input.form-control").attr("disabled","true");
-  $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
-  $(".selectInput").removeClass("active");
-  $(this).addClass("active").siblings().removeClass("active");
-  $(this).next(".selectInput").addClass("active").focus();
-});
 
-$(".selectInput").find("input.form-control").keyup(function(){
-  clearNoNum(this);
-});
+<%= render partial: 'complaints/complaint'%>
 
-function clearNoNum(obj){
-  obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
-  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
-}
+<%= content_for :footers do %>
+  <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
 <% end -%>

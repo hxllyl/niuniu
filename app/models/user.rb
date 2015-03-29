@@ -156,6 +156,10 @@ class User < ActiveRecord::Base
   def can_upgrade_4s
     !LEVELS.keys[2..4].include?(level)
   end
+  
+  def can_upgrade
+    level != LEVELS.keys[3] and level != LEVELS.keys[4]
+  end
 
   def following?(user)
     followings.include?(user)
@@ -172,7 +176,10 @@ class User < ActiveRecord::Base
       area:     area_name,
       avatar:   avatar,
       contact:  contact,
-      dealt_infos: dealt_infos
+      dealt_infos: dealt_infos,
+      post_count: posts.needs.count, 
+      tender_count: tenders.count,
+      following_count: followings.count
     }
   end
 

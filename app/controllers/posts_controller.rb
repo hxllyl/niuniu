@@ -81,7 +81,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post     = Post.find_by_id(params[:id])
+    @post     = Post.includes(:comments).find_by_id(params[:id])
     @someone  = @post.user
     @follows  = current_user.followings & @someone.followers if current_user
   end

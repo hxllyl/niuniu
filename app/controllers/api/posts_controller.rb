@@ -258,4 +258,27 @@ class Api::PostsController < Api::BaseController
 
     render json: {status: 200, notice: 'success', data: {post: post, tender: tender}}
   end
+  
+  # 资源更新
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   post_ids: [Array]     资源的id     
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  
+  def update_all
+    posts = @user.posts.resources.where("id in (?)", params[:post_ids])
+    posts.update_all(updated_at: Time.now)
+    
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
+  end
+  
 end
