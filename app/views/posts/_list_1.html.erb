@@ -67,7 +67,7 @@
                     <td><%= link_to post.title, post_path(post.id, _type: 1)%></td>
                     <td><%= post.car_license_areas %></td>
                     <td><%= post.color %></td>
-                    <td><%= post.owner %><%= image_tag post.user.level_icon %></td>
+                    <td><%= post.owner %><%= image_tag post.user.try(:level_icon), size: '50x20' %></td>
                     <td><%= post.publish_time %></td>
                 </tr>
                 <% end %>

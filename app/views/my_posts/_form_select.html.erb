@@ -3,9 +3,13 @@
     <label for="car_standard" class="col-md-4 control-label">规格</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
           <%- @standards.each do |standard| %>
-          <option value="<%= standard.id %>"><%= standard[:name]%></option>
+            <%- if standard == @standard %>
+              <option value="<%= standard.id %>" selected="selected"><%= standard[:name]%></option>
+            <% else %>
+              <option value="<%= standard.id %>"><%= standard[:name]%></option>
+            <% end %>
           <% end %>
         </select>
       </div>
@@ -17,178 +21,34 @@
       <div class="dropdown w100p">
         <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> >
           <%- @brands.each do |brand| %>
-          <option value="<%= brand.id %>"><%= brand.name %></option>
+            <%- if brand == @brand %>
+              <option value="<%= brand.id %>" selected="selected"><%= brand.name %></option>
+            <% else %>
+              <option value="<%= brand.id %>"><%= brand.name %></option>
+            <% end %>
           <% end %>
         </select>
       </div>
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="car_model" class="col-md-4 control-label">车型</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <%- unless @car_models == 'set_it_itself' %>
-          <select name="post[car_model_id]" class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
-            <%- @car_models.each do |car_model| %>
-              <option value="<%= car_model.id %>"><%= car_model.name %></option>
-            <% end %>
-            <option value="set_car_model">自定义</option>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[car_model_id]">
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="car_style" class="col-md-4 control-label">款式</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <%- unless @base_cars == 'set_by_itself' %>
-          <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
-            <%- @base_cars.each do |base_car| %>
-              <option value="<%= base_car.id %>"><%= base_car.style %></option>
-            <% end %>
-            <option value="set_base_car">自定义</option>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[base_car_id]">
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="car_appearance" class="col-md-4 control-label">外观</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <%- unless @outer_colors == 'set_by_itself' %>
-          <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
-            <%- @outer_colors.each do |ele| %>
-              <option value="<%= ele %>"><%= ele %></option>
-            <% end %>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[outer_color]">
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="car_interior" class="col-md-4 control-label">内饰</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <%- unless @inner_colors == 'set_by_itself' %>
-          <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
-            <%- @inner_colors.each do |ele| %>
-              <option value="<%= ele %>"><%= ele %></option>
-            <% end %>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[inner_color]">
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="car_address" class="col-md-4 control-label">上牌地点</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <input type="text" class="form-control input-sm" name="post[car_license_areas]">
-      </div>
-    </div>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="car_area" class="col-md-4 control-label">区域要求</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <%- unless @areas == 'set_by_itself' %>
-          <select name="post[car_in_areas]" class="form-control input-sm" id="car_area">
-            <%- @areas.each do |ele| %>
-              <option value="<%= ele %>"><%= ele %></option>
-            <% end %>
-          </select>
-        <% else %>
-          <input type="text" class="form-control input-sm" name="post[car_in_areas]">
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="car_date" class="col-md-4 control-label">提车时间</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <select name="post[take_car_date]" class="form-control input-sm" id="car_date">
-          <%- Post::TAKE_DATES.each do |k, v|%>
-            <option value="<%= k %>"><%= v%></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="methodSelect row">
-  <div class="tt clearfix">
-    <h5 class="col-md-6">报价方式</h5>
-    <h5 class="col-md-6">指导价：<span id="guidePrice"><%= @price %></span>万</h5>
-  </div>
-  <div class="form-group form-inline col-md-6">
-    <label class="radio selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios1" value="1"><span>优惠点数</span>
-    </label>
-    <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="methodVal1" placeholder="" name="post[discount_content]">
-      <div class="units">点数</div>
-    </label>
-  </div>
-  <div class="form-group form-inline col-md-6">
-    <label class="radio selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios2" value="2"><span>优惠金额</span>
-    </label>
-    <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="methodVal2" placeholder="" name="post[discount_content]">
-      <div class="units">万元</div>
-    </label>
-  </div>
-  <div class="form-group form-inline col-md-6">
-    <label class="radio selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios3" value="3"><span>加价金额</span>
-    </label>
-    <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="methodVal3" placeholder="" name="post[discount_content]">
-      <div class="units">万元</div>
-    </label>
-  </div>
-  <div class="form-group form-inline col-md-6">
-    <label class="radio selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios4" value="4"><span>直接报价</span>
-    </label>
-    <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="methodVal4" placeholder="" name="post[discount_content]">
-      <div class="units">万元</div>
-    </label>
-  </div>
-</div>
+<input class='hide' id="post_type" name="post[_type]" value="<%= @post_type %>">
+<%= render @car_model == 'set_car_model' ? 'car_model_input' : 'car_model_select'%>
 
 <script type="text/javascript">
 $(document).ready(function(){
   $('body').on('change', '#post_standard_id', function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
+    var _type = $('#post_type').val();
 
     $.ajax({
       method: "GET",
       url: url,
       data: {
         post: {
-          standard_id: standard_id
+          standard_id: standard_id,
+          _type: _type
         }
       },
       success: function(data){
@@ -201,7 +61,8 @@ $(document).ready(function(){
   $('body').on('change', '#post_brand_id', function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
-    var brand_id = $('#brand_id').val();
+    var brand_id = $('#post_brand_id').val();
+    var _type = $('#post_type').val();
 
     $.ajax({
       method: "GET",
@@ -209,7 +70,8 @@ $(document).ready(function(){
       data: {
         post: {
           standard_id: standard_id,
-          brand_id: brand_id
+          brand_id: brand_id,
+          _type: _type
         }
       },
       success: function(data){
@@ -224,6 +86,7 @@ $(document).ready(function(){
     var standard_id = $('#post_standard_id').val();
     var brand_id = $('#post_brand_id').val();
     var car_model_id = $('#post_car_model_id').val();
+    var _type = $('#post_type').val();
 
     $.ajax({
       method: "GET",
@@ -232,7 +95,8 @@ $(document).ready(function(){
         post: {
           standard_id: standard_id,
           brand_id: brand_id,
-          car_model_id: car_model_id
+          car_model_id: car_model_id,
+          _type: _type
         }
       },
       success: function(data){
@@ -248,6 +112,7 @@ $(document).ready(function(){
     var brand_id = $('#post_brand_id').val();
     var car_model_id = $('#post_car_model_id').val();
     var base_car_id = $('#post_base_car_id').val();
+    var _type = $('#post_type').val();
 
     $.ajax({
       method: "GET",
@@ -257,7 +122,8 @@ $(document).ready(function(){
           standard_id: standard_id,
           brand_id: brand_id,
           car_model_id: car_model_id,
-          base_car_id: bae_car_id
+          base_car_id: base_car_id,
+          _type: _type
         }
       },
       success: function(data){
