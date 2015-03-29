@@ -68,7 +68,7 @@
                     <td><%= link_to post.car_model_name, post_path(post.id, _type: 0), class: 'name' %></td>
                     <td><span class="price"><%= post.expect_price.to_f %></span></td>
                     <td><%= post.standard_name + '现车' %></td>
-                    <td><%= post.owner %>icon</td>
+                    <td><%= post.owner %><%= image_tag post.user.try(:level_icon), size: "50x20" %></td>
                     <td><%= link_to '浏览', user_list_posts_path(user_id: post.user_id, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
                     <td><%= post.publish_time %></td>
                   </tr>
