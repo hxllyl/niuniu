@@ -112,7 +112,7 @@ Rails.application.routes.draw do
 
     namespace :users do
       get :list
-      get :has_updated, on: :collection
+      get :has_updated
     end
   end
 

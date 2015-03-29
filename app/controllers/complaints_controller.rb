@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ComplaintsController < BaseController
 
   def create
@@ -7,14 +9,26 @@ class ComplaintsController < BaseController
     complaint = current_user.complaints.new(complaint_params)
     complaint.save!
 
-    render text: 'ok'
+    respond_to do |format|
+      format.html {
+        flash[:notice] = t('success')
+        redirect_to :back
+      }
+      format.js {}
+    end
   rescue => e
-    render text: e.message
+    respond_to do |format|
+      format.html {
+        flash[:error] = complaint.errors.full_message.join('\n')
+        redirect_to :back
+      }
+      format.js {}
+    end
   end
 
   private
   
   def complaint_params
-    params[:complaint].permit(:resource_type, :resource_id, :content)
+    params[:complaint].permit(:resource_type, :resource_id, :content, :user_id)
   end
 end
