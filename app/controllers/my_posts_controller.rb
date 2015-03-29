@@ -83,15 +83,20 @@ class MyPostsController < ApplicationController
                 ) unless base_car
 
     params.require(:post).permit!
-    params[:post][:car_in_areas] = [params[:post][:car_in_areas]]
+    params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
     params[:post][:car_model_id] = car_model.id
     params[:post][:base_car_id]  = base_car.id
-    @post = Post.new(params[:post])
+
+    photos = params[:post].delete(:post_photos)
+    @post  = Post.new(params[:post])
+    photos && photos.each_with_index do |ele, index|
+      @post.post_photos.new(_type: %w(front side obverse inner)[index], image: ele.tempfile)
+    end
 
     @post.user = current_user
 
     if @post.save
-      redirect_to current_user
+      redirect_to @post._type == 0 ? user_my_posts_path(current_user, _type: 0) : current_user
     else
       render action: new, flash: @post.errors
     end
