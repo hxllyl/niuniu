@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    resources :users do
+      get :search, on: :collection
+    end
+  end
+
   root 'portal#index'
 
   devise_for :users, controllers: {

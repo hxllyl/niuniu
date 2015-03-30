@@ -74,6 +74,9 @@ gem 'capistrano-rails'
 gem 'capistrano-bundler'
 gem 'capistrano-rvm'
 
+gem 'haml'
+gem 'font-awesome-rails'
+
 group :production do
   gem 'unicorn-rails', '~> 2.2.0'
   gem 'unicorn'
