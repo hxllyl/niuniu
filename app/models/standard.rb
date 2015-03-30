@@ -14,7 +14,7 @@ class Standard < ActiveRecord::Base
       id:             id,
       resource_name:  'Standard',
       name:           name,
-      brands:         brands.map(&:to_hash)
+      # brands:         brands.map(&:to_hash)
     }
   end
 

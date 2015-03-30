@@ -20,8 +20,8 @@ class PostsController < ApplicationController
   def resources_list
     @standards  = Standard.all
     @brands     = Brand.all
-    @car_models = CarModel.all
-    @base_cars  = BaseCar.all
+    @car_models = []
+    @base_cars  = []
 
     @standard   = Standard.find_by_id(params[:standard_id])
     @brand      = Brand.find_by_id(params[:brand_id])
@@ -41,17 +41,19 @@ class PostsController < ApplicationController
 
   def get_resources
     @standards  = Standard.all
-    @brands     = Brand.all
-    @car_models = CarModel.all
-    @base_cars  = BaseCar.all
     @standard   = Standard.find_by_id(params[:post_standard_id])
-    @brand      = Brand.find_by_id(params[:post_brand_id])
-    @car_model  = CarModel.find_by_id(params[:post_car_model_id])
-    @base_car   = BaseCar.find_by_id(params[:post_base_car_id])
-
     @standard   = Standard.find_by_id(params[:standard_id])   unless @standard
+
+    @brands     = @standard ? @standard.brands : Brand.all.valid
+    @brand      = Brand.find_by_id(params[:post_brand_id])
     @brand      = Brand.find_by_id(params[:brand_id])         unless @brand
+
+    @car_models = @standard && @brand ? CarModel.where(standard_id: @standard.id, brand_id: @brand.id) : []
+    @car_model  = CarModel.find_by_id(params[:post_car_model_id])
     @car_model  = CarModel.find_by_id(params[:car_model_id])  unless @car_model
+
+    @base_cars  = @car_model ? @car_model.base_cars : []
+    @base_car   = BaseCar.find_by_id(params[:post_base_car_id])
     @base_car   = BaseCar.find_by_id(params[:base_car_id])    unless @base_car
 
     conds = {}
