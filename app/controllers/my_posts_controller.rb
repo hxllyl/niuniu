@@ -120,7 +120,7 @@ class MyPostsController < ApplicationController
   end
 
   def show
-    logger.infos "*" * 199
+    logger.info "*" * 199
     @post = Post.find_by_id(params[:id])
   end
 
