@@ -147,6 +147,48 @@ $(document).ready(function(){
   $(".selectInput").find("input.form-control").keyup(function(){
     clearNoNum(this);
   });
+  var gPrice = parseFloat($("#guidePrice").html());
+  var val1 = parseFloat($("#methodVal1").val());
+  if (val1 > 100){
+    $("#methodVal1").val(100);
+  }
+  $("#methodVal1").keyup(function(){
+    $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
+    $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
+  });
+  $("#methodVal2").keyup(function(){
+    $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
+    $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
+  });
+  $("#methodVal3").keyup(function(){
+    var thisV = parseFloat($(this).val());
+    if(isNaN(thisV)){
+      thisV = 0;
+    }
+    $("#methodVal4").val((gPrice + thisV).toFixed(2));
+  });
+
+  $("#methodVal4").bind("focus blur keyup", function() {
+    if ($(this).val() < gPrice){
+      $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
+      $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
+      $("#methodVal3").val(0);
+    }
+    else {
+      $("#methodVal1,#methodVal2").val(0);
+      $("#methodVal3").val($(this).val() - gPrice);
+    }
+  });
+
+  $("#methodVal4").blur(function(){
+    if ($(this).val() == "" || $(this).val() == 0){
+      $(this).val(gPrice);
+    }
+  });
+
+  $("#methodRadios5").click(function(){
+    $(".selectInput").find("input.form-control").val("");
+  });
 });
 
 function clearNoNum(obj){
