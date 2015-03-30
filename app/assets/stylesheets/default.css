@@ -394,6 +394,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .aboutUsMain.row .infoBox { color: #323232; }
 .aboutUsMain.row .infoBox td { height: 38px; line-height: 24px; }
 .aboutUsForm.row { margin-right: 25px; }
+.aboutBlank { padding: 100px 0; text-align: center; }
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 12px; }
