@@ -60,20 +60,17 @@ namespace :database do
     pics     = Array(0..4)
     pics_dir = Rails.root + 'public' + 'cars'
     100.times do
-      standard = Standard.all.sample
-      brand    = standard.brands.sample
-      car_model = brand.car_models.sample
-      base_car = car_model.base_cars.sample
+      base_car = BaseCar.all.sample
       post     = Post.new(
                  _type:             [0, 1].sample,
-                 standard_id:       standard.id,
-                 brand_id:          brand.id,
+                 standard_id:       base_car.standard_id,
+                 brand_id:          base_car.brand_id,
                  user_id:           user_ids.sample,
-                 car_model_id:      car_model.id,
+                 car_model_id:      base_car.car_model_id,
                  outer_color:       (base_car.outer_color.sample rescue '白色'),
                  inner_color:       (base_car.inner_color.sample rescue '黑色'),
                  car_license_areas: Area.first.name,
-                 car_in_areas:      brand.regions.sample(2),
+                 car_in_areas:      base_car.brand.regions.sample(2),
                  discount_way:      1,
                  discount_content:  0.9,
                  resource_type:     [0, 1].sample

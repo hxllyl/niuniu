@@ -5,7 +5,7 @@
       <%- if @standard %>
         <li>
           <span class="name"><%= @standard.name %></span>
-          <a href="#" class="close" aria-label="Close">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></a>
+          <a href="<%= resources_list_posts_path(@q_json.delete(:st)) %>" class="close" aria-label="Close">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></a>
         </li>
       <% end %>
       <%- if @brand %>
