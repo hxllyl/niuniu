@@ -117,6 +117,7 @@ Rails.application.routes.draw do
       get :list
       get :has_updated
       patch :change_password
+      patch :reset_password
     end
   end
 
