@@ -9,13 +9,13 @@
       </div>
       <div class="sFormBox clearfix">
         <div class="sFormTag bfL">照片</div>
-        <ul class="row first sFormArea addImgGroups">
+        <ul class="row first sFormArea addImgGroups" id="post_photos">
           <%- Post::PHOTOS.each do |k, v| %>
           <li class="col-md-3">
             <div class="thumbnail box">
-              <div class="img"><span class="alt"><%= v %></span><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></div>
+              <div class="img" id=<%= k %>><span class="alt"><%= v %></span><%= image_tag("index/hotCar.jpg", alt: "", width: "100%")%></div>
               <div class="fileInput">
-                <div class="fileBtn">添加照片<input type="file" class="button" name="post[post_photos][]"/></div>
+                <div class="fileBtn">添加照片<input type="file" class="button <%= k %>" name=<%= "post[post_photos][#{k}][]" %>/></div>
               </div>
             </div>
           </li>
@@ -103,4 +103,17 @@ function clearNoNum(obj){
   obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
   obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
 }
+
+$(document).ready(function(){
+    $('#post_photos').find('input[type="file"]').on('change', function(){
+      var n = $(this).attr('class').split(" ")[1];
+      if(this.files && this.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e){
+          $('#'+n).html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  });
 </script>
