@@ -103,14 +103,25 @@ class MyPostsController < ApplicationController
   end
 
   def edit
+    @post  = Post.find_by_id(params[:id])
+    @standards = Standard.all
+    @standard  = @post.standard
+    @brands    = @standards.first.brands.valid
+    @brand     = @post.brand
+    @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @standards.first.brands.first.id, status: 1)
+    @car_model = @post.car_model
+    @base_cars = @car_models.first.base_cars
+    @base_car  = @post.base_car
+    @post_type = @post._type
   end
 
   def update
+    # update not work default show
   end
 
   def show
-    @post  = Post.find_by_id(params[:id])
-    @_type = params[:_type]
+    logger.infos "*" * 199
+    @post = Post.find_by_id(params[:id])
   end
 
   def destroy
