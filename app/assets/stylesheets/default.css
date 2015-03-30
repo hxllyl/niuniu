@@ -78,7 +78,7 @@ padding:0;
 .contentBox .lineTitle { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; background-color: #ededed; background-image: none; }
 .contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
 .hotCar li { margin: 8px auto; }
-.hotCar li .box { padding: 5px; margin-bottom: 0; border-color: #e9e9e9; border-radius: 0; box-shadow: none; }
+.hotCar li .box { min-height: 193px; padding: 5px; margin-bottom: 0; border-color: #e9e9e9; border-radius: 0; box-shadow: none; }
 .hotCar li .box .imgBox { display: block; height: 110px; border: 1px solid #e6e6e6; overflow: hidden; }
 .hotCar li .intro { line-height: 20px; padding: 4px; margin-top: 8px; font-size: 12px; color: #999999; }
 .hotCar li .intro .name { font-size: 14px; color: #666666; }
@@ -394,6 +394,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .aboutUsMain.row .infoBox { color: #323232; }
 .aboutUsMain.row .infoBox td { height: 38px; line-height: 24px; }
 .aboutUsForm.row { margin-right: 25px; }
+.aboutBlank { padding: 100px 0; text-align: center; }
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 12px; }

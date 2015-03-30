@@ -119,7 +119,7 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def unfollow
-    @user.followings.where(following_id: user.id).delete_all
+    @user.followings.where('follow_ships.following_id' => params[:user_id]).delete_all
 
     render json: {status: 200, notice: 'success'}
   rescue => ex
