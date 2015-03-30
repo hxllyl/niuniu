@@ -120,8 +120,31 @@ class MyPostsController < ApplicationController
   end
 
   def show
-    logger.info "*" * 199
     @post = Post.find_by_id(params[:id])
+    standard  = Standard.find_by_id(params[:post][:standard_id])
+    brand     = Brand.find_by_id(params[:post][:brand_id])
+    car_model = CarModel.find_by_id(params[:post][:car_model_id])
+    base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
+
+    params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
+
+    photos = params[:post].delete(:post_photos)
+    params.require(:post).permit!
+    @post.attributes = params[:post]
+    photos && photos.each do |k, v|
+      photo = @post.post_photos.find_by__type(k)
+      if photo
+        photo.update_attributes(image: v.first.values.first.tempfile)
+      else
+        @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+      end
+    end
+
+    if @post.save
+      redirect_to user_my_posts_path(current_user, _type: 0)
+    else
+      render action: edit, flash: @post.errors
+    end
   end
 
   def destroy

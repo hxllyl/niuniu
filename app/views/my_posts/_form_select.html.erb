@@ -148,51 +148,63 @@ $(document).ready(function(){
     clearNoNum(this);
   });
   var gPrice = parseFloat($("#guidePrice").html());
-  var val1 = parseFloat($("#methodVal1").val());
-  if (val1 > 100){
-    $("#methodVal1").val(100);
+  if (isNaN(gPrice)){
+    gPrice = 0;
+    $("#methodVal4").bind("focus blur keyup", function() {
+      $("#methodVal1,#methodVal2,#methodVal3").val("");
+    });
   }
-  $("#methodVal1").keyup(function(){
-    $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
-    $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
-  });
-  $("#methodVal2").keyup(function(){
-    $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
-    $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
-  });
-  $("#methodVal3").keyup(function(){
-    var thisV = parseFloat($(this).val());
-    if(isNaN(thisV)){
-      thisV = 0;
-    }
-    $("#methodVal4").val((gPrice + thisV).toFixed(2));
-  });
-
-  $("#methodVal4").bind("focus blur keyup", function() {
-    if ($(this).val() < gPrice){
-      $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
-      $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
+  else {
+    $("#methodVal1").keyup(function(){
+      if ($(this).val() > 100){
+        $("#methodVal1").val(100);
+      }
+      $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
       $("#methodVal3").val(0);
-    }
-    else {
+      $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
+    });
+    $("#methodVal2").keyup(function(){
+      $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
+      $("#methodVal3").val(0);
+      $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
+    });
+    $("#methodVal3").keyup(function(){
+      var thisV = parseFloat($(this).val());
+      if(isNaN(thisV)){
+        thisV = 0;
+      }
       $("#methodVal1,#methodVal2").val(0);
-      $("#methodVal3").val($(this).val() - gPrice);
-    }
-  });
+      $("#methodVal4").val((gPrice + thisV).toFixed(2));
+    });
 
-  $("#methodVal4").blur(function(){
-    if ($(this).val() == "" || $(this).val() == 0){
-      $(this).val(gPrice);
-    }
-  });
+    $("#methodVal4").bind("focus blur keyup", function() {
+      if ($(this).val() < gPrice){
+        $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
+        $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
+        $("#methodVal3").val(0);
+      }
+      else {
+        $("#methodVal1,#methodVal2").val(0);
+        $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
+      }
+    });
 
+    $("#methodVal4").blur(function(){
+      if ($(this).val() == ""){
+        $(this).val(gPrice);
+      }
+    });
+  }
   $("#methodRadios5").click(function(){
     $(".selectInput").find("input.form-control").val("");
   });
 });
 
 function clearNoNum(obj){
-  obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
+  obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
+  obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
+  obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
+  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
   obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
 }
 </script>

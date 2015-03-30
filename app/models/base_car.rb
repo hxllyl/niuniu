@@ -34,7 +34,8 @@ class BaseCar < ActiveRecord::Base
       number:         self.NO,
       outer_color:    outer_color,
       inner_color:    inner_color,
-      base_price:     base_price.to_f
+      base_price:     base_price.to_f,
+      regions:        brand.regions
     }
   end
 
