@@ -53,18 +53,47 @@ class Tender < ActiveRecord::Base
 
   def to_hash
     {
-      id:     id,
-      title:  post.title,
-      area:   post.app_area,
-      color:  post.color,
-      owner:  post.owner,
-      time:   post.publish_time,
-      tender: price
+      id:             id,
+      title:          post.title,
+      area:           post.app_area,
+      color:          post.color,
+      owner:          post.owner,
+      time:           post.publish_time,
+      tender:         price,
+      status:         status,
+      base_price:     base_price,
+      self_time:      publish_time,
+      self_user_id:   user_id,
+      self_user_name: user.name_area
     }
   end
 
   def publish_time
     updated_at < Date.today ? updated_at.strftime("%m/%d %H:%M") : updated_at.strftime("%H:%M")
+  end
+
+  def base_price
+    "#{post.guiding_price}万/#{human_discount}"
+  end
+
+  # 优惠方式
+  def human_discount
+    case self.discount_way
+    when DISCOUNT_WAYS.keys[0] then
+      I18n.t('discount') << discount_content.to_s << I18n.t('point')
+    when DISCOUNT_WAYS.keys[1] then
+      I18n.t('discount') << discount_content.to_s << I18n.t('wan')
+    when DISCOUNT_WAYS.keys[2] then
+      I18n.t('add') << discount_content.to_s << I18n.t('wan')
+    when DISCOUNT_WAYS.keys[3] then
+      if expect_price < guiding_price
+        I18n.t('discount') << (guiding_price - expect_price).to_s << I18n.t('wan')
+      else
+        I18n.t('add') << (expect_price - guiding_price).to_s << I18n.t('wan')
+      end
+    else
+      guiding_price.to_s << I18n.t('wan')
+    end
   end
 
 end

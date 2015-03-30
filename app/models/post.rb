@@ -156,7 +156,8 @@ class Post < ActiveRecord::Base
       base_path:          url,
       tenders_count:      tenders.count,
       status:             STATUS[status],
-      resource_type:      RESOURCE_TYPE[resource_type]
+      resource_type:      RESOURCE_TYPE[resource_type],
+      tenders:            tender.map(&:to_hash)
     }
   end
 
