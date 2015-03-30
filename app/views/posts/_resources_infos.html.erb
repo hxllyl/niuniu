@@ -35,7 +35,7 @@
       <div class="listBox">
         <ul class="list clearfix" id='standards_list'>
           <% @standards.each do |std| %>
-          <li><a href="javascript:get_resource_list('<%= get_resources_posts_path(post_standard_id: std.id) %>')"><%= std.name %></a></li>
+          <li><a href="<%= resources_list_posts_path(@q_json.merge(st: std.id)) %>"><%= std.name %></a></li>
           <% end %>
         </ul>
       </div>
@@ -48,7 +48,7 @@
         <ul class="list clearfix">
           <% @brands.each do |brand| %>
           <li>
-            <a href="javascript:get_resource_list('<%= get_resources_posts_path(post_brand_id: brand.id) %>')"><%= brand.name %></a>
+            <a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
           </li>
           <% end %>
         </ul>
@@ -62,7 +62,7 @@
         <ul class="list clearfix">
           <% @car_models.each do |car_model| %>
           <li>
-            <a href="javascript:get_resource_list('<%= get_resources_posts_path(post_car_model_id: car_model.id) %>')"><%= car_model.name %></a>
+            <a href="<%= resources_list_posts_path(@q_json.merge(cm: car_model.id)) %>"><%= car_model.name %></a>
           </li>
           <% end %>
         </ul>
@@ -76,7 +76,7 @@
         <ul class="list clearfix">
           <% @base_cars.each do |style| %>
           <li>
-            <a href="javascript:get_resource_list('<%= get_resources_posts_path(post_base_car_id: style.id) %>')"><%= style.style %></a>
+            <a href="<%= resources_list_posts_path(@q_json.merge(bc: style.id)) %>"><%= style.style %></a>
           </li>
           <% end %>
         </ul>
