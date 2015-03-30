@@ -107,6 +107,7 @@ class UsersController < BaseController
     @customer_service = current_user.customer_service
   end
 
+  
   private
   def user_params
     params.require(:user).permit(:name, :role, :company, :area_id,

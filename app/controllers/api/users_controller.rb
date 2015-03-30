@@ -78,8 +78,6 @@ class Api::UsersController < Api::BaseController
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
-
-
   # 修改密码
   #
   # Params:
@@ -100,7 +98,46 @@ class Api::UsersController < Api::BaseController
   rescue => ex
     render json: { status: 400, notice: 'failed', error_msg: ex.message }
   end
-
+  
+  # 认证升级
+  # 
+  # Params:
+  #   token:          [String]   valid token
+  #   level:          [integer]  升级到的等级
+  #   identity:       [fileData] 身份证件图片
+  #   hand_id:        [fileData] 手持身份证
+  #   visiting:       [fileData] 名片
+  #   room_outer:     [fileData] 展厅门头
+  #   room_inner:     [fileData] 展厅内部
+  #   license:        [fileData] 营业执照
+  # Returns:
+  #   status: 200
+  #   notice: success
+  # Errors:
+  #   status: 500
+  #   notice: failed
+  #   error_msg: 
+  
+  def update_level
+    raise Errors::ArgumentsError.new, 'level参数不存在或比用户level低' if params[:level].blank? or params[:level].to_i <= @user.level 
+    
+    %w(identity hand_id visiting room_outer room_inner license).each do |t|
+      if params[t.to_sym].present?
+        photo = @user.send("#{t}")
+        if photo
+          photo.update(image: params[t.to_sym])
+        else
+          @user.photos << Photo.new(image: params[t.to_sym], _type: t)
+        end
+      else
+        next
+      end
+    end
+    render json: { status: 200, notice: 'success' }  
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
+  end
+  
   # 重置密码
   #
   # Params:
