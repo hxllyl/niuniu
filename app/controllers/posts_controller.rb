@@ -17,24 +17,41 @@ class PostsController < ApplicationController
   end
 
   # 市场资源点击品牌进入资源列表页
+  # params: st=1&br=1&cm=1&bc=1&oc=xx&ic=xx&rt=xx
   def resources_list
+    params.delete(:action)
+    params.delete(:controller)
+
+    @q_json = params
+
     @standards  = Standard.all
-    @brands     = Brand.all
-    @car_models = []
-    @base_cars  = []
+    @standard   = Standard.find_by_id(params[:st])
 
-    @standard   = Standard.find_by_id(params[:standard_id])
-    @brand      = Brand.find_by_id(params[:brand_id])
-    @car_model  = CarModel.find_by_id(params[:car_model_id])
-    @base_car   = BaseCar.find_by_id(params[:base_car_id])
+    @brands     = @standard ? @standard.brands.valid : Brand.valid
+    @brand      = Brand.find_by_id(params[:br])
 
-    conds = {}
-    conds[:outer_color]   = params[:outer_color]    if params[:outer_color]
-    conds[:inner_color]   = params[:inner_color]    if params[:inner_color]
-    conds[:resource_type] = params[:resource_type]  if params[:resource_type]
+    if params[:st] && params[:br]
+      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
+      @car_model  = CarModel.find_by_id(params[:cm])
+    else
+      @car_models = []
+      @car_model  = nil
+    end
+    if params[:cm]
+      @base_cars  = @car_model.base_cars.valid
+      @base_car   = BaseCar.find_by_id(params[:bc])
+    else
+      @base_cars  = []
+      @base_car   = nil
+    end
+    if params[:bc]
+      conds = {}
+      conds[:outer_color]   = params[:oc]    if params[:oc]
+      conds[:inner_color]   = params[:ic]    if params[:ic]
+      conds[:resource_type] = params[:rt]    if params[:rt]
 
-    @posts = @base_car ? @base_car.posts.resources.where(conds).order(updated_at: :desc).page(params[:page]).per(10) : nil
-
+      @posts = @base_car.posts.resources.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
+    end
   # rescue => e
   #   render json: {status: :not_ok, msg: e.message}
   end
