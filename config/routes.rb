@@ -116,6 +116,7 @@ Rails.application.routes.draw do
     namespace :users do
       get :list
       get :has_updated
+      post :update_level
       patch :change_password
     end
   end

@@ -19,7 +19,7 @@
           <div class="tips">你可以选择png/jpg图片(180*180)作为头像</div>
           <div class="fileInput">
             <div class="fileBtn black">修改头像
-              <%= file_field_tag :_image, type: :file, multiple: true, class: 'button user_image', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
+              <%= file_field_tag :_image, value: current_user.avatar, type: :file, multiple: true, class: 'button user_image', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
               <%= hidden_field_tag :_type, 'avatar' -%>
             </div>
           </div>
