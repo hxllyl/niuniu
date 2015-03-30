@@ -86,13 +86,13 @@ class Tender < ActiveRecord::Base
     when DISCOUNT_WAYS.keys[2] then
       I18n.t('add') << discount_content.to_s << I18n.t('wan')
     when DISCOUNT_WAYS.keys[3] then
-      if expect_price < guiding_price
-        I18n.t('discount') << (guiding_price - expect_price).to_s << I18n.t('wan')
+      if price < post.guiding_price
+        I18n.t('discount') << (post.guiding_price - price).to_s << I18n.t('wan')
       else
-        I18n.t('add') << (expect_price - guiding_price).to_s << I18n.t('wan')
+        I18n.t('add') << (price - post.guiding_price).to_s << I18n.t('wan')
       end
     else
-      guiding_price.to_s << I18n.t('wan')
+      post.guiding_price.to_s << I18n.t('wan')
     end
   end
 
