@@ -3,28 +3,28 @@
   <div class="panel-heading lineTitle">
     <ul class="selectCrumb clearfix">
       <%- if @standard %>
-      <li><span class="name">
-        <%= @standard.name %></span><span class="close" aria-label="Close">&times;
-        <input class="hide" id="standard_id" value="<%= @standard.id %>">
-      </span></li>
+        <li>
+          <span class="name"><%= @standard.name %></span>
+          <span class="close" aria-label="Close" onclick="javascript:get_resource_list('<%= get_resources_posts_path(standard_id: std.id) %>')">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></span>
+        </li>
       <% end %>
       <%- if @brand %>
-      <li><span class="name">
-        <%= @brand.name %></span><span class="close" aria-label="Close">&times;
-        <input class="hide" id="brand_id" value="<%= @brand.id %>">
-      </span></li>
+        <li>
+          <span class="name"><%= @brand.name %></span>
+          <span class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></span>
+        </li>
       <% end %>
       <%- if @car_model %>
-      <li><span class="name">
-        <%= @car_model.name %></span><span class="close" aria-label="Close">&times;
-        <input class="hide" id="car_model_id" value="<%= @car_model.id %>">
-      </span></li>
+        <li>
+          <span class="name"><%= @car_model.name %></span>
+          <span class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></span>
+        </li>
       <% end %>
       <%- if @base_car %>
-      <li><span class="name">
-        <%= @base_car.style %></span><span class="close" aria-label="Close">&times;
-        <input class="hide" id="base_car_id" value="<%= @base_car.id %>">
-      </span></li>
+        <li>
+          <span class="name"><%= @base_car.style %></span>
+          <span class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></span>
+        </li>
       <% end %>
     </ul>
   </div>
