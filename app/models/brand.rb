@@ -24,7 +24,7 @@ class Brand < ActiveRecord::Base
       id:             id,
       resource_name:  'Brand',
       name:           name,
-      image:          car_photo.image.url,
+      image:          car_photo.try(:image).try(:url),
       regions:        regions,
       car_models:     car_models.map(&:to_hash)
     }
