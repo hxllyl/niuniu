@@ -14,11 +14,11 @@
               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th width="30%">品牌/车型</th>
+                    <th width="28%">品牌/车型</th>
                     <th width="12%">报价(万元)</th>
                     <th width="12%">上牌地点</th>
-                    <th width="12%">外观/内饰</th>
-                    <th width="18%">发布人</th>
+                    <th width="20%">外观/内饰</th>
+                    <th width="12%">发布人</th>
                     <th width="10%">发布时间</th>
                     <th width="6%">操作</th>
                   </tr>
@@ -69,7 +69,7 @@
                     <td><%= tender.post.try(:user_name) %>
                         <%= image_tag(tender.post.user.level_icon, size: '50x20') %>
                     </td>
-                      
+
                     <td><%= human_time(tender.updated_at) %></td>
                     <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除</a></td>
                   </tr>
@@ -81,11 +81,11 @@
         </div>
       </div>
     </div>
-    
+
     <div class="col-md-3 mainRight">
       <%= render partial: 'partials/right_search' -%>
     </div>
-    
+
   </div>
 </div>
 
