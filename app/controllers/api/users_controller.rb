@@ -74,4 +74,33 @@ class Api::UsersController < Api::BaseController
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
+
+
+
+  # 修改密码
+  #
+  # Params:
+  #   token:        [String] valid token
+  #   password      [String] 密码
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String] success
+  # Error
+  #   status: [Integer] 400
+  #   notice: [String]  failed
+
+  def change_password
+    @user.password = user_params[:password]
+    @user.save!
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 400, notice: 'failed', error_msg: ex.message }
+  end
+
+  private
+
+  def user_params
+    params.permit(:password)
+  end
 end
