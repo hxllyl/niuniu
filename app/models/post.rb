@@ -152,7 +152,7 @@ class Post < ActiveRecord::Base
       photos:             photos,
       short_name:         base_car_NO,
       updated_at:         updated_at,
-      brand_image:        brand.car_photo.image.url,
+      brand_image:        brand.car_photo.try(:image).try(:url),
       base_path:          url,
       tenders_count:      tenders.count,
       status:             STATUS[status],
