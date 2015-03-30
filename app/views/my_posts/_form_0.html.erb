@@ -6,7 +6,7 @@
     <%- if @post.new_record? %>
       <form class="form-horizontal sourceForm" action="<%= user_my_posts_path %>" method="post" enctype="multipart/form-data">
     <% else %>
-      <form class="form-horizontal sourceForm" action="<%= user_my_post_path %>" method="put" enctype="multipart/form-data">
+      <form class="form-horizontal sourceForm" action="<%= user_my_post_path %>" method="patch" enctype="multipart/form-data">
     <% end %>
       <div id='form_select'>
         <%= render 'form_select' %>

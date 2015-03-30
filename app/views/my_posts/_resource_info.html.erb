@@ -5,7 +5,11 @@
       <div class="dropdown w100p">
         <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
           <%- @base_car.outer_color.each do |ele| %>
-          <option value="<%= ele %>"><%= ele %></option>
+            <%- if @post.outer_color == ele %>
+              <option value="<%= ele %>" selected="selected"><%= ele %></option>
+            <% else %>
+              <option value="<%= ele %>"><%= ele %></option>
+            <% end %>
           <% end %>
         </select>
       </div>
@@ -17,7 +21,11 @@
       <div class="dropdown w100p">
         <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
           <%- @base_car.inner_color.each do |ele| %>
-          <option value="<%= ele %>"><%= ele %></option>
+            <%- if @post.inner_color == ele %>
+              <option value="<%= ele %>" selected="selected"><%= ele %></option>
+            <% else%>
+              <option value="<%= ele %>"><%= ele %></option>
+            <% end %>
           <% end %>
         </select>
       </div>
@@ -31,7 +39,11 @@
       <div class="dropdown w100p">
         <select name="post[resource_type]" class="form-control input-sm" id="car_date">
           <%- Post::RESOURCE_TYPE.each do |k, v|%>
-          <option value="<%= k %>"><%= v %></option>
+            <%- if @post.resource_type == k %>
+              <option value="<%= k %>"selected="selected"><%= v %></option>
+            <% else %>
+              <option value="<%= k %>"><%= v %></option>
+            <% end %>
           <% end %>
         </select>
       </div>
