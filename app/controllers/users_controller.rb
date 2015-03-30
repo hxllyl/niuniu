@@ -88,12 +88,16 @@ class UsersController < BaseController
         current_user.photos << Photo.new(image: img_box[:_image], _type: img_box[:_type])
       end
     end
-    respond_to do |format|
-      format.html {
-        flash[:notice] = t('success')
-        redirect_to my_level_user_path(current_user)
-      }
+
+    instrument 'user.update_level', user_id: current_user.id, start_level: current_user.level, end_level: params[:level] do
+      respond_to do |format|
+        format.html {
+          flash[:notice] = t('success')
+          redirect_to my_level_user_path(current_user)
+        }
+      end
     end
+
   rescue => ex
     respond_to do |format|
       format.html {
@@ -107,6 +111,7 @@ class UsersController < BaseController
     @customer_service = current_user.customer_service
   end
 
+  
   private
   def user_params
     params.require(:user).permit(:name, :role, :company, :area_id,

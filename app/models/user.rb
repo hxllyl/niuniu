@@ -58,6 +58,9 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
+  
+  # 用户升级认证log
+  has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel'
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
 
@@ -116,7 +119,7 @@ class User < ActiveRecord::Base
     token = self.tokens.build(value: Digest::SHA1.hexdigest(salt))
     token.save
   end
-
+  
   # token 用于api验证 目前使用第一个
   def token
     self.tokens.first

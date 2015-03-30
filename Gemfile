@@ -77,6 +77,7 @@ gem 'capistrano-rvm'
 group :production do
   gem 'unicorn-rails', '~> 2.2.0'
   gem 'unicorn'
+  gem 'newrelic_rpm'
 end
 
 group :development, :test do
@@ -111,8 +112,9 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
+  gem 'rack-mini-profiler', require: false
+  # gem 'flamegraph' # 2.1 2.0 only
 end
-
 
 # simple admin
 # gem 'rails_admin', git: "https://github.com/sferik/rails_admin.git", branch: 'master'

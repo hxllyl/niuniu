@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326094131) do
+ActiveRecord::Schema.define(version: 20150330063731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,17 @@ ActiveRecord::Schema.define(version: 20150326094131) do
     t.string   "method_name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "log_user_update_levels", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "operator_id"
+    t.string   "method_name", limit: 20, default: "update_level"
+    t.integer  "start_level"
+    t.integer  "end_level"
+    t.integer  "status",                 default: 0
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "messages", force: :cascade do |t|
