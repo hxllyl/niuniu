@@ -447,6 +447,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mr14 { margin-right: 14px; }
 .mr20 { margin-right: 20px; }
 .mb10 { margin-bottom: 10px; }
+.ml6 { margin-left: 6px; }
 .txtL { text-align: left; }
 .txtC { text-align: center; }
 .txtR { text-align: right; }
