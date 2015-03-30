@@ -5,7 +5,7 @@
       <div class="dropdown w100p">
         <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
           <%- @base_car.outer_color.each do |ele| %>
-            <%- if @post.outer_color == ele %>
+            <%- if @post && @post.outer_color == ele %>
               <option value="<%= ele %>" selected="selected"><%= ele %></option>
             <% else %>
               <option value="<%= ele %>"><%= ele %></option>
@@ -21,7 +21,7 @@
       <div class="dropdown w100p">
         <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
           <%- @base_car.inner_color.each do |ele| %>
-            <%- if @post.inner_color == ele %>
+            <%- if @post && @post.inner_color == ele %>
               <option value="<%= ele %>" selected="selected"><%= ele %></option>
             <% else%>
               <option value="<%= ele %>"><%= ele %></option>
@@ -39,7 +39,7 @@
       <div class="dropdown w100p">
         <select name="post[resource_type]" class="form-control input-sm" id="car_date">
           <%- Post::RESOURCE_TYPE.each do |k, v|%>
-            <%- if @post.resource_type == k %>
+            <%- if @post && @post.resource_type == k %>
               <option value="<%= k %>"selected="selected"><%= v %></option>
             <% else %>
               <option value="<%= k %>"><%= v %></option>
@@ -59,15 +59,15 @@
   <%- Post::DISCOUNT_WAYS.each do |k, v| %>
     <div class="form-group form-inline col-md-6">
       <label class="radio selectTag">
-        <%- if @post.discount_way == k %>
-          <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value="1" checked='checked'><span><%= v %></span>
+        <%- if @post && @post.discount_way == k %>
+          <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value=<%= k %> checked='checked'><span><%= v %></span>
         <% else %>
-          <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value="1"><span><%= v %></span>
+          <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value=<%= k %>><span><%= v %></span>
         <% end %>
       </label>
       <%- unless k == 5 %>
         <label class="selectInput">
-          <%- if @post.discount_way == k %>
+          <%- if @post && @post.discount_way == k %>
             <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_way.to_f %>>
           <% else %>
             <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]">
