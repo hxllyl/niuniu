@@ -129,6 +129,7 @@ Rails.application.routes.draw do
       post :update_level
       patch :change_password
       patch :reset_password
+      put   :update
     end
   end
 
