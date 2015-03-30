@@ -228,8 +228,8 @@ class Api::PostsController < Api::BaseController
       render json: {status: 400, notice: '请重试'}
     end
 
-    # rescue => e
-    # render json: {status: false, error: e.message}
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 成交寻车
@@ -257,6 +257,32 @@ class Api::PostsController < Api::BaseController
     post.complete(tender.id)
 
     render json: {status: 200, notice: 'success', data: {post: post, tender: tender}}
+  end
+
+  # 撤销我的报价
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   id:       [Integer]   tender ID
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
+  def del_my_tender
+    tender = Tender.find_by_id(params[:id])
+
+    raise 'not found' unless tender
+    raise 'you have no right to do it!' unless tender.user == @user
+
+    tender.update_attributes(status: -1)
+
+
+    render json: {status: 200, notice: 'success'}
+    rescue => e
+    render json: {status: false, error: e.message}
   end
 
   # 资源更新

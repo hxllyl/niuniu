@@ -23,7 +23,7 @@
   <div class="listBox">
     <ul class="list clearfix">
       <%- Post::RESOURCE_TYPE.each do |k, v| %>
-        <li class=<%= @q_json[:rt].to_i == k ? 'current' : '' %>><a href="<%= resources_list_posts_path(@q_json.merge(rt: k)) %>"><%= v %></a></li>
+        <li class=<%= @q_json[:rt] == k.to_s ? 'current' : '' %>><a href="<%= resources_list_posts_path(@q_json.merge(rt: k)) %>"><%= v %></a></li>
       <% end %>
     </ul>
   </div>

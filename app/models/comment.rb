@@ -16,6 +16,7 @@ class Comment < ActiveRecord::Base
     {
       id:         id,
       user_id:    user_id,
+      user_name:  user_name,
       content:    content,
       created_at: created_at.to_s(:db),
       replies:    replies.order(updated_at: :desc).map(&:to_hash)

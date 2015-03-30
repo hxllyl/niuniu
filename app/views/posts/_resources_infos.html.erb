@@ -5,25 +5,25 @@
       <%- if @standard %>
         <li>
           <span class="name"><%= @standard.name %></span>
-          <a href="<%= resources_list_posts_path(@q_json.delete(:st)) %>" class="close" aria-label="Close">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></a>
+          <a href="<%= resources_list_posts_path %>" class="close" aria-label="Close">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></a>
         </li>
       <% end %>
       <%- if @brand %>
         <li>
           <span class="name"><%= @brand.name %></span>
-          <a href="#" class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></a>
+          <a href="<%= resources_list_posts_path(@q_json.reject{|k, v| %w(br cm bc ic oc rt).include?(k)}) %>" class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></a>
         </li>
       <% end %>
       <%- if @car_model %>
         <li>
           <span class="name"><%= @car_model.name %></span>
-          <a href="#" class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></a>
+          <a href="<%= resources_list_posts_path(@q_json.reject{|k, v| %w(cm bc ic oc rt).include?(k)}) %>" class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></a>
         </li>
       <% end %>
       <%- if @base_car %>
         <li>
           <span class="name"><%= @base_car.style %></span>
-          <a href="#" class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></a>
+          <a href="<%= resources_list_posts_path(@q_json.reject{|k, v| %w(bc ic oc rt).include?(k)}) %>" class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></a>
         </li>
       <% end %>
     </ul>

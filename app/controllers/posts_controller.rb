@@ -19,11 +19,14 @@ class PostsController < ApplicationController
   # 市场资源点击品牌进入资源列表页
   # params: st=1&br=1&cm=1&bc=1&oc=xx&ic=xx&rt=xx
   def resources_list
+    logger.info "*" * 100
+    logger.info params
     params.delete(:action)
     params.delete(:controller)
 
     @q_json = params
-
+    logger.info @q_json
+    logger.info "*" * 100
     @standards  = Standard.all
     @standard   = Standard.find_by_id(params[:st])
 
@@ -37,14 +40,14 @@ class PostsController < ApplicationController
       @car_models = []
       @car_model  = nil
     end
-    if params[:cm]
+    if params[:st] && params[:br] && params[:cm]
       @base_cars  = @car_model.base_cars.valid
       @base_car   = BaseCar.find_by_id(params[:bc])
     else
       @base_cars  = []
       @base_car   = nil
     end
-    if params[:bc]
+    if params[:st] && params[:br] && params[:cm] && params[:bc]
       conds = {}
       conds[:outer_color]   = params[:oc]    if params[:oc]
       conds[:inner_color]   = params[:ic]    if params[:ic]
