@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     get :delete_relation, on: :collection
 
     resources :my_posts do
+      member do
+        patch :update
+      end
       collection do
         get :get_select_infos
         post :update_position
@@ -117,6 +120,7 @@ Rails.application.routes.draw do
       get :list
       get :has_updated
       patch :change_password
+      patch :reset_password
     end
   end
 

@@ -2,6 +2,9 @@
 # 用户
 class Api::UsersController < Api::BaseController
 
+  skip_before_action :authenticate_user!, only: [ :forget_password ]
+
+
   # 取部分用户的基本详情
   #
   # Params:
@@ -98,9 +101,36 @@ class Api::UsersController < Api::BaseController
     render json: { status: 400, notice: 'failed', error_msg: ex.message }
   end
 
+  # 重置密码
+  #
+  # Params:
+  #   mobile:       [String] 手机号
+  #   password      [String] 密码
+  #   valid_code    [String] 验证过的验证码
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String] success
+  # Error
+  #   status: [Integer] 400
+  #   notice: [String]  failed
+
+  # LESLIE: 重置密码， 需确保之前操作已进行
+  def reset_password
+    user = User.find_by_mobile(user_params[:mobile])
+    fail("user not found") if user.blank?
+    vc = ValidCode.select(:code).where(mobile: user_params[:mobile]).order("created_at desc").first
+    fail("valid code is not correct") unless vc.try(:code) == String(params[:valid_code])
+
+    user.password = user_params[:password]
+    render json: { status: 200, notice: 'success'}
+  rescue => e
+    render json: { status: 400, notice: 'failed', error_msg: e.message }
+  end
+
   private
 
   def user_params
-    params.permit(:password)
+    params.permit(:password, :valid_code, :mobile)
   end
 end

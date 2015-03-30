@@ -105,19 +105,46 @@ class MyPostsController < ApplicationController
   def edit
     @post  = Post.find_by_id(params[:id])
     @standards = Standard.all
+    @standard  = @post.standard
     @brands    = @standards.first.brands.valid
     @brand     = @post.brand
     @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @standards.first.brands.first.id, status: 1)
+    @car_model = @post.car_model
     @base_cars = @car_models.first.base_cars
     @base_car  = @post.base_car
     @post_type = @post._type
   end
 
   def update
+    # update not work default show
   end
 
   def show
-    @post  = Post.find_by_id(params[:id])
+    @post = Post.find_by_id(params[:id])
+    standard  = Standard.find_by_id(params[:post][:standard_id])
+    brand     = Brand.find_by_id(params[:post][:brand_id])
+    car_model = CarModel.find_by_id(params[:post][:car_model_id])
+    base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
+
+    params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
+
+    photos = params[:post].delete(:post_photos)
+    params.require(:post).permit!
+    @post.attributes = params[:post]
+    photos && photos.each do |k, v|
+      photo = @post.post_photos.find_by__type(k)
+      if photo
+        photo.update_attributes(image: v.first.values.first.tempfile)
+      else
+        @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+      end
+    end
+
+    if @post.save
+      redirect_to user_my_posts_path(current_user, _type: 0)
+    else
+      render action: edit, flash: @post.errors
+    end
   end
 
   def destroy
