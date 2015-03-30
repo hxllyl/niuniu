@@ -6,8 +6,8 @@ class Api::BaseCarsController < Api::BaseController
   #
   # Params:
   #   token:        [String]    valid token
-  #   _type:        [String]    类型: standard, brand, car_model, base_car
-  #   standard_id   [Integer]   上一级类型ID, 找车型（car_model）时需要brand_id(id) 跟standard_id
+  #   _type:        [String]    类型 standard, brand, car_model, base_car
+  #   standard_id:  [Integer]   上一级类型ID, 找车型（car_model）时需要brand_id(id) 跟standard_id
   #   id:           [Integer]   类型的ID
   #
   # Return:

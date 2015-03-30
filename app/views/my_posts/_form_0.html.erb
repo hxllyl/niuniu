@@ -1,118 +1,97 @@
 <div class="panel panel-default contentBox">
+
   <div class="panel-heading lineTitle">
     <h3 class="panel-title">发布资源</h3>
   </div>
   <div class="panel-body">
     <%- if @post.new_record? %>
-      <form class="form-horizontal sourceForm" action="<%= user_my_posts_path %>" method="post" enctype="multipart/form-data">
+        <%= form_tag(user_my_posts_path, method: :post, multipart: true, class: "form-horizontal sourceForm") do %>
+            <%= render 'form_detail' %>
+        <% end %>
     <% else %>
-      <form class="form-horizontal sourceForm" url="<%= user_my_post_path(current_user, @post) %>" method="PATCH" enctype="multipart/form-data">
-    <% end %>
-      <div id='form_select'>
-        <%= render 'form_select' %>
-      </div>
-      <div class="sFormBox clearfix">
-        <div class="sFormTag bfL">照片</div>
-        <ul class="row first sFormArea addImgGroups" id="post_photos">
-          <%- Post::PHOTOS.each do |k, v| %>
-          <li class="col-md-3">
-            <div class="thumbnail box">
-              <div class="img" id=<%= k %>><span class="alt"><%= v %></span><%= image_tag(@post.photos[k], alt: "", width: "100%")%></div>
-              <div class="fileInput">
-                <div class="fileBtn">添加照片<input type="file" class="button <%= k %>" name=<%= "post[post_photos][#{k}][]" %>/></div>
-              </div>
-            </div>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="sFormBox mt-20 clearfix">
-        <div class="sFormTag bfL">备注</div>
-        <div class="sFormArea"><textarea class="form-control" rows="3" name="post[remark]"><%= @post.remark %></textarea></div>
-      </div>
-      <div class="subGroup row">
-        <div class="form-group">
-          <input type="submit" class="btn btn-default orange btn_spacing" value="发布" />
-          <input type="reset" class="btn btn-default btn_spacing" value="取消" />
-        </div>
-      </div>
-    </form>
-  </div>
+        <%= form_tag(user_my_post_path(current_user, @post), method: :put, multipart: true, class: "form-horizontal sourceForm") do %>
+            <%= render 'form_detail' %>
+        <% end %>
+    <% end %></div>
+
+
 </div>
 <script type="text/javascript">
-$(document).ready(function(){
-  $(".selectInput").find("input.form-control").attr("disabled","true");
-  $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-    if ($(this).hasClass("disabled")) return false;
-    $(".selectInput").find("input.form-control").attr("disabled","true");
-    $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
-    $(".selectInput").removeClass("active");
-    $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
-    $(this).addClass("active").siblings().removeClass("active");
-    $(this).next(".selectInput").addClass("active").focus();
-  });
 
-  $(".selectInput").find("input.form-control").keyup(function(){
-    clearNoNum(this);
-  });
-  var gPrice = parseFloat($("#guidePrice").html());
-  if (isNaN(gPrice)){
-    gPrice = 0;
-    $("#methodVal4").bind("focus blur keyup", function() {
-      $("#methodVal1,#methodVal2,#methodVal3").val("");
-    });
-  }
-  else {
-    $("#methodVal1").keyup(function(){
-      if ($(this).val() > 100){
-        $("#methodVal1").val(100);
-      }
-      $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
-      $("#methodVal3").val(0);
-      $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
-    });
-    $("#methodVal2").keyup(function(){
-      $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
-      $("#methodVal3").val(0);
-      $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
-    });
-    $("#methodVal3").keyup(function(){
-      var thisV = parseFloat($(this).val());
-      if(isNaN(thisV)){
-        thisV = 0;
-      }
-      $("#methodVal1,#methodVal2").val(0);
-      $("#methodVal4").val((gPrice + thisV).toFixed(2));
+    $(document).ready(function () {
+        $(".selectInput").find("input.form-control").attr("disabled", "true");
+        $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
+            if ($(this).hasClass("disabled")) return false;
+            $(".selectInput").find("input.form-control").attr("disabled", "true");
+            $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
+            $(".selectInput").removeClass("active");
+            $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
+            $(this).addClass("active").siblings().removeClass("active");
+            $(this).next(".selectInput").addClass("active").focus();
+        });
+
+
+        $(".selectInput").find("input.form-control").keyup(function () {
+            clearNoNum(this);
+        });
+        var gPrice = parseFloat($("#guidePrice").html());
+        if (isNaN(gPrice)) {
+            gPrice = 0;
+            $("#methodVal4").bind("focus blur keyup", function () {
+                $("#methodVal1,#methodVal2,#methodVal3").val("");
+            });
+        }
+        else {
+            $("#methodVal1").keyup(function () {
+                if ($(this).val() > 100) {
+                    $("#methodVal1").val(100);
+                }
+                $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
+                $("#methodVal3").val(0);
+                $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
+            });
+            $("#methodVal2").keyup(function () {
+                $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
+                $("#methodVal3").val(0);
+                $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
+            });
+            $("#methodVal3").keyup(function () {
+                var thisV = parseFloat($(this).val());
+                if (isNaN(thisV)) {
+                    thisV = 0;
+                }
+                $("#methodVal1,#methodVal2").val(0);
+                $("#methodVal4").val((gPrice + thisV).toFixed(2));
+            });
+
+            $("#methodVal4").bind("focus blur keyup", function () {
+                if ($(this).val() < gPrice) {
+                    $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
+                    $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
+                    $("#methodVal3").val(0);
+                }
+                else {
+                    $("#methodVal1,#methodVal2").val(0);
+                    $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
+                }
+            });
+
+            $("#methodVal4").blur(function () {
+                if ($(this).val() == "") {
+                    $(this).val(gPrice);
+                }
+            });
+        }
+        $("#methodRadios5").click(function () {
+            $(".selectInput").find("input.form-control").val("");
+        });
     });
 
-    $("#methodVal4").bind("focus blur keyup", function() {
-      if ($(this).val() < gPrice){
-        $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
-        $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
-        $("#methodVal3").val(0);
-      }
-      else {
-        $("#methodVal1,#methodVal2").val(0);
-        $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
-      }
-    });
-
-    $("#methodVal4").blur(function(){
-      if ($(this).val() == ""){
-        $(this).val(gPrice);
-      }
-    });
-  }
-  $("#methodRadios5").click(function(){
-    $(".selectInput").find("input.form-control").val("");
-  });
-});
-
-function clearNoNum(obj){
-  obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
-  obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
-  obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
-  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
-  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,"$1$2.$3"); //只能输入两个小数
-}
+    function clearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //先把非数字的都替换掉，除了数字和.
+        obj.value = obj.value.replace(/^\./g, ""); //必须保证第一个为数字而不是.
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //保证只有出现一个.而没有多个.
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", "."); //保证.只出现一次，而不能出现两次以上
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3"); //只能输入两个小数
+    }
 </script>
