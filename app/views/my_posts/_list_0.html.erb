@@ -20,12 +20,12 @@
               </div>
             </div>
             <div class="bfR">
-            <%= form_tag user_my_posts_path(current_user), method: :get do %>    
+            <%= form_tag user_my_posts_path(current_user), method: :get do %>
             <%= hidden_field_tag 'brand_id', @brand_id %>
             <%= hidden_field_tag '_type', @_type %>
             <%= hidden_field_tag 'update_all', 'true' %>
             <%= hidden_field_tag 'resource_ids', @posts.map(&:id) %>
-              <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.try(:publish_time) %></span></div>              
+              <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.try(:publish_time) %></span></div>
               <button class="btn btn-default bfR" type="submit"><span class="icon icon-refresh"></span>全部更新</button>
               <% end-%>
             </div>
@@ -38,7 +38,7 @@
                     <td>
                       <div class="box clearfix">
                         <div class="infoM">
-                          <h5 class="name"><%= link_to post.portal_resource_title, user_my_post_path(current_user, post) %></h5>
+                          <h5 class="name"><%= link_to post.portal_resource_title, post_path(post, _type: 0) %></h5>
                           <div class="info clearfix">
                             <div class="m"><%= post.standard_type %></div>
                             <div class="m"><%= post.color %></div>
@@ -54,7 +54,7 @@
                         <div class="info"><%= post.remark %></div>
                       </div>
                       <div class="btnGroups">
-                        <a class="btn btn-default btn-xs" href="#" role="button">编辑</a>
+                        <a class="btn btn-default btn-xs" href="<%= edit_user_my_post_path(current_user, post) %>" role="button">编辑</a>
                         <a class="btn btn-default btn-xs upBtn" href="javascript:;" role="button">上移</a>
                         <a class="btn btn-default btn-xs downBtn" href="javascript:;" role="button">下移</a>
                         <a class="btn btn-default btn-xs cancelBtn" href="#" role="button" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-way="resources">删除</a>
