@@ -27,7 +27,7 @@ class CarModel < ActiveRecord::Base
       id:             id,
       resource_name:  'CarModel',
       name:           name,
-      base_cars:      base_cars.map(&:to_hash)
+      # base_cars:      base_cars.map(&:to_hash)
     }
   end
 
