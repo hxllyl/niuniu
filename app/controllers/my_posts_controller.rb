@@ -116,10 +116,6 @@ class MyPostsController < ApplicationController
   end
 
   def update
-    # update not work default show
-  end
-
-  def show
     @post = Post.find_by_id(params[:id])
     standard  = Standard.find_by_id(params[:post][:standard_id])
     brand     = Brand.find_by_id(params[:post][:brand_id])
@@ -145,6 +141,10 @@ class MyPostsController < ApplicationController
     else
       render action: edit, flash: @post.errors
     end
+  end
+
+  def show
+    # 暂无用
   end
 
   def destroy
