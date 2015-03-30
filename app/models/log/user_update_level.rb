@@ -22,6 +22,7 @@ class Log::UserUpdateLevel < ActiveRecord::Base
             else 
               ['visiting', 'room_outer', 'room_inner']
             end
+            
     photos = users.photos.where('_type in (?)', types)        
   end
   

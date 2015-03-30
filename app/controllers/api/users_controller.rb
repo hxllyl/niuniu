@@ -171,7 +171,25 @@ class Api::UsersController < Api::BaseController
   
   # 跟新个人资料
   #
-  #
+  # Params
+  #   avatar:         [fileData] 头像图片
+  #   _type:          [String]   图片类型 这里是 ‘avatar’
+  #   user['name']:   [String]   用户名称
+  #   user['role']:   [String]   用户角色 这里是 ‘normal’
+  #   user['company'] [String]   用户公司名称
+  #   user['area_id'] [integer]  用户注册地id
+  #   user['contact']['company_address']   [String]     用户公司地址
+  #   user['contact']['self_introduction'] [String]     用户自我评价
+  #   user['contact']['position_header']   [String]     职务抬头
+  #   user['contact']['photo']             [String]     联系电话
+  #   user['contact']['wx']                [String]     微信
+  # Returns:
+  #   status: 200
+  #   notice: success
+  # Errors:
+  #   status: 500
+  #   notice: failed
+  #   error_msg: 
   
   def update
     if @user.update_attributes update_user_params
@@ -199,10 +217,10 @@ class Api::UsersController < Api::BaseController
   
   def update_user_params
     params.require(:user).permit(:name, :role, :company, :area_id,
-                                 { contact: [
+                                  { contact: [
                                    :company_address,
                                    :self_introduction,
-                                   :finance_header,
+                                   :position_header,
                                    :photo,
                                    :wx]}
                                 )

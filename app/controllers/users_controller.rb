@@ -118,7 +118,7 @@ class UsersController < BaseController
                                  { contact: [
                                    :company_address,
                                    :self_introduction,
-                                   :finance_header,
+                                   :position_header,
                                    :photo,
                                    :wx]}
                                 )
