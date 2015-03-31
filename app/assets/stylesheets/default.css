@@ -253,6 +253,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .boardForm .sub { margin-top: 12px; color: #f4621b; }
 .boardList { }
 .boardList li { padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
+.boardList li.last { border-bottom: none; }
 .boardList li .photo { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; }
 .boardList li .detail { line-height: 24px; margin-left: 64px; color: #666; }
 .boardList li .detail .name { font-weight: bold; color: #343434; }
@@ -260,6 +261,8 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .boardList li .detail .info { }
 .boardList li .detail .time { text-align: right; }
 .boardList li .detail .time .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
+.boardList li .detail .time .icon-message:hover { text-decoration: none; color: #ff791f; }
+#new_comment { margin-top: 10px; }
 /*posts style*/
 .selectCrumb { }
 .selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; margin-right: 6px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }

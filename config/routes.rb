@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: [ :index ] do
-    post :level_uploads, on: :collection
+    post :upload, on: :collection
   end
 
   resources :areas, only: [:show]

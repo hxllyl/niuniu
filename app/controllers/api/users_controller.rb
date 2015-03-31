@@ -171,7 +171,7 @@ class Api::UsersController < Api::BaseController
     render json: { status: 400, notice: 'failed', error_msg: e.message }
   end
 
-  # 跟新个人资料
+  # 更新个人资料
   #
   # Params
   #   avatar:         [fileData] 头像图片
@@ -223,7 +223,7 @@ class Api::UsersController < Api::BaseController
                                    :company_address,
                                    :self_introduction,
                                    :position_header,
-                                   :photo,
+                                   :qq,
                                    :wx]}
                                 )
   end

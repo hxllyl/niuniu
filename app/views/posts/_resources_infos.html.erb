@@ -43,14 +43,30 @@
     </div>
     <div class="carList clearfix">
       <div class="tt">品牌</div>
-      <div class="listBox">
-        <ul class="list clearfix">
-          <% @brands.each do |brand| %>
-          <li class=<%= @brand == brand ? 'current' : '' %>>
-            <a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
-          </li>
+      <div role="tabpanel" class="listBox">
+        <ul class="selectTag nav-tabs clearfix" role="tablist">
+          <li role="presentation" class="active"><a href="#allBrand" aria-controls="allBrand" role="tab" data-toggle="tab">全部</a></li>
+          <% @rs.brands_ordered_by_pinyin.keys.each do |letter| %>
+          <li role="presentation">
+            <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
           <% end %>
         </ul>
+        <div class="tab-content">
+          <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
+            <% @brands.each do |brand| %>
+            <li>
+              <a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
+            </li>
+            <% end %>
+          </ul>
+          <% @rs.brands_ordered_by_pinyin.each do |(letter, brands)| %>
+          <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
+            <% brands.each do |brand| %>
+              <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="carList clearfix">

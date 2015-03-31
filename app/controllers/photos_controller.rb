@@ -3,23 +3,24 @@
 class PhotosController < BaseController
   
   # 用户升级上传图片
-  def level_uploads      
+  def upload      
+    raise '请上传图片' if params[:file].blank?
     
-    args_hash = params[:_img]
-    file, type, level = args_hash['image'], args_hash['type'], args_hash['level'] 
-    raise '用户已经升级过了' if current_user.level >= level.to_i
+    file_tmp = params[:file]
     
-    current_user.level = level if level.present?
+    tmp_dir = File.join(Rails.root, 'public', 'uploads', 'tmp')
     
-    photo = Photo.new(image: File.open(file, 'r'), _type: type)
-    current_user.photos << photo
-    current_user.save
-    current_user.reload
+    tmp_dir.tap(&:mkdir_p) unless Dir.exist? tmp_dir
     
-    respond_to do |format|
-      format.html {}
-      format.json { render json: { status: 'success',  file: current_user.avatar }}
-    end
+    secure_name = SecureRandom.uuid + "-" + file_tmp.original_filename.downcase
     
+    FileUtils.chmod(0644, file_tmp.tempfile.path)
+    FileUtils.mv(file_tmp.tempfile.path, tmp_dir + secure_name)
+    
+    @file_path = tmp_dir + secure_name
+    render js: {}
+  # rescue => ex
+  #   render nothing: true
   end
+  
 end
