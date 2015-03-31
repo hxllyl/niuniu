@@ -129,6 +129,9 @@ end
 # Plain Old Ruby Object
 gem 'virtus'
 
+# Null Object
+gem 'naught'
+
 # translate chinese to Pinyin
 gem 'chinese_pinyin'
 

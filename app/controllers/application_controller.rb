@@ -1,4 +1,6 @@
 require 'forwardable'
+require 'naught'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -6,5 +8,7 @@ class ApplicationController < ActionController::Base
   extend Forwardable
   
   def_delegator ActiveSupport::Notifications, :instrument
+
+  NullObject = Naught.build
 
 end

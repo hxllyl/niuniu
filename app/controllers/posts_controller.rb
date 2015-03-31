@@ -104,7 +104,7 @@ class PostsController < ApplicationController
 
   def show
     @post     = Post.includes(:comments).find_by_id(params[:id])
-    @someone  = @post.user
+    @someone  = @post.user || NullObject.new
     @follows  = current_user.followings & @someone.followers if current_user
   end
 
