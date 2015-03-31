@@ -3,7 +3,7 @@
 require_relative '../../../app/services/list_api_post'
 class Api::PostsController < Api::BaseController
 
-  skip_before_action :auth_user, only: [ :search ]
+  # skip_before_action :auth_user, only: [ :search ]
   # 市场资源列表，寻车列表
   #
   # Params:
