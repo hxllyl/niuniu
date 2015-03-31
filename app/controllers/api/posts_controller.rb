@@ -1,10 +1,7 @@
 # encoding: utf-8
-
-require_relative '../../../app/services/list_api_post'
-
 # 市场资源，寻车信息
+require_relative '../../../app/services/list_api_post'
 class Api::PostsController < Api::BaseController
-
   # 市场资源列表，寻车列表
   #
   # Params:
