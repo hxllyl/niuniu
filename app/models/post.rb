@@ -143,7 +143,7 @@ class Post < ActiveRecord::Base
       brand:              brand_name,
       brand_id:           brand.id,
       model:              car_model.name,
-      model_id:           model.id,
+      model_id:           car_model.id,
       style:              base_car.style,
       style_id:           base_car.id,
       outer_color:        outer_color,
@@ -162,7 +162,8 @@ class Post < ActiveRecord::Base
       tenders_count:      tenders.count,
       status:             STATUS[status],
       resource_type:      RESOURCE_TYPE[resource_type],
-      tenders:            tenders.map(&:to_hash)
+      tenders:            tenders.map(&:to_hash),
+      base_price:         base_car.base_price.to_f
     }
   end
 
