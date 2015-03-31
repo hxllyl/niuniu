@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users do
-      get :search, on: :collection
+      collection do
+        get :search
+        get :contacted
+        get :registered
+      end
     end
   end
 

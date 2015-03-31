@@ -30,8 +30,12 @@
                     %span.block.m-t-xs
                       %strong.font-bold
                         = current_user.try(:username) || '管理员'
-            %li{ class: nav_class_name('users') }
+            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'search')) }
               = link_to '手机号查询', search_admin_users_path
+            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'contacted')) }
+              = link_to '已联系未注册名录', contacted_admin_users_path
+            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'registered')) }
+              = link_to '已注册用户名录', registered_admin_users_path
       
     #page-wrapper.gray-bg
       .row.border-bottom

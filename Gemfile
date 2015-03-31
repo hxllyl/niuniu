@@ -47,6 +47,7 @@ gem 'httpclient'
 gem 'roo', '~> 1.13.2'
 gem 'writeexcel', '~> 1.0.5'
 
+# https://github.com/amatsuda/kaminari
 gem 'kaminari'
 
 gem 'acts_as_list'

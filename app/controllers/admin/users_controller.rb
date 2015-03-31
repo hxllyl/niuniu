@@ -13,4 +13,14 @@ class Admin::UsersController < Admin::BaseController
       format.js { render :layout => false }
     end
   end
+
+  def contacted
+    # TODO: Add logic for contacted users 已联系用户
+    @users = User.page(params[:page]||1).per(30)
+  end
+
+  def registered
+    # TODO: Add logic for registered users 已注册用户
+    @users = User.page(params[:page]||1).per(30)
+  end
 end
