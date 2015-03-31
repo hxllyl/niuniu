@@ -1,4 +1,7 @@
 # encoding: utf-8
+
+require_relative '../../../app/services/list_api_post'
+
 # 市场资源，寻车信息
 class Api::PostsController < Api::BaseController
 
@@ -353,6 +356,42 @@ class Api::PostsController < Api::BaseController
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
+  end
+
+
+  # 资源搜索
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   type:     [Integer]   搜索类型 0(模糊搜索), 1(级联搜索)
+  #   q:        [String]    模糊搜索时候的关键词
+  #   cid:      [Integer]   车型id
+  #   sid:      [Integer]   规格id
+  #   bid:      [Integer]   品牌id
+  #   style:    [String]    款式
+  #   icol:     [String]    内饰
+  #   ocol:     [String]    外观
+  #   status:   [Integer]   resource_type 期货还是现车
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    posts json
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def search
+    results = if params[:cid] && params[:style] # 认定为级联搜索
+                ListApiPost.call(params)
+              else
+                Post.search do
+                  with(:_type, 0)
+                  fulltext String(params[:q])
+                end
+              end
+    render json: {status: 200, notice: 'ok', data: results.map(&:to_hash) }
+  rescue => ex
+    render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
 
 end
