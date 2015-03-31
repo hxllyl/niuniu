@@ -119,7 +119,7 @@ class UsersController < BaseController
                                    :company_address,
                                    :self_introduction,
                                    :position_header,
-                                   :photo,
+                                   :qq,
                                    :wx]}
                                 )
   end

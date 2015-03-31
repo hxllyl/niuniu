@@ -7,4 +7,8 @@
 //               "</div>" +
 //             "</li>"
 //            )
-$('.boardList li:eq(0)').before("<%= j (render partial: 'comments/comment', locals: {comment: @comment}) %>")
+if($('.boardList li').length === 0) {
+  $('.boardList').append("<%= j (render partial: 'comments/comment', locals: {comment: @comment})%>")
+}else{
+  $('.boardList li:eq(0)').before("<%= j (render partial: 'comments/comment', locals: {comment: @comment}) %>")
+}

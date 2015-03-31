@@ -89,7 +89,7 @@
                 <label for="" class="col-sm-2 control-label">联系电话：</label>
                 <div class="col-sm-10 prl0">
                   <%= f.fields_for :contact do |c_f|%>
-                    <%= c_f.text_field 'photo', class: 'form-control',value: current_user.contact["photo"] -%>
+                    <%= c_f.text_field 'photo', class: 'form-control',value: current_user.contact["phone"], disabled: true-%>
                   <%end-%>
                 </div>
               </div>
