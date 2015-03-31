@@ -1,3 +1,3 @@
 class ListApiPost
-  
+
 end

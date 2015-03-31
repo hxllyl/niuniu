@@ -135,3 +135,7 @@ gem 'naught'
 # translate chinese to Pinyin
 gem 'chinese_pinyin'
 
+# search
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+
