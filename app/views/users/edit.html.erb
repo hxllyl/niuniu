@@ -15,11 +15,11 @@
       <h5 class="title"><%= t('custom_setting') -%></h5>
       <div class="row">
         <div class="col-md-3 photoArea">
-          <div class="photo"><%= image_tag(current_user.avatar, alt: "", width: "180", height: "180")%></div>
+          <div class="photo"><%= image_tag(current_user.avatar, alt: "", width: "180", height: "180", class: 'show-img')%></div>
           <div class="tips">你可以选择png/jpg图片(180*180)作为头像</div>
           <div class="fileInput">
             <div class="fileBtn black">修改头像
-              <%= file_field_tag :_image, value: current_user.avatar, type: :file, multiple: true, class: 'button user_image', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
+              <%= file_field_tag :_image, value: current_user.avatar, type: :file, multiple: true, class: 'button upload_btn', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
               <%= hidden_field_tag :_type, 'avatar' -%>
             </div>
           </div>
@@ -57,7 +57,7 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">认证等级：</label>
                 <div class="col-sm-10 prl0">
-                  <div class="levelIcon bfL"><%= image_tag(current_user.level_icon, alt: "", width: "100%")%></div>
+                  <div class="levelIcon bfL"><%= image_tag(current_user.level_icon, alt: "", width: "100%") if current_user.is_show_icon? %></div>
                   <a href="<%= my_level_user_path(current_user)%>" class="btn btn-default black bfR"><span class="icon icon-upgrade"></span>升级</a>
                 </div>
               </div>

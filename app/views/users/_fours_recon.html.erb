@@ -8,7 +8,7 @@
       <div class="fileInput">
         <div class="fileBtn">添加照片
           <%= file_field_tag "#{type}[_image]", value: current_user.send("#{type}"), type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
-          <%= hidden_field_tag "#{type}[_type]", "#{type}" %>
+          <%= hidden_field_tag "#{type}[_type]", "#{type}", class: 'upload_btn' %>
         </div>
       </div>
     </div>

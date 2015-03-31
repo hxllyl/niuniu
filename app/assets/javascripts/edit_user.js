@@ -44,4 +44,17 @@ $(function(){
       }
     });
   });
+  
+  //上传图片
+  var upload_input = $('.upload_btn');
+  
+  upload_input.on('change', function(e){
+    e.preventDefault();
+    
+    var $_file = $(this).val();
+    
+    $(this).closest('form').submit();
+  });
+  
+  
 })

@@ -14,7 +14,7 @@ class UsersController < BaseController
         end
       end
       flash[:notice] = t('success')
-      redirect_to my_level_user_path(@user)
+      redirect_to :back
     else
       flash[:notice] = @user.errors.full_messages.join('\n')
       render action: :edit
@@ -93,7 +93,7 @@ class UsersController < BaseController
       respond_to do |format|
         format.html {
           flash[:notice] = t('success')
-          redirect_to my_level_user_path(current_user)
+          redirect_to :back
         }
       end
     end

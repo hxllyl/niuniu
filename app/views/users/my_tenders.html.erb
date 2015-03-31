@@ -31,7 +31,7 @@
                       <td><%= tender.post_car_license_areas -%></td>
                       <td><%= tender.post_color -%></td>
                       <td><%= tender.post.try(:user_name) -%>
-                          <%= image_tag(tender.post.user.level_icon, size: '40x16') -%>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.is_show_icon? -%>
                       </td>
                       <td><%= human_time(tender.updated_at) %></td>
                       <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除
@@ -68,7 +68,7 @@
                       <td><%= tender.post_car_license_areas -%></td>
                       <td><%= tender.post_color -%></td>
                       <td><%= tender.post.try(:user_name) %>
-                          <%= image_tag(tender.post.user.level_icon, size: '40x16') %>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.is_show_icon? %>
                       </td>
 
                       <td><%= human_time(tender.updated_at) %></td>
