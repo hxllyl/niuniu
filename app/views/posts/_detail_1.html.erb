@@ -92,13 +92,29 @@
                   <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
                   <div class="detail">
                     <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
-                    <div class="time"><a href="#new_comment" class="icon icon-message"></a><%= human_time(comment.updated_at) %></div>
-
+                    <div class="time"><a href="#new_comment" class="icon icon-message" data-name="<%= comment.user_name %>" data-parent-id="<%= comment.id %>"></a><%= human_time(comment.updated_at) %></div>
+                    <ul class="boardList">
+                      <li>
+                        <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
+                        <div class="detail">
+                          <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
+                          <div class="time"><a href="#new_comment" class="icon icon-message"></a><%= human_time(comment.updated_at) %></div>
+                        </div>
+                      </li>
+                      <li class="last">
+                        <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
+                        <div class="detail">
+                          <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
+                          <div class="time"><a href="#new_comment" class="icon icon-message"></a><%= human_time(comment.updated_at) %></div>
+                        </div>
+                    </li>
                   </div>
+                  
                 </li>
                 <% end -%>
               </ul>
               <%= form_for Comment.new, as: :comment, url: comments_path, method: :post, remote: true do |f| %>
+                <%= f.hidden_field :parent_id, value: nil %>
                 <%= f.hidden_field :resource_id, value: @post.id %>
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.hidden_field :resource_type, value: @post.class.to_s %>
@@ -131,8 +147,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $(".icon-message").click(function(){
+    var $name = $(this).attr('data-name');
+    var $parent_id   = $(this).attr('data-parent-id');
+    
     $("#comment_content").focus();
-    $("#comment_content").val("@" + user_name + content);
+    $("#comment_content").val("@" + $name + ':');
+    $('input#comment_parent_id').val($parent_id);
   });
 });
 </script>

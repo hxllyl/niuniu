@@ -22,5 +22,14 @@ class Comment < ActiveRecord::Base
       replies:    replies.order(updated_at: :desc).map(&:to_hash)
     }
   end
+  
+  # 回复链 
+  def children_chain(comments = [])
+    if self.replies.empty?
+      comments.concat self
+    else
+      self.replies.map{|c| c.children_chain(comments)}
+    end
+  end
 
 end
