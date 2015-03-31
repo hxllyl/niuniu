@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       get :needs_list
       get :user_list
       get :user_resources_list
+      get :download_posts
     end
   end
 
