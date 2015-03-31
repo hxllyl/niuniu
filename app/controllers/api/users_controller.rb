@@ -161,10 +161,11 @@ class Api::UsersController < Api::BaseController
   def reset_password
     user = User.find_by_mobile(user_params[:mobile])
     fail("user not found") if user.blank?
-    vc = ValidCode.select(:code).where(mobile: user_params[:mobile]).order("created_at desc").first
+    vc = ValidCode.where(mobile: user_params[:mobile]).order("created_at desc").first
     fail("valid code is not correct") unless vc.try(:code) == String(params[:valid_code])
 
     user.password = user_params[:password]
+    user.save!
     render json: { status: 200, notice: 'success'}
   rescue => e
     render json: { status: 400, notice: 'failed', error_msg: e.message }
