@@ -23,6 +23,3 @@ application up and running.
   rake sunspot:solr:start #后台运行
   rake sunspot:solr:run   #在前台运行
 
-  rake sunspot:solr:start #后台运行
-
-
