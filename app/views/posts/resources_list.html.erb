@@ -46,25 +46,4 @@ $(document).ready(function () {
     return null;
   }
 })(jQuery);
-
-function get_resource_list(url){
-  var standard_id = $('#standard_id').val();
-  var brand_id = $('#brand_id').val();
-  var car_model_id = $('#car_model_id').val();
-  var base_car_id = $('#base_car_id').val();
-
-  $.ajax({
-      method: "GET",
-      url: url,
-      data: {
-        standard_id: standard_id,
-        brand_id: brand_id,
-        car_model_id: car_model_id,
-        base_car_id: base_car_id,
-      },
-      success: function(data){
-        $("#current_infos").html(data);
-      }
-    });
-}
 </script>
