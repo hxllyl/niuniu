@@ -2,7 +2,8 @@
 # 用户
 class Api::UsersController < Api::BaseController
 
-  skip_before_action :authenticate_user!, only: [ :forget_password ]
+  skip_before_filter :verify_authenticity_token, only: [ :reset_password ]
+  skip_before_action :auth_user, only: [ :reset_password ]
 
 
   # 取部分用户的基本详情

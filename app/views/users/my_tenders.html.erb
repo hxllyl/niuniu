@@ -15,10 +15,10 @@
                 <thead>
                   <tr>
                     <th width="28%">品牌/车型</th>
-                    <th width="12%">报价(万元)</th>
-                    <th width="12%">上牌地点</th>
-                    <th width="20%">外观/内饰</th>
-                    <th width="12%">发布人</th>
+                    <th width="10%">报价(万元)</th>
+                    <th width="10%">上牌地点</th>
+                    <th width="22%">外观/内饰</th>
+                    <th width="14%">发布人</th>
                     <th width="10%">发布时间</th>
                     <th width="6%">操作</th>
                   </tr>
@@ -31,7 +31,7 @@
                       <td><%= tender.post_car_license_areas -%></td>
                       <td><%= tender.post_color -%></td>
                       <td><%= tender.post.try(:user_name) -%>
-                          <%= image_tag(tender.post.user.level_icon, size: '50x20') -%>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') -%>
                       </td>
                       <td><%= human_time(tender.updated_at) %></td>
                       <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除
@@ -47,35 +47,37 @@
             </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="tabpanel2">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
-              <thead>
-                <tr>
-                  <th width="30%">品牌/车型</th>
-                  <th width="12%">报价(万元)</th>
-                  <th width="12%">上牌地点</th>
-                  <th width="12%">外观/内饰</th>
-                  <th width="18%">发布人</th>
-                  <th width="10%">发布时间</th>
-                  <th width="6%">操作</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @completed_tenders.each do |tender|%>
+            <div class="sourceTab">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+                <thead>
                   <tr>
-                    <td><a href="#" class="name"><%= tender.post_title %></a></td>
-                    <td><span class="num"><%= tender.price %></span></td>
-                    <td><%= tender.post_car_license_areas -%></td>
-                    <td><%= tender.post_color -%></td>
-                    <td><%= tender.post.try(:user_name) %>
-                        <%= image_tag(tender.post.user.level_icon, size: '50x20') %>
-                    </td>
-
-                    <td><%= human_time(tender.updated_at) %></td>
-                    <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除</a></td>
+                    <th width="28%">品牌/车型</th>
+                    <th width="10%">报价(万元)</th>
+                    <th width="10%">上牌地点</th>
+                    <th width="22%">外观/内饰</th>
+                    <th width="14%">发布人</th>
+                    <th width="10%">发布时间</th>
+                    <th width="6%">操作</th>
                   </tr>
-                <% end -%>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <% @completed_tenders.each do |tender|%>
+                    <tr>
+                      <td><a href="#" class="name"><%= tender.post_title %></a></td>
+                      <td><span class="num"><%= tender.price %></span></td>
+                      <td><%= tender.post_car_license_areas -%></td>
+                      <td><%= tender.post_color -%></td>
+                      <td><%= tender.post.try(:user_name) %>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') %>
+                      </td>
+
+                      <td><%= human_time(tender.updated_at) %></td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除</a></td>
+                    </tr>
+                  <% end -%>
+                </tbody>
+              </table>
+            </div>
           </div>
 
         </div>
