@@ -91,4 +91,32 @@ class PostsController < ApplicationController
     @users = User.where("id" => Post.resources.map(&:user_id)).page(params[:page]).per(10)
   end
 
+  # 导出用户资源
+  def download_posts
+    # posts = Post.where(_type: 0, user_id: params[:user_id])
+
+    # path = 'public/system/quests_details_list.xls'
+    # workbook = WriteExcel.new(path)
+    # worksheet = workbook.add_worksheet
+    # format = workbook.add_format
+    # format.set_bold(1)
+    # format.set_color('red')
+    # format.set_align('center')
+    # headings = %w()
+
+    # worksheet.write('A1',headings,format)
+
+    # records.each_with_index do |record,index|
+    #   a = []
+
+    #   worksheet.write("A#{index+2}",a)
+    # end
+
+    # workbook.close
+
+    # send_file(path)
+
+    # return
+  end
+
 end

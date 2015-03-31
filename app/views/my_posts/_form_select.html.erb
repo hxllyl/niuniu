@@ -198,6 +198,18 @@ $(document).ready(function(){
   $("#methodRadios5").click(function(){
     $(".selectInput").find("input.form-control").val("");
   });
+
+  // 内饰外饰自定义
+  $('body').on('change', '#car_appearance', function(){
+    if ($(this).val() == "set_outer_color"){
+      $('#car_appearance').parent().html('<input type="text" class="form-control input-sm" name="post[outer_color]">')
+    }
+  });
+  $('body').on('change', '#car_interior', function(){
+    if ($(this).val() == "set_inner_color"){
+      $('#car_interior').parent().html('<input type="text" class="form-control input-sm" name="post[inner_color]">')
+    }
+  });
 });
 
 function clearNoNum(obj){
