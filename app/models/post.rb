@@ -197,6 +197,10 @@ class Post < ActiveRecord::Base
     standard_name << RESOURCE_TYPE[resource_type]
   end
 
+  def st_rt
+    standard_name << '/' << RESOURCE_TYPE[resource_type]
+  end
+
   # 优惠方式
   def human_discount
     case self.discount_way

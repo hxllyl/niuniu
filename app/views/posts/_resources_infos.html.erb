@@ -29,66 +29,56 @@
     </ul>
   </div>
   <div class="panel-body souSelList">
-    <%- unless @standard %>
     <div class="carList clearfix">
       <div class="tt">规格</div>
       <div class="listBox">
         <ul class="list clearfix" id='standards_list'>
           <% @standards.each do |std| %>
-          <li><a href="<%= resources_list_posts_path(@q_json.merge(st: std.id)) %>"><%= std.name %></a></li>
+          <li class=<%= @standard == std ? 'current' : '' %>>
+            <a href="<%= resources_list_posts_path(@q_json.merge(st: std.id)) %>"><%= std.name %></a>
+          </li>
           <% end %>
         </ul>
       </div>
     </div>
-    <% end %>
-    <%- unless @brand %>
     <div class="carList clearfix">
       <div class="tt">品牌</div>
       <div class="listBox">
         <ul class="list clearfix">
           <% @brands.each do |brand| %>
-          <li>
+          <li class=<%= @brand == brand ? 'current' : '' %>>
             <a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
           </li>
           <% end %>
         </ul>
       </div>
     </div>
-    <% end %>
-    <%- unless @car_model%>
     <div class="carList clearfix">
       <div class="tt">车型</div>
       <div class="listBox">
         <ul class="list clearfix">
           <% @car_models.each do |car_model| %>
-          <li>
+          <li class=<%= @car_model == car_model ? 'current' : '' %>>
             <a href="<%= resources_list_posts_path(@q_json.merge(cm: car_model.id)) %>"><%= car_model.name %></a>
           </li>
           <% end %>
         </ul>
       </div>
     </div>
-    <% end %>
-    <%- unless @base_car %>
     <div class="carList clearfix">
       <div class="tt">车款</div>
       <div class="listBox">
         <ul class="list clearfix">
           <% @base_cars.each do |style| %>
-          <li>
+          <li class=<%= @base_car == style ? 'current' : '' %>>
             <a href="<%= resources_list_posts_path(@q_json.merge(bc: style.id)) %>"><%= style.style %></a>
           </li>
           <% end %>
         </ul>
       </div>
     </div>
-    <% end %>
-    <%- if @standard && @brand && @car_model && @base_car %>
-    <%= render 'child_search' %>
-    <% end %>
+    <%= render 'child_search' if @standard && @brand && @car_model && @base_car %>
   </div>
 </div>
-<% if @base_car %>
-<%= render 'resources_list' %>
-<% end %>
+<%= render 'resources_list' if @base_car %>
 </div>
