@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330063731) do
+ActiveRecord::Schema.define(version: 20150331063738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 20150330063731) do
     t.integer  "following_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "log_base_cars", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "base_car_id"
+    t.string   "method_name", null: false
+    t.string   "content",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "log_posts", force: :cascade do |t|

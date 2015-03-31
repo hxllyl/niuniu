@@ -59,7 +59,7 @@ namespace :database do
     user_ids = User.all.map(&:id)
     pics     = Array(0..4)
     pics_dir = Rails.root + 'public' + 'cars'
-    100.times do
+    1000.times do
       base_car = BaseCar.all.sample
       post     = Post.new(
                  _type:             [0, 1].sample,
@@ -96,23 +96,24 @@ namespace :database do
       5 => %w(电议)
     }
 
-    Post.needs.each do |need|
+    Post.needs.sample(100).each do |need|
       if need != 3
-        user = User.where("id <> #{need.user_id}").first
+        User.where("id <> #{need.user_id}").sample(rand(10)).each do |user|
 
-        discount_way            = discount_hash.keys.sample
-        discount_content        = discount_hash[discount_way].sample
-        tender                  = Tender.new
-        tender.post             = need
-        tender.discount_way     = discount_way
-        tender.discount_content = discount_content
-        tender.user             = user
-        tender.save
+          discount_way            = discount_hash.keys.sample
+          discount_content        = discount_hash[discount_way].sample
+          tender                  = Tender.new
+          tender.post             = need
+          tender.discount_way     = discount_way
+          tender.discount_content = discount_content
+          tender.user             = user
+          tender.save
+        end
       end
     end
 
     Post.needs.sample(10).each do |need|
-      need.complete(need.tenders.first.id)
+      need.complete(need.tenders.first.id) if need.tenders.first
     end
   end
 
