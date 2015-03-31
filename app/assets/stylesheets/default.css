@@ -38,6 +38,7 @@ padding:0;
 #topBar .nav li a { height: 46px; line-height: 46px; padding: 0 16px; color: #808080; }
 #topBar .nav li a:hover { color: #f4621b; }
 #topBar .nav li a .icon { float: left; width: 26px; height: 46px; line-height: 46px; text-align: center; font-size: 20px; }
+#topBar .nav > li.active { border: none; background: none; }
 #topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
 #topBar .navbar-nav-right { font-size: 12px; }
 #topBar .navbar-nav-right li { padding: 0; background: url(../imgs/line1x8.gif) no-repeat right center; }
@@ -155,7 +156,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .breadcrumb { padding: 0 15px; margin-bottom: 10px; color: #666; background-color: transparent; }
 .breadcrumb>li+li:before { color: #666; }
 .breadcrumb>.active { color: #666; }
-.breadcrumb a { color: #428cca; }
+.breadcrumb>li a { color: #428cca; }
 /*source style*/
 .mySourceOpe .updateTime { line-height: 34px; font-size: 12px; color: #313131; }
 .mySourceTab { margin: auto -15px; border-bottom: 1px solid #e6e6e6; }
@@ -166,7 +167,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .infoM .name { line-height: 24px; }
 .mySourceTab .infoM .name a { font-weight: bold; color: #333; }
 .mySourceTab .infoM .info { }
-.mySourceTab .infoM .info .m { float: left; margin-right: 24px; }
+.mySourceTab .infoM .info .m { float: left; margin: 0; margin-right: 24px; }
 /*.mySourceTab .infoM .info .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .mySourceTab .infoM .info .tag { float: left; width: 35px; height: 14px; margin-top: 5px; margin-right: 6px; }
 .mySourceTab .infoM .info .statu { margin-left: 6px; color: #38a876; }
@@ -174,7 +175,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .infoPrice .price { margin-right: 8px; font-size: 18px; font-weight: bold; color: #ff791f; }
 .mySourceTab .infoPrice .price .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
 .mySourceTab .remark .info { min-height: 24px; margin-left: 50px; }
-.mySourceTab .table>tbody>tr>td .btnGroups { display: none; position: absolute; top: 50%; right: 170px; margin-top: -11px; }
+.mySourceTab .table>tbody>tr>td .btnGroups { display: none; position: absolute; top: 50%; right: 200px; margin-top: -11px; }
 .mySourceTab .table>tbody>tr>td .btnGroups .btn { padding: 1px 10px; margin: auto 4px; }
 /*pagelist style*/
 .pageList { position: relative; left: 50%; float: left; margin-top: 15px; margin-bottom: 0; }
@@ -252,6 +253,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .boardForm .sub { margin-top: 12px; color: #f4621b; }
 .boardList { }
 .boardList li { padding: 14px 0; border-bottom: 1px solid #e6e6e6; }
+.boardList li.last { border-bottom: none; }
 .boardList li .photo { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; }
 .boardList li .detail { line-height: 24px; margin-left: 64px; color: #666; }
 .boardList li .detail .name { font-weight: bold; color: #343434; }
@@ -259,6 +261,8 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .boardList li .detail .info { }
 .boardList li .detail .time { text-align: right; }
 .boardList li .detail .time .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
+.boardList li .detail .time .icon-message:hover { text-decoration: none; color: #ff791f; }
+#new_comment { margin-top: 10px; }
 /*posts style*/
 .selectCrumb { }
 .selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; margin-right: 6px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }

@@ -10,7 +10,7 @@
         <div class="panel-body">
           <div class="clearfix">
 
-            <%= form_tag my_followers_user_path(current_user), method: :get, class: 'searchBox w30p' do %>  
+            <%= form_tag my_followers_user_path(current_user), method: :get, class: 'searchBox w30p' do %>
               <%= text_field_tag 'key', @key, class: "form-control input pr50", placeholder:"用户名或手机" %>
               <%= submit_tag '搜索', class: "btn btn-primary subBtn" %>
             <% end -%>
@@ -18,7 +18,7 @@
           <ul class="row followersList">
             <% @followings.each do |following|%>
             <li class="col-md-4">
-              <div class="photo bfL"><a href="#"><%= image_tag(following.avatar, alt: "", size: '55x55')%></a></div>
+              <div class="photo bfL"><a href="#"><%= image_tag(following.avatar, alt: "", size: '44x44')%></a></div>
               <div class="info">
                 <h5 class="name"><a href="#"><%= following.name%>（<%= following.area_name%>）</a></h5>
                 <p class="tel"><%= User.human_attribute_name(:mobile)%>：<%= following.mobile%></p>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="col-md-3 mainRight">
       <%= render partial: 'partials/right_search' -%>
     </div>

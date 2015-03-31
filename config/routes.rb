@@ -56,7 +56,7 @@ Rails.application.routes.draw do
       get :needs_list
       get :user_list
       get :user_resources_list
-      get :get_resources
+      get :download_posts
     end
   end
 
@@ -67,7 +67,7 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only: [ :index ] do
-    post :level_uploads, on: :collection
+    post :upload, on: :collection
   end
 
   resources :areas, only: [:show]
@@ -99,6 +99,7 @@ Rails.application.routes.draw do
       put  :change_position
       delete :destroy
       put :del_my_tender
+      get :search
     end
 
     resources :valid_codes, only: [:index] do

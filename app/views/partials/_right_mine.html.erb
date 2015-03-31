@@ -4,7 +4,7 @@
       <div class="photo bfL"><a href="<%= user_path(current_user) %>"><%= image_tag current_user.avatar, size: '78x78', alt: "我的头像" -%></a></div>
       <div class="name">
         <h5><%= link_to current_user.name + '(' + current_user.area.try(:name).to_s + ')', current_user %></h5>
-        <div class="clearfix"><span class="tag"><%= image_tag current_user.level_icon, alt: "", width: '100%' %></span></div>
+        <div class="clearfix"><span class="tag"><%= image_tag(current_user.level_icon, alt: "", width: '100%') if current_user.is_show_icon? %></span></div>
       </div>
     </div>
     <ul class="row userData">

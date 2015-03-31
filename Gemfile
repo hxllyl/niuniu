@@ -118,17 +118,25 @@ group :development do
   gem 'quiet_assets'
   gem 'rack-mini-profiler', require: false
   # gem 'flamegraph' # 2.1 2.0 only
+
+  #api doc
+  gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
 end
 
 # simple admin
 # gem 'rails_admin', git: "https://github.com/sferik/rails_admin.git", branch: 'master'
 
-#api doc
-# gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
 
 # Plain Old Ruby Object
 gem 'virtus'
 
+# Null Object
+gem 'naught'
+
 # translate chinese to Pinyin
 gem 'chinese_pinyin'
+
+# search
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 

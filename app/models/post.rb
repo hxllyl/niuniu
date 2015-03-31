@@ -52,6 +52,29 @@ class Post < ActiveRecord::Base
     inner:    '里面'
   }
 
+  searchable do
+    text :inner_color
+    text :outer_color
+    text :brand do
+      brand.name
+    end
+
+    text :standard do
+      standard.name
+    end
+
+    text :car_model do
+      car_model.name
+    end
+
+    text :base_car do
+      base_car.style
+    end
+    text :title
+    integer :_type
+
+  end
+
   # relations
   has_many    :tenders, class_name: 'Tender'
   belongs_to  :user,  ->{ includes(:area) },  class_name: 'User' # 消除 N+1 查询
@@ -138,9 +161,14 @@ class Post < ActiveRecord::Base
       user_mobile:        user_mobile,
       user_company:       user_company,
       user_level:         User::LEVELS[user_level],
+      standard:           standard_name,
+      standard_id:        standard.id,
       brand:              brand_name,
+      brand_id:           brand.id,
       model:              car_model.name,
+      model_id:           car_model.id,
       style:              base_car.style,
+      style_id:           base_car.id,
       outer_color:        outer_color,
       inner_color:        inner_color,
       car_license_areas:  car_license_areas,
@@ -157,7 +185,8 @@ class Post < ActiveRecord::Base
       tenders_count:      tenders.count,
       status:             STATUS[status],
       resource_type:      RESOURCE_TYPE[resource_type],
-      tenders:            tenders.map(&:to_hash)
+      tenders:            tenders.map(&:to_hash),
+      base_price:         base_car.base_price.to_f
     }
   end
 
@@ -195,6 +224,10 @@ class Post < ActiveRecord::Base
 
   def standard_resource_type
     standard_name << RESOURCE_TYPE[resource_type]
+  end
+
+  def st_rt
+    standard_name << '/' << RESOURCE_TYPE[resource_type]
   end
 
   # 优惠方式

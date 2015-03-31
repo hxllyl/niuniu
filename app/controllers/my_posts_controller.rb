@@ -82,6 +82,21 @@ class MyPostsController < ApplicationController
                   status: 0
                 ) unless base_car
 
+    # 为资源库保存自定义的颜色
+    Log::BaseCar.create(
+      user_id: current_user.id,
+      base_car_id: base_car.id,
+      method_name: 'outer_color',
+      content: params[:post][:outer_color]
+    ) unless base_car.outer_color.include?(params[:post][:outer_color])
+
+    Log::BaseCar.create(
+      user_id: current_user.id,
+      base_car_id: base_car.id,
+      method_name: 'inner_color',
+      content: params[:post][:inner_color]
+    ) unless base_car.inner_color.include?(params[:post][:inner_color])
+
     params.require(:post).permit!
     params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
     params[:post][:car_model_id] = car_model.id
@@ -121,6 +136,21 @@ class MyPostsController < ApplicationController
     brand     = Brand.find_by_id(params[:post][:brand_id])
     car_model = CarModel.find_by_id(params[:post][:car_model_id])
     base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
+
+    # 为资源库保存自定义的颜色
+    Log::BaseCar.create(
+      user_id: current_user.id,
+      base_car_id: base_car.id,
+      method_name: 'outer_color',
+      content: params[:post][:outer_color]
+    ) unless base_car.outer_color.include?(params[:post][:outer_color])
+
+    Log::BaseCar.create(
+      user_id: current_user.id,
+      base_car_id: base_car.id,
+      method_name: 'inner_color',
+      content: params[:post][:inner_color]
+    ) unless base_car.inner_color.include?(params[:post][:inner_color])
 
     params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
 

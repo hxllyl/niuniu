@@ -137,7 +137,7 @@ class User < ActiveRecord::Base
   def level_icon
     case self.level
       when LEVELS.keys[0] then
-        'user/typeIcon_p.png'
+        ''
       when LEVELS.keys[1] then
         'user/typeIcon_p.png'
       when LEVELS.keys[2] then
@@ -147,6 +147,10 @@ class User < ActiveRecord::Base
       else
         'user/typeIcon_4s.png'
     end
+  end
+  
+  def is_show_icon?
+    level != LEVELS.keys[0]
   end
 
   # 用户成交量(包括寻车和报价成交总是)
@@ -182,7 +186,8 @@ class User < ActiveRecord::Base
       dealt_infos: dealt_infos,
       post_count: posts.needs.count, 
       tender_count: tenders.count,
-      following_count: followings.count
+      following_count: followings.count,
+      area_id: area_id
     }
   end
 

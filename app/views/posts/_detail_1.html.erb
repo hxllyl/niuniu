@@ -85,27 +85,44 @@
           </div>
           <% if current_user %>
             <div class="boardForm clearfix">
-              <h5 class="tt">留言</h5>
+              <h5 class="tt">留言：</h5>
+              <ul class="boardList">
+                <% @post.comments.each do |comment| %>
+                <li>
+                  <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
+                  <div class="detail">
+                    <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
+                    <div class="time"><a href="#new_comment" class="icon icon-message" data-name="<%= comment.user_name %>" data-parent-id="<%= comment.id %>"></a><%= human_time(comment.updated_at) %></div>
+                    <ul class="boardList">
+                      <li>
+                        <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
+                        <div class="detail">
+                          <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
+                          <div class="time"><a href="#new_comment" class="icon icon-message"></a><%= human_time(comment.updated_at) %></div>
+                        </div>
+                      </li>
+                      <li class="last">
+                        <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
+                        <div class="detail">
+                          <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
+                          <div class="time"><a href="#new_comment" class="icon icon-message"></a><%= human_time(comment.updated_at) %></div>
+                        </div>
+                    </li>
+                  </div>
+                  
+                </li>
+                <% end -%>
+              </ul>
               <%= form_for Comment.new, as: :comment, url: comments_path, method: :post, remote: true do |f| %>
+                <%= f.hidden_field :parent_id, value: nil %>
                 <%= f.hidden_field :resource_id, value: @post.id %>
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.hidden_field :resource_type, value: @post.class.to_s %>
                 <%= f.text_area :content, class: "form-control", placeHolder: '不能超过225个字' %>
-                <%= f.submit '留言', class: "btn btn-default input-sm btn_spacing sub bfR", id: "" %>
+                <%= f.submit '留言', class: "btn btn-default btn-sm btn_spacing sub bfR", id: "" %>
               <% end -%>
             </div>
-          <% end %>  
-          <ul class="boardList">
-            <% @post.comments.each do |comment| %>
-            <li>
-              <div class="photo bfL"><a href="#"><%= image_tag(comment.user.avatar, alt: "", size: '45x45')%></a></div>
-              <div class="detail">
-                <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
-                <div class="time"><span class="icon icon-message"></span><%= human_time(comment.updated_at) %></div>
-              </div>
-            </li>
-            <% end -%>
-          </ul>
+          <% end %>
         </div>
       </div>
     </div>
@@ -121,8 +138,21 @@
 </div>
 <% if current_user %>
   <%= render partial: 'complaints/complaint'%>
-<% end -%>  
+<% end -%>
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
 <% end -%>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".icon-message").click(function(){
+    var $name = $(this).attr('data-name');
+    var $parent_id   = $(this).attr('data-parent-id');
+    
+    $("#comment_content").focus();
+    $("#comment_content").val("@" + $name + ':');
+    $('input#comment_parent_id').val($parent_id);
+  });
+});
+</script>
