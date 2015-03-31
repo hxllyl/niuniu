@@ -64,7 +64,7 @@ class Tender < ActiveRecord::Base
       base_price:     base_price,
       self_time:      publish_time,
       self_user_id:   user_id,
-      self_user_name: user.name_area
+      self_user_name: user.try(:name_area)
     }
   end
 
