@@ -70,6 +70,7 @@ class Post < ActiveRecord::Base
     text :base_car do
       base_car.style
     end
+    text :title
   end
 
   # relations
