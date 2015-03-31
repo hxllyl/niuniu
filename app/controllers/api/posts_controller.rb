@@ -2,6 +2,8 @@
 # 市场资源，寻车信息
 require_relative '../../../app/services/list_api_post'
 class Api::PostsController < Api::BaseController
+
+  skip_before_action :auth_user, only: [ :search ]
   # 市场资源列表，寻车列表
   #
   # Params:
@@ -380,12 +382,15 @@ class Api::PostsController < Api::BaseController
   def search
     results = if params[:cid] && params[:style] # 认定为级联搜索
                 ListApiPost.call(params)
-              else
+              elsif params[:q]
                 Post.search do
                   with(:_type, 0)
                   fulltext String(params[:q])
-                end
+                end.results
+              else
+                []
               end
+
     render json: {status: 200, notice: 'ok', data: results.map(&:to_hash) }
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
