@@ -1,0 +1,8 @@
+.hr-line-dashed
+.search-result
+  - if @user.present?
+    -# TODO: logic for a. 已注册或已联系 b. 我来联系
+    = @user.inspect
+  - else
+    此手机号码不存在
+    -# b. 我来联系?

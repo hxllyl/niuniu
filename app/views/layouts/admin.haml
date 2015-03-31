@@ -4,7 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %title 牛牛汽车
+    %title 牛牛汽车 - 后台管理
     = stylesheet_link_tag 'admin/admin', media: 'all'
     = javascript_include_tag 'admin/admin'
     = csrf_meta_tags
@@ -31,7 +31,7 @@
                       %strong.font-bold
                         = current_user.try(:username) || '管理员'
             %li{ class: nav_class_name('users') }
-              = link_to '管理用户', admin_users_path
+              = link_to '手机号查询', search_admin_users_path
       
     #page-wrapper.gray-bg
       .row.border-bottom
