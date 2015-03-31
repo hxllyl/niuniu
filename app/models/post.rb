@@ -71,6 +71,8 @@ class Post < ActiveRecord::Base
       base_car.style
     end
     text :title
+    integer :_type
+
   end
 
   # relations
