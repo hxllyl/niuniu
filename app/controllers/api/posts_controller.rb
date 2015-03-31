@@ -63,7 +63,7 @@ class Api::PostsController < Api::BaseController
     uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).map(&:to_hash)
     completed   = @user.tenders.completed.order(updated_at: :desc).map(&:to_hash)
 
-    render json: {status: 200, notice: 'success', data: {uncompleted: completed, completed: completed}}
+    render json: {status: 200, notice: 'success', data: {uncompleted: uncompleted, completed: completed}}
 
     rescue => e
     render json: {status: false, error: e.message}
