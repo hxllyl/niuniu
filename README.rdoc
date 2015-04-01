@@ -14,14 +14,16 @@ application up and running.
 
 * Sunspot 全文检索工具（用于搜索 post 相关内容）
 
-  安装生成默认的配置信息
+  1.先安装 Java 环境
 
-  rails generate sunspot_rails:install
+  2.安装生成默认的配置信息
 
-  运行Sunspot
+    rails generate sunspot_rails:install
 
-  rake sunspot:solr:start #后台运行
-  rake sunspot:solr:run   #在前台运行
+  3. 运行Sunspot
+
+    rake sunspot:solr:start #后台运行
+    rake sunspot:solr:run   #在前台运行
 
 * init database and gen base infos
 
