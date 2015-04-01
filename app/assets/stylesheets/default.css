@@ -197,7 +197,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .methodSelect .tt .sm { font-size: 12px; }
 .methodSelect .tt .col-md-6 { padding: 0; }
 .methodSelect .form-group { height: 38px; padding: 4px 0; margin: 0; }
-.methodSelect .selectTag { float: left; font-weight: normal; color: #666; }
+.methodSelect .selectTag { float: left; font-weight: normal; color: #666; cursor: pointer; }
 .methodSelect .selectTag input { float: left; margin: 2px 12px 0 0; }
 .methodSelect .selectTag span { float: left; width: 80px; }
 .methodSelect .selectTag span.current { color: #f4621b; }

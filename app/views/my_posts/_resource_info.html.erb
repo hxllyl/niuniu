@@ -55,7 +55,7 @@
           <%- if @post && @post.discount_way == k %>
             <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_way.to_f %>>
           <% else %>
-            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]">
+            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]" value="0">
           <% end %>
           <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
         </label>
