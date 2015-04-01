@@ -134,6 +134,13 @@ class MyPostsController < ApplicationController
     @base_cars = @car_models.first.base_cars
     @base_car  = @post.base_car
     @post_type = @post._type
+
+    @discount_contents =  if @post.expect_price > @post.guiding_price
+                            [nil, nil, (@post.expect_price.to_f - @post.guiding_price.to_f).round(2)]
+                          else
+                            [((@post.guiding_price.to_f - @post.expect_price.to_f)/@post.guiding_price.to_f*100).round(2), (@post.guiding_price.to_f - @post.expect_price.to_f).round(2), nil]
+                          end
+    @discount_contents << @post.expect_price
   end
 
   def update

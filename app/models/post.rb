@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Post < ActiveRecord::Base
 
-  before_create :get_some_must_attr
+  before_save :get_some_must_attr
 
   # constants
   TYPES = {
@@ -27,8 +27,9 @@ class Post < ActiveRecord::Base
 
   # 资源类型
   RESOURCE_TYPE = {
-    0 => '现车',
-    1 => '期货'
+    0  => '现车',
+    1  => '期货',
+    -1 => '' # 这是寻车
   }
 
   TAKE_DATES = {
