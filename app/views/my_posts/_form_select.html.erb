@@ -133,70 +133,86 @@ $(document).ready(function(){
     });
   });
 
-  $(".selectInput").find("input.form-control").attr("disabled","true");
-  $(".methodSelect > .form-group").find(".selectTag").click(function (e) {
-    if ($(this).hasClass("disabled")) return false;
-    $(".selectInput").find("input.form-control").attr("disabled","true");
-    $(this).next(".selectInput").find("input.form-control").removeAttr("disabled");
-    $(".selectInput").removeClass("active");
-    $(".methodSelect > .form-group").find(".selectTag").removeClass("active");
-    $(this).addClass("active").siblings().removeClass("active");
-    $(this).next(".selectInput").addClass("active").focus();
-  });
-
-  $(".selectInput").find("input.form-control").keyup(function(){
-    clearNoNum(this);
+  var offerGroup = $(".methodSelect > .form-group");
+  var offerInput = $(".selectInput").find("input[type='text']");
+  offerInput.attr("disabled", "true");
+  offerGroup.find(".selectTag").each(function (e) {
+      $(this).bind("click", function(){
+          if ($(this).hasClass("disabled")) return false;
+          offerGroup.find(".selectTag").removeClass("active");
+          offerGroup.find(".selectInput").removeClass("active");
+          $(this).addClass("active");
+          $(this).next(".selectInput").addClass("active");
+          $(this).next(".selectInput").find("input[type='text']").removeAttr("disabled");
+          $(this).next(".selectInput").find("input[type='text']").focus();
+      });
   });
   var gPrice = parseFloat($("#guidePrice").html());
-  if (isNaN(gPrice)){
-    gPrice = 0;
-    $("#methodVal4").bind("focus blur keyup", function() {
-      $("#methodVal1,#methodVal2,#methodVal3").val("");
-    });
+  if (isNaN(gPrice)) {
+      gPrice = 0;
+      $("#methodVal4").bind("focus blur keyup", function () {
+          $("#methodVal1,#methodVal2,#methodVal3").val("");
+      });
   }
   else {
-    $("#methodVal1").keyup(function(){
-      if ($(this).val() > 100){
-        $("#methodVal1").val(100);
-      }
-      $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
-      $("#methodVal3").val(0);
-      $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
-    });
-    $("#methodVal2").keyup(function(){
-      $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
-      $("#methodVal3").val(0);
-      $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
-    });
-    $("#methodVal3").keyup(function(){
-      var thisV = parseFloat($(this).val());
-      if(isNaN(thisV)){
-        thisV = 0;
-      }
-      $("#methodVal1,#methodVal2").val(0);
-      $("#methodVal4").val((gPrice + thisV).toFixed(2));
-    });
+      $("#methodVal1").bind("focus keyup", function(){
+          if ($(this).val() > 100) {
+              $("#methodVal1").val(100);
+          }
+          $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
+          $("#methodVal3").val(0);
+          $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
+      });
+      $("#methodVal2").bind("focus keyup", function(){
+          $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
+          $("#methodVal3").val(0);
+          if ($(this).val() > gPrice){
+              $(this).val(gPrice);
+              $("#methodVal4").val(0);
+          }
+          else {
+              $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
+          }
+      });
+      $("#methodVal3").bind("focus keyup", function(){
+          var thisV = parseFloat($(this).val());
+          if (isNaN(thisV)) {
+              thisV = 0;
+          }
+          $("#methodVal1,#methodVal2").val(0);
+          $("#methodVal4").val((gPrice + thisV).toFixed(2));
+      });
 
-    $("#methodVal4").bind("focus blur keyup", function() {
-      if ($(this).val() < gPrice){
-        $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
-        $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
-        $("#methodVal3").val(0);
-      }
-      else {
-        $("#methodVal1,#methodVal2").val(0);
-        $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
-      }
-    });
-
-    $("#methodVal4").blur(function(){
-      if ($(this).val() == ""){
-        $(this).val(gPrice);
-      }
-    });
+      $("#methodVal4").bind("focus keyup", function(){
+          if ($(this).val() < gPrice) {
+              $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
+              $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
+              $("#methodVal3").val(0);
+          }
+          else {
+              $("#methodVal1,#methodVal2").val(0);
+              $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
+          }
+      });
   }
-  $("#methodRadios5").click(function(){
-    $(".selectInput").find("input.form-control").val("");
+  $("#methodRadios5").click(function () {
+      $(".selectInput").find("input.form-control").val("");
+  });
+
+  offerInput.each(function(){
+      var thisVal = $(this).val();
+      $(this).bind("click",function(){
+          $(this).select();
+      });
+      $(this).bind("keyup",function(){
+          clearNoNum(this);
+          //thisVal.toFixed(2);
+      });
+      $(this).bind("blur",function(){
+          if (thisVal == ""){
+              $(this).val(0);
+          }
+      });
   });
 
   // 内饰外饰自定义
