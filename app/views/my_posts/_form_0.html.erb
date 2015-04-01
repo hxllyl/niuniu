@@ -30,11 +30,20 @@
             $(this).next(".selectInput").addClass("active").focus();
         });
 
-
-        $(".selectInput").find("input.form-control").keyup(function () {
+        $(".selectInput").find("input.form-control").bind("focus blur keyup",function(){
             clearNoNum(this);
+            $(this).val().toFixed(2);
+            //$(this).select();
+            //alert($(this).val());
+        });
+        $(".selectInput").find("input.form-control").bind("focus",function(){
+            $(this).select();
         });
         var gPrice = parseFloat($("#guidePrice").html());
+        var val1 = parseFloat($("#methodVal1").val());
+        var val2 = parseFloat($("#methodVal2").val());
+        var val3 = parseFloat($("#methodVal3").val());
+        var val4 = parseFloat($("#methodVal4").val());
         if (isNaN(gPrice)) {
             gPrice = 0;
             $("#methodVal4").bind("focus blur keyup", function () {
@@ -42,6 +51,10 @@
             });
         }
         else {
+            $("#methodVal1").val((val2 / gPrice * 100).toFixed(2));
+            $("#methodVal2").val((gPrice * val1 / 100).toFixed(2));
+            $("#methodVal3").val((val4 - gPrice).toFixed(2));
+            $("#methodVal4").val((gPrice - val2).toFixed(2));
             $("#methodVal1").keyup(function () {
                 if ($(this).val() > 100) {
                     $("#methodVal1").val(100);
