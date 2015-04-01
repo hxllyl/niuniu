@@ -13,7 +13,7 @@
 				<li>
 					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image_path), alt: "") %></div>
 					<div class="info">
-						<h5 class="tt"><%= link_to post_name(post), post_path(post, {_type: 1}) %></a></h5>
+						<h5 class="tt"><%= link_to post.title, post_path(post, {_type: 1}) %></a></h5>
 						<p class="detail clearfix"><span class="bfL"><%= post.color %></span><span class="bfR"><%= post.owner_detail %></span></p>
 					</div>
 				</li>

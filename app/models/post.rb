@@ -22,7 +22,7 @@ class Post < ActiveRecord::Base
     2 => '优惠金额',
     3 => '加价金额',
     4 => '直接报价',
-    5 => '暂不报价' # 寻车没有 暂不报价
+    5 => '电议' # 寻车没有 电议
   }
 
   # 资源类型
@@ -52,28 +52,28 @@ class Post < ActiveRecord::Base
     inner:    '里面'
   }
 
-  searchable do
-    text :inner_color
-    text :outer_color
-    text :brand do
-      brand.name
-    end
+  # searchable do
+  #   text :inner_color
+  #   text :outer_color
+  #   text :brand do
+  #     brand.name
+  #   end
 
-    text :standard do
-      standard.name
-    end
+  #   text :standard do
+  #     standard.name
+  #   end
 
-    text :car_model do
-      car_model.name
-    end
+  #   text :car_model do
+  #     car_model.name
+  #   end
 
-    text :base_car do
-      base_car.style
-    end
-    text :title
-    integer :_type
+  #   text :base_car do
+  #     base_car.style
+  #   end
+  #   text :title
+  #   integer :_type
 
-  end
+  # end
 
   # relations
   has_many    :tenders, class_name: 'Tender'
@@ -186,7 +186,8 @@ class Post < ActiveRecord::Base
       status:             STATUS[status],
       resource_type:      RESOURCE_TYPE[resource_type],
       tenders:            tenders.map(&:to_hash),
-      base_price:         base_car.base_price.to_f
+      base_price:         base_car.base_price.to_f,
+      user_name_area:     user.name_area
     }
   end
 
@@ -211,7 +212,7 @@ class Post < ActiveRecord::Base
   end
 
   def title
-    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << brand_name << base_car_NO
+    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << ' ' << brand_name << ' ' << base_car_NO
   end
 
   def portal_resource_title
