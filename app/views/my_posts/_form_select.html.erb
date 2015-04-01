@@ -3,7 +3,11 @@
     <label for="car_standard" class="col-md-4 control-label">规格</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <%- if @post.new_record? %>
+          <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% else %>
+          <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% end %>
           <%- @standards.each do |standard| %>
             <%- if standard == @standard %>
               <option value="<%= standard.id %>" selected="selected"><%= standard[:name]%></option>
@@ -19,7 +23,11 @@
     <label for="car_brand" class="col-md-4 control-label">品牌</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> >
+        <%- if @post.new_record? %>
+          <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% else %>
+          <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% end %>
           <%- @brands.each do |brand| %>
             <%- if brand == @brand %>
               <option value="<%= brand.id %>" selected="selected"><%= brand.name %></option>

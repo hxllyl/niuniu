@@ -35,6 +35,7 @@ class MyPostsController < ApplicationController
   end
 
   def get_select_infos
+    @post       = Post.new
     @standards  = Standard.all
     @standard   = Standard.find_by_id(params[:post][:standard_id])
     @brands     = @standard.brands.valid
