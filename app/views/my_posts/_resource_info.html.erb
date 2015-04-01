@@ -55,7 +55,7 @@
       <%- unless k == 5 %>
         <label class="selectInput">
           <%- if @post && @post.discount_way == k %>
-            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_way.to_f %>>
+            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_content.to_f %>>
           <% else %>
             <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]">
           <% end %>
