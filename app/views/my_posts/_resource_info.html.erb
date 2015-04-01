@@ -4,7 +4,7 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
-          <%- @base_car.outer_color.each do |ele| %>
+          <%- @base_car && @base_car.outer_color.each do |ele| %>
             <%- if @post && @post.outer_color == ele %>
               <option value="<%= ele %>" selected="selected"><%= ele %></option>
             <% else %>
@@ -21,7 +21,7 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
-          <%- @base_car.inner_color.each do |ele| %>
+          <%- @base_car && @base_car.inner_color.each do |ele| %>
             <%- if @post && @post.inner_color == ele %>
               <option value="<%= ele %>" selected="selected"><%= ele %></option>
             <% else%>
@@ -55,7 +55,7 @@
       <%- unless k == 5 %>
         <label class="selectInput">
           <%- if @post && @post.discount_way == k %>
-            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_way.to_f %>>
+            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_content.to_f %>>
           <% else %>
             <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]">
           <% end %>

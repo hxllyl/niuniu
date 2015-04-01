@@ -7,9 +7,9 @@ class MyPostsController < ApplicationController
     @_type = params[:_type]
     @brand_id = params[:brand_id]
     unless @brand_id.blank?
-      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order(position: :asc , updated_at: :desc).page(params[:page]).per(10)
+      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order(position: :desc , updated_at: :desc).page(params[:page]).per(10)
     else
-      @posts = current_user.posts.where(_type: @_type).order(position: :asc, updated_at: :desc).page(params[:page]).per(10)
+      @posts = current_user.posts.where(_type: @_type).order(position: :desc, updated_at: :desc).page(params[:page]).per(10)
     end
 
     if params[:update_all]
@@ -47,8 +47,13 @@ class MyPostsController < ApplicationController
       @base_car  = 'set_base_car'
     else
       @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : @car_models.first
-      @base_cars  = @car_model.base_cars.valid
-      @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
+      if @car_model
+        @base_cars  = @car_model.base_cars.valid
+        @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
+      else
+        @car_model = 'set_car_model'
+        @base_car  = 'set_base_car'
+      end
     end
 
     if params[:post][:base_car_id]  == 'set_base_car'

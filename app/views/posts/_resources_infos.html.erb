@@ -61,7 +61,7 @@
           <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
           <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
             <% brands.each do |brand| %>
-              <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
+              <li><a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a></li>
             <% end %>
           </ul>
           <% end %>
