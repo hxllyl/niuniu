@@ -70,12 +70,12 @@ namespace :database do
                  outer_color:       (base_car.outer_color.sample rescue '白色'),
                  inner_color:       (base_car.inner_color.sample rescue '黑色'),
                  car_license_areas: Area.first.name,
-                 car_in_areas:      base_car.brand.regions.sample(2),
+                 car_in_areas:      base_car.brand.regions.sample,
                  discount_way:      1,
-                 discount_content:  0.9,
-                 resource_type:     [0, 1].sample
+                 discount_content:  0.9
                )
       if post._type == 0
+        post.resource_type = [0, 1].sample
         %w(front side obverse inner).each do |ele|
           post.post_photos.new(_type: ele, image: File.open("#{pics_dir}/#{pics.sample}.jpg"))
         end
