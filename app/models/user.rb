@@ -183,7 +183,6 @@ class User < ActiveRecord::Base
       area:             area_name,
       avatar:           avatar,
       contact:          contact,
-      dealt_infos:      dealt_infos,
       post_count:       posts.needs.count,
       tender_count:     tenders.count,
       following_count:  followings.count,

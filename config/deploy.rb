@@ -53,7 +53,34 @@ namespace :deploy do
     end
   end
 
+  # after "deploy:update_code", "solr:symlink"
+
+  # namespace :solr do
+  #   desc "start solr"
+  #   task :start, :roles => :app, :except => { :no_release => true } do
+  #     run "cd #{application_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
+  #   end
+  #   desc "stop solr"
+  #   task :stop, :roles => :app, :except => { :no_release => true } do
+  #     run "cd #{application_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
+  #   end
+  #   desc "reindex the whole database"
+  #   task :reindex, :roles => :app do
+  #     run "cd #{application_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+  #   end
+  #   desc "Symlink in-progress deployment to a shared Solr index"
+  #   task :symlink, :except => { :no_release => true } do
+  #     #创建solr所需要的目录
+  #     run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/data"
+  #     run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/pids"
+  #
+  #     run "ln -s #{shared_path}/solr/data/ #{release_path}/solr/data"
+  #     run "ln -s #{shared_path}/solr/pids/ #{release_path}/solr/pids"
+  #   end
+  # end
+
   after :finishing, 'deploy:cleanup'
   #after :finishing, :copy_sync_scripts
   # after :finishing, 'deploy:spec_ruby_version'
+
 end

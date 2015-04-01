@@ -58,21 +58,21 @@ class Post < ActiveRecord::Base
   #   text :brand do
   #     brand.name
   #   end
-
+  #
   #   text :standard do
   #     standard.name
   #   end
-
+  #
   #   text :car_model do
   #     car_model.name
   #   end
-
+  #
   #   text :base_car do
   #     base_car.style
   #   end
   #   text :title
   #   integer :_type
-
+  #
   # end
 
   # relations
@@ -111,12 +111,14 @@ class Post < ActiveRecord::Base
 
   acts_as_list scope: :user
 
+  validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1'
+
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way
-                          when 1 then base_car.base_price.to_f * discount_content
-                          when 2 then base_car.base_price.to_f - discount_content
-                          when 3 then base_car.base_price.to_f + discount_content
+                          when 1 then base_car.base_price.to_f * (100 - discount_content.to_f) / 100
+                          when 2 then base_car.base_price.to_f - discount_content.to_f
+                          when 3 then base_car.base_price.to_f + discount_content.to_f
                           when 4 then discount_content.to_f
                         end
 
@@ -275,7 +277,7 @@ class Post < ActiveRecord::Base
   end
 
   def app_area
-    "#{_type == 0 ? '卖 ' : '寻 '}" + car_license_areas
+    "#{_type == 1 ? '卖 ' : '寻 '}" + car_license_areas
   end
   
 end

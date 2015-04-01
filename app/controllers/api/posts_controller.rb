@@ -153,6 +153,9 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  failure
   #   data:   [JSON]    post errors
   def create
+    params.require(:post).permit!
+
+    post      = Post.find_or_initialize_by(id: params[:post][:id])
     standard  = Standard.find_by_id(params[:post][:standard_id])
     brand     = Brand.find_by_id(params[:post][:brand_id])
     car_model = CarModel.find_by_id(params[:post][:car_model_id])
@@ -198,10 +201,7 @@ class Api::PostsController < Api::BaseController
     aa && aa.each do |ele|
       photos[ele['_type']] = params.delete(params[:post][ele['_type']])
     end
-
-    params.require(:post).permit!
-
-    post = Post.new(params[:post])
+    post.attributes = params[:post]
 
     # 资源传图
     photos && photos.each do |k, v|
@@ -222,7 +222,7 @@ class Api::PostsController < Api::BaseController
   # 报价
   #
   # Params:
-  #   token:                      [String]    valid token
+  #   token:                     [String]    valid token
   #   tender[post_id]:           [Integer]   post ID
   #   tender[discount_way]:      [Integer]   报价方式
   #   tender[discount_content]:  [Float]     报价详情
