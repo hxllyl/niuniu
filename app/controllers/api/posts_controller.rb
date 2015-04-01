@@ -175,20 +175,37 @@ class Api::PostsController < Api::BaseController
                   status: 0
                 ) unless base_car
 
-      params[:post][:car_model_id] = car_model.id
-      params[:post][:base_car_id]  = base_car.id
+    params[:post][:car_model_id] = car_model.id
+    params[:post][:base_car_id]  = base_car.id
 
-    photos = params.delete(params[:post][:post_photos])
+    # 为资源库保存自定义的颜色
+    Log::BaseCar.create(
+      user_id: current_user.id,
+      base_car_id: base_car.id,
+      method_name: 'outer_color',
+      content: params[:post][:outer_color]
+    ) unless base_car.outer_color.include?(params[:post][:outer_color])
+
+    Log::BaseCar.create(
+      user_id: current_user.id,
+      base_car_id: base_car.id,
+      method_name: 'inner_color',
+      content: params[:post][:inner_color]
+    ) unless base_car.inner_color.include?(params[:post][:inner_color])
+
+    photos = {}
+    aa = params.delete(params[:post][:post_photos])
+    aa && aa.each do |ele|
+      photos[ele['_type']] = params.delete(params[:post][ele['_type']])
+    end
 
     params.require(:post).permit!
 
     post = Post.new(params[:post])
 
     # 资源传图
-    photos && photos.each do |ele|
-      img = ele['file'].match(/<(.*)>/)[1]
-      File.open('test.png', 'wb'){|f| f.write [img.gsub(/\s+/, '')].pack('H*')}
-      post.post_photos.new(_type: ele['_type'], image: File.open("#{Rails.root}/test.png"))
+    photos && photos.each do |k, v|
+      post.post_photos.new(_type: k, image: v.tempfile)
     end
 
     post.user = @user
