@@ -84,7 +84,7 @@ class Post < ActiveRecord::Base
   belongs_to  :standard,class_name: 'Standard'
   has_many    :post_photos, as: :owner, dependent: :nullify, autosave: true # 资源图片
   has_many    :respondents, class_name: 'Complaint', as: :resource # 被投诉列表
-  has_many    :comments, -> {where('parent_id is null').order('updated_at desc')}, as: :resource
+  has_many    :comments, -> {where('ancestry is null').order('updated_at desc')}, as: :resource
 
   USER_METHODS = [:name, :mobile, :level, :company, :area, :area_name, :level_icon ]
 

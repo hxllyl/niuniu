@@ -2,7 +2,7 @@
 class Comment < ActiveRecord::Base
   # validates
   
-  # has_ancestry ancestry_column: :parent_id
+  has_ancestry ancestry_column: :ancestry
   
   # relations
   belongs_to :user, class_name: 'User'
