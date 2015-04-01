@@ -3,7 +3,7 @@
 $(function(){
 
   // 用户获取手机验证码
-  var validCodeBut = $('.valid_code_but');
+  var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
   var nextStep = $('#next-step');
   var codeBut  = $('#valid_code_but');
