@@ -47,8 +47,13 @@ class MyPostsController < ApplicationController
       @base_car  = 'set_base_car'
     else
       @car_model  = params[:post][:car_model_id] ? CarModel.find_by_id(params[:post][:car_model_id]) : @car_models.first
-      @base_cars  = @car_model.base_cars.valid
-      @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
+      if @car_model
+        @base_cars  = @car_model.base_cars.valid
+        @base_car   = params[:post][:base_car_id] ? BaseCar.find_by_id(params[:post][:base_car_id]) : @base_cars.first
+      else
+        @car_model = 'set_car_model'
+        @base_car  = 'set_base_car'
+      end
     end
 
     if params[:post][:base_car_id]  == 'set_base_car'

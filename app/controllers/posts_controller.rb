@@ -42,7 +42,7 @@ class PostsController < ApplicationController
       @base_cars  = @car_model.base_cars.valid
       @base_car   = BaseCar.find_by_id(params[:bc])
     else
-      @base_cars  = @car_models.first.base_cars.valid
+      @base_cars  = @car_models.empty? ? [] : @car_models.first.base_cars.valid
       @base_car   = nil
     end
 

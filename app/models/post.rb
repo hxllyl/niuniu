@@ -275,7 +275,7 @@ class Post < ActiveRecord::Base
   end
 
   def app_area
-    "#{_type == 0 ? '卖 ' : '寻 '}" + car_license_areas
+    "#{_type == 1 ? '卖 ' : '寻 '}" + car_license_areas
   end
 
 end
