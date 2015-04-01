@@ -33,7 +33,7 @@
             <div class="col-md-3 level">
               <% user_level_icons(current_user).each do |icon| %>
                 <p><span class="levelIcon bfL">
-                  <%= image_tag(icon, alt: "", width: "100%") if current_user.is_show_icon? %>
+                  <%= image_tag(icon, alt: "", width: "100%") if current_user.try(:is_show_icon?) %>
                 </span>
               </p>
               <% end -%>
