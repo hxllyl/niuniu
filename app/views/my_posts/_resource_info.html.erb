@@ -39,7 +39,9 @@
 <div class="methodSelect row">
   <div class="tt clearfix">
     <h5 class="col-md-6">报价方式</h5>
-    <h5 class="col-md-6">指导价：<span id="guidePrice"><%= @base_car.base_price.to_f %></span>万</h5>
+    <%- if @base_car && @base_car.base_price.to_f != 0.0 %>
+      <h5 class="col-md-6">指导价：<span id="guidePrice"><%= @base_car.base_price.to_f %></span>万</h5>
+    <% end %>
   </div>
   <%- Post::DISCOUNT_WAYS.each do |k, v| %>
     <div class="form-group form-inline col-md-6">
