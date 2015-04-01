@@ -21,7 +21,7 @@ class Api::UsersController < Api::BaseController
   #   notice: [String]  请重新再试
   def list
 
-    infos = User.where('id in (?)', params[:user_ids] ? params[:user_ids] : []).map(&:to_hash)
+    infos = User.where('id in (?)', params[:user_ids] ? params[:user_ids] : []).collect{|ele| ele.to_hash.merge(follow_status: @user.following?(ele))}
 
     render json: {status: 200, notice: 'success', data: {users: infos}}
 
