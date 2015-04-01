@@ -20,7 +20,7 @@ application up and running.
 
     rails generate sunspot_rails:install
 
-  3. 运行Sunspot
+  3.运行Sunspot
 
     rake sunspot:solr:start #后台运行
     rake sunspot:solr:run   #在前台运行
