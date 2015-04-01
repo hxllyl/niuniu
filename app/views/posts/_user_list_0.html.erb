@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="#">首页</a></li>
+    <li><a href="<%= root_path %>">首页</a></li>
     <li><a href="#">资源详情</a></li>
     <li class="active">他的资源</li>
   </ol>
@@ -15,226 +15,42 @@
         <div class="panel-body">
           <div class="mySourceOpe">
             <div class="btn-group">
-              <select name="" class="form-control">
-                <option value="筛选品牌">筛选品牌</option>
-                <option value="品牌1">品牌1</option>
-                <option value="品牌2">品牌2</option>
+              <select name="" class="form-control" id="brands_select">
+                <option value="">筛选品牌</option>
+                <%- @brands.each do |brand| %>
+                  <%- if brand.id == params[:br].to_i %>
+                    <option value=<%= user_list_posts_path(@q_json.merge(br: brand.id)) %> selected><%= brand.name %></option>
+                  <% else %>
+                    <option value=<%= user_list_posts_path(@q_json.merge(br: brand.id)) %>><%= brand.name %></option>
+                  <% end %>
+                <% end %>
               </select>
             </div>
           </div>
           <div class="mySourceTab mt10">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
               <tbody>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td>
+                      <div class="box clearfix">
+                        <div class="infoM">
+                          <h5 class="name"><%= link_to post.re_name, post_path(post, _type: 0) %></h5>
+                          <div class="info clearfix">
+                            <div class="m"><%= post.st_rt %></div><div class="m"><%= post.publish_time %></div>
+                          </div>
+                        </div>
+                        <div class="infoPrice">
+                          <p><span class="price"><%= post.expect_price %>万</span><span class="time"><%= post.publish_time %></span></p>
+                          <p>指导价：<%= post.base_price %></p>
                         </div>
                       </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
+                      <div class="remark clearfix">
+                        <div class="tt bfL">备注：</div><div class="info"><%= post.remark %></div>
                       </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><a href="#">路虎 揽胜运动 款式名称 3345</a></h5>
-                        <div class="info clearfix">
-                          <div class="m">中规/现车</div>
-                          <div class="m">黑/白</div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price">37.68万</span><span class="time">16:30</span></p>
-                        <p>指导价：39.68万/下2万</p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"></div>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
@@ -253,3 +69,11 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $("#brands_select").change(function(){
+    document.location.href = $(this).val();
+  });
+});
+</script>

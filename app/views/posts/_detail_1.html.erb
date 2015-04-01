@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="/">首页</a></li>
+    <li><a href=<%= root_path %>>首页</a></li>
     <li class="active">寻车详情</li>
   </ol>
 </div>
@@ -38,44 +38,19 @@
             <div class="tt clearfix">
               <h5 class="col-md-6">给他报价<span class="sm">(可不选，直接给他留言)</span></h5>
             </div>
-            <form class="quoteForm">
+            <form class="quoteForm" action=<%= tender_post_path %> method='post'>
               <div class="clearfix">
-                <div class="form-group form-inline col-md-6">
-                  <label class="radio selectTag">
-                    <input type="radio" name="methodRadios" id="methodRadios1" value="option1"><span>优惠点数</span>
-                  </label>
-                  <label class="selectInput">
-                    <input type="text" class="form-control input-sm" id="" placeholder="">
-                    <div class="units">点数</div>
-                  </label>
-                </div>
-                <div class="form-group form-inline col-md-6">
-                  <label class="radio selectTag">
-                    <input type="radio" name="methodRadios" id="methodRadios2" value="option2"><span>优惠金额</span>
-                  </label>
-                  <label class="selectInput">
-                    <input type="text" class="form-control input-sm" id="" placeholder="">
-                    <div class="units">万元</div>
-                  </label>
-                </div>
-                <div class="form-group form-inline col-md-6">
-                  <label class="radio selectTag">
-                    <input type="radio" name="methodRadios" id="methodRadios3" value="option3"><span>加价金额</span>
-                  </label>
-                  <label class="selectInput">
-                    <input type="text" class="form-control input-sm" id="" placeholder="">
-                    <div class="units">万元</div>
-                  </label>
-                </div>
-                <div class="form-group form-inline col-md-6">
-                  <label class="radio selectTag">
-                    <input type="radio" name="methodRadios" id="methodRadios4" value="option4"><span>直接报价</span>
-                  </label>
-                  <label class="selectInput">
-                    <input type="text" class="form-control input-sm" id="" placeholder="">
-                    <div class="units">万元</div>
-                  </label>
-                </div>
+                <%- Post::DISCOUNT_WAYS.select{|k, v| k != 5}.each do |k, v| %>
+                  <div class="form-group form-inline col-md-6">
+                    <label class="radio selectTag">
+                      <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %>><span><%= v %></span>
+                    </label>
+                    <label class="selectInput">
+                      <input type="text" class="form-control input-sm" id="" placeholder="" name="tender[discount_content]">
+                      <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
+                    </label>
+                  </div>
+                <% end %>
               </div>
               <div class="mt10">
                 <input type="submit" class="btn btn-default btn_spacing btnW200 orange sub" id="" value="提交" />
@@ -109,7 +84,7 @@
                         </div>
                     </li>
                   </div>
-                  
+
                 </li>
                 <% end -%>
               </ul>
@@ -149,7 +124,7 @@ $(document).ready(function(){
   $(".icon-message").click(function(){
     var $name = $(this).attr('data-name');
     var $parent_id   = $(this).attr('data-parent-id');
-    
+
     $("#comment_content").focus();
     $("#comment_content").val("@" + $name + ':');
     $('input#comment_parent_id').val($parent_id);

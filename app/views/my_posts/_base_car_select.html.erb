@@ -2,7 +2,11 @@
   <label for="car_style" class="col-md-4 control-label">款式</label>
   <div class="col-md-9 inputBox">
     <div class="dropdown w100p">
-      <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+      <%- if @post.new_record? %>
+        <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+      <% else %>
+        <select name="post[base_car_id]" disabled class="form-control input-sm" id="post_base_car_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+      <% end %>
         <%- @base_cars.each do |base_car| %>
           <%- if base_car == @base_car %>
             <option value="<%= base_car.id %>" selected="selected"><%= base_car.style %></option>

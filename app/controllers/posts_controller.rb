@@ -4,6 +4,7 @@ require_relative '../../app/services/search_resource'
 require_relative '../../app/services/list_resources'
 
 class PostsController < ApplicationController
+   skip_before_filter :verify_authenticity_token, only: [:tender]
 
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
@@ -80,9 +81,18 @@ class PostsController < ApplicationController
   def user_list
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     # params[:user_id] 某用户
-    @_type = params[:_type]
-    @someone = User.find_by_id(params[:user_id])
-    @posts = Post.where(user_id: params[:user_id], _type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
+    params.delete(:action)
+    params.delete(:controller)
+
+    @q_json   = params
+    @_type    = params[:_type]
+    @someone  = User.find_by_id(params[:user_id])
+    @brands   = @someone.posts.resources.map(&:brand).uniq
+
+    conds            = {user_id: params[:user_id], _type: params[:type].to_i}
+    conds[:brand_id] = params[:br] if params[:br]
+
+    @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
     @follows  = current_user.followings & @someone.followers if current_user
   end
 
@@ -118,5 +128,20 @@ class PostsController < ApplicationController
 
     # return
   end
+
+  # 报价
+  def tender
+    post = Post.find_by_id(params[:id])
+    params.require(:tender).permit!
+
+    tender = Tender.new(params[:tender])
+    tender.post = post
+    tender.user = current_user
+
+    tender.save
+
+    redirect_to :back
+  end
+
 
 end

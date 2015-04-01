@@ -18,7 +18,7 @@
 	<div class="panel-body brandSelect">
     <form class="searchBox" action="<%= resources_list_posts_path  %>" method="get">
       <div class="dropdown w100p">
-        <%= select_tag 'brand_id', options_for_select(all_brand, params[:brand]), class: 'form-control', id: 'car_brandMenu', prompt: '请选择品牌' -%>
+        <%= select_tag 'br', options_for_select(all_brand, params[:brand]), class: 'form-control', id: 'car_brandMenu', prompt: '请选择品牌' -%>
       </div>
       <input type="hidden" name="_type" value='0' />
       <input type="submit" class="btn btn-primary subBtn" value="提交">
