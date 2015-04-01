@@ -35,6 +35,12 @@
   </div>
 </div>
 <%= render 'resource_select' %>
+<%- unless @post.new_record? %>
+  <input class='hide' id="post_standard_id" name="post[standard_id]" value="<%= @post.standard_id %>">
+  <input class='hide' id="post_brand_id" name="post[brand_id]" value="<%= @post.brand_id %>">
+  <input class='hide' id="post_car_model_id" name="post[car_model_id]" value="<%= @post.car_model_id %>">
+  <input class='hide' id="post_base_car_id" name="post[base_car_id]" value="<%= @post.base_car_id %>">
+<% end %>
 
 <div class="methodSelect row">
   <div class="tt clearfix">
@@ -54,8 +60,8 @@
       </label>
       <%- unless k == 5 %>
         <label class="selectInput">
-          <%- if @post && @post.discount_way == k %>
-            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]", value=<%= @post.discount_content.to_f %>>
+          <%- unless @post.new_record? %>
+            <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]" value="<%= @discount_contents[k-1]%>">
           <% else %>
             <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]">
           <% end %>

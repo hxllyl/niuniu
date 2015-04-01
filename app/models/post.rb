@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Post < ActiveRecord::Base
 
-  before_create :get_some_must_attr
+  before_save :get_some_must_attr
 
   # constants
   TYPES = {
@@ -27,8 +27,9 @@ class Post < ActiveRecord::Base
 
   # 资源类型
   RESOURCE_TYPE = {
-    0 => '现车',
-    1 => '期货'
+    0  => '现车',
+    1  => '期货',
+    -1 => '' # 这是寻车
   }
 
   TAKE_DATES = {
@@ -111,7 +112,7 @@ class Post < ActiveRecord::Base
 
   acts_as_list scope: :user
 
-  validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1'
+  # validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1 when _type = 0', if: -> { _type == 0 }
 
   # instance methods
   def get_some_must_attr
@@ -214,7 +215,7 @@ class Post < ActiveRecord::Base
   end
 
   def title
-    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << ' ' << brand_name << ' ' << base_car_NO
+    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << ' ' << brand_name << ' ' << car_model_name << ' ' << base_car_NO
   end
 
   def portal_resource_title
@@ -277,7 +278,7 @@ class Post < ActiveRecord::Base
   end
 
   def app_area
-    "#{_type == 1 ? '卖 ' : '寻 '}" + car_license_areas
+    "#{_type == 1 ? '卖' : '寻'}" << car_license_areas
   end
 
 end
