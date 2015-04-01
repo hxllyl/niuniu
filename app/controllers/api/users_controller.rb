@@ -16,6 +16,7 @@ class Api::UsersController < Api::BaseController
   #   status: [Integer] 200
   #   notice: [String]  success
   #   data:   [JSON]    user infos list
+  #
   # Error
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
@@ -38,15 +39,16 @@ class Api::UsersController < Api::BaseController
   #   status: [Integer] 200
   #   notice: [String]  success
   #   data:   [JSON]    user infos list
+  #
   # Error
-  #   status: [Integer] 500
-  #   notice: [String]  failed
-  #   error_msg: [String] 错误的消息
+  #   status:     [Integer] 500
+  #   notice:     [String]  failed
+  #   error_msg:  [String]  错误的消息
   def show
     remain_info = {
-      post_count: @user.posts.needs.count,
-      tender_count: @user.tenders.count,
-      following_count: @user.followings.count
+      post_count:       @user.posts.needs.count,
+      tender_count:     @user.tenders.count,
+      following_count:  @user.followings.count
     }
     user_info = @user.to_hash.merge(remain_info)
     render json: {status: 200, notice: 'success', data: user_info}
@@ -57,21 +59,22 @@ class Api::UsersController < Api::BaseController
   # 寻车报价是否有更新
   #
   # Params:
-  #  token:    [String]  valid token
-  #  updated_at: [DateTime] 更新时间
+  #  token:       [String]    valid token
+  #  updated_at:  [DateTime]  更新时间
   #
   # Returns:
-  #  status: [Integer] 200
-  #  notice: [String] success
+  #  status: [Integer]  200
+  #  notice: [String]   success
   #  data:
+  #
   # Errors:
-  #  status: [Integer] 500
-  #  notice: [String] failed
-  #  error_msg: [String]
+  #  status:    [Integer]       500
+  #  notice:    [String]        failed
+  #  error_msg: [String]        error json
   def has_updated
     t = params[:updated_at] || Time.now
 
-    post_status = @user.posts.needs.where("updated_at > ?", t).count > 0
+    post_status   = @user.posts.needs.where("updated_at > ?", t).count > 0
     tender_status = @user.tenders.where("updated_at > ?", t).count > 0
 
     render json: { status: 200, notice: 'success', data: {post: post_status, tender: tender_status}}
@@ -104,20 +107,22 @@ class Api::UsersController < Api::BaseController
   #
   # Params:
   #   token:          [String]   valid token
-  #   level:          [integer]  升级到的等级
-  #   identity:       [fileData] 身份证件图片
-  #   hand_id:        [fileData] 手持身份证
-  #   visiting:       [fileData] 名片
-  #   room_outer:     [fileData] 展厅门头
-  #   room_inner:     [fileData] 展厅内部
-  #   license:        [fileData] 营业执照
-  # Returns:
-  #   status: 200
-  #   notice: success
-  # Errors:
-  #   status: 500
-  #   notice: failed
-  #   error_msg:
+  #   level:          [Integer]  升级到的等级
+  #   identity:       [FileData] 身份证件图片
+  #   hand_id:        [FileData] 手持身份证
+  #   visiting:       [FileData] 名片
+  #   room_outer:     [FileData] 展厅门头
+  #   room_inner:     [FileData] 展厅内部
+  #   license:        [FileData] 营业执照
+  #
+  # Return:
+  #   status: [Integer]   200
+  #   notice: [String]    success
+  #
+  # Error:
+  #   status:     [Integer]   500
+  #   notice:     [String]    failed
+  #   error_msg:  [JSON]      errors json
 
   def update_level
     raise Errors::ArgumentsError.new, 'level参数不存在或比用户level低' if params[:level].blank? or params[:level].to_i <= @user.level
@@ -152,7 +157,8 @@ class Api::UsersController < Api::BaseController
   #
   # Return:
   #   status: [Integer] 200
-  #   notice: [String] success
+  #   notice: [String]  success
+  #
   # Error
   #   status: [Integer] 400
   #   notice: [String]  failed
@@ -174,24 +180,26 @@ class Api::UsersController < Api::BaseController
   # 更新个人资料
   #
   # Params
-  #   avatar:         [fileData] 头像图片
-  #   _type:          [String]   图片类型 这里是 ‘avatar’
-  #   user['name']:   [String]   用户名称
-  #   user['role']:   [String]   用户角色 这里是 ‘normal’
-  #   user['company'] [String]   用户公司名称
-  #   user['area_id'] [integer]  用户注册地id
-  #   user['contact']['company_address']   [String]     用户公司地址
-  #   user['contact']['self_introduction'] [String]     用户自我评价
-  #   user['contact']['position_header']   [String]     职务抬头
-  #   user['contact']['photo']             [String]     联系电话
-  #   user['contact']['wx']                [String]     微信
-  # Returns:
-  #   status: 200
-  #   notice: success
-  # Errors:
-  #   status: 500
-  #   notice: failed
-  #   error_msg:
+  #   avatar:                           [fileData] 头像图片
+  #   _type:                            [String]   图片类型 这里是 ‘avatar’
+  #   user[name]:                       [String]   用户名称
+  #   user[role]:                       [String]   用户角色 这里是 ‘normal’
+  #   user[company]:                    [String]   用户公司名称
+  #   user[area_id]:                    [integer]  用户注册地id
+  #   user[contact][company_address]:   [String]   用户公司地址
+  #   user[contact][self_introduction]: [String]   用户自我评价
+  #   user[contact][position_header]:   [String]   职务抬头
+  #   user[contact][photo]:             [String]   联系电话
+  #   user[contact][wx]:                [String]   微信
+  #
+  # Return:
+  #   status: [Integer]   200
+  #   notice: [String]    success
+  #
+  # Error:
+  #   status:     [Integer]   500
+  #   notice:     [String]    failed
+  #   error_msg:  [Strin]     error json
 
   def update
     if @user.update_attributes update_user_params
