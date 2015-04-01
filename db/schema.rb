@@ -38,7 +38,10 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                                                    null: false
   end
 
-  add_index "base_cars", ["style", "NO"], name: "index_base_cars_on_style_and_NO", using: :btree
+  add_index "base_cars", ["NO"], name: "index_base_cars_on_NO", using: :btree
+  add_index "base_cars", ["base_price"], name: "index_base_cars_on_base_price", using: :btree
+  add_index "base_cars", ["outer_color", "inner_color"], name: "index_base_cars_on_outer_color_and_inner_color", using: :btree
+  add_index "base_cars", ["style"], name: "index_base_cars_on_style", using: :btree
 
   create_table "brands", force: :cascade do |t|
     t.integer  "standard_id"
@@ -72,9 +75,14 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.string   "content",       limit: 225,             null: false
     t.integer  "parent_id"
     t.integer  "status",                    default: 0
+    t.string   "ancestry"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
+
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
+  add_index "comments", ["content"], name: "index_comments_on_content", using: :btree
+  add_index "comments", ["resource_id", "resource_type"], name: "index_comments_on_resource_id_and_resource_type", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 225,             null: false

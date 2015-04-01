@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def human_time(time)
     if time < Date.today
-      time.strftime("%m/%d %H:%M")
+      time.strftime("%m/%d")
     else
       time.strftime("%H:%M")
     end

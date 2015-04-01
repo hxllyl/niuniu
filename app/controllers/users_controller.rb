@@ -65,6 +65,19 @@ class UsersController < BaseController
       }
     end
   end
+  
+  def add_following
+    user = User.find_by_id params[:id]
+    raise '关注的对象已不存在' if user.blank?
+    raise '已关注' if current_user.following?user
+    
+    current_user.followings << user
+    
+    render js: "alert('关注成功');$('#following').html('<span>已关注</span>');"
+                
+  rescue => ex
+    render js: "alert('#{ex.message}');"
+  end
 
   def system_infos
     @sys_messages = current_user.received_messages.where(_type: Message::TYPES.keys[0]).order('status asc ,updated_at desc').page(params[:page]).per(5)
