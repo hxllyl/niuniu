@@ -15,10 +15,15 @@
         <div class="panel-body">
           <div class="mySourceOpe">
             <div class="btn-group">
-              <select name="" class="form-control">
-                <option value="筛选品牌">筛选品牌</option>
-                <option value="品牌1">品牌1</option>
-                <option value="品牌2">品牌2</option>
+              <select name="" class="form-control" id="brands_select">
+                <option value="">筛选品牌</option>
+                <%- @brands.each do |brand| %>
+                  <%- if brand.id == params[:br].to_i %>
+                    <option value=<%= user_list_posts_path(@q_json.merge(br: brand.id)) %> selected><%= brand.name %></option>
+                  <% else %>
+                    <option value=<%= user_list_posts_path(@q_json.merge(br: brand.id)) %>><%= brand.name %></option>
+                  <% end %>
+                <% end %>
               </select>
             </div>
           </div>
@@ -64,3 +69,11 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $("#brands_select").change(function(){
+    document.location.href = $(this).val();
+  });
+});
+</script>
