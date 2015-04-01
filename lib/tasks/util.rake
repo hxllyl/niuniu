@@ -26,7 +26,7 @@ namespace :util do
 
        st = Standard.find_or_initialize_by(name: columns[0])
        br = Brand.find_or_initialize_by(name: columns[1])
-       cm = CarModel.find_or_initialize_by(name: columns[2])
+       cm = CarModel.find_or_initialize_by(name: (columns[2] || ' '))
        bc = BaseCar.find_or_initialize_by(style: columns[3],
                                  NO: columns[4].to_i.to_s, base_price: columns[5].to_f
                                 )

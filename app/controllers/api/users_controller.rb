@@ -55,8 +55,8 @@ class Api::UsersController < Api::BaseController
     remain_info = {
       post_count: user.posts.needs.count,
       tender_count: user.tenders.count,
-      following_count: user.followings.count
-      is_following: @user.following?user
+      following_count: user.followings.count,
+      is_following: @user.following?(user)
     }
     
     user_info = user.to_hash.merge(remain_info)
