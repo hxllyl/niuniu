@@ -29,7 +29,7 @@
               <p>资源公司（认证）<span class="next_arr"></span></p>
               <p>综合展厅（认证）<span class="next_arr_r"></span></p>
             </div>
-            
+
             <div class="col-md-3 level">
               <% user_level_icons(current_user).each do |icon| %>
                 <p><span class="levelIcon bfL">
@@ -38,18 +38,18 @@
               </p>
               <% end -%>
             </div>
-            
+
             <div class="col-md-6 status">
               <% 4.times do |i|%>
                 <% if current_user.level >= i or current_user ==  User::LEVELS.keys[4]%>
                   <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
                 <% else %>
-                  <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[i]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
+                  <p><a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[i]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
                 <% end -%>
-            <% end -%>  
+            <% end -%>
             </div>
           </div>
-          
+
           <div role="tabpanel" class="levelProcess clearfix tab-pane" id="tabpanel2">
             <div class="col-md-3 process">
               <p>个人手机（认证）<span class="next_arr"></span></p>
@@ -69,7 +69,7 @@
               <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
               <p>
-                <a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
+                <a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
               </p>
               <% end -%>
             </div>

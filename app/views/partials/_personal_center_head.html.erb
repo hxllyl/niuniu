@@ -5,7 +5,7 @@
     <div class="detail">
       <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag(current_user.level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?)%></span>
         <% if current_user.can_upgrade %>
-          <a href="<%= my_level_user_path(current_user) -%>" class="btn btn-default btn-xs"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
+          <a href="<%= my_level_user_path(current_user) -%>" class="btn btn-default btn-xs orange"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
         <% end -%>
       </div>
       <div class="detailTab">
