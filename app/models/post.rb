@@ -111,6 +111,8 @@ class Post < ActiveRecord::Base
 
   acts_as_list scope: :user
 
+  validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1'
+
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way
