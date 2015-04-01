@@ -57,7 +57,7 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">认证等级：</label>
                 <div class="col-sm-10 prl0">
-                  <div class="levelIcon bfL"><%= image_tag(current_user.level_icon, alt: "", width: "100%") if current_user.is_show_icon? %></div>
+                  <div class="levelIcon bfL"><%= image_tag(current_user.level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?) %></div>
                   <a href="<%= my_level_user_path(current_user)%>" class="btn btn-default black bfR"><span class="icon icon-upgrade"></span>升级</a>
                 </div>
               </div>
