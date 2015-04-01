@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",            null: false
   end
 
+  add_index "areas", ["name"], name: "index_areas_on_name", using: :btree
+  add_index "areas", ["parent_id"], name: "index_areas_on_parent_id", using: :btree
+
   create_table "base_cars", force: :cascade do |t|
     t.integer  "standard_id"
     t.integer  "brand_id"
@@ -38,7 +41,13 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                                                    null: false
   end
 
-  add_index "base_cars", ["style", "NO"], name: "index_base_cars_on_style_and_NO", using: :btree
+  add_index "base_cars", ["NO"], name: "index_base_cars_on_NO", using: :btree
+  add_index "base_cars", ["base_price"], name: "index_base_cars_on_base_price", using: :btree
+  add_index "base_cars", ["brand_id"], name: "index_base_cars_on_brand_id", using: :btree
+  add_index "base_cars", ["car_model_id"], name: "index_base_cars_on_car_model_id", using: :btree
+  add_index "base_cars", ["outer_color", "inner_color"], name: "index_base_cars_on_outer_color_and_inner_color", using: :btree
+  add_index "base_cars", ["standard_id"], name: "index_base_cars_on_standard_id", using: :btree
+  add_index "base_cars", ["style"], name: "index_base_cars_on_style", using: :btree
 
   create_table "brands", force: :cascade do |t|
     t.integer  "standard_id"
@@ -50,10 +59,16 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                           null: false
   end
 
+  add_index "brands", ["name"], name: "index_brands_on_name", using: :btree
+  add_index "brands", ["standard_id"], name: "index_brands_on_standard_id", using: :btree
+
   create_table "brands_standards", id: false, force: :cascade do |t|
     t.integer "brand_id"
     t.integer "standard_id"
   end
+
+  add_index "brands_standards", ["brand_id"], name: "index_brands_standards_on_brand_id", using: :btree
+  add_index "brands_standards", ["standard_id"], name: "index_brands_standards_on_standard_id", using: :btree
 
   create_table "car_models", force: :cascade do |t|
     t.integer  "standard_id"
@@ -65,6 +80,10 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                null: false
   end
 
+  add_index "car_models", ["brand_id"], name: "index_car_models_on_brand_id", using: :btree
+  add_index "car_models", ["standard_id"], name: "index_car_models_on_standard_id", using: :btree
+  add_index "car_models", ["status"], name: "index_car_models_on_status", using: :btree
+
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "resource_id"
@@ -72,9 +91,15 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.string   "content",       limit: 225,             null: false
     t.integer  "parent_id"
     t.integer  "status",                    default: 0
+    t.string   "ancestry"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
+
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
+  add_index "comments", ["content"], name: "index_comments_on_content", using: :btree
+  add_index "comments", ["resource_id", "resource_type"], name: "index_comments_on_resource_id_and_resource_type", using: :btree
+  add_index "comments", ["status"], name: "index_comments_on_status", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       limit: 225,             null: false
@@ -95,12 +120,19 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                            null: false
   end
 
+  add_index "complaints", ["operator_id"], name: "index_complaints_on_operator_id", using: :btree
+  add_index "complaints", ["resource_id", "resource_type"], name: "index_complaints_on_resource_id_and_resource_type", using: :btree
+  add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
+
   create_table "follow_ships", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "following_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  add_index "follow_ships", ["follower_id"], name: "index_follow_ships_on_follower_id", using: :btree
+  add_index "follow_ships", ["following_id"], name: "index_follow_ships_on_following_id", using: :btree
 
   create_table "log_base_cars", force: :cascade do |t|
     t.integer  "user_id"
@@ -111,6 +143,10 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "log_base_cars", ["base_car_id"], name: "index_log_base_cars_on_base_car_id", using: :btree
+  add_index "log_base_cars", ["method_name"], name: "index_log_base_cars_on_method_name", using: :btree
+  add_index "log_base_cars", ["user_id"], name: "index_log_base_cars_on_user_id", using: :btree
+
   create_table "log_posts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -118,6 +154,10 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "log_posts", ["method_name"], name: "index_log_posts_on_method_name", using: :btree
+  add_index "log_posts", ["post_id"], name: "index_log_posts_on_post_id", using: :btree
+  add_index "log_posts", ["user_id"], name: "index_log_posts_on_user_id", using: :btree
 
   create_table "log_user_update_levels", force: :cascade do |t|
     t.integer  "user_id"
@@ -130,6 +170,11 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                                      null: false
   end
 
+  add_index "log_user_update_levels", ["end_level"], name: "index_log_user_update_levels_on_end_level", using: :btree
+  add_index "log_user_update_levels", ["method_name"], name: "index_log_user_update_levels_on_method_name", using: :btree
+  add_index "log_user_update_levels", ["status"], name: "index_log_user_update_levels_on_status", using: :btree
+  add_index "log_user_update_levels", ["user_id"], name: "index_log_user_update_levels_on_user_id", using: :btree
+
   create_table "messages", force: :cascade do |t|
     t.string   "title",       limit: 100
     t.integer  "sender_id"
@@ -141,6 +186,11 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "messages", ["_type"], name: "index_messages_on__type", using: :btree
+  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+  add_index "messages", ["status"], name: "index_messages_on_status", using: :btree
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "content",       limit: 225
@@ -151,6 +201,10 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                            null: false
   end
 
+  add_index "notifications", ["resource_id", "resource_type"], name: "index_notifications_on_resource_id_and_resource_type", using: :btree
+  add_index "notifications", ["status"], name: "index_notifications_on_status", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
   create_table "photos", force: :cascade do |t|
     t.integer  "owner_id"
     t.string   "owner_type", limit: 20
@@ -160,6 +214,9 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  add_index "photos", ["_type"], name: "index_photos_on__type", using: :btree
+  add_index "photos", ["owner_id", "owner_type"], name: "index_photos_on_owner_id_and_owner_type", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "standard_id"
@@ -186,11 +243,22 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                                                          null: false
   end
 
+  add_index "posts", ["_type"], name: "index_posts_on__type", using: :btree
+  add_index "posts", ["base_car_id"], name: "index_posts_on_base_car_id", using: :btree
+  add_index "posts", ["brand_id"], name: "index_posts_on_brand_id", using: :btree
+  add_index "posts", ["expect_price"], name: "index_posts_on_expect_price", using: :btree
+  add_index "posts", ["outer_color", "inner_color"], name: "index_posts_on_outer_color_and_inner_color", using: :btree
+  add_index "posts", ["standard_id"], name: "index_posts_on_standard_id", using: :btree
+  add_index "posts", ["status"], name: "index_posts_on_status", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
   create_table "standards", force: :cascade do |t|
     t.string   "name",       limit: 15, null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  add_index "standards", ["name"], name: "index_standards_on_name", using: :btree
 
   create_table "tenders", force: :cascade do |t|
     t.integer  "post_id"
@@ -203,6 +271,11 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "updated_at",                                            null: false
   end
 
+  add_index "tenders", ["post_id"], name: "index_tenders_on_post_id", using: :btree
+  add_index "tenders", ["price"], name: "index_tenders_on_price", using: :btree
+  add_index "tenders", ["status"], name: "index_tenders_on_status", using: :btree
+  add_index "tenders", ["user_id"], name: "index_tenders_on_user_id", using: :btree
+
   create_table "tokens", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "value",      limit: 50,             null: false
@@ -211,6 +284,9 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
+
+  add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
+  add_index "tokens", ["value"], name: "index_tokens_on_value", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 15,               null: false
@@ -239,6 +315,9 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.inet     "last_sign_in_ip"
   end
 
+  add_index "users", ["area_id"], name: "index_users_on_area_id", using: :btree
+  add_index "users", ["job_number"], name: "index_users_on_job_number", using: :btree
+  add_index "users", ["level"], name: "index_users_on_level", using: :btree
   add_index "users", ["mobile"], name: "index_users_on_mobile", unique: true, using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -251,5 +330,10 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
+
+  add_index "valid_codes", ["_type"], name: "index_valid_codes_on__type", using: :btree
+  add_index "valid_codes", ["code"], name: "index_valid_codes_on_code", using: :btree
+  add_index "valid_codes", ["mobile"], name: "index_valid_codes_on_mobile", using: :btree
+  add_index "valid_codes", ["status"], name: "index_valid_codes_on_status", using: :btree
 
 end

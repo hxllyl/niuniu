@@ -26,15 +26,15 @@ class Api::UsersController < Api::BaseController
 
     render json: {status: 200, notice: 'success', data: {users: infos}}
 
-    rescue => e
+  rescue => e
     render json: {status: false, error: e.message}
   end
 
-  # 个人中心的基本详情
+  # 个人详情 当前用户或者其他人
   #
   # Params:
   #   token:    [String]  valid token
-  #
+  #   id:       [Integer] 用户id（不传就是当前用户信息） 可选
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
@@ -45,12 +45,23 @@ class Api::UsersController < Api::BaseController
   #   notice:     [String]  failed
   #   error_msg:  [String]  错误的消息
   def show
+
+    if params[:id].present?
+      user = user.find_by_id params[:id]
+    else
+      user = @user
+    end
+
+    raise '不存在该用户' if user.blank?
+
     remain_info = {
-      post_count:       @user.posts.needs.count,
-      tender_count:     @user.tenders.count,
-      following_count:  @user.followings.count
+      post_count:       user.posts.needs.count,
+      tender_count:     user.tenders.count,
+      following_count:  user.followings.count
+      is_following:     user.following?(user)
     }
-    user_info = @user.to_hash.merge(remain_info)
+
+    user_info = user.to_hash.merge(remain_info)
     render json: {status: 200, notice: 'success', data: user_info}
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}

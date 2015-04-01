@@ -11,5 +11,10 @@ class CreateLogUserUpdateLevels < ActiveRecord::Migration
       t.column     :status, :integer, default: 0 # 状态 0 等待审核 1 审核通过 2 审核不同通过 
       t.timestamps null: false
     end
+    
+    add_index(:log_user_update_levels, :user_id)
+    add_index(:log_user_update_levels, :end_level)
+    add_index(:log_user_update_levels, :status)
+    add_index(:log_user_update_levels, :method_name)
   end
 end

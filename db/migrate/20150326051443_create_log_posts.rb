@@ -7,5 +7,9 @@ class CreateLogPosts < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    
+    add_index(:log_posts, :user_id)
+    add_index(:log_posts, :post_id)
+    add_index(:log_posts, :method_name)
   end
 end

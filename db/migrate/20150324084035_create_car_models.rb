@@ -9,5 +9,9 @@ class CreateCarModels < ActiveRecord::Migration
       t.column :click_counter, :integer, default: 0 #点击率，用于排序
       t.timestamps null: false
     end
+    
+    add_index(:car_models, :standard_id)
+    add_index(:car_models, :brand_id)
+    add_index(:car_models, :status)
   end
 end

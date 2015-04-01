@@ -7,8 +7,15 @@
 //               "</div>" +
 //             "</li>"
 //            )
-if($('.boardList li').length === 0) {
-  $('.boardList').append("<%= j (render partial: 'comments/comment', locals: {comment: @comment})%>")
-}else{
-  $('.boardList li:eq(0)').before("<%= j (render partial: 'comments/comment', locals: {comment: @comment}) %>")
-}
+  
+<% if @comment.parent %>
+  $("#comment_<%= @comment.parent.id%>").replce("<%= j (render partial: 'posts/sub_comment', locals: {sub_comms: @comment.parent.children_chain, comm_counts: @comment.parent.children_chain.count})%>")
+<% else %>
+  if($('.boardList li').length === 0) {
+    $('.boardList').append("<%= j (render partial: 'comments/comment', locals: {comment: @comment})%>")
+  }else{
+    $('.boardList li:eq(0)').before("<%= j (render partial: 'comments/comment', locals: {comment: @comment}) %>")
+  }
+<% end -%>  
+
+

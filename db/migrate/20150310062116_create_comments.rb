@@ -12,7 +12,13 @@ class CreateComments < ActiveRecord::Migration
       t.column :content, :string, limit: 225, null: false # 评论内容
       t.references :parent, class_name: 'Comment' # 自连接
       t.column :status, :integer, default: 0 # 0 未删除 -1 删除
+      t.column :ancestry, :string # 用户排序
       t.timestamps null: false
     end
+    
+    add_index(:comments, :content)
+    add_index(:comments, :ancestry)
+    add_index(:comments, [:resource_id, :resource_type])
+    add_index(:comments, :status)
   end
 end

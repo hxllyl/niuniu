@@ -10,5 +10,8 @@ class CreateFollowShips < ActiveRecord::Migration
       t.references :following, class_name: 'User' # 被关注人的id
       t.timestamps null: false
     end
+    
+    add_index(:follow_ships, :follower_id)
+    add_index(:follow_ships, :following_id)
   end
 end

@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
-
+  
   # 用户升级认证log
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel'
 
@@ -213,6 +213,21 @@ class User < ActiveRecord::Base
 
   def heading_show
     %w(2 3 4).include?(level) ? company : name
+  end
+  
+  def level_update_status
+    log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).first
+    can_do = []
+    can_do = [1, 2, 3, 4] if log.blank? 
+    
+    if log.level == LEVELS.keys[1]
+      can_do = [2,3,4]
+    elsif log.level == LEVELS.keys[2]
+      can_do = [3]
+    else
+      can_do = []
+    end
+    can_do
   end
 
 end

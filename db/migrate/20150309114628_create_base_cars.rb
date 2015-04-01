@@ -20,6 +20,12 @@ class CreateBaseCars < ActiveRecord::Migration
       t.timestamps null: false
     end
     
-    add_index(:base_cars, [:style, :NO])
+    add_index(:base_cars, :style)
+    add_index(:base_cars, :base_price)
+    add_index(:base_cars, [:outer_color, :inner_color])
+    add_index(:base_cars, :NO)
+    add_index(:base_cars, :standard_id)
+    add_index(:base_cars, :brand_id)
+    add_index(:base_cars, :car_model_id)
   end
 end
