@@ -53,7 +53,7 @@ namespace :deploy do
     end
   end
 
-  after "deploy:update_code", "solr:symlink"
+  # after "deploy:update_code", "solr:symlink"
 
   namespace :solr do
     desc "start solr"
