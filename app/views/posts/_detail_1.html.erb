@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="/">首页</a></li>
+    <li><a href=<%= root_path %>>首页</a></li>
     <li class="active">寻车详情</li>
   </ol>
 </div>
@@ -109,7 +109,7 @@
                         </div>
                     </li>
                   </div>
-                  
+
                 </li>
                 <% end -%>
               </ul>
@@ -149,7 +149,7 @@ $(document).ready(function(){
   $(".icon-message").click(function(){
     var $name = $(this).attr('data-name');
     var $parent_id   = $(this).attr('data-parent-id');
-    
+
     $("#comment_content").focus();
     $("#comment_content").val("@" + $name + ':');
     $('input#comment_parent_id').val($parent_id);
