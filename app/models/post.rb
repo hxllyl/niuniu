@@ -112,7 +112,7 @@ class Post < ActiveRecord::Base
 
   acts_as_list scope: :user
 
-  validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1 when _type = 0', if: -> { _type == 0 }
+  # validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1 when _type = 0', if: -> { _type == 0 }
 
   # instance methods
   def get_some_must_attr
