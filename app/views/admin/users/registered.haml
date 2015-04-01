@@ -1,0 +1,43 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 已注册用户名录
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          %table.table.table-striped
+            %tr
+              %th 序号
+              %th 业务员工号
+              %th 姓名
+              %th 联系电话
+              %th{ style: 'width: 120px;'} 公司名称
+              %th 认证等级
+              %th 注册日期
+              %th 最后登录时间
+              %th 近一月累计成交
+              %th 累计成交
+              %th 备注
+              %th
+            - @users.each do |user|
+              %tr
+                %td= user.id
+                %td 业务员工号
+                %td= user.name
+                %td= user.mobile
+                %td= user.company
+                %td= user.level
+                %td= user.created_at.to_s(:db)
+                %td= user.last_sign_in_at.try(:to_s, :db)
+                %td 近一月累计成交
+                %td 累计成交
+                %td 备注
+                %td= link_to '修改', edit_admin_user_path(user)
+
+          - if @users.present?
+            .hr-line-dashed
+
+          .text-center
+            = paginate @users

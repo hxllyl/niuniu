@@ -186,7 +186,8 @@ class User < ActiveRecord::Base
       dealt_infos: dealt_infos,
       post_count: posts.needs.count, 
       tender_count: tenders.count,
-      following_count: followings.count
+      following_count: followings.count,
+      area_id: area_id
     }
   end
 

@@ -12,3 +12,14 @@ application up and running.
 
   把api下sessions和registions类的继承关系换一下，运行rake doc:api会将生成文档输出路径
 
+* Sunspot 全文检索工具（用于搜索 post 相关内容）
+
+  安装生成默认的配置信息
+
+  rails generate sunspot_rails:install
+
+  运行Sunspot
+
+  rake sunspot:solr:start #后台运行
+  rake sunspot:solr:run   #在前台运行
+
