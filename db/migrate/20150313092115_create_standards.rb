@@ -8,5 +8,7 @@ class CreateStandards < ActiveRecord::Migration
       t.column :name, :string, limit: 15, null: false
       t.timestamps null: false
     end
+    
+    add_index(:standards, :name)
   end
 end

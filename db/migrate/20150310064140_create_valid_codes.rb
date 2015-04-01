@@ -12,5 +12,10 @@ class CreateValidCodes < ActiveRecord::Migration
       t.column :status, :integer, default: 0 # 验证码状态 0 未使用 1 已使用   
       t.timestamps null: false
     end
+    
+    add_index(:valid_codes, :mobile)
+    add_index(:valid_codes, :_type)
+    add_index(:valid_codes, :code)
+    add_index(:valid_codes, :status)
   end
 end

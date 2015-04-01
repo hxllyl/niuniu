@@ -13,5 +13,9 @@ class CreateNotifications < ActiveRecord::Migration
       t.column :resource_type, :string, limit: 30 # object的class 这里是String
       t.timestamps null: false
     end
+    
+    add_index(:notifications, :user_id)
+    add_index(:notifications, [:resource_id, :resource_type])
+    add_index(:notifications, :status)
   end
 end

@@ -12,5 +12,10 @@ class CreateMessages < ActiveRecord::Migration
       t.column :status, :integer, default: 0 # 消息状态
       t.timestamps null: false
     end
+    
+    add_index(:messages, :sender_id)
+    add_index(:messages, :receiver_id)
+    add_index(:messages, :_type)
+    add_index(:messages, :status)
   end
 end

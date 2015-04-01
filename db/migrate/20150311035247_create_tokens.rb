@@ -11,5 +11,8 @@ class CreateTokens < ActiveRecord::Migration
       t.column :status, :integer, default: 0  
       t.timestamps null: false
     end
+    
+    add_index(:tokens, :user_id)
+    add_index(:tokens, :value)
   end
 end

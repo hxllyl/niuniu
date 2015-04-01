@@ -16,8 +16,9 @@ class CreateComments < ActiveRecord::Migration
       t.timestamps null: false
     end
     
-    add_index(:comments, [:content])
-    add_index(:comments, [:ancestry])
+    add_index(:comments, :content)
+    add_index(:comments, :ancestry)
     add_index(:comments, [:resource_id, :resource_type])
+    add_index(:comments, :status)
   end
 end

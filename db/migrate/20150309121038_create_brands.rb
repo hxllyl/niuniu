@@ -15,5 +15,8 @@ class CreateBrands < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    
+    add_index(:brands, :standard_id)
+    add_index(:brands, :name)
   end
 end

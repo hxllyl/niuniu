@@ -11,5 +11,8 @@ class CreateAreas < ActiveRecord::Migration
       t.references :parent, class_name: 'Area'
       t.timestamps null: false
     end
+    
+    add_index(:areas, :name)
+    add_index(:areas, :parent_id)
   end
 end

@@ -13,5 +13,8 @@ class CreatePhotos < ActiveRecord::Migration
       t.column :mask, :string, limit: 10 # 却别用户 继承关系
       t.timestamps null: false
     end
+    
+    add_index(:photos, [:owner_id, :owner_type])
+    add_index(:photos, :_type)
   end
 end

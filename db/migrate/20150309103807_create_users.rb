@@ -16,9 +16,14 @@ class CreateUsers < ActiveRecord::Migration
       t.column :status, :integer, default: 0 # 新建状态, 1 => 后台审理通过, 2 => 后台审理未通过
       t.column :contact, :jsonb, default: {} # 联系方式 qq wx
       t.column :job_number, :string, limit: 15 # 公司人员工号
-      t.references :customer_service, class_name: 'User'
+      t.references :customer_service, class_name: 'Staff'
       t.column :mask, :string, limit: 10 # 却别用户 继承关系
       t.timestamps null: false
     end
+    
+    add_index(:users, :name)
+    add_index(:users, :area_id)
+    add_index(:users, :level)
+    add_index(:users, :job_number)
   end
 end

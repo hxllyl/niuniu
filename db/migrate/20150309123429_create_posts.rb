@@ -31,5 +31,13 @@ class CreatePosts < ActiveRecord::Migration
       t.timestamps null: false
     end
     
+    add_index(:posts, :standard_id)
+    add_index(:posts, :brand_id)
+    add_index(:posts, :base_car_id)
+    add_index(:posts, :user_id)
+    add_index(:posts, :_type)
+    add_index(:posts, [:outer_color, :inner_color])
+    add_index(:posts, :expect_price)
+    add_index(:posts, :status)
   end
 end

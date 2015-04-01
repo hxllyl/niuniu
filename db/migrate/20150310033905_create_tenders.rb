@@ -14,5 +14,10 @@ class CreateTenders < ActiveRecord::Migration
       t.column :status,  :integer, default: 0 # 0 未成交 1 已成交 -1 已删除
       t.timestamps null: false
     end
+    
+    add_index(:tenders, :post_id)
+    add_index(:tenders, :user_id)
+    add_index(:tenders, :price)
+    add_index(:tenders, :status)
   end
 end

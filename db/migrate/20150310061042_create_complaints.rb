@@ -14,5 +14,9 @@ class CreateComplaints < ActiveRecord::Migration
       t.references :operator, class_name: 'User' # 操作人
       t.timestamps null: false
     end
+    
+    add_index(:complaints, [:resource_id, :resource_type])
+    add_index(:complaints, :user_id)
+    add_index(:complaints, :operator_id)
   end
 end
