@@ -222,7 +222,7 @@ class Api::PostsController < Api::BaseController
   # 报价
   #
   # Params:
-  #   token:                      [String]    valid token
+  #   token:                     [String]    valid token
   #   tender[post_id]:           [Integer]   post ID
   #   tender[discount_way]:      [Integer]   报价方式
   #   tender[discount_content]:  [Float]     报价详情
