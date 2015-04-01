@@ -4,7 +4,7 @@
 			<div class="photo bfL"><a href="#"><%= image_tag(@someone.avatar, alt: "", size: '78x78')%></a></div>
 			<div class="name">
 				<h5><%= @someone.name_area %></h5>
-				<div class="clearfix"><span class="tag"><%= image_tag("user/typeIcon_p.png", alt: "", width: "100%")%></span></div>
+				<div class="clearfix"><span class="tag"><%= image_tag(@someone.level_icon, alt: "", width: "100%")%></span></div>
 				<a class="btn btn-success btn-xs mt6" href="#" role="button"><span class="glyphicon glyphicon-plus"></span>加关注</a>
 			</div>
 		</div>
