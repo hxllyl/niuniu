@@ -280,5 +280,9 @@ class Post < ActiveRecord::Base
   def app_area
     "#{_type == 1 ? '卖' : '寻'}" << car_license_areas
   end
-  
+
+  def show_price
+    expect_price.to_f == 0.0 ? '电议' : "#{expect_price.to_f}万"
+  end
+
 end
