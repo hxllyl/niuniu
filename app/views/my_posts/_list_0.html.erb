@@ -16,7 +16,7 @@
             <div class="bfL">
               <a class="btn btn-default orange mr14" href="<%= new_user_my_post_path(current_user, _type: 0) %>" role="button">添加资源</a>
               <div class="btn-group">
-                <%= select_tag 'brand', options_for_select(all_brand, selected: @brand_id), class: 'form-control', id: 'brand_select', prompt:  '筛选品牌', data_id: current_user.id -%>
+                <%= select_tag 'brand', options_for_select(@brands.collect{|brand| [brand.name, brand.id]}, selected: @brand_id), class: 'form-control', id: 'brand_select', prompt:  '筛选品牌', data_id: current_user.id -%>
               </div>
             </div>
             <div class="bfR">

@@ -16,6 +16,8 @@ class MyPostsController < ApplicationController
       current_user.posts.where("posts._type = #{@_type} and posts.id in (?)", params[:resource_ids].split(' ')).update_all(updated_at: Time.now())
     end
 
+    @brands = current_user.posts.resources.map(&:brand).uniq
+
     respond_to do |format|
       format.html {}
       format.js {}

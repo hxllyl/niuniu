@@ -215,7 +215,7 @@ class Post < ActiveRecord::Base
   end
 
   def title
-    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << ' ' << brand_name << ' ' << base_car_NO
+    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << ' ' << brand_name << ' ' << car_model_name << ' ' << base_car_NO
   end
 
   def portal_resource_title
@@ -278,7 +278,7 @@ class Post < ActiveRecord::Base
   end
 
   def app_area
-    "#{_type == 1 ? '卖 ' : '寻 '}" + car_license_areas
+    "#{_type == 1 ? '卖' : '寻'}" << car_license_areas
   end
   
 end

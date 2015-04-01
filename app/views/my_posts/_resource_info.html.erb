@@ -51,7 +51,7 @@
   </div>
   <%- Post::DISCOUNT_WAYS.each do |k, v| %>
     <div class="form-group form-inline col-md-6">
-      <label class="radio selectTag">
+      <label class="<%= (@post && @post.discount_way == k) ? "radio selectTag active" : "radio selectTag" %>">
         <%- if @post && @post.discount_way == k %>
           <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value=<%= k %> checked='checked'><span><%= v %></span>
         <% else %>

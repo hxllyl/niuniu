@@ -9,15 +9,15 @@
 					<tr>
 						<th width="16%">发布人</th>
 						<th width="12%">注册地</th>
-						<th width="50%">涉及品牌</th>
+						<th width="48%">涉及品牌</th>
 						<th width="12%">资源表</th>
-						<th width="10%">发布时间</th>
+						<th width="12%">发布时间</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%- @users.each do |user| %>
 						<tr>
-							<td><%= user.heading_show %></td>
+							<td><%= link_to user.heading_show, user_list_posts_path(user_id: user.id, _type: 0), class: 'name' %></td>
 							<td><%= user.area_name %></td>
 							<td><%= user.brands_ary %></td>
 							<td><%= link_to '浏览', user_list_posts_path(user_id: user.id, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
