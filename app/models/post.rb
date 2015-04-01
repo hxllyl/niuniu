@@ -216,7 +216,7 @@ class Post < ActiveRecord::Base
   end
 
   def portal_resource_title
-    brand_name << car_model_name << base_car_NO
+    standard_name << brand_name << car_model_name << base_car_NO
   end
 
   def brand_model_name
@@ -229,6 +229,14 @@ class Post < ActiveRecord::Base
 
   def st_rt
     standard_name << '/' << RESOURCE_TYPE[resource_type]
+  end
+
+  def base_price
+    "#{guiding_price}万/#{human_discount}"
+  end
+
+  def re_name
+    "#{brand_name} #{car_model_name} 款式名称 #{base_car_NO}"
   end
 
   # 优惠方式

@@ -80,9 +80,9 @@ class PostsController < ApplicationController
   def user_list
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     # params[:user_id] 某用户
-    @_type = params[:_type]
-    @someone = User.find_by_id(params[:user_id])
-    @posts = Post.where(user_id: params[:user_id], _type: params[:type]).order(updated_at: :desc).page(params[:page]).per(10)
+    @_type    = params[:_type]
+    @someone  = User.find_by_id(params[:user_id])
+    @posts    = Post.where(user_id: params[:user_id], _type: params[:type].to_i).order(position: :desc).page(params[:page]).per(10)
     @follows  = current_user.followings & @someone.followers if current_user
   end
 
