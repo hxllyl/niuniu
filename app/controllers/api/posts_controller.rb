@@ -21,7 +21,7 @@ class Api::PostsController < Api::BaseController
   def list
     conds = {_type: params[:_type]}
     conds.merge!(:updated_at.gt => DateTime.parse(params[:updated_at])) if params[:updated_at]
-    posts = Post.where(conds).order(updated_at: :desc)
+    posts = Post.where(conds).order(updated_at: :desc).limit(10)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
