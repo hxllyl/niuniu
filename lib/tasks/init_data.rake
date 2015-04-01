@@ -59,7 +59,7 @@ namespace :database do
     user_ids = User.all.map(&:id)
     pics     = Array(0..4)
     pics_dir = Rails.root + 'public' + 'cars'
-    100.times do
+    1000.times do
       base_car = BaseCar.all.sample
       post     = Post.new(
                  _type:             [0, 1].sample,
