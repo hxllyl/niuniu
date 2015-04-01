@@ -4,6 +4,7 @@ require_relative '../../app/services/search_resource'
 require_relative '../../app/services/list_resources'
 
 class PostsController < ApplicationController
+   skip_before_filter :verify_authenticity_token, only: [:tender]
 
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
@@ -127,5 +128,20 @@ class PostsController < ApplicationController
 
     # return
   end
+
+  # 报价
+  def tender
+    post = Post.find_by_id(params[:id])
+    params.require(:tender).permit!
+
+    tender = Tender.new(params[:tender])
+    tender.post = post
+    tender.user = current_user
+
+    tender.save
+
+    redirect_to :back
+  end
+
 
 end

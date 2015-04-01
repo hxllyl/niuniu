@@ -58,6 +58,9 @@ Rails.application.routes.draw do
       get :user_resources_list
       get :download_posts
     end
+    member do
+      post :tender
+    end
   end
 
   resources :follow_ships, only: [ :create, :destroy ]
