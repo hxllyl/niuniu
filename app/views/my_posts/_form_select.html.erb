@@ -172,7 +172,7 @@ $(document).ready(function(){
           $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
       });
       $("#methodVal2").bind("focus keyup", function(){
-          $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(2));
+          $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(1));
           $("#methodVal3").val(0);
           if ($(this).val() > gPrice){
               $(this).val(gPrice);
@@ -194,7 +194,7 @@ $(document).ready(function(){
       $("#methodVal4").bind("focus keyup", function(){
           if ($(this).val() < gPrice) {
               $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
-              $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(2));
+              $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(1));
               $("#methodVal3").val(0);
           }
           else {
@@ -215,11 +215,6 @@ $(document).ready(function(){
       $(this).bind("keyup",function(){
           clearNoNum(this);
           //thisVal.toFixed(2);
-      });
-      $(this).bind("blur",function(){
-          if (thisVal == ""){
-              $(this).val(0);
-          }
       });
   });
 
