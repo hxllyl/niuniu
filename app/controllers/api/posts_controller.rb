@@ -3,7 +3,7 @@
 require_relative '../../../app/services/list_api_post'
 class Api::PostsController < Api::BaseController
 
-  skip_before_action :auth_user, only: [ :search ]
+  # skip_before_action :auth_user, only: [ :search ]
   # 市场资源列表，寻车列表
   #
   # Params:
@@ -65,7 +65,7 @@ class Api::PostsController < Api::BaseController
     uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).map(&:to_hash)
     completed   = @user.tenders.completed.order(updated_at: :desc).map(&:to_hash)
 
-    render json: {status: 200, notice: 'success', data: {uncompleted: completed, completed: completed}}
+    render json: {status: 200, notice: 'success', data: {uncompleted: uncompleted, completed: completed}}
 
     rescue => e
     render json: {status: false, error: e.message}

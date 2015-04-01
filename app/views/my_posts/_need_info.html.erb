@@ -48,40 +48,5 @@
   </div>
 </div>
 <% end %>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="car_address" class="col-md-4 control-label">上牌地点</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <input type="text" class="form-control input-sm" name="post[car_license_areas]">
-      </div>
-    </div>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="car_area" class="col-md-4 control-label">区域要求</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <select name="post[car_in_areas]" class="form-control input-sm" id="car_area">
-          <%- @brand.regions.each do |ele| %>
-          <option value="<%= ele %>"><%= ele %></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="car_date" class="col-md-4 control-label">提车时间</label>
-    <div class="col-md-9 inputBox">
-      <div class="dropdown w100p">
-        <select name="post[take_car_date]" class="form-control input-sm" id="car_date">
-          <%- Post::TAKE_DATES.each do |k, v|%>
-          <option value="<%= k %>"><%= v%></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render @post_type == 1 ? 'need_select' : 'resource_select' %>
 <%= render (@car_model == 'set_car_model'|| @base_car == 'set_base_car') ? 'tender_by_itself' : 'tender' %>
