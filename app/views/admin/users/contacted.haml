@@ -1,0 +1,31 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 已联系未注册名录
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          %table.table.table-striped
+            %tr
+              %th 序号
+              %th 业务员工号
+              %th 手机号
+              %th 首次联系时间
+              %th 备注
+              %th
+            - @users.each do |user|
+              %tr
+                %td= user.id
+                %td 业务员工号
+                %td= user.mobile
+                %td 首次联系时间
+                %td 备注
+                %td= link_to '修改', edit_admin_user_path(user)
+
+          - if @users.present?
+            .hr-line-dashed
+
+          .text-center
+            = paginate @users
