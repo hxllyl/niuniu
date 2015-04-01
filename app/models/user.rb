@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
-  
+
   # 用户升级认证log
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel'
 
@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
     token = self.tokens.build(value: Digest::SHA1.hexdigest(salt))
     token.save
   end
-  
+
   # token 用于api验证 目前使用第一个
   def token
     self.tokens.first
@@ -148,7 +148,7 @@ class User < ActiveRecord::Base
         'user/typeIcon_4s.png'
     end
   end
-  
+
   def is_show_icon?
     level != LEVELS.keys[0]
   end
@@ -163,7 +163,7 @@ class User < ActiveRecord::Base
   def can_upgrade_4s
     !LEVELS.keys[2..4].include?(level)
   end
-  
+
   def can_upgrade
     level != LEVELS.keys[3] and level != LEVELS.keys[4]
   end
@@ -174,20 +174,21 @@ class User < ActiveRecord::Base
 
   def to_hash
     {
-      id:       id,
-      name:     name,
-      company:  company,
-      mobile:   mobile,
-      _type:    _type,
-      level:    LEVELS[level],
-      area:     area_name,
-      avatar:   avatar,
-      contact:  contact,
-      dealt_infos: dealt_infos,
-      post_count: posts.needs.count, 
-      tender_count: tenders.count,
-      following_count: followings.count,
-      area_id: area_id
+      id:               id,
+      name:             name,
+      company:          company,
+      mobile:           mobile,
+      _type:            _type,
+      level:            LEVELS[level],
+      area:             area_name,
+      avatar:           avatar,
+      contact:          contact,
+      dealt_infos:      dealt_infos,
+      post_count:       posts.needs.count,
+      tender_count:     tenders.count,
+      following_count:  followings.count,
+      area_id:          area_id,
+      dealt_infos:      dealt_infos
     }
   end
 

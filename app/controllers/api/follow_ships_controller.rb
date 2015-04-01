@@ -15,7 +15,7 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def my_followers
-    render json: {status: true, data: {followers: @user.followers}}
+    render json: {status: true, data: {followers: @user.followers.map(&:to_hash)}}
 
     rescue => e
     render json: {status: false, error: e.message}
@@ -98,9 +98,9 @@ class Api::FollowShipsController < Api::BaseController
     user = User.find_by_id(params[:following_id])
     raise 'not found' unless user
     raise '已经关注该用户' if @user.followings.include?user
-    
+
     @user.followings << user
-    
+
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 400, notice: ex.message }

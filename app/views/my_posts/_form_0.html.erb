@@ -1,7 +1,7 @@
 <div class="panel panel-default contentBox">
 
   <div class="panel-heading lineTitle">
-    <h3 class="panel-title">发布资源</h3>
+    <h3 class="panel-title"><%= @post.new_record? ? '发布资源' : '编辑资源' %></h3>
   </div>
   <div class="panel-body">
     <%- if @post.new_record? %>
