@@ -18,8 +18,8 @@
 			</div>
 		</div>
 		<div class="userDetail">
-			<p>自我评价：<span></span></p>
-			<p>注册地：<span></span></p>
+			<p>自我评价：<span><%= @someone.contact['self_introduction'] %></span></p>
+			<p>注册地：<span><%= @someone.area_name %></span></p>
 			<p><strong><%= @someone.last_month_dealt %></strong></p>
 			<p><strong><%= @someone.sum_dealt %></strong></p>
 			<p>公司名称：<span><%= @someone.company %></span></p>
