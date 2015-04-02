@@ -141,19 +141,19 @@ class Api::UsersController < Api::BaseController
     
     %w(identity hand_id visiting room_outer room_inner license).each do |t|
       if params[t.to_sym].present?
+        
         photo = @user.photos.find_by(_type: t)
+        
         if photo
           photo.update(image: params[t.to_sym], _type: t)
         else
-          
           @user.photos << Photo.new(image: params[t.to_sym], _type: t)
         end
-        
       else
         next
       end
     end
-    
+
     instrument 'user.update_level',  user_id: @user.id, start_level: @user.level, end_level: params[:level].to_i do
       render json: { status: 200, notice: 'success', can_upgrade: 'false'}
     end

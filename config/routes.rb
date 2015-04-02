@@ -145,6 +145,7 @@ Rails.application.routes.draw do
     end
 
     resources :phone_lists, only: [:index] do
+      post :contact_list, on: :collection
       get :send_invite_message, on: :collection
     end
   end
