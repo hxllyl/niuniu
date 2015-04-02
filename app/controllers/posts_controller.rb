@@ -76,9 +76,12 @@ class PostsController < ApplicationController
     @post       = Post.includes(:comments, :tenders).find_by_id(params[:id])
     @someone    = @post.user || NullObject.new
     @title      = '寻车详情'
-    @is_tender  = true
+    @tender     = if !params[:tender_id] && current_user
+                    Tender.where(user_id: current_user.id, post_id: @post.id).first
+                  else
+                    Tender.find_by_id(params[:tender_id])
+                  end
     if params[:tender_id]
-      @is_tender = false
       if current_user
         if current_user.id == params[:tender_id].to_i
           @title    = '我的报价详情'

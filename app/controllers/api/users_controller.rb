@@ -35,6 +35,7 @@ class Api::UsersController < Api::BaseController
   # Params:
   #   token:    [String]  valid token
   #   id:       [Integer] 用户id（不传就是当前用户信息） 可选
+  #
   # Return:
   #   status: [Integer] 200
   #   notice: [String]  success
