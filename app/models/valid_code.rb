@@ -15,7 +15,8 @@ class ValidCode < ActiveRecord::Base
 
   # 验证码的类型 目前只有一个
   TYPES = {
-    0 => '注册'
+    0 => '注册',
+    1 => '修改密码'
   }
   
   CODE_SIZE = 6
@@ -53,7 +54,7 @@ class ValidCode < ActiveRecord::Base
   after_initialize :set_defaults
   def set_defaults
     self.status ||= STATUS.keys[0]
-    self.code ||= rand(36**CODE_SIZE).to_s(36)
+    self.code ||= genrate_code
   end
   
   private
@@ -65,6 +66,14 @@ class ValidCode < ActiveRecord::Base
     
     logger.info status.to_s + status.class.to_s 
     true if status == '100'
+  end
+  
+  def genrate_code
+    code = []
+    1.upto(6) do |i|
+      code << (0..9).to_a.sample
+    end
+    code.join('')
   end
   
 end

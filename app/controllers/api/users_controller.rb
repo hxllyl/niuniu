@@ -127,9 +127,9 @@ class Api::UsersController < Api::BaseController
   #   license:        [FileData] 营业执照
   #
   # Return:
-  #   status: [Integer]   200
-  #   notice: [String]    success
-  #
+  #   status:             [Integer]   200
+  #   notice:             [String]    success
+  #   can_update_level:   [Array]     上传成功以后还能继续升级到的等级 e: [2, 3, 4]
   # Error:
   #   status:     [Integer]   500
   #   notice:     [String]    failed
@@ -140,9 +140,9 @@ class Api::UsersController < Api::BaseController
 
     %w(identity hand_id visiting room_outer room_inner license).each do |t|
       if params[t.to_sym].present?
-        photo = @user.send("#{t}")
+        photo = current_user.photos.find_by(_type: t)
         if photo
-          photo.update(image: params[t.to_sym])
+          photo.update(image: params[t.to_sym], _type: t)
         else
           @user.photos << Photo.new(image: params[t.to_sym], _type: t)
         end
@@ -152,7 +152,7 @@ class Api::UsersController < Api::BaseController
     end
 
     instrument 'user.update_level',  user_id: @user.id, start_level: @user.level, end_level: params[:level] do
-      render json: { status: 200, notice: 'success' }
+      render json: { status: 200, notice: 'success', can_update_level: @user.level_update_status }
     end
 
   rescue => ex

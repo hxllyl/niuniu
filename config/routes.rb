@@ -142,6 +142,10 @@ Rails.application.routes.draw do
       patch :reset_password
       put   :update
     end
+    
+    resources :phone_lists, only: [:index] do
+      get :send_invite_message, on: :collection
+    end
   end
 
   # mount RailsAdmin::Engine => '/a', as: 'rails_admin'

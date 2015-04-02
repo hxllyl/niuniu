@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
       user_name:  user_name,
       content:    content,
       created_at: created_at.to_s(:db),
-      replies:    replies.order(updated_at: :desc).map(&:to_hash)
+      replies:    descendants.order(updated_at: :desc).map(&:to_hash)
     }
   end
   
