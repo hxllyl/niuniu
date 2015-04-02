@@ -9,6 +9,8 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:        [String]    valid token
   #   _type:        [Integer]   0 资源 1 寻车
+  #   page:         [Integer]   页码
+  #   per:          [Integer]   每页记录数
   #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   # Return:
@@ -21,7 +23,10 @@ class Api::PostsController < Api::BaseController
   def list
     conds = {_type: params[:_type]}
     conds.merge!(:updated_at.gt => DateTime.parse(params[:updated_at])) if params[:updated_at]
-    posts = Post.where(conds).order(updated_at: :desc).limit(10)
+
+    page = params[:page] ? params[:page] : 0
+    per  = params[:per]  ? params[:per]  : 10
+    posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -162,19 +167,19 @@ class Api::PostsController < Api::BaseController
     base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
 
     car_model = CarModel.create(
-                  standard_id: standard.id,
-                  brand_id: brand.id,
-                  name: params[:post][:car_model_id],
-                  status: 0
+                  standard_id:  standard.id,
+                  brand_id:     brand.id,
+                  name:         params[:post][:car_model_id],
+                  status:       0
                 ) unless car_model
 
     base_car  = BaseCar.create(
-                  standard_id: standard.id,
-                  brand_id: brand.id,
+                  standard_id:  standard.id,
+                  brand_id:     brand.id,
                   car_model_id: car_model.id,
-                  style: params[:post][:base_car_id],
-                  outer_color: [params[:post][:outer_color]],
-                  inner_color: [params[:post][:inner_color]],
+                  style:        params[:post][:base_car_id],
+                  outer_color:  [params[:post][:outer_color]],
+                  inner_color:  [params[:post][:inner_color]],
                   status: 0
                 ) unless base_car
 
@@ -183,26 +188,25 @@ class Api::PostsController < Api::BaseController
 
     # 为资源库保存自定义的颜色
     Log::BaseCar.create(
-      user_id: current_user.id,
-      base_car_id: base_car.id,
-      method_name: 'outer_color',
-      content: params[:post][:outer_color]
+      user_id:      current_user.id,
+      base_car_id:  base_car.id,
+      method_name:  'outer_color',
+      content:      params[:post][:outer_color]
     ) unless base_car.outer_color.include?(params[:post][:outer_color])
 
     Log::BaseCar.create(
-      user_id: current_user.id,
-      base_car_id: base_car.id,
-      method_name: 'inner_color',
-      content: params[:post][:inner_color]
+      user_id:      current_user.id,
+      base_car_id:  base_car.id,
+      method_name:  'inner_color',
+      content:      params[:post][:inner_color]
     ) unless base_car.inner_color.include?(params[:post][:inner_color])
 
     photos = {}
-    aa = params.delete(params[:post][:post_photos])
+    aa = params[:post].delete(:post_photos)
     aa && aa.each do |ele|
-      photos[ele['_type']] = params.delete(params[:post][ele['_type']])
+      photos[ele['_type']] = params.delete(ele['_type'])
     end
     post.attributes = params[:post]
-
     # 资源传图
     photos && photos.each do |k, v|
       post.post_photos.new(_type: k, image: v.tempfile)
@@ -215,8 +219,8 @@ class Api::PostsController < Api::BaseController
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
-    # rescue => e
-    # render json: {status: 400, notice: 'failure', data: {errors: e.errors}}
+  rescue => e
+    render json: {status: 400, notice: 'failure', data: {errors: e.errors}}
   end
 
   # 报价
@@ -247,7 +251,7 @@ class Api::PostsController < Api::BaseController
       render json: {status: 400, notice: '请重试'}
     end
 
-    rescue => e
+  rescue => e
     render json: {status: false, error: e.message}
   end
 
