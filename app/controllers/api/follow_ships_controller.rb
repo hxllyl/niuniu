@@ -34,7 +34,7 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def my_followings
-    render json: {status: true, data: {followings: @user.followings}}
+    render json: {status: true, data: {followings: @user.followings.map(&:to_hash)}}
 
     rescue => e
     render json: {status: false, error: e.message}
@@ -97,7 +97,7 @@ class Api::FollowShipsController < Api::BaseController
   def create
     user = User.find_by_id(params[:following_id])
     raise 'not found' unless user
-    raise '已经关注该用户' if @user.followings.include?user
+    raise '已经关注该用户' if @user.followings.include?(user)
 
     @user.followings << user
 
@@ -119,7 +119,7 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def unfollow
-    @user.followings.where('follow_ships.following_id' => params[:user_id]).delete_all
+    FollowShip.where(following_id: params[:user_id], follower_id: @user.id).delete_all
 
     render json: {status: 200, notice: 'success'}
   rescue => ex

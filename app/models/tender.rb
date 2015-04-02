@@ -8,7 +8,7 @@ class Tender < ActiveRecord::Base
   STATUS = {
     0  => '未成交',
     1  => '已成交',
-    -1 => '已删除'
+    -1 => '已撤销'
   }
 
   DISCOUNT_WAYS ={
@@ -70,7 +70,7 @@ class Tender < ActiveRecord::Base
   end
 
   def publish_time
-    updated_at < Date.today ? updated_at.strftime("%m/%d %H:%M") : updated_at.strftime("%H:%M")
+    updated_at < Date.today ? updated_at.strftime("%m/%d") : updated_at.strftime("%H:%M")
   end
 
   def base_price

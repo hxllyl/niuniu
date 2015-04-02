@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::BaseController
     if request.xhr?
       @mobile = params[:mobile]
       if @mobile.present?
-        @user = User.where(mobile: @mobile).first
+        @user = User.where(mobile: @mobile).first.to_hash
       end
     end
 

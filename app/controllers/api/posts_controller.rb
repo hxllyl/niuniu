@@ -21,7 +21,7 @@ class Api::PostsController < Api::BaseController
   def list
     conds = {_type: params[:_type]}
     conds.merge!(:updated_at.gt => DateTime.parse(params[:updated_at])) if params[:updated_at]
-    posts = Post.where(conds).order(updated_at: :desc)
+    posts = Post.where(conds).order(updated_at: :desc).limit(10)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -215,8 +215,8 @@ class Api::PostsController < Api::BaseController
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
-    rescue => e
-    render json: {status: 400, notice: 'failure', data: {errors: e.errors}}
+    # rescue => e
+    # render json: {status: 400, notice: 'failure', data: {errors: e.errors}}
   end
 
   # 报价
@@ -411,6 +411,35 @@ class Api::PostsController < Api::BaseController
     render json: {status: 200, notice: 'ok', data: results.map(&:to_hash) }
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
+  end
+
+  # 我针对某条寻车是否报过价
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   post_id:  [Integer]   寻车ID
+  #
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    is_tenderd(true|false) and tender_status(nil|未成交|已成交|已撤销)
+  #
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def tender_status
+    post = Post.find_by_id(params[:post_id])
+    raise '寻车信息出错' if post._type != 1
+
+    tender = post.tenders.find_by_user_id(@user.id)
+
+    is_tenderd, tender_status = tender ? [true, Tender::STATUS[tender.status]] : [false, nil]
+
+    render json: {status: 200, notice: 'ok', data: {is_tenderd: is_tenderd, tender_status: tender_status}}
+
+  rescue => e
+    render json: {status: 500, notice: 'failed', error_msg: e.message}
   end
 
 end

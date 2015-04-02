@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       get :edit_my_level
       put :update_my_level
       get :about_us
-      
+
     end
     patch :add_following, on: :collection
 
@@ -105,6 +105,7 @@ Rails.application.routes.draw do
       delete :destroy
       put :del_my_tender
       get :search
+      get :tender_status
     end
 
     resources :valid_codes, only: [:index] do

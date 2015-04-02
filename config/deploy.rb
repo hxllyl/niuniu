@@ -54,19 +54,19 @@ namespace :deploy do
   end
 
   # after "deploy:update_code", "solr:symlink"
-
+  #
   # namespace :solr do
   #   desc "start solr"
   #   task :start, :roles => :app, :except => { :no_release => true } do
-  #     run "cd #{application_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
+  #     run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
   #   end
   #   desc "stop solr"
   #   task :stop, :roles => :app, :except => { :no_release => true } do
-  #     run "cd #{application_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
+  #     run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
   #   end
   #   desc "reindex the whole database"
   #   task :reindex, :roles => :app do
-  #     run "cd #{application_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+  #     run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
   #   end
   #   desc "Symlink in-progress deployment to a shared Solr index"
   #   task :symlink, :except => { :no_release => true } do

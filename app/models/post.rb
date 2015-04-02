@@ -190,7 +190,8 @@ class Post < ActiveRecord::Base
       resource_type:      RESOURCE_TYPE[resource_type],
       tenders:            tenders.map(&:to_hash),
       base_price:         base_car.base_price.to_f,
-      user_name_area:     user.name_area
+      user_name_area:     user.name_area,
+      price_status:       base_price
     }
   end
 
