@@ -36,6 +36,8 @@
               = link_to '已联系未注册名录', contacted_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'registered')) }
               = link_to '已注册用户名录', registered_admin_users_path
+            %li{ class: (:active if current_page?(controller: 'admin/posts', action: 'index')) }
+              = link_to '寻车列表', admin_posts_path
       
     #page-wrapper.gray-bg
       .row.border-bottom
