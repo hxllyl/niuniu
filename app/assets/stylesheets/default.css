@@ -313,6 +313,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
 #myReport .form-group { padding: 10px 0; margin: 0; color: #666; }
 #myReport .form-group .col-md-6 { margin: 0; }
+.alertTips .modal-dialog { margin: 0 auto; }
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 url(user/bannerBg.jpg) no-repeat right bottom; }
 .userOverview .userInfo { padding: 20px; }
