@@ -9,6 +9,8 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:        [String]    valid token
   #   _type:        [Integer]   0 资源 1 寻车
+  #   page:         [Integer]   页码
+  #   per:          [Integer]   每页记录数
   #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   # Return:
@@ -21,7 +23,10 @@ class Api::PostsController < Api::BaseController
   def list
     conds = {_type: params[:_type]}
     conds.merge!(:updated_at.gt => DateTime.parse(params[:updated_at])) if params[:updated_at]
-    posts = Post.where(conds).order(updated_at: :desc).limit(10)
+
+    page = params[:page] ? params[:page] : 0
+    per  = params[:per]  ? params[:per]  : 10
+    posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -198,11 +203,14 @@ class Api::PostsController < Api::BaseController
 
     photos = {}
     aa = params.delete(params[:post][:post_photos])
+    logger.info "*" * 100
+    logger.info aa
     aa && aa.each do |ele|
       photos[ele['_type']] = params.delete(params[:post][ele['_type']])
     end
     post.attributes = params[:post]
-
+    logger.infos photos
+    logger.info "*" * 100
     # 资源传图
     photos && photos.each do |k, v|
       post.post_photos.new(_type: k, image: v.tempfile)
