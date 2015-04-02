@@ -40,6 +40,7 @@ namespace :database do
     companies = %w(流浪客ty晶晶 上海嘉玮汽车 中国大自然汽车有限责任公司 上海防冻汽车交易公司 上海嘉玮汽车 上海嘉玮汽车 旭日汽车 上海郎客 杭州鼎臻汽车销售有限公司 天津港宏顺通汽车销售有限公司 牛牛汽车0002 牛牛汽车 牛牛汽车 牛牛汽车 天津市晟信源汽车销售有限公司 天津路驰汽车贸易有限公司 天津路通世纪国际贸易有限公司 杭州鼎欧汽车销售有限公司 北京博辰骏达汽车销售有现公司 北京中汽顺合汽车)
     names = %w(进口商 改名晶晶 吴嘉明 555 向顺 吴嘉明 周芳芳 洪旭 郭里 池姑娘 吴可嘉 韩健 石雨璐 张继兰 王西 杨光远 马清亮 于景欣 杭州鼎欧名车.沈忠 孙树毓 郭智东)
     mobiles.each do |mobile|
+      comp = companies.sample
       ha = {
         name:     names.sample,
         mobile:   mobile,
@@ -47,9 +48,9 @@ namespace :database do
         level:    User::LEVELS.keys[0],
         status:   User::STATUS.keys[1],
         password: '123456',
-        company: companies.sample,
+        company: comp,
         area_id: Area.all.sample.id,
-        contact: {company_address: '牛牛汽车公司上海牛牛路', position_header: '客服经理', wx: '5656565', qq: '12345678'}
+        contact: {company_address: comp, position_header: '客服经理', wx: '5656565', qq: '12345678'}
       }
       User.create(ha) unless User.find_by_mobile(mobile)
     end

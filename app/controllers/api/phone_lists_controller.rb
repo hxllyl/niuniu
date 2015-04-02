@@ -2,9 +2,9 @@
 # 通讯录
 
 class Api::PhoneListsController < Api::BaseController
-  
+
   respond_to :json
-  
+
   # 通讯录用户匹配系统用户
   #
   # Params:
@@ -18,13 +18,13 @@ class Api::PhoneListsController < Api::BaseController
   #   status: 500
   #   notice: failed
   #   error_msg: 错误消息
-  
+
   def index
     raise '请上传通讯录用户' if params[:contacts].blank? or params[:contacts].empty?
-    
+
     datas = []
-    
-    params[:contacts].each_with_object({}) { |contact, hash| 
+
+    params[:contacts].each_with_object({}) { |contact, hash|
       hash[contact['name']] =  contact['mobiles'].each_with_object({}) do |mobile, ha|
                                  u = User.find_by(mobile: mobile)
                                  if u
@@ -33,18 +33,18 @@ class Api::PhoneListsController < Api::BaseController
                                    ha.merge!({mobile => {}})
                                  end
                               end
-      datas << hash                        
-    } 
+      datas << hash
+    }
     render json: { status: 200, notice: 'success', datas: datas}
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message} 
+    render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
-  
+
   # 发送邀请短信
   #
   # Params:
   #   token:      [String]  用户token
-  #   mobile:     [String]  手机号码 
+  #   mobile:     [String]  手机号码
   # Returns:
   #   status: 200
   #   notice: success
@@ -52,17 +52,17 @@ class Api::PhoneListsController < Api::BaseController
   #   status: 500
   #   notice: failed
   #   error_msg: 错误信息
-  
+
   def send_invite_message
-    raise '手机号码不正确' if params[:mobile].blank? and (params[:mobile] =~ /(\A1[3|4|5|8][0-9]{9}\z)/) == 0 
-    
+    raise '手机号码不正确' if params[:mobile].blank? and (params[:mobile] =~ /(\A1[3|4|5|8][0-9]{9}\z)/) == 0
+
     mobile = params[:mobile]
-    
+
     SendInviteMessageJob.perform_later(@user, mobile)
-    
+
     render json: { status: 200, notice: 'success'}
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message}
+    render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
-  
+
 end
