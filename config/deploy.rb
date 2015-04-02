@@ -6,7 +6,7 @@ set :keep_releases, 3
 set :rvm_ruby_version, "2.1"
 
 set :linked_files, %w{config/config.yml config/database.yml config/unicorn.rb config/boot.rb}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index solr/data solr/pids}
 
 
 namespace :deploy do
@@ -48,34 +48,41 @@ namespace :deploy do
 #   end
 
 
-  after "deploy:update_code", "solr:symlink"
-
-  namespace :solr do
-    desc "start solr"
-    task :start, :roles => :app, :except => { :no_release => true } do
-      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
-    end
-    desc "stop solr"
-    task :stop, :roles => :app, :except => { :no_release => true } do
-      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
-    end
-    desc "reindex the whole database"
-    task :reindex, :roles => :app do
-      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
-    end
-    desc "Symlink in-progress deployment to a shared Solr index"
-    task :symlink, :except => { :no_release => true } do
-      #创建solr所需要的目录
-      run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/data"
-      run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/pids"
-
-      run "ln -s #{shared_path}/solr/data/ #{release_path}/solr/data"
-      run "ln -s #{shared_path}/solr/pids/ #{release_path}/solr/pids"
-    end
-  end
-
   after :finishing, 'deploy:cleanup'
   #after :finishing, :copy_sync_scripts
   # after :finishing, 'deploy:spec_ruby_version'
 
+end
+
+namespace :solr do
+  desc "start solr"
+  task :start do
+    on roles(:app), :except => { :no_release => true } do
+      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
+    end
+  end
+
+  desc "stop solr"
+  task :stop do
+    on roles(:app), :except => { :no_release => true } do
+      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
+    end
+  end
+
+  desc "reindex the whole database"
+  task :reindex do
+    on roles(:app) do
+      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+    end
+  end
+
+  # desc "Symlink in-progress deployment to a shared Solr index"
+  # task :symlink, :except => { :no_release => true } do
+  #   #创建solr所需要的目录
+  #   run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/data"
+  #   run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/pids"
+  #
+  #   run "ln -s #{shared_path}/solr/data/ #{release_path}/solr/data"
+  #   run "ln -s #{shared_path}/solr/pids/ #{release_path}/solr/pids"
+  # end
 end
