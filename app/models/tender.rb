@@ -74,7 +74,9 @@ class Tender < ActiveRecord::Base
       take_car_data:      Post::TAKE_DATES[post.take_car_date],
       mobile:             post.user_mobile,
       title:              post.title,
-      detail_title:       post._type == 0 ? post.title : post.need_detail_title
+      detail_title:       post._type == 0 ? post.title : post.need_detail_title,
+      post_remark:        post.remark,
+      remark:             remark
     }
   end
 
