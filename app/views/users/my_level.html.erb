@@ -72,7 +72,7 @@
               <% if current_user.level == User::LEVELS.keys[4] %>
                 <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
-                <% if current_user.update_level_status.include?User::LEVELS.keys[4]%>
+                <% if current_user.level_update_status.include?User::LEVELS.keys[4]%>
                 <p>
                   <a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
                 </p>
