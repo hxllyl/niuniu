@@ -72,7 +72,9 @@ class Tender < ActiveRecord::Base
       area:               post.car_in_area,
       price_status:       base_price,
       take_car_data:      Post::TAKE_DATES[post.take_car_date],
-      mobile:             post.user_mobile
+      mobile:             post.user_mobile,
+      title:              post.title,
+      detail_title:       post._type == 0 ? post.title : post.need_detail_title
     }
   end
 
