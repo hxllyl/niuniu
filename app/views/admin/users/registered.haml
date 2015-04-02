@@ -3,10 +3,11 @@
     %h2 已注册用户名录
 
 .wrapper.wrapper-content.animated.fadeInRight
-  .row
-    .col-lg-12
-      .ibox.float-e-margins
-        .ibox-content
+  
+  .ibox.float-e-margins
+    .ibox-content
+      .row
+        .col-lg-12
           %table.table.table-striped
             %tr
               %th 序号
@@ -35,7 +36,21 @@
                 %td 累计成交
                 %td 备注
                 %td= link_to '修改', edit_admin_user_path(user)
-
+        .col-lg-6
+          %table.table.table-responsive
+            %tr
+              %th 后台分配的用户数：
+              %td 10000
+            %tr
+              %th{ style: 'width: 150px;'} 今日新增用户数
+              %td 50
+            %tr
+              %th 本月新增用户数
+              %td 50
+            %tr
+              %th 累计用户数
+              %td 50
+        .col-lg-12
           - if @users.present?
             .hr-line-dashed
 
