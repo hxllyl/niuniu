@@ -189,7 +189,7 @@ class MyPostsController < ApplicationController
   end
 
   def show
-    # 暂无用
+    @post = Post.find_by_id(params[:id])
   end
 
   def destroy
