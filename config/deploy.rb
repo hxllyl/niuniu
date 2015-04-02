@@ -58,14 +58,14 @@ namespace :solr do
   desc "start solr"
   task :start do
     on roles(:app), :except => { :no_release => true } do
-      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
+      run "cd #{release_path} && RAILS_ENV=#{fetch(:rails_env)} bundle exec rake sunspot:solr:start"
     end
   end
 
   desc "stop solr"
   task :stop do
     on roles(:app), :except => { :no_release => true } do
-      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
+      run "cd #{release_path} && RAILS_ENV=#{fetch(:rails_env)} bundle exec rake sunspot:solr:stop"
     end
   end
 
