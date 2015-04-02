@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.integer  "standard_id"
     t.integer  "brand_id"
     t.integer  "car_model_id"
-    t.decimal  "base_price",              precision: 10, scale: 2
-    t.string   "outer_color",                                                                array: true
-    t.string   "inner_color",                                                                array: true
+    t.decimal  "base_price",              precision: 10, scale: 2, default: 0.0
+    t.string   "outer_color",                                                                 array: true
+    t.string   "inner_color",                                                                 array: true
     t.string   "style",        limit: 60
     t.string   "NO",           limit: 12,                          default: ""
     t.integer  "status",                                           default: 1
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
   end
 
   add_index "base_cars", ["NO"], name: "index_base_cars_on_NO", using: :btree
@@ -225,19 +225,19 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.integer  "base_car_id"
     t.integer  "user_id"
     t.integer  "_type"
-    t.string   "remark",            limit: 160
-    t.string   "outer_color",       limit: 60,                                        null: false
-    t.string   "inner_color",       limit: 60,                                        null: false
-    t.string   "car_license_areas", limit: 60,                                        null: false
-    t.string   "car_in_areas",                                           default: [], null: false, array: true
-    t.integer  "take_car_date",                                          default: 0
-    t.decimal  "expect_price",                  precision: 10, scale: 2
+    t.string   "remark",           limit: 160
+    t.string   "outer_color",      limit: 60,                                         null: false
+    t.string   "inner_color",      limit: 60,                                         null: false
+    t.string   "car_license_area", limit: 60,                                         null: false
+    t.string   "car_in_area",                                                         null: false
+    t.integer  "take_car_date",                                         default: 0
+    t.decimal  "expect_price",                 precision: 10, scale: 2, default: 0.0
     t.integer  "discount_way",                                                        null: false
-    t.decimal  "discount_content",              precision: 10, scale: 2
-    t.integer  "status",                                                 default: 1
+    t.decimal  "discount_content",             precision: 10, scale: 2, default: 0.0
+    t.integer  "status",                                                default: 1
     t.integer  "resource_type",                                                       null: false
-    t.integer  "sys_set_count",                                          default: 0
-    t.integer  "channel",                                                default: 0
+    t.integer  "sys_set_count",                                         default: 0
+    t.integer  "channel",                                               default: 0
     t.integer  "position"
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
@@ -263,12 +263,12 @@ ActiveRecord::Schema.define(version: 20150331063738) do
   create_table "tenders", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.decimal  "price",            precision: 10, scale: 2
-    t.integer  "discount_way",                                          null: false
-    t.decimal  "discount_content", precision: 10, scale: 2
+    t.decimal  "price",            precision: 10, scale: 2, default: 0.0
+    t.integer  "discount_way",                                            null: false
+    t.decimal  "discount_content", precision: 10, scale: 2, default: 0.0
     t.integer  "status",                                    default: 0
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   add_index "tenders", ["post_id"], name: "index_tenders_on_post_id", using: :btree

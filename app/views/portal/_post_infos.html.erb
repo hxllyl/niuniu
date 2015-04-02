@@ -13,7 +13,7 @@
 				<li>
 					<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image_path), alt: "") %></div>
 					<div class="info">
-						<h5 class="tt"><%= link_to post.title << ' ' << post.app_area, post_path(post, {_type: 1}) %></a></h5>
+						<h5 class="tt"><%= link_to post.need_title, post_path(post, {_type: 1}) %></h5>
 						<p class="detail clearfix"><span class="bfL"><%= post.color %></span><span class="bfR"><%= post.owner_detail %></span></p>
 					</div>
 				</li>
@@ -28,7 +28,7 @@
   			<li>
   				<div class="logo bfL"><%= image_tag(post.brand.car_photo.try(:image_path), alt: "") %></div>
   				<div class="info">
-  					<h5 class="tt"><%= link_to post_name(post), post_path(post, {_type: 1}) %></h5>
+  					<h5 class="tt"><%= link_to post.need_title, post_path(post, {_type: 1}) %></h5>
   					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
 
   				</div>
@@ -42,7 +42,7 @@
   			<li>
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image_path) , alt: "")  %></div>
   				<div class="info">
-  					<h5 class="tt"><%= link_to post_name(post), post_path(post, {_type: 1}) %></h5>
+  					<h5 class="tt"><%= link_to post.need_title, post_path(post, {_type: 1}) %></h5>
   					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
         </li>
        <% end -%>
@@ -54,7 +54,7 @@
   			<li>
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image_path) , alt: "")  %></div>
   				<div class="info">
-  					<h5 class="tt"><%= link_to post_name(post), post_path(post, {_type: 1}) %></h5>
+  					<h5 class="tt"><%= link_to post.need_title, post_path(post, {_type: 1}) %></h5>
   					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
 
   				</div>
@@ -68,7 +68,7 @@
   			<li>
   				<div class="logo bfL"><%= image_tag( post.brand.car_photo.try(:image_pat), alt: "")  %></div>
   				<div class="info">
-  					<h5 class="tt"><%= link_to post_name(post), post_path(post, {_type: 1}) %></h5>
+  					<h5 class="tt"><%= link_to post.need_title, post_path(post, {_type: 1}) %></h5>
   					<p class="clearfix"><span class="bfL"></span><%= post.color %><span class="bfR"><%= post.owner_detail %></span></p>
 
   				</div>
