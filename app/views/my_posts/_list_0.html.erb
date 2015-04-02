@@ -57,7 +57,7 @@
                         <a class="btn btn-default btn-xs" href="<%= edit_user_my_post_path(current_user, post) %>" role="button">编辑</a>
                         <a class="btn btn-default btn-xs upBtn" href="javascript:;" role="button">上移</a>
                         <a class="btn btn-default btn-xs downBtn" href="javascript:;" role="button">下移</a>
-                        <a class="btn btn-default btn-xs cancelBtn" href="#" role="button" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-way="resources">删除</a>
+                        <a class="btn btn-default btn-xs cancelBtn" href="#" role="button" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-way="resources" data-toggle="modal" data-target="#alertModal">删除</a>
                       </div>
                   </td>
                 </tr>
@@ -77,3 +77,9 @@
     </div>
   </div>
 </div>
+
+<%= render partial: 'users/del_modal' %>
+
+<%= content_for :footers do%>
+  <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true%>
+<%end%>
