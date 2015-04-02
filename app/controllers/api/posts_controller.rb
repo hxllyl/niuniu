@@ -226,6 +226,7 @@ class Api::PostsController < Api::BaseController
   #   tender[post_id]:           [Integer]   post ID
   #   tender[discount_way]:      [Integer]   报价方式
   #   tender[discount_content]:  [Float]     报价详情
+  #   tender[remark]:            [String]    备注
   #
   # Return:
   #   status: [Integer] 200
