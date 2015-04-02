@@ -3,10 +3,11 @@
     %h2 已联系未注册名录
 
 .wrapper.wrapper-content.animated.fadeInRight
-  .row
-    .col-lg-12
-      .ibox.float-e-margins
-        .ibox-content
+  
+  .ibox.float-e-margins
+    .ibox-content
+      .row
+        .col-lg-12
           %table.table.table-striped
             %tr
               %th 序号
@@ -23,7 +24,28 @@
                 %td 首次联系时间
                 %td 备注
                 %td= link_to '修改', edit_admin_user_path(user)
+        .col-lg-6
+          %table.table.table-responsive
+            %tr
+              %th 总数量
+              %td{ colspan: 3 } 10000
+            %tr
+              %th{ style: 'width: 100px;'} 今日新增数
+              %td 50
+              %th{ style: 'width: 100px;'} 今日注册数
+              %td 100
+            %tr
+              %th 本月新增数
+              %td 50
+              %th 本月注册数
+              %td 100
+            %tr
+              %th 累计新增数
+              %td 50
+              %th 累计注册数
+              %td 100 
 
+        .col-lg-12
           - if @users.present?
             .hr-line-dashed
 

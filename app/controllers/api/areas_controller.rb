@@ -2,9 +2,9 @@
 # 省市
 
 class Api::AreasController < Api::BaseController
-  
+
   skip_before_filter :auth_user, only: [:index]
-  
+
   # 获取省市两级目录
   # Params:
   # Return:
@@ -20,10 +20,10 @@ class Api::AreasController < Api::BaseController
     data = provinces.each_with_object({}) do |p, h|
              h[p.name] = p.children.map(&:as_api)
            end
-           
+
     render json: { status: 200, notice: 'success', data: data }
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message }           
+    render json: { status: 500, notice: 'failure', error_msg: ex.message }
   end
-  
+
 end

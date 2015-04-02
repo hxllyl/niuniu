@@ -193,7 +193,8 @@ class Post < ActiveRecord::Base
       price_status:       base_price,
       title:              title,
       detail_title:       _type == 0 ? title : need_detail_title,
-      license_area:       app_area
+      license_area:       app_area,
+      remark:             remark
     }
   end
 

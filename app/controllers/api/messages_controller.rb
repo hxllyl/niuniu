@@ -28,7 +28,7 @@ class Api::MessagesController < Api::BaseController
     @msg = @user.send("#{method}").where("_type = ? and updated_at >= ?", type, date).order('updated_at desc')
     render json: { status: 200, notice: 'success', data: @msg.map(&:as_api) }
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message }
+    render json: { status: 500, notice: 'failure', error_msg: ex.message }
   end
 
   # 反馈意见
@@ -51,10 +51,10 @@ class Api::MessagesController < Api::BaseController
     if @message.save
       render json: { status: 200, notice: 'success' }
     else
-      render json: { status: 500, notice: 'failed', error_msg: @message.errors.full_message.join('\n') }
+      render json: { status: 500, notice: 'failure', error_msg: @message.errors.full_message.join('\n') }
     end
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message }
+    render json: { status: 500, notice: 'failure', error_msg: ex.message }
   end
 
   private

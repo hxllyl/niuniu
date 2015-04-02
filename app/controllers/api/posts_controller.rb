@@ -244,7 +244,7 @@ class Api::PostsController < Api::BaseController
     if tender.save
       render json: {status: 200, notice: 'success', data: {tender: tender}}
     else
-      render json: {status: 400, notice: '请重试'}
+      render json: {status: 400, notice: 'failure'}
     end
 
   rescue => e
@@ -323,7 +323,7 @@ class Api::PostsController < Api::BaseController
 
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message}
+    render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
 
   # 资源上移，下移
@@ -348,7 +348,7 @@ class Api::PostsController < Api::BaseController
 
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message}
+    render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
 
   # 删除资源
@@ -371,7 +371,7 @@ class Api::PostsController < Api::BaseController
     @user.posts.resources.delete resource
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 500, notice: 'failed', error_msg: ex.message}
+    render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
 
 
@@ -410,9 +410,9 @@ class Api::PostsController < Api::BaseController
 
     data = results.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
 
-    render json: {status: 200, notice: 'ok', data: { posts: data  } }
+    render json: {status: 200, notice: 'success', data: { posts: data  } }
   rescue => ex
-    render json: {status: 500, notice: 'failed', error_msg: ex.message}
+    render json: {status: 500, notice: 'failure', error_msg: ex.message}
   end
 
   # 我针对某条寻车是否报过价
@@ -438,10 +438,10 @@ class Api::PostsController < Api::BaseController
 
     is_tenderd, tender_status = tender ? [true, Tender::STATUS[tender.status]] : [false, nil]
 
-    render json: {status: 200, notice: 'ok', data: {is_tenderd: is_tenderd, tender_status: tender_status}}
+    render json: {status: 200, notice: 'success', data: {is_tenderd: is_tenderd, tender_status: tender_status}}
 
   rescue => e
-    render json: {status: 500, notice: 'failed', error_msg: e.message}
+    render json: {status: 500, notice: 'failure', error_msg: e.message}
   end
 
 end

@@ -33,13 +33,13 @@ class Api::ValidCodesController < Api::BaseController
         valid_code.send_code
         render json: { status: 'success', code: valid_code.code }
       else
-        render json: { status: 'failed', error_msg: valid_code.errors.full_messages.join('\n') }
+        render json: { status: 'failure', error_msg: valid_code.errors.full_messages.join('\n') }
       end
     end
   rescue Errors::InvaildVaildCodeError => ex
-    render json: { status: 'failed', error_msg: ex.message }
+    render json: { status: 'failure', error_msg: ex.message }
   end
-  
+
   # 验证手机验证码是否有效
   # Params:
   #   mobile: [String] 手机号码
@@ -52,17 +52,17 @@ class Api::ValidCodesController < Api::BaseController
   #   notice:    [String]  消息('failed')
   def validate_code
     raise Errors::ArgumentsError.new, t('error_msgs.arguments_errors') \
-            unless is_legal?(params[:mobile], :mobile) and is_legal?(params[:valid_code], :code) 
+            unless is_legal?(params[:mobile], :mobile) and is_legal?(params[:valid_code], :code)
     valid_code = ValidCode.where(mobile: params[:mobile], code: params[:valid_code]).first
-    
+
     json = if valid_code and valid_code.is_valid?
              { status: 200, notice: 'success' }
            else
-             { status: 500, notice: 'failed' }
+             { status: 500, notice: 'failure' }
            end
     render json: json
   rescue Errors::ArgumentsError => error
-    render json: { status: 500, notice: 'failed', error_msg: error.message }         
+    render json: { status: 500, notice: 'failed', error_msg: error.message }
   end
 
   private
@@ -74,8 +74,8 @@ class Api::ValidCodesController < Api::BaseController
       str.present? and (str =~ /(\A\w{6}\z)/) == 0
     else
       false
-    end  
+    end
   end
-  
-  
+
+
 end
