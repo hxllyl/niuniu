@@ -9,16 +9,16 @@
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">寻车详情<span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
+          <h3 class="panel-title"><%= @title %><span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
         </div>
         <div class="panel-body sourceDetail">
           <div class="row">
             <div class="col-md-6 con">
-              <h5 class="name"><%= @post.title %></h5>
+              <h5 class="name"><%= @post.need_detail_title %></h5>
               <div class="info">
                 <p><%= @post.app_area %></p>
                 <p><%= @post.color %></p>
-                <p>车辆所在区域要求：<%= @post.car_in_areas.join(',')%></p>
+                <p>车辆所在区域要求：<%= @post.car_in_area %></p>
                 <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date]%></p>
               </div>
             </div>
@@ -68,13 +68,13 @@
                   <div class="detail">
                     <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
                     <div class="time"><a href="#new_comment" class="icon icon-message" data-name="<%= comment.user_name %>" data-parent-id="<%= comment.id %>"></a><%= human_time(comment.updated_at) %></div>
-                  
-                  <ul class="boardList" id="comment_<%= comment.id %>">  
+
+                  <ul class="boardList" id="comment_<%= comment.id %>">
                     <% unless comment.children_chain.empty? %>
                       <%= render partial: 'sub_comment', locals: {sub_comms: comment.children_chain, comm_counts: comment.children_chain.size } -%>
                     <% end -%>
-                  </ul>  
-                  
+                  </ul>
+
                    </div>
                   </li>
 
@@ -94,18 +94,19 @@
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%= render partial: 'partials/right_user' %>
-      <%- if current_user %>
-        <%= render partial: 'partials/right_joint_followings' %>
+      <%- if current_user && current_user == @someone %>
+        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+        <%= render partial: 'partials/right_search' %>
+      <% else %>
+        <%= render partial: 'partials/right_user' %>
+        <%= render partial: 'partials/right_joint_followings' if current_user %>
+        <%= render partial: 'partials/right_his_resources' %>
+        <%= render partial: 'partials/right_his_needs' %>
       <% end %>
-      <%= render partial: 'partials/right_his_resources' %>
-      <%= render partial: 'partials/right_his_needs' %>
     </div>
   </div>
 </div>
-<% if current_user %>
-  <%= render partial: 'complaints/complaint'%>
-<% end -%>
+<%= render partial: 'complaints/complaint' if current_user && current_user != @someone %>
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>

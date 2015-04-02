@@ -29,7 +29,8 @@ class Tender < ActiveRecord::Base
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
 
-  delegate :car_license_areas, :color, :publish_time, :title, to: :post, prefix: true, allow_nil: true
+  delegate :car_license_area, :color, :publish_time, :title, to: :post, prefix: true, allow_nil: true
+  delegate :name, to: :user, prefix: true, allow_nil: true
 
   def get_price
     self.price =  case discount_way
@@ -59,9 +60,9 @@ class Tender < ActiveRecord::Base
       color:          post.color,
       owner:          post.owner,
       time:           post.publish_time,
-      tender:         price,
+      tender:         price.to_f,
       status:         status,
-      base_price:     base_price,
+      base_price:     base_price.to_f,
       self_time:      publish_time,
       self_user_id:   user_id,
       self_user_name: user.try(:name_area),

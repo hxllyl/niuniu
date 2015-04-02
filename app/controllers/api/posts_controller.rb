@@ -27,8 +27,10 @@ class Api::PostsController < Api::BaseController
     page = params[:page] ? params[:page] : 0
     per  = params[:per]  ? params[:per]  : 10
     posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
+    #render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
 
-    render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
+    data = posts.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
+    render json: {status: 200, notice: 'success', data: { posts: data } }
   end
 
   # 我的资源列表，寻车列表
@@ -141,8 +143,8 @@ class Api::PostsController < Api::BaseController
   #   post[outer_color]:        [String]      外观颜色
   #   post[inner_color]:        [String]      内饰颜色
   #   post[base_car_id]:        [Integer]     基本库 ID 匹配
-  #   post[car_license_areas]:  [String]      上牌区域
-  #   post[car_in_areas]:       [Array]       车辆所在地
+  #   post[car_license_area]:   [String]      上牌区域
+  #   post[car_in_area]:        [Array]       车辆所在地
   #   post[take_car_date]:      [Integer]     提车日期 select
   #   post[discount_way]:       [Integer]     出价方式(电议只有资源有) select
   #   post[discount_content]:   [Float]       出价详情
@@ -412,7 +414,9 @@ class Api::PostsController < Api::BaseController
                 []
               end
 
-    render json: {status: 200, notice: 'ok', data: results.map(&:to_hash) }
+    data = results.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
+
+    render json: {status: 200, notice: 'ok', data: { posts: data  } }
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end

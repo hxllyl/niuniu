@@ -106,7 +106,6 @@ class MyPostsController < ApplicationController
     ) unless base_car.inner_color.include?(params[:post][:inner_color])
 
     params.require(:post).permit!
-    params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
     params[:post][:car_model_id] = car_model.id
     params[:post][:base_car_id]  = base_car.id
 
@@ -167,8 +166,6 @@ class MyPostsController < ApplicationController
       content: params[:post][:inner_color]
     ) unless base_car.inner_color.include?(params[:post][:inner_color])
 
-    params[:post][:car_in_areas] = [params[:post][:car_in_areas]] if params[:post][:car_in_areas]
-
     photos = params[:post].delete(:post_photos)
     params.require(:post).permit!
     @post.attributes = params[:post]
@@ -189,7 +186,7 @@ class MyPostsController < ApplicationController
   end
 
   def show
-    # 暂无用
+    @post = Post.find_by_id(params[:id])
   end
 
   def destroy

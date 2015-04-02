@@ -26,9 +26,9 @@
                 <tbody>
                   <% @uncompleted_tenders.each do |tender|%>
                     <tr>
-                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1), class: 'name' %></td>
+                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: current_user.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
-                      <td><%= tender.post_car_license_areas -%></td>
+                      <td><%= tender.post_car_license_area -%></td>
                       <td><%= tender.post_color -%></td>
                       <td><%= tender.post.try(:user_name) -%>
                           <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) -%>
@@ -63,9 +63,9 @@
                 <tbody>
                   <% @completed_tenders.each do |tender|%>
                     <tr>
-                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1), class: 'name' %></td>
+                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: current_user.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
-                      <td><%= tender.post_car_license_areas -%></td>
+                      <td><%= tender.post_car_license_area -%></td>
                       <td><%= tender.post_color -%></td>
                       <td><%= tender.post.try(:user_name) %>
                           <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) %>

@@ -73,8 +73,20 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post     = Post.includes(:comments).find_by_id(params[:id])
+    @post     = Post.includes(:comments, :tenders).find_by_id(params[:id])
     @someone  = @post.user || NullObject.new
+    @title    = '寻车详情'
+
+    if params[:tender_id]
+      if current_user
+        if current_user.id == params[:tender_id].to_i
+          @title    = '我的报价详情'
+        else
+          @title    = '他的报价详情'
+          @someone  = User.find_by_id(params[:tender_id])
+        end
+      end
+    end
     @follows  = current_user.followings & @someone.followers if current_user
   end
 

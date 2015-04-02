@@ -10,7 +10,7 @@ class CreateBaseCars < ActiveRecord::Migration
       t.references :brand,      class_name: 'Brand' # 车辆品牌
       t.references :car_model,  class_name: 'CarModel' # 车型
 
-      t.column :base_price, :decimal, precision: 10, scale: 2 # 知道价钱，单位（元）
+      t.column :base_price, :decimal, precision: 10, scale: 2, default: 0.0 # 知道价钱，单位（元）
       t.column :outer_color, :string, array: true # 外观
       t.column :inner_color, :string, array: true # 内饰
       t.column :style, :string, limit: 60 # 车辆款式
@@ -19,7 +19,7 @@ class CreateBaseCars < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    
+
     add_index(:base_cars, :style)
     add_index(:base_cars, :base_price)
     add_index(:base_cars, [:outer_color, :inner_color])

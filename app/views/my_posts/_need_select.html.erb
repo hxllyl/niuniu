@@ -3,7 +3,7 @@
     <label for="car_address" class="col-md-4 control-label">上牌地点</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <input type="text" class="form-control input-sm" name="post[car_license_areas]">
+        <input type="text" class="form-control input-sm" name="post[car_license_area]">
       </div>
     </div>
   </div>
@@ -11,7 +11,7 @@
     <label for="car_area" class="col-md-4 control-label">区域要求</label>
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
-        <select name="post[car_in_areas]" class="form-control input-sm" id="car_area">
+        <select name="post[car_in_area]" class="form-control input-sm" id="car_area">
           <%- @brand.regions.each do |ele| %>
           <option value="<%= ele %>"><%= ele %></option>
           <% end %>
