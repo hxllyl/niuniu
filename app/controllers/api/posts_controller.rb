@@ -215,8 +215,8 @@ class Api::PostsController < Api::BaseController
     else
       render json: {status: 400, notice: 'failure', data: {errors: post.errors}}
     end
-    rescue => e
-    render json: {status: 400, notice: 'failure', data: {errors: e.errors}}
+    # rescue => e
+    # render json: {status: 400, notice: 'failure', data: {errors: e.errors}}
   end
 
   # 报价
@@ -422,7 +422,7 @@ class Api::PostsController < Api::BaseController
   # Return:
   #   status:   [Integer] 200
   #   notice:   [String]  success
-  #   data:     [JSON]    is_tenderd true | false
+  #   data:     [JSON]    is_tenderd(true|false) and tender_status(nil|未成交|已成交|已撤销)
   #
   # Error
   #   status: [Integer] 500
