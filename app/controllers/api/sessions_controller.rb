@@ -2,6 +2,7 @@
 # 用户登陆、注销
 class Api::SessionsController < Devise::SessionsController #Api::BaseController #
   skip_before_filter :verify_authenticity_token
+  skip_before_action :verify_signed_out_user
   respond_to :json
 
   # 用户登陆
@@ -39,17 +40,20 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
   #   status: [Integer] 400
   #   notice: [String]  请重试
   def destroy
-    warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
-    @user.token.update_attributes(value: nil)
-    render json:  {
-                    status:   true,
+
+    u = Token.find_by_value(params[:token]).user
+    sign_out(u)
+      render json:  {
+                    status:   200,
+                    notice: 'success',
                     data:     {}
                   }
   end
 
   def failure
     render json:  {
-                    status:   false,
+                    status:   400,
+                    notice:   'failed',
                     data:     {}
                   }
   end
