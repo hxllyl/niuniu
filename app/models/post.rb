@@ -92,9 +92,8 @@ class Post < ActiveRecord::Base
   delegate :name, to: :standard, prefix: true
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true, allow_nil: true
-  delegate :NO, :to_human_name, :base_price, to: :base_car, prefix: true
+  delegate :NO, :to_human_name, :base_price, :style, to: :base_car, prefix: true
   delegate :name, to: :car_model, prefix: true, allow_nil: true
-  #delegate :to_human_name, to: :base_car, prefix: true, allow_nil: true
 
   # class methods
   # 资源
@@ -127,7 +126,7 @@ class Post < ActiveRecord::Base
     self.resource_type = -1 if _type == 1
     # 寻车的报价方式可以为空，当用户不选时，我们给其一个默认值
     self.discount_way  = 5 unless discount_way
-    self.car_license_areas = '' if _type == 0
+    self.car_license_area = '' if _type == 0
   end
 
   # alias method names
@@ -174,8 +173,8 @@ class Post < ActiveRecord::Base
       style_id:           base_car.id,
       outer_color:        outer_color,
       inner_color:        inner_color,
-      car_license_areas:  car_license_areas,
-      car_in_areas:       car_in_areas,
+      car_license_areas:  car_license_area,
+      car_in_areas:       car_in_area,
       take_car_date:      TAKE_DATES[take_car_date],
       expect_price:       expect_price.to_f,
       discount_way:       DISCOUNT_WAYS[discount_way],
@@ -191,7 +190,10 @@ class Post < ActiveRecord::Base
       tenders:            tenders.map(&:to_hash),
       base_price:         base_car.base_price.to_f,
       user_name_area:     user.name_area,
-      price_status:       base_price
+      price_status:       base_price,
+      title:              title,
+      detail_title:       _type == 0 ? title : need_detail_title,
+      license_area:       app_area
     }
   end
 
@@ -215,16 +217,24 @@ class Post < ActiveRecord::Base
     updated_at < Date.today ? updated_at.strftime("%m/%d") : updated_at.strftime("%H:%M")
   end
 
+  def need_title
+    [title, app_area].join('　')
+  end
+
+  def need_detail_title
+    ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+  end
+
   def title
-    "#{_type == 0 ? '卖 ' : '寻 '}" << standard_name << ' ' << brand_name << ' ' << car_model_name << ' ' << base_car_NO
+    if _type == 1
+      ['寻', standard_name, brand_name, car_model_name, base_car_NO].join(' ')
+    else
+      [brand_name, car_model_name, base_car_NO].join(' ')
+    end
   end
 
-  def portal_resource_title
-    standard_name << brand_name << car_model_name << base_car_NO
-  end
-
-  def brand_model_name
-    brand_name << " " << car_model_name.delete(brand_name)
+  def app_area
+    _type == 1 ? '卖' << car_license_area : nil
   end
 
   def standard_resource_type
@@ -237,10 +247,6 @@ class Post < ActiveRecord::Base
 
   def base_price
     "#{guiding_price}万/#{human_discount}"
-  end
-
-  def re_name
-    "#{brand_name} #{car_model_name} 款式名称 #{base_car_NO}"
   end
 
   # 优惠方式
@@ -276,10 +282,6 @@ class Post < ActiveRecord::Base
 
   def url
     "#{APP_CONFIG['host']}/posts/#{id}?_type=#{_type}"
-  end
-
-  def app_area
-    "#{_type == 1 ? '卖' : '寻'}" << car_license_areas
   end
 
   def show_price

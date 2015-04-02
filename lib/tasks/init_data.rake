@@ -50,7 +50,7 @@ namespace :database do
         company: companies.sample,
         area_id: Area.all.sample.id
       }
-      user = User.create(ha) unless User.find_by_mobile(mobile)
+      User.create(ha) unless User.find_by_mobile(mobile)
     end
   end
 
@@ -59,7 +59,7 @@ namespace :database do
     user_ids = User.all.map(&:id)
     pics     = Array(0..4)
     pics_dir = Rails.root + 'public' + 'cars'
-    1000.times do
+    100.times do
       base_car = BaseCar.all.sample
       post     = Post.new(
                  _type:             [0, 1].sample,
@@ -69,8 +69,8 @@ namespace :database do
                  car_model_id:      base_car.car_model_id,
                  outer_color:       (base_car.outer_color.sample rescue '白色'),
                  inner_color:       (base_car.inner_color.sample rescue '黑色'),
-                 car_license_areas: Area.first.name,
-                 car_in_areas:      base_car.brand.regions.sample,
+                 car_license_area:  Area.first.name,
+                 car_in_area:       base_car.brand.regions.sample,
                  discount_way:      1,
                  discount_content:  0.9
                )
@@ -98,7 +98,7 @@ namespace :database do
 
     Post.needs.sample(100).each do |need|
       if need != 3
-        User.where("id <> #{need.user_id}").sample(rand(10)).each do |user|
+        User.where("id <> #{need.user_id}").sample(rand(5)).each do |user|
 
           discount_way            = discount_hash.keys.sample
           discount_content        = discount_hash[discount_way].sample

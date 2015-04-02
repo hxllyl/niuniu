@@ -65,7 +65,7 @@
                 <%- @posts.each do |post| %>
                   <tr>
                     <td><%= link_to post.title, post_path(post.id, _type: 1)%></td>
-                    <td><%= post.car_license_areas %></td>
+                    <td><%= post.car_license_area %></td>
                     <td><%= post.color %></td>
                     <td><%= post.owner %><span class="ml6"><%= image_tag(post.user.try(:level_icon), size: '40x16') if current_user.try(:is_show_icon?) %></span></td>
                     <td><%= post.publish_time %></td>
