@@ -34,7 +34,7 @@ class Api::FollowShipsController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def my_followings
-    render json: {status: true, data: {followings: @user.followings}}
+    render json: {status: true, data: {followings: @user.followings.map(&:to_hash)}}
 
     rescue => e
     render json: {status: false, error: e.message}
