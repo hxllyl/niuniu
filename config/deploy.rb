@@ -7,7 +7,7 @@ set :rvm_ruby_version, "2.1"
 set :current_path, current_path
 
 set :linked_files, %w{config/config.yml config/database.yml config/unicorn.rb config/boot.rb}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index solr/production/data solr/pids/production}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index }
 
 
 namespace :deploy do
