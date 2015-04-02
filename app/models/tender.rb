@@ -8,7 +8,7 @@ class Tender < ActiveRecord::Base
   STATUS = {
     0  => '未成交',
     1  => '已成交',
-    -1 => '已删除'
+    -1 => '已撤销'
   }
 
   DISCOUNT_WAYS ={

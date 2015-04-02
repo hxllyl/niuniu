@@ -413,4 +413,33 @@ class Api::PostsController < Api::BaseController
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
 
+  # 我针对某条寻车是否报过价
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   post_id:  [Integer]   寻车ID
+  #
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    is_tenderd true | false
+  #
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def tender_status
+    post = Post.find_by_id(params[:post_id])
+    raise '寻车信息出错' if post._type != 1
+
+    tender = post.tenders.find_by_user_id(@user.id)
+
+    is_tenderd, tender_status = tender ? [true, Tender::STATUS[tender.status]] : [false, nil]
+
+    render json: {status: 200, notice: 'ok', data: {is_tenderd: is_tenderd, tender_status: tender_status}}
+
+  rescue => e
+    render json: {status: 500, notice: 'failed', error_msg: e.message}
+  end
+
 end
