@@ -16,7 +16,7 @@ class PortalController < BaseController
     @hot_brands = Brand.includes(:car_photo).order(click_counter: :desc).limit(8)
 
     # 寻车列表
-    @needs      = Post.needs.includes(:user, :car_model, :standard, brand: [:car_photo]).order(updated_at: :desc).limit(8)
+    @needs      = Post.needs.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(updated_at: :desc).limit(8)
 
     # 四个品牌对就的寻车列表
     @posts_with_brands = @hot_brands[0..3].each_with_object({}) do |brand, ha|
@@ -26,10 +26,10 @@ class PortalController < BaseController
                          end
 
     # 最热车源
-    @hot_resources = Post.resources.order(sys_set_count: :desc).limit(8)
+    @hot_resources = Post.resources.includes(:base_car, :post_photos).order(sys_set_count: :desc).limit(8)
 
     # 最新车源
-    newest_resouces   = Post.resources.includes(:user, :brand, :car_model).order(updated_at: :desc).group_by(&:user_id)
+    newest_resouces   = Post.resources.includes(:user, :brand, :car_model, :base_car, :standard).order(updated_at: :desc).group_by(&:user_id)
     @newest_resouces  = []
 
     newest_resouces.each_with_index do |ele, i|

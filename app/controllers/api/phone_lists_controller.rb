@@ -1,6 +1,5 @@
 # encoding: utf-8
 # 通讯录
-
 class Api::PhoneListsController < Api::BaseController
 
   respond_to :json
@@ -9,17 +8,21 @@ class Api::PhoneListsController < Api::BaseController
   #
   # Params:
   #   token:        [String] 用户token
-  #   contacts:     [Array]  通讯录用户，具体格式：contacts: [ {name: name_1, mobiles: ['13112345678', '13212345678']}, {name: name_2, mobiles: ['15112345678', '15212345678']}    ]
-  # Returns:
+  #   contacts[]:     [Array]  通讯录用户，具体格式：contacts: [
+  #                                                         {name: name_1, mobiles: ['13112345678', '13212345678']},
+  #                                                         {name: name_2, mobiles: ['15112345678', '15212345678']}
+  #                                                        ]
+  # Return:
   #   status: 200
   #   notice: success
   #   datas:  返回数据 {"status" : 200, "notice" : "success", "datas": {'depp': {'13112345678':{user_id: 3, is_following: true}}}}
-  # Errors:
+  #
+  # Error:
   #   status: 500
   #   notice: failed
   #   error_msg: 错误消息
 
-  def index
+  def contact_list
     raise '请上传通讯录用户' if params[:contacts].blank? or params[:contacts].empty?
 
     datas = []
@@ -45,10 +48,12 @@ class Api::PhoneListsController < Api::BaseController
   # Params:
   #   token:      [String]  用户token
   #   mobile:     [String]  手机号码
-  # Returns:
+  #
+  # Return:
   #   status: 200
   #   notice: success
-  # Errors:
+  #
+  # Error:
   #   status: 500
   #   notice: failed
   #   error_msg: 错误信息

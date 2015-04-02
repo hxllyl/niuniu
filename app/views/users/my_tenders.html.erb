@@ -34,7 +34,7 @@
                           <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) -%>
                       </td>
                       <td><%= human_time(tender.updated_at) %></td>
-                      <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除
+                      <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-toggle="modal" data-target="#alertModal">删除
                           </a>
                       </td>
                     </tr>
@@ -72,7 +72,7 @@
                       </td>
 
                       <td><%= human_time(tender.updated_at) %></td>
-                      <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders'>删除</a></td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-toggle="modal" data-target="#alertModal">删除</a></td>
                     </tr>
                   <% end -%>
                 </tbody>
@@ -90,6 +90,8 @@
 
   </div>
 </div>
+
+<%= render partial: 'del_modal' %>
 
 <%= content_for :footers do  %>
   <%= javascript_include_tag 'edit_user' -%>

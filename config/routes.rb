@@ -141,9 +141,11 @@ Rails.application.routes.draw do
       patch :change_password
       patch :reset_password
       put   :update
+      get :show
     end
-    
+
     resources :phone_lists, only: [:index] do
+      post :contact_list, on: :collection
       get :send_invite_message, on: :collection
     end
   end
