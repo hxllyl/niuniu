@@ -19,11 +19,15 @@ namespace :util do
     file_path = "#{Rails.root}/doc/base_car_data.xlsx"
 
     import_data(file_path) { |roo|
+      puts 'start import base_cars'
+      
       (roo.first_row.succ..roo.last_row).each do |i|
         columns = (roo.first_column..roo.last_column).collect do |j|
           roo.cell(i,j)
         end
-
+        
+        
+      begin
        st = Standard.find_or_initialize_by(name: columns[0].chomp)
        br = Brand.find_or_initialize_by(name: columns[1].chomp)
        cm = CarModel.find_or_initialize_by(name: (columns[2] || ' ').to_s.chomp)
@@ -46,8 +50,13 @@ namespace :util do
        bc.outer_color = columns[6].split(' ') if columns[6]
        bc.inner_color = columns[7].split(' ') if columns[7]
        bc.save
+     rescue => ex
+       puts 'some wrong happend: ' + ex.message
+       next
      end
+   end
     }
+    puts "end import base_cars"
   end
 
   desc "import chinese province and city data"

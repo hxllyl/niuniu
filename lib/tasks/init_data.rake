@@ -48,7 +48,8 @@ namespace :database do
         status:   User::STATUS.keys[1],
         password: '123456',
         company: companies.sample,
-        area_id: Area.all.sample.id
+        area_id: Area.all.sample.id,
+        contact: {company_address: '牛牛汽车公司上海牛牛路', position_header: '客服经理', wx: '5656565', qq: '12345678'}
       }
       User.create(ha) unless User.find_by_mobile(mobile)
     end
