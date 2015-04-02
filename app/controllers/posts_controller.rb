@@ -99,6 +99,7 @@ class PostsController < ApplicationController
     # params[:user_id] 某用户
     params.delete(:action)
     params.delete(:controller)
+    params[:_type] = 0 # 这边只能是寻车列表
 
     @q_json   = params
     @_type    = params[:_type]
