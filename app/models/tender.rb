@@ -30,6 +30,7 @@ class Tender < ActiveRecord::Base
   scope :completed, -> { where(status: 1) }
 
   delegate :car_license_area, :color, :publish_time, :title, to: :post, prefix: true, allow_nil: true
+  delegate :name, to: :user, prefix: true, allow_nil: true
 
   def get_price
     self.price =  case discount_way
