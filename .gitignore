@@ -39,6 +39,8 @@ unicorn.sh
 .ruby-gemset
 .gitignore.swp
 /solr
+!/solr/solr.xml
+
 
 # emacs
 \#*

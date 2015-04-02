@@ -412,7 +412,7 @@ class Api::PostsController < Api::BaseController
                 []
               end
 
-    render json: {status: 200, notice: 'ok', data: results.map(&:to_hash) }
+    render json: {status: 200, notice: 'ok', data: { posts: results.map(&:to_hash) }}
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
