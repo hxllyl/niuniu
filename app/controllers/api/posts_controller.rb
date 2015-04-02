@@ -3,7 +3,8 @@
 require_relative '../../../app/services/list_api_post'
 class Api::PostsController < Api::BaseController
 
-  # skip_before_action :auth_user, only: [ :search ]
+       # skip_before_action :auth_user, only: [ :search ]
+
   # 市场资源列表，寻车列表
   #
   # Params:
@@ -35,6 +36,8 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:        [String]    valid token
   #   _type:        [Integer]   0 资源 1 寻车
+  #   page:         [Integer]   页码 # 从0开始
+  #   per:          [Integer]   每页记录数
   #
   #
   # Return:
@@ -45,7 +48,10 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def my_list
-    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+    page = params[:page] ? params[:page] : 0
+    per  = params[:per]  ? params[:per]  : 10
+
+    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc).page(page).per(per)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -54,6 +60,8 @@ class Api::PostsController < Api::BaseController
   #
   # Params:
   #   token:        [String]    valid token
+  #   page:         [Integer]   页码 # 从0开始
+  #   per:          [Integer]   每页记录数
   #
   #
   # Return:
@@ -64,8 +72,11 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def my_tenders
-    uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).map(&:to_hash)
-    completed   = @user.tenders.completed.order(updated_at: :desc).map(&:to_hash)
+    page = params[:page] ? params[:page] : 0
+    per  = params[:per]  ? params[:per]  : 10
+
+    uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).page(page).per(per).map(&:to_hash)
+    completed   = @user.tenders.completed.order(updated_at: :desc).page(page).per(per).map(&:to_hash)
 
     render json: {status: 200, notice: 'success', data: {uncompleted: uncompleted, completed: completed}}
 
