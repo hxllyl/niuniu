@@ -24,10 +24,10 @@ namespace :util do
           roo.cell(i,j)
         end
 
-       st = Standard.find_or_initialize_by(name: columns[0])
-       br = Brand.find_or_initialize_by(name: columns[1])
-       cm = CarModel.find_or_initialize_by(name: (columns[2] || ' '))
-       bc = BaseCar.find_or_initialize_by(style: columns[3],
+       st = Standard.find_or_initialize_by(name: columns[0].chomp)
+       br = Brand.find_or_initialize_by(name: columns[1].chomp)
+       cm = CarModel.find_or_initialize_by(name: (columns[2] || ' ').to_s.chomp)
+       bc = BaseCar.find_or_initialize_by(style: columns[3].chomp,
                                  NO: columns[4].to_i.to_s, base_price: columns[5].to_f
                                 )
 

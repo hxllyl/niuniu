@@ -16,8 +16,8 @@ class CreatePosts < ActiveRecord::Migration
       t.column :remark, :string, limit: 160 # 备注
       t.column :outer_color, :string, limit: 60, null: false # 外观
       t.column :inner_color, :string, limit: 60, null: false # 内饰
-      t.column :car_license_area, :string, limit: 60, null: false # 车辆上牌区域
-      t.column :car_in_area, :string, null: false # 车辆所在区域
+      t.column :car_license_area, :string, limit: 60 # 车辆上牌区域
+      t.column :car_in_area, :string # 车辆所在区域
       t.column :take_car_date, :integer, default: 0 # 提车日期
       t.column :expect_price, :decimal, precision: 10, scale: 2, default: 0.0 # 期望成交价格
       t.column :discount_way, :integer, null: false # 出价方式 1 优惠点数 2 优惠金额 3 加价金额 4 直接报价 5 电议

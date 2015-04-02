@@ -228,8 +228,8 @@ ActiveRecord::Schema.define(version: 20150331063738) do
     t.string   "remark",           limit: 160
     t.string   "outer_color",      limit: 60,                                         null: false
     t.string   "inner_color",      limit: 60,                                         null: false
-    t.string   "car_license_area", limit: 60,                                         null: false
-    t.string   "car_in_area",                                                         null: false
+    t.string   "car_license_area", limit: 60
+    t.string   "car_in_area"
     t.integer  "take_car_date",                                         default: 0
     t.decimal  "expect_price",                 precision: 10, scale: 2, default: 0.0
     t.integer  "discount_way",                                                        null: false
