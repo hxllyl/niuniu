@@ -4,15 +4,18 @@ class Users::PasswordsController < Devise::PasswordsController
   before_filter :assert_reset_token_passed, except: [:edit, :update]
   
   before_filter :configure_sign_in_params, only: [:update, :create]
+
+  skip_before_action :assert_reset_token_passed, only: [ :new, :create ]
+
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource/password
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   def edit
