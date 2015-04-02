@@ -216,7 +216,9 @@ class User < ActiveRecord::Base
   end
   
   def level_update_status
+    
     log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).first
+    
     can_do = []
     can_do = [1, 2, 3, 4] if log.blank? 
     
