@@ -160,12 +160,21 @@ class User < ActiveRecord::Base
     Post.completed.where(conditions).count + Tender.completed.where(conditions).count
   end
 
-  def can_upgrade_4s
-    !LEVELS.keys[2..4].include?(level)
-  end
-
   def can_upgrade
-    level != LEVELS.keys[3] and level != LEVELS.keys[4]
+    #level != LEVELS.keys[3] and level != LEVELS.keys[4]
+    level_update_status
+  end
+  
+  def can_upgrade_levels
+    if level == LEVELS.keys[0]
+      [1]
+    elsif level == LEVELS.keys[1]
+      [2,3,4]
+    elsif level == LEVELS.keys[2]
+      [3]
+    else
+      []
+    end 
   end
 
   def following?(user)
@@ -216,21 +225,9 @@ class User < ActiveRecord::Base
   end
   
   def level_update_status
-    
     log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).order('updated_at desc').first
     
-    can_do = []
-    can_do = [1, 2, 3, 4] if log.blank? 
-    
-    if log.end_level == LEVELS.keys[1]
-      can_do = [2,3,4]
-    elsif log.end_level == LEVELS.keys[2]
-      can_do = [3]
-    else
-      can_do = []
-    end
-    
-    can_do
+    log.blank?
   end
 
 end

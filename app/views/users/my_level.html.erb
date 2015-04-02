@@ -40,11 +40,11 @@
             </div>
 
             <div class="col-md-6 status">
-            <% User::LEVELS.keys[0..3].each do |l| %>
-              <% if current_user.level >= l%>
+            <% User::LEVELS.keys[0..3].each do |l| %> 
+              <% if current_user.level >= l %>
                 <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
-                  <% if current_user.level_update_status.include?(l) and  current_user.level > User::LEVELS.keys[0]%>
+                  <% if current_user.can_upgrade and  current_user.can_upgrade_levels.include?(l)%>
                     <p><a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[l]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
                   <%else%>
                     <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[l]) %>" role="button" disabled="disabled"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
@@ -72,7 +72,7 @@
               <% if current_user.level == User::LEVELS.keys[4] %>
                 <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
-                <% if current_user.level_update_status.include?User::LEVELS.keys[4]%>
+                <% if current_user.can_upgrade_levels.include?User::LEVELS.keys[4]%>
                 <p>
                   <a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
                 </p>

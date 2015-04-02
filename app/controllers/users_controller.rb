@@ -1,7 +1,9 @@
 # encoding: utf-8
 
 class UsersController < BaseController
-
+  
+  
+  before_action :can_upgrade?, only: [:update_my_level]
   def update
     @user = User.find params[:id]
     if @user.update_attributes user_params
@@ -137,6 +139,13 @@ class UsersController < BaseController
                                    :qq,
                                    :wx]}
                                 )
+  end
+  
+  def can_upgrade?
+    unless (current_user.can_upgrade and current_user.can_upgrade_levels.include?(params[:level].to_i))
+      flash[:notice] = '不能做该升级操作' and redirect_to(:back) 
+      return
+    end
   end
 
 end
