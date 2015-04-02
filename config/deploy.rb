@@ -4,9 +4,10 @@ set :deploy_timestamped, true
 set :release_name, Time.now.localtime.strftime("%Y%m%d%H%M%S")
 set :keep_releases, 3
 set :rvm_ruby_version, "2.1"
+set :current_path, current_path
 
 set :linked_files, %w{config/config.yml config/database.yml config/unicorn.rb config/boot.rb}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index solr/data solr/pids}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets public/system config/full_lists public/uploads public/images public/assets/index solr/production/data solr/pids/production}
 
 
 namespace :deploy do
@@ -57,22 +58,35 @@ end
 namespace :solr do
   desc "start solr"
   task :start do
-    on roles(:app), :except => { :no_release => true } do
-      run "cd #{release_path} && RAILS_ENV=#{fetch(:rails_env)} bundle exec rake sunspot:solr:start"
+    on roles(:app), :except => {:no_release => true} do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, 'exec', 'rake', 'sunspot:solr:start'
+        end
+      end
     end
   end
 
   desc "stop solr"
   task :stop do
-    on roles(:app), :except => { :no_release => true } do
-      run "cd #{release_path} && RAILS_ENV=#{fetch(:rails_env)} bundle exec rake sunspot:solr:stop"
+    on roles(:app), :except => {:no_release => true} do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, 'exec', 'rake', 'sunspot:solr:stop'
+        end
+      end
     end
+
   end
 
   desc "reindex the whole database"
   task :reindex do
-    on roles(:app) do
-      run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+    on roles(:app), :except => {:no_release => true} do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, 'exec', 'rake', 'sunspot:solr:reindex'
+        end
+      end
     end
   end
 
