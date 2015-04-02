@@ -14,7 +14,7 @@
         <div class="panel-body sourceDetail">
           <div class="row">
             <div class="col-md-6 con">
-              <h5 class="name"><%= @post.portal_resource_title %></h5>
+              <h5 class="name"><%= @post.title %></h5>
               <div class="info">
                 <p><%= @post.standard_type %></p>
                 <p><%= @post.color %></p>
@@ -24,7 +24,7 @@
             <div class="col-md-6 con">
               <div class="info">
                 <p><span class="price"><%= @post.expect_price.to_f %>万</span></p>
-                <p>指导价：<%= @post.guiding_price.to_s << '/' << @post.human_discount %></p>
+                <p>指导价：<%= @post.base_price %></p>
                 <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
               </div>
             </div>

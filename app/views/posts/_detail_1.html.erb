@@ -14,11 +14,11 @@
         <div class="panel-body sourceDetail">
           <div class="row">
             <div class="col-md-6 con">
-              <h5 class="name"><%= @post.title %></h5>
+              <h5 class="name"><%= @post.need_detail_title %></h5>
               <div class="info">
                 <p><%= @post.app_area %></p>
                 <p><%= @post.color %></p>
-                <p>车辆所在区域要求：<%= @post.car_in_areas.join(',')%></p>
+                <p>车辆所在区域要求：<%= @post.car_in_area %></p>
                 <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date]%></p>
               </div>
             </div>
@@ -68,13 +68,13 @@
                   <div class="detail">
                     <div class="info"><span class="name"><a href="#"><%= comment.user_name%>：</a></span><%= comment.content %></div>
                     <div class="time"><a href="#new_comment" class="icon icon-message" data-name="<%= comment.user_name %>" data-parent-id="<%= comment.id %>"></a><%= human_time(comment.updated_at) %></div>
-                  
-                  <ul class="boardList" id="comment_<%= comment.id %>">  
+
+                  <ul class="boardList" id="comment_<%= comment.id %>">
                     <% unless comment.children_chain.empty? %>
                       <%= render partial: 'sub_comment', locals: {sub_comms: comment.children_chain, comm_counts: comment.children_chain.size } -%>
                     <% end -%>
-                  </ul>  
-                  
+                  </ul>
+
                    </div>
                   </li>
 

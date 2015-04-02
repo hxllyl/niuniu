@@ -27,10 +27,10 @@
                     <tr>
                       <td><%= link_to post.title, post_path(post, _type: 1), class: 'name' %></td>
                       <td><span class="num"><%= post.tenders.count %></span></td>
-                      <td><%= post.car_license_areas %></td>
+                      <td><%= post.car_license_area %></td>
                       <td><%= post.color %></td>
                       <td><%= post.publish_time %></td>
-                      <td><a href="#" class="del cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts">删除</td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts" data-toggle="modal" data-target="#alertModal">删除</td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -58,10 +58,10 @@
                     <tr>
                       <td><%= link_to post.title, user_my_post_path(current_user, post), class: 'name' %></td>
                       <td><span class="num"><%= post.tenders.count %></span></td>
-                      <td><%= post.car_license_areas %></td>
+                      <td><%= post.car_license_area %></td>
                       <td><%= post.color %></td>
                       <td><%= post.publish_time %></td>
-                      <td><a href="#" class="del cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts">删除</td></td>
+                      <td><a href="#" class="del cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts" data-toggle="modal" data-target="#alertModal">删除</td></td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -78,16 +78,16 @@
 
   </div>
 </div>
-<div class="modal box bs-example-modal-sm" id="alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal box bs-example-modal-sm" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title lineTitle">警告！</h4>
       </div>
-      <div class="modal-body">是否要删除本条内容？</div>
+      <div class="modal-body">请确定是否要删除本条信息？</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default w100p orange" role="button" data-toggle="modal" data-target="#reg_step2" data-dismiss="modal" aria-label="Close" disabled="disabled" ><%= t('next_step') %></button>
+        <button type="button" class="btn btn-default w100p btn_spacing orange" role="button" aria-label="Close">确定</button>
       </div>
     </div>
   </div>
