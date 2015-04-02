@@ -54,19 +54,25 @@ class Tender < ActiveRecord::Base
 
   def to_hash
     {
-      id:             id,
-      title:          post.title,
-      area:           post.app_area,
-      color:          post.color,
-      owner:          post.owner,
-      time:           post.publish_time,
-      tender:         price.to_f,
-      status:         status,
-      base_price:     base_price.to_f,
-      self_time:      publish_time,
-      self_user_id:   user_id,
-      self_user_name: user.try(:name_area),
-      level:          User::LEVELS[user.level]
+      id:                 id,
+      title:              post.title,
+      area:               post.app_area,
+      color:              post.color,
+      owner:              post.owner,
+      time:               post.publish_time,
+      tender:             price.to_f,
+      status:             status,
+      base_price:         base_price.to_f,
+      self_time:          publish_time,
+      self_user_id:       user_id,
+      self_user_name:     user.try(:name_area),
+      level:              User::LEVELS[user.level],
+      user_avatar:        post.user.avatar,
+      user_introduction:  post.user.contact[:self_introduction],
+      area:               post.car_in_area,
+      price_status:       base_price,
+      take_car_data:      Post::TAKE_DATES[post.take_car_date],
+      mobile:             post.user_mobile
     }
   end
 

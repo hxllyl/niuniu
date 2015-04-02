@@ -9,8 +9,8 @@ class Api::UsersController < Api::BaseController
   # 取部分用户的基本详情
   #
   # Params:
-  #   token:    [String]  valid token
-  #   user_ids: [Array]   user ids
+  #   token:      [String]  valid token
+  #   user_ids[]: [Array]   user ids
   #
   # Return:
   #   status: [Integer] 200
