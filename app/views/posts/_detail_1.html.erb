@@ -94,14 +94,14 @@
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%- if current_user && current_user != @someone %>
+      <%- if current_user && current_user == @someone %>
+        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+        <%= render partial: 'partials/right_search' %>
+      <% else %>
         <%= render partial: 'partials/right_user' %>
         <%= render partial: 'partials/right_joint_followings' if current_user %>
         <%= render partial: 'partials/right_his_resources' %>
         <%= render partial: 'partials/right_his_needs' %>
-      <% else %>
-        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
-        <%= render partial: 'partials/right_search' %>
       <% end %>
     </div>
   </div>
