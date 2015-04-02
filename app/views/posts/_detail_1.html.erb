@@ -9,7 +9,7 @@
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">寻车详情<span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
+          <h3 class="panel-title"><%= @title %><span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
         </div>
         <div class="panel-body sourceDetail">
           <div class="row">
@@ -94,18 +94,19 @@
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%= render partial: 'partials/right_user' %>
-      <%- if current_user %>
-        <%= render partial: 'partials/right_joint_followings' %>
+      <%- if current_user && current_user != @someone %>
+        <%= render partial: 'partials/right_user' %>
+        <%= render partial: 'partials/right_joint_followings' if current_user %>
+        <%= render partial: 'partials/right_his_resources' %>
+        <%= render partial: 'partials/right_his_needs' %>
+      <% else %>
+        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+        <%= render partial: 'partials/right_search' %>
       <% end %>
-      <%= render partial: 'partials/right_his_resources' %>
-      <%= render partial: 'partials/right_his_needs' %>
     </div>
   </div>
 </div>
-<% if current_user %>
-  <%= render partial: 'complaints/complaint'%>
-<% end -%>
+<%= render partial: 'complaints/complaint' if current_user && current_user != @someone %>
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>

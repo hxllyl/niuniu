@@ -51,7 +51,7 @@
               <tbody>
                 <%- @post.tenders.each do |tender| %>
                   <tr>
-                    <td><%= link_to tender.user_name, user_list_posts_path(tender.user, _type: 1) %></td>
+                    <td><%= link_to tender.user_name, post_path(@post, _type: 1, tender_id: tender.user_id) %></td>
                     <td><span class="num"><%= tender.price.to_f %></span></td>
                     <td><%= tender.publish_time %></td>
                     <td><a href="javascript:;" class="del">删除</a></td>

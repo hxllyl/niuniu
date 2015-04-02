@@ -26,7 +26,7 @@
                 <tbody>
                   <% @uncompleted_tenders.each do |tender|%>
                     <tr>
-                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1), class: 'name' %></td>
+                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: current_user.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
                       <td><%= tender.post_car_license_area -%></td>
                       <td><%= tender.post_color -%></td>
@@ -63,7 +63,7 @@
                 <tbody>
                   <% @completed_tenders.each do |tender|%>
                     <tr>
-                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1), class: 'name' %></td>
+                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: current_user.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
                       <td><%= tender.post_car_license_area -%></td>
                       <td><%= tender.post_color -%></td>
