@@ -38,7 +38,7 @@ unicorn.sh
 .ruby-version
 .ruby-gemset
 .gitignore.swp
-/solr
+/solr/*
 !/solr/solr.xml
 
 
