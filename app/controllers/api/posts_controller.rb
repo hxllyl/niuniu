@@ -9,9 +9,8 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:        [String]    valid token
   #   _type:        [Integer]   0 资源 1 寻车
-  #   page:         [Integer]   页码
+  #   page:         [Integer]   页码 # 从0开始
   #   per:          [Integer]   每页记录数
-  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   # Return:
   #   status: [Integer] 200
@@ -22,12 +21,10 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  请重新再试
   def list
     conds = {_type: params[:_type]}
-    conds.merge!(:updated_at.gt => DateTime.parse(params[:updated_at])) if params[:updated_at]
 
     page = params[:page] ? params[:page] : 0
     per  = params[:per]  ? params[:per]  : 10
     posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
-    #render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
 
     data = posts.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
     render json: {status: 200, notice: 'success', data: { posts: data } }
@@ -38,7 +35,6 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:        [String]    valid token
   #   _type:        [Integer]   0 资源 1 寻车
-  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   #
   # Return:
@@ -58,7 +54,6 @@ class Api::PostsController < Api::BaseController
   #
   # Params:
   #   token:        [String]    valid token
-  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   #
   # Return:
@@ -84,7 +79,6 @@ class Api::PostsController < Api::BaseController
   #   token:        [String]    valid token
   #   user_id:      [Integer]   user ID
   #   _type:        [Integer]   0 资源 1 寻车
-  #   updated_at:   [DataTime]  更新时间，每次返回最新的更新时间
   #
   #
   # Return:
