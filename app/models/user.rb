@@ -217,18 +217,19 @@ class User < ActiveRecord::Base
   
   def level_update_status
     
-    log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).first
+    log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).order('updated_at desc').first
     
     can_do = []
     can_do = [1, 2, 3, 4] if log.blank? 
     
-    if log.level == LEVELS.keys[1]
+    if log.end_level == LEVELS.keys[1]
       can_do = [2,3,4]
-    elsif log.level == LEVELS.keys[2]
+    elsif log.end_level == LEVELS.keys[2]
       can_do = [3]
     else
       can_do = []
     end
+    
     can_do
   end
 

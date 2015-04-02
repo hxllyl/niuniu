@@ -374,8 +374,8 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .accountsMain .levelBox .levelProcess p { height: 34px; line-height: 34px; margin: 12px 0; }
 .accountsMain .levelBox .process { max-width: 220px; }
 .accountsMain .levelBox .process p { position: relative; float: left; min-width: 110px; margin: 6px 0; color: #808080; }
-.accountsMain .levelBox .process p .next_arr { position: absolute; bottom: -20px; left: 50%; width: 8px; height: 26px; margin-left: -4px; background: url(user/processArr.png) no-repeat left top; }
-.accountsMain .levelBox .process p .next_arr_r { position: absolute; bottom: 12px; right: -20px; width: 24px; height: 99px; background: url(user/processArr_r.png) no-repeat left top; }
+.accountsMain .levelBox .process p .next_arr { position: absolute; bottom: -20px; left: 50%; width: 8px; height: 26px; margin-left: -4px; background: asset-data-url('user/processArr.png') no-repeat left top; }
+.accountsMain .levelBox .process p .next_arr_r { position: absolute; bottom: 12px; right: -20px; width: 24px; height: 99px; background:  asset-data-url('user/processArr_r.png') no-repeat left top; }
 .accountsMain .levelBox .status p { text-align: right; }
 .accountsMain .levelBox .status p .icon_done { margin-right: 8px; }
 .accountsMain .levelBox .backLink { padding: 8px 0; }
