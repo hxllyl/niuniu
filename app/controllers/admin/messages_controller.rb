@@ -19,6 +19,16 @@ class Admin::MessagesController < Admin::BaseController
     end
   end
 
+  def destroy
+    @message = Message.find_by_id(params[:id])
+    if @message.present?
+      @message.destroy
+      redirect_to admin_messages_path, notice: '已删除'
+    else
+      redirect_to admin_messages_path, alert: '未找到此系统通知'
+    end
+  end
+
   private
   def message_params
     params.require(:message).permit(:receiver_group, :title, :content)

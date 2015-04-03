@@ -35,11 +35,10 @@
             %td= Message::STATUS[item.status]
             %td= item.created_at.to_s(:db)
             %td
-              = link_to '删除', '#'
+              = link_to '删除', admin_message_path(item), method: :delete, data: { confirm: '确认删除？' }
               &nbsp;&nbsp;
               -# TODO: 是否有重发？貌似没有
               -# = link_to '重发', '#'
-
 
       - if @messages.present?
         .hr-line-dashed

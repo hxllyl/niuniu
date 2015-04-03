@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
     resources :posts
 
-    resources :messages, only: [:index, :new, :create]
+    resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
   end
 
