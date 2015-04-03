@@ -117,4 +117,26 @@ class Tender < ActiveRecord::Base
     end
   end
 
+  #after_save :make_message
+  def make_message
+    if new_record?
+      Message.make_system_message(generate_message(:create), post.user)
+    elsif level == LEVELS.keys[1]
+      Message.make_system_message(generate_message(:dealed), user)
+    end
+  end
+  
+  private
+  def generate_message(type)
+    message = case type
+              when :create then
+                <<-EOF
+                您所#{post.need_detail_title} 的车，牛牛汽车生意朋友圈的#{user_name}给您报了价。
+                EOF
+              when :dealed then
+                <<-EOF
+                您报价的#{post.need_detail_title('tender')} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}给您报了价。
+                EOF
+              end
+  end
 end

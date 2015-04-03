@@ -39,4 +39,8 @@ class BaseCar < ActiveRecord::Base
     }
   end
 
+  def select_name
+    base_price.to_s << '万 ' << style
+  end
+
 end

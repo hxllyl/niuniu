@@ -35,7 +35,9 @@
             <div class="tt bfL">备注：</div>
             <div class="info"><%= @post.remark%></div>
           </div>
-          <%= render @tender || (current_user && @post.tenders.map(&:user_id).include?(current_user.id)) ? 'tender_info' : 'tender_form' %>
+          <%- if current_user && current_user.id != @post.user_id %>
+            <%= render @tender || (current_user && @post.tenders.map(&:user_id).include?(current_user.id)) ? 'tender_info' : 'tender_form' %>
+          <% end %>
         </div>
       </div>
     </div>

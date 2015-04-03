@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   # tables relation
   has_many :photos, as: :owner, dependent: :nullify, autosave: true # 与图片类关联起来 处理用户图片
-  has_many :posts, ->{where("posts.status != #{Post::STATUS.keys[4]}")}, class_name: 'Post' # 需求和寻车
+  has_many :posts, ->{where("posts.status != #{Post::STATUS.keys[4]}").order('position ASC')}, class_name: 'Post' # 需求和寻车
   has_many :tenders, ->{where("tenders.status != #{Tender::STATUS.keys[2]}")}, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
   has_many :tokens, class_name: 'Token', dependent: :nullify # 用于api验证
@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
   
   # 用户升级认证log
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel'
+  
+  has_many :active_devices, class_name: 'ActiveDevice' # jpush 用户设备
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
 
@@ -167,7 +169,7 @@ class User < ActiveRecord::Base
   
   def can_upgrade_levels
     if level == LEVELS.keys[0]
-      [1]
+      [1,4]
     elsif level == LEVELS.keys[1]
       [2,3,4]
     elsif level == LEVELS.keys[2]
@@ -231,7 +233,7 @@ class User < ActiveRecord::Base
   end
 
   def  unread_tenders
-    log_posts.not_read.tender_to_posts(posts.needs.pluck(:id))
+    Log::Post.not_read.tender_to_posts(posts.needs.pluck(:id))
   end
 
   def unread_hunts #

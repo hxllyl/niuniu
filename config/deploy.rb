@@ -50,7 +50,8 @@ namespace :deploy do
 
 
   after :finishing, 'deploy:cleanup'
-  #after :finishing, :copy_sync_scripts
+  # after "deploy:update_code", "deploy:migrate"
+  # after :finishing, :copy_sync_scripts
   # after :finishing, 'deploy:spec_ruby_version'
 
 end
@@ -87,6 +88,13 @@ namespace :solr do
           execute :bundle, 'exec', 'rake', 'sunspot:solr:reindex'
         end
       end
+    end
+  end
+
+  desc "stop all sunspot services"
+  task :stop_all do
+    on roles(:app), :except => {:no_release => true} do
+      execute "for i in $(pgrep java); do kill -9 $i; done"
     end
   end
 

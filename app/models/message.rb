@@ -1,6 +1,10 @@
 # encoding: utf-8
 
+require 'concerns/message_handler'
+
 class Message < ActiveRecord::Base
+  
+  include Concerns::MessageHandler
   
   STATUS = {
     0 => '未读',
@@ -28,5 +32,17 @@ class Message < ActiveRecord::Base
       status: status,
       _type: _type
     }
+  end
+  
+  def self.make_system_message(message, user)
+    Message.create(_type: TYPES.keys[0], recevier: user, content: message)
+  end
+  
+  before_create :push_message
+  
+  def push_message
+    if _type = TYPES.keys[0]
+      jpush_message(content, Message.push_list(recevier))
+    end
   end
 end

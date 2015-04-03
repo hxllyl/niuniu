@@ -15,7 +15,17 @@
           <div class="mySourceOpe clearfix">
             <div class="bfR">
               <div class="btn-group">
-                <%= select_tag 'order_ele', options_for_select([['默认排序', '0'], ['按时间排序', '1']], selected: @order_ele), class: 'form-control'%>
+                <%= select_tag 'order_ele', options_for_select([['默认排序', 'updated_at'], ['按价格排序', 'expect_price']], selected: @order_ele), class: 'form-control', id: 'key_select_order' %>
+
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">sdfsdf</a></li>
+                  <li><a href="#">sdfsdffff</a></li>
+                </ul>
               </div>
             </div>
           </div>
@@ -64,3 +74,14 @@
 <%= content_for :footers do%>
   <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true%>
 <%end%>
+
+<script>
+  // 一键找车
+  $('#key_select_order').on('change', function(e){
+    e.preventDefault();
+    var order = $('#key_select_order').val();
+    var url = '&order_ele=' + order;
+
+    location.href = location.href + url;
+  });
+</script>

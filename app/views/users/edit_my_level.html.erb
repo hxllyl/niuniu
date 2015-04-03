@@ -48,7 +48,7 @@ $(document).ready(function () {
       if(this.files && this.files[0]){
         var reader = new FileReader();
         reader.onload = function(e){
-          $('#'+targetId).html('<div class="img"><span class="alt">照片示例</span><img src="'+e.target.result+'" width="100%" ></div>')
+          $('#'+targetId).html('<div class="img"><span class="alt">照片示例</span><img src="'+ e.target.result +'" width="100%" ></div>')
         };
         reader.readAsDataURL(this.files[0]);
       }
