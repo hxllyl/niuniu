@@ -63,8 +63,9 @@ class PostsController < ApplicationController
       conds[:outer_color]   = params[:oc] && @q_json[:oc] = params[:oc]  if params[:oc]
       conds[:inner_color]   = params[:ic] && @q_json[:ic] = params[:ic]  if params[:ic]
       conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
-
-      @posts = @base_car.posts.resources.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
+      @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
+      @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
+      @posts = @base_car.posts.resources.where(conds).order(@order_by).page(params[:page]).per(10)
     end
   end
 
