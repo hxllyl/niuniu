@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
 
     resources :posts
+    root 'users#search'
   end
 
   root 'portal#index'
