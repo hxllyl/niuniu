@@ -2,7 +2,7 @@
 
 class UsersController < BaseController
   
-  before_action :can_upgrade?, only: [:update_my_level, :edit_my_level]
+  # before_action :can_upgrade?, only: [:update_my_level, :edit_my_level]
   
   def update
     @user = User.find params[:id]
@@ -15,6 +15,7 @@ class UsersController < BaseController
           avatar.update(image: params[:_image], _type: params[:_type])
         end
       end
+      
       flash[:notice] = t('success')
       redirect_to :back
     else
@@ -145,7 +146,7 @@ class UsersController < BaseController
   
   def can_upgrade?
     unless (current_user.can_upgrade and current_user.can_upgrade_levels.include?(params[:level].to_i))
-      flash[:notice] = '不能做该升级操作' and redirect_to(:back) 
+      flash[:notice] = '不能做该升级操作' and redirect_to(my_level_user_path(current_user)) 
       return
     end
   end

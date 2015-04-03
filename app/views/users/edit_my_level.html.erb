@@ -39,3 +39,23 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.button').on('change', function(){
+      var targetId = $(this).attr('target-id');
+      
+      if(this.files && this.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e){
+          $('#'+targetId).html('<div class="img"><span class="alt">照片示例</span><img src="'+e.target.result+'" width="100%" ></div>')
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+});
+</script>
+
+<%= content_for :footers do %>
+  <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true %>
+<% end %>
