@@ -6,18 +6,21 @@
       <p class="num" id='posts'><%= current_user.posts.needs.count %></p>
       <p><%= t('i_posts')%></p>
     </a>
+    <div class="dot"></div>
   </li>
   <li class="<%= 'current' if params[:action] == 'my_tenders'%>">
     <a href="<%= my_tenders_user_path(current_user)%>">
       <p class="num" id='tenders'><%= current_user.tenders.count %></p>
       <p><%= t('i_tenders')%></p>
     </a>
+    <div class="dot"></div>
   </li>
   <li class="<%= 'current' if params[:action] == 'my_followers'%>">
     <a href="<%= my_followers_user_path(current_user)%>">
       <p class="num" id='followings'><%= current_user.followings.count %></p>
       <p><%= t('i_followings') %></p>
     </a>
+    <div class="dot"></div>
   </li>
 </ul>
 <% end %>

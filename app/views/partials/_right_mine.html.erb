@@ -8,23 +8,26 @@
       </div>
     </div>
     <ul class="row userData">
-      <li class="col-md-4">
+      <li class="col-md-4 noread">
         <a href="<%= user_path(current_user) %>">
           <p class="data"><%= current_user.posts_with_type(Post::TYPES.keys[1]).count %></p>
           <p class="tt"><%= I18n.t('i_post')%></p>
         </a>
+        <div class="dot"></div>
       </li>
       <li class="col-md-4">
         <a href="<%= my_tenders_user_path(current_user) %>">
           <p class="data"><%= current_user.tenders.count %></p>
           <p class="tt"><%= I18n.t('i_tender') %></p>
         </a>
+        <div class="dot"></div>
       </li>
       <li class="col-md-4 last">
         <a href="<%= my_followers_user_path(current_user) %>">
           <p class="data"><%= current_user.followings.count %></p>
           <p class="tt"><%= I18n.t('i_following') %></p>
         </a>
+        <div class="dot"></div>
       </li>
     </ul>
     <%- if hidden_button %>
