@@ -25,6 +25,12 @@ application up and running.
     rake sunspot:solr:start #后台运行
     rake sunspot:solr:run   #在前台运行
 
+  4.重建索引
+    rake sunspot:sorl:stop_all # 本地直接删除 solr 目录即可
+    rake sunspot:sorl:start
+    rake sunspot:solr:reindex
+
+
 * init database and gen base infos
 
   rake database:init
