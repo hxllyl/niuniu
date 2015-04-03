@@ -11,19 +11,19 @@
       <%- if @brand %>
         <li>
           <span class="name"><%= @brand.name %></span>
-          <a href="<%= resources_list_posts_path(@q_json.reject{|k, v| %w(br cm bc ic oc rt).include?(k)}) %>" class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></a>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st]) %>" class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></a>
         </li>
       <% end %>
       <%- if @car_model %>
         <li>
           <span class="name"><%= @car_model.name %></span>
-          <a href="<%= resources_list_posts_path(@q_json.reject{|k, v| %w(cm bc ic oc rt).include?(k)}) %>" class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></a>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br]) %>" class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></a>
         </li>
       <% end %>
       <%- if @base_car %>
         <li>
           <span class="name"><%= @base_car.style %></span>
-          <a href="<%= resources_list_posts_path(@q_json.reject{|k, v| %w(bc ic oc rt).include?(k)}) %>" class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></a>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm]) %>" class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></a>
         </li>
       <% end %>
     </ul>
@@ -45,7 +45,7 @@
       <div class="tt">品牌</div>
       <div role="tabpanel" class="listBox">
         <ul class="selectTag nav-tabs clearfix" role="tablist">
-          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.each do |letter| %>
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
           <li role="presentation">
             <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
           <% end %>
