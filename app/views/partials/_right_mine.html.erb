@@ -8,14 +8,14 @@
       </div>
     </div>
     <ul class="row userData">
-      <li class="col-md-4 noread">
+      <li class="col-md-4 <%= 'noread' if current_user.has_unread_tenders? %>">
         <a href="<%= user_path(current_user) %>">
           <p class="data"><%= current_user.posts_with_type(Post::TYPES.keys[1]).count %></p>
           <p class="tt"><%= I18n.t('i_post')%></p>
         </a>
         <div class="dot"></div>
       </li>
-      <li class="col-md-4">
+      <li class="col-md-4 <%= 'noread' if current_user.has_unread_hunts? %> ">
         <a href="<%= my_tenders_user_path(current_user) %>">
           <p class="data"><%= current_user.tenders.count %></p>
           <p class="tt"><%= I18n.t('i_tender') %></p>
