@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'concerns/jpush'
+require 'concerns/message_handler'
 
 class Message < ActiveRecord::Base
   
