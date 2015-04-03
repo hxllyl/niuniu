@@ -73,6 +73,9 @@ class Post < ActiveRecord::Base
     end
     text :title
     integer :_type
+    integer :user_id
+    time :updated_at
+    float :expect_price
 
   end
 
@@ -102,6 +105,8 @@ class Post < ActiveRecord::Base
   scope :needs,     -> { where(_type: 1) }
   # 已成交
   scope :completed, -> { where(status: 3) }
+  # 有效的
+  scope :valid,     -> { where(status: 1) }
   # 未成交
   scope :uncompleted, -> { where("status <> 3") }
 

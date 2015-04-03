@@ -15,7 +15,7 @@
           <div class="mySourceOpe clearfix">
             <div class="bfR">
               <div class="btn-group">
-                <%= select_tag 'order_ele', options_for_select([['默认排序', '0'], ['按时间排序', '1']], selected: @order_ele), class: 'form-control'%>
+                <%= select_tag 'order_ele', options_for_select([['默认排序', 'updated_at'], ['按时间排序', 'expect_price']], selected: @order_ele), class: 'form-control'%>
               </div>
             </div>
           </div>
