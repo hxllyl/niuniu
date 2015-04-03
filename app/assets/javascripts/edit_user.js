@@ -73,16 +73,20 @@ $(function(){
   //
   // });
   
-  //上传图片
-  var upload_input = $('.upload_btn');
   
-  upload_input.on('change', function(e){
-    e.preventDefault();
+  
+  //上传图片
+  $('.button').on('change', function(event){
+    var preview = $(this).closest('img');
     
-    var $_file = $(this).val();
-    
-    $(this).closest('form').submit();
+    if(this.files && this.files[0]){
+      var reader = new FileReader();
+      reader.onload = function(e){
+        preview.html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
+      };
+      reader.readAsDataURL(this.files[0]);
+    }
   });
   
-  
 })
+

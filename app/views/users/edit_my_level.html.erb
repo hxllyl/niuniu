@@ -39,3 +39,8 @@
     </div>
   </div>
 </div>
+
+<%= content_for :footers do %>
+  <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true %>
+
+<% end %>

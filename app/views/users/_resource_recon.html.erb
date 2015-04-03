@@ -7,7 +7,7 @@
       </div>
       <div class="fileInput">
         <div class="fileBtn">添加照片
-          <%= file_field_tag "#{type}[_image]", value: current_user.photos.find_by(_type: type).try(:image_file), type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
+          <%= file_field_tag "#{type}[_image]" , type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
           <%= hidden_field_tag "#{type}[_type]", "#{type}" %>
         </div>
       </div>
