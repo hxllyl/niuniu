@@ -1,0 +1,66 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to '首页', root_path%></li>
+    <li class="active">一键找车</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">一键找车</h3>
+        </div>
+        <div class="panel-body">
+          <div class="mySourceOpe clearfix">
+            <div class="bfR">
+              <div class="btn-group">
+                <%= select_tag 'order_ele', options_for_select([['默认排序', '0'], ['按时间排序', '1']], selected: @order_ele), class: 'form-control'%>
+              </div>
+            </div>
+          </div>
+          <div class="mySourceTab mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <tbody>
+                <% @posts.each do |post| %>
+                  <tr data-id="<%= post.id%>">
+                    <td>
+                      <div class="box clearfix">
+                        <div class="infoM">
+                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %></h5>
+                          <div class="info clearfix">
+                            <div class="m"><%= post.standard_type %></div>
+                            <div class="m"><%= post.color %></div>
+                          </div>
+                        </div>
+                        <div class="infoPrice">
+                          <p><span class="price"><%= post.show_price %></span><span class="time"><%= post.publish_time %></span></p>
+                          <p>指导价：<%= post.base_price %></p>
+                        </div>
+                      </div>
+                      <div class="remark clearfix">
+                        <div class="tt bfL">备注：</div>
+                        <div class="info"><%= post.remark %></div>
+                      </div>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+            <%= paginate @posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
+      <%= render partial: 'partials/right_search' %>
+    </div>
+  </div>
+</div>
+
+<%= content_for :footers do%>
+  <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true%>
+<%end%>
