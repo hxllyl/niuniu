@@ -143,3 +143,6 @@ gem 'sunspot_solr'
 # nested
 gem 'ancestry'
 
+#jpush
+gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
+

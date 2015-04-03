@@ -91,6 +91,7 @@ Rails.application.routes.draw do
     end
 
     resources :messages do
+      post :device_methods, on: :collection
     end
 
     resources :base_cars, only: [:index]

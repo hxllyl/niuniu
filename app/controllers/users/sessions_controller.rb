@@ -26,7 +26,8 @@ class Users::SessionsController < Devise::SessionsController
       end
       
     else
-      # Authentication fails, redirect the user to the root page     
+      # Authentication fails, redirect the user to the root page
+      flash[:error] = '用户名或密码错误！'     
       redirect_to request.referrer || '/'
     end
 

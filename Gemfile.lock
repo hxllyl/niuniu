@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/jpush/jpush-api-ruby-client.git
+  revision: 87459b7cf9a5ade3d439f4911196e4fb3e158cd1
+  specs:
+    jpush (3.2.1)
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -361,6 +367,7 @@ DEPENDENCIES
   haml
   httpclient
   jbuilder (~> 2.0)
+  jpush!
   jquery-rails
   kaminari
   meta_request

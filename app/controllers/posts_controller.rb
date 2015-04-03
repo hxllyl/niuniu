@@ -116,11 +116,14 @@ class PostsController < ApplicationController
       if current_user
         if current_user.id == @tender.user_id
           @title    = '我的报价'
+
         else
           @title    = '他的报价'
           @someone  = @tender.user
         end
       end
+
+      instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
     end
     @follows  = current_user.followings & @someone.followers if current_user
   end

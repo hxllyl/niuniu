@@ -17,9 +17,10 @@
 <body>
 <% if !flash.empty? %>
   <div class="alertTips">
-    <h5 class="tt">恭喜您！</h5>
+    <h5 class="tt"></h5>
     <div class="info"> 
-      <%= flash[:notice] || flash[:error] %> 
+      <%= flash[:notice] || flash[:error] %>
+      <% flash.clear %> 
     </div>
   </div>
 <% end -%>
