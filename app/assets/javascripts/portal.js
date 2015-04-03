@@ -27,10 +27,10 @@ $(function(){
   validCode.keyup(function(event){
     event.preventDefault();
     var objThis = $(this);
-    var nextStep = $('.next-step');
+    var nextStep = objThis.parents('.modal-content').find('.next-step');
 
     if(objThis.val().length == 6){
-      $.get('/valid_codes/_valid.json?mobile='+$('#mobile').val()+'&valid_code=' + objThis.val(),function(data){
+      $.get('/valid_codes/_valid.json?mobile=' + $('#mobile').val() + '&valid_code=' + objThis.val(),function(data){
         if(data.status == 'success'){
           nextStep.prop('disabled', false);
         }else{

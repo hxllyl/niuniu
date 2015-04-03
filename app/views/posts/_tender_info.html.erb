@@ -8,6 +8,7 @@
 <div class="remark">
   <div class="tt bfL">报价备注：</div>
   <div class="info"><%= @tender.remark%></div>
+  <div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div>
 </div>
 <% if @current_user && @current_user == @post.user %>
   <input type="submit" class="btn btn-default btnW200 btn_spacing mt20 orange sub" id="" value="成交" />
