@@ -5,8 +5,7 @@ $(function(){
   // 用户获取手机验证码
   var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
-  var nextStep = $('#next-step');
-  var codeBut  = $('#valid_code_but');
+  //var nextStep = $('#next-step');
   var countdown = $("#countdown");
   var countWait = 60;
 
@@ -27,16 +26,18 @@ $(function(){
 
   validCode.keyup(function(event){
     event.preventDefault();
+    var objThis = $(this);
+    var nextStep = $('.next-step');
 
-    if(validCode.val().length == 6){
-      $.get('/valid_codes/_valid.json?mobile='+$('#mobile').val()+'&valid_code=' + validCode.val(),function(data){
-          if(data.status == 'success'){
-            nextStep.prop('disabled', false);
-          }else{
-            nextStep.prop('disabled', true);
-            alert("手机或验证码输入错误！");
-          }
-        })
+    if(objThis.val().length == 6){
+      $.get('/valid_codes/_valid.json?mobile='+$('#mobile').val()+'&valid_code=' + objThis.val(),function(data){
+        if(data.status == 'success'){
+          nextStep.prop('disabled', false);
+        }else{
+          nextStep.prop('disabled', true);
+          alert("手机或验证码输入错误！");
+        }
+      })
     }
   });
 
