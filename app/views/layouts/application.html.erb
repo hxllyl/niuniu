@@ -15,6 +15,13 @@
 </head>
 
 <body>
+<% if !flash.empty? %>
+  <div class="alertTips">
+    <h5 class="tt">恭喜您！</h5>
+    <div class="info"><%= flash[:notice] || flash[:error]%> </div>
+  </div>
+<% end -%>
+
 <%= render partial: 'partials/nav' %>
 <%= yield %>
 <%= render partial: 'partials/footer' %>

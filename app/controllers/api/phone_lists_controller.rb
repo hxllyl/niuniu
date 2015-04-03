@@ -30,12 +30,12 @@ class Api::PhoneListsController < Api::BaseController
     params[:contacts].each_with_object({}) { |contact, hash|
       mobile = contact['mobile']
       u = User.find_by(mobile: mobile)
-      repair = if u
-                 {user_id: u.id, is_following: @user.following?(u)}
+      hash = if u
+                {user_id: u.id, is_following: @user.following?(u)}
                else
                  {user_id: '', is_following: ''}
                end
-      datas << hash.merge!(repair)
+      datas << contact.merge!(hash)
     }
     render json: { status: 200, notice: 'success', datas: datas}
   rescue => ex
