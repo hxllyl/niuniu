@@ -232,4 +232,20 @@ class User < ActiveRecord::Base
     log.blank?
   end
 
+  def  unread_tenders
+    Log::Post.not_read.tender_to_posts(posts.needs.pluck(:id))
+  end
+
+  def unread_hunts #
+    Log::Post.not_read.hunt_completed(self.id)
+  end
+
+  def has_unread_tenders? # 判断有否未读之报价
+    unread_tenders.count > 0
+  end
+
+  def has_unread_hunts? # 判断有否未读之寻车（我对寻车所作之报价已完成）
+    unread_hunts.count > 0
+  end
+
 end

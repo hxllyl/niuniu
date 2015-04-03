@@ -56,6 +56,35 @@ class PostsController < ApplicationController
     end
   end
 
+  # 一键找车列表页
+  def key_search
+    @order_ele = params[:order_ele] ? params[:order_ele] : 'updated_at'
+    u_ids      = User.all.map(&:id)
+
+    followed, unfollow = if current_user
+                          [current_user.followings.map(&:id), u_ids - current_user.followings.map(&:id)]
+                        else
+                          [[], u_ids]
+                        end
+
+    @followed_posts =   Post.search do
+                          with(:_type, 0)
+                          fulltext String(params[:q])
+                          with(:user_id, Array(followed))
+                          fulltext String(params[:q])
+                          order_by(:updated_at, :desc)
+                        end.results
+
+    @unfollow_posts =   Post.search do
+                          with(:_type, 0)
+                          fulltext String(params[:q])
+                          with(:user_id, Array(unfollow))
+                          fulltext String(params[:q])
+                          order_by(:updated_at, :desc)
+                        end.results
+    @posts = Kaminari.paginate_array(@followed_posts + @unfollow_posts).page(params[:page]).per(10)
+  end
+
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
     @rs = SearchResource.new(params)
@@ -82,14 +111,18 @@ class PostsController < ApplicationController
                     Tender.find_by_id(params[:tender_id])
                   end
     if params[:tender_id]
+      @tender   = Tender.find_by_id(params[:tender_id])
       if current_user
-        if current_user.id == params[:tender_id].to_i
-          @title    = '我的报价详情'
+        if current_user.id == @tender.user_id
+          @title    = '我的报价'
+
         else
-          @title    = '他的报价详情'
-          @someone  = User.find_by_id(params[:tender_id])
+          @title    = '他的报价'
+          @someone  = @tender.user
         end
       end
+
+      instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
     end
     @follows  = current_user.followings & @someone.followers if current_user
   end
@@ -162,7 +195,7 @@ class PostsController < ApplicationController
 
   # 成交
   def complete
-    post   = @user.posts.needs.find_by(params[:post_id])
+    post   = Post.find_by_id(params[:id])
 
     tender = post.tenders.find_by_id(params[:tender_id])
 

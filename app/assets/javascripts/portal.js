@@ -3,7 +3,7 @@
 $(function(){
 
   // 用户获取手机验证码
-  var validCodeBut = $('#valid_code_but');
+  var validCodeBut = $('.valid_code_but');
   var validCode = $('.valid-code');
   //var nextStep = $('#next-step');
   var countdown = $("#countdown");
@@ -14,8 +14,9 @@ $(function(){
   validCodeBut.on('click', function(event){
     event.preventDefault();
     var objThis = $(this);
-    var mobile = $('#mobile');
-    $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
+    var mobileInput = objThis.parents('.modal-content').find('.mobile');
+
+    $.post('/valid_codes.json', { mobile: mobileInput.val(), type: 0 }, function(data){
       if(data.status == 'success'){
         countTime(objThis);
       }else{
@@ -27,10 +28,11 @@ $(function(){
   validCode.keyup(function(event){
     event.preventDefault();
     var objThis = $(this);
-    var nextStep = $('.next-step');
+    var mobileInput = objThis.parents('.modal-content').find('.mobile');
+    var nextStep = objThis.parents('.modal-content').find('.next-step');
 
     if(objThis.val().length == 6){
-      $.get('/valid_codes/_valid.json?mobile='+$('#mobile').val()+'&valid_code=' + objThis.val(),function(data){
+      $.get('/valid_codes/_valid.json?mobile=' + mobileInput.val() + '&valid_code=' + objThis.val(),function(data){
         if(data.status == 'success'){
           nextStep.prop('disabled', false);
         }else{

@@ -30,7 +30,7 @@ class Tender < ActiveRecord::Base
   scope :completed, -> { where(status: 1) }
 
   delegate :car_license_area, :color, :publish_time, :title, to: :post, prefix: true, allow_nil: true
-  delegate :name, :mobile, to: :user, prefix: true, allow_nil: true
+  delegate :name, :mobile, :level, to: :user, prefix: true, allow_nil: true
 
   def get_price
     self.price =  case discount_way
@@ -79,7 +79,9 @@ class Tender < ActiveRecord::Base
       tender_price_status:      base_price,
       tender_publish_time:      created_at.strftime("%Y/%m/%d %H:%M"),
       tender_remark:            remark,
-      tender_user_mobile:       user_mobile
+      tender_user_mobile:       user_mobile,
+      tender_user_level:        User::LEVELS[user_level],
+      tender_status:            status
     }
   end
 
@@ -89,6 +91,10 @@ class Tender < ActiveRecord::Base
 
   def base_price
     "#{post.guiding_price}万/#{human_discount}"
+  end
+
+  def is_completed?
+    status == 1
   end
 
   # 优惠方式

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $(".dropdown-toggle").dropdown();
+  //$(".dropdown-toggle").dropdown();
   $(".nav-tabs a").click(function (e) {
     e.preventDefault();
     $(this).tab("show");
@@ -46,7 +46,7 @@ $(document).ready(function(){
       $("#topBar").removeClass("fixed");
     };
   });
-  
+
   setTimeout(function() {
       $('.alertTips').fadeOut('fast');
   }, 3000);

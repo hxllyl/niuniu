@@ -13,7 +13,7 @@
         </div>
         <div class="panel-body sourceDetail pb200">
           <div class="row">
-            <div class="col-md-6 con">
+            <div class="col-md-8 con">
               <h5 class="name"><%= @post.need_detail_title %></h5>
               <div class="info">
                 <p><%= @post.app_area %></p>
@@ -22,11 +22,12 @@
                 <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date]%></p>
               </div>
             </div>
-            <div class="col-md-6 con">
+            <div class="col-md-4 con">
               <div class="info">
                 <p class="price">期望的成交价：<span class="num"><%= @post.expect_price %>万</span></p>
                 <p>指导价：<%= @post.guiding_price %>万/<%= @post.human_discount %></p>
                 <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
+                <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
               </div>
             </div>
           </div>
