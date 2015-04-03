@@ -71,6 +71,7 @@ class Tender < ActiveRecord::Base
       post_price_status:        post.base_price,
 
       tender_id:                id,
+      tender_user_id:           user_id,
       tender_price:             price.to_f,
       tender_price_status:      base_price,
       tender_publish_time:      created_at.strftime("%Y/%m/%d %H:%M"),
