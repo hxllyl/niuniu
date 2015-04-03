@@ -230,4 +230,20 @@ class User < ActiveRecord::Base
     log.blank?
   end
 
+  def  unread_tenders # 未读报价
+    log_posts.as_tender.not_read
+  end
+
+  def unread_hunts # 未读寻车
+    log_posts.as_hunt.not_read
+  end
+
+  def has_unread_tenders?
+    unread_tenders.count > 0
+  end
+
+  def has_unread_hunts?
+    unread_hunts.count > 0
+  end
+
 end
