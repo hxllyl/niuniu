@@ -50,7 +50,8 @@ namespace :deploy do
 
 
   after :finishing, 'deploy:cleanup'
-  #after :finishing, :copy_sync_scripts
+  # after "deploy:update_code", "deploy:migrate"
+  # after :finishing, :copy_sync_scripts
   # after :finishing, 'deploy:spec_ruby_version'
 
 end
