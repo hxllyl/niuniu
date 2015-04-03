@@ -9,9 +9,9 @@
       <% end %>
         <%- @base_cars.each do |base_car| %>
           <%- if base_car == @base_car %>
-            <option value="<%= base_car.id %>" selected="selected"><%= base_car.style %></option>
+            <option value="<%= base_car.id %>" selected="selected"><%= base_car.select_name %></option>
           <% else %>
-            <option value="<%= base_car.id %>"><%= base_car.style %></option>
+            <option value="<%= base_car.id %>"><%= base_car.select_name %></option>
           <% end %>
         <% end %>
         <option value="set_base_car">自定义</option>

@@ -44,39 +44,5 @@ $(function(){
       });
     })
   })
-  
-  
-  
-  // var cancelBtn = $('.cancelBtn');
-  
-  // cancelBtn.on('click', function(e){
-  //   e.preventDefault();
-  //
-  //   var cancel = $(this);
-  //   var id = cancel.attr('data-id');
-  //   var clazz = cancel.attr('data-clazz');
-  //   var type = cancel.attr('data-type');
-  //   var ban = cancel.attr('data-update');
-  //   var way = cancel.attr('data-way');
-  //
-  //   var query = "?id=" + id + "&clazz=" + clazz + "&type=" + type + '&way=' + way;
-  //
-  //   $('#alertModal').modal({ backdrop: 'static', keyboard: false }).one('click', '#delete-btn',
-  //                          function(e){
-  //                            $.get('/users/delete_relation.json' + query, function(data){
-  //                              if(data.status == 'success'){
-  //                                cancel.parent().parent().hide();
-  //                                $('#'+ban).text(data.number);
-  //                              }
-  //                            });
-  //                          });
-  //
-  // });
-  
-  
-  
-  //上传图片
-
-  
 })
 

@@ -38,5 +38,10 @@ class BaseCar < ActiveRecord::Base
       regions:        brand.regions
     }
   end
+  
+  def select_name
+    header = self.NO.blank? ? '' : self.NO.to_s << ' '
+    header << style
+  end
 
 end
