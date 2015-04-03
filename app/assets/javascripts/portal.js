@@ -10,18 +10,17 @@ $(function(){
   var countdown = $("#countdown");
   var countWait = 60;
 
-  //validCodeBut.attr("disabled",false);
+  validCodeBut.attr("disabled",false);
 
   validCodeBut.on('click', function(event){
     event.preventDefault();
     var objThis = $(this);
-    var mobile = $(this).prev('#mobile');
+    var mobile = $('#mobile');
     $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
       if(data.status == 'success'){
         countTime(objThis);
       }else{
         alert(data.error_msg);
-
       }
     });
   });
