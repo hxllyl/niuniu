@@ -231,7 +231,7 @@ class User < ActiveRecord::Base
   end
 
   def  unread_tenders
-    log_posts.not_read.tender_to_posts(posts.needs.pluck(:id))
+    Log::Post.not_read.tender_to_posts(posts.needs.pluck(:id))
   end
 
   def unread_hunts #
