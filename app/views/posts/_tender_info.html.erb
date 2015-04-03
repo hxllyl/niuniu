@@ -2,13 +2,13 @@
   <div class="info bfL">
     <p class="price"><%= @title if @title != '寻车详情' %>：<span class="num"><%= @tender.price %>万</span></p>
     <p>指导价：<%= @tender.base_price %></p>
+    <div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div>
   </div>
   <div class="time bfR"><%= @tender.created_at.strftime("%Y/%m/%d %H:%M")%></div>
 </div>
 <div class="remark">
   <div class="tt bfL">报价备注：</div>
   <div class="info"><%= @tender.remark%></div>
-  <div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div>
 </div>
 <%= link_to '成交', complete_post_path(@post, tender_id: @tender.id), method: 'put', class: 'btn btn-default btnW200 btn_spacing mt20 orange sub' if @current_user && @current_user == @post.user && @post.status != 3 %>
 <!--<%#= render 'comment_form'%>-->
