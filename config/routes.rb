@@ -8,6 +8,8 @@ Rails.application.routes.draw do
         get :registered
       end
     end
+
+    resources :posts
   end
 
   root 'portal#index'
@@ -145,6 +147,7 @@ Rails.application.routes.draw do
     end
 
     resources :phone_lists, only: [:index] do
+      post :contact_list, on: :collection
       get :send_invite_message, on: :collection
     end
   end

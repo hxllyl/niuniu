@@ -22,7 +22,7 @@ class Api::PhoneListsController < Api::BaseController
   #   notice: failed
   #   error_msg: 错误消息
 
-  def index
+  def contact_list
     raise '请上传通讯录用户' if params[:contacts].blank? or params[:contacts].empty?
 
     datas = []

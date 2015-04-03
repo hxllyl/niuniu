@@ -7,7 +7,7 @@
         <li class="active"><a href="<%= my_level_user_path(current_user)%>"><span class="icon icon-level"></span><%= t('level_recon') -%></a></li>
         <li><a href="<%= edit_user_password_path(current_user)%>"><span class="icon icon-pw"></span><%= t('password_change') -%></a></li>
         <li><a href="<%= about_us_user_path(current_user)%>"><span class="icon icon-logo"></span><%= t('about_us') -%></a></li>
-        <li><a href="<%= destroy_user_session_path(current_user, format: :html)%>" data-method='delete'><span class="icon icon-quit"></span><%= t('safe_logout') -%></a></li>
+        <li><a href="<%= destroy_user_session_path()%>" data-method='delete'><span class="icon icon-quit"></span><%= t('safe_logout') -%></a></li>
       </ul>
     </div>
     <div class="col-md-10 accountsMain">
@@ -40,11 +40,11 @@
             </div>
 
             <div class="col-md-6 status">
-            <% User::LEVELS.keys[0..3].each do |l| %>
-              <% if current_user.level >= l%>
+            <% User::LEVELS.keys[0..3].each do |l| %> 
+              <% if current_user.level >= l %>
                 <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
-                  <% if current_user.level_update_status.include?(l) and  current_user.level > User::LEVELS.keys[0]%>
+                  <% if current_user.can_upgrade and  current_user.can_upgrade_levels.include?(l)%>
                     <p><a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[l]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
                   <%else%>
                     <p><a class="btn btn-default black" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[l]) %>" role="button" disabled="disabled"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a></p>
@@ -72,7 +72,7 @@
               <% if current_user.level == User::LEVELS.keys[4] %>
                 <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
-                <% if current_user.level_update_status.include?User::LEVELS.keys[4]%>
+                <% if current_user.can_upgrade_levels.include?User::LEVELS.keys[4]%>
                 <p>
                   <a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
                 </p>

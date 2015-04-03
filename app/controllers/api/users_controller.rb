@@ -138,10 +138,12 @@ class Api::UsersController < Api::BaseController
 
   def update_level
     raise Errors::ArgumentsError.new, 'level参数不存在或比用户level低' if params[:level].blank? or params[:level].to_i <= @user.level
-
+    
     %w(identity hand_id visiting room_outer room_inner license).each do |t|
       if params[t.to_sym].present?
-        photo = current_user.photos.find_by(_type: t)
+        
+        photo = @user.photos.find_by(_type: t)
+        
         if photo
           photo.update(image: params[t.to_sym], _type: t)
         else
@@ -152,10 +154,9 @@ class Api::UsersController < Api::BaseController
       end
     end
 
-    instrument 'user.update_level',  user_id: @user.id, start_level: @user.level, end_level: params[:level] do
-      render json: { status: 200, notice: 'success', can_update_level: @user.level_update_status }
+    instrument 'user.update_level',  user_id: @user.id, start_level: @user.level, end_level: params[:level].to_i do
+      render json: { status: 200, notice: 'success', can_upgrade: 'false'}
     end
-
   rescue => ex
     render json: { status: 500, notice: 'failure', error_msg: ex.message }
   end

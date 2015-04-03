@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331063738) do
+ActiveRecord::Schema.define(version: 20150402141714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_devices", force: :cascade do |t|
+    t.integer  "user_id",                                null: false
+    t.string   "register_id", limit: 30,                 null: false
+    t.boolean  "active",                 default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "active_devices", ["register_id"], name: "index_active_devices_on_register_id", using: :btree
+  add_index "active_devices", ["user_id"], name: "index_active_devices_on_user_id", using: :btree
 
   create_table "areas", force: :cascade do |t|
     t.string   "name",       limit: 20, null: false
