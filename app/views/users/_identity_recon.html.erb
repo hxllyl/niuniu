@@ -2,12 +2,12 @@
   <li class="col-md-3">
     <div class="thumbnail box">
       <h5 class="tt"><%= t(type)%></h5>
-      <div class="img"><span class="alt">照片示例</span>
-      <%= image_tag(current_user.send("#{type}"), alt: "", width: "100%", id: type) if current_user.send("#{type}") %>
+      <div class="img" id="<%= type %>"><span class="alt">照片示例</span>
+      <%= image_tag(current_user.send("#{type}"), alt: "", width: "100%") if current_user.send("#{type}") %>
       </div>
       <div class="fileInput">
         <div class="fileBtn">添加照片
-          <%= file_field_tag "#{type}[_image]", type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg'  %>
+          <%= file_field_tag "#{type}[_image]", type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg', 'target-id' => type  %>
           <%= hidden_field_tag "#{type}[_type]", "#{type}", class: 'upload_btn' %>
         </div>
       </div>

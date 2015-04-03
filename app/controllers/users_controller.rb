@@ -15,6 +15,7 @@ class UsersController < BaseController
           avatar.update(image: params[:_image], _type: params[:_type])
         end
       end
+      
       flash[:notice] = t('success')
       redirect_to :back
     else
