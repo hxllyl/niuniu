@@ -90,6 +90,13 @@ namespace :solr do
     end
   end
 
+  desc "stop all sunspot services"
+  task :stop_all do
+    on roles(:app), :except => {:no_release => true} do
+      execute "for i in $(pgrep java); do kill -9 $i; done"
+    end
+  end
+
   # desc "Symlink in-progress deployment to a shared Solr index"
   # task :symlink, :except => { :no_release => true } do
   #   #创建solr所需要的目录
