@@ -18,7 +18,7 @@ class Log::Post < ActiveRecord::Base
   scope :already_read, -> { where(:read => true) }
   scope :not_read, -> { where(:read => false ) }
 
-  scope :as_tender, -> { where(:method_name => [ :tender, :tender_completed ] ) }
-  scope :as_hunt,   -> { where(:method_name => :post_completed ) } # 寻车完成
+  scope :tender_to_posts, ->(post_ids) { where(:method_name => :tender, :post_id => Array(post_ids) ) } # 提醒寻车方
+  scope :hunt_completed,  ->(u_id) { where(:method_name => :tender_completed, user_id: u_id ) } # 提醒报价方
 
 end

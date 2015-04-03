@@ -1,14 +1,14 @@
 <% if current_user.present? %>
 
 <ul class="list clearfix">
-  <li class="<%= 'current' if params[:action] == 'show'%>" >
+  <li class="<%= 'current' if params[:action] == 'show'%> <%= 'noread' if current_user.has_unread_tenders? %>" >
     <a href="<%= user_path(current_user)%>">
       <p class="num" id='posts'><%= current_user.posts.needs.count %></p>
       <p><%= t('i_posts')%></p>
     </a>
     <div class="dot"></div>
   </li>
-  <li class="<%= 'current' if params[:action] == 'my_tenders'%>">
+  <li class="<%= 'current' if params[:action] == 'my_tenders'%>  <%= 'noread' if current_user.has_unread_hunts? %> ">
     <a href="<%= my_tenders_user_path(current_user)%>">
       <p class="num" id='tenders'><%= current_user.tenders.count %></p>
       <p><%= t('i_tenders')%></p>

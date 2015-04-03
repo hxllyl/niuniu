@@ -187,6 +187,10 @@ class MyPostsController < ApplicationController
 
   def show
     @post = Post.find_by_id(params[:id])
+
+    # LESLIE: 浏览该页面 意味着已查看了所有对该寻车的报价
+    payload = { post_id: @post.id, method_name: 'tender' }
+    instrument 'user.has_read_tender', payload
   end
 
   def destroy
