@@ -30,5 +30,9 @@ class Photo < ActiveRecord::Base
    end 
   end
   
+  def image_file
+    image.file
+  end
+  
 end
 
