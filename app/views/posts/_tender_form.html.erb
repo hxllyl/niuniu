@@ -1,27 +1,29 @@
-<div class="methodSelect quote row">
-  <div class="tt clearfix">
-    <h5 class="col-md-6">给他报价<span class="sm">(可不选，直接给他留言)</span></h5>
-  </div>
-  <form class="quoteForm" action=<%= tender_post_path %> method='post'>
-    <div class="clearfix">
-      <%- Post::DISCOUNT_WAYS.select{|k, v| k != 5}.each do |k, v| %>
-        <div class="form-group form-inline col-md-6">
-          <label class="radio selectTag">
-            <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %>><span><%= v %></span>
-          </label>
-          <label class="selectInput">
-            <input type="text" class="form-control input-sm" id="" placeholder="" name="tender[discount_content]">
-            <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
-          </label>
-        </div>
-      <% end %>
+<form action=<%= tender_post_path %> method='post'>
+  <div class="methodSelect quote row">
+    <div class="tt clearfix">
+      <h5 class="col-md-6">给他报价<span class="sm">(可不选，直接给他留言)</span></h5>
     </div>
-  </form>
-</div>
-<div class="boardForm clearfix">
-  <h5 class="tt">报价备注：</h5>
-  <!--<%#= render 'comment_form'%>-->
-  <textarea class="form-control mt10" placeHolder="不能超过225个字"></textarea>
-</div>
-<input type="submit" class="btn btn-default btnW200 mt20 orange sub" id="" value="全部提交" />
+    <div class="quoteForm">
+      <div class="clearfix">
+        <%- Post::DISCOUNT_WAYS.select{|k, v| k != 5}.each do |k, v| %>
+          <div class="form-group form-inline col-md-6">
+            <label class="radio selectTag">
+              <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %>><span><%= v %></span>
+            </label>
+            <label class="selectInput">
+              <input type="text" class="form-control input-sm" id="" placeholder="" name="tender[discount_content]">
+              <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="boardForm clearfix">
+    <h5 class="tt">报价备注：</h5>
+    <!--<%#= render 'comment_form'%>-->
+    <textarea class="form-control mt10" name='tender[remark]' placeHolder="不能超过225个字"></textarea>
+  </div>
+  <input type="submit" class="btn btn-default btnW200 mt20 orange sub" id="" value="全部提交" />
+</form>
 
