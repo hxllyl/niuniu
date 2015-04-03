@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
   
-$('div.alertTips').fadeOut('normal');
+

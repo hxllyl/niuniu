@@ -46,4 +46,8 @@ $(document).ready(function(){
       $("#topBar").removeClass("fixed");
     };
   });
+  
+  setTimeout(function() {
+      $('.alertTips').fadeOut('fast');
+  }, 3000);
 });
