@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       get :user_list
       get :user_resources_list
       get :download_posts
+      get :key_search
     end
     member do
       post :tender

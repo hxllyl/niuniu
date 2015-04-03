@@ -56,6 +56,11 @@ class PostsController < ApplicationController
     end
   end
 
+  # 一键找车列表页
+  def key_search
+
+  end
+
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
     @rs = SearchResource.new(params)
