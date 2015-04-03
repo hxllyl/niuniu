@@ -3,14 +3,14 @@
 $(function(){
 
   // 用户获取手机验证码
-  var validCodeBut = $('.valid_code_but');
+  var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
   var nextStep = $('#next-step');
   var codeBut  = $('#valid_code_but');
   var countdown = $("#countdown");
   var countWait = 60;
 
-  validCodeBut.attr("disabled",false);
+  //validCodeBut.attr("disabled",false);
 
   validCodeBut.on('click', function(event){
     event.preventDefault();
