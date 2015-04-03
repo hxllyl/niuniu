@@ -1,6 +1,6 @@
 <div class="detailPriceInfo row">
   <div class="info bfL">
-    <p class="price"><%= @title if @title != '寻车详情' %>：<span class="num"><%= @tender.price %>万</span></p>
+    <p class="price"><%= @title == '寻车详情' ? '我的报价' : @title  %>：<span class="num"><%= @tender.price %>万</span></p>
     <p>指导价：<%= @tender.base_price %></p>
     <% if @tender.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
   </div>
