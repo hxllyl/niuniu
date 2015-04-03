@@ -10,12 +10,17 @@ class Message < ActiveRecord::Base
     0 => '未读',
     1 => '已读'
   }
+  # enum status: [:read, :unread]
   
   TYPES = {
     0 => '系统',
     1 => '用户反馈'
   }
   
+  # 接收组：all - 所有用户
+  # http://edgeapi.rubyonrails.org/classes/ActiveRecord/Enum.html
+  enum receiver_group: [ :all_users ]
+
   validates :content, presence: true
   validates :_type, inclusion: { in: TYPES.keys }
   validates :status, inclusion: { in: STATUS.keys }
@@ -39,10 +44,23 @@ class Message < ActiveRecord::Base
   end
   
   before_create :push_message
+
+  def real_receiver_users
+    if receiver_group && receiver_group.all_users?
+      users = User.all
+    end
+  end
   
   def push_message
     if _type = TYPES.keys[0]
-      jpush_message(content, Message.push_list(recevier))
+      if self.receiver
+        jpush_message(content, Message.push_list(receiver))
+      else
+        # NOTICE: In this case, this should put in a queue, now comment it
+        # real_receiver_users.each do |u|
+        #   jpush_message(content, u)
+        # end
+      end
     end
   end
 end

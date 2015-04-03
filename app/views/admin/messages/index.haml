@@ -1,6 +1,16 @@
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-lg-9
-    %h2 历史系统通知
+    %h2 
+      历史系统通知
+      = link_to '创建新的系统通知', new_admin_message_path, class: 'btn btn-sm btn-primary'
+    -# <ol class="breadcrumb">
+    -#     <li>
+    -#         <a href="index.html">Home</a>
+    -#     </li>
+    -#     <li class="active">
+    -#         <strong>Widgets</strong>
+    -#     </li>
+    -# </ol>
 
 .wrapper.wrapper-content.animated.fadeInRight
   .ibox.float-e-margins
@@ -11,6 +21,7 @@
           %th 标题
           %th 发送人
           %th 接收者
+          %th 接收组
           %th 状态
           %th 发送时间
           %th 操作
@@ -19,13 +30,15 @@
             %td= item.id
             %td= item.title
             %td= item.sender.name
-            %td= item.receiver.name
-            %td= item.status
+            %td= item.receiver.try(:name)
+            %td= t("message.receiver_group.#{item.receiver_group}") if item.receiver_group
+            %td= Message::STATUS[item.status]
             %td= item.created_at.to_s(:db)
             %td
               = link_to '删除', '#'
               &nbsp;&nbsp;
-              = link_to '重发', '#'
+              -# TODO: 是否有重发？貌似没有
+              -# = link_to '重发', '#'
 
 
       - if @messages.present?
