@@ -33,7 +33,7 @@ class Api::PhoneListsController < Api::BaseController
       hash = if u
                 {user_id: u.id, is_following: @user.following?(u)}
                else
-                 {user_id: '', is_following: ''}
+                {user_id: '', is_following: ''}
                end
       datas << contact.merge!(hash)
     }
