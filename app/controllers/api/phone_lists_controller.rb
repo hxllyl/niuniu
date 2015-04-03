@@ -9,13 +9,13 @@ class Api::PhoneListsController < Api::BaseController
   # Params:
   #   token:        [String] 用户token
   #   contacts[]:     [Array]  通讯录用户，具体格式：contacts: [
-  #                                                         {name: name_1, mobiles: ['13112345678', '13212345678']},
-  #                                                         {name: name_2, mobiles: ['15112345678', '15212345678']}
+  #                                                         {name: name_1, mobile: '13112345678'},
+  #                                                         {name: name_2, mobile: '15112345678'}
   #                                                        ]
   # Return:
   #   status: 200
   #   notice: success
-  #   datas:  返回数据 {"status" : 200, "notice" : "success", "datas": {'depp': {'13112345678':{user_id: 3, is_following: true}}}}
+  #   datas:  返回数据 {"status" : 200, "notice" : "success", "datas": [{name: '', mobile: '', user_id: '', is_following: }]
   #
   # Error:
   #   status: 500
@@ -28,19 +28,18 @@ class Api::PhoneListsController < Api::BaseController
     datas = []
 
     params[:contacts].each_with_object({}) { |contact, hash|
-      hash[contact['name']] =  contact['mobiles'].each_with_object({}) do |mobile, ha|
-                                 u = User.find_by(mobile: mobile)
-                                 if u
-                                   ha.merge!({mobile => {user_id: u.id, is_following: @user.following?(u)}})
-                                 else
-                                   ha.merge!({mobile => {}})
-                                 end
-                              end
-      datas << hash
+      mobile = contact['mobile']
+      u = User.find_by(mobile: mobile)
+      repair = if u
+                 {user_id: u.id, is_following: @user.following?(u)}
+               else
+                 {user_id: '', is_following: ''}
+               end
+      datas << hash.merge!(repair)
     }
     render json: { status: 200, notice: 'success', datas: datas}
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message}
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
   # 发送邀请短信
