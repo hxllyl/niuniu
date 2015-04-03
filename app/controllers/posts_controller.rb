@@ -58,7 +58,8 @@ class PostsController < ApplicationController
 
   # 一键找车列表页
   def key_search
-
+    @order_ele = params[:order_ele] ? params[:order_ele] : 0
+    @posts = Post.resources.order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   # 寻车信息点击品牌进入寻车列表页
