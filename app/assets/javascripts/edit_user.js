@@ -76,17 +76,7 @@ $(function(){
   
   
   //上传图片
-  $('.button').on('change', function(event){
-    var preview = $(this).closest('img');
-    
-    if(this.files && this.files[0]){
-      var reader = new FileReader();
-      reader.onload = function(e){
-        preview.html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
-      };
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
+
   
 })
 
