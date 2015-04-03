@@ -13,14 +13,17 @@ class Admin::BaseController < ApplicationController
 
   end
 
+  helper_method :salesman?
   def salesman?
 
   end
 
+  helper_method :normal_admin?
   def normal_admin?
 
   end
 
+  helper_method :super_admin?
   def super_admin?
 
   end

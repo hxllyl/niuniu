@@ -38,6 +38,10 @@
               = link_to '已注册用户名录', registered_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/posts', action: 'index')) }
               = link_to '寻车列表', admin_posts_path
+            -# TODO: Add real logic for 'normal_admin?', and remove '||= true'
+            - if normal_admin? || true 
+              %li{ class: (:active if current_page?(controller: 'admin/messages')) }
+                = link_to '系统消息', admin_messages_path
       
     #page-wrapper.gray-bg
       .row.border-bottom
