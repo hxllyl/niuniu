@@ -88,12 +88,12 @@ class PostsController < ApplicationController
                     Tender.find_by_id(params[:tender_id])
                   end
     if params[:tender_id]
+      @tender   = Tender.find_by_id(params[:tender_id])
       if current_user
-        if current_user.id == params[:tender_id].to_i
+        if current_user.id == @tender.user_id
           @title    = '我的报价'
         else
           @title    = '他的报价'
-          @tender   = Tender.find_by_id(params[:tender_id])
           @someone  = @tender.user
         end
       end

@@ -27,7 +27,7 @@
                 <p class="price">期望的成交价：<span class="num"><%= @post.expect_price %>万</span></p>
                 <p>指导价：<%= @post.guiding_price %>万/<%= @post.human_discount %></p>
                 <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
-                <div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div>
+                <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
               </div>
             </div>
           </div>
