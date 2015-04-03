@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
   
   # 用户升级认证log
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel'
+  
+  has_many :active_devices, class_name: 'ActiveDevice' # jpush 用户设备
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
 
@@ -167,7 +169,7 @@ class User < ActiveRecord::Base
   
   def can_upgrade_levels
     if level == LEVELS.keys[0]
-      [1]
+      [1,4]
     elsif level == LEVELS.keys[1]
       [2,3,4]
     elsif level == LEVELS.keys[2]

@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 class Post < ActiveRecord::Base
 
   before_save :get_some_must_attr
@@ -222,8 +223,12 @@ class Post < ActiveRecord::Base
     [title, app_area].join('　')
   end
 
-  def need_detail_title
-    ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+  def need_detail_title(keeper = nil)
+    if keeper.nil?
+      ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+    else
+      [standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+    end
   end
 
   def title
@@ -273,7 +278,11 @@ class Post < ActiveRecord::Base
   def is_completed?
     status == 3
   end
-
+  
+  def dealed_tender
+    tenders.where(status: Tender::STATUS.keys[1]).first
+  end
+  
   # 逻辑删除 物理删除用real_delete
   alias :real_delete :delete
 
@@ -288,5 +297,18 @@ class Post < ActiveRecord::Base
   def show_price
     expect_price.to_f == 0.0 ? '电议' : "#{expect_price.to_f}万"
   end
-
+  
+  # after_update :make_message
+  def make_message
+    if is_completed?
+      Message.make_system_message(generate_message, user)
+    end
+  end
+  
+  private
+  def generate_message
+    message =<<-EOF
+    您所：#{need_detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{dealed_tender.user_name} 达成了交易。
+    EOF
+  end
 end

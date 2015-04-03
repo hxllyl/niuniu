@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'jpush'
 
 module Concerns
   module MessageHandler
@@ -13,6 +14,29 @@ module Concerns
       status = json.split('\n').first
     
       logger.info status.to_s + status.class.to_s 
+    end
+    
+    def jpush_message(j_msg, reg_ids)
+      
+      return if reg_ids.blank? or reg_ids.empty?
+      j_msg = j_msg.truncate(72) if j_msg.length > 72
+      
+      app_key, master_secret = APP_CONFIG['app_key'], APP_CONFIG['master_secret']
+      client ||= JPush::JPushClient.new(app_key, master_secret) 
+      
+      logger = Logger.new(STDOUT)
+      
+      options = {
+        platform: JPush::Platform.all,
+        audience: JPush::Audience.build(registration_id: reg_ids),
+        options:  JPush::Options.build(apns_production: true),
+        notification: JPush::Notification.new(alert: "#{j_msg}")
+      }
+      
+      payload = JPush::PushPayload.new(options).check
+      
+      result = client.sendPush(payload);
+      logger.debug("Got result  " + result)
     end
     
   end

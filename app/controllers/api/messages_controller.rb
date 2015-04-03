@@ -28,7 +28,7 @@ class Api::MessagesController < Api::BaseController
     @msg = @user.send("#{method}").where("_type = ? and updated_at >= ?", type, date).order('updated_at desc')
     render json: { status: 200, notice: 'success', data: @msg.map(&:as_api) }
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message }
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
 
   # 反馈意见
@@ -51,12 +51,38 @@ class Api::MessagesController < Api::BaseController
     if @message.save
       render json: { status: 200, notice: 'success' }
     else
-      render json: { status: 500, notice: 'failure', error_msg: @message.errors.full_message.join('\n') }
+      render json: { status: 500, notice: 'failed', error_msg: @message.errors.full_message.join('\n') }
     end
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message }
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
-
+  
+  # 注册或激活灭活设备(jpush)
+  #
+  # Params:
+  #   token:        [String] 用户token
+  #   register_id:  [String] jpush register_id
+  #   method:       [String] activating 激活(如果该register_id是第一次激活, 会先插入数据再激活)，inactivated 灭活
+  # Returns:
+  #   status: 200
+  #   notice: success
+  # Errors:
+  #   status: 500
+  #   notice: failed
+  #   error_msg: 错误信息
+   
+  def device_methods
+    raise 'register_id must be included' if params[:register_id]
+    
+    device = ActiveDevice.where(user_id: params[:user_id], register_id: params[:register_id]).first_or_initialize
+    device.active = params[:method] == 'activating' 
+    device.save
+    
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
+  end
+  
   private
   def message_params
     params.require(:message).permit(:sender_id, :receiver_id, :title, :content, :_type)
