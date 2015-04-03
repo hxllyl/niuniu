@@ -84,10 +84,11 @@ class PostsController < ApplicationController
     if params[:tender_id]
       if current_user
         if current_user.id == params[:tender_id].to_i
-          @title    = '我的报价详情'
+          @title    = '我的报价'
         else
-          @title    = '他的报价详情'
-          @someone  = User.find_by_id(params[:tender_id])
+          @title    = '他的报价'
+          @tender   = Tender.find_by_id(params[:tender_id])
+          @someone  = @tender.user
         end
       end
     end
@@ -162,7 +163,7 @@ class PostsController < ApplicationController
 
   # 成交
   def complete
-    post   = @user.posts.needs.find_by(params[:post_id])
+    post   = Post.find_by_id(params[:id])
 
     tender = post.tenders.find_by_id(params[:tender_id])
 
