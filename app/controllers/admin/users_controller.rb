@@ -16,12 +16,12 @@ class Admin::UsersController < Admin::BaseController
 
   def contacted
     # TODO: Add logic for contacted users 已联系用户
-    @users = User.page(params[:page]||1).order('created_at desc').per(30)
+    @users = User.order('created_at desc').page(params[:page]||1).per(30)
   end
 
   def registered
     # TODO: Add logic for registered users 已注册用户
-    @users = User.page(params[:page]||1).order('created_at desc').per(30)
+    @users = User.order('created_at desc').page(params[:page]||1).per(30)
   end
 
   def edit

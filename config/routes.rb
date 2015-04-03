@@ -8,6 +8,8 @@ Rails.application.routes.draw do
         get :registered
       end
     end
+
+    resources :posts
   end
 
   root 'portal#index'
