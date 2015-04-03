@@ -2,8 +2,8 @@
 
 class UsersController < BaseController
   
+  before_action :can_upgrade?, only: [:update_my_level, :edit_my_level]
   
-  before_action :can_upgrade?, only: [:update_my_level]
   def update
     @user = User.find params[:id]
     if @user.update_attributes user_params
@@ -94,10 +94,12 @@ class UsersController < BaseController
 
   def update_my_level
     %w(avatar identity hand_id visiting room_outer room_inner license).each do |t|
+      
       photo = current_user.photos.find_by(_type: t)
+      
       img_box = params[t.to_sym]
       
-      next if img_box.blank?
+      next if img_box.blank? or img_box['_image'].blank?
       
       if photo
         photo.update(image: img_box[:_image], _type: img_box[:_type])
