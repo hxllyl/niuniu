@@ -3,7 +3,7 @@
 $(function(){
 
   // 用户获取手机验证码
-  var validCodeBut = $('.valid_code_but');
+  var validCodeBut = $('#valid_code_but');
   var validCode = $('.valid-code');
   var nextStep = $('#next-step');
   var codeBut  = $('#valid_code_but');
@@ -15,13 +15,12 @@ $(function(){
   validCodeBut.on('click', function(event){
     event.preventDefault();
     var objThis = $(this);
-    var mobile = $(this).prev('#mobile');
+    var mobile = $('#mobile');
     $.post('/valid_codes.json', { mobile: mobile.val(), type: 0 }, function(data){
       if(data.status == 'success'){
         countTime(objThis);
       }else{
         alert(data.error_msg);
-
       }
     });
   });

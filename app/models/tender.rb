@@ -34,9 +34,9 @@ class Tender < ActiveRecord::Base
 
   def get_price
     self.price =  case discount_way
-                    when 1 then (post.base_car.base_price * discount_content).to_f
-                    when 2 then (post.base_car.base_price - discount_content).to_f
-                    when 3 then (post.base_car.base_price + discount_content).to_f
+                    when 1 then post.base_car.base_price.to_f * (100 - discount_content.to_f) / 100
+                    when 2 then post.base_car.base_price.to_f - discount_content.to_f
+                    when 3 then post.base_car.base_price.to_f + discount_content.to_f
                     when 4 then discount_content.to_f
                   end
   end
@@ -54,29 +54,27 @@ class Tender < ActiveRecord::Base
 
   def to_hash
     {
-      id:                 id,
-      title:              post.title,
-      area:               post.app_area,
-      color:              post.color,
-      owner:              post.owner,
-      time:               post.publish_time,
-      tender:             price.to_f,
-      status:             status,
-      base_price:         base_price.to_f,
-      self_time:          publish_time,
-      self_user_id:       user_id,
-      self_user_name:     user.try(:name_area),
-      level:              User::LEVELS[user.level],
-      user_avatar:        post.user.avatar,
-      user_introduction:  post.user.contact[:self_introduction],
-      area:               post.car_in_area,
-      price_status:       base_price,
-      take_car_data:      Post::TAKE_DATES[post.take_car_date],
-      mobile:             post.user_mobile,
-      title:              post.title,
-      detail_title:       post._type == 0 ? post.title : post.need_detail_title,
-      post_remark:        post.remark,
-      remark:             remark
+      post_id:                  post_id,
+      post_title:               post.title,
+      post_detail_title:        post._type == 0 ? post.title : post.need_detail_title,
+      post_user_id:             post.user_id,
+      post_color:               post.color,
+      post_user_name:           post.owner,
+      post_user_mobile:         post.user_mobile,
+      post_car_in_area:         post.car_in_area,
+      post_car_license_area:    post.app_area,
+      post_user_introduction:   post.user.contact[:self_introduction],
+      post_user_avatar:         post.user.avatar,
+      post_remark:              post.remark,
+      post_publish_time:        post.created_at.strftime("%Y/%m/%d %H:%M"),
+      post_expect_price:        post.expect_price.to_f,
+      post_price_status:        post.base_price,
+
+      tender_id:                id,
+      tender_price:             price.to_f,
+      tender_price_status:      base_price,
+      tender_publish_time:      created_at.strftime("%Y/%m/%d %H:%M"),
+      tender_remark:            remark
     }
   end
 

@@ -316,7 +316,9 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .modal.box .modal-footer { padding: 0 44px 26px; border-top: 0; }
 #myReport .form-group { padding: 10px 0; margin: 0; color: #666; }
 #myReport .form-group .col-md-6 { margin: 0; }
-.alertTips .modal-dialog { margin: 0 auto; }
+.alertTips { position: absolute; top: 0; left: 50%; width: 400px; height: 200px; padding: 20px; margin-left: -200px; border-radius: 0 0 10px 10px; box-shadow: 0px 6px 6px 0 #999; background-color: #FFF; }
+.alertTips .tt { margin-top: 20px; text-align: center; font-size: 18px; color: #ff791f; }
+.alertTips .info { display: table-cell; width: 400px; height: 100px; text-align: center; vertical-align: middle; }
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 url(user/bannerBg.jpg) no-repeat right bottom; }
 .userOverview .userInfo { padding: 20px; }
