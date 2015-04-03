@@ -4,7 +4,7 @@ require_relative '../../app/services/search_resource'
 require_relative '../../app/services/list_resources'
 
 class PostsController < ApplicationController
-   skip_before_filter :verify_authenticity_token, only: [:tender]
+   skip_before_filter :verify_authenticity_token, only: [:tender, :complete]
 
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
@@ -156,6 +156,19 @@ class PostsController < ApplicationController
     tender.user = current_user
 
     tender.save
+
+    redirect_to :back
+  end
+
+  # 成交
+  def complete
+    post   = @user.posts.needs.find_by(params[:post_id])
+
+    tender = post.tenders.find_by_id(params[:tender_id])
+
+    raise 'not found' unless tender
+
+    post.complete(tender.id)
 
     redirect_to :back
   end
