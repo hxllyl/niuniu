@@ -58,8 +58,31 @@ class PostsController < ApplicationController
 
   # 一键找车列表页
   def key_search
-    @order_ele = params[:order_ele] ? params[:order_ele] : 0
-    @posts = Post.resources.order(updated_at: :desc).page(params[:page]).per(10)
+    @order_ele = params[:order_ele] ? params[:order_ele] : 'updated_at'
+    u_ids      = User.all.map(&:id)
+
+    followed, unfollow = if current_user
+                          [current_user.followings.map(&:id), u_ids - current_user.followings.map(&:id)]
+                        else
+                          [[], u_ids]
+                        end
+
+    @followed_posts =   Post.search do
+                          with(:_type, 0)
+                          fulltext String(params[:q])
+                          with(:user_id, Array(followed))
+                          fulltext String(params[:q])
+                          order_by(:updated_at, :desc)
+                        end.results
+
+    @unfollow_posts =   Post.search do
+                          with(:_type, 0)
+                          fulltext String(params[:q])
+                          with(:user_id, Array(unfollow))
+                          fulltext String(params[:q])
+                          order_by(:updated_at, :desc)
+                        end.results
+    @posts = Kaminari.paginate_array(@followed_posts + @unfollow_posts).page(params[:page]).per(10)
   end
 
   # 寻车信息点击品牌进入寻车列表页
