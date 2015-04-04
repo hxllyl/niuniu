@@ -229,7 +229,11 @@ class User < ActiveRecord::Base
   def level_update_status
     log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).order('updated_at desc').first
     
-    log.blank?
+    if log.blank?
+      [true,  nil]
+    else
+      [false, log.end_level]
+    end
   end
 
   def  unread_tenders
