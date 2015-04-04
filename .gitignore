@@ -12,11 +12,11 @@
 *.swp
 .code_swarm
 /config/database.yml
-/config/config.yml
 /config/services.yml
 /config/unicorn.rb
 /config/mongoid.yml
 /config/uas.yml
+/config/config.yml
 /config/organization_structure.yml
 /config/*.sample
 /public/system
@@ -33,6 +33,7 @@ unicorn.sh
 /config/backup/.cache
 /config/backup/data
 /config/backup/log
+config/config.yml
 /.cdn_token_file
 /config/conf/dk/.cdn_token_file.example
 .ruby-version
