@@ -115,6 +115,11 @@ class PostsController < ApplicationController
     #          else
     #            Post.needs
     #          end
+
+    @standard   = Standard.find_by_id(params[:st])
+    @brand      = Brand.find_by_id(params[:br])
+    @car_model  = CarModel.find_by_id(params[:cm])
+
   end
 
   def show
