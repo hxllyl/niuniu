@@ -29,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # 支持js6语法包
 gem 'sprockets', '~> 3.0.0.beta'
-gem 'sprockets-es6', '~> 0.6.0'
+# gem 'sprockets-es6', '~> 0.6.0'
 
 # 图片处理 gem
 gem 'carrierwave'
