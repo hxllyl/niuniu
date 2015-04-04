@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  //$(".dropdown-toggle").dropdown();
+  $(".dropdown-toggle").dropdown();
   $(".nav-tabs a").click(function (e) {
     e.preventDefault();
     $(this).tab("show");
