@@ -68,7 +68,7 @@ gem 'acts_as_list'
 gem 'rvm'
 
 #gem 'rvm-capistrano'
-gem 'capistrano','~> 3.3.0'
+gem 'capistrano','~> 3.3.5'
 gem 'capistrano-ext'
 gem 'capistrano-unicorn', :require => false
 gem 'capistrano-rails'
