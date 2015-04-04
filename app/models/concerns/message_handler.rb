@@ -33,7 +33,7 @@ module Concerns
         notification: JPush::Notification.new(alert: "#{j_msg}")
       }
       
-      payload = JPush::PushPayload.new(options).check
+      payload = JPush::PushPayload.new(options)
       
       result = client.sendPush(payload);
       logger.debug("Got result  " + result)
