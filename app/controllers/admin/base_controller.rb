@@ -11,7 +11,7 @@ class Admin::BaseController < ApplicationController
   # TODO: add logic
   # Internal staff: salesman, normal_admin, super_admin
   def require_staff
-    if !current_staff
+    unless current_staff
       redirect_to root_path, alert: '很抱歉，您没有权限' and return
     end
   end
