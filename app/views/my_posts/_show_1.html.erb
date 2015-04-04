@@ -27,7 +27,7 @@
               </div>
               <div class="col-md-6 con">
                 <div class="info">
-                  <p class="price">期望的成交价：<span class="num"><%= @post.expect_price.to_f %>万</span></p>
+                  <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                   <p>指导价：<%= @post.base_car_base_price.to_f %>万/<%= @post.human_discount %></p>
                   <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
                 </div>

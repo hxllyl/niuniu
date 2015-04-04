@@ -18,7 +18,7 @@
               <ul class="list clearfix">
                 <li><%= link_to '全部', needs_list_posts_path %></li>
                 <%- @standards.each do |sd| %>
-                  <li><%= link_to sd.name, needs_list_posts_path(standard_id: sd.id) %></li>
+                  <li><%= link_to sd.name, needs_list_posts_path(st: sd.id) %></li>
                 <% end %>
               </ul>
             </div>
@@ -28,7 +28,7 @@
             <div class="listBox">
               <ul class="list clearfix">
                 <%- @brands.each do |br| %>
-                  <li><%= link_to br.name, needs_list_posts_path(brand_id: br.id) %></li>
+                  <li><%= link_to br.name, needs_list_posts_path(br: br.id) %></li>
                 <% end %>
               </ul>
             </div>
@@ -38,7 +38,7 @@
             <div class="listBox">
               <ul class="list clearfix">
                 <%- @car_models.each do |cm|%>
-                  <li><%= link_to cm.name, needs_list_posts_path(car_model_id: cm.id) %></li>
+                  <li><%= link_to cm.name, needs_list_posts_path(cm: cm.id) %></li>
                 <% end %>
               </ul>
             </div>
