@@ -29,7 +29,7 @@
 					<%- @newest_resouces.each do |post| %>
 					<tr>
 						<td><%= link_to post.title, post_path(post, _type: 0), class: 'name' %></td>
-						<td><span class="price"><%= post.expect_price.to_f %></span></td>
+						<td><span class="price"><%= post.show_price %></span></td>
 						<td><%= post.standard_resource_type %></td>
 						<td><%= link_to post.user_name, user_list_posts_path(user_id: post.user_id, _type: 0), class: 'name' %></td>
 						<td>
