@@ -351,7 +351,7 @@ DEPENDENCIES
   bullet
   byebug
   cancan
-  capistrano (~> 3.3.5)
+  capistrano (~> 3.3.0)
   capistrano-bundler
   capistrano-ext
   capistrano-rails
