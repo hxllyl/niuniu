@@ -105,16 +105,16 @@ class PostsController < ApplicationController
 
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
-    @rs = SearchResource.new(params)
-    @needs = if @rs.car_model.present?
-               @rs.car_model.posts.needs
-             elsif @rs.brand.present?
-               Post.needs.with_brand(@rs.brand)
-             elsif @rs.standard.present?
-               Post.with_standard(@rs.standard).needs
-             else
-               Post.needs
-             end
+    # @rs = SearchResource.new(params)
+    # @needs = if @rs.car_model.present?
+    #            @rs.car_model.posts.needs
+    #          elsif @rs.brand.present?
+    #            Post.needs.with_brand(@rs.brand)
+    #          elsif @rs.standard.present?
+    #            Post.with_standard(@rs.standard).needs
+    #          else
+    #            Post.needs
+    #          end
   end
 
   def show
