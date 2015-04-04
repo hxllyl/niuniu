@@ -289,6 +289,10 @@ class Post < ActiveRecord::Base
     status == 3
   end
 
+  def to_ary
+    [standard_name, brand_name, car_model_name, base_car_style, Post::RESOURCE_TYPE[resource_type], color, expect_price.to_f, created_at.to_s(:db)]
+  end
+
   def dealed_tender
     tenders.where(status: Tender::STATUS.keys[1]).first
   end

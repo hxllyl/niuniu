@@ -171,30 +171,24 @@ class PostsController < ApplicationController
 
   # 导出用户资源
   def download_posts
-    # posts = Post.where(_type: 0, user_id: params[:user_id])
+    posts = Post.where(_type: 0, user_id: params[:user_id]).order(updated_at: :desc)
 
-    # path = 'public/system/quests_details_list.xls'
-    # workbook = WriteExcel.new(path)
-    # worksheet = workbook.add_worksheet
-    # format = workbook.add_format
-    # format.set_bold(1)
-    # format.set_color('red')
-    # format.set_align('center')
-    # headings = %w()
+    path = "public/system/users_#{params[:user_id]}_resources_list.xls"
+    workbook = WriteExcel.new(path)
+    worksheet = workbook.add_worksheet
+    headings = %w(规格 品牌 型号 款式 状态 颜色 价格/万 发布时间)
 
-    # worksheet.write('A1',headings,format)
+    worksheet.write(0, 0, headings)
 
-    # records.each_with_index do |record,index|
-    #   a = []
+    posts.each_with_index do |record, index|
+      worksheet.write(index+1, 0, record.to_ary)
+    end
 
-    #   worksheet.write("A#{index+2}",a)
-    # end
+    workbook.close
 
-    # workbook.close
+    send_file(path)
 
-    # send_file(path)
-
-    # return
+    return
   end
 
   # 报价
