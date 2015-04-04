@@ -87,6 +87,7 @@ class UsersController < BaseController
   end
 
   def my_level
+    @level_status = current_user.can_upgrade
   end
 
   def edit_my_level

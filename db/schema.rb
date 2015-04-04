@@ -276,13 +276,12 @@ ActiveRecord::Schema.define(version: 20150403225441) do
   create_table "tenders", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.decimal  "price",                        precision: 10, scale: 2, default: 0.0
-    t.integer  "discount_way",                                                        null: false
-    t.decimal  "discount_content",             precision: 10, scale: 2, default: 0.0
-    t.integer  "status",                                                default: 0
-    t.string   "remark",           limit: 225
-    t.datetime "created_at",                                                          null: false
-    t.datetime "updated_at",                                                          null: false
+    t.decimal  "price",            precision: 10, scale: 2, default: 0.0
+    t.integer  "discount_way",                                            null: false
+    t.decimal  "discount_content", precision: 10, scale: 2, default: 0.0
+    t.integer  "status",                                    default: 0
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   add_index "tenders", ["post_id"], name: "index_tenders_on_post_id", using: :btree
