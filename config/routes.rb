@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :banners
     resources :posts
 
     resources :messages, only: [:index, :new, :create, :destroy]
@@ -92,6 +93,8 @@ Rails.application.routes.draw do
       delete  'sessions'      => 'sessions#destroy',      :as => 'logout'
       post    'registrations' => 'registrations#create',  :as => 'register'
     end
+
+    resources :banners, only: [:index]
 
     resources :messages do
       post :device_methods, on: :collection

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403225441) do
+ActiveRecord::Schema.define(version: 20150404053620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(version: 20150403225441) do
 
   add_index "areas", ["name"], name: "index_areas_on_name", using: :btree
   add_index "areas", ["parent_id"], name: "index_areas_on_parent_id", using: :btree
+
+  create_table "banners", force: :cascade do |t|
+    t.string   "title"
+    t.string   "poi"
+    t.string   "position"
+    t.string   "image"
+    t.datetime "begin_at"
+    t.datetime "end_at"
+    t.string   "use"
+    t.string   "redirect_way"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "base_cars", force: :cascade do |t|
     t.integer  "standard_id"
