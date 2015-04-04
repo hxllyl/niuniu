@@ -115,8 +115,6 @@ class PostsController < ApplicationController
              else
                Post.needs
              end
-  # rescue => e
-  #   render json: {status: :not_ok, msg: e.message}
   end
 
   def show
