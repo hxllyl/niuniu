@@ -213,7 +213,7 @@ class PostsController < ApplicationController
     worksheet.write(2, 0, %w(品牌/车型/款式 外观/内饰 规格/状态 价格 备注))
 
     user.posts.resources.order(updated_at: :desc).each_with_index do |record, index|
-      worksheet.write(index + 3, 0, record.to_ary)
+      worksheet.write(index + 3, 0, record.infos)
     end
 
     workbook.close
