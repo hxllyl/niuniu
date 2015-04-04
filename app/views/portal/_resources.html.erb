@@ -20,7 +20,11 @@
 							<td><%= link_to user.heading_show, user_list_posts_path(user_id: user.id, _type: 0), class: 'name' %></td>
 							<td><%= user.area_name %></td>
 							<td><%= user.brands_ary %></td>
-							<td><%= link_to '浏览', user_list_posts_path(user_id: user.id, _type: 0) %><span class="sepLine">|</span><a href="#">下载</a></td>
+							<td>
+								<%= link_to '浏览', user_list_posts_path(user_id: user.id, _type: 0) %>
+								<span class="sepLine">|</span>
+								<%= link_to '下载', download_posts_posts_path(user_id: user.id) %>
+							</td>
 							<td><%= user.posts.resources.order(updated_at: :desc).first.publish_time %></td>
 						</tr>
 					<% end %>
