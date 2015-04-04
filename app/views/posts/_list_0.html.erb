@@ -31,6 +31,7 @@
                   <li><%= link_to br.name, resources_list_posts_path(br: br.id) %></li>
                 <% end %>
               </ul>
+              <p class="txtR"><%= link_to '[更多]', resources_list_posts_path, class: 'moreLink' %></p>
             </div>
           </div>
           <div class="carList last clearfix">
@@ -56,10 +57,10 @@
                 <tr>
                   <th width="28%">品牌/车型</th>
                   <th width="12%">报价(万元)</th>
-                  <th width="12%">状态</th>
+                  <th width="14%">状态</th>
                   <th width="24%">发布人</th>
                   <th width="12%">资源表</th>
-                  <th width="12%">发布时间</th>
+                  <th width="10%">发布时间</th>
                 </tr>
               </thead>
               <tbody>

@@ -14,19 +14,19 @@
               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th width="28%">品牌/车型</th>
+                    <th width="30%">品牌/车型</th>
                     <th width="10%">报价(万元)</th>
                     <th width="10%">上牌地点</th>
                     <th width="22%">外观/内饰</th>
                     <th width="12%">发布人</th>
-                    <th width="12%">发布时间</th>
+                    <th width="10%">发布时间</th>
                     <th width="6%">操作</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @uncompleted_tenders.each do |tender|%>
                     <tr>
-                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: current_user.id), class: 'name' %></td>
+                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: tender.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
                       <td><%= tender.post_car_license_area -%></td>
                       <td><%= tender.post_color -%></td>
@@ -51,19 +51,19 @@
               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
                 <thead>
                   <tr>
-                    <th width="28%">品牌/车型</th>
+                    <th width="30%">品牌/车型</th>
                     <th width="10%">报价(万元)</th>
                     <th width="10%">上牌地点</th>
                     <th width="22%">外观/内饰</th>
                     <th width="12%">发布人</th>
-                    <th width="12%">发布时间</th>
+                    <th width="10%">发布时间</th>
                     <th width="6%">操作</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @completed_tenders.each do |tender|%>
                     <tr>
-                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: current_user.id), class: 'name' %></td>
+                      <td><%= link_to tender.post_title, post_path(tender.post, _type: 1, tender_id: tender.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
                       <td><%= tender.post_car_license_area -%></td>
                       <td><%= tender.post_color -%></td>

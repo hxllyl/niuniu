@@ -42,7 +42,9 @@ padding:0;
 #topBar .nav li.active a { border-bottom: 2px solid #f4621b; color: #f4621b; box-shadow: none; }
 #topBar .navbar-nav-right { font-size: 12px; }
 #topBar .navbar-nav-right li { padding: 0; background: url(../imgs/line1x8.gif) no-repeat right center; }
+#topBar .navbar-nav-right li .dropdown-menu { padding: 0; }
 #topBar .navbar-nav-right li .dropdown-menu li { background-image: none; }
+#topBar .navbar-nav-right li .dropdown-menu li a { height: 36px; line-height: 36px; padding: 0 12px; font-size: 12px; }
 #topBar .navbar-nav-right li.last { background: none; }
 #topBar .navbar-nav-right li a { padding: 0 8px; }
 #topBar .navbar-nav-right li a .icon { width: 20px; }
@@ -300,6 +302,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .carList .list li a { color: #458cc7; }
 .carList .list li.current a { color: #f4621b; }
 .carList .listBox .toggleBtn { position: absolute; bottom: 0; right: 0; height: 20px; line-height: 20px; font-size: 12px; color: #458cc7; cursor: pointer; }
+.carList .listBox .moreLink { color: #458cc7; }
 .carSourceHis li { position: relative; line-height: 24px; padding: 4px 0; border-top: 1px solid #e6e6e6; color: #666; }
 .carSourceHis li.first { border-top: none; }
 .carSourceHis li .name { line-height: 24px; }
@@ -344,7 +347,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .userDataTag .list li.current a { padding-bottom: 2px; border-bottom: 2px solid #f4621b; }
 .userDataTag .link { position: absolute; right: 10px; bottom: 8px; }
 .userDataTag .link a:hover { color: #f4621b; }
-.userDataTag .list li .dot, .userDataTag .link .dot { display: none; position: absolute; top: 8px; right: 46px; width: 10px; height: 10px; border-radius: 5px; background-color: #f4621b; overflow: hidden; }
+.userDataTag .list li .dot, .userDataTag .link .dot { display: none; position: absolute; top: 4px; right: 46px; width: 10px; height: 10px; border-radius: 5px; background-color: #f4621b; overflow: hidden; }
 .userDataTag .link .dot { top: -8px; left: -12px; }
 .userDataTag .list li.noread .dot, .userDataTag .link.noread .dot { display: block; }
 .systemMesList li { line-height: 24px; padding: 10px 0 10px 30px; border-bottom: 1px solid #e6e6e6; color: #818181; background-repeat: no-repeat; background-position: 4px 18px; }

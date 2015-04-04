@@ -44,6 +44,10 @@ defaults: &defaults
   qx_login: 2062569822
   qx_password: 202084
   qx_tip: 欢迎您加入牛牛汽车，您的验证码是：
+  
+  # jpush 测试账号
+  app_key: 330de1b62fd033affa15166f
+  master_secret: 2f04b114782b5de2d2cec5c3
 
 development:
   <<: *defaults

@@ -1,22 +1,19 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 $(function(){
-
   // 用户获取手机验证码
   var validCodeBut = $('.valid_code_but');
   var validCode = $('.valid-code');
-  //var nextStep = $('#next-step');
   var countdown = $("#countdown");
   var countWait = 60;
 
   validCodeBut.attr("disabled",false);
-
   validCodeBut.on('click', function(event){
     event.preventDefault();
     var objThis = $(this);
     var mobileInput = objThis.parents('.modal-content').find('.mobile');
-
     var objBtnType = objThis.next('.valid_type');
+
     $.post('/valid_codes.json', { mobile: mobileInput.val(), type: objBtnType.val() }, function(data){
       if(data.status == 'success'){
         countTime(objThis);
@@ -47,11 +44,11 @@ $(function(){
   function countTime(obj) {
     if (countWait == 0) {
       $(obj).attr("disabled",false);
-    $(obj).val("获取动态码");
+      $(obj).val("获取动态码");
       countWait = 60;
     } else {
       $(obj).attr("disabled",true);
-    $(obj).val(countWait + "秒后重新获取");
+      $(obj).val(countWait + "秒后重新获取");
       countWait--;
       setTimeout(function() {
         countTime(obj);
@@ -85,12 +82,12 @@ $(function(){
 });
 
 function updateCountdown(seconds, selected) {
-    seconds--;
-    if (seconds > 0) {
-       selected.text(seconds);
-       setTimeout(updateCountdown(seconds, selected), 1000);
-    } else {
-      selected.hide();
-      return 0;
-    }
+  seconds--;
+  if (seconds > 0) {
+    selected.text(seconds);
+    setTimeout(updateCountdown(seconds, selected), 1000);
+  } else {
+    selected.hide();
+    return 0;
+  }
 }

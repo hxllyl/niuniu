@@ -48,7 +48,7 @@ class Api::UsersController < Api::BaseController
   def show
 
     if params[:id].present?
-      user = user.find_by_id params[:id]
+      user = User.find_by_id params[:id]
     else
       user = @user
     end
@@ -59,13 +59,15 @@ class Api::UsersController < Api::BaseController
       post_count: user.posts.needs.count,
       tender_count: user.tenders.count,
       following_count: user.followings.count,
-      is_following: @user.following?(user)
+      is_following: @user.following?(user),
+      can_upgrade: user.can_upgrade.first,
+      valid_level_now: user.can_upgrade.last
     }
 
     user_info = user.to_hash.merge(remain_info)
     render json: {status: 200, notice: 'success', data: user_info}
   rescue => ex
-    render json: {status: 500, notice: 'failure', error_msg: ex.message}
+    render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
 
   # 寻车报价是否有更新
@@ -91,7 +93,7 @@ class Api::UsersController < Api::BaseController
 
     render json: { status: 200, notice: 'success', data: {post: post_status, tender: tender_status}}
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message}
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
   # 修改密码
@@ -112,7 +114,7 @@ class Api::UsersController < Api::BaseController
     @user.save!
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 400, notice: 'failure', error_msg: ex.message }
+    render json: { status: 400, notice: 'failed', error_msg: ex.message }
   end
 
   # 认证升级
@@ -158,7 +160,7 @@ class Api::UsersController < Api::BaseController
       render json: { status: 200, notice: 'success', can_upgrade: 'false'}
     end
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message }
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
 
   # 重置密码
@@ -187,7 +189,7 @@ class Api::UsersController < Api::BaseController
     user.save!
     render json: { status: 200, notice: 'success'}
   rescue => e
-    render json: { status: 400, notice: 'failure', error_msg: e.message }
+    render json: { status: 400, notice: 'failed', error_msg: e.message }
   end
 
   # 更新个人资料
@@ -226,10 +228,10 @@ class Api::UsersController < Api::BaseController
       end
       render json: { status: 200, notice: 'success' }
      else
-      render json: { status: 500, notice: 'failure', error_msg: @user.errors.full_messages.join('\n')}
+      render json: { status: 500, notice: 'failed', error_msg: @user.errors.full_messages.join('\n')}
      end
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message }
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
 
   private

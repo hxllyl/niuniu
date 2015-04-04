@@ -4,7 +4,7 @@
 			<div class="photo bfL"><a href="#"><%= image_tag(@someone.avatar, alt: "", size: '78x78')%></a></div>
 			<div class="name">
 				<h5><%= @someone.name_area %></h5>
-				<div class="clearfix"><span class="tag"><%= image_tag(@user.level_icon, alt: "", width: "100%") if @someone.is_show_icon?%></span></div>
+				<div class="clearfix"><span class="tag"><%= image_tag(@someone.level_icon, alt: "", width: "100%") if @someone.is_show_icon?%></span></div>
         <div id='following'>
         <% if current_user and !current_user.following?@someone%>
           <%= link_to add_following_users_path(id: @someone.id), class: 'btn btn-success btn-xs mt6', id: 'add-following', role: 'button', method: :patch, remote: true do %>
