@@ -23,10 +23,10 @@ $(function(){
 
   var trLength = $(".btnGroups").find(".downBtn").length;
   $(".btnGroups").find(".upBtn").each(function(){
+    $(this).unbind("click");
     $(this).click(function(){
       var $tr = $(this).parents("tr");
       var id = $tr.attr('data-id');
-
       if ($tr.index() != 0){
 
         $.post(position_url, {id: id, type: 'up'}, function(){});
@@ -35,12 +35,12 @@ $(function(){
     });
   });
   $(".btnGroups").find(".downBtn").each(function(){
+    $(this).unbind("click");
     $(this).click(function(){
       var $tr = $(this).parents("tr");
       if ($tr.index() != trLength - 1){
         var id = $tr.attr('data-id');
         $.post(position_url, {id: id, type: 'down'}, function(){});
-
         $tr.next().after($tr);
       }
     });
