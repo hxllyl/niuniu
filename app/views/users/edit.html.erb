@@ -15,11 +15,11 @@
       <h5 class="title"><%= t('custom_setting') -%></h5>
       <div class="row">
         <div class="col-md-3 photoArea">
-          <div class="photo"><%= image_tag(current_user.avatar, alt: "", width: "180", height: "180", class: 'show-img')%></div>
+          <div class="photo show-img"><%= image_tag(current_user.avatar, alt: "", width: "180", height: "180", id: 'show-img')%></div>
           <div class="tips">你可以选择png/jpg图片(180*180)作为头像</div>
           <div class="fileInput">
             <div class="fileBtn">修改头像
-              <%= file_field_tag :_image, value: current_user.avatar, type: :file, multiple: true, class: 'button upload_btn', accept: 'image/png,image/gif,image/jpeg, image/jpg' -%>
+              <%= file_field_tag :_image, value: current_user.avatar, type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg', 'target-id' => 'show-img' -%>
               <%= hidden_field_tag :_type, 'avatar' -%>
             </div>
           </div>
@@ -121,6 +121,23 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.button').on('change', function(){
+      var targetId = $(this).attr('target-id');
+      
+      if(this.files && this.files[0]){
+        
+        var reader = new FileReader();
+        reader.onload = function(e){
+          $('#show-img').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+});
+</script>
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true %>
