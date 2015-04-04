@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403045805) do
+ActiveRecord::Schema.define(version: 20150403225441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,14 +188,15 @@ ActiveRecord::Schema.define(version: 20150403045805) do
   add_index "log_user_update_levels", ["user_id"], name: "index_log_user_update_levels_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.string   "title",       limit: 100
+    t.string   "title",          limit: 100
     t.integer  "sender_id"
     t.integer  "receiver_id"
-    t.integer  "_type",                   default: 0
-    t.string   "content",                             null: false
-    t.integer  "status",                  default: 0
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "_type",                      default: 0
+    t.string   "content",                                null: false
+    t.integer  "status",                     default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "receiver_group"
   end
 
   add_index "messages", ["_type"], name: "index_messages_on__type", using: :btree
@@ -275,12 +276,13 @@ ActiveRecord::Schema.define(version: 20150403045805) do
   create_table "tenders", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.decimal  "price",            precision: 10, scale: 2, default: 0.0
-    t.integer  "discount_way",                                            null: false
-    t.decimal  "discount_content", precision: 10, scale: 2, default: 0.0
-    t.integer  "status",                                    default: 0
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.decimal  "price",                        precision: 10, scale: 2, default: 0.0
+    t.integer  "discount_way",                                                        null: false
+    t.decimal  "discount_content",             precision: 10, scale: 2, default: 0.0
+    t.integer  "status",                                                default: 0
+    t.string   "remark",           limit: 225
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
   end
 
   add_index "tenders", ["post_id"], name: "index_tenders_on_post_id", using: :btree
