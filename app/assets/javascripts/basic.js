@@ -49,5 +49,5 @@ $(document).ready(function(){
 
   setTimeout(function() {
       $('.alertTips').fadeOut('fast');
-  }, 3000);
+  }, 2000);
 });

@@ -59,31 +59,29 @@ class Post < ActiveRecord::Base
     expect_price: '价格排序'
   }
 
-  searchable do
-    text :inner_color
-    text :outer_color
-    text :brand do
-      brand.name
-    end
-
-    text :standard do
-      standard.name
-    end
-
-    text :car_model do
-      car_model.name
-    end
-
-    text :base_car do
-      base_car.style
-    end
-    text :title
-    integer :_type
-    integer :user_id, :references => User
-    time :updated_at
-    float :expect_price
-
-  end
+  # searchable do
+  #   text :inner_color
+  #   text :outer_color
+  #   text :brand do
+  #     brand.name
+  #   end
+  #
+  #   text :standard do
+  #     standard.name
+  #   end
+  #
+  #   text :car_model do
+  #     car_model.name
+  #   end
+  #
+  #   text :base_car do
+  #     base_car.style
+  #   end
+  #   text :title
+  #   integer :_type
+  #   integer :user_id
+  #
+  # end
 
   # relations
   has_many    :tenders, class_name: 'Tender'
@@ -290,7 +288,7 @@ class Post < ActiveRecord::Base
   end
 
   def to_ary
-    [standard_name, brand_name, car_model_name, base_car_style, Post::RESOURCE_TYPE[resource_type], color, expect_price.to_f, created_at.to_s(:db)]
+    ["#{brand_name}/#{car_model_name}/#{base_car_style}", color, st_rt, "#{show_price} 指导价#{base_price}", remark]
   end
 
   def dealed_tender

@@ -46,7 +46,6 @@ class Api::UsersController < Api::BaseController
   #   notice:     [String]  failed
   #   error_msg:  [String]  错误的消息
   def show
-
     if params[:id].present?
       user = User.find_by_id params[:id]
     else
@@ -65,6 +64,7 @@ class Api::UsersController < Api::BaseController
     }
 
     user_info = user.to_hash.merge(remain_info)
+    
     render json: {status: 200, notice: 'success', data: user_info}
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}

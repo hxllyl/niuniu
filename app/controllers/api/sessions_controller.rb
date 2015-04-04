@@ -20,12 +20,16 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
   #  notice: [String]  请输入正确的帐号密码
   def create
     warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
-
-    render json:  {
-                    status:   200,
-                    notice:   'success',
-                    data:     { token: current_user.token }
-                  }
+    
+    respond_to do |format| 
+      format.json {
+        render json:  {
+                        status:   200,
+                        notice:   'success',
+                        data:     { token: current_user.token }
+                      }
+      }
+    end
   end
 
   # 用户注销

@@ -200,17 +200,20 @@ class PostsController < ApplicationController
 
   # 导出用户资源
   def download_posts
-    posts = Post.where(_type: 0, user_id: params[:user_id]).order(updated_at: :desc)
+    user = User.find_by_id(params[:user_id])
 
-    path = "public/system/users_#{params[:user_id]}_resources_list.xls"
-    workbook = WriteExcel.new(path)
+    path      = "public/system/users_#{params[:user_id]}_resources_list.xls"
+    workbook  = WriteExcel.new(path)
+    # format
+    format    = workbook.add_format(color: 'blue', align: 'center', font: '80')
     worksheet = workbook.add_worksheet
-    headings = %w(规格 品牌 型号 款式 状态 颜色 价格/万 发布时间)
 
-    worksheet.write(0, 0, headings)
+    worksheet.write('A1', "#{user.name}的资源表（下载时间: #{Time.now.strftime("%Y/%m/%d")}）", format)
+    worksheet.write('A2', "联系电话: #{user.mobile}", format)
+    worksheet.write(2, 0, %w(品牌/车型/款式 外观/内饰 规格/状态 价格 备注))
 
-    posts.each_with_index do |record, index|
-      worksheet.write(index+1, 0, record.to_ary)
+    user.posts.resources.order(updated_at: :desc).each_with_index do |record, index|
+      worksheet.write(index + 3, 0, record.to_ary)
     end
 
     workbook.close

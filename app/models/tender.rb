@@ -70,7 +70,7 @@ class Tender < ActiveRecord::Base
       post_expect_price:        post.expect_price.to_f,
       post_price_status:        post.base_price,
       post_tenders_count:       post.tenders.count,
-      post_brand_img:           post.brand.car_photo.image.try(:url),
+      post_brand_img:           (post.brand.car_photo.image.try(:url) rescue ''),
 
       tender_id:                id,
       tender_user_id:           user_id,

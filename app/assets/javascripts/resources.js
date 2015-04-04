@@ -34,6 +34,7 @@ $(function(){
       }
     });
   });
+  
   $(".btnGroups").find(".downBtn").each(function(){
     $(this).unbind("click");
     $(this).click(function(){

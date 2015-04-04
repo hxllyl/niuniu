@@ -408,10 +408,11 @@ class Api::PostsController < Api::BaseController
     results = if params[:cid] && params[:style] # 认定为级联搜索
                 ListApiPost.call(params)
               elsif params[:q]
-                Post.search do
-                  with(:_type, 0)
-                  fulltext String(params[:q])
-                end.results
+                # Post.search do
+               #    with(:_type, 0)
+               #    fulltext String(params[:q])
+               #  end.results
+               Post.limit(30)
               else
                 []
               end
