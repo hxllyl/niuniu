@@ -73,11 +73,11 @@ class Api::MessagesController < Api::BaseController
   #   error_msg: 错误信息
    
   def device_methods
-    raise 'register_id must be included' if params[:register_id]
+    raise 'register_id must be included' if params[:register_id].blank?
     
     device = ActiveDevice.where(user_id: @user.id, register_id: params[:register_id]).first_or_initialize
     device.active = params[:method] == 'activating' 
-    device.save
+    device.save!
     
     render json: { status: 200, notice: 'success' }
   rescue => ex

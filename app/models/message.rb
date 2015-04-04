@@ -57,7 +57,7 @@ class Message < ActiveRecord::Base
   def push_message
     if _type = TYPES.keys[0]
       if self.receiver
-        jpush_message(content, Message.push_list(receiver))
+        jpush_message(content, ActiveDevice.push_list(receiver))
       else
         # NOTICE: In this case, this should put in a queue, now comment it
         # real_receiver_users.each do |u|

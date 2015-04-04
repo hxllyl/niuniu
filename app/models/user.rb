@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
         case m
         when 'avatar' then
           define_method m.to_sym do
-            (self.photos.where(_type: m).first.image_path.thumb rescue nil) || AVATAR
+            (self.photos.where(_type: m).first.image_path(:medium) rescue nil) || AVATAR
           end
         else
           define_method m.to_sym do
