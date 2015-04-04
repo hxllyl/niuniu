@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     end
 
     resources :posts
+
+    resources :messages, only: [:index, :new, :create, :destroy]
+    root 'users#search'
   end
 
   root 'portal#index'

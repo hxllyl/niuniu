@@ -20,45 +20,62 @@ class PostsController < ApplicationController
   # 市场资源点击品牌进入资源列表页
   # params: st=1&br=1&cm=1&bc=1&oc=xx&ic=xx&rt=xx
   def resources_list
-    params.delete(:action)
-    params.delete(:controller)
-
-    @q_json = params
-    @standards  = Standard.all
-    @standard   = Standard.find_by_id(params[:st])
-
-    @brands     = @standard ? @standard.brands.valid : @standards.first.brands.valid
-    @brand      = Brand.find_by_id(params[:br])
-
-    if params[:st] && params[:br]
-      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
-      @car_model  = CarModel.find_by_id(params[:cm])
+    if params[:bc]
+      @base_car  = BaseCar.find_by_id(params[:bc])
+      @car_model, @brand, @standard = @base_car.car_model, @base_car.brand, @base_car.standard
+      @base_cars, @car_models, @brands, @standards = @car_model.base_cars, @brand.car_models, @standard.brands, @brand.standards
+      @q_json = {bc: @base_car.id, cm: @car_model.id, br: @brand.id, st: @standard.id}
+    elsif params[:cm]
+      @q_json = {cm: params[:cm]}
+      @base_car = nil
+      @car_model = CarModel.find_by_id(params[:cm])
+      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars
+      @car_models, @brands, @standards  = CarModel.where(standard_id: @standard.id, brand_id: @brand.id), @standard.brands, @brand.standards
+      @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
+    elsif params[:br] && params[:st]
+      @q_json = {st: params[:st], br: params[:br]}
+      @brand = Brand.find_by_id(params[:br])
+      @standard = Standard.find_by_id(params[:st])
+      @car_model, @base_car, @base_cars = nil, nil, []
+      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+      @brands, @standards = @standard.brands, Standard.all
+      @q_json = {br: @brand.id, st: @standard.id}
+    elsif params[:br]
+      @q_json = {br: params[:br]}
+      @base_car, @car_model, @base_cars, @car_models = nil, nil, [], []
+      @brand = Brand.find_by_id(params[:br])
+      @brands, @standards  = Brand.all, @brand.standards
+      @q_json = {br: @brand.id}
+    elsif params[:st]
+      @q_json = {st: params[:st]}
+      @base_car, @car_model, @brand, @base_cars, @car_models = nil, nil, nil, [], [],[]
+      @standard = Standard.find_by_id(params[:st])
+      @brands, @standards  = @standard.brands, Standard.all
+      @q_json = {st: @standard.id}
     else
-      @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @brands.first.id).valid
-      @car_model  = nil
+      @standard, @brand, @car_model, @base_car, @car_models, @base_cars = nil, nil, nil, nil, [], []
+      @standards, @brands = Standard.all, Brand.all
+      @q_json = {}
     end
 
-    if params[:st] && params[:br] && params[:cm]
-      @base_cars  = @car_model.base_cars.valid
-      @base_car   = BaseCar.find_by_id(params[:bc])
-    else
-      @base_cars  = @car_models.empty? ? [] : @car_models.first.base_cars.valid
-      @base_car   = nil
-    end
-
-    if params[:st] && params[:br] && params[:cm] && params[:bc]
+    if @base_car
       conds = {}
-      conds[:outer_color]   = params[:oc]    if params[:oc]
-      conds[:inner_color]   = params[:ic]    if params[:ic]
-      conds[:resource_type] = params[:rt]    if params[:rt]
-
-      @posts = @base_car.posts.resources.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
+      conds[:outer_color]   = params[:oc] && @q_json[:oc] = params[:oc]  if params[:oc]
+      conds[:inner_color]   = params[:ic] && @q_json[:ic] = params[:ic]  if params[:ic]
+      conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
+      @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
+      @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
+      @posts = @base_car.posts.resources.where(conds).order(@order_by).page(params[:page]).per(10)
     end
   end
 
   # 一键找车列表页
   def key_search
-    @order_ele = params[:order_ele] ? params[:order_ele] : 'updated_at'
+    params.delete(:action)
+    params.delete(:controller)
+
+    @q_json             = params
+    @q_json[:order_ele] = params[:order_ele] ? params[:order_ele] : 'updated_at'
     # u_ids      = User.all.map(&:id)
 
     # followed, unfollow = if current_user
@@ -98,8 +115,6 @@ class PostsController < ApplicationController
              else
                Post.needs
              end
-  # rescue => e
-  #   render json: {status: :not_ok, msg: e.message}
   end
 
   def show
@@ -154,30 +169,24 @@ class PostsController < ApplicationController
 
   # 导出用户资源
   def download_posts
-    # posts = Post.where(_type: 0, user_id: params[:user_id])
+    posts = Post.where(_type: 0, user_id: params[:user_id]).order(updated_at: :desc)
 
-    # path = 'public/system/quests_details_list.xls'
-    # workbook = WriteExcel.new(path)
-    # worksheet = workbook.add_worksheet
-    # format = workbook.add_format
-    # format.set_bold(1)
-    # format.set_color('red')
-    # format.set_align('center')
-    # headings = %w()
+    path = "public/system/users_#{params[:user_id]}_resources_list.xls"
+    workbook = WriteExcel.new(path)
+    worksheet = workbook.add_worksheet
+    headings = %w(规格 品牌 型号 款式 状态 颜色 价格/万 发布时间)
 
-    # worksheet.write('A1',headings,format)
+    worksheet.write(0, 0, headings)
 
-    # records.each_with_index do |record,index|
-    #   a = []
+    posts.each_with_index do |record, index|
+      worksheet.write(index+1, 0, record.to_ary)
+    end
 
-    #   worksheet.write("A#{index+2}",a)
-    # end
+    workbook.close
 
-    # workbook.close
+    send_file(path)
 
-    # send_file(path)
-
-    # return
+    return
   end
 
   # 报价

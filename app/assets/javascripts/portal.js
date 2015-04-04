@@ -16,7 +16,8 @@ $(function(){
     var objThis = $(this);
     var mobileInput = objThis.parents('.modal-content').find('.mobile');
 
-    $.post('/valid_codes.json', { mobile: mobileInput.val(), type: 0 }, function(data){
+    var objBtnType = objThis.next('.valid_type');
+    $.post('/valid_codes.json', { mobile: mobileInput.val(), type: objBtnType.val() }, function(data){
       if(data.status == 'success'){
         countTime(objThis);
       }else{

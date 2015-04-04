@@ -54,6 +54,11 @@ class Post < ActiveRecord::Base
     inner:    '里面'
   }
 
+  ORDERS = {
+    updated_at:   '默认排序',
+    expect_price: '价格排序'
+  }
+
   searchable do
     text :inner_color
     text :outer_color
@@ -74,7 +79,7 @@ class Post < ActiveRecord::Base
     end
     text :title
     integer :_type
-    integer :user_id
+    integer :user_id, :references => User
     time :updated_at
     float :expect_price
 
@@ -283,11 +288,15 @@ class Post < ActiveRecord::Base
   def is_completed?
     status == 3
   end
-  
+
+  def to_ary
+    [standard_name, brand_name, car_model_name, base_car_style, Post::RESOURCE_TYPE[resource_type], color, expect_price.to_f, created_at.to_s(:db)]
+  end
+
   def dealed_tender
     tenders.where(status: Tender::STATUS.keys[1]).first
   end
-  
+
   # 逻辑删除 物理删除用real_delete
   alias :real_delete :delete
 
@@ -302,14 +311,14 @@ class Post < ActiveRecord::Base
   def show_price
     expect_price.to_f == 0.0 ? '电议' : "#{expect_price.to_f}万"
   end
-  
+
   # after_update :make_message
   def make_message
     if is_completed?
       Message.make_system_message(generate_message, user)
     end
   end
-  
+
   private
   def generate_message
     message =<<-EOF

@@ -74,14 +74,3 @@
 <%= content_for :footers do%>
   <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true%>
 <%end%>
-
-<script>
-  // 一键找车
-  $('#key_select_order').on('change', function(e){
-    e.preventDefault();
-    var order = $('#key_select_order').val();
-    var url = '&order_ele=' + order;
-
-    location.href = location.href + url;
-  });
-</script>

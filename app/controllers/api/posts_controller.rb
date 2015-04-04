@@ -36,8 +36,6 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:        [String]    valid token
   #   _type:        [Integer]   0 资源 1 寻车
-  #   page:         [Integer]   页码 # 从0开始
-  #   per:          [Integer]   每页记录数
   #
   #
   # Return:
@@ -48,10 +46,8 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def my_list
-    page = params[:page] ? params[:page] : 0
-    per  = params[:per]  ? params[:per]  : 10
 
-    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc).page(page).per(per)
+    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
