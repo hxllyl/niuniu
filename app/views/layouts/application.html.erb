@@ -30,6 +30,7 @@
 <%= render partial: 'partials/footer' %>
 <%= yield :footers %>
 
+<%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true, 'async' => true %>
 <%= javascript_include_tag 'basic', 'data-turbolinks-track' => true, 'async' => true %>
 </body>
 </html>
