@@ -81,6 +81,8 @@ class Tender < ActiveRecord::Base
       tender_remark:            remark,
       tender_user_mobile:       user_mobile,
       tender_user_level:        User::LEVELS[user_level],
+      tender_discount_way:      discount_way,
+      tender_discount_content:  discount_content,
       tender_status:            status
     }
   end
@@ -125,7 +127,7 @@ class Tender < ActiveRecord::Base
       Message.make_system_message(generate_message(:dealed), user)
     end
   end
-  
+
   private
   def generate_message(type)
     message = case type
