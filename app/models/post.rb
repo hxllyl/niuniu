@@ -79,7 +79,7 @@ class Post < ActiveRecord::Base
     end
     text :title
     integer :_type
-    integer :user_id
+    integer :user_id, :references => User
     time :updated_at
     float :expect_price
 
