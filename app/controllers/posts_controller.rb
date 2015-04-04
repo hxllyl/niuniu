@@ -120,6 +120,33 @@ class PostsController < ApplicationController
     @brand      = Brand.find_by_id(params[:br])
     @car_model  = CarModel.find_by_id(params[:cm])
 
+    if @car_model
+      @standard, @brand = @car_model.standard, @car_model.brand
+      @car_models = CarModel.where(standard_id: @car_model.standard_id, brand_id: @car_model.brand_id)
+      @standards, @brands = @brand.standards, @standard.brands
+      @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
+    elsif @standard && @brand
+      @standards, @brands = @brand.standards, @standard.brands
+      @car_model, @car_models = nil, CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+      @q_json = {br: @brand.id, st: @standard.id}
+    elsif @standard
+      @standards, @brands, @car_models, @brand, @car_model = Standard.all, @standard.brands, [], nil, nil
+      @q_json = {st: @standard.id}
+    elsif @brand
+      @standards, @brands, @car_models, @standard, @car_model = @brand.standards, Brand.all, [], nil, nil
+      @q_json = {br: @brand.id}
+    else
+      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.all.sample(30)
+      @q_json = {}
+    end
+
+    conds = {_type: 1}
+    conds[:standard_id] = @standard.id  if @standard
+    conds[:brand_id]    = @brand.id     if @brand
+    conds[:car_model_id]= @car_model.id if @car_model
+    @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
+    @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
+    @posts = Post.where(conds).order(@order_by).page(params[:page]).per(10)
   end
 
   def show
@@ -153,7 +180,6 @@ class PostsController < ApplicationController
     # params[:user_id] 某用户
     params.delete(:action)
     params.delete(:controller)
-    params[:_type] = 0 # 这边只能是寻车列表
 
     @q_json   = params
     @_type    = params[:_type]

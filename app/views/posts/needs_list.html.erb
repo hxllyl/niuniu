@@ -10,9 +10,24 @@
       <div role="tabpanel" class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <ul class="selectCrumb clearfix">
-            <li><span class="name"><%= @rs.standard.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
-            <li><span class="name"><%= @rs.brand.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
-            <li><span class="name"><%= @rs.car_model.try(:name) %></span><span class="close" aria-label="Close">&times;</span></li>
+            <%- if @standard %>
+              <li>
+                <span class="name"><%= @standard.name %></span>
+                <a href="<%= needs_list_posts_path %>" class="close" aria-label="Close">&times;</a>
+              </li>
+            <% end %>
+            <%- if @brand %>
+              <li>
+                <span class="name"><%= @brand.name %></span>
+                <a href="<%= needs_list_posts_path(st: @q_json[:st]) %>" class="close" aria-label="Close">&times;</a>
+              </li>
+            <% end %>
+            <%- if @car_model %>
+              <li>
+                <span class="name"><%= @car_model.name %></span>
+                <a href="<%= needs_list_posts_path(st: @q_json[:st], br: @q_json[:br]) %>" class="close" aria-label="Close">&times;</a>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="panel-body">
@@ -20,8 +35,10 @@
             <div class="tt">规格</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <% @rs.all_standards.each do |std| %>
-                  <li><a href=<%= needs_list_posts_path(standard_id: std.id) %>><%= std.name %></a></li>
+                <% @standards.each do |std| %>
+                  <li class="<%= @standard == std ? 'current' : '' %>">
+                    <%= link_to std.name, needs_list_posts_path(@q_json.merge(st: std.id)) %>
+                  </li>
                 <% end %>
               </ul>
             </div>
@@ -31,7 +48,7 @@
             <div role="tabpanel" class="listBox toggle">
               <ul class="selectTag nav-tabs clearfix" role="tablist">
                 <li role="presentation" class="active"><a href="#allBrand" aria-controls="allBrand" role="tab" data-toggle="tab">全部</a></li>
-                <% @rs.brands_ordered_by_pinyin.keys.each do |letter| %>
+                <% @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
                     <li role="presentation">
                       <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
                 <% end %>
@@ -39,15 +56,17 @@
               </ul>
               <div class="tab-content">
                 <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
-                  <% @rs.all_brands.each do |brand| %>
-                    <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
+                  <% @brands.each do |brand| %>
+                    <li class="<%= @brand == brand ? 'current' : '' %>">
+                      <%= link_to brand.name, needs_list_posts_path(@q_json.merge(br: brand.id)) %>
+                    </li>
                   <% end %>
                 </ul>
 
-                <% @rs.brands_ordered_by_pinyin.each do |(letter, brands)| %>
+                <% @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
                     <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
                       <% brands.each do |brand| %>
-                          <li><a href=<%= needs_list_posts_path(brand_id: brand.id) %>><%= brand.name %></a></li>
+                          <li><%= link_to brand.name, needs_list_posts_path(@q_json.merge(br: brand.id)) %></li>
                       <% end %>
                     </ul>
                 <% end %>
@@ -60,8 +79,10 @@
             <div class="tt">型号</div>
             <div class="listBox">
               <ul class="list clearfix">
-                <% @rs.all_car_models.each do |car_model| %>
-                  <li><a href=<%= needs_list_posts_path(car_model_id: car_model.id) %>><%= car_model.name %></a></li>
+                <% @car_models.each do |car_model| %>
+                  <li class="<%= @car_model == car_model ? 'current' : '' %>">
+                    <%= link_to car_model.name, needs_list_posts_path(@q_json.merge(cm: car_model.id)) %>
+                  </li>
                 <% end %>
               </ul>
             </div>
@@ -70,7 +91,7 @@
       </div>
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">全部寻车（<%= @needs.count %>）</h3>
+          <h3 class="panel-title">全部寻车（<%= @posts.total_count %>）</h3>
         </div>
         <div class="panel-body">
           <div class="mySourceOpe">
@@ -85,7 +106,7 @@
           <div class="mySourceTab mt10">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
               <tbody>
-              <% @needs.each do |post| %>
+              <% @posts.each do |post| %>
                 <tr>
                   <td>
                     <div class="box clearfix">
@@ -93,7 +114,11 @@
                         <h5 class="name"><%= link_to post.title, post_path(post, _type: 1) %></a></h5>
                         <div class="info clearfix">
                           <div class="m"><%= post.color %></div>
-                          <div class="m"><span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?)%></span><span><a href="#"><%= post.owner %></a></span><span class="statu"><%=following?(post.user)%></span></div>
+                          <div class="m">
+                            <span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?)%></span>
+                            <span><%= link_to post.owner, user_list_posts_path(user_id: post.user_id, _type: 1) %></span>
+                            <span class="statu"><%=following?(post.user)%></span>
+                          </div>
                         </div>
                       </div>
                       <div class="infoPrice">
