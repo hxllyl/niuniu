@@ -39,7 +39,7 @@ $(function(){
         if(data.status == 'success'){
           cancel.parent().parent().hide();
           $('#'+ban).text(data.number);
-          $('#alertModal').fade(100);
+          $('#alertModal').fade('fast');
         }
       });
     })
