@@ -48,12 +48,24 @@ namespace :deploy do
 #     end
 #   end
 
+  Rake::Task["deploy:compile_assets"].clear_actions
+  task :compile_assets => [:set_rails_env] do
+    run_locally do
+      if capture("git --no-pager diff #{fetch(:previous_revision)} #{fetch(:current_revision)} app/assets vendor/assets").empty?
+         info "Skipping assets compilation"
+      else
+        invoke 'deploy:assets:precompile'
+        invoke 'deploy:assets:backup_manifest'
+      end
+    end
+  end
+
 
   after :finishing, 'deploy:cleanup'
   # after "deploy:update_code", "deploy:migrate"
   # after :finishing, :copy_sync_scripts
   # after :finishing, 'deploy:spec_ruby_version'
-
+  
 end
 
 namespace :solr do
