@@ -137,8 +137,9 @@ gem 'naught'
 gem 'chinese_pinyin'
 
 # search
-gem 'sunspot_rails'
-gem 'sunspot_solr'
+# gem 'sunspot_rails'
+# gem 'sunspot_solr'
+# gem 'pg_search'
 
 # nested
 gem 'ancestry'
