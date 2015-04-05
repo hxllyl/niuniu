@@ -141,16 +141,17 @@ $(document).ready(function(){
     });
   });
 
-  var offerGroup = $(".methodSelect > .form-group");
+  var offerGroup = $(".methodSelect").find(".form-group");
   var offerInput = $(".selectInput").find("input[type='text']");
   offerInput.attr("disabled", "true");
   offerGroup.find(".selectTag").each(function (e) {
       $(this).bind("click", function(){
           if ($(this).hasClass("disabled")) return false;
           offerGroup.find(".selectTag").removeClass("active");
-          offerGroup.find(".selectInput").removeClass("active");
           $(this).addClass("active");
+          offerGroup.find(".selectInput").removeClass("active");
           $(this).next(".selectInput").addClass("active");
+          offerGroup.find(".selectInput").find("input[type='text']").attr("disabled", "true");
           $(this).next(".selectInput").find("input[type='text']").removeAttr("disabled");
           $(this).next(".selectInput").find("input[type='text']").focus();
       });

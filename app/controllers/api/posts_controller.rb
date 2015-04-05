@@ -50,6 +50,10 @@ class Api::PostsController < Api::BaseController
 
     posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
 
+    if params[:_type] == '1' # 仅针对寻车
+      instrument 'user.has_read_tender', post_id: posts.pluck(:id)
+    end
+    
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
@@ -72,10 +76,14 @@ class Api::PostsController < Api::BaseController
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
 
+    u_c = @user.tenders.completed
     uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).page(page).per(per).map(&:to_hash)
-    completed   = @user.tenders.completed.order(updated_at: :desc).page(page).per(per).map(&:to_hash)
+    completed   = u_c.order(updated_at: :desc).page(page).per(per).map(&:to_hash)
 
-    render json: {status: 200, notice: 'success', data: {uncompleted: uncompleted, completed: completed}}
+    post_ids = u_c.pluck(:post_id)
+    instrument 'user.has_read_hunt', post_id: post_ids, user_id: @user.id do
+      render json: {status: 200, notice: 'success', data: {uncompleted: uncompleted, completed: completed}}
+    end
 
     rescue => e
     render json: {status: false, error: e.message}

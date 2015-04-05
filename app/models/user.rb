@@ -186,6 +186,10 @@ class User < ActiveRecord::Base
       []
     end
   end
+  
+  def had_updated_levels
+    levels = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[1]).order('end_level asc').pluck(:end_level)
+  end
 
   def following?(user)
     followings.include?(user)
