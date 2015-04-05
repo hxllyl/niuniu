@@ -65,22 +65,19 @@ class Post < ActiveRecord::Base
   #   text :brand do
   #     brand.name
   #   end
-
   #   text :standard do
   #     standard.name
   #   end
-
   #   text :car_model do
   #     car_model.name
   #   end
-
   #   text :base_car do
   #     base_car.style
   #   end
   #   text :title
   #   integer :_type
   #   integer :user_id
-
+  #
   # end
 
   # relations
