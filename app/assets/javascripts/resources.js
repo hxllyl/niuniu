@@ -23,7 +23,6 @@ $(function(){
 
   var trLength = $(".btnGroups").find(".downBtn").length;
   $(".btnGroups").find(".upBtn").each(function(){
-    $(this).unbind("click");
     $(this).click(function(){
       var $tr = $(this).parents("tr");
       var id = $tr.attr('data-id');
@@ -34,9 +33,8 @@ $(function(){
       }
     });
   });
-  
+
   $(".btnGroups").find(".downBtn").each(function(){
-    $(this).unbind("click");
     $(this).click(function(){
       var $tr = $(this).parents("tr");
       if ($tr.index() != trLength - 1){

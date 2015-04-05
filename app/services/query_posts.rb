@@ -2,9 +2,9 @@ module Services
   class QueryPost
     attr_reader :query, :brands, :car_models, :standards, :base_cars
 
-    def initialize(opts = {_type: 0})
+    def initialize(opts = {})
       @query = String(opts[:q])
-      @_type = opts[:_type] # 资源
+      @_type = opts[:_type] || 0 # 默认搜索资源
     end
 
     def search_multi_tables
@@ -26,7 +26,7 @@ module Services
       base = posts[:base_car_id].in( @brands.pluck(:id) )
       cus_post = posts[:outer_color].matches( "%#{@query}%" ).or( posts[:inner_color].matches( "%#{@query}%" ) )
 
-      Post.resources.valid.where(std.or(brd).or(car).or(base).or(cus_post))
+      Post.as_resource(@_type).valid.where(std.or(brd).or(car).or(base).or(cus_post))
     end
   end
 end

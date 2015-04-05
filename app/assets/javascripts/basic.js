@@ -1,10 +1,11 @@
 $(document).ready(function(){
   $(".dropdown-toggle").dropdown();
-  $(".modalBtn").click(function(){
+  $(".modalBtn").bind("click",function(){
     var targetId = $(this).data("target");
     var toggleId = $(this).data("toggle");
     if (toggleId == "modal"){
-      $(targetId).modal();
+      $(targetId).modal("show");
+      //alert(1);
     }
   });
   $(".nav-tabs a").click(function (e) {

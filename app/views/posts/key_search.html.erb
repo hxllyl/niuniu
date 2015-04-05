@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= @order_ele ? @order_ele : '排序方式' %><span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
                   <%- Post::ORDERS.each do |k, v| %>
-                    <li><a href="<%= needs_list_posts_path(@q_json.merge(order_by: k)) %>"><%= v %></a></li>
+                    <li><a href="<%= key_search_posts_path(@q_json.merge(order_by: k)) %>"><%= v %></a></li>
                   <% end %>
                 </ul>
               </div>
