@@ -71,51 +71,20 @@ class PostsController < ApplicationController
 
   # 一键找车列表页
   def key_search
-    params.delete(:action)
-    params.delete(:controller)
+    @q_json    = {q: params[:q]}
+    @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
+    order_by   = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
 
-    @q_json             = params
-    @q_json[:order_ele] = params[:order_ele] ? params[:order_ele] : 'updated_at'
-    # u_ids      = User.all.map(&:id)
+    result = Services::QueryPost.new(params.slice(:q)).search
 
-    # followed, unfollow = if current_user
-    #                       [current_user.followings.map(&:id), u_ids - current_user.followings.map(&:id)]
-    #                     else
-    #                       [[], u_ids]
-    #                     end
+    fol_posts = result.where(:user_id => current_user.following_ids).order(order_by)
+    others = result.where.not(:user_id => current_user.following_ids).order(order_by)
 
-    # @followed_posts =   Post.search do
-    #                       with(:_type, 0)
-    #                       fulltext String(params[:q])
-    #                       with(:user_id, Array(followed))
-    #                       fulltext String(params[:q])
-    #                       order_by(:updated_at, :desc)
-    #                     end.results
-
-    # @unfollow_posts =   Post.search do
-    #                       with(:_type, 0)
-    #                       fulltext String(params[:q])
-    #                       with(:user_id, Array(unfollow))
-    #                       fulltext String(params[:q])
-    #                       order_by(:updated_at, :desc)
-    #                     end.results
-    # @posts = Kaminari.paginate_array(@followed_posts + @unfollow_posts).page(params[:page]).per(10)
-    @posts = Post.resources.valid.page(params[:page]).per(10)
+    @posts = Kaminari.paginate_array(fol_posts + others).page(params[:page]).per(10)
   end
 
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
-    # @rs = SearchResource.new(params)
-    # @needs = if @rs.car_model.present?
-    #            @rs.car_model.posts.needs
-    #          elsif @rs.brand.present?
-    #            Post.needs.with_brand(@rs.brand)
-    #          elsif @rs.standard.present?
-    #            Post.with_standard(@rs.standard).needs
-    #          else
-    #            Post.needs
-    #          end
-
     @standard   = Standard.find_by_id(params[:st])
     @brand      = Brand.find_by_id(params[:br])
     @car_model  = CarModel.find_by_id(params[:cm])

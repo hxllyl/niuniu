@@ -71,6 +71,7 @@ class Tender < ActiveRecord::Base
       post_price_status:        post.base_price,
       post_tenders_count:       post.tenders.count,
       post_brand_img:           (post.brand.car_photo.image.try(:url) rescue ''),
+      post_take_car_date:       Post::TAKE_DATES[post.take_car_date],
 
       tender_id:                id,
       tender_user_id:           user_id,

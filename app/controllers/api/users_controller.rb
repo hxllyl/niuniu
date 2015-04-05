@@ -61,11 +61,11 @@ class Api::UsersController < Api::BaseController
       is_following: @user.following?(user),
       can_upgrade: user.can_upgrade.first,
       valid_level_now: user.can_upgrade.last,
-      is_updated_identity: user.had_updated_levels.include?User::LEVELS.keys[1]
+      is_updated_identity: user.had_updated_levels.include?(User::LEVELS.keys[1])
     }
 
     user_info = user.to_hash.merge(remain_info)
-    
+
     render json: {status: 200, notice: 'success', data: user_info}
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
@@ -144,9 +144,9 @@ class Api::UsersController < Api::BaseController
 
     %w(identity hand_id visiting room_outer room_inner license).each do |t|
       if params[t.to_sym].present?
-        
+
         photo = @user.photos.find_by(_type: t)
-        
+
         if photo
           photo.update(image: params[t.to_sym], _type: t)
         else
@@ -221,14 +221,14 @@ class Api::UsersController < Api::BaseController
   def update
    if params[:avatar].present?
      avatar = @user.photos.find_by(_type: 'avatar')
-  
+
      unless avatar
        @user.photos << Photo.new(image: params[:avatar], _type: params[:_type])
      else
        avatar.update(image: params[:avatar], _type: params[:_type])
      end
    end
-   
+
    if params[:user].present?
      if @user.update_attributes update_user_params
       render json: { status: 200, notice: 'success' } and return
@@ -236,7 +236,7 @@ class Api::UsersController < Api::BaseController
       render json: { status: 500, notice: 'failed', error_msg: @user.errors.full_messages.join('\n')} and return
      end
    end
-   
+
    render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
