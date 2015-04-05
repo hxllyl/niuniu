@@ -2,10 +2,8 @@ class Admin::UsersController < Admin::BaseController
 
   def search
     if request.xhr?
-      @mobile = params[:mobile]
-      if @mobile.present?
-        @user = User.where(mobile: @mobile).first.to_hash
-      end
+      @user = User.find_by_mobile(params[:mobile])
+      # @mobile = Log::ContactPhone.find_by_mobile(params[:mobile])
     end
 
     respond_to do |format|
@@ -28,6 +26,17 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find_by_id(params[:id])
     if @user.blank?
       redirect_to :back, notice: '很抱歉，此用户不存在'
+    end
+  end
+
+  # 我来联系, 归入自己的通讯录
+  def contact
+    @mobile = Log::ContactPhone.new(
+                mobile: params[:mobile],
+                sender_id: current_user.id
+              )
+    if @mobile.save
+    else
     end
   end
 

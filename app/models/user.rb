@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # constants
-  ROLES = %w(normal)
+  ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
   AVATAR = 'index/user_photo.jpg'
 
   STATUS = {
