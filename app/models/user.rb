@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
 
   # constants
   ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
+
+  # 注册状态：来自网站 ios android 后台
+  REG_STATUS = {
+    0 => 'web',
+    1 => 'ios',
+    2 => 'android',
+    3 => 'background'
+  }
   AVATAR = 'index/user_photo.jpg'
 
   STATUS = {
