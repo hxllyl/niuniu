@@ -24,7 +24,7 @@ class Api::PostsController < Api::BaseController
   def list
     conds = {_type: params[:_type]}
 
-    page = params[:page] ? params[:page] : 0
+    page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
     posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
 
@@ -48,7 +48,7 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  请重新再试
   def my_list
 
-    posts = @user.posts.where(_type: params[:_type]).order(position: :desc, updated_at: :desc)
+    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -69,7 +69,7 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def my_tenders
-    page = params[:page] ? params[:page] : 0
+    page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
 
     uncompleted = @user.tenders.uncompleted.order(updated_at: :desc).page(page).per(per).map(&:to_hash)
@@ -87,6 +87,8 @@ class Api::PostsController < Api::BaseController
   #   token:        [String]    valid token
   #   user_id:      [Integer]   user ID
   #   _type:        [Integer]   0 资源 1 寻车
+  #   page:         [Integer]   页码 # 从0开始
+  #   per:          [Integer]   每页记录数
   #
   #
   # Return:
@@ -101,7 +103,10 @@ class Api::PostsController < Api::BaseController
 
     raise 'not found' unless user
 
-    posts = user.posts.where(_type: params[:_type]).order(position: :asc, updated_at: :desc)
+    page = params[:page] ? params[:page] : 1
+    per  = params[:per]  ? params[:per]  : 10
+
+    posts = user.posts.where(_type: params[:_type]).page(page).per(per)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
 

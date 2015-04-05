@@ -23,11 +23,11 @@ class Api::MessagesController < Api::BaseController
 
   def index
     page_size = params[:page_size] || 10
-    page = params[:page].to_i || 1
+    page = (params[:page].nil? or params[:page].to_i == 0) ? 1 : params[:page].to_i
     way  = params[:way]
     type, method = way == 'system' ? [Message::TYPES.keys[0], 'received_messages'] : [Message::TYPES.keys[1], 'send_messages']
-    @msg = @user.send("#{method}").where("_type = ? and updated_at >= ?", type, date).order('updated_at desc').offset(page_size*(i-1)).limit(page_size)
-    render json: { status: 200, notice: 'success', data: @msg.map(&:as_api) }
+    @msg = @user.send("#{method}").where("_type = ? ", type).order('updated_at desc').offset(page_size*(page - 1)).limit(page_size)
+    render json: { status: 200, notice: 'success', data: @msg.map(&:for_api) }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
@@ -56,6 +56,52 @@ class Api::MessagesController < Api::BaseController
     end
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
+  end
+  
+  # 更新消息状态
+  #
+  # Params:
+  #   token:    [String] 用户的token
+  #   ids:      [Array] 消息的id 多个
+  # Returns:
+  #   status:   200
+  #   notice:   success
+  # Errors
+  #   status:   500
+  #   notice:   failed
+  #   error_msg  错误消息
+  
+  def update_messages
+    raise '参数ids不存在或为空' if params[:ids].nil? or params[:ids].empty?
+    
+    messages = @user.received_messages.where('messages.id in (?)', params[:ids]).update_all(status: Message::STATUS.keys[1])
+    
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }
+  end
+  
+  # 删除系统消息
+  #
+  # Params:
+  #   token:    [String] 用户的token
+  #   ids:      [Array] 消息的id 多个
+  # Returns:
+  #   status:   200
+  #   notice:   success
+  # Errors
+  #   status:   500
+  #   notice:   failed
+  #   error_msg  错误消息
+  
+  def destroy_messages
+    raise '参数ids不存在或为空' if params[:ids].nil? or params[:ids].empty?
+    
+    @user.received_messages.where("messages.ids in (?)", params[:ids]).clear
+    
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message }  
   end
   
   # 注册或激活灭活设备(jpush)

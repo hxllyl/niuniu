@@ -126,6 +126,8 @@ class Post < ActiveRecord::Base
                           when 2 then base_car.base_price.to_f - discount_content.to_f
                           when 3 then base_car.base_price.to_f + discount_content.to_f
                           when 4 then discount_content.to_f
+                          else
+                            0.0
                         end
 
     # 只有资源才有的条件，因为数据库设计不能为空，所以给寻车一个-1的值来区分
