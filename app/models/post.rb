@@ -115,6 +115,8 @@ class Post < ActiveRecord::Base
 
   scope :with_standard, ->(std) { where(standard_id: std) }
 
+  scope :as_resource, ->(type) { where(_type: type) }
+
   acts_as_list scope: :user
 
   # validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1 when _type = 0', if: -> { _type == 0 }
