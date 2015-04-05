@@ -36,9 +36,9 @@ class Api::BaseCarsController < Api::BaseController
             when 'brand'
               Standard.find_by_id(params[:id]).brands.map(&:to_hash)
             when 'car_model'
-              CarModel.where(standard_id: params[:standard_id], brand_id: params[:id]).map(&:to_hash)
+              CarModel.where(standard_id: params[:standard_id], brand_id: params[:id]).valid.map(&:to_hash)
             when 'base_car'
-              CarModel.find_by_id(params[:id]).base_cars.map(&:to_hash)
+              CarModel.find_by_id(params[:id]).base_cars.valid.map(&:to_hash)
             end
 
     render json: {status: 200, notice: 'success', data: data}
