@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   end
 
   create_table "base_cars", force: :cascade do |t|
-    t.integer  "standard_id"
-    t.integer  "brand_id"
-    t.integer  "car_model_id"
+    t.integer  "standard_id",                                                    null: false
+    t.integer  "brand_id",                                                       null: false
+    t.integer  "car_model_id",                                                   null: false
     t.decimal  "base_price",              precision: 10, scale: 2, default: 0.0
     t.string   "outer_color",                                                                 array: true
     t.string   "inner_color",                                                                 array: true
@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "base_cars", ["style"], name: "index_base_cars_on_style", using: :btree
 
   create_table "brands", force: :cascade do |t|
-    t.integer  "standard_id"
     t.string   "name",          limit: 40,             null: false
     t.string   "regions",                                           array: true
     t.integer  "status",                   default: 0
@@ -84,19 +83,18 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   end
 
   add_index "brands", ["name"], name: "index_brands_on_name", using: :btree
-  add_index "brands", ["standard_id"], name: "index_brands_on_standard_id", using: :btree
 
   create_table "brands_standards", id: false, force: :cascade do |t|
-    t.integer "brand_id"
-    t.integer "standard_id"
+    t.integer "brand_id",    null: false
+    t.integer "standard_id", null: false
   end
 
   add_index "brands_standards", ["brand_id"], name: "index_brands_standards_on_brand_id", using: :btree
   add_index "brands_standards", ["standard_id"], name: "index_brands_standards_on_standard_id", using: :btree
 
   create_table "car_models", force: :cascade do |t|
-    t.integer  "standard_id"
-    t.integer  "brand_id"
+    t.integer  "standard_id",               null: false
+    t.integer  "brand_id",                  null: false
     t.string   "name",                      null: false
     t.integer  "status",        default: 1
     t.integer  "click_counter", default: 0
@@ -136,10 +134,10 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   create_table "complaints", force: :cascade do |t|
     t.integer  "resource_id"
     t.string   "resource_type", limit: 30
-    t.integer  "user_id"
+    t.integer  "user_id",                               null: false
     t.integer  "status",                    default: 0
     t.string   "content",       limit: 225
-    t.integer  "operator_id"
+    t.integer  "operator_id",                           null: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
@@ -149,8 +147,8 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
 
   create_table "follow_ships", force: :cascade do |t|
-    t.integer  "follower_id"
-    t.integer  "following_id"
+    t.integer  "follower_id",  null: false
+    t.integer  "following_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -172,8 +170,8 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "log_base_cars", ["user_id"], name: "index_log_base_cars_on_user_id", using: :btree
 
   create_table "log_posts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "user_id",                     null: false
+    t.integer  "post_id",                     null: false
     t.string   "method_name"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
@@ -202,8 +200,8 @@ ActiveRecord::Schema.define(version: 20150404053620) do
 
   create_table "messages", force: :cascade do |t|
     t.string   "title",          limit: 100
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
+    t.integer  "sender_id",                              null: false
+    t.integer  "receiver_id",                            null: false
     t.integer  "_type",                      default: 0
     t.string   "content",                                null: false
     t.integer  "status",                     default: 0
@@ -218,7 +216,7 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "messages", ["status"], name: "index_messages_on_status", using: :btree
 
   create_table "notifications", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",                               null: false
     t.string   "content",       limit: 225
     t.integer  "status",                    default: 0
     t.integer  "resource_id"
@@ -245,11 +243,11 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "photos", ["owner_id", "owner_type"], name: "index_photos_on_owner_id_and_owner_type", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "standard_id"
-    t.integer  "brand_id"
-    t.integer  "car_model_id"
-    t.integer  "base_car_id"
-    t.integer  "user_id"
+    t.integer  "standard_id",                                                         null: false
+    t.integer  "brand_id",                                                            null: false
+    t.integer  "car_model_id",                                                        null: false
+    t.integer  "base_car_id",                                                         null: false
+    t.integer  "user_id",                                                             null: false
     t.integer  "_type"
     t.string   "remark",           limit: 160
     t.string   "outer_color",      limit: 60,                                         null: false
@@ -287,14 +285,15 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "standards", ["name"], name: "index_standards_on_name", using: :btree
 
   create_table "tenders", force: :cascade do |t|
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.decimal  "price",            precision: 10, scale: 2, default: 0.0
-    t.integer  "discount_way",                                            null: false
-    t.decimal  "discount_content", precision: 10, scale: 2, default: 0.0
-    t.integer  "status",                                    default: 0
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.integer  "post_id",                                                             null: false
+    t.integer  "user_id",                                                             null: false
+    t.decimal  "price",                        precision: 10, scale: 2, default: 0.0
+    t.integer  "discount_way",                                                        null: false
+    t.decimal  "discount_content",             precision: 10, scale: 2, default: 0.0
+    t.integer  "status",                                                default: 0
+    t.string   "remark",           limit: 225
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
   end
 
   add_index "tenders", ["post_id"], name: "index_tenders_on_post_id", using: :btree
@@ -303,7 +302,7 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "tenders", ["user_id"], name: "index_tenders_on_user_id", using: :btree
 
   create_table "tokens", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",                           null: false
     t.string   "value",      limit: 50,             null: false
     t.datetime "expired_at"
     t.integer  "status",                default: 0
@@ -320,7 +319,7 @@ ActiveRecord::Schema.define(version: 20150404053620) do
     t.integer  "_type"
     t.string   "company",                limit: 225
     t.string   "role",                   limit: 30
-    t.integer  "area_id"
+    t.integer  "area_id",                                         null: false
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
     t.jsonb    "contact",                            default: {}
