@@ -100,6 +100,8 @@ Rails.application.routes.draw do
 
     resources :messages do
       post :device_methods, on: :collection
+      post :update_messages, on: :collection
+      post :destroy_messages, on: :collection
     end
 
     resources :base_cars, only: [:index]

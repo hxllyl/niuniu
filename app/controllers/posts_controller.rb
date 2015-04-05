@@ -169,7 +169,7 @@ class PostsController < ApplicationController
     conds            = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
     conds[:brand_id] = params[:br] if params[:br]
 
-    @posts    = Post.where(conds).order(position: :desc, updated_at: :desc).page(params[:page]).per(10)
+    @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
     @follows  = current_user.followings & @someone.followers if current_user
   end
 
@@ -192,7 +192,7 @@ class PostsController < ApplicationController
     worksheet.write('A2', "联系电话: #{user.mobile}", format)
     worksheet.write(2, 0, %w(品牌/车型/款式 外观/内饰 规格/状态 价格 备注))
 
-    user.posts.resources.valid.order(updated_at: :desc).each_with_index do |record, index|
+    user.posts.resources.valid.each_with_index do |record, index|
       worksheet.write(index + 3, 0, record.infos)
     end
 

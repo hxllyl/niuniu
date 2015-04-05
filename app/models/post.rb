@@ -126,6 +126,8 @@ class Post < ActiveRecord::Base
                           when 2 then base_car.base_price.to_f - discount_content.to_f
                           when 3 then base_car.base_price.to_f + discount_content.to_f
                           when 4 then discount_content.to_f
+                          else
+                            0.0
                         end
 
     # 只有资源才有的条件，因为数据库设计不能为空，所以给寻车一个-1的值来区分
@@ -258,7 +260,7 @@ class Post < ActiveRecord::Base
   end
 
   def base_price
-    "#{guiding_price}万/#{human_discount}"
+    human_discount ? "#{guiding_price}万/#{human_discount}" : "#{guiding_price}万"
   end
 
   # 优惠方式
@@ -276,6 +278,8 @@ class Post < ActiveRecord::Base
       else
         I18n.t('add') << (expect_price - guiding_price).to_s << I18n.t('wan')
       end
+    when DISCOUNT_WAYS.keys[4] then
+      nil
     else
       guiding_price.to_s << I18n.t('wan')
     end
