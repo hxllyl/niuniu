@@ -252,7 +252,7 @@ class Post < ActiveRecord::Base
   end
 
   def standard_resource_type
-    standard_name << RESOURCE_TYPE[resource_type]
+    standard_name + RESOURCE_TYPE[resource_type]
   end
 
   def st_rt
