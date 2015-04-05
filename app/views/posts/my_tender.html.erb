@@ -9,7 +9,7 @@
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">我的报价<span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
+          <h3 class="panel-title">我的报价<span class="date bfR"><%#= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
         </div>
         <div class="panel-body sourceDetail pb200">
           <div class="row">
@@ -47,7 +47,7 @@
     </div>
   </div>
 </div>
-<%= render partial: 'complaints/complaint' if ccurrent_user != @someone %>
+<%= render partial: 'complaints/complaint' if current_user != @someone %>
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
