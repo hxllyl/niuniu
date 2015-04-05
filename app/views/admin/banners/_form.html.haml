@@ -33,6 +33,16 @@
                 = f.text_field :end_at, class: 'form-control'
 
             .form-group
+              = f.label :redirect_way, '跳转至: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_field :redirect_way, class: 'form-control'
+
+            .form-group
+              = f.label :use, '用途(web 或者 App): ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.select :use,  options_for_select([['web', 'web'], ['app', 'app']]), include_blank: '', html: { class: 'form-control' }
+
+            .form-group
               = f.label :image, '文件: ', class: 'col-sm-2 control-label'
               .col-sm-2
                 = f.file_field :image, class: 'form-control'
