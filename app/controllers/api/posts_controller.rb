@@ -47,7 +47,7 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  请重新再试
   def my_list
 
-    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+    posts = @user.posts.where(_type: params[:_type]).order(position: :desc, updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -100,7 +100,7 @@ class Api::PostsController < Api::BaseController
 
     raise 'not found' unless user
 
-    posts = user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+    posts = user.posts.where(_type: params[:_type]).order(position: :asc, updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
 

@@ -1,7 +1,7 @@
 <div class="container">
   <ol class="breadcrumb">
     <li><a href="<%= root_path %>">首页</a></li>
-    <li><a href="#">资源详情</a></li>
+    <li><%= link_to '寻车信息', posts_path(_type: 1) %></li>
     <li class="active">他的寻车</li>
   </ol>
 </div>
@@ -25,76 +25,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, post_path(post, _type: 1), class: 'name' %></td>
+                    <td><%= post.car_license_area %></td>
+                    <td><%= post.color %></td>
+                    <td><%= post.owner%><%= image_tag(post.user.try(:level_icon), size: "40x16") if post.user.try(:is_show_icon?) %></td>
+                    <td><%= post.publish_time %></td>
                 </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr class="done">
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a><span class="seal seal_done_part"></span></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
-                <tr>
-                  <td><a href="#" class="name">寻中规路虎揽胜运动 3345</a></td>
-                  <td>河南</td>
-                  <td>黑/白</td>
-                  <td>李木子(上海)icon</td>
-                  <td>16:30</td>
-                </tr>
+                <% end %>
+
               </tbody>
             </table>
           </div>

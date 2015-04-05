@@ -200,7 +200,8 @@ class Post < ActiveRecord::Base
       title:              title,
       detail_title:       _type == 0 ? title : need_detail_title,
       license_area:       app_area,
-      remark:             remark
+      remark:             remark,
+      position:           position
     }
   end
 

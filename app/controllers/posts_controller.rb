@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @standards  = Standard.all
     @brands     = Brand.order(click_counter: :desc).limit(20)
     @car_models = CarModel.order(click_counter: :desc).limit(40)
-    posts   = Post.includes(:base_car, :post_photos, :standard, :brand).where(_type: params[:_type]).order(updated_at: :desc).group_by(&:user_id).collect{|k, v| v.first}
+    posts   = Post.includes(:base_car, :post_photos, :standard, :brand).where(_type: params[:_type], status: 1).order(updated_at: :desc).group_by(&:user_id).collect{|k, v| v.first}
     @posts  =  Kaminari.paginate_array(posts).page(params[:page]).per(10)
   end
 
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
     end
 
     if @base_car
-      conds = {}
+      conds = {status: 1}
       conds[:outer_color]   = params[:oc] && @q_json[:oc] = params[:oc]  if params[:oc]
       conds[:inner_color]   = params[:ic] && @q_json[:ic] = params[:ic]  if params[:ic]
       conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
@@ -140,7 +140,7 @@ class PostsController < ApplicationController
       @q_json = {}
     end
 
-    conds = {_type: 1}
+    conds = {_type: 1, status: 1}
     conds[:standard_id] = @standard.id  if @standard
     conds[:brand_id]    = @brand.id     if @brand
     conds[:car_model_id]= @car_model.id if @car_model
@@ -164,18 +164,18 @@ class PostsController < ApplicationController
     @q_json   = params
     @_type    = params[:_type]
     @someone  = User.find_by_id(params[:user_id])
-    @brands   = @someone.posts.resources.map(&:brand).uniq
+    @brands   = @someone.posts.where(_type: @_type).map(&:brand).uniq
 
-    conds            = {user_id: params[:user_id], _type: params[:type].to_i}
+    conds            = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
     conds[:brand_id] = params[:br] if params[:br]
 
-    @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
+    @posts    = Post.where(conds).order(position: :desc, updated_at: :desc).page(params[:page]).per(10)
     @follows  = current_user.followings & @someone.followers if current_user
   end
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-    @users = User.where("id" => Post.resources.map(&:user_id)).page(params[:page]).per(10)
+    @users = User.where("id" => Post.resources.valid.map(&:user_id)).page(params[:page]).per(10)
   end
 
   # 导出用户资源
@@ -192,7 +192,7 @@ class PostsController < ApplicationController
     worksheet.write('A2', "联系电话: #{user.mobile}", format)
     worksheet.write(2, 0, %w(品牌/车型/款式 外观/内饰 规格/状态 价格 备注))
 
-    user.posts.resources.order(updated_at: :desc).each_with_index do |record, index|
+    user.posts.resources.valid.order(updated_at: :desc).each_with_index do |record, index|
       worksheet.write(index + 3, 0, record.infos)
     end
 
