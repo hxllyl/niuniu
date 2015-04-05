@@ -1,5 +1,12 @@
 $(document).ready(function(){
   $(".dropdown-toggle").dropdown();
+  $(".modalBtn").click(function(){
+    var targetId = $(this).data("target");
+    var toggleId = $(this).data("toggle");
+    if (toggleId == "modal"){
+      $(targetId).modal();
+    }
+  });
   $(".nav-tabs a").click(function (e) {
     e.preventDefault();
     $(this).tab("show");

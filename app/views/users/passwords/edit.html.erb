@@ -19,7 +19,7 @@
             <div class="col-sm-6 prl0">
               <%= f.password_field :current_password, autofocus: true, autocomplete: "off", class: "form-control" %>
             </div>
-            <div class="col-sm-4 tips"><a href="#forget_step1" data-toggle="modal" data-target="#forget_step1">忘记密码</a></div>
+            <div class="col-sm-4 tips"><a href="#forget_step1" class="modalBtn" data-toggle="modal" data-target="#forget_step1">忘记密码</a></div>
           </div>
           <div class="form-group clearfix">
             <%= f.label :password, "新密码：", class: "col-sm-2 control-label" %>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="" class="btn btn-default w100p orange next-step" role="button" data-toggle="modal" data-target="#forget_step2" data-dismiss="modal" aria-label="Close" disabled="disabled" ><%= t('next_step') %></button>
+        <button type="button" id="" class="btn btn-default w100p orange modalBtn next-step" role="button" data-toggle="modal" data-target="#forget_step2" data-dismiss="modal" aria-label="Close" disabled="disabled" ><%= t('next_step') %></button>
       </div>
     </div>
   </div>

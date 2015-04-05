@@ -14,14 +14,14 @@
 	    <label class="bfL">
 	      <%= check_box_tag :remember_name %><%= t('remember_me')%>
 	    </label>
-	    <div class="forget bfR"><a href="#forget_step1" data-toggle="modal" data-target="#forget_step1"><%= t('forget_pw') %></a></div>
+	    <div class="forget bfR"><a href="#forget_step1" class="modalBtn" data-toggle="modal" data-target="#forget_step1"><%= t('forget_pw') %></a></div>
 	  </div>
 	  <ul class="subGroup row">
 	  	<li class="col-md-6">
 	  		<input type="submit" class="btn btn-default w100p orange btn_spacing" value="登录" />
 	  	</li>
 	  	<li class="col-md-6">
-	  		<button type="button" class="btn btn-default w100p btn_spacing" role="button" data-toggle="modal" data-target="#reg_step1"><%= t('register_but') %></button>
+	  		<button type="button" class="btn btn-default w100p btn_spacing modalBtn" role="button" data-toggle="modal" data-target="#reg_step1"><%= t('register_but') %></button>
 	  	</li>
 	  </ul>
     <% end -%>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="" class="btn btn-default w100p orange next-step" role="button" data-toggle="modal" data-target="#forget_step2" data-dismiss="modal" aria-label="Close" disabled="disabled" ><%= t('next_step') %></button>
+        <button type="button" id="" class="btn btn-default w100p orange modalBtn next-step" role="button" data-toggle="modal" data-target="#forget_step2" data-dismiss="modal" aria-label="Close" disabled="disabled" ><%= t('next_step') %></button>
       </div>
     </div>
   </div>
