@@ -96,7 +96,7 @@ padding:0;
 .newSourceIcon li a:hover { text-decoration: none; color: #ff791f; }
 .sourceTab .table { margin-bottom: 0; }
 .sourceTab .table>thead>tr>th { height: 42px; line-height: 42px; padding: 0 4px; border-bottom: 2px solid #e6e6e6; color: #333; }
-.sourceTab .table>tbody>tr>td { position: relative; line-height: 20px; padding: 8px 4px; border-bottom: 1px solid #e6e6e6; color: #666; }
+.sourceTab .table>tbody>tr>td { position: relative; height: 40px; line-height: 20px; padding: 8px 4px; border-bottom: 1px solid #e6e6e6; vertical-align: middle; color: #666; }
 .sourceTab td .price, .sourceTab td .num { color: #ff791f; }
 .sourceTab td a { color: #458cc7; }
 .sourceTab td a.name { color: #666; }
@@ -105,8 +105,8 @@ padding:0;
 .sourceTab .table>tbody>tr.done { background-color: #fcf1ea; }
 .sourceTab .table>tbody>tr.recall { background-color: #e6e6e6; }
 .sourceTab .table>tbody>tr.recall td, .sourceTab .table>tbody>tr.recall td a.name, .sourceTab .table>tbody>tr.recall td .price, .sourceTab .table>tbody>tr.recall td .num { color: #999; }
-.sourceTab .table>tbody>tr>td .seal.seal_done_part { top: 0; right: 10px; width: 64px; height: 39px; background: url(seal_done_part.png) no-repeat center; }
-.sourceTab .table>tbody>tr>td .seal.seal_recall_part { top: 0; right: 10px; width: 54px; height: 39px; background: url(seal_recall_part.png) no-repeat center; }
+.sourceTab .table>tbody>tr>td .seal.seal_done_part { top: 0; right: 20px; width: 64px; height: 39px; background: url(seal_done_part.png) no-repeat center; }
+.sourceTab .table>tbody>tr>td .seal.seal_recall_part { top: 0; right: 20px; width: 54px; height: 39px; background: url(seal_recall_part.png) no-repeat center; }
 .sourceTab td .del { color: #b3b3b3; }
 .moreLink { height: 18px; line-height: 18px; margin-top: 14px; font-size: 12px; }
 .moreLink a { color: #458cc7; }
