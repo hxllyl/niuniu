@@ -241,6 +241,39 @@ class Api::UsersController < Api::BaseController
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
 
+
+  # 检查是否有未读
+  #
+  # Params
+
+  #   _type:                        [String]   0 => 寻车, 1 => 报价, 不传表示 寻车或者报价
+  #   token:                       [String]   用户 token
+
+  #
+  # Return:
+  #   status:         [Integer]   200
+  #   notice:         [String]    success
+  #   has_unread:     [Boolean]   true or false
+  #
+  # Error:
+  #   status:     [Integer]   500
+  #   notice:     [String]    failed
+  #   error_msg:  [Strin]     error json
+  def check_unread
+    # LESLIE: 针对寻车， 需要显示有否对其报价， 针对报价， 显示有否已完成的寻车
+    ubool = if params[:_type] == '0'
+              @user.has_unread_tenders?
+            elsif params[:_type] == '1'
+              @user.has_unread_hunts?
+            else
+              @user.has_unread_hunts? || @user.has_unread_tenders?
+            end
+
+    render json: {status: 200, notice: 'success', has_unread: ubool}
+  rescue => ex
+    render json: {status: 500, notice: 'failed', error_msg: ex.message}
+  end
+
   private
 
   def user_params

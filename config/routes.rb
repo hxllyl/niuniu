@@ -157,6 +157,7 @@ Rails.application.routes.draw do
       patch :reset_password
       put   :update
       get :show
+      get :check_unread
     end
 
     resources :phone_lists, only: [:index] do
