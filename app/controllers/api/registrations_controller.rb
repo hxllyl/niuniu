@@ -15,6 +15,7 @@ class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseC
   #   user[area_id]:                [Integer]用户所在城市id
   #   user[role]:                   [String] 用户角色(app端注册用'normal')
   #   valid_code:                   [String] 手机验证码
+  #   user[reg_status]:             [Integer] 1 ios 2 android
   #
   # Return:
   #   status: [Integer] 200

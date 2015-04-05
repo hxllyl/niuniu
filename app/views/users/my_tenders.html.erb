@@ -38,7 +38,7 @@
                         <%- if tender.status == -1 %>
                           <span class="seal seal_recall_part"></span>
                         <% else %>
-                          <a href="#alertModal" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-toggle="modal" data-target="#alertModal">删除
+                          <a href="javascript:;" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-toggle="modal" data-target="#alertModal">删除
                           </a>
                         <% end %>
                       </td>
@@ -77,7 +77,7 @@
                       </td>
 
                       <td><%= human_time(tender.updated_at) %></td>
-                      <td><a href="#alertModal" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-toggle="modal" data-target="#alertModal">删除</a></td>
+                      <td><a href="javascript:;" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-toggle="modal" data-target="#alertModal">删除</a></td>
                     </tr>
                   <% end -%>
                 </tbody>

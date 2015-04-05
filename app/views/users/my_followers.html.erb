@@ -23,7 +23,7 @@
                 <h5 class="name"><%= link_to following.name_area, user_list_posts_path(user_id: following.id, _type: 0) %></a></h5>
                 <p class="tel"><%= User.human_attribute_name(:mobile)%>：<%= following.mobile%></p>
               </div>
-              <div><a href="#alertModal" class="btn btn-default btn-xs modalBtn cancelBtn" data-id="<%= following.id %>" data-type="followings" data-clazz="user" data-update='followings' data-toggle="modal" data-target="#alertModal">取消关注</a><div>
+              <div><a href="javascript:;" class="btn btn-default btn-xs modalBtn cancelBtn" data-id="<%= following.id %>" data-type="followings" data-clazz="user" data-update='followings' data-toggle="modal" data-target="#alertModal">取消关注</a><div>
             </li>
             <% end -%>
           </ul>
