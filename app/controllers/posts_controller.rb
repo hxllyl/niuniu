@@ -150,28 +150,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post       = Post.includes(:comments, :tenders).find_by_id(params[:id])
-    @someone    = @post.user || NullObject.new
-    @title      = '寻车详情'
-    @tender     = if !params[:tender_id] && current_user
-                    Tender.where(user_id: current_user.id, post_id: @post.id).first
-                  else
-                    Tender.find_by_id(params[:tender_id])
-                  end
-    if params[:tender_id]
-      @tender   = Tender.find_by_id(params[:tender_id])
-      if current_user
-        if current_user.id == @tender.user_id
-          @title    = '我的报价'
-
-        else
-          @title    = '他的报价'
-          @someone  = @tender.user
-        end
-      end
-
-      instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
-    end
+    @post       = Post.find_by_id(params[:id])
+    @someone    = @post.user
     @follows  = current_user.followings & @someone.followers if current_user
   end
 
@@ -248,6 +228,24 @@ class PostsController < ApplicationController
     post.complete(tender.id)
 
     redirect_to :back
+  end
+
+  def my_tender
+    @post       = Post.find_by_id(params[:id])
+    @someone    = @post.user
+    @tender     = Tender.find_by_id(params[:tender_id])
+
+    instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
+    @follows  = current_user.followings & @someone.followers if current_user
+  end
+
+  def his_tender
+    @post       = Post.find_by_id(params[:id])
+    @someone    = @post.user
+    @tender     = Tender.find_by_id(params[:tender_id])
+
+    instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
+    @follows  = current_user.followings & @someone.followers if current_user
   end
 
 
