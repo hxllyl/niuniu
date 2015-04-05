@@ -22,7 +22,8 @@ class Banner < ActiveRecord::Base
       title: title,
       poi: poi,
       position: position,
-      url: image.try(:url)
+      url: image.try(:url),
+      redirect_way: redirect_way
     }
   end
 
