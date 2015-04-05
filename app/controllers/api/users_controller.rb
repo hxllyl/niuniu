@@ -204,8 +204,9 @@ class Api::UsersController < Api::BaseController
   #   user[contact][company_address]:   [String]   用户公司地址
   #   user[contact][self_introduction]: [String]   用户自我评价
   #   user[contact][position_header]:   [String]   职务抬头
-  #   user[contact][photo]:             [String]   联系电话
+  #   user[contact][phone]:             [String]   联系电话
   #   user[contact][wx]:                [String]   微信
+  #   user[contact][qq]:                [String]   qq
   #
   # Return:
   #   status: [Integer]   200

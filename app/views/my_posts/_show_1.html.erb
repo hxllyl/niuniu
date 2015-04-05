@@ -16,7 +16,7 @@
         <div class="panel-body">
           <div class="sourceDetail">
             <div class="row">
-              <div class="col-md-6 con">
+              <div class="col-md-7 con">
                 <h5 class="name"><%= @post.need_title %></h5>
                 <div class="info">
                   <p><%= @post.app_area %></p>
@@ -25,11 +25,11 @@
                   <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date] %></p>
                 </div>
               </div>
-              <div class="col-md-6 con">
+              <div class="col-md-5 con">
                 <div class="info">
                   <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                   <p>指导价：<%= @post.base_car_base_price.to_f %>万/<%= @post.human_discount %></p>
-                  <div class="reportLink"><a href="#" data-toggle="modal" data-target="#myReport">我要举报</a></div>
+                  <div class="reportLink"><a href="#myReport" data-toggle="modal" data-target="#myReport">我要举报</a></div>
                 </div>
               </div>
             </div>
@@ -50,11 +50,11 @@
               </thead>
               <tbody>
                 <%- @post.tenders.each do |tender| %>
-                  <tr>
-                    <td><%= link_to tender.user_name, his_tender_post_path(@post, tender_id: tender.id) %></td>
+                  <tr class="done">
+                    <td><%= link_to tender.user_name, his_tender_post_path(@post, tender_id: tender.id) %><span class="seal seal_done_part"></span></td>
                     <td><span class="num"><%= tender.price.to_f %></span></td>
                     <td><%= tender.publish_time %></td>
-                    <td><a href="javascript:;" class="del">删除</a></td>
+                    <td><a href="#alertModal" class="del" data-toggle="modal" data-target="#alertModal">删除</a></td>
                   </tr>
                 <% end %>
               </tbody>
