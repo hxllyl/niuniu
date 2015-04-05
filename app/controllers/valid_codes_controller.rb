@@ -10,7 +10,7 @@ class ValidCodesController < BaseController
   # return:
   #   format.json 
   def create
-    @valid_code = ValidCode.where(mobile: params[:mobile], _type: params[:type]).first
+    @valid_code = ValidCode.where(mobile: params[:mobile], _type: params[:type]).last
     if @valid_code and @valid_code.is_valid?
       @valid_code.send_code
       render json: { status: 'success', code: @valid_code.code } 

@@ -2,7 +2,9 @@
 
 class UsersController < BaseController
   
-  # before_action :can_upgrade?, only: [:update_my_level, :edit_my_level]
+  before_action :can_upgrade?, only: [:update_my_level, :edit_my_level]
+  
+  skip_before_action :authenticate_user!, only: [:reset_password]
   
   def update
     @user = User.find params[:id]
@@ -133,7 +135,9 @@ class UsersController < BaseController
   end
   
   def reset_password    
-    @user = User.find(current_user.id)
+    @user = User.find(current_user.id) rescue User.find_by(mobile: params[:mobile])
+    flash[:notice] = '改号码暂时尚未注册，请先注册！' and redirect_to('/') if @user.blank?
+    
     if @user.update(user_params_without_current_password)
       # Sign in the user by passing validation in case their password changed
       sign_in @user, :bypass => true
