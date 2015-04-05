@@ -30,6 +30,6 @@ class Admin::BannersController < Admin::BaseController
   private
 
   def banner_params
-    params.require(:banner).permit(:title, :image, :begin_at, :end_at, :poi, :position)
+    params.require(:banner).permit( :title, :image, :begin_at, :end_at, :poi, :position, :use, :redirect_way )
   end
 end
