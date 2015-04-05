@@ -36,10 +36,11 @@ class Users::PasswordsController < Devise::PasswordsController
     else
       clean_up_passwords(resource)
       respond_with_navigational(resource){ render_with_scope :edit }
-      flash[:error] = '密码修改未能成功！'
+      flash[:notice] = '修改密码未能成功！'
     end
+        
   end
-
+  
   protected
   # You can put the params you want to permit in the empty array.
   def configure_sign_in_params
@@ -54,6 +55,7 @@ class Users::PasswordsController < Devise::PasswordsController
   def user_params
     params[:user].permit(:current_password, :password, :password_confirmation)
   end
+
   # The path used after sending reset password instructions
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
