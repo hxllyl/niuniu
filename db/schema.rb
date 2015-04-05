@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404053620) do
+ActiveRecord::Schema.define(version: 20150405072228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,20 @@ ActiveRecord::Schema.define(version: 20150404053620) do
   add_index "log_base_cars", ["base_car_id"], name: "index_log_base_cars_on_base_car_id", using: :btree
   add_index "log_base_cars", ["method_name"], name: "index_log_base_cars_on_method_name", using: :btree
   add_index "log_base_cars", ["user_id"], name: "index_log_base_cars_on_user_id", using: :btree
+
+  create_table "log_contact_phones", force: :cascade do |t|
+    t.string   "mobile",      limit: 15,                 null: false
+    t.integer  "sender_id",                              null: false
+    t.integer  "_type",                  default: 0
+    t.boolean  "is_register",            default: false
+    t.integer  "status"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "log_contact_phones", ["_type"], name: "index_log_contact_phones_on__type", using: :btree
+  add_index "log_contact_phones", ["mobile"], name: "index_log_contact_phones_on_mobile", using: :btree
+  add_index "log_contact_phones", ["sender_id"], name: "index_log_contact_phones_on_sender_id", using: :btree
 
   create_table "log_posts", force: :cascade do |t|
     t.integer  "user_id"

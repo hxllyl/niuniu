@@ -25,7 +25,7 @@ class Api::MessagesController < Api::BaseController
     page_size = params[:page_size] || 10
     page = params[:page].to_i || 1
     way  = params[:way]
-    type, method = way == 'system' ? [Message::TYPES.keys[0], 'recevied_messages'] : [Message::TYPES.keys[1], 'send_messages']
+    type, method = way == 'system' ? [Message::TYPES.keys[0], 'received_messages'] : [Message::TYPES.keys[1], 'send_messages']
     @msg = @user.send("#{method}").where("_type = ? and updated_at >= ?", type, date).order('updated_at desc').offset(page_size*(i-1)).limit(page_size)
     render json: { status: 200, notice: 'success', data: @msg.map(&:as_api) }
   rescue => ex

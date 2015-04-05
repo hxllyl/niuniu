@@ -61,9 +61,9 @@ class Api::PhoneListsController < Api::BaseController
     raise '手机号码不正确' if params[:mobile].blank? and (params[:mobile] =~ /(\A1[3|4|5|8][0-9]{9}\z)/) == 0
 
     mobile = params[:mobile]
-
+    
     SendInviteMessageJob.perform_later(@user, mobile)
-
+    
     render json: { status: 200, notice: 'success'}
   rescue => ex
     render json: { status: 500, notice: 'failure', error_msg: ex.message}
