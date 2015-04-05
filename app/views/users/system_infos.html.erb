@@ -13,9 +13,9 @@
               <div class="info"><%= message.content %></div>
               <div class="clearfix">
                 <div class="date bfL"><%= human_time(message.updated_at)%></div>
-                
-                <a href="#" class="btn btn-link del bfR cancelBtn" data-id="<%= message.id %>" data-type="received_messages" data-clazz="message" data-update='messages'><span class="icon icon-del"></span>删除</a>
-                
+
+                <a href="#alertModal" class="btn btn-link del bfR cancelBtn" data-id="<%= message.id %>" data-type="received_messages" data-clazz="message" data-update="messages" data-toggle="modal" data-target="#alertModal"><span class="icon icon-del"></span>删除</a>
+
               </div>
             </li>
             <% end -%>
@@ -26,11 +26,11 @@
         </div>
       </div>
     </div>
-    
+
     <div class="col-md-3 mainRight">
       <%= render partial: 'partials/right_search' -%>
     </div>
-  
+
   </div>
 </div>
 
