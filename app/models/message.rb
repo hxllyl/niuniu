@@ -38,6 +38,7 @@ class Message < ActiveRecord::Base
       title: title,
       content: content,
       status: status,
+      created_at: created_at,
       _type: _type
     }
   end
