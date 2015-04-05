@@ -58,10 +58,10 @@ class User < ActiveRecord::Base
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
-  
+
   # 用户升级认证log
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel'
-  
+
   has_many :active_devices, class_name: 'ActiveDevice' # jpush 用户设备
 
   scope :valid_user, -> {where("status != #{STATUS[-1]}")}
@@ -166,7 +166,7 @@ class User < ActiveRecord::Base
     #level != LEVELS.keys[3] and level != LEVELS.keys[4]
     level_update_status
   end
-  
+
   def can_upgrade_levels
     if level == LEVELS.keys[0]
       [1,4]
@@ -176,7 +176,7 @@ class User < ActiveRecord::Base
       [3]
     else
       []
-    end 
+    end
   end
 
   def following?(user)
@@ -225,10 +225,10 @@ class User < ActiveRecord::Base
   def heading_show
     %w(2 3 4).include?(level) ? company : name
   end
-  
+
   def level_update_status
     log = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[0]).order('updated_at desc').first
-    
+
     if log.blank?
       [true,  nil]
     else
@@ -250,6 +250,10 @@ class User < ActiveRecord::Base
 
   def has_unread_hunts? # 判断有否未读之寻车（我对寻车所作之报价已完成）
     unread_hunts.count > 0
+  end
+
+  def user_avatar
+    avatar.class == String ? avatar : avatar.image.try(:url)
   end
 
 end

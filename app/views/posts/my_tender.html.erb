@@ -9,7 +9,7 @@
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">寻车详情<span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
+          <h3 class="panel-title">我的报价<span class="date bfR"><%#= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
         </div>
         <div class="panel-body sourceDetail pb200">
           <div class="row">
@@ -35,20 +35,15 @@
             <div class="tt bfL">备注：</div>
             <div class="info"><%= @post.remark%></div>
           </div>
-          <%= render 'tender_form' if current_user != @someone %>
+          <%= render 'tender_info' %>
         </div>
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%- if current_user == @someone %>
-        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
-        <%= render partial: 'partials/right_search' %>
-      <% else %>
-        <%= render partial: 'partials/right_user' %>
-        <%= render partial: 'partials/right_joint_followings' if current_user %>
-        <%= render partial: 'partials/right_his_resources' %>
-        <%= render partial: 'partials/right_his_needs' %>
-      <% end %>
+      <%= render partial: 'partials/right_user' %>
+      <%= render partial: 'partials/right_joint_followings' if current_user %>
+      <%= render partial: 'partials/right_his_resources' %>
+      <%= render partial: 'partials/right_his_needs' %>
     </div>
   </div>
 </div>
