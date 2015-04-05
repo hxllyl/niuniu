@@ -6,9 +6,9 @@
 class CreateBaseCars < ActiveRecord::Migration
   def change
     create_table :base_cars do |t|
-      t.references :standard,   class_name: 'Standard' # 规格与基础数据关联
-      t.references :brand,      class_name: 'Brand' # 车辆品牌
-      t.references :car_model,  class_name: 'CarModel' # 车型
+      t.references :standard,   class_name: 'Standard', null: false # 规格与基础数据关联
+      t.references :brand,      class_name: 'Brand', null: false # 车辆品牌
+      t.references :car_model,  class_name: 'CarModel', null: false # 车型
 
       t.column :base_price, :decimal, precision: 10, scale: 2, default: 0.0 # 知道价钱，单位（元）
       t.column :outer_color, :string, array: true # 外观
