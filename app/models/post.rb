@@ -200,7 +200,8 @@ class Post < ActiveRecord::Base
       title:              title,
       detail_title:       _type == 0 ? title : need_detail_title,
       license_area:       app_area,
-      remark:             remark
+      remark:             remark,
+      position:           position
     }
   end
 
@@ -257,7 +258,7 @@ class Post < ActiveRecord::Base
   end
 
   def base_price
-    "#{guiding_price}万/#{human_discount}"
+    human_discount ? "#{guiding_price}万/#{human_discount}" : "#{guiding_price}万"
   end
 
   # 优惠方式
@@ -275,6 +276,8 @@ class Post < ActiveRecord::Base
       else
         I18n.t('add') << (expect_price - guiding_price).to_s << I18n.t('wan')
       end
+    when DISCOUNT_WAYS.keys[4] then
+      nil
     else
       guiding_price.to_s << I18n.t('wan')
     end

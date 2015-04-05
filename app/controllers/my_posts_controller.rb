@@ -7,9 +7,9 @@ class MyPostsController < ApplicationController
     @_type = params[:_type]
     @brand_id = params[:brand_id]
     unless @brand_id.blank?
-      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").order('updated_at desc').page(params[:page]).per(10)
+      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").page(params[:page]).per(10)
     else
-      @posts = current_user.posts.where(_type: @_type).order('updated_at desc').page(params[:page]).per(10)
+      @posts = current_user.posts.where(_type: @_type).page(params[:page]).per(10)
     end
 
     if params[:update_all]

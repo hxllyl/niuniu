@@ -1,6 +1,7 @@
 # encoding: utf-8
 # 市场资源，寻车信息
 require_relative '../../../app/services/list_api_post'
+require_relative '../../../app/services/query_posts'
 class Api::PostsController < Api::BaseController
 
        # skip_before_action :auth_user, only: [ :search ]
@@ -47,7 +48,7 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  请重新再试
   def my_list
 
-    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+    posts = @user.posts.where(_type: params[:_type]).order(position: :desc, updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
@@ -100,7 +101,7 @@ class Api::PostsController < Api::BaseController
 
     raise 'not found' unless user
 
-    posts = user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+    posts = user.posts.where(_type: params[:_type]).order(position: :asc, updated_at: :desc)
 
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
 
@@ -405,19 +406,21 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def search
+    my_following_ids = @user.following_ids
+
     results = if params[:cid] && params[:style] # 认定为级联搜索
                 ListApiPost.call(params)
               elsif params[:q]
-                # Post.search do
-               #    with(:_type, 0)
-               #    fulltext String(params[:q])
-               #  end.results
-               Post.limit(30)
+                Services::QueryPost.new(params.slice(:q)).search
               else
-                []
+                Post.none
               end
 
-    data = results.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
+    posts_by_my_following = Post.resources.where(:id => results, :user_id => my_following_ids).order(expect_price: :asc, updated_at: :desc)
+
+    others = results.where.not( :id => posts_by_my_following ).order(expect_price: :asc, updated_at: :desc)
+
+    data = Array(posts_by_my_following + others).map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }
   rescue => ex
