@@ -64,7 +64,7 @@ class Tender < ActiveRecord::Base
       post_car_in_area:         post.car_in_area,
       post_car_license_area:    post.app_area,
       post_user_introduction:   post.user.contact[:self_introduction],
-      post_user_avatar:         post.user.avatar,
+      post_user_avatar:         post.user.user_avatar,
       post_remark:              post.remark,
       post_publish_time:        post.created_at.strftime("%Y/%m/%d %H:%M"),
       post_expect_price:        post.expect_price.to_f,
