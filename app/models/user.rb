@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # constants
-  ROLES = %w(normal)
+  ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
   AVATAR = 'index/user_photo.jpg'
 
   STATUS = {
@@ -177,6 +177,10 @@ class User < ActiveRecord::Base
     else
       []
     end
+  end
+  
+  def had_updated_levels
+    levels = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[1]).order('end_level asc').pluck(:end_level)
   end
 
   def following?(user)

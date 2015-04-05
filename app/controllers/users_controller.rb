@@ -131,6 +131,25 @@ class UsersController < BaseController
   def about_us
     @customer_service = current_user.customer_service
   end
+  
+  def reset_password    
+    @user = User.find(current_user.id)
+    if @user.update(user_params_without_current_password)
+      # Sign in the user by passing validation in case their password changed
+      sign_in @user, :bypass => true
+      
+      if params[:channel] == 'reset_password'
+        valid_code = ValidCode.where(mobile: params[:mobile], code: params[:valid_code], \
+                                     status: ValidCode::STATUS.keys[0]).first
+        raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') if valid_code.blank?                             
+        valid_code.update(status: ValidCode::STATUS.keys[1])
+      end
+      
+      redirect_to root_path
+    else
+      render "edit"
+    end
+  end
 
   
   private
@@ -150,6 +169,10 @@ class UsersController < BaseController
       flash[:notice] = '不能做该升级操作' and redirect_to(my_level_user_path(current_user)) 
       return
     end
+  end
+  
+  def user_params_without_current_password
+    params[:user].permit(:password, :password_confirmation)
   end
 
 end
