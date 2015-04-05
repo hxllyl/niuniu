@@ -140,7 +140,7 @@ class Api::UsersController < Api::BaseController
 
   def update_level
     raise Errors::ArgumentsError.new, 'level参数不存在或比用户level低' if params[:level].blank? or params[:level].to_i <= @user.level
-    
+
     %w(identity hand_id visiting room_outer room_inner license).each do |t|
       if params[t.to_sym].present?
         
@@ -218,19 +218,25 @@ class Api::UsersController < Api::BaseController
   #   error_msg:  [Strin]     error json
 
   def update
-    if @user.update_attributes update_user_params
-     if params[:avatar].present?
-        avatar = @user.photos.find_by(_type: 'avatar')
-        unless avatar
-          @user.photos << Photo.new(image: params[:avatar], _type: params[:_type])
-        else
-          avatar.update(image: params[:avatar], _type: params[:_type])
-        end
-      end
-      render json: { status: 200, notice: 'success' }
+   if params[:avatar].present?
+     avatar = @user.photos.find_by(_type: 'avatar')
+  
+     unless avatar
+       @user.photos << Photo.new(image: params[:avatar], _type: params[:_type])
      else
-      render json: { status: 500, notice: 'failed', error_msg: @user.errors.full_messages.join('\n')}
+       avatar.update(image: params[:avatar], _type: params[:_type])
      end
+   end
+   
+   if params[:user].present?
+     if @user.update_attributes update_user_params
+      render json: { status: 200, notice: 'success' } and return
+     else
+      render json: { status: 500, notice: 'failed', error_msg: @user.errors.full_messages.join('\n')} and return
+     end
+   end
+   
+   render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
@@ -242,6 +248,7 @@ class Api::UsersController < Api::BaseController
   end
 
   def update_user_params
+    params[:user] = JSON(params[:user]) if params[:user].is_a?String
     params.require(:user).permit(:name, :role, :company, :area_id,
                                   { contact: [
                                    :company_address,
