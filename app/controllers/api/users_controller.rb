@@ -253,7 +253,7 @@ class Api::UsersController < Api::BaseController
   # Return:
   #   status:         [Integer]   200
   #   notice:         [String]    success
-  #   has_unread:     [Boolean]   true or false
+  #   read_info:     [JSON]   { hunt: true, tender: false, system_msg: false  }
   #
   # Error:
   #   status:     [Integer]   500
@@ -261,15 +261,8 @@ class Api::UsersController < Api::BaseController
   #   error_msg:  [Strin]     error json
   def check_unread
     # LESLIE: 针对寻车， 需要显示有否对其报价， 针对报价， 显示有否已完成的寻车
-    ubool = if params[:_type] == '0'
-              @user.has_unread_tenders?
-            elsif params[:_type] == '1'
-              @user.has_unread_hunts?
-            else
-              @user.has_unread_hunts? || @user.has_unread_tenders?
-            end
-
-    render json: {status: 200, notice: 'success', has_unread: ubool}
+    info = { hunt: @user.has_unread_tenders?, tender: @user.has_unread_hunts?, system_msg: false  }
+    render json: {status: 200, notice: 'success', read_info: info }
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
