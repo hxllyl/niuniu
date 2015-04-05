@@ -25,7 +25,7 @@ class Tender < ActiveRecord::Base
   has_many :comments, as: :resources
 
   # 未成交的报价
-  scope :uncompleted, -> { where(status: 0) }
+  scope :uncompleted, -> { where("status <> 1") }
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
 
