@@ -6,11 +6,11 @@
 class CreatePosts < ActiveRecord::Migration
   def change
     create_table :posts do |t|
-      t.references :standard, class_name: 'Standard' # 规格 中规 美规等
-      t.references :brand, class_name: 'Brand' # 所属品牌
-      t.references :car_model, class_name: 'CarModel' # 所属车型
-      t.references :base_car, class_name: 'BaseCar' # 所属车款
-      t.references :user, class_name: 'User' # 资源或者寻车拥有者
+      t.references :standard, class_name: 'Standard', null: false # 规格 中规 美规等
+      t.references :brand, class_name: 'Brand', null: false # 所属品牌
+      t.references :car_model, class_name: 'CarModel', null: false # 所属车型
+      t.references :base_car, class_name: 'BaseCar', null: false # 所属车款
+      t.references :user, class_name: 'User', null: false # 资源或者寻车拥有者
 
       t.column :_type, :integer # 资源类型 0 => 资源， 1 => 寻车
       t.column :remark, :string, limit: 160 # 备注

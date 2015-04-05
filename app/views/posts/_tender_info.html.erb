@@ -1,6 +1,6 @@
 <div class="detailPriceInfo row">
   <div class="info bfL">
-    <p class="price"><%= @title == '寻车详情' ? '我的报价' : @title  %>：<span class="num"><%= @tender.price %>万</span></p>
+    <p class="price"><%= current_user == @post.user ? '他的报价' : '我的报价' %>：<span class="num"><%= @tender.price %>万</span></p>
     <p>指导价：<%= @tender.base_price %></p>
     <% if @tender.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
   </div>
@@ -10,5 +10,5 @@
   <div class="tt bfL">报价备注：</div>
   <div class="info"><%= @tender.remark%></div>
 </div>
-<%= link_to '成交', complete_post_path(@post, tender_id: @tender.id), method: 'put', class: 'btn btn-default btnW200 btn_spacing mt20 orange sub' if @current_user && @current_user == @post.user && @post.status != 3 %>
+<%= link_to '成交', complete_post_path(@post, tender_id: @tender.id), method: 'put', class: 'btn btn-default btnW200 btn_spacing mt20 orange sub' if current_user == @post.user && @post.status != 3 %>
 <!--<%#= render 'comment_form'%>-->

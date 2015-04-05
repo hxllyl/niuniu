@@ -70,6 +70,8 @@ Rails.application.routes.draw do
     member do
       post :tender
       put  :complete
+      get  :my_tender
+      get  :his_tender
     end
   end
 

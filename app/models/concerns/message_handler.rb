@@ -36,7 +36,7 @@ module Concerns
       payload = JPush::PushPayload.new(options)
       
       result = client.sendPush(payload);
-      logger.debug("Got result  " + result)
+      logger.debug("Got result  " + result.inspect)
     end
     
   end
