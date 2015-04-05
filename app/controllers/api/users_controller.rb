@@ -60,7 +60,8 @@ class Api::UsersController < Api::BaseController
       following_count: user.followings.count,
       is_following: @user.following?(user),
       can_upgrade: user.can_upgrade.first,
-      valid_level_now: user.can_upgrade.last
+      valid_level_now: user.can_upgrade.last,
+      is_updated_identity: user.had_updated_levels.include?User::LEVELS.keys[1]
     }
 
     user_info = user.to_hash.merge(remain_info)

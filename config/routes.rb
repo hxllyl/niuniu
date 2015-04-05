@@ -40,11 +40,12 @@ Rails.application.routes.draw do
       get :edit_my_level
       put :update_my_level
       get :about_us
-
     end
     patch :add_following, on: :collection
 
     get :delete_relation, on: :collection
+    
+    patch :reset_password, on: :collection
 
     resources :my_posts do
       member do
