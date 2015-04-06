@@ -105,7 +105,7 @@ class PostsController < ApplicationController
       @standards, @brands, @car_models, @standard, @car_model = @brand.standards, Brand.all, [], nil, nil
       @q_json = {br: @brand.id}
     else
-      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.all.sample(30).valid
+      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.valid.sample(30)
       @q_json = {}
     end
 
