@@ -27,7 +27,7 @@
                 <% if @post.discount_way != 5 %>
                   <p class="price">期望的成交价：<span class="num" id="guidePrice"><%= @post.show_price %></span></p>
                 <% end %>
-                <%- if post.base_car.valid? %>
+                <%- if @post.base_car.valid? %>
                   <p>指导价：<%= @post.base_price %></p>
                 <% end %>
                 <%- if current_user != @post.user%>
@@ -43,7 +43,7 @@
               <div class="info"><%= @post.remark%></div>
             </div>
           <% end %>
-          <% unless @post.is_completed? %>
+          <% if !@post.is_completed? && current_user != @post.user %>
             <%= render @tender ? 'tender_info' : 'tender_form' %>
           <% end %>
         </div>
