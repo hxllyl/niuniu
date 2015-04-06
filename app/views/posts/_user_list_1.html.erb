@@ -34,7 +34,7 @@
                       <%= post.owner%>
                       <%= image_tag(post.user.try(:level_icon), size: "40x16") if post.user.try(:is_show_icon?) %>
                       <%- if post.is_completed? %>
-                        <div class="seal seal_done_sm"></div>
+                        <div class="seal seal_done_part"></div>
                       <% end %>
                     </td>
                     <td><%= post.publish_time %></td>
