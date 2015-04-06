@@ -30,7 +30,8 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">姓　　名：</label>
                 <div class="col-sm-10 prl0">
-                  <%= f.text_field :name, class: 'form-control', id: ''%>
+                  <%= f.text_field :name, class: 'form-control', id: '', placeholder: '输入不得超过6个字符', required: 'required', maxlength: '6' %>
+                  <span class="help-block with-errors"></span>
                 </div>
               </div>
               <div class="form-group clearfix">
@@ -38,10 +39,12 @@
                 <div class="col-sm-10 prl0">
                   <div class="row ptb0 mrl-15">
                     <div class="dropdown col-md-6">
-                     <%= select_tag 'province', options_for_select(areas(level: :provinces), selected: current_user.area.parent.id), {class: 'form-control', id: 'province', prompt: '请选择省份'} -%>
+                     <%= select_tag 'province', options_for_select(areas(level: :provinces), selected: current_user.area.parent.id), {class: 'form-control', id: 'province', prompt: '请选择省份', required: 'required'} -%>
+                     <span class="help-block with-errors"></span>
          			      </div>
                     <div class="dropdown col-md-6">
-                     <%= f.select :area_id, options_for_select([[current_user.area.name, current_user.area.id]]), { prompt: '请选择城市' }, {class: 'form-control', id: 'city'} %>
+                     <%= f.select :area_id, options_for_select([[current_user.area.name, current_user.area.id]]), { prompt: '请选择城市' }, {class: 'form-control', id: 'city', required: 'required'} %>
+                     <span class="help-block with-errors"></span>
                     </div>
                   </div>
                 </div>
@@ -50,7 +53,7 @@
                 <label for="" class="col-sm-2 control-label">自我评价：</label>
                 <div class="col-sm-10 prl0">
                   <%= f.fields_for :contact do |c_f| %>
-                   <%= c_f.text_field 'self_introduction', class: 'form-control', value: current_user.contact["self_introduction"] -%>
+                   <%= c_f.text_field 'self_introduction', class: 'form-control', placeholder: '输入不得超过12个字符', maxlength: '12', value: current_user.contact["self_introduction"] -%>
                   <% end -%>
                 </div>
               </div>
@@ -66,14 +69,15 @@
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">公司名称：</label>
                 <div class="col-sm-10 prl0">
-                  <%= f.text_field :company, class: 'form-control' -%>
+                  <%= f.text_field :company, class: 'form-control', placeholder: '输入不得超过14个字符', maxlength: '14', required: 'required' -%>
+                  <span class="help-block with-errors"></span>
                 </div>
               </div>
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">公司地址：</label>
                 <div class="col-sm-10 prl0">
                   <%= f.fields_for :contact do |c_f|%>
-                    <%= c_f.text_field 'company_address', class: 'form-control', value: current_user.contact["company_address"] -%>
+                    <%= c_f.text_field 'company_address', class: 'form-control', placeholder: '', value: current_user.contact["company_address"] -%>
                   <% end -%>
                 </div>
               </div>
@@ -81,7 +85,7 @@
                 <label for="" class="col-sm-2 control-label">职务抬头：</label>
                 <div class="col-sm-10 prl0">
                   <%= f.fields_for :contact do |c_f|%>
-                    <%= c_f.text_field 'position_header', class: 'form-control', value: current_user.contact["position_header"] -%>
+                    <%= c_f.text_field 'position_header', class: 'form-control', placeholder: '输入不得超过6个字符', maxlength: '6', value: current_user.contact["position_header"] -%>
                   <%end-%>
                 </div>
               </div>
@@ -99,16 +103,16 @@
                   <%end-%>
                 </div>
               </div>
-              
+
               <div class="form-group clearfix">
                 <label for="" class="col-sm-2 control-label">QQ：</label>
                 <div class="col-sm-10 prl0">
                   <%= f.fields_for :contact do |c_f|%>
-                    <%= c_f.text_field 'qq', class: 'form-control',value: current_user.contact["qq"]  -%>
+                    <%= c_f.text_field 'qq', class: 'form-control',value: current_user.contact["qq"] -%>
                   <% end-%>
                 </div>
               </div>
-              
+
             </div>
             <div class="txtC">
               <%= f.submit t('commit'), class: 'btn btn-default orange' -%>
@@ -125,9 +129,9 @@
 $(document).ready(function () {
     $('.button').on('change', function(){
       var targetId = $(this).attr('target-id');
-      
+
       if(this.files && this.files[0]){
-        
+
         var reader = new FileReader();
         reader.onload = function(e){
           $('#show-img').attr('src', e.target.result);
@@ -140,5 +144,5 @@ $(document).ready(function () {
 
 <%= content_for :footers do %>
   <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true %>
-  
+
 <% end -%>
