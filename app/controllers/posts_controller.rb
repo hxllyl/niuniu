@@ -113,9 +113,8 @@ class PostsController < ApplicationController
     conds[:standard_id] = @standard.id  if @standard
     conds[:brand_id]    = @brand.id     if @brand
     conds[:car_model_id]= @car_model.id if @car_model
-    @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
-    @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
-    @posts = Post.where(conds).order(@order_by).page(params[:page]).per(10)
+
+    @posts = Post.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def show

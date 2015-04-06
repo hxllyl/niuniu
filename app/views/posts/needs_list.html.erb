@@ -94,47 +94,27 @@
           <h3 class="panel-title">全部寻车（<%= @posts.total_count %>）</h3>
         </div>
         <div class="panel-body">
-          <div class="mySourceOpe">
-            <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= @order_ele ? @order_ele : '排序方式' %><span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <%- Post::ORDERS.each do |k, v| %>
-                  <li><a href="<%= needs_list_posts_path(@q_json.merge(order_by: k)) %>"><%= v %></a></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <div class="mySourceTab mt10">
+          <div class="sourceTab">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
-              <tbody>
-              <% @posts.each do |post| %>
+              <thead>
                 <tr>
-                  <td>
-                    <div class="box clearfix">
-                      <div class="infoM">
-                        <h5 class="name"><%= link_to post.title, post_path(post, _type: 1) %></a></h5>
-                        <div class="info clearfix">
-                          <div class="m"><%= post.color %></div>
-                          <div class="m">
-                            <span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?)%></span>
-                            <span><%= link_to post.owner, user_list_posts_path(user_id: post.user_id, _type: 1) %></span>
-                            <span class="statu"><%=following?(post.user)%></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="infoPrice">
-                        <p><span class="price"><%= post.show_price %></span><span class="time"><%= post.publish_time %></span></p>
-                        <p>指导价：<%= post.base_price %></p>
-                      </div>
-                    </div>
-                    <div class="remark clearfix">
-                      <div class="tt bfL">备注：</div>
-                      <div class="info"><%= post.remark %></div>
-                    </div>
-                  </td>
+                  <th width="30%">品牌/车型</th>
+                  <th width="10%">上牌地点</th>
+                  <th width="26%">外观/内饰</th>
+                  <th width="24%">发布人</th>
+                  <th width="10%">发布时间</th>
                 </tr>
-              <% end %>
+              </thead>
+              <tbody>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, post_path(post.id, _type: 1)%></td>
+                    <td><%= post.car_license_area %></td>
+                    <td><%= post.color %></td>
+                    <td><%= post.owner %><span class="ml6"><%= image_tag(post.user.try(:level_icon), size: '40x16') if current_user.try(:is_show_icon?) %></span></td>
+                    <td><%= post.publish_time %></td>
+                </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
