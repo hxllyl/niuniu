@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         get :search
         get :contacted
         get :registered
+        post :contact
       end
     end
 

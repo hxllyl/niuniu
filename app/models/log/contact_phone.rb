@@ -8,7 +8,9 @@ class Log::ContactPhone < ActiveRecord::Base
   }
   
   validates :mobile, presence: true, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }
-  validates :sender, presence: true
+  validates :sender_id, presence: true
   validates :_type,  presence: true, inclusion: {in: TYPES.keys}
+
+  belongs_to :sender, class_name: 'User'
 
 end

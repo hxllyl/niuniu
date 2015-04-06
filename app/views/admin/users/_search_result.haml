@@ -11,5 +11,6 @@
     -# - else
     -#   = link_to '我来联系', '#'
   - else
-    此手机号码不存在
+    -# 此手机号码不存在
     -# b. 我来联系?
+    = link_to '我来联系', contact_admin_users_path(mobile: @mobile), method: :post, class: 'btn btn-warning'
