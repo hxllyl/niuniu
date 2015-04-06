@@ -45,36 +45,31 @@
           </div>
           <div class="carList clearfix">
             <div class="tt">品牌</div>
-            <div role="tabpanel" class="listBox toggle">
-              <ul class="selectTag nav-tabs clearfix" role="tablist">
-                <li role="presentation" class="active"><a href="#allBrand" aria-controls="allBrand" role="tab" data-toggle="tab">全部</a></li>
-                <% @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
-                    <li role="presentation">
-                      <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
-                <% end %>
-
-              </ul>
-              <div class="tab-content">
-                <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
-                  <% @brands.each do |brand| %>
-                    <li class="<%= @brand == brand ? 'current' : '' %>">
-                      <%= link_to brand.name, needs_list_posts_path(@q_json.merge(br: brand.id)) %>
-                    </li>
-                  <% end %>
-                </ul>
-
-                <% @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
-                    <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
-                      <% brands.each do |brand| %>
-                          <li><%= link_to brand.name, needs_list_posts_path(@q_json.merge(br: brand.id)) %></li>
-                      <% end %>
-                    </ul>
-                <% end %>
-
-              </div>
-              <div class="toggleBtn">[更多]</div>
-            </div>
-          </div>
+            <div role="tabpanel" class="listBox">
+        <ul class="selectTag nav-tabs clearfix" role="tablist">
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
+          <li role="presentation">
+            <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
+          <% end %>
+        </ul>
+        <div class="tab-content">
+          <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
+            <% @brands.each do |brand| %>
+            <li class=<%= brand == @brand ? 'current' : ''%>>
+              <a href="<%= needs_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
+            </li>
+            <% end %>
+          </ul>
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
+          <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
+            <% brands.each do |brand| %>
+              <li><a href="<%= needs_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
           <div class="carList clearfix">
             <div class="tt">型号</div>
             <div class="listBox">
