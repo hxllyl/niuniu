@@ -35,7 +35,9 @@
             <div class="tt bfL">备注：</div>
             <div class="info"><%= @post.remark%></div>
           </div>
-          <%= render 'tender_form' if current_user != @someone %>
+          <% unless @post.is_completed? %>
+            <%= render @tender ? 'tender_info' : 'tender_form' %>
+          <% end %>
         </div>
       </div>
     </div>

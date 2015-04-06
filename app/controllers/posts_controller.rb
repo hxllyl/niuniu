@@ -118,9 +118,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post       = Post.find_by_id(params[:id])
-    @someone    = @post.user
+    @post     = Post.find_by_id(params[:id])
+    @someone  = @post.user
     @follows  = current_user.followings & @someone.followers if current_user
+    @tender   = Tender.find_by_user_id_and_post_id(current_user.id, @post.id)
   end
 
   def user_list

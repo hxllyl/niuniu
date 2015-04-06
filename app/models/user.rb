@@ -186,7 +186,7 @@ class User < ActiveRecord::Base
       []
     end
   end
-  
+
   def had_updated_levels
     levels = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[1]).order('end_level asc').pluck(:end_level)
   end
@@ -266,6 +266,10 @@ class User < ActiveRecord::Base
 
   def user_avatar
     avatar.class == String ? avatar : avatar.image.try(:url)
+  end
+
+  def tendered?(post_id)
+    Tender.find_by_user_id_and_post_id(id, post_id) ? true : false
   end
 
 end
