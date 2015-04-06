@@ -35,6 +35,7 @@ $(function(){
     var query = "?id=" + id + "&clazz=" + clazz + "&type=" + type + '&way=' + way;
     
     $('#del-btn').on('click', function(e){
+      e.preventDefault();
       $.get('/users/delete_relation.json' + query, function(data){
         if(data.status == 'success'){
           cancel.parent().parent().hide();

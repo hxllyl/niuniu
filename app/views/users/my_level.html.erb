@@ -81,7 +81,7 @@
                   <a class="btn btn-default orange" href="<%= edit_my_level_user_path(current_user, level: User::LEVELS.keys[4]) %>" role="button"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
                 </p>
                 <%else%>
-                   <% if @level_status == User::LEVELS.keys[4] %>
+                   <% if @level_status.last == User::LEVELS.keys[4] %>
                      <p class="check">待审核</p>
                    <%else%>
                      <p>
