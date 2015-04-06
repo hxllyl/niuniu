@@ -1,7 +1,7 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">我的寻车</a></li>
+    <li><%= link_to "首页", root_path %></li>
+    <li><%= link_to "我的寻车", user_path(current_user) %></li>
     <li class="active">报价详情</li>
   </ol>
 </div>

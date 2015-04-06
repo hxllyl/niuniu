@@ -1,8 +1,8 @@
 <%= render partial: 'partials/personal_center_head' %>
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="#">个人中心</a></li>
-    <li><a href="#">我的寻车</a></li>
+    <li><%= link_to "个人中心", user_path(current_user) %></li>
+    <li><%= link_to "我的寻车", user_path(current_user) %></li>
     <li class="active">查看报价</li>
   </ol>
 </div>

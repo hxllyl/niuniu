@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href=<%= root_path%>>首页</a></li>
+    <li><%= link_to "首页", root_path %></li>
     <li class="active"><%= @post._type == 1 ? '发布寻车' : '发布资源' %></li>
   </ol>
 </div>
