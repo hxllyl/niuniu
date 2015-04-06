@@ -40,7 +40,7 @@ class BaseCar < ActiveRecord::Base
   end
 
   def select_name
-    base_price.to_s << '万 ' << style
+    base_price.to_f == 0.0 ? style : base_price.to_s << '万 ' << style
   end
 
   def valid?

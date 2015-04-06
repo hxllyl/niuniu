@@ -55,7 +55,7 @@ class Api::FollowShipsController < Api::BaseController
   #   notice: [String]  请重新再试
   def joint_followers
     user = User.find_by_id(params[:user_id])
-    render json: {status: true, data: {joint_followers: @user.followings & user.followers}}
+    render json: {status: true, data: {joint_followers: @user.followings.map(&:to_hash) & user.followers.map(&:to_hash)}}
 
     rescue => e
     render json: {status: false, error: e.message}
