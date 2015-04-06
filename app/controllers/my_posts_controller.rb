@@ -203,8 +203,17 @@ class MyPostsController < ApplicationController
 
   # 更新post位置
   def update_position
-    post = current_user.posts.find params[:id]
-    params[:type] == 'up' ? post.move_higher : post.move_lower
+    post = current_user.posts.resources.find params[:id]
+    
+    type = params[:type]
+    swap_obj = current_user.posts.resources.find params[:swap_id]
+    
+    unless (type == 'down' and post.first?) or ( type == 'up' and post.last?)
+      swap_tmp(post, swap_obj)
+      post.save
+      swap_obj.save
+    end
+    
     respond_to do |format|
       format.js {
         render nothing: true
@@ -212,4 +221,13 @@ class MyPostsController < ApplicationController
     end
     # render nothing
   end
+  
+  private
+  
+  def swap_tmp(objx, objy, temp=nil)
+    temp = objx.position
+    objx.position = objy.position
+    objy.position = temp 
+  end
+  
 end
