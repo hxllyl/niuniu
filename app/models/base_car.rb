@@ -43,4 +43,8 @@ class BaseCar < ActiveRecord::Base
     base_price.to_s << '万 ' << style
   end
 
+  def valid?
+    status == 1
+  end
+
 end

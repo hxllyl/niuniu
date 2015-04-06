@@ -27,7 +27,9 @@
                 <% if @post.discount_way != 5 %>
                   <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                 <% end %>
-                <p>指导价：<%= @post.base_price %></p>
+                <%- if @post.base_car.valid? %>
+                  <p>指导价：<%= @post.base_price %></p>
+                <% end %>
                 <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
               </div>
             </div>
