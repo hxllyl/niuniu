@@ -28,7 +28,6 @@
                   <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                 <% end %>
                 <p>指导价：<%= @post.base_price %></p>
-                <div class="reportLink"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#myReport">我要举报</a></div>
                 <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
               </div>
             </div>
