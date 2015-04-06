@@ -35,10 +35,12 @@
                 </div>
               </div>
             </div>
-            <div class="row remark">
-              <div class="tt bfL">备注：</div>
-              <div class="info"><%= @post.remark %></div>
-            </div>
+            <%- unless [nil, ''].include?(@post.remark) %>
+              <div class="row remark">
+                <div class="tt bfL">备注：</div>
+                <div class="info"><%= @post.remark %></div>
+              </div>
+            <% end %>
           </div>
           <div class="sourceTab">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">

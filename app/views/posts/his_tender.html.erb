@@ -33,10 +33,12 @@
               </div>
             </div>
           </div>
-          <div class="remark">
-            <div class="tt bfL">备注：</div>
-            <div class="info"><%= @post.remark%></div>
-          </div>
+          <%- unless [nil, ''].include?(@post.remark) %>
+            <div class="remark">
+              <div class="tt bfL">备注：</div>
+              <div class="info"><%= @post.remark%></div>
+            </div>
+          <% end %>
           <%= render 'tender_info' %>
         </div>
       </div>
