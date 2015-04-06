@@ -1,12 +1,14 @@
 $(document).ready(function(){
   $(".dropdown-toggle").dropdown();
-
+  /*标签切换*/
   $(".nav-tabs a").click(function (e) {
     e.preventDefault();
     $(this).tab("show");
   });
   /*翻页居中*/
   $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
+  /*表单验证*/
+  $("form,.modal,#form_select").validator();
   /*placeholder兼容*/
   var doc = document,
   inputs = doc.getElementsByTagName("input"),
@@ -47,8 +49,8 @@ $(document).ready(function(){
       $("#topBar").removeClass("fixed");
     };
   });
-
+  /*提醒框*/
   setTimeout(function() {
-      $('.alertTips').fadeOut('fast');
+      $(".alertTips").fadeOut("fast");
   }, 2000);
 });

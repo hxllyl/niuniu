@@ -31,6 +31,7 @@
 <%= render partial: 'partials/footer' %>
 <%= yield :footers %>
 
+<%= javascript_include_tag 'validator', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'basic', 'data-turbolinks-track' => true %>
 </body>
 </html>
