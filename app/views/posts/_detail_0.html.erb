@@ -34,8 +34,8 @@
             <div class="info"><%= @post.remark %></div>
           </div>
           <ul class="sourceGallery">
-            <%- @post.photos.each do |ele| %>
-              <li><%= image_tag(ele.last)%></li>
+            <%- @post.photos_ary.each do |ele| %>
+              <li><%= image_tag(ele)%></li>
             <% end %>
           </ul>
         </div>

@@ -113,15 +113,15 @@ class PostsController < ApplicationController
     conds[:standard_id] = @standard.id  if @standard
     conds[:brand_id]    = @brand.id     if @brand
     conds[:car_model_id]= @car_model.id if @car_model
-    @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
-    @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
-    @posts = Post.where(conds).order(@order_by).page(params[:page]).per(10)
+
+    @posts = Post.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def show
-    @post       = Post.find_by_id(params[:id])
-    @someone    = @post.user
+    @post     = Post.find_by_id(params[:id])
+    @someone  = @post.user
     @follows  = current_user.followings & @someone.followers if current_user
+    @tender   = Tender.find_by_user_id_and_post_id(current_user.id, @post.id)
   end
 
   def user_list
@@ -135,7 +135,7 @@ class PostsController < ApplicationController
     @someone  = User.find_by_id(params[:user_id])
     @brands   = @someone.posts.where(_type: @_type).map(&:brand).uniq
 
-    conds            = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
+    conds = {user_id: params[:user_id], _type: params[:_type].to_i}
     conds[:brand_id] = params[:br] if params[:br]
 
     @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)

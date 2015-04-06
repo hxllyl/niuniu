@@ -66,7 +66,7 @@
               <tbody>
                 <%- @posts.each do |post| %>
                   <tr>
-                    <td><%= link_to post.car_model_name, post_path(post.id, _type: 0), class: 'name' %></td>
+                    <td><%= link_to "#{post.brand_name}/#{post.car_model_name}", post_path(post, _type: 0), class: 'name' %></td>
                     <td><span class="price"><%= post.show_price %></span></td>
                     <td><%= post.standard_resource_type %></td>
                     <td><%= post.owner %><span class="ml6"><%= image_tag(post.user.try(:level_icon), size: "40x16") if current_user.try(:is_show_icon?) %></span></td>

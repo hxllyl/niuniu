@@ -165,6 +165,10 @@ class Post < ActiveRecord::Base
     hash
   end
 
+  def photos_ary
+    [photos[:front], photos[:side], photos[:obverse], photos[:inner]].compact
+  end
+
   def to_hash
     {
       id:                 id,
