@@ -210,8 +210,8 @@ class PostsController < BaseController
 
   def his_tender
     @post       = Post.find_by_id(params[:id])
-    @someone    = @post.user
     @tender     = Tender.find_by_id(params[:tender_id])
+    @someone    = @tender.user
 
     instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
     @follows  = current_user.followings & @someone.followers if current_user
