@@ -225,7 +225,11 @@ class Api::PostsController < Api::BaseController
     post.attributes = params[:post]
     # 资源传图
     photos && photos.each do |k, v|
-      post.post_photos.new(_type: k, image: v.tempfile)
+      if v
+        post.post_photos.new(_type: k, image: v.tempfile)
+      else
+        post.post_photos.where(_type: k).delete_all
+      end
     end
 
     post.user = @user
@@ -520,7 +524,7 @@ class Api::PostsController < Api::BaseController
   rescue => e
     render json: { status: 500, notice: 'failed', error_msg: e.message }
   end
-  
+
   private
 
   def swap_tmp(objx, objy, temp=nil)
