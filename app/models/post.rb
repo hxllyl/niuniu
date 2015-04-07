@@ -210,7 +210,8 @@ class Post < ActiveRecord::Base
   end
 
   def publish_time
-    updated_at < Date.today ? updated_at.strftime("%m/%d") : updated_at.strftime("%H:%M")
+    time = _type == 0 ? updated_at : created_at
+    time < Date.today ? time.strftime("%m/%d") : time.strftime("%H:%M")
   end
 
   def need_title

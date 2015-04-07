@@ -90,7 +90,7 @@ class Tender < ActiveRecord::Base
   end
 
   def publish_time
-    updated_at < Date.today ? updated_at.strftime("%m/%d") : updated_at.strftime("%H:%M")
+    created_at < Date.today ? created_at.strftime("%m/%d") : created_at.strftime("%H:%M")
   end
 
   def base_price

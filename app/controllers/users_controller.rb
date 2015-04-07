@@ -32,8 +32,8 @@ class UsersController < BaseController
   end
 
   def my_tenders
-    @uncompleted_tenders = Tender.includes(:post).uncompleted.valid.where(user_id: current_user.id).order('updated_at desc').page(params[:page]).per(10)
-    @completed_tenders = Tender.includes(:post).completed.valid.where(user_id: current_user.id).order('updated_at desc')
+    @uncompleted_tenders = Tender.includes(:post).uncompleted.where(user_id: current_user.id).order('updated_at desc').page(params[:page]).per(10)
+    @completed_tenders = Tender.includes(:post).completed.where(user_id: current_user.id).order('updated_at desc')
   end
 
   def my_followers
