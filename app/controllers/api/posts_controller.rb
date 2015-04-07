@@ -478,6 +478,52 @@ class Api::PostsController < Api::BaseController
   end
 
 
+  # 所有品牌
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    brand_names => %w[奥迪 宝马]
+  #
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def filter_brands
+    brands = Brand.distinct(:name).pluck(:name)
+    render json:  { status: 200, notice: 'success', data: { brand_names: brands } }
+  rescue => e
+    render json: { status: 500, notice: 'failed', error_msg: e.message }
+  end
+
+
+  # 根据品牌名称搜索寻车
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   brand_name [String]   品牌名称
+  #
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    posts => [post1, post2]
+  #
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def filter_brand
+    hunts = Post.needs.includes(:user, :brand).where("brands.name" => String(params[:brand_name]))
+    data = Array(hunts).map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
+
+    render json: {status: 200, notice: 'success', data: { posts: data  } }
+  rescue => e
+    render json: { status: 500, notice: 'failed', error_msg: e.message }
+  end
+  
   private
 
   def swap_tmp(objx, objy, temp=nil)
