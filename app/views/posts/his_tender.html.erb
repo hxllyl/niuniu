@@ -27,7 +27,7 @@
                 <% if @post.discount_way != 5 %>
                   <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                 <% end %>
-                <%- if @post.base_car.valid? %>
+                <%- if @post.base_car.is_valid? %>
                   <p>指导价：<%= @post.base_price %></p>
                 <% end %>
                 <div class="reportLink"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#myReport">我要举报</a></div>

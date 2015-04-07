@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150405072228) do
     t.string   "style",        limit: 60
     t.string   "NO",           limit: 12,                          default: ""
     t.integer  "status",                                           default: 1
+    t.string   "display_name"
     t.datetime "created_at",                                                     null: false
     t.datetime "updated_at",                                                     null: false
   end
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150405072228) do
     t.integer  "standard_id",               null: false
     t.integer  "brand_id",                  null: false
     t.string   "name",                      null: false
+    t.string   "display_name"
     t.integer  "status",        default: 1
     t.integer  "click_counter", default: 0
     t.datetime "created_at",                null: false

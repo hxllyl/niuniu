@@ -40,7 +40,7 @@
                         </div>
                         <div class="infoPrice">
                           <p><span class="price"><%= post.show_price %></span><span class="time"><%= post.publish_time %></span></p>
-                          <%- if post.base_car.valid? %>
+                          <%- if post.base_car.is_valid? %>
                             <p>指导价：<%= post.base_price %></p>
                           <% end %>
                         </div>
