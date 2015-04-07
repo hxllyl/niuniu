@@ -23,7 +23,8 @@ class Tender < ActiveRecord::Base
   belongs_to :user, class_name: 'User'
   belongs_to :post, class_name: 'Post'
   has_many :comments, as: :resources
-
+  
+  scope :valid, -> {where("status <> ?", STATUS.keys[2])}
   # 未成交的报价
   scope :uncompleted, -> { where("status <> 1") }
   # 已成交的报价

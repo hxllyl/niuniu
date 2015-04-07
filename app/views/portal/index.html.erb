@@ -3,21 +3,18 @@
 		<div class="col-md-9 mainBox">
 			<div id="carousel-example-generic" class="banner mb10 carousel slide" data-ride="carousel">
 			  <ol class="carousel-indicators">
-			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          <% @banners.count.times do |i|%>
+            
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="<%= i == 0 ? 'active' : ''%>"></li>
+          <%end-%>
 			  </ol>
 
 			  <div class="carousel-inner" role="listbox">
-			    <div class="item active">
-			      <a href="#" target="_blank"><%= image_tag("index/banner.jpg", alt: "", width: "100%")%></a>
-			    </div>
-			    <div class="item">
-			      <a href="#" target="_blank"><%= image_tag("index/banner.jpg", alt: "", width: "100%")%></a>
-			    </div>
-			    <div class="item">
-			      <a href="#" target="_blank"><%= image_tag("index/banner.jpg", alt: "", width: "100%")%></a>
-			    </div>
+          <% @banners.each_with_index do |ban, i| %>
+    			      <div class="<%= i== 0 ? 'item active' : 'item' %>">    
+    			      <a href="#" target="_blank"><%= image_tag(ban.image.url, alt: "", width: "100%")%></a>
+    			    </div>
+			    <%end%>
 			  </div>
 
 			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -51,3 +48,4 @@
 <%= content_for :footers do %>
   <%= javascript_include_tag 'portal', 'data-turbolinks-track' => true %>
 <% end -%>
+
