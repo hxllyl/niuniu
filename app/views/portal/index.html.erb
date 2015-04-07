@@ -12,7 +12,7 @@
 			  <div class="carousel-inner" role="listbox">
           <% @banners.each_with_index do |ban, i| %>
     			      <div class="<%= i== 0 ? 'item active' : 'item' %>">    
-    			      <a href="#" target="_blank"><%= image_tag(ban.image.url, alt: "", width: "100%")%></a>
+    			      <a href="<%= ban.redirect_way || '#'%>" target="_blank"><%= image_tag(ban.image.url, alt: "", width: "100%")%></a>
     			    </div>
 			    <%end%>
 			  </div>

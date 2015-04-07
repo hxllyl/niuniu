@@ -8,4 +8,6 @@ class ActiveDevice < ActiveRecord::Base
   belongs_to :user, class_name: 'User'
   
   scope :push_list, ->(user){ where(user: user, active: true) }
+  
+  scope :active, ->{where('active = ?', true)}
 end
