@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # constants
+  # 为什么不用staff这个模型？
   ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
-
+  
   # 注册状态：来自网站 ios android 后台
   REG_STATUS = {
     0 => 'web',
@@ -58,7 +59,8 @@ class User < ActiveRecord::Base
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
 
-  belongs_to :customer_service, class_name: 'Staff'
+  belongs_to :customer_service, class_name: 'User'
+  has_many :customers, -> {where(role: 'sale')}, class_name: 'User', foreign_key: :customer_service_id
 
   has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'

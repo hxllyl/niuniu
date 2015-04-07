@@ -1,8 +1,5 @@
 # encoding: utf-8
-
-require_relative '../../app/services/search_resource'
-require_relative '../../app/services/list_resources'
-
+require_relative '../../app/services/query_posts'
 class PostsController < BaseController
    skip_before_filter :verify_authenticity_token, only: [:tender, :complete]
 
@@ -135,7 +132,7 @@ class PostsController < BaseController
     @someone  = User.find_by_id(params[:user_id])
     @brands   = @someone.posts.where(_type: @_type).map(&:brand).uniq
 
-    conds = {user_id: params[:user_id], _type: params[:_type].to_i}
+    conds = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
     conds[:brand_id] = params[:br] if params[:br]
 
     @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
