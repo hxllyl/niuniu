@@ -13,12 +13,11 @@ class ListApiPost
   end
 
   def call
-    cond = { car_model_id: @cid }
+    cond = { car_model_id: @cid, base_car_id: @style }
     res = Post.resources.where(cond)
     res = res.where(outer_color: @ocol) if @ocol
     res = res.where(inner_color: @icol) if @icol
     res = res.where(status: @status) if @status
-    res = res.includes(:base_car).where("base_cars.style" =>  @style) if @style
     res
   end
 
