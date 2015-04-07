@@ -6,13 +6,13 @@
       <% if current_user %>
         <li class="<%= post_active?('my_posts', params[:controller], '0', params[:_type]) %>"><a href=<%= user_my_posts_path(current_user, _type: 0) %>><span class="icon icon-source"></span>我的资源</a></li>
       <% else %>
-        <li class="<%= post_active?('my_posts', params[:controller], '0', params[:_type]) %>"><a href='#'><span class="icon icon-source"></span>我的资源</a></li>
+        <li class="<%= post_active?('my_posts', params[:controller], '0', params[:_type]) %>"><a href=<%= posts_path(_type: 0)%>><span class="icon icon-source"></span>我的资源</a></li>
       <% end %>
       <li class="<%= post_active?('posts', params[:controller], '0', params[:_type]) %>"><a href=<%= posts_path(_type: 0)%>><span class="icon icon-market"></span>市场资源</a></li>
       <% if current_user %>
         <li class="<%= post_active?('my_posts', params[:controller], '1', params[:_type]) %>"><a href=<%= new_user_my_post_path(user_id: current_user, _type: 1) %>><span class="icon icon-search"></span>我要寻车</a></li>
       <%else%>
-        <li class="<%= post_active?('my_posts', params[:controller], '1', params[:_type]) %>"><a href="#"><span class="icon icon-search"></span>我要寻车</a></li>
+        <li class="<%= post_active?('my_posts', params[:controller], '1', params[:_type]) %>"><a href=<%= posts_path(_type: 1)%>><span class="icon icon-search"></span>我要寻车</a></li>
       <% end %>
       <li class="<%= post_active?('posts', params[:controller], '1', params[:_type]) %>"><a href=<%= posts_path(_type: 1)%>><span class="icon icon-carInfo"></span>寻车信息</a></li>
     </ul>

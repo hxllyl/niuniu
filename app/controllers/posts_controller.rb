@@ -1,9 +1,6 @@
 # encoding: utf-8
-
-require_relative '../../app/services/search_resource'
-require_relative '../../app/services/list_resources'
-
-class PostsController < ApplicationController
+require_relative '../../app/services/query_posts'
+class PostsController < BaseController
    skip_before_filter :verify_authenticity_token, only: [:tender, :complete]
 
   def index
@@ -210,8 +207,8 @@ class PostsController < ApplicationController
 
   def his_tender
     @post       = Post.find_by_id(params[:id])
-    @someone    = @post.user
     @tender     = Tender.find_by_id(params[:tender_id])
+    @someone    = @tender.user
 
     instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
     @follows  = current_user.followings & @someone.followers if current_user

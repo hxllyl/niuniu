@@ -3,7 +3,7 @@
     %h2 已联系未注册名录
 
 .wrapper.wrapper-content.animated.fadeInRight
-  
+
   .ibox.float-e-margins
     .ibox-content
       .row
@@ -19,9 +19,9 @@
             - @users.each do |user|
               %tr
                 %td= user.id
-                %td 业务员工号
+                %td= user.job_number
                 %td= user.mobile
-                %td 首次联系时间
+                %td= user.created_at.to_s(:db)
                 %td 备注
                 %td= link_to '修改', edit_admin_user_path(user)
         .col-lg-6
@@ -43,7 +43,7 @@
               %th 累计新增数
               %td 50
               %th 累计注册数
-              %td 100 
+              %td 100
 
         .col-lg-12
           - if @users.present?
