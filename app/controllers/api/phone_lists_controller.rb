@@ -64,9 +64,19 @@ class Api::PhoneListsController < Api::BaseController
     
     SendInviteMessageJob.perform_later(@user, mobile)
     
-    render json: { status: 200, notice: 'success'}
-  rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message}
+    payload = {
+      sender: @user, 
+      mobile: mobile,
+      _type:  Log::ContactPhone::TYPES.keys[1],
+      last_contact_at: Time.now
+    }
+    
+    instrument 'contact_phone.send_invite_message', payload do  
+      render json: { status: 200, notice: 'success'}
+    end
+    
+  # rescue => ex
+  #   render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
 
 end

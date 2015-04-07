@@ -14,14 +14,18 @@ class ValidCodesController < BaseController
       @valid_code.send_code
       render json: { status: 'success', code: @valid_code.code }
     else
-      @valid_code = ValidCode.new(mobile: params[:mobile], _type: params[:type])
-
-      if @valid_code.save
-        @valid_code.send_code
-        render json: { status: 'success', code: @valid_code.code }
+      if @valid_code.blank? or @valid_code._type == ValidCode::TYPES.keys[1]
+        @valid_code = ValidCode.new(mobile: params[:mobile], _type: params[:type])
+      
+        if @valid_code.save
+          @valid_code.send_code
+          render json: { status: 'success', code: @valid_code.code }
+        else
+          render json: { status: 'failed', error_msg: @valid_code.errors.full_messages.join('\n') }
+        end
       else
-        render json: { status: 'failed', error_msg: @valid_code.errors.full_messages.join('\n') }
-      end
+        render json: { status: 'failed', error_msg: "号码：#{@valid_code.mobile},已经被注册"}
+      end  
     end
   end
 
