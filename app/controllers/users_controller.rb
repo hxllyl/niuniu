@@ -33,8 +33,8 @@ class UsersController < BaseController
   end
 
   def my_tenders
-    @uncompleted_tenders = Tender.includes(:post).uncompleted.where(user_id: current_user.id).order('updated_at desc').page(params[:page]).per(10)
-    @completed_tenders = Tender.includes(:post).completed.where(user_id: current_user.id).order('updated_at desc')
+    @uncompleted_tenders = Tender.includes(:post).uncompleted.valid.where(user_id: current_user.id).order('updated_at desc').page(params[:page]).per(10)
+    @completed_tenders = Tender.includes(:post).completed.valid.where(user_id: current_user.id).order('updated_at desc')
   end
 
   def my_followers
@@ -53,14 +53,17 @@ class UsersController < BaseController
     object = clazz.find params[:id]
     if clazz == Post
       if params[:way] == 'resources'
-        current_user.send("#{params[:type]}").resources.delete object
+        object.update(status: Post::STATUS.keys[4]) if current_user.send("#{params[:type]}").resources.include?(object)
       else
-        current_user.send("#{params[:type]}").needs.delete object
+        object.update(status: Post::STATUS.keys[4]) if current_user.send("#{params[:type]}").needs.include?(object)
         new_counter = current_user.send("#{params[:type]}").needs.count
       end
+    elsif clazz == Tender
+      object.update(status: Tender::STATUS.keys[2]) if current_user.send("#{params[:type]}").include?(object)
+      new_counter = current_user.send("#{params[:type]}").count  
     else
-     current_user.send("#{params[:type]}").delete object
-     new_counter = current_user.send("#{params[:type]}").count
+      current_user.send("#{params[:type]}").delete object
+      new_counter = current_user.send("#{params[:type]}").count
     end
     
     respond_to do |format|
