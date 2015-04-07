@@ -23,7 +23,7 @@ class Tender < ActiveRecord::Base
   belongs_to :user, class_name: 'User'
   belongs_to :post, class_name: 'Post'
   has_many :comments, as: :resources
-  
+
   scope :valid, -> {where("status <> ?", STATUS.keys[2])}
   # 未成交的报价
   scope :uncompleted, -> { where("status <> 1") }
@@ -57,7 +57,7 @@ class Tender < ActiveRecord::Base
     {
       post_id:                  post_id,
       post_title:               post.title,
-      post_detail_title:        post._type == 0 ? post.title : post.detail_title,
+      post_detail_title:        post.detail_title,
       post_user_id:             post.user_id,
       post_color:               post.color,
       post_user_name:           post.owner,
@@ -135,11 +135,11 @@ class Tender < ActiveRecord::Base
     message = case type
               when :create then
                 <<-EOF
-                您所#{post.need_detail_title} 的车，牛牛汽车生意朋友圈的#{user_name}给您报了价。
+                您所#{post.detail_title} 的车，牛牛汽车生意朋友圈的#{user_name}给您报了价。
                 EOF
               when :dealed then
                 <<-EOF
-                您报价的#{post.need_detail_title('tender')} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}给您报了价。
+                您报价的#{post.detail_title} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}给您报了价。
                 EOF
               end
   end
