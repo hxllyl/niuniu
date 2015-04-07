@@ -132,7 +132,7 @@ class PostsController < BaseController
     @someone  = User.find_by_id(params[:user_id])
     @brands   = @someone.posts.where(_type: @_type).map(&:brand).uniq
 
-    conds = {user_id: params[:user_id], _type: params[:_type].to_i}
+    conds = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
     conds[:brand_id] = params[:br] if params[:br]
 
     @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
