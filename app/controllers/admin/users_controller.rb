@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::BaseController
 
   def contacted
     # TODO: Add logic for contacted users 已联系用户
-    @users = User.order('created_at desc').page(params[:page]||1).per(30)
+    @users = Log::ContactPhone.where(sender_id: current_user.id, _type: 0).order('created_at desc').page(params[:page]||1).per(30)
   end
 
   def registered
