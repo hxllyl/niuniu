@@ -81,7 +81,6 @@ gem 'font-awesome-rails'
 group :production do
   gem 'unicorn-rails', '~> 2.2.0'
   gem 'unicorn'
-  gem 'newrelic_rpm'
 end
 
 group :development, :test do
