@@ -504,8 +504,8 @@ class Api::PostsController < Api::BaseController
   #
   # Params:
   #   token:              [String]    valid token
-  #   brand_name          [String]   品牌名称
-  #   page                [Integer]   页数
+  #   brand_name:          [String]   品牌名称
+  #   page:                [Integer]   页数
   #
   # Return:
   #   status:   [Integer] 200
