@@ -19,7 +19,7 @@
             - @users.each do |user|
               %tr
                 %td= user.id
-                %td 业务员工号
+                %td= user.job_number
                 %td= user.mobile
                 %td= user.created_at.to_s(:db)
                 %td 备注

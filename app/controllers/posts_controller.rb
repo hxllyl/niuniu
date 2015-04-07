@@ -1,8 +1,5 @@
 # encoding: utf-8
-
-require_relative '../../app/services/search_resource'
-require_relative '../../app/services/list_resources'
-
+require_relative '../../app/services/query_posts'
 class PostsController < BaseController
    skip_before_filter :verify_authenticity_token, only: [:tender, :complete]
 
