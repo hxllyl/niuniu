@@ -29,7 +29,7 @@ module Concerns
       options = {
         platform: JPush::Platform.all,
         audience: JPush::Audience.build(registration_id: reg_ids),
-        options:  JPush::Options.build(apns_production: true),
+        options:  JPush::Options.build(apns_production: false),
         notification: JPush::Notification.new(alert: "#{j_msg}")
       }
       

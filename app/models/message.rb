@@ -60,7 +60,7 @@ class Message < ActiveRecord::Base
       if self.receiver
         jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
       else
-        jpush_message(content, ActiveDevice.active)
+        jpush_message(content, ActiveDevice.active.pluck(:register_id))
         # NOTICE: In this case, this should put in a queue, now comment it
         # real_receiver_users.each do |u|
         #   jpush_message(content, u)

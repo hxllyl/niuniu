@@ -29,7 +29,7 @@
           %tr
             %td= item.id
             %td= item.title
-            %td= item.sender.name
+            %td= item.sender.try(:name)
             %td= item.receiver.try(:name)
             %td= t("message.receiver_group.#{item.receiver_group}") if item.receiver_group
             %td= Message::STATUS[item.status]
