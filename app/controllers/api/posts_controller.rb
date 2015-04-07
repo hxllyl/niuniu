@@ -517,7 +517,7 @@ class Api::PostsController < Api::BaseController
   #   error_msg: 错误信息
   def filter_brand
     hunts = Post.needs.includes(:user, :brand).where("brands.name" => String(params[:brand_name]))
-    data = Array(hunts).map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
+    data = Array(hunts).map { |post| post.to_hash }
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }
   rescue => e
