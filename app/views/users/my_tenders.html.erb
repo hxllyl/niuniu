@@ -40,9 +40,7 @@
                       </td>
                       <td><%= human_time(tender.updated_at) %></td>
                       <td>
-                        <%- if tender.status == -1 %>
-                          <span class="seal seal_recall_part"></span>
-                        <% else %>
+                        <%- unless tender.status == -1 %>
                           <a href="#" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-way='tenders' data-toggle="modal" data-target="#alertModal">删除
                           </a>
                         <% end %>
