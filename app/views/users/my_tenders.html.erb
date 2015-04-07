@@ -29,7 +29,12 @@
                       <td><%= link_to tender.post_title, my_tender_post_path(tender.post, tender_id: tender.id), class: 'name' %></td>
                       <td><span class="num"><%= tender.price %></span></td>
                       <td><%= tender.post_car_license_area -%></td>
-                      <td><%= tender.post_color -%></td>
+                      <td>
+                        <%= tender.post_color -%>
+                        <% if [tender.status, tender.post.status].include?(-1) %>
+                          <span class="seal seal_recall_part"></span>
+                        <% end %>
+                      </td>
                       <td><%= tender.post.try(:user_name) -%>
                           <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) -%>
                       </td>

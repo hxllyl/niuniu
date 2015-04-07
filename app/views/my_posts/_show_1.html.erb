@@ -58,9 +58,8 @@
                   <%- if tender.status == -1 %>
                     <tr>
                       <td><%= tender.user_name %></td>
-                      <td><span class="num"><%= tender.price.to_f %></span></td>
+                      <td><span class="num"><%= tender.price.to_f %></span><span class="seal seal_recall_part"></span></td>
                       <td><%= tender.publish_time %></td>
-                      <td><span class="seal seal_recall_part"></span></td>
                     </tr>
                   <% else %>
                     <tr>
