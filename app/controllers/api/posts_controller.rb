@@ -503,8 +503,9 @@ class Api::PostsController < Api::BaseController
   # 根据品牌名称搜索寻车
   #
   # Params:
-  #   token:    [String]    valid token
-  #   brand_name [String]   品牌名称
+  #   token:              [String]    valid token
+  #   brand_name          [String]   品牌名称
+  #   page                [Integer]   页数
   #
   # Return:
   #   status:   [Integer] 200
@@ -516,7 +517,7 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def filter_brand
-    hunts = Post.needs.includes(:user, :brand).where("brands.name" => String(params[:brand_name]))
+    hunts = Post.needs.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).page(params[:page] || 1).per(10)
     data = Array(hunts).map { |post| post.to_hash }
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }
