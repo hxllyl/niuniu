@@ -3,7 +3,7 @@
 require_relative '../../app/services/search_resource'
 require_relative '../../app/services/list_resources'
 
-class PostsController < ApplicationController
+class PostsController < BaseController
    skip_before_filter :verify_authenticity_token, only: [:tender, :complete]
 
   def index
