@@ -1,6 +1,5 @@
 # encoding: utf-8
 # 市场资源，寻车信息
-require_relative '../../../app/services/list_api_post'
 require_relative '../../../app/services/query_posts'
 class Api::PostsController < Api::BaseController
 
@@ -427,23 +426,20 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def search
-    my_following_ids = @user.following_ids
+    my_following_ids = @user.following_ids.to_set
 
     results = if params[:cid] && params[:style] # 认定为级联搜索
-                ListApiPost.call(params)
+                cond = params.slice(:cid, :icol, :ocol, :style, :status)
+                Services::QueryPost.new(cond).by_style_and_status_color
               elsif params[:q]
-                Services::QueryPost.new(params.slice(:q)).search
+                Services::QueryPost.new(params.slice(:q)).search_and_order_with_users(my_following_ids, params[:page])
               else
                 Post.none
               end
 
-    posts_by_my_following = Post.resources.where(:id => results, :user_id => my_following_ids).order(expect_price: :asc, updated_at: :desc)
+    data = Array(results).map { |post| post.to_hash.merge!(is_following: my_following_ids.include?(post.user_id)) }
 
-    others = results.where.not( :id => posts_by_my_following ).order(expect_price: :asc, updated_at: :desc)
-
-    data = Array(posts_by_my_following + others).map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
-
-    render json: {status: 200, notice: 'success', data: { posts: data  } }
+    render json: {status: 200, notice: 'success', data: {posts: data}}
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
