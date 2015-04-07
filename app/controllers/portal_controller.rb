@@ -39,6 +39,8 @@ class PortalController < BaseController
 
     # 资源表
     @users = User.where("id" => Post.resources.valid.order(updated_at: :desc).map(&:user_id).uniq[0..9])
+  
+    @banners = Banner.where(use: 'web', poi: 'up').order('banners.position')
   end
 
   # 首页搜索

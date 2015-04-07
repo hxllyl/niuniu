@@ -14,7 +14,8 @@
           %th 位置
           %th 跳转链接
           %th 用途
-          %th 操作
+          %th 编辑
+          %th 删除
         - @banners.each do |item|
           %tr
             %td= item.id
@@ -22,6 +23,9 @@
             %td= item.poi
             %td= item.redirect_way
             %td= item.use
+            %td
+              = link_to '编辑', edit_admin_banner_path(item)
+              &nbsp;&nbsp;
             %td
               = link_to '删除', admin_banner_path(item), method: :delete, data: { confirm: '确认删除？' }
               &nbsp;&nbsp;
