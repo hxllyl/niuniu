@@ -15,12 +15,12 @@ class Admin::UsersController < Admin::BaseController
 
   def contacted
     # TODO: Add logic for contacted users 已联系用户
-    @users = Log::ContactPhone.where(sender_id: current_user.id, _type: 0, is_register: false).order('created_at desc').page(params[:page]||1).per(30)
+    @users = Log::ContactPhone.where(sender_id: current_staff.id, _type: 0, is_register: false).order('created_at desc').page(params[:page]||1).per(30)
   end
 
   def registered
     # TODO: Add logic for registered users 已注册用户
-    mobiles = Log::ContactPhone.where(sender_id: current_user.id, _type: 0, is_register: true).map(&:mobile)
+    mobiles = Log::ContactPhone.where(sender_id: current_staff.id, _type: 0, is_register: true).map(&:mobile)
     @users = User.where(mobile: mobiles).order('created_at desc').page(params[:page]||1).per(30)
   end
 
