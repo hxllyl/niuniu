@@ -109,16 +109,4 @@ namespace :solr do
       execute "for i in $(pgrep java); do kill -9 $i; done"
     end
   end
-
-  Rake::Task["deploy:compile_assets"].clear_actions
-  task :compile_assets => [:set_rails_env] do
-    run_locally do
-      if capture("git --no-pager diff #{fetch(:previous_revision)} #{fetch(:current_revision)} app/assets vendor/assets").empty?
-         info "Skipping assets compilation"
-      else
-        invoke 'deploy:assets:precompile'
-        invoke 'deploy:assets:backup_manifest'
-      end
-    end
-  end
 end
