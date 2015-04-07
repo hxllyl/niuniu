@@ -68,7 +68,7 @@ gem 'acts_as_list'
 gem 'rvm'
 
 #gem 'rvm-capistrano'
-gem 'capistrano','~> 3.3.0'
+gem 'capistrano','~> 3.2.0'
 gem 'capistrano-ext'
 gem 'capistrano-unicorn', :require => false
 gem 'capistrano-rails'
@@ -120,7 +120,7 @@ group :development do
   # gem 'flamegraph' # 2.1 2.0 only
 
   #api doc
-  #gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
+  # gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
 end
 
 # simple admin

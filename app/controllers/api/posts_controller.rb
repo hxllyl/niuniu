@@ -22,7 +22,7 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def list
-    conds = {_type: params[:_type]}
+    conds = {_type: params[:_type], status: 1 }
 
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
@@ -53,7 +53,7 @@ class Api::PostsController < Api::BaseController
     if params[:_type] == '1' # 仅针对寻车
       instrument 'user.has_read_tender', post_id: posts.pluck(:id)
     end
-    
+
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
@@ -345,7 +345,7 @@ class Api::PostsController < Api::BaseController
 
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message}
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
   # 资源上移，下移
@@ -353,6 +353,7 @@ class Api::PostsController < Api::BaseController
   # Params:
   #   token:    [String]    valid token
   #   id:       [Integer]     资源的id
+  #   swap_id:  [Integer]  所要换位的resource 的id 上移就是上一个的resource的id 下移 就是下一个的resource的id
   #   way:      [String]  up 或者 down
   # Return:
   #   status: [Integer] 200
@@ -364,13 +365,20 @@ class Api::PostsController < Api::BaseController
 
   def change_position
     resource = @user.posts.resources.find_by_id params[:id]
-    raise 'user did not had the resource' if resource.blank?
 
-    params[:way] == 'up' ? resource.move_higher : resource.move_lower
+    swap_resource = @user.posts.resources.find_by_id params[:swap_id]
+
+    raise 'user did not had the resource' if resource.blank? or swap_resource.blank?
+
+    unless (params[:way] == 'down' and resource.first?) or ( params[:way] == 'up' and resource.last?)
+      swap_tmp(resource, swap_resource)
+      resource.save
+      swap_resource.save
+    end
 
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message}
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
   # 删除资源
@@ -393,7 +401,7 @@ class Api::PostsController < Api::BaseController
     @user.posts.resources.delete resource
     render json: { status: 200, notice: 'success' }
   rescue => ex
-    render json: { status: 500, notice: 'failure', error_msg: ex.message}
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
 
 
@@ -437,7 +445,7 @@ class Api::PostsController < Api::BaseController
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }
   rescue => ex
-    render json: {status: 500, notice: 'failure', error_msg: ex.message}
+    render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
 
   # 我针对某条寻车是否报过价
@@ -466,7 +474,16 @@ class Api::PostsController < Api::BaseController
     render json: {status: 200, notice: 'success', data: {is_tenderd: is_tenderd, tender_status: tender_status}}
 
   rescue => e
-    render json: {status: 500, notice: 'failure', error_msg: e.message}
+    render json: {status: 500, notice: 'failed', error_msg: e.message}
+  end
+
+
+  private
+
+  def swap_tmp(objx, objy, temp=nil)
+    temp = objx.position
+    objx.position = objy.position
+    objy.position = temp
   end
 
 end

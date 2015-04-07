@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href=<%= root_path %>>首页</a></li>
+    <li><%= link_to "首页", root_path %></li>
     <li class="active">寻车详情</li>
   </ol>
 </div>
@@ -24,17 +24,22 @@
             </div>
             <div class="col-md-4 con">
               <div class="info">
-                <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
-                <p>指导价：<%= @post.base_price %></p>
-                <div class="reportLink"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#myReport">我要举报</a></div>
+                <% if @post.discount_way != 5 %>
+                  <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
+                <% end %>
+                <%- if @post.base_car.is_valid? %>
+                  <p>指导价：<%= @post.base_price %></p>
+                <% end %>
                 <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
               </div>
             </div>
           </div>
-          <div class="remark">
-            <div class="tt bfL">备注：</div>
-            <div class="info"><%= @post.remark%></div>
-          </div>
+          <%- unless [nil, ''].include?(@post.remark) %>
+            <div class="remark">
+              <div class="tt bfL">备注：</div>
+              <div class="info"><%= @post.remark%></div>
+            </div>
+          <% end %>
           <%= render 'tender_info' %>
         </div>
       </div>

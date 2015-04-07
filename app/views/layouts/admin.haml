@@ -46,6 +46,12 @@
                 = link_to '系统消息', admin_messages_path
 
     #page-wrapper.gray-bg
+      .row.flash-wrapper
+        - flash.each do |type, message|
+          %div{:class => "#{type} alert #{type.to_sym == :alert ? 'alert-danger' : 'alert-success'} alert-dismissable"}
+            %button.close{ type: 'button', :'aria-hidden' => true, data: { dismiss: 'alert' } } &times;
+            %p= message.html_safe
+
       .row.border-bottom
         %nav.navbar.navbar-static-top{:role => "navigation", :style => "margin-bottom: 0"}
           -# .navbar-header
@@ -58,5 +64,7 @@
               = link_to '#', method: :delete, class: :delete do
                 %i.fa.fa-sign-out
                 安全退出当前帐号
+
+      
 
       = yield

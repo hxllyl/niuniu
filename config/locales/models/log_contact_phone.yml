@@ -1,0 +1,13 @@
+zh-CN:
+  activerecord:
+    models:
+      'log/contact_phone': '联系人'
+    attributes:
+      'log/contact_phone':
+        mobile: 手机号码
+    errors:
+      models:
+        'log/contact_phone':
+          attributes:
+            mobile:
+              invalid: '无效'

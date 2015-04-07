@@ -165,6 +165,10 @@ class Post < ActiveRecord::Base
     hash
   end
 
+  def photos_ary
+    [photos[:front], photos[:side], photos[:obverse], photos[:inner]].compact
+  end
+
   def to_hash
     {
       id:                 id,
@@ -202,10 +206,11 @@ class Post < ActiveRecord::Base
       user_name_area:     user.name_area,
       price_status:       base_price,
       title:              title,
-      detail_title:       _type == 0 ? title : need_detail_title,
+      detail_title:       _type == 0 ? title : detail_title,
       license_area:       app_area,
       remark:             remark,
-      position:           position
+      position:           position,
+      created_at:         created_at
     }
   end
 
@@ -233,7 +238,7 @@ class Post < ActiveRecord::Base
     [title, app_area].join('　')
   end
 
-  def need_detail_title(keeper = nil)
+  def detail_title(keeper = nil)
     if keeper.nil?
       ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
     else
@@ -258,7 +263,7 @@ class Post < ActiveRecord::Base
   end
 
   def st_rt
-    standard_name << '/' << RESOURCE_TYPE[resource_type]
+    standard_name + '/' + RESOURCE_TYPE[resource_type]
   end
 
   def base_price

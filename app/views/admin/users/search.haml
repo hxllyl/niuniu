@@ -8,7 +8,7 @@
       %h2 手机号查询
       = form_tag params.merge(format: 'js'), method: :get, remote: true, class: 'form-horizontal' do
         .input-group
-          = text_field_tag :mobile, nil, type: 'mobile', class: 'form-control input-lg', placeholder: '输入手机号码'
+          = text_field_tag :mobile, @mobile||nil, type: 'mobile', class: 'form-control input-lg', placeholder: '输入手机号码'
           .input-group-btn
             %button.btn.btn-lg.btn-primary{ type: 'submit'} 查询
       

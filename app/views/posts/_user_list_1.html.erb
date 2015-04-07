@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="<%= root_path %>">首页</a></li>
+    <li><%= link_to "首页", root_path %></li>
     <li><%= link_to '寻车信息', posts_path(_type: 1) %></li>
     <li class="active">他的寻车</li>
   </ol>
@@ -30,7 +30,13 @@
                     <td><%= link_to post.title, post_path(post, _type: 1), class: 'name' %></td>
                     <td><%= post.car_license_area %></td>
                     <td><%= post.color %></td>
-                    <td><%= post.owner%><%= image_tag(post.user.try(:level_icon), size: "40x16") if post.user.try(:is_show_icon?) %></td>
+                    <td>
+                      <%= post.owner%>
+                      <%= image_tag(post.user.try(:level_icon), size: "40x16") if post.user.try(:is_show_icon?) %>
+                      <%- if post.is_completed? %>
+                        <div class="seal seal_done_part"></div>
+                      <% end %>
+                    </td>
                     <td><%= post.publish_time %></td>
                 </tr>
                 <% end %>

@@ -1,7 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><a href="<%= root_path %>">首页</a></li>
-    <li><a href="#">资源详情</a></li>
+    <li><%= link_to "首页", root_path %></li>
     <li class="active">他的资源</li>
   </ol>
 </div>
@@ -42,7 +41,9 @@
                         </div>
                         <div class="infoPrice">
                           <p><span class="price"><%= post.show_price %></span><span class="time"><%= post.publish_time %></span></p>
-                          <p>指导价：<%= post.base_price %></p>
+                          <%- if post.base_car.is_valid? %>
+                            <p>指导价：<%= post.base_price %></p>
+                          <% end %>
                         </div>
                       </div>
                       <div class="remark clearfix">

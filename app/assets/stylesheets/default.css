@@ -54,6 +54,9 @@ padding:0;
 .mainBox { padding-right: 5px; }
 .contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
 .banner { height: 152px; overflow: hidden; }
+.banner .carousel-indicators { bottom: 10px; }
+.banner .carousel-indicators li { border-color: #f4621b; }
+.banner .carousel-indicators .active { background-color: #f4621b; }
 .nav-tabs.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
 .nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; color: #333; }
 .nav-tabs.carInfoTabs li a:hover { color: #f4621b; }
@@ -428,6 +431,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
 .btn { text-shadow: none; }
+.btn.disabled { cursor: default !important; }
 .btn .icon { display: inline-block; width: 20px; height: 22px; margin-top: -4px; margin-bottom: 0px; text-align: left; vertical-align: bottom; font-size: 22px; }
 .btn.btn-sm .icon, .btn.btn-xs .icon { margin-top: -4px; margin-bottom: -4px; font-size: 16px; }
 .btn .icon.icon-upgrade { position: relative; left: -6px; }
@@ -436,16 +440,17 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .btn.w100p { width: 100%; }
 .btn.btnW200 { width: 200px; }
 .btn.orange { border-color: #ff791f; color: #FFF; background-color: #ff791f; }
-.btn.orange:hover { border-color: #c8621d; background-color: #c8621d; }
+.btn.orange:active, .btn.orange:focus, .btn.orange:hover { border-color: #c8621d; background-color: #c8621d; }
 .btn.blue { border-color: #5ac0de; color: #FFF; background-color: #5ac0de; }
-.btn.blue:hover { border-color: #489bb3; background-color: #489bb3; }
+.btn.blue:active, .btn.blue:focus, .btn.blue:hover { border-color: #489bb3; background-color: #489bb3; }
 .btn.black { color: #FFF; background-color: #6d6d6d; }
-.btn.black:hover { background-color: #5b5b5b; }
+.btn.black:active, .btn.black:focus, .btn.black:hover { background-color: #5b5b5b; }
 .btn_spacing { padding-right: 2px; letter-spacing: 10px; }
 .btn.p0 { padding-right: 0; padding-left: 0; }
 .icon.icon-money { font-size: 26px; color: #ff791f; }
 .icon.icon-message { font-size: 24px; }
 .icon.icon-refresh { margin-right: 6px; }
+.help-block { margin: 0; font-size: 12px; }
 /*
 **page style end && class reset begin**
 */

@@ -23,25 +23,25 @@ $(function(){
 
   var trLength = $(".btnGroups").find(".downBtn").length;
   $(".btnGroups").find(".upBtn").each(function(){
-    $(this).unbind("click");
     $(this).click(function(){
       var $tr = $(this).parents("tr");
       var id = $tr.attr('data-id');
       if ($tr.index() != 0){
-
-        $.post(position_url, {id: id, type: 'up'}, function(){});
+        var swap_id = $tr.prev().attr('data-id');
+        
+        $.post(position_url, {id: id, type: 'up', swap_id: swap_id}, function(){});
         $tr.prev().before($tr);
       }
     });
   });
-  
+
   $(".btnGroups").find(".downBtn").each(function(){
-    $(this).unbind("click");
     $(this).click(function(){
       var $tr = $(this).parents("tr");
       if ($tr.index() != trLength - 1){
         var id = $tr.attr('data-id');
-        $.post(position_url, {id: id, type: 'down'}, function(){});
+        var swap_id = $tr.next().attr('data-id');
+        $.post(position_url, {id: id, type: 'down', swap_id: swap_id}, function(){});
         $tr.next().after($tr);
       }
     });

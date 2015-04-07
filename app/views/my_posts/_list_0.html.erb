@@ -1,6 +1,6 @@
 <div class="container">
   <ol class="breadcrumb">
-    <li><%= link_to '首页', root_path%></li>
+    <li><%= link_to '首页', root_path %></li>
     <li class="active">我的资源</li>
   </ol>
 </div>
@@ -38,15 +38,20 @@
                     <td>
                       <div class="box clearfix">
                         <div class="infoM">
-                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %></h5>
+                          <h5 class="name"><%= link_to post.detail_title, post_path(post, _type: 0) %></h5>
                           <div class="info clearfix">
                             <div class="m"><%= post.standard_type %></div>
                             <div class="m"><%= post.color %></div>
                           </div>
                         </div>
                         <div class="infoPrice">
-                          <p><span class="price"><%= post.show_price %></span><span class="time"><%= post.publish_time %></span></p>
-                          <p>指导价：<%= post.base_price %></p>
+                          <p>
+                            <span class="price"><%= post.show_price %></span>
+                            <span class="time"><%= post.publish_time %></span>
+                          </p>
+                          <%- if post.base_car.is_valid? %>
+                            <p>指导价：<%= post.base_price %></p>
+                          <% end %>
                         </div>
                       </div>
                       <div class="remark clearfix">
@@ -80,6 +85,3 @@
 
 <%= render partial: 'users/del_modal' %>
 
-<%= content_for :footers do%>
-  <%= javascript_include_tag 'edit_user', 'data-turbolinks-track' => true%>
-<%end%>

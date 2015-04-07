@@ -26,7 +26,7 @@ module Services
       base = posts[:base_car_id].in( @brands.pluck(:id) )
       cus_post = posts[:outer_color].matches( "%#{@query}%" ).or( posts[:inner_color].matches( "%#{@query}%" ) )
 
-      Post.as_resource(@_type).where(std.or(brd).or(car).or(base).or(cus_post))
+      Post.as_resource(@_type).valid.where(std.or(brd).or(car).or(base).or(cus_post))
     end
   end
 end

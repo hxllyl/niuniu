@@ -23,21 +23,21 @@ class PostsController < ApplicationController
     if params[:bc]
       @base_car  = BaseCar.find_by_id(params[:bc])
       @car_model, @brand, @standard = @base_car.car_model, @base_car.brand, @base_car.standard
-      @base_cars, @car_models, @brands, @standards = @car_model.base_cars, @brand.car_models, @standard.brands, @brand.standards
+      @base_cars, @car_models, @brands, @standards = @car_model.base_cars.valid, @brand.car_models.valid, @standard.brands, @brand.standards
       @q_json = {bc: @base_car.id, cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif params[:cm]
       @q_json = {cm: params[:cm]}
       @base_car = nil
       @car_model = CarModel.find_by_id(params[:cm])
-      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars
-      @car_models, @brands, @standards  = CarModel.where(standard_id: @standard.id, brand_id: @brand.id), @standard.brands, @brand.standards
+      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars.valid
+      @car_models, @brands, @standards  = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid, @standard.brands, @brand.standards
       @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif params[:br] && params[:st]
       @q_json = {st: params[:st], br: params[:br]}
       @brand = Brand.find_by_id(params[:br])
       @standard = Standard.find_by_id(params[:st])
       @car_model, @base_car, @base_cars = nil, nil, []
-      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
       @brands, @standards = @standard.brands, Standard.all
       @q_json = {br: @brand.id, st: @standard.id}
     elsif params[:br]
@@ -65,69 +65,38 @@ class PostsController < ApplicationController
       conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
       @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
       @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
-      @posts = @base_car.posts.resources.where(conds).order(@order_by).page(params[:page]).per(10)
+      @posts = @base_car.posts.resources.where(conds).valid.order(@order_by).page(params[:page]).per(10)
     end
   end
 
   # 一键找车列表页
   def key_search
-    params.delete(:action)
-    params.delete(:controller)
+    @q_json    = {q: params[:q]}
+    @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
+    order_by   = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
 
-    @q_json             = params
-    @q_json[:order_ele] = params[:order_ele] ? params[:order_ele] : 'updated_at'
-    # u_ids      = User.all.map(&:id)
+    result = Services::QueryPost.new(params.slice(:q)).search
 
-    # followed, unfollow = if current_user
-    #                       [current_user.followings.map(&:id), u_ids - current_user.followings.map(&:id)]
-    #                     else
-    #                       [[], u_ids]
-    #                     end
+    fol_posts = result.where(:user_id => current_user.following_ids).order(order_by)
+    others = result.where.not(:user_id => current_user.following_ids).order(order_by)
 
-    # @followed_posts =   Post.search do
-    #                       with(:_type, 0)
-    #                       fulltext String(params[:q])
-    #                       with(:user_id, Array(followed))
-    #                       fulltext String(params[:q])
-    #                       order_by(:updated_at, :desc)
-    #                     end.results
-
-    # @unfollow_posts =   Post.search do
-    #                       with(:_type, 0)
-    #                       fulltext String(params[:q])
-    #                       with(:user_id, Array(unfollow))
-    #                       fulltext String(params[:q])
-    #                       order_by(:updated_at, :desc)
-    #                     end.results
-    # @posts = Kaminari.paginate_array(@followed_posts + @unfollow_posts).page(params[:page]).per(10)
-    @posts = Post.resources.valid.page(params[:page]).per(10)
+    @posts = Kaminari.paginate_array(fol_posts + others).page(params[:page]).per(10)
   end
 
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
-    # @rs = SearchResource.new(params)
-    # @needs = if @rs.car_model.present?
-    #            @rs.car_model.posts.needs
-    #          elsif @rs.brand.present?
-    #            Post.needs.with_brand(@rs.brand)
-    #          elsif @rs.standard.present?
-    #            Post.with_standard(@rs.standard).needs
-    #          else
-    #            Post.needs
-    #          end
-
     @standard   = Standard.find_by_id(params[:st])
     @brand      = Brand.find_by_id(params[:br])
     @car_model  = CarModel.find_by_id(params[:cm])
 
     if @car_model
       @standard, @brand = @car_model.standard, @car_model.brand
-      @car_models = CarModel.where(standard_id: @car_model.standard_id, brand_id: @car_model.brand_id)
+      @car_models = CarModel.where(standard_id: @car_model.standard_id, brand_id: @car_model.brand_id).valid
       @standards, @brands = @brand.standards, @standard.brands
       @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif @standard && @brand
       @standards, @brands = @brand.standards, @standard.brands
-      @car_model, @car_models = nil, CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+      @car_model, @car_models = nil, CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
       @q_json = {br: @brand.id, st: @standard.id}
     elsif @standard
       @standards, @brands, @car_models, @brand, @car_model = Standard.all, @standard.brands, [], nil, nil
@@ -136,7 +105,7 @@ class PostsController < ApplicationController
       @standards, @brands, @car_models, @standard, @car_model = @brand.standards, Brand.all, [], nil, nil
       @q_json = {br: @brand.id}
     else
-      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.all.sample(30)
+      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.valid.sample(30)
       @q_json = {}
     end
 
@@ -144,15 +113,15 @@ class PostsController < ApplicationController
     conds[:standard_id] = @standard.id  if @standard
     conds[:brand_id]    = @brand.id     if @brand
     conds[:car_model_id]= @car_model.id if @car_model
-    @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
-    @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
-    @posts = Post.where(conds).order(@order_by).page(params[:page]).per(10)
+
+    @posts = Post.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def show
-    @post       = Post.find_by_id(params[:id])
-    @someone    = @post.user
+    @post     = Post.find_by_id(params[:id])
+    @someone  = @post.user
     @follows  = current_user.followings & @someone.followers if current_user
+    @tender   = Tender.find_by_user_id_and_post_id(current_user.id, @post.id)
   end
 
   def user_list
@@ -166,7 +135,7 @@ class PostsController < ApplicationController
     @someone  = User.find_by_id(params[:user_id])
     @brands   = @someone.posts.where(_type: @_type).map(&:brand).uniq
 
-    conds            = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
+    conds = {user_id: params[:user_id], _type: params[:_type].to_i}
     conds[:brand_id] = params[:br] if params[:br]
 
     @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)

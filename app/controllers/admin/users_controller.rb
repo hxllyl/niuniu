@@ -1,6 +1,7 @@
 class Admin::UsersController < Admin::BaseController
 
   def search
+    @mobile = params[:mobile]
     if request.xhr?
       @user = User.find_by_mobile(params[:mobile])
       # @mobile = Log::ContactPhone.find_by_mobile(params[:mobile])
@@ -31,12 +32,15 @@ class Admin::UsersController < Admin::BaseController
 
   # 我来联系, 归入自己的通讯录
   def contact
-    @mobile = Log::ContactPhone.new(
+    @contact_phone = Log::ContactPhone.new(
                 mobile: params[:mobile],
-                sender_id: current_user.id
+                sender_id: current_staff.id
               )
-    if @mobile.save
+    if @contact_phone.save
+      redirect_to contacted_admin_users_path, notice: '已加入通讯录'
     else
+      flash[:alert] = @contact_phone.errors.full_messages.join(', ')
+      redirect_to search_admin_users_path(mobile: params[:mobile])
     end
   end
 

@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
   # tables relation
   has_many :photos, as: :owner, dependent: :nullify, autosave: true # 与图片类关联起来 处理用户图片
-  has_many :posts, ->{where("posts.status != #{Post::STATUS.keys[4]}").order('position DESC')}, class_name: 'Post' # 需求和寻车
+  has_many :posts, ->{where("posts.status != #{Post::STATUS.keys[4]}").order('posts.position DESC')}, class_name: 'Post' # 需求和寻车
   has_many :tenders, ->{where("tenders.status != #{Tender::STATUS.keys[2]}")}, class_name: 'Tender' # 报价
   has_many :comments, class_name: 'Comment'
   has_many :tokens, class_name: 'Token', dependent: :nullify # 用于api验证
@@ -186,7 +186,7 @@ class User < ActiveRecord::Base
       []
     end
   end
-  
+
   def had_updated_levels
     levels = log_user_update_levels.where(status: Log::UserUpdateLevel::STATUS.keys[1]).order('end_level asc').pluck(:end_level)
   end
@@ -210,7 +210,9 @@ class User < ActiveRecord::Base
       tender_count:     tenders.count,
       following_count:  followings.count,
       area_id:          area_id,
-      dealt_infos:      dealt_infos
+      dealt_infos:      dealt_infos,
+      status:           status,
+      role:             role
     }
   end
 
@@ -266,6 +268,10 @@ class User < ActiveRecord::Base
 
   def user_avatar
     avatar.class == String ? avatar : avatar.image.try(:url)
+  end
+
+  def tendered?(post_id)
+    Tender.find_by_user_id_and_post_id(id, post_id) ? true : false
   end
 
 end

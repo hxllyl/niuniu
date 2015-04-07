@@ -65,7 +65,7 @@ namespace :deploy do
   # after "deploy:update_code", "deploy:migrate"
   # after :finishing, :copy_sync_scripts
   # after :finishing, 'deploy:spec_ruby_version'
-  
+
 end
 
 namespace :solr do
@@ -110,13 +110,15 @@ namespace :solr do
     end
   end
 
-  # desc "Symlink in-progress deployment to a shared Solr index"
-  # task :symlink, :except => { :no_release => true } do
-  #   #创建solr所需要的目录
-  #   run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/data"
-  #   run "cd #{deploy_to} && mkdir -p #{shared_path}/solr/pids"
-  #
-  #   run "ln -s #{shared_path}/solr/data/ #{release_path}/solr/data"
-  #   run "ln -s #{shared_path}/solr/pids/ #{release_path}/solr/pids"
-  # end
+  Rake::Task["deploy:compile_assets"].clear_actions
+  task :compile_assets => [:set_rails_env] do
+    run_locally do
+      if capture("git --no-pager diff #{fetch(:previous_revision)} #{fetch(:current_revision)} app/assets vendor/assets").empty?
+         info "Skipping assets compilation"
+      else
+        invoke 'deploy:assets:precompile'
+        invoke 'deploy:assets:backup_manifest'
+      end
+    end
+  end
 end
