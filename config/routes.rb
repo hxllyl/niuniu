@@ -123,6 +123,9 @@ Rails.application.routes.draw do
       put :del_my_tender
       get :search
       get :tender_status
+      get :filter_brands
+      get :filter_brand
+
     end
 
     resources :valid_codes, only: [:index] do

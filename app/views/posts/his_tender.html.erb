@@ -14,7 +14,7 @@
         <div class="panel-body sourceDetail pb200">
           <div class="row">
             <div class="col-md-8 con">
-              <h5 class="name"><%= @post.need_detail_title %></h5>
+              <h5 class="name"><%= @post.detail_title %></h5>
               <div class="info">
                 <p><%= @post.app_area %></p>
                 <p><%= @post.color %></p>
@@ -27,7 +27,9 @@
                 <% if @post.discount_way != 5 %>
                   <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                 <% end %>
-                <p>指导价：<%= @post.base_price %></p>
+                <%- if @post.base_car.is_valid? %>
+                  <p>指导价：<%= @post.base_price %></p>
+                <% end %>
                 <div class="reportLink"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#myReport">我要举报</a></div>
                 <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
               </div>

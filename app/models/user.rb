@@ -210,7 +210,9 @@ class User < ActiveRecord::Base
       tender_count:     tenders.count,
       following_count:  followings.count,
       area_id:          area_id,
-      dealt_infos:      dealt_infos
+      dealt_infos:      dealt_infos,
+      status:           status,
+      role:             role
     }
   end
 

@@ -16,6 +16,7 @@ class CreateBaseCars < ActiveRecord::Migration
       t.column :style, :string, limit: 60 # 车辆款式
       t.column :NO, :string, limit: 12, default: '' # 行话(e: 9876)
       t.column :status, :integer, default: 1 # 1 激活 0 未激活
+      t.column :display_name, :string # 显示名称
 
       t.timestamps null: false
     end

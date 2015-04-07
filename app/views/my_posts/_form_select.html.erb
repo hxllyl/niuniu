@@ -28,11 +28,13 @@
         <% else %>
           <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
-          <%- @brands.each do |brand| %>
-            <%- if brand == @brand %>
-              <option value="<%= brand.id %>" selected="selected"><%= brand.name %></option>
-            <% else %>
-              <option value="<%= brand.id %>"><%= brand.name %></option>
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
+            <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}[letter].each do |brand| %>
+              <%- if brand == @brand %>
+                <option value="<%= brand.id %>" selected="selected"><%= "#{letter}#{brand.name}" %></option>
+              <% else %>
+                <option value="<%= brand.id %>"><%= "#{letter}#{brand.name}" %></option>
+              <% end %>
             <% end %>
           <% end %>
         </select>

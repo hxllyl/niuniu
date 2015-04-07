@@ -1,7 +1,9 @@
 <div class="detailPriceInfo row">
   <div class="info bfL">
     <p class="price"><%= current_user == @post.user ? '他的报价' : '我的报价' %>：<span class="num"><%= @tender.price %>万</span></p>
-    <p>指导价：<%= @tender.base_price %></p>
+    <%- if @post.base_car.is_valid? %>
+      <p>指导价：<%= @tender.base_price %></p>
+    <% end %>
     <% if @tender.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
   </div>
   <div class="time bfR"><%= @tender.created_at.strftime("%Y/%m/%d %H:%M")%></div>

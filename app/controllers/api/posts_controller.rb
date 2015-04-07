@@ -22,7 +22,7 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def list
-    conds = {_type: params[:_type]}
+    conds = {_type: params[:_type], status: 1 }
 
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
@@ -53,7 +53,7 @@ class Api::PostsController < Api::BaseController
     if params[:_type] == '1' # 仅针对寻车
       instrument 'user.has_read_tender', post_id: posts.pluck(:id)
     end
-    
+
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
@@ -365,17 +365,17 @@ class Api::PostsController < Api::BaseController
 
   def change_position
     resource = @user.posts.resources.find_by_id params[:id]
-    
+
     swap_resource = @user.posts.resources.find_by_id params[:swap_id]
-    
-    raise 'user did not had the resource' if resource.blank? or swap_resource.blank? 
-    
+
+    raise 'user did not had the resource' if resource.blank? or swap_resource.blank?
+
     unless (params[:way] == 'down' and resource.first?) or ( params[:way] == 'up' and resource.last?)
       swap_tmp(resource, swap_resource)
       resource.save
       swap_resource.save
     end
-    
+
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
@@ -476,14 +476,61 @@ class Api::PostsController < Api::BaseController
   rescue => e
     render json: {status: 500, notice: 'failed', error_msg: e.message}
   end
-   
+
+
+  # 所有品牌
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    brand_names => %w[奥迪 宝马]
+  #
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def filter_brands
+    brands = Brand.distinct(:name).pluck(:name)
+    render json:  { status: 200, notice: 'success', data: { brand_names: brands } }
+  rescue => e
+    render json: { status: 500, notice: 'failed', error_msg: e.message }
+  end
+
+
+  # 根据品牌名称搜索寻车
+  #
+  # Params:
+  #   token:              [String]    valid token
+  #   brand_name:          [String]   品牌名称
+  #   page:                [Integer]   页数
+  #
+  # Return:
+  #   status:   [Integer] 200
+  #   notice:   [String]  success
+  #   data:     [JSON]    posts => [post1, post2]
+  #
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+  def filter_brand
+    hunts = Post.needs.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).page(params[:page] || 1).per(10)
+    data = Array(hunts).map { |post| post.to_hash }
+
+    render json: {status: 200, notice: 'success', data: { posts: data  } }
+  rescue => e
+    render json: { status: 500, notice: 'failed', error_msg: e.message }
+  end
   
   private
-  
+
   def swap_tmp(objx, objy, temp=nil)
     temp = objx.position
     objx.position = objy.position
-    objy.position = temp 
+    objy.position = temp
   end
-   
+
 end

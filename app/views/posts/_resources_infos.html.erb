@@ -35,7 +35,7 @@
         <ul class="list clearfix" id='standards_list'>
           <% @standards.each do |std| %>
           <li class=<%= @standard == std ? 'current' : '' %>>
-            <a href="<%= resources_list_posts_path(@q_json.merge(st: std.id)) %>"><%= std.name %></a>
+            <a href="<%= resources_list_posts_path(st: std.id) %>"><%= std.name %></a>
           </li>
           <% end %>
         </ul>
@@ -54,14 +54,14 @@
           <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
             <% @brands.each do |brand| %>
             <li class=<%= brand == @brand ? 'current' : ''%>>
-              <a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
+              <a href="<%= resources_list_posts_path(st: @q_json[:st], br: brand.id) %>"><%= brand.name %></a>
             </li>
             <% end %>
           </ul>
           <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
           <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
             <% brands.each do |brand| %>
-              <li><a href="<%= resources_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a></li>
+              <li><a href="<%= resources_list_posts_path(st: @q_json[:st], br: brand.id) %>"><%= brand.name %></a></li>
             <% end %>
           </ul>
           <% end %>
@@ -74,7 +74,7 @@
         <ul class="list clearfix">
           <% @car_models.each do |car_model| %>
           <li class=<%= @car_model == car_model ? 'current' : '' %>>
-            <a href="<%= resources_list_posts_path(@q_json.merge(cm: car_model.id)) %>"><%= car_model.name %></a>
+            <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br], cm: car_model.id) %>"><%= car_model.name %></a>
           </li>
           <% end %>
         </ul>

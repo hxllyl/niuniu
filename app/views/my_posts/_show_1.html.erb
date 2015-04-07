@@ -17,7 +17,7 @@
           <div class="sourceDetail">
             <div class="row">
               <div class="col-md-8 con">
-                <h5 class="name"><%= @post.need_title %></h5>
+                <h5 class="name"><%= @post.detail_title %></h5>
                 <div class="info">
                   <p><%= @post.app_area %></p>
                   <p><%= @post.color %></p>
@@ -30,7 +30,9 @@
                   <% if @post.discount_way != 5 %>
                     <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                   <% end %>
-                  <p>指导价：<%= @post.base_price %></p>
+                  <%- if @post.base_car.is_valid? %>
+                    <p>指导价：<%= @post.base_price %></p>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -48,7 +50,7 @@
                   <th width="40%">报价方</th>
                   <th width="40%">报价(万元)</th>
                   <th width="10%">发布时间</th>
-                  <th width="10%">操作</th>
+                  <!-- <th width="10%">操作</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -65,7 +67,7 @@
                       <td><%= link_to tender.user_name, his_tender_post_path(@post, tender_id: tender.id) %></td>
                       <td><span class="num"><%= tender.price.to_f %></span><%- if tender.is_completed? %><span class="seal seal_done_part"></span><% end %></td>
                       <td><%= tender.publish_time %></td>
-                      <td><a href="javascript:;" class="del modalBtn" data-toggle="modal" data-target="#alertModal">删除</a></td>
+                      <!-- <td><a href="javascript:;" class="del modalBtn" data-toggle="modal" data-target="#alertModal">删除</a></td> -->
                     </tr>
                   <% end %>
                 <% end %>

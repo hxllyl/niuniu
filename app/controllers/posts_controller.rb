@@ -23,21 +23,21 @@ class PostsController < ApplicationController
     if params[:bc]
       @base_car  = BaseCar.find_by_id(params[:bc])
       @car_model, @brand, @standard = @base_car.car_model, @base_car.brand, @base_car.standard
-      @base_cars, @car_models, @brands, @standards = @car_model.base_cars, @brand.car_models, @standard.brands, @brand.standards
+      @base_cars, @car_models, @brands, @standards = @car_model.base_cars.valid, @brand.car_models.valid, @standard.brands, @brand.standards
       @q_json = {bc: @base_car.id, cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif params[:cm]
       @q_json = {cm: params[:cm]}
       @base_car = nil
       @car_model = CarModel.find_by_id(params[:cm])
-      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars
-      @car_models, @brands, @standards  = CarModel.where(standard_id: @standard.id, brand_id: @brand.id), @standard.brands, @brand.standards
+      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars.valid
+      @car_models, @brands, @standards  = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid, @standard.brands, @brand.standards
       @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif params[:br] && params[:st]
       @q_json = {st: params[:st], br: params[:br]}
       @brand = Brand.find_by_id(params[:br])
       @standard = Standard.find_by_id(params[:st])
       @car_model, @base_car, @base_cars = nil, nil, []
-      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+      @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
       @brands, @standards = @standard.brands, Standard.all
       @q_json = {br: @brand.id, st: @standard.id}
     elsif params[:br]
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
       conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
       @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
       @order_by = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
-      @posts = @base_car.posts.resources.where(conds).order(@order_by).page(params[:page]).per(10)
+      @posts = @base_car.posts.resources.where(conds).valid.order(@order_by).page(params[:page]).per(10)
     end
   end
 
@@ -91,12 +91,12 @@ class PostsController < ApplicationController
 
     if @car_model
       @standard, @brand = @car_model.standard, @car_model.brand
-      @car_models = CarModel.where(standard_id: @car_model.standard_id, brand_id: @car_model.brand_id)
+      @car_models = CarModel.where(standard_id: @car_model.standard_id, brand_id: @car_model.brand_id).valid
       @standards, @brands = @brand.standards, @standard.brands
       @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif @standard && @brand
       @standards, @brands = @brand.standards, @standard.brands
-      @car_model, @car_models = nil, CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+      @car_model, @car_models = nil, CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
       @q_json = {br: @brand.id, st: @standard.id}
     elsif @standard
       @standards, @brands, @car_models, @brand, @car_model = Standard.all, @standard.brands, [], nil, nil
@@ -105,7 +105,7 @@ class PostsController < ApplicationController
       @standards, @brands, @car_models, @standard, @car_model = @brand.standards, Brand.all, [], nil, nil
       @q_json = {br: @brand.id}
     else
-      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.all.sample(30)
+      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.valid.sample(30)
       @q_json = {}
     end
 
