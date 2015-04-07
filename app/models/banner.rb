@@ -15,6 +15,7 @@ class Banner < ActiveRecord::Base
   validates_presence_of :image, message: 'image must be existed'
 
   scope :valid, -> { all }
+  # scope :live, -> {where("banners.begin_at <= ? and banners.end_at < ?", Time.now, Time.now)}
 
   def to_hash
     {

@@ -59,27 +59,6 @@ class Post < ActiveRecord::Base
     expect_price: '价格排序'
   }
 
-  # searchable do
-  #   text :inner_color
-  #   text :outer_color
-  #   text :brand do
-  #     brand.name
-  #   end
-  #   text :standard do
-  #     standard.name
-  #   end
-  #   text :car_model do
-  #     car_model.name
-  #   end
-  #   text :base_car do
-  #     base_car.style
-  #   end
-  #   text :title
-  #   integer :_type
-  #   integer :user_id
-  #
-  # end
-
   # relations
   has_many    :tenders, class_name: 'Tender'
   belongs_to  :user,  ->{ includes(:area) },  class_name: 'User' # 消除 N+1 查询
@@ -238,8 +217,8 @@ class Post < ActiveRecord::Base
     [title, app_area].join('　')
   end
 
-  def detail_title(keeper = nil)
-    if keeper.nil?
+  def detail_title
+    if _type == 1
       ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
     else
       [standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')

@@ -8,9 +8,14 @@ class Admin::BannersController < Admin::BaseController
   end
 
   def edit
+    @banner = Banner.find( params[:id] )
   end
 
   def update
+    @banner = Banner.find( params[:id] )
+    @banner.attributes = banner_params
+    @banner.save
+    redirect_to admin_banners_path
   end
 
   def create
