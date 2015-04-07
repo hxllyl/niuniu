@@ -22,7 +22,7 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def list
-    conds = {_type: params[:_type]}
+    conds = {_type: params[:_type], status: 1 }
 
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
@@ -53,7 +53,7 @@ class Api::PostsController < Api::BaseController
     if params[:_type] == '1' # 仅针对寻车
       instrument 'user.has_read_tender', post_id: posts.pluck(:id)
     end
-    
+
     render json: {status: 200, notice: 'success', data: {posts: posts.map(&:to_hash)}}
   end
 
@@ -365,17 +365,17 @@ class Api::PostsController < Api::BaseController
 
   def change_position
     resource = @user.posts.resources.find_by_id params[:id]
-    
+
     swap_resource = @user.posts.resources.find_by_id params[:swap_id]
-    
-    raise 'user did not had the resource' if resource.blank? or swap_resource.blank? 
-    
+
+    raise 'user did not had the resource' if resource.blank? or swap_resource.blank?
+
     unless (params[:way] == 'down' and resource.first?) or ( params[:way] == 'up' and resource.last?)
       swap_tmp(resource, swap_resource)
       resource.save
       swap_resource.save
     end
-    
+
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
@@ -476,14 +476,14 @@ class Api::PostsController < Api::BaseController
   rescue => e
     render json: {status: 500, notice: 'failed', error_msg: e.message}
   end
-   
-  
+
+
   private
-  
+
   def swap_tmp(objx, objy, temp=nil)
     temp = objx.position
     objx.position = objy.position
-    objy.position = temp 
+    objy.position = temp
   end
-   
+
 end

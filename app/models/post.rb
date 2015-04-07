@@ -209,7 +209,8 @@ class Post < ActiveRecord::Base
       detail_title:       _type == 0 ? title : detail_title,
       license_area:       app_area,
       remark:             remark,
-      position:           position
+      position:           position,
+      created_at:         created_at
     }
   end
 
