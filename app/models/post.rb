@@ -313,7 +313,7 @@ class Post < ActiveRecord::Base
   private
   def generate_message
     message =<<-EOF
-    您所：#{need_detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{dealed_tender.user_name} 达成了交易。
+    您所：#{detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{dealed_tender.user_name} 达成了交易。
     EOF
   end
 end
