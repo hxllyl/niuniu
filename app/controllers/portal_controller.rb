@@ -20,7 +20,7 @@ class PortalController < BaseController
 
     # 四个品牌对就的寻车列表
     @posts_with_brands = @hot_brands[0..3].each_with_object({}) do |brand, ha|
-                            posts = brand.posts.resources.valid.order(updated_at: :desc).limit(8)
+                            posts = brand.posts.needs.valid.order(updated_at: :desc).limit(8)
                             ha.merge!({brand.id => posts})
                             ha
                          end
