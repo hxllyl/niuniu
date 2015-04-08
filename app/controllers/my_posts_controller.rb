@@ -135,7 +135,7 @@ class MyPostsController < BaseController
     @standard  = @post.standard
     @brands    = @standards.first.brands.valid
     @brand     = @post.brand
-    @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id, status: 1)
+    @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
     @car_model = @post.car_model
     @base_cars = @car_model.base_cars
     @base_car  = @post.base_car

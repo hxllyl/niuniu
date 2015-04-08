@@ -13,7 +13,7 @@ class CreatePosts < ActiveRecord::Migration
       t.references :user, class_name: 'User', null: false # 资源或者寻车拥有者
 
       t.column :_type, :integer # 资源类型 0 => 资源， 1 => 寻车
-      t.column :remark, :string, limit: 160 # 备注
+      t.column :remark, :string, limit: 225 # 备注
       t.column :outer_color, :string, limit: 60, null: false # 外观
       t.column :inner_color, :string, limit: 60, null: false # 内饰
       t.column :car_license_area, :string, limit: 60, null: false # 车辆上牌区域
