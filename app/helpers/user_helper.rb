@@ -13,14 +13,15 @@ module UserHelper
           else
             %w(user/typeIcon_p.png user/typeIcon_s.png user/typeIcon_z.png)
           end 
-    list.unshift('user/typeIcon_p.png')      
+    #list.unshift('user/typeIcon_p.png')      
+    list
   end
   
   def recon_icons(user)
     if user.level == User::LEVELS.keys[4]
-      %w(user/typeIcon_p.png user/typeIcon_4s.png)                                                         
+      %w(user/typeIcon_4s.png)                                                         
     else
-      %w(user/typeIcon_p.png user/typeIcon_4s_dis.png)
+      %w(user/typeIcon_4s_dis.png)
     end 
   end
 

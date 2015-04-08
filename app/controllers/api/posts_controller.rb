@@ -343,10 +343,15 @@ class Api::PostsController < Api::BaseController
   #   error_msg: 错误信息
 
   def update_all
-    posts = @user.posts.resources.where("id in (?)", params[:post_ids])
-    posts.update_all(updated_at: Time.now)
-
-    render json: { status: 200, notice: 'success' }
+    if @user.could_update_my_resoruces?
+      posts = @user.posts.resources.where("id in (?)", params[:post_ids])
+      posts.update_all(updated_at: Time.now)
+      @user.gen_update_all_log
+      render_infos = { status: 200, notice: 'success' }
+    else
+      render_infos = { status: 200, notice: 'faild', error_msg: '对不起，您一个小时之内不能重复更新您的资源列表' }
+    end
+    render json: render_infos
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end

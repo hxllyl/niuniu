@@ -222,7 +222,7 @@ class Post < ActiveRecord::Base
     if _type == 1
       ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
     else
-      [standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+      [brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
     end
   end
 
@@ -247,7 +247,11 @@ class Post < ActiveRecord::Base
   end
 
   def base_price
-    human_discount ? "#{guiding_price}万/#{human_discount}" : "#{guiding_price}万"
+    if expect_price.to_f == 0.0
+      "#{guiding_price}万"
+    else
+      human_discount ? "#{guiding_price}万/#{human_discount}" : "#{guiding_price}万"
+    end
   end
 
   # 优惠方式

@@ -33,9 +33,10 @@
       <div class="tt">规格</div>
       <div class="listBox">
         <ul class="list clearfix" id='standards_list'>
+          <% b_json = @q_json[:br] ? {br: @q_json[:br]} : {} %>
           <% @standards.each do |std| %>
           <li class=<%= @standard == std ? 'current' : '' %>>
-            <a href="<%= resources_list_posts_path(st: std.id) %>"><%= std.name %></a>
+            <a href="<%= resources_list_posts_path(b_json.merge(st: std.id)) %>"><%= std.name %></a>
           </li>
           <% end %>
         </ul>
