@@ -43,8 +43,8 @@ class Message < ActiveRecord::Base
     }
   end
   
-  def self.make_system_message(message, user)
-    Message.create(_type: TYPES.keys[0], recevier: user, content: message)
+  def self.make_system_message(message, user, type)
+    Message.create(_type: type, recevier: user, content: message)
   end
   
   before_create :push_message
@@ -56,7 +56,7 @@ class Message < ActiveRecord::Base
   end
   
   def push_message
-    if _type = TYPES.keys[0]
+    if _type != TYPES.keys[1]
       if self.receiver
         jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
       else
