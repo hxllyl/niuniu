@@ -304,6 +304,7 @@ class Post < ActiveRecord::Base
   end
 
   after_update :make_message
+  
   def make_message
     if is_completed?
       Message.make_system_message(generate_message, user, Message::TYPES.keys[4])
@@ -313,7 +314,7 @@ class Post < ActiveRecord::Base
   private
   def generate_message
     message =<<-EOF
-    您所：#{need_detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{dealed_tender.user_name} 达成了交易。
+    您所：#{detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{dealed_tender.user_name} 达成了交易。
     EOF
   end
 end
