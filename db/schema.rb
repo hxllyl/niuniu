@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.string   "style",        limit: 60
     t.string   "NO",           limit: 12,                          default: ""
     t.integer  "status",                                           default: 1
+    t.string   "display_name"
     t.datetime "created_at",                                                     null: false
     t.datetime "updated_at",                                                     null: false
   end
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.integer  "standard_id",               null: false
     t.integer  "brand_id",                  null: false
     t.string   "name",                      null: false
+    t.string   "display_name"
     t.integer  "status",        default: 1
     t.integer  "click_counter", default: 0
     t.datetime "created_at",                null: false
@@ -267,7 +269,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.string   "remark",           limit: 160
     t.string   "outer_color",      limit: 60,                                         null: false
     t.string   "inner_color",      limit: 60,                                         null: false
-    t.string   "car_license_area", limit: 60
+    t.string   "car_license_area", limit: 60,                                         null: false
     t.string   "car_in_area"
     t.integer  "take_car_date",                                         default: 0
     t.decimal  "expect_price",                 precision: 10, scale: 2, default: 0.0
