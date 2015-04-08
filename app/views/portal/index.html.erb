@@ -4,14 +4,14 @@
 			<div id="carousel-example-generic" class="banner mb10 carousel slide" data-ride="carousel">
 			  <ol class="carousel-indicators">
           <% @banners.count.times do |i|%>
-            
+
             <li data-target="#carousel-example-generic" data-slide-to="0" class="<%= i == 0 ? 'active' : ''%>"></li>
           <%end-%>
 			  </ol>
 
 			  <div class="carousel-inner" role="listbox">
           <% @banners.each_with_index do |ban, i| %>
-    			      <div class="<%= i== 0 ? 'item active' : 'item' %>">    
+    			      <div class="<%= i== 0 ? 'item active' : 'item' %>">
     			      <a href="<%= ban.redirect_way || '#'%>" target="_blank"><%= image_tag(ban.image.url, alt: "", width: "100%")%></a>
     			    </div>
 			    <%end%>
@@ -41,6 +41,7 @@
 			<% end %>
 			<%= render partial: 'partials/right_app_icon' %>
 			<%= render partial: 'partials/right_search' %>
+			<%= render partial: 'partials/right_history_list' if current_user %>
 		</div>
 	</div>
 </div>
