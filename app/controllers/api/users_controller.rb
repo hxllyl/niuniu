@@ -70,6 +70,28 @@ class Api::UsersController < Api::BaseController
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
+  
+  # 用户的客服经理
+  #
+  # Params:
+  #   token:    [String] 用户token
+  # Returns:
+  #   status:   200
+  #   notice:   success
+  #   data:     客服基本信息
+  # Errors:
+  #   status:   500
+  #   notice:   failed
+  
+  def customer_service
+    customer_service = @user.customer_service
+    
+    if customer_service
+      render json: { status: 200, notice: 'success', data:  customer_service}
+    else
+      render json: { status: 500, notice: 'failed'}
+    end
+  end
 
   # 寻车报价是否有更新
   #

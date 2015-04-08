@@ -163,6 +163,7 @@ Rails.application.routes.draw do
       put   :update
       get :show
       get :check_unread
+      get :customer_service
     end
 
     resources :phone_lists, only: [:index] do
