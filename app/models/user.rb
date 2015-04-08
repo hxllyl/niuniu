@@ -281,9 +281,9 @@ class User < ActiveRecord::Base
     !log_posts.update_resources.last || log_posts.update_resources.last.created_at < 1.hours.ago
   end
 
-  # 生成刷新资源列表日志
-  def gen_update_all_log
-    log_posts.create(method_name: 'update_all', post_id: posts.first.id)
+  # 生成POST日志
+  def gen_post_log(post, method_name)
+    log_posts.create(method_name: method_name, post_id: post.id)
   end
 
 end

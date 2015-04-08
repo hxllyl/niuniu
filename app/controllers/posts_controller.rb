@@ -117,8 +117,10 @@ class PostsController < BaseController
   def show
     @post     = Post.find_by_id(params[:id])
     @someone  = @post.user
-    @follows  = current_user.followings & @someone.followers if current_user
+    @follows  = current_user.followings & @someone.followers
     @tender   = Tender.find_by_user_id_and_post_id(current_user.id, @post.id)
+
+    current_user.gen_post_log(@post, 'view')
   end
 
   def user_list
