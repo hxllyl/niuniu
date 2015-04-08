@@ -1,8 +1,9 @@
 @charset "utf-8";
+
 /* CSS Document */
 body, dl, dd, h1, h2, h3, h4, h5, h6, p, form { margin: 0; }
 ol, ul, textarea { margin: 0; padding: 0; }
-body { font: 14px "Microsoft Yahei", Arial, Helvetica, sans-serif; line-height: normal!important; -webkit-text-size-adjust: none; color: #808080; background-color: #dadada; }
+body { font: 14px "Microsoft Yahei", Arial, Helvetica, sans-serif; line-height: normal !important; -webkit-text-size-adjust: none; color: #808080; background-color: #dadada; }
 dl, dt, dd, ul, ol, li { list-style-type: none; }
 h5, h6 { font-size: 100%; font-weight: normal; }
 address, caption, cite, code, dfn, em, th, var { font-style: normal; font-weight: 500; }
@@ -19,16 +20,17 @@ a { color: #808080; text-decoration: none; }
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video { display: inline-block; }
 audio:not([controls]) { display: none; }
-input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {
-border:none;
-padding:0;
-}/*firefox input text-align center*/
+input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner { border: none; padding: 0; }
+
+/*firefox input text-align center*/
 .clearfix:after { content: "."; display: block; clear: both; height: 0; visibility: hidden; }
 .clearfix { zoom: 1; }
+
 /*
 **styles reset end && page style begin**
 */
 .container { padding: 0; }
+
 /*top style*/
 #topBar { height: 47px; min-height: inherit; margin-bottom: 10px; border-width: 0 0 1px; border-radius: 0; box-shadow: none; background-color: #ededed; background-image: none; }
 #topBar.fixed { position: fixed; top: 0; left: 0; z-index: 100; width: 100%; box-shadow: 0px 4px 4px #c7c7c7; }
@@ -50,6 +52,7 @@ padding:0;
 #topBar .navbar-nav-right li a .icon { width: 20px; }
 #topBar .navbar-nav-right li a .caret { margin-left: 8px; }
 #topBar .navbar-nav-right li.open>a { box-shadow: none; }
+
 /*index style*/
 .mainBox { padding-right: 5px; }
 .contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
@@ -86,7 +89,7 @@ padding:0;
 .contentBox .lineTitle .panel-title { line-height: 34px; font-size: 14px; font-weight: normal; }
 .hotCar li { margin: 8px auto; }
 .hotCar li .box { min-height: 193px; padding: 5px; margin-bottom: 0; border-color: #e9e9e9; border-radius: 0; box-shadow: none; }
-.hotCar li .box .imgBox { display: block; height: 110px; border: 1px solid #e6e6e6; overflow: hidden; }
+.hotCar li .box .imgBox { display: block; height: 110px; border: 1px solid #e6e6e6; background: #ccc image_url('placeholder.png') no-repeat center; overflow: hidden; }
 .hotCar li .intro { line-height: 20px; padding: 4px; margin-top: 4px; font-size: 12px; color: #999999; }
 .hotCar li .intro .name { height: 20px; line-height: 20px; font-size: 14px; color: #666666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hotCar li .intro .name a { color: #666666; }
@@ -119,6 +122,7 @@ padding:0;
 .indexUser .userInfo .photo { width: 75px; height: 75px; margin-right: 16px; border-radius: 50%; overflow: hidden; }
 .indexUser .userInfo .name { display: table-cell; height: 75px; vertical-align: middle; }
 .indexUser .userInfo .name h5 a { font-weight: bold; color: #323232; }
+
 /*.indexUser .userInfo .name .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .indexUser .userInfo .name .tag { float: left; width: 35px; height: 14px; margin-top: 6px; }
 .indexUser .userInfo .glyphicon { margin-right: 6px; }
@@ -161,11 +165,13 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .brandSelect { }
 .brandSelect .dropdown { float: left; width: 74%; margin-right: 4%; }
 .brandSelect .subBtn { float: right; width: 22%; }
+
 /*subPage style*/
 .breadcrumb { padding: 0 15px; margin-bottom: 10px; color: #666; background-color: transparent; }
 .breadcrumb>li+li:before { color: #666; }
 .breadcrumb>.active { color: #666; }
 .breadcrumb>li a { color: #428cca; }
+
 /*source style*/
 .mySourceOpe .updateTime { line-height: 34px; font-size: 12px; color: #313131; }
 .mySourceTab { margin: auto -15px; border-bottom: 1px solid #e6e6e6; }
@@ -177,6 +183,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .infoM .name a { font-weight: bold; color: #333; }
 .mySourceTab .infoM .info { }
 .mySourceTab .infoM .info .m { float: left; margin: 0; margin-right: 24px; }
+
 /*.mySourceTab .infoM .info .tag { float: left; height: 14px; line-height: 14px; padding: 0 6px; margin-top: 6px; border-radius: 7px; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .mySourceTab .infoM .info .tag { float: left; width: 35px; height: 14px; margin-top: 5px; margin-right: 6px; }
 .mySourceTab .infoM .info .statu { margin-left: 6px; color: #38a876; }
@@ -186,6 +193,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mySourceTab .remark .info { min-height: 24px; margin-left: 50px; }
 .mySourceTab .table>tbody>tr>td .btnGroups { display: none; position: absolute; top: 50%; right: 200px; margin-top: -11px; }
 .mySourceTab .table>tbody>tr>td .btnGroups .btn { padding: 1px 10px; margin: auto 4px; }
+
 /*pagelist style*/
 .pageList { position: relative; left: 50%; float: left; margin-top: 15px; margin-bottom: 0; }
 .pageList .pagination>span { float: left; }
@@ -217,6 +225,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .methodSelect.quote .selectTag { line-height: 30px; }
 .methodSelect.quote .selectTag input { float: left; margin: 8px 12px 0 0; }
 .methodSelect .selectTag.active { color: #ff791f; }
+
 /*.methodSelect .selectInput.active { opacity: 1; filter: alpha(opacity=100); }*/
 .methodSelect .selectInput.active .form-control { border-color: #f4621b; }
 .methodSelect .selectInput .form-control[disabled], .methodSelect .selectInput .form-control[readonly] { cursor: not-allowed; background-color: #FFF; opacity: 1; }
@@ -279,6 +288,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .boardList li .detail .time .icon { display: inline-block; height: 24px; margin-top: -2px; margin-right: 8px; vertical-align: middle; font-style: normal; }
 .boardList li .detail .time .icon-message:hover { text-decoration: none; color: #ff791f; }
 #new_comment { margin-top: 10px; }
+
 /*posts style*/
 .selectCrumb { }
 .selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; margin-right: 6px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }
@@ -313,6 +323,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .carSourceHis li .info .price { color: #ff791f; }
 .seal { position: absolute; top: 0; right: 0; }
 .carSourceHis li .seal.seal_done_sm { top: 2px; right: -10px; width: 58px; height: 44px; background: image_url('seal_done_sm.png') no-repeat center; }
+
 /*modal style*/
 .modal.box { }
 .modal.box .modal-sm { width: 364px; }
@@ -331,12 +342,14 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .alertTips { position: absolute; z-index: 100; top: 0; left: 50%; width: 300px; height: 100px; padding: 10px; margin-left: -150px; border-radius: 0 0 10px 10px; box-shadow: 0px 6px 6px 0 #999; background-color: #FFF; }
 .alertTips .tt { margin-top: 10px; text-align: center; font-size: 18px; color: #ff791f; }
 .alertTips .info { display: table-cell; width: 280px; height: 60px; text-align: center; vertical-align: middle; }
+
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 image_url("user/bannerBg.jpg") no-repeat right bottom; }
 .userOverview .userInfo { padding: 20px; }
 .userOverview .userInfo .photo { width: 118px; height: 118px; border: 5px solid #d3d3d3; border-radius: 50%; text-align: center; overflow: hidden; }
 .userOverview .userInfo .detail { display: inline-block; line-height: 20px; margin-left: 40px; }
 .userOverview .userInfo .detail .name { float: left; line-height: 22px; margin-right: 8px; font-size: 18px; font-weight: bold; color: #323232; }
+
 /*.userOverview .userInfo .detail .type { float: left; height: 22px; line-height: 22px; padding: 0 10px; margin-right: 8px; border-radius: 11px; font-size: 13px; color: #FFF; background-color: #b3b3b3; }*/
 .userOverview .userInfo .detail .type { float: left; width: 56px; height: 22px; margin-right: 8px; }
 .userOverview .userInfo .detailTab { margin-top: 8px; color: #666; }
@@ -366,6 +379,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .followersList li .info .name a { color: #666; }
 .followersList li .info .tel { line-height: 22px; font-size: 12px; }
 .followersList li .cancelBtn { position: absolute; top: 12px; right: 12px; }
+
 /*accounts style*/
 .accountsSetting { margin-bottom: 10px; background-color: #ededed; }
 .accountsSetting .row { margin: 0; }
@@ -416,17 +430,20 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .aboutUsMain.row .photoBox .photo { width: 78px; height: 78px; margin: 0 auto; border-radius: 50%; overflow: hidden; }
 .aboutUsMain.row .photoBox .name { margin: 8px 0; font-size: 12px; color: #323232; }
 .aboutUsMain.row .photoBox .name span { margin-right: 6px; font-size: 14px; }
+
 /*.aboutUsMain.row .photoBox .tag { display: block; width: 36px; height: 14px; line-height: 14px; margin: 0 auto; border-radius: 7px; text-align: center; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .aboutUsMain.row .photoBox .tag { display: block; width: 35px; height: 14px; margin: 0 auto; }
 .aboutUsMain.row .infoBox { color: #323232; }
 .aboutUsMain.row .infoBox td { height: 38px; line-height: 24px; }
 .aboutUsForm.row { margin-right: 25px; }
 .aboutBlank { padding: 100px 0; text-align: center; }
+
 /*foot style*/
 #foot { padding-bottom: 40px; }
 .copyright { font-size: 12px; }
 .copyright p { line-height: 24px; color: #1a1a1a; }
 .copyright p a { color: #1a1a1a; }
+
 /*input style*/
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
@@ -451,6 +468,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .icon.icon-message { font-size: 24px; }
 .icon.icon-refresh { margin-right: 6px; }
 .help-block { margin: 0; font-size: 12px; }
+
 /*
 **page style end && class reset begin**
 */
@@ -484,6 +502,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .txtR { text-align: right; }
 .bgf8 { background-color: #f8f8f8; }
 .bgf9 { background-color: #f9f9f9; }
+
 /*
 **class reset end**
 */

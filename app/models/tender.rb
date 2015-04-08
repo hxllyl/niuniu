@@ -122,6 +122,7 @@ class Tender < ActiveRecord::Base
   end
 
   after_save :make_message
+  
   def make_message
     if new_record?
       Message.make_system_message(generate_message(:create), post.user, Message::TYPES.keys[2])

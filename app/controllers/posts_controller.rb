@@ -5,13 +5,17 @@ class PostsController < BaseController
 
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
-
+    # 资源每人最新一条，寻车，所有
     @_type      = params[:_type]
     @standards  = Standard.all
     @brands     = Brand.order(click_counter: :desc).limit(20)
     @car_models = CarModel.order(click_counter: :desc).limit(40)
-    posts   = Post.includes(:base_car, :post_photos, :standard, :brand).where(_type: params[:_type], status: 1).order(updated_at: :desc).group_by(&:user_id).collect{|k, v| v.first}
-    @posts  =  Kaminari.paginate_array(posts).page(params[:page]).per(10)
+    if @_type.to_i == 1
+      @posts   = Post.needs.valid.order(updated_at: :desc).page(params[:page]).per(10)
+    else
+      posts   = Post.resources.valid.order(updated_at: :desc).group_by(&:user_id).collect{|k, v| v.first}
+      @posts  =  Kaminari.paginate_array(posts).page(params[:page]).per(10)
+    end
   end
 
   # 市场资源点击品牌进入资源列表页
