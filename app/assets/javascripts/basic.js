@@ -8,7 +8,7 @@ $(document).ready(function(){
   /*翻页居中*/
   $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
   /*表单验证*/
-  $("form,.modal,#form_select,.sourceForm").validator();
+  $("form,.modal,#form_select,.new_user").validator();
   /*placeholder兼容*/
   $(function () {
     $("input[placeholder]").inputTip();
