@@ -26,7 +26,7 @@ class Tender < ActiveRecord::Base
 
   scope :valid, -> {where("status <> ?", STATUS.keys[2])}
   # 未成交的报价
-  scope :uncompleted, -> { where("status <> 1") }
+  scope :uncompleted, -> { where(status: 0) }
   # 已成交的报价
   scope :completed, -> { where(status: 1) }
 
