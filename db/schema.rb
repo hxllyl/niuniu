@@ -266,7 +266,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.integer  "base_car_id",                                                         null: false
     t.integer  "user_id",                                                             null: false
     t.integer  "_type"
-    t.string   "remark",           limit: 160
+    t.string   "remark",           limit: 225
     t.string   "outer_color",      limit: 60,                                         null: false
     t.string   "inner_color",      limit: 60,                                         null: false
     t.string   "car_license_area", limit: 60,                                         null: false
