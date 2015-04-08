@@ -33,10 +33,12 @@ class MyPostsController < BaseController
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
     @post = Post.new(_type: params[:_type])
     @standards = Standard.all
-    @brands    = @standards.first.brands.valid
+    @standard  = Standard.first
+    @brands    = @standard.brands.valid
     @brand     = @brands.first
-    @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @standards.first.brands.first.id, status: 1)
-    @base_cars = @car_models.first.base_cars
+    @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @brand.id, status: 1)
+    @car_model  = @car_models.first
+    @base_cars = @car_model.base_cars.valid
     @base_car  = @base_cars.first
     @post_type = @post._type
   end
