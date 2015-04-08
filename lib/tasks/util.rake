@@ -9,9 +9,9 @@ namespace :util do
 
   desc '系统初始化数据'
   task init: :environment do
-    Rake::Task["util:base_cars"].invoke
-    Rake::Task["util:areas"].invoke
     Rake::Task["util:brands"].invoke
+    Rake::Task["util:areas"].invoke
+    Rake::Task["util:base_cars"].invoke
   end
 
   desc "数据导入"
@@ -28,31 +28,37 @@ namespace :util do
 
 
       begin
-       st = Standard.find_or_initialize_by(name: columns[0].chomp)
-       br = Brand.find_or_initialize_by(name: columns[1].chomp)
-       cm = CarModel.find_or_initialize_by(
-              name: (columns[2] || ' ').to_s.chomp,
-              display_name: (columns[2] || ' ').to_s.chomp
-            )
-       bc = BaseCar.find_or_initialize_by(
-              style: columns[3].chomp,
-              display_name: columns[3].chomp,
-              NO: columns[4].to_i.to_s,
-              base_price: columns[5].to_f
-            )
-
+       st = Standard.find_or_initialize_by(name: columns[0].chomp.strip)
        st.save
 
-       br.standards << st unless br.standards.include?(st)
+       br = Brand.find_or_initialize_by(name: columns[1].chomp.strip)
        br.regions = columns[8].split(' ') if columns[8]
        br.status = 1
        br.save
 
-       cm.standard = st
-       cm.brand = br
+       st.brands << br unless st.brands.include?(br)
+       st.save
+
+       br.standards << st unless br.standards.include?(st)
+       br.save
+
+       cm = CarModel.find_or_initialize_by(
+              standard_id: st.id,
+              brand_id: br.id,
+              name: (columns[2] || ' ').to_s.chomp.strip,
+              display_name: (columns[2] || ' ').to_s.chomp.strip
+            )
        cm.save
 
-       bc.standard, bc.brand, bc.car_model = st, br, cm
+       bc = BaseCar.find_or_initialize_by(
+              standard_id: st.id,
+              brand_id: br.id,
+              car_model_id: cm.id,
+              style: columns[3].chomp.strip,
+              display_name: columns[3].chomp.strip,
+              NO: columns[4].to_i.to_s,
+              base_price: columns[5].to_f
+            )
        bc.outer_color = columns[6].split(' ') if columns[6]
        bc.inner_color = columns[7].split(' ') if columns[7]
        bc.save
@@ -97,7 +103,7 @@ namespace :util do
     csv = CSV.parse(csv_text, headers: true)
     csv.each_with_index do |row, i|
       ha = row.to_hash
-      brand = Brand.find_or_initialize_by(name: ha["name"])
+      brand = Brand.find_or_initialize_by(name: ha["name"], status: 0)
 
       system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
 
