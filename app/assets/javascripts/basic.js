@@ -8,7 +8,7 @@ $(document).ready(function(){
   /*翻页居中*/
   $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
   /*表单验证*/
-  $("form,.modal,#form_select,.sourceForm").validator();
+  $("form,.modal,#form_select,.new_user").validator();
   /*placeholder兼容*/
   $(function () {
     $("input[placeholder]").inputTip();
@@ -27,6 +27,16 @@ $(document).ready(function(){
   setTimeout(function() {
       $(".alertTips").fadeOut("fast");
   }, 2000);
+
+  $("textarea").each(function(){
+    $(this).html($(this).attr("placeholder"));
+  })
+  $("textarea").focus(function(){
+    $(this).html("");
+  });
+  $("textarea").blur(function(){
+    $(this).html($(this).attr("placeholder"));
+  });
 
   $(function() {
     //IE也能用textarea
