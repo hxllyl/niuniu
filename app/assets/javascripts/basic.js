@@ -8,38 +8,12 @@ $(document).ready(function(){
   /*翻页居中*/
   $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
   /*表单验证*/
-  $("form,.modal,#form_select").validator();
+  $("form,.modal,#form_select,.sourceForm").validator();
   /*placeholder兼容*/
-  var doc = document,
-  inputs = doc.getElementsByTagName("input"),
-  supportPlaceholder = "placeholder" in doc.createElement("input"),
-  placeholder = function(input) {
-    var text = input.getAttribute("placeholder"),
-    defaultValue = input.defaultValue;
-    if (defaultValue == "") {
-      input.value = text
-    }
-    input.onfocus = function() {
-      if (input.value === text) {
-        this.value = ""
-      }
-    };
-    input.onblur = function() {
-      if (input.value === "") {
-        this.value = text
-      }
-    }
-  };
-  if (!supportPlaceholder) {
-    for (var i = 0,
-    len = inputs.length; i < len; i++) {
-      var input = inputs[i],
-      text = input.getAttribute("placeholder");
-      if (input.type === "text" && text) {
-        placeholder(input)
-      }
-    }
-  }
+  $(function () {
+    $("input[placeholder]").inputTip();
+    $("input[type='button']").focus();
+  });
   /*nav fixed*/
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();
@@ -53,4 +27,27 @@ $(document).ready(function(){
   setTimeout(function() {
       $(".alertTips").fadeOut("fast");
   }, 2000);
+
+  $(function() {
+    //IE也能用textarea
+    $("textarea[maxlength]").keyup(function() {
+      var area = $(this);
+      var max = parseInt(area.attr("maxlength"), 10); //获取maxlength的值
+      if (max > 0) {
+        if (area.val().length > max) { //textarea的文本长度大于maxlength
+          area.val(area.val().substr(0, max)); //截断textarea的文本重新赋值
+        }
+      }
+    });
+    //复制的字符处理问题
+    $("textarea[maxlength]").blur(function() {
+      var area = $(this);
+      var max = parseInt(area.attr("maxlength"), 10); //获取maxlength的值
+      if (max > 0) {
+        if (area.val().length > max) { //textarea的文本长度大于maxlength
+          area.val(area.val().substr(0, max)); //截断textarea的文本重新赋值
+        }
+      }
+    });
+  });
 });
