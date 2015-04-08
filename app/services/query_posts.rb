@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 module Services
   class QueryPost
     attr_reader :query, :brands, :car_models, :standards, :base_cars
