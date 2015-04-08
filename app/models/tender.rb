@@ -139,7 +139,7 @@ class Tender < ActiveRecord::Base
                 EOF
               when :dealed then
                 <<-EOF
-                您报价的#{post.detail_title} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}给您报了价。
+                您报价的#{post.detail_title} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}达成了交易。
                 EOF
               end
   end

@@ -170,13 +170,14 @@ ActiveRecord::Schema.define(version: 20150408065746) do
   add_index "log_base_cars", ["user_id"], name: "index_log_base_cars_on_user_id", using: :btree
 
   create_table "log_contact_phones", force: :cascade do |t|
-    t.string   "mobile",      limit: 15,                 null: false
+    t.string   "mobile",          limit: 15,                 null: false
     t.integer  "sender_id"
-    t.integer  "_type",                  default: 0
-    t.boolean  "is_register",            default: false
+    t.integer  "_type",                      default: 0
+    t.boolean  "is_register",                default: false
+    t.datetime "last_contact_at"
     t.integer  "status"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "log_contact_phones", ["_type"], name: "index_log_contact_phones_on__type", using: :btree
@@ -263,7 +264,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.integer  "base_car_id",                                                         null: false
     t.integer  "user_id",                                                             null: false
     t.integer  "_type"
-    t.string   "remark",           limit: 160
+    t.string   "remark",           limit: 225
     t.string   "outer_color",      limit: 60,                                         null: false
     t.string   "inner_color",      limit: 60,                                         null: false
     t.string   "car_license_area", limit: 60
@@ -333,6 +334,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.integer  "_type"
     t.string   "company",                limit: 225
     t.string   "role",                   limit: 30
+    t.integer  "reg_status",                         default: 0
     t.integer  "area_id",                                         null: false
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
