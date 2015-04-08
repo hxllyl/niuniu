@@ -220,7 +220,7 @@ class MyPostsController < BaseController
     end
 
     respond_to do |format|
-      format.js {
+      format.json {
         render nothing: true
       }
     end

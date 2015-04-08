@@ -13,7 +13,7 @@ $(function(){
     location.href = url;
   });
 
-  var position_url = '/users/'+ id +'/my_posts/update_position.js';
+  var position_url = '/users/'+ id +'/my_posts/update_position.json';
 
   $(".mySourceTab .table").find("tr").hover(function(){
     $(this).find(".btnGroups").show();
