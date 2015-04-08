@@ -55,7 +55,7 @@ namespace :deploy do
          info "Skipping assets compilation"
       else
         invoke 'deploy:assets:precompile'
-        invoke 'deploy:assets:backup_manifest'
+        # invoke 'deploy:assets:backup_manifest'
       end
     end
   end

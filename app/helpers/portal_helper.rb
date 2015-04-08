@@ -5,7 +5,14 @@
 module PortalHelper
 
   def all_brand
-    Brand.pluck(:name, :id)
+    # Brand.pluck(:name, :id)
+    ary = []
+    Brand.valid.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter|
+      Brand.valid.group_by {|e| Pinyin.t(e.name)[0].upcase}[letter].each do |ele|
+        ary << [letter + ele.name, ele.id]
+      end
+    end
+    ary
   end
 
   # 选择省市
@@ -13,7 +20,7 @@ module PortalHelper
     opt[:level] ||= 'provinces' # provinces, cities
     Area.send(opt[:level]).pluck(:name, :id)
   end
-  
+
   def options_cities(province_id)
     Area.where(parent_id: province_id).collect {|c| [c.name, c.id]}
   end
