@@ -283,14 +283,21 @@ class User < ActiveRecord::Base
 
   # 生成POST日志
   def gen_post_log(post, method_name)
-    log_posts.create(method_name: method_name, post_id: post.id)
+    # log_posts.create(method_name: method_name, post_id: post.id)
+    log = log_posts.find_or_initialize_by(method_name: method_name, post_id: post.id)
+    log.new_record? ? log.save : log.update_attributes(updated_at: Time.now)
   end
-  
+
+  # 最近浏览的
+  def later_view_posts(_type = 0)
+    Post.where("id in (?) and _type=? and status=1", log_posts.views.order(updated_at: :desc).limit(5).map(&:post_id), _type)
+  end
+
   after_save :genrate_register_log
   def genrate_register_log
     log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
     log.is_register = true
     log.save
   end
-  
+
 end
