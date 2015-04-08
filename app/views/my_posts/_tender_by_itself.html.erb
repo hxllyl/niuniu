@@ -38,4 +38,13 @@
       <div class="units">万元</div>
     </label>
   </div>
+  <%- if @post_type == 0 %>
+    <div class="form-group form-inline col-md-6">
+      <label class="radio selectTag">
+        <input type="radio" name="post[discount_way]" id="methodRadios5" value="5"><span>电议</span>
+      </label>
+    </div>
+  <% end %>
 </div>
+
+
