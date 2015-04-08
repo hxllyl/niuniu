@@ -44,7 +44,7 @@ class Message < ActiveRecord::Base
   end
   
   def self.make_system_message(message, user, type)
-    Message.create(_type: type, recevier: user, content: message)
+    Message.create(_type: type, receiver: user, content: message)
   end
   
   before_create :push_message
