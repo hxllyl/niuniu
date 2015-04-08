@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   # constants
   # 为什么不用staff这个模型？
   ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
-  
+
   # 注册状态：来自网站 ios android 后台
   REG_STATUS = {
     0 => 'web',
@@ -276,4 +276,21 @@ class User < ActiveRecord::Base
     Tender.find_by_user_id_and_post_id(id, post_id) ? true : false
   end
 
+  # 是否可以刷新资源列表
+  def could_update_my_resoruces?
+    !log_posts.update_resources.last || log_posts.update_resources.last.created_at < 1.hours.ago
+  end
+
+  # 生成POST日志
+  def gen_post_log(post, method_name)
+    log_posts.create(method_name: method_name, post_id: post.id)
+  end
+  
+  after_save :genrate_register_log
+  def genrate_register_log
+    log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
+    log.is_register = true
+    log.save
+  end
+  
 end

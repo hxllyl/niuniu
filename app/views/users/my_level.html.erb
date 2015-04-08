@@ -31,6 +31,7 @@
             </div>
 
             <div class="col-md-3 level">
+              <p><span class="levelIcon bfL"></span></p>
               <% user_level_icons(current_user).each do |icon| %>
                 <p><span class="levelIcon bfL">
                   <%= image_tag(icon, alt: "", width: "100%") %>
@@ -64,6 +65,7 @@
               <p>4s（认证）</p>
             </div>
             <div class="col-md-3 level">
+              <p><span class="levelIcon bfL"></span></p>
              <% recon_icons(current_user).each do |icon| %>
                <p><span class="levelIcon bfL">
                  <%= image_tag(icon, alt: "", width: "100%")%>

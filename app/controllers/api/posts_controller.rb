@@ -343,10 +343,15 @@ class Api::PostsController < Api::BaseController
   #   error_msg: 错误信息
 
   def update_all
-    posts = @user.posts.resources.where("id in (?)", params[:post_ids])
-    posts.update_all(updated_at: Time.now)
-
-    render json: { status: 200, notice: 'success' }
+    if @user.could_update_my_resoruces?
+      posts = @user.posts.resources.where("id in (?)", params[:post_ids])
+      posts.update_all(updated_at: Time.now)
+      @user.gen_post_log(posts.first, 'update_all')
+      render_infos = { status: 200, notice: 'success' }
+    else
+      render_infos = { status: 200, notice: 'faild', error_msg: '对不起，您一个小时之内不能重复更新您的资源列表' }
+    end
+    render json: render_infos
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
   end
@@ -524,6 +529,30 @@ class Api::PostsController < Api::BaseController
   rescue => e
     render json: { status: 500, notice: 'failed', error_msg: e.message }
   end
+
+  # 生成日志
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   post_id:  [Integer]     资源的id
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  # Error
+  #   status: [Integer] 500
+  #   notice: [String]  failed
+  #   error_msg: 错误信息
+
+  def gen_log
+    post = Post.find_by_id(params[:post_id])
+
+    @user.gen_post_log(post, 'view')
+
+    render json: { status: 200, notice: 'success' }
+  rescue => ex
+    render json: { status: 500, notice: 'failed', error_msg: ex.message}
+  end
+
 
   private
 

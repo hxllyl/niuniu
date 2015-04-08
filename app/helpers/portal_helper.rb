@@ -13,6 +13,10 @@ module PortalHelper
     opt[:level] ||= 'provinces' # provinces, cities
     Area.send(opt[:level]).pluck(:name, :id)
   end
+  
+  def options_cities(province_id)
+    Area.where(parent_id: province_id).collect {|c| [c.name, c.id]}
+  end
 
   # post在首页的名称显示
   def post_name(post)

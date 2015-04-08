@@ -20,20 +20,26 @@ namespace :util do
 
     import_data(file_path) { |roo|
       puts 'start import base_cars'
-      
+
       (roo.first_row.succ..roo.last_row).each do |i|
         columns = (roo.first_column..roo.last_column).collect do |j|
           roo.cell(i,j)
         end
-        
-        
+
+
       begin
        st = Standard.find_or_initialize_by(name: columns[0].chomp)
        br = Brand.find_or_initialize_by(name: columns[1].chomp)
-       cm = CarModel.find_or_initialize_by(name: (columns[2] || ' ').to_s.chomp)
-       bc = BaseCar.find_or_initialize_by(style: columns[3].chomp,
-                                 NO: columns[4].to_i.to_s, base_price: columns[5].to_f
-                                )
+       cm = CarModel.find_or_initialize_by(
+              name: (columns[2] || ' ').to_s.chomp,
+              display_name: (columns[2] || ' ').to_s.chomp
+            )
+       bc = BaseCar.find_or_initialize_by(
+              style: columns[3].chomp,
+              display_name: columns[3].chomp,
+              NO: columns[4].to_i.to_s,
+              base_price: columns[5].to_f
+            )
 
        st.save
 

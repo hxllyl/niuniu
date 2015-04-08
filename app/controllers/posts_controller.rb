@@ -68,16 +68,12 @@ class PostsController < BaseController
 
   # 一键找车列表页
   def key_search
+    order_by = {   'updated_at' =>  'updated_at', 'expect_price' => 'expect_price'  }.fetch(params[:order_by]) { 'updated_at' }
     @q_json    = {q: params[:q]}
     @order_ele = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
-    order_by   = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
+    u_ids = current_user.following_ids.to_set
 
-    result = Services::QueryPost.new(params.slice(:q)).search
-
-    fol_posts = result.where(:user_id => current_user.following_ids).order(order_by)
-    others = result.where.not(:user_id => current_user.following_ids).order(order_by)
-
-    @posts = Kaminari.paginate_array(fol_posts + others).page(params[:page]).per(10)
+    @posts = Services::QueryPost.new(params.slice(:q)).search_and_order_with_users( u_ids, params[:page], order_by )
   end
 
   # 寻车信息点击品牌进入寻车列表页
@@ -117,8 +113,10 @@ class PostsController < BaseController
   def show
     @post     = Post.find_by_id(params[:id])
     @someone  = @post.user
-    @follows  = current_user.followings & @someone.followers if current_user
+    @follows  = current_user.followings & @someone.followers
     @tender   = Tender.find_by_user_id_and_post_id(current_user.id, @post.id)
+
+    current_user.gen_post_log(@post, 'view')
   end
 
   def user_list

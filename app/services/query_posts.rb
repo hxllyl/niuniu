@@ -1,6 +1,8 @@
+# require 'pry'
 module Services
   class QueryPost
     attr_reader :query, :brands, :car_models, :standards, :base_cars
+    PER = 10
 
     def initialize(opts = {})
       @query = String(opts[:q])
@@ -42,12 +44,15 @@ module Services
       res
     end
 
-    def search_and_order_with_users(user_ids, _page)
-      results = search.order(expect_price: :asc, updated_at: :desc)
+    def search_and_order_with_users(user_ids, _page, sort_by = 'updated_at' )
+
+      order_ways = { 'updated_at' => :desc, 'expect_price' =>  :asc }
+
+      results = search
       page = _page || 1
       user_ids = Array( user_ids )
 
-      return results if (results.blank? || user_ids.blank?)
+      return results.order(order_ways.slice(sort_by)).page(page).per(PER) if (results.blank? || user_ids.blank?)
 
       hash = { true => 0, false => 1 }
 
@@ -58,7 +63,7 @@ module Services
       end
 
       Post.resources.joins("join (VALUES #{values}) as x(id, ordering)  on posts.id = x.id ").\
-          order("x.ordering", expect_price: :asc, updated_at: :desc).page(page).per(10)
+          order("x.ordering", order_ways.slice(sort_by)).page(page).per(10)
 
     end
   end

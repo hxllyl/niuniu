@@ -28,6 +28,7 @@
               <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.try(:publish_time) %></span></div>
               <button class="btn btn-default bfR" type="submit"><span class="icon icon-refresh"></span>全部更新</button>
               <% end-%>
+
             </div>
           </div>
           <div class="mySourceTab mt10">
@@ -38,7 +39,7 @@
                     <td>
                       <div class="box clearfix">
                         <div class="infoM">
-                          <h5 class="name"><%= link_to post.detail_title, post_path(post, _type: 0) %></h5>
+                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %></h5>
                           <div class="info clearfix">
                             <div class="m"><%= post.standard_type %></div>
                             <div class="m"><%= post.color %></div>

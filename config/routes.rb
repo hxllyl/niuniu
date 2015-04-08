@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     patch :add_following, on: :collection
 
     get :delete_relation, on: :collection
-    
+
     patch :reset_password, on: :collection
 
     resources :my_posts do
@@ -125,7 +125,7 @@ Rails.application.routes.draw do
       get :tender_status
       get :filter_brands
       get :filter_brand
-
+      post :gen_log
     end
 
     resources :valid_codes, only: [:index] do
