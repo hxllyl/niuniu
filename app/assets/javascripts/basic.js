@@ -28,6 +28,16 @@ $(document).ready(function(){
       $(".alertTips").fadeOut("fast");
   }, 2000);
 
+  $("textarea").each(function(){
+    $(this).html($(this).attr("placeholder"));
+  })
+  $("textarea").focus(function(){
+    $(this).html("");
+  });
+  $("textarea").blur(function(){
+    $(this).html($(this).attr("placeholder"));
+  });
+
   $(function() {
     //IE也能用textarea
     $("textarea[maxlength]").keyup(function() {
