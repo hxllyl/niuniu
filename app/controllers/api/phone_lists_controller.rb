@@ -34,7 +34,7 @@ class Api::PhoneListsController < Api::BaseController
               log = Log::ContactPhone.find_by(sender: @user, mobile: mobile, _type:  Log::ContactPhone::TYPES.keys[1])
               {user_id: u.id, is_following: @user.following?(u), is_invite: log.present?}
              else
-              {user_id: '', is_following: '', is_invite: ''}
+              {user_id: '', is_following: false, is_invite: false}
              end
       datas << contact.merge!(hash)
     }

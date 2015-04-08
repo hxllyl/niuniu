@@ -125,7 +125,7 @@ class Tender < ActiveRecord::Base
   def make_message
     if new_record?
       Message.make_system_message(generate_message(:create), post.user, Message::TYPES.keys[2])
-    elsif level == STATUS.keys[1]
+    elsif status == STATUS.keys[1]
       Message.make_system_message(generate_message(:dealed), user, Message::TYPES.keys[3])
     end
   end
@@ -139,7 +139,7 @@ class Tender < ActiveRecord::Base
                 EOF
               when :dealed then
                 <<-EOF
-                您报价的#{post.detail_title} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}给您报了价。
+                您报价的#{post.detail_title} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}达成了交易。
                 EOF
               end
   end
