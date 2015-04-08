@@ -31,10 +31,11 @@ class Api::PhoneListsController < Api::BaseController
       mobile = contact['mobile']
       u = User.find_by(mobile: mobile)
       hash = if u
-                {user_id: u.id, is_following: @user.following?(u)}
-               else
-                {user_id: '', is_following: ''}
-               end
+              log = Log::ContactPhone.find_by(sender: @user, mobile: mobile, _type:  Log::ContactPhone::TYPES.keys[1])
+              {user_id: u.id, is_following: @user.following?(u), is_invite: log.present?}
+             else
+              {user_id: '', is_following: '', is_invite: ''}
+             end
       datas << contact.merge!(hash)
     }
     render json: { status: 200, notice: 'success', datas: datas}
@@ -75,8 +76,8 @@ class Api::PhoneListsController < Api::BaseController
       render json: { status: 200, notice: 'success'}
     end
     
-  # rescue => ex
-  #   render json: { status: 500, notice: 'failure', error_msg: ex.message}
+  rescue => ex
+    render json: { status: 500, notice: 'failure', error_msg: ex.message}
   end
 
 end
