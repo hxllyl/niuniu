@@ -6,7 +6,7 @@
   .ibox
     .ibox-content
       %h2 手机号查询
-      = form_tag params.merge(format: 'js'), method: :get, remote: true, class: 'form-horizontal' do
+      = form_tag params, method: :get, remote: true, class: 'form-horizontal' do
         .input-group
           = text_field_tag :mobile, @mobile||nil, type: 'mobile', class: 'form-control input-lg', placeholder: '输入手机号码'
           .input-group-btn
