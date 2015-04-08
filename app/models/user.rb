@@ -285,5 +285,12 @@ class User < ActiveRecord::Base
   def gen_post_log(post, method_name)
     log_posts.create(method_name: method_name, post_id: post.id)
   end
-
+  
+  after_save :genrate_register_log
+  def genrate_register_log
+    log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
+    log.is_register = true
+    log.save
+  end
+  
 end

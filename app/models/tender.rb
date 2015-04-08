@@ -121,12 +121,12 @@ class Tender < ActiveRecord::Base
     end
   end
 
-  #after_save :make_message
+  after_save :make_message
   def make_message
     if new_record?
-      Message.make_system_message(generate_message(:create), post.user)
-    elsif level == LEVELS.keys[1]
-      Message.make_system_message(generate_message(:dealed), user)
+      Message.make_system_message(generate_message(:create), post.user, Message::TYPES.keys[2])
+    elsif level == STATUS.keys[1]
+      Message.make_system_message(generate_message(:dealed), user, Message::TYPES.keys[3])
     end
   end
 

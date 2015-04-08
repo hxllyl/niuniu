@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407120316) do
+ActiveRecord::Schema.define(version: 20150408065746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20150407120316) do
     t.string   "style",        limit: 60
     t.string   "NO",           limit: 12,                          default: ""
     t.integer  "status",                                           default: 1
-    t.string   "display_name"
     t.datetime "created_at",                                                     null: false
     t.datetime "updated_at",                                                     null: false
   end
@@ -97,7 +96,6 @@ ActiveRecord::Schema.define(version: 20150407120316) do
     t.integer  "standard_id",               null: false
     t.integer  "brand_id",                  null: false
     t.string   "name",                      null: false
-    t.string   "display_name"
     t.integer  "status",        default: 1
     t.integer  "click_counter", default: 0
     t.datetime "created_at",                null: false
@@ -173,7 +171,7 @@ ActiveRecord::Schema.define(version: 20150407120316) do
 
   create_table "log_contact_phones", force: :cascade do |t|
     t.string   "mobile",          limit: 15,                 null: false
-    t.integer  "sender_id",                                  null: false
+    t.integer  "sender_id"
     t.integer  "_type",                      default: 0
     t.boolean  "is_register",                default: false
     t.datetime "last_contact_at"
@@ -269,7 +267,7 @@ ActiveRecord::Schema.define(version: 20150407120316) do
     t.string   "remark",           limit: 160
     t.string   "outer_color",      limit: 60,                                         null: false
     t.string   "inner_color",      limit: 60,                                         null: false
-    t.string   "car_license_area", limit: 60,                                         null: false
+    t.string   "car_license_area", limit: 60
     t.string   "car_in_area"
     t.integer  "take_car_date",                                         default: 0
     t.decimal  "expect_price",                 precision: 10, scale: 2, default: 0.0
