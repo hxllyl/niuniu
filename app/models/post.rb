@@ -303,10 +303,10 @@ class Post < ActiveRecord::Base
     expect_price.to_f == 0.0 ? '电议' : "#{expect_price.to_f}万"
   end
 
-  # after_update :make_message
+  after_update :make_message
   def make_message
     if is_completed?
-      Message.make_system_message(generate_message, user)
+      Message.make_system_message(generate_message, user, Message::TYPES.keys[4])
     end
   end
 
