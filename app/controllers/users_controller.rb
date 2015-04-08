@@ -138,7 +138,7 @@ class UsersController < BaseController
 
   def reset_password
     @user = User.find(current_user.id) rescue User.find_by(mobile: params[:mobile])
-    flash[:notice] = '改号码暂时尚未注册，请先注册！' and redirect_to('/') if @user.blank?
+    raise '改号码暂时尚未注册，请先注册！' if @user.blank?
 
     if @user.update(user_params_without_current_password)
       # Sign in the user by passing validation in case their password changed
@@ -155,6 +155,9 @@ class UsersController < BaseController
     else
       render "edit"
     end
+  rescue => ex
+    flash[:error] = ex.message
+    redirect_to '/'
   end
 
 
