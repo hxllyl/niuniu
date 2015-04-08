@@ -20,7 +20,7 @@
 </div>
 <div class="sFormBox mt-20 clearfix">
   <div class="sFormTag bfL">备注</div>
-  <div class="sFormArea"><textarea class="form-control" rows="3" name="post[remark]"><%= @post.remark %></textarea>
+  <div class="sFormArea"><textarea class="form-control" rows="3" placeHolder="输入不能超过225个字" name="post[remark]" maxlength="225"><%= @post.remark %></textarea>
   </div>
 </div>
 <div class="subGroup row">
