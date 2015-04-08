@@ -222,7 +222,7 @@ class Post < ActiveRecord::Base
     if _type == 1
       ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
     else
-      [standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+      [brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
     end
   end
 

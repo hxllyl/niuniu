@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   # constants
   # 为什么不用staff这个模型？
   ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
-  
+
   # 注册状态：来自网站 ios android 后台
   REG_STATUS = {
     0 => 'web',
@@ -274,6 +274,16 @@ class User < ActiveRecord::Base
 
   def tendered?(post_id)
     Tender.find_by_user_id_and_post_id(id, post_id) ? true : false
+  end
+
+  # 是否可以刷新资源列表
+  def could_update_my_resoruces?
+    !log_posts.update_resources.last || log_posts.update_resources.last.created_at < 1.hours.ago
+  end
+
+  # 生成刷新资源列表日志
+  def gen_update_all_log
+    log_posts.create(method_name: 'update_all', post_id: posts.first.id)
   end
 
 end

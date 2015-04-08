@@ -13,7 +13,12 @@ class MyPostsController < BaseController
     end
 
     if params[:update_all]
-      current_user.posts.where("posts._type = #{@_type} and posts.id in (?)", params[:resource_ids].split(' ')).update_all(updated_at: Time.now())
+      if current_user.could_update_my_resoruces?
+        current_user.posts.where("posts._type = #{@_type} and posts.id in (?)", params[:resource_ids].split(' ')).update_all(updated_at: Time.now())
+        current_user.gen_update_all_log
+      else
+        flash[:notice] = '对不起，您一个小时之内不能重复更新您的资源列表'
+      end
     end
 
     @brands = current_user.posts.resources.map(&:brand).uniq
