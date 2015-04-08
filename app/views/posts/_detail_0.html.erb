@@ -47,19 +47,13 @@
     </div>
     <div class="col-md-3 mainRight">
       <%= render partial: 'partials/right_user' %>
-      <%- if current_user %>
-        <%= render partial: 'partials/right_joint_followings' %>
-      <% end %>
+      <%= render partial: 'partials/right_joint_followings' %>
       <%= render partial: 'partials/right_his_resources' %>
       <%= render partial: 'partials/right_his_needs' %>
     </div>
   </div>
 </div>
-
-<% if current_user %>
-  <%= render partial: 'complaints/complaint'%>
-<% end -%>
-
+<%= render partial: 'complaints/complaint'%>
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
 <% end -%>

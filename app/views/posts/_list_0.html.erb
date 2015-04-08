@@ -96,15 +96,9 @@
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%- if current_user %>
-          <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
-      <% else %>
-          <%= render partial: 'partials/right_login' %>
-      <% end %>
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
       <%= render partial: 'partials/right_search' %>
-      <%- if current_user %>
-        <%= render partial: 'partials/right_history_list' %>
-      <% end %>
+      <%= render partial: 'partials/right_history_list' %>
     </div>
   </div>
 </div>

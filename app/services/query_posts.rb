@@ -15,11 +15,11 @@ module Services
     end
 
     def search_multi_tables
-      @brands = Brand.where("name LIKE :name", name: "%#{@query}%")
-      @standards = Standard.where('name LIKE :name', name: "%#{@query}%")
-      @car_models = CarModel.where('name LIKE :name', name: "%#{ @query }%")
+      @brands = Brand.where(' name ILIKE :name', name: "%#{@query}%")
+      @standards = Standard.where(' name ILIKE :name', name: "%#{@query}%")
+      @car_models = CarModel.where(' name ILIKE :name', name: "%#{ @query }%")
       # @base_cars = BaseCar.where("base_price LIKE :price OR style LIKE :style", price: /#{@query}/, style: "%#{@query}%")
-      @base_cars = BaseCar.where(" style LIKE :style", style: "%#{@query}%")
+      @base_cars = BaseCar.where(' style ILIKE :style', style: "%#{@query}%")
     end
 
     def search
