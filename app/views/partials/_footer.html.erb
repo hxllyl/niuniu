@@ -82,3 +82,12 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#reg_step2").find("input[type='submit']").click(function(){
+    if ($(this).hasClass("disabled")){
+      return false;
+    }
+  });
+});
+</script>
