@@ -32,7 +32,7 @@ namespace :util do
        st.save
 
        br = Brand.find_or_initialize_by(name: columns[1].chomp.strip)
-       br.regions = columns[8].split(' ') if columns[8]
+       br.regions = columns[10].split(' ') if columns[10]
        br.status = 1
        br.save
 
@@ -45,8 +45,8 @@ namespace :util do
        cm = CarModel.find_or_initialize_by(
               standard_id: st.id,
               brand_id: br.id,
-              name: (columns[2] || ' ').to_s.chomp.strip,
-              display_name: (columns[2] || ' ').to_s.chomp.strip
+              name: columns[2].to_s.strip.chomp,
+              display_name: columns[3].to_s.strip.chomp
             )
        cm.save
 
@@ -54,13 +54,13 @@ namespace :util do
               standard_id: st.id,
               brand_id: br.id,
               car_model_id: cm.id,
-              style: columns[3].chomp.strip,
-              display_name: columns[3].chomp.strip,
-              NO: columns[4].to_i.to_s,
-              base_price: columns[5].to_f
+              style: columns[4].strip.chomp,
+              display_name: columns[5].to_s.strip.chomp,
+              NO: columns[6].to_i.to_s,
+              base_price: columns[7].to_f
             )
-       bc.outer_color = columns[6].split(' ') if columns[6]
-       bc.inner_color = columns[7].split(' ') if columns[7]
+       bc.outer_color = columns[8].split(' ') if columns[8]
+       bc.inner_color = columns[9].split(' ') if columns[9]
        bc.save
      rescue => ex
        puts 'some wrong happend: ' + ex.message
