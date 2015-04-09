@@ -406,7 +406,8 @@ class Api::PostsController < Api::BaseController
     post= @user.posts.find_by_id(params[:id])
     raise 'user did not had the post' if post.blank?
 
-    @user.posts.delete post
+    post.update_attributes(status: -1)
+
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}
