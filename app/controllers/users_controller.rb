@@ -87,7 +87,7 @@ class UsersController < BaseController
   end
 
   def system_infos
-    @sys_messages = current_user.received_messages.where(_type: Message::TYPES.keys[0]).order('status asc ,updated_at desc').page(params[:page]).per(5)
+    @sys_messages = current_user.system_messages.order('status asc ,updated_at desc').page(params[:page]).per(5)
   end
 
   def my_level
