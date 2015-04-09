@@ -22,4 +22,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def auth_my_self
+    if current_user.id == params[:user_id].to_i
+      return true
+    else
+      flash[:notice] = "您无权访问此页面"
+      redirect_to root_path
+    end
+  end
+
 end

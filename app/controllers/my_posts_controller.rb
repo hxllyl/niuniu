@@ -1,7 +1,8 @@
 # encoding: utf-8
 class MyPostsController < BaseController
-
+  before_filter :auth_my_self
   skip_before_filter :verify_authenticity_token
+
 
   def index
     @_type = params[:_type]
