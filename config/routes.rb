@@ -120,7 +120,6 @@ Rails.application.routes.draw do
       post  :update_all
       put  :change_position
       delete :destroy
-      put :del_my_tender
       put :del_my_post
       get :search
       get :tender_status
