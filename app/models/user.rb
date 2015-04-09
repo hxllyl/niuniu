@@ -62,9 +62,12 @@ class User < ActiveRecord::Base
   belongs_to :customer_service, class_name: 'User'
   has_many :customers, -> {where(role: 'sale')}, class_name: 'User', foreign_key: :customer_service_id
 
-  has_many :send_messages, class_name: 'Message', foreign_key: 'sender_id'
-  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
+  has_many :send_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1])}, class_name: 'Feedback', foreign_key: 'sender_id'
+  has_many :received_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1]) }, class_name: 'Feedback', foreign_key: 'receiver_id'
 
+  has_many :user_messages, class_name: 'UserMessage'
+  has_many :system_messages, through: :user_messages, source: :message
+  
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
@@ -74,7 +77,7 @@ class User < ActiveRecord::Base
 
   has_many :active_devices, class_name: 'ActiveDevice' # jpush 用户设备
 
-  scope :valid_user, -> {where("status != #{STATUS[-1]}")}
+  scope :valid_user, -> {where("status != #{STATUS.keys[2]}")}
 
   accepts_nested_attributes_for :photos
 

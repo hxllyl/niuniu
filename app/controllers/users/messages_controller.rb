@@ -3,13 +3,13 @@
 class Users::MessagesController < BaseController
   
   def index
-    @send_messages = current_user.send_messages
-    @received_message = current_user.received_messages
+    @send_messages = current_user.send_feedbacks
+    @received_message = current_user.received_feedbacks
   end
   
   def create
-    @message = Message.new message_params
-    if @message.save
+    @fb = Feedback.new message_params
+    if @fb.save
       flash[:notice] = t('success')
       redirect_to my_level_user_path(current_user)
     else
@@ -24,6 +24,6 @@ class Users::MessagesController < BaseController
   
   private
   def message_params
-    params.require(:message).permit(:sender_id, :receiver_id, :title, :content, :_type)
+    params.require(:feedback).permit(:sender_id, :receiver_id, :title, :content, :_type)
   end
 end

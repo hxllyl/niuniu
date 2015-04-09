@@ -20,6 +20,8 @@ class Message < ActiveRecord::Base
     4 => '寻车完成'
   }
   
+  self.inheritance_column = :mask
+  
   # 接收组：all - 所有用户
   # http://edgeapi.rubyonrails.org/classes/ActiveRecord/Enum.html
   enum receiver_group: [ :all_users ]
@@ -28,10 +30,15 @@ class Message < ActiveRecord::Base
   validates :_type, inclusion: { in: TYPES.keys }
   validates :status, inclusion: { in: STATUS.keys }
   
+  
+  
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
   
-  belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
+  has_many :user_messages, class_name: 'UserMessage'
+  has_many :users, through: :user_messages, source: :user
+  
+  #belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
   
   def for_api
     {
@@ -47,7 +54,7 @@ class Message < ActiveRecord::Base
     Message.create(_type: type, receiver: user, content: message)
   end
   
-  before_create :push_message
+  after_create :push_message
 
   def real_receiver_users
     if receiver_group && receiver_group.all_users?
@@ -60,7 +67,13 @@ class Message < ActiveRecord::Base
       if self.receiver
         jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
       else
-        jpush_message(content, ActiveDevice.active.pluck(:register_id))
+        
+        if _type == TYPES.keys[0]
+          jpush_message(content, ActiveDevice.active.pluck(:register_id))
+          users = User.valid_user
+          self.users << users
+        end
+        
         # NOTICE: In this case, this should put in a queue, now comment it
         # real_receiver_users.each do |u|
         #   jpush_message(content, u)

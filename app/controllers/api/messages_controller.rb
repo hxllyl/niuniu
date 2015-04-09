@@ -25,9 +25,11 @@ class Api::MessagesController < Api::BaseController
     page_size = params[:page_size] || 10
     page = (params[:page].nil? or params[:page].to_i == 0) ? 1 : params[:page].to_i
     way  = params[:way]
-    type, method = way == 'system' ? [Message::TYPES.keys[0], 'received_messages'] : [Message::TYPES.keys[1], 'send_messages']
-    @msg = @user.send("#{method}").where("_type = ? ", type).order('updated_at desc').offset(page_size*(page - 1)).limit(page_size)
-    render json: { status: 200, notice: 'success', data: @msg.map(&:for_api) }
+    if way == 'system'
+      messages = @user.system_messages.order('updated_at desc').offset(page*page_size).limit(page_size)
+    end
+    
+    render json: { status: 200, notice: 'success', data: messages.map(&:for_api)}
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
   end
@@ -48,11 +50,11 @@ class Api::MessagesController < Api::BaseController
   #   error_msg: 错误信息
 
   def create
-    @message = Message.new message_params
-    if @message.save
+    @fb = Feedback.new message_params
+    if @fb.save
       render json: { status: 200, notice: 'success' }
     else
-      render json: { status: 500, notice: 'failed', error_msg: @message.errors.full_message.join('\n') }
+      render json: { status: 500, notice: 'failed', error_msg: @fb.errors.full_message.join('\n') }
     end
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
@@ -132,7 +134,7 @@ class Api::MessagesController < Api::BaseController
   
   private
   def message_params
-    params.require(:message).permit(:sender_id, :receiver_id, :title, :content, :_type)
+    params.require(:feedback).permit(:sender_id, :receiver_id, :title, :content, :_type)
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408065746) do
+ActiveRecord::Schema.define(version: 20150409040356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
 
   create_table "messages", force: :cascade do |t|
     t.string   "title",          limit: 100
-    t.integer  "sender_id",                              null: false
+    t.integer  "sender_id"
     t.integer  "receiver_id"
     t.integer  "_type",                      default: 0
     t.string   "content",                                null: false
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 20150408065746) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.integer  "receiver_group"
+    t.string   "mask",           limit: 15
   end
 
   add_index "messages", ["_type"], name: "index_messages_on__type", using: :btree
@@ -329,6 +330,17 @@ ActiveRecord::Schema.define(version: 20150408065746) do
 
   add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
   add_index "tokens", ["value"], name: "index_tokens_on_value", using: :btree
+
+  create_table "user_messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.integer  "status",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_messages", ["message_id"], name: "index_user_messages_on_message_id", using: :btree
+  add_index "user_messages", ["user_id"], name: "index_user_messages_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 15,               null: false

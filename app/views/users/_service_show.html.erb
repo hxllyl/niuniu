@@ -47,7 +47,7 @@
           <label for="" class="control-label">意见反馈：</label>
         </div>
         <div class="col-md-10">
-          <%= form_for Message.new, as: :message, url: users_messages_path, method: :post do |f| %>
+          <%= form_for Feedback.new, as: :feedback, url: users_messages_path, method: :post do |f| %>
             <%= f.hidden_field :_type, value: Message::TYPES.keys[1] -%>
             <%= f.hidden_field :sender_id, value: current_user.id -%>
             <%= f.hidden_field :receiver_id, value: @customer_service.id -%>

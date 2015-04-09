@@ -146,9 +146,8 @@ class Tender < ActiveRecord::Base
               end
   end
   
-  private
   def generate_post_message
-    message =<<-EOF
+    message = <<-EOF
     您所：#{post.detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{post.user_name} 达成了交易。
     EOF
   end
