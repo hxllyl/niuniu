@@ -27,9 +27,9 @@
                 <% if @post.discount_way != 5 %>
                   <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                 <% end %>
-                <%- if @post.base_car.is_valid? %>
+                <%- if @post.base_car.is_valid? && @post.base_car_base_price.to_f != 0.0 %>
                   <p>指导价：<%= @post.base_price %></p>
-                  <p class="hide" id="guidePrice"><%= @post.base_car_base_price.to_f%></p>
+                  <p class="hide" id="guidePrice"><%= @post.base_car_base_price.to_f %></p>
                 <% end %>
                 <%- if current_user != @post.user%>
                   <div class="reportLink"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#myReport">我要举报</a></div>

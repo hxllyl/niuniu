@@ -125,8 +125,8 @@ class Post < ActiveRecord::Base
   def complete(tender_id)
     tender = self.tenders.find_by_id(tender_id)
     if tender
-      self.update_attributes(status: 3)
       tender.update_attributes(status: 1)
+      self.update_attributes(status: 3)
     end
     Log::Post.create(user_id: user_id, post_id: id, method_name: 'post_completed')
     tender_log = Log::Post.find_or_initialize_by(user_id: tender.user_id, post_id: id, method_name: 'tender')
@@ -220,18 +220,22 @@ class Post < ActiveRecord::Base
 
   def detail_title
     if _type == 1
-      ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+      ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_short_name].compact.join(' ')
     else
-      [brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+      [brand_name, car_model_name, base_car_style, base_car_short_name].compact.join(' ')
     end
   end
 
   def title
     if _type == 1
-      ['寻', standard_name, brand_name, car_model_name, base_car_NO].join(' ')
+      ['寻', standard_name, brand_name, car_model_name, base_car_short_name].compact.join(' ')
     else
-      [brand_name, car_model_name, base_car_NO].join(' ')
+      [brand_name, car_model_name, base_car_short_name].compact.join(' ')
     end
+  end
+
+  def base_car_short_name
+    base_car_NO == '0' ? nil : base_car_NO
   end
 
   def app_area

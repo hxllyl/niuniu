@@ -87,7 +87,7 @@
         <ul class="list clearfix">
           <% @base_cars.each do |style| %>
           <li class=<%= @base_car == style ? 'current' : '' %>>
-            <a href="<%= resources_list_posts_path(@q_json.merge(bc: style.id)) %>"><%= style.style %></a>
+            <a href="<%= resources_list_posts_path(@q_json.merge(bc: style.id)) %>"><%= style.select_name %></a>
           </li>
           <% end %>
         </ul>

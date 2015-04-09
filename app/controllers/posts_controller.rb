@@ -8,8 +8,8 @@ class PostsController < BaseController
     # 资源每人最新一条，寻车，所有
     @_type      = params[:_type]
     @standards  = Standard.all
-    @brands     = Brand.order(click_counter: :desc).limit(20)
-    @car_models = CarModel.order(click_counter: :desc).limit(40)
+    @brands     = Brand.valid.order(click_counter: :desc).limit(20)
+    @car_models = CarModel.valid.order(click_counter: :desc).limit(40)
     if @_type.to_i == 1
       @posts   = Post.needs.valid.order(updated_at: :desc).page(params[:page]).per(10)
     else
@@ -24,13 +24,13 @@ class PostsController < BaseController
     if params[:bc]
       @base_car  = BaseCar.find_by_id(params[:bc])
       @car_model, @brand, @standard = @base_car.car_model, @base_car.brand, @base_car.standard
-      @base_cars, @car_models, @brands, @standards = @car_model.base_cars.valid, @brand.car_models.valid, @standard.brands, @brand.standards
+      @base_cars, @car_models, @brands, @standards = @car_model.base_cars.valid.order(base_price: :asc), @brand.car_models.valid, @standard.brands, @brand.standards
       @q_json = {bc: @base_car.id, cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif params[:cm]
       @q_json = {cm: params[:cm]}
       @base_car = nil
       @car_model = CarModel.find_by_id(params[:cm])
-      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars.valid
+      @brand, @standard, @base_cars = @car_model.brand, @car_model.standard, @car_model.base_cars.valid.order(base_price: :asc)
       @car_models, @brands, @standards  = CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid, @standard.brands, @brand.standards
       @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
     elsif params[:br] && params[:st]
@@ -45,7 +45,7 @@ class PostsController < BaseController
       @q_json = {br: params[:br]}
       @base_car, @car_model, @base_cars, @car_models = nil, nil, [], []
       @brand = Brand.find_by_id(params[:br])
-      @brands, @standards  = Brand.all, @brand.standards
+      @brands, @standards  = Brand.valid, @brand.standards
       @q_json = {br: @brand.id}
     elsif params[:st]
       @q_json = {st: params[:st]}
@@ -55,7 +55,7 @@ class PostsController < BaseController
       @q_json = {st: @standard.id}
     else
       @standard, @brand, @car_model, @base_car, @car_models, @base_cars = nil, nil, nil, nil, [], []
-      @standards, @brands = Standard.all, Brand.all
+      @standards, @brands = Standard.all, Brand.valid
       @q_json = {}
     end
 
