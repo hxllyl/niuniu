@@ -329,6 +329,32 @@ class Api::PostsController < Api::BaseController
     render json: {status: false, error: e.message}
   end
 
+  # 撤销我的寻车|资源
+  #
+  # Params:
+  #   token:    [String]    valid token
+  #   id:       [Integer]   post ID
+  #
+  # Return:
+  #   status: [Integer] 200
+  #   notice: [String]  success
+  # Error
+  #   status: [Integer] 400
+  #   Notice: [String]  请重新再试
+  def del_my_post
+    post = Post.find_by_id(params[:id])
+
+    raise 'not found' unless post
+    raise 'you have no right to do it!' unless post.user == @user
+
+    post.update_attributes(status: -1)
+
+
+    render json: {status: 200, notice: 'success'}
+    rescue => e
+    render json: {status: false, error: e.message}
+  end
+
   # 资源更新
   #
   # Params:
