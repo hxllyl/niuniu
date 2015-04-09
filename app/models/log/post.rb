@@ -13,7 +13,7 @@ class Log::Post < ActiveRecord::Base
 
   scope :views, -> { where(method_name: 'view').order(updated_at: :desc) }
 
-  scope :completeds, -> { where(method_name: /completed/) }
+  scope :completeds, -> { where(method_name: ['post_completed', 'tender_completed']) }
 
   scope :update_resources, -> { where(method_name: 'update_all').order(created_at: :desc) }
 
