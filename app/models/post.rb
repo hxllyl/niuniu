@@ -125,8 +125,8 @@ class Post < ActiveRecord::Base
   def complete(tender_id)
     tender = self.tenders.find_by_id(tender_id)
     if tender
-      self.update_attributes(status: 3)
       tender.update_attributes(status: 1)
+      self.update_attributes(status: 3)
     end
     Log::Post.create(user_id: user_id, post_id: id, method_name: 'post_completed')
     tender_log = Log::Post.find_or_initialize_by(user_id: tender.user_id, post_id: id, method_name: 'tender')
