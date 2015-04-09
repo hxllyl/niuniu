@@ -78,7 +78,8 @@ class User < ActiveRecord::Base
   has_many :active_devices, class_name: 'ActiveDevice' # jpush 用户设备
 
   scope :valid_user, -> {where("status != #{STATUS.keys[2]}")}
-
+  scope :normals, -> {where("users.role = ?", 'normal')}
+  
   accepts_nested_attributes_for :photos
 
   # class methods
