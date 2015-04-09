@@ -38,7 +38,7 @@ class Message < ActiveRecord::Base
   has_many :user_messages, class_name: 'UserMessage'
   has_many :users, through: :user_messages, source: :user
   
-  #belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
+  # belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
   
   def for_api
     {
@@ -67,10 +67,9 @@ class Message < ActiveRecord::Base
       if self.receiver
         jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
       else
-        
         if _type == TYPES.keys[0]
           jpush_message(content, ActiveDevice.active.pluck(:register_id))
-          users = User.valid_user
+          users = User.valid_user.normals
           self.users << users
         end
         
