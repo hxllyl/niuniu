@@ -403,10 +403,11 @@ class Api::PostsController < Api::BaseController
   #   error_msg: 错误信息
 
   def destroy
-    resource = @user.posts.resources.find_by_id params[:id]
-    raise 'user did not had the resource' if resource.blank?
+    post= @user.posts.find_by_id(params[:id])
+    raise 'user did not had the post' if post.blank?
 
-    @user.posts.resources.delete resource
+    post.update_attributes(status: -1)
+
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message}

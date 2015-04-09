@@ -185,7 +185,7 @@ class Post < ActiveRecord::Base
       user_name_area:     user.name_area,
       price_status:       base_price,
       title:              title,
-      detail_title:       _type == 0 ? title : detail_title,
+      detail_title:       detail_title,
       license_area:       app_area,
       remark:             remark,
       position:           position,
