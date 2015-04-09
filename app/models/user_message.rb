@@ -2,7 +2,6 @@
 
 class UserMessage < ActiveRecord::Base
   
-  
   validates :user,  presence: true
   validates :message,  presence: true
     
