@@ -3,8 +3,6 @@
 require_relative '../../../app/services/query_posts'
 class Api::PostsController < Api::BaseController
 
-       # skip_before_action :auth_user, only: [ :search ]
-
   # 市场资源列表，寻车列表
   #
   # Params:
@@ -499,7 +497,7 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def filter_brands
-    brands = Brand.distinct(:name).pluck(:name)
+    brands = Brand.valid.distinct(:name).pluck(:name)
     render json:  { status: 200, notice: 'success', data: { brand_names: brands } }
   rescue => e
     render json: { status: 500, notice: 'failed', error_msg: e.message }

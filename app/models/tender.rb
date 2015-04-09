@@ -73,6 +73,7 @@ class Tender < ActiveRecord::Base
       post_tenders_count:       post.tenders.count,
       post_brand_img:           (post.brand.car_photo.image.try(:url) rescue ''),
       post_take_car_date:       Post::TAKE_DATES[post.take_car_date],
+      post_base_car_price:      post.base_car_base_price.to_f,
 
       tender_id:                id,
       tender_user_id:           user_id,
@@ -122,7 +123,7 @@ class Tender < ActiveRecord::Base
   end
 
   after_save :make_message
-  
+
   def make_message
     if new_record?
       Message.make_system_message(generate_message(:create), post.user, Message::TYPES.keys[2])
@@ -145,11 +146,11 @@ class Tender < ActiveRecord::Base
                 EOF
               end
   end
-  
+
   def generate_post_message
     message = <<-EOF
     您所：#{post.detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{post.user_name} 达成了交易。
     EOF
   end
-  
+
 end
