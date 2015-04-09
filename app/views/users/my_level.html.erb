@@ -41,8 +41,9 @@
             </div>
 
             <div class="col-md-6 status">
-            <% User::LEVELS.keys[0..3].each do |l| %> 
-              <% if current_user.level >= l %>
+            <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
+            <% User::LEVELS.keys[1..3].each do |l| %> 
+              <% if current_user.level >= l and current_user.level < User::LEVELS.keys[4] %>
                 <p><span class="icon_done"><%= image_tag("icon_done.png", alt: "")%></span><%= t('completed')%></p>
               <% else %>
                   <% if @level_status.first and  current_user.can_upgrade_levels.include?(l)%>
