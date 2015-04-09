@@ -220,18 +220,22 @@ class Post < ActiveRecord::Base
 
   def detail_title
     if _type == 1
-      ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+      ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_short_name].compact.join(' ')
     else
-      [brand_name, car_model_name, base_car_style, base_car_NO].join(' ')
+      [brand_name, car_model_name, base_car_style, base_car_short_name].compact.join(' ')
     end
   end
 
   def title
     if _type == 1
-      ['寻', standard_name, brand_name, car_model_name, base_car_NO].join(' ')
+      ['寻', standard_name, brand_name, car_model_name, base_car_short_name].compact.join(' ')
     else
-      [brand_name, car_model_name, base_car_NO].join(' ')
+      [brand_name, car_model_name, base_car_short_name].compact.join(' ')
     end
+  end
+
+  def base_car_short_name
+    base_car_NO == '0' ? nil : base_car_NO
   end
 
   def app_area
