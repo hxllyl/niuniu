@@ -30,7 +30,7 @@
                   <% if @post.discount_way != 5 %>
                     <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
                   <% end %>
-                  <%- if @post.base_car.is_valid? && post.base_car_base_price.to_f != 0.0 %>
+                  <%- if @post.base_car.is_valid? && @post.base_car_base_price.to_f != 0.0 %>
                     <p>指导价：<%= @post.base_price %></p>
                   <% end %>
                 </div>
