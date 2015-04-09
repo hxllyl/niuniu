@@ -47,7 +47,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $('body').on('change', '#post_standard_id', function(){
+  $('#post_standard_id').change(function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
     var _type = $('#post_type').val();
@@ -62,13 +62,12 @@ $(document).ready(function(){
         }
       },
       success: function(data){
-        console.log('data')
         $("#form_select").html(data)
       }
     });
   });
 
-  $('body').on('change', '#post_brand_id', function(){
+  $('#post_brand_id').change(function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
     var brand_id = $('#post_brand_id').val();
@@ -85,13 +84,12 @@ $(document).ready(function(){
         }
       },
       success: function(data){
-        console.log('data')
         $("#form_select").html(data)
       }
     });
   });
 
-  $('body').on('change', '#post_car_model_id', function(){
+  $('#post_car_model_id').change(function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
     var brand_id = $('#post_brand_id').val();
@@ -110,13 +108,12 @@ $(document).ready(function(){
         }
       },
       success: function(data){
-        console.log('data')
         $("#form_select").html(data)
       }
     });
   });
 
-  $('body').on('change', '#post_base_car_id', function(){
+  $('#post_base_car_id').change(function(){
     var url = $(this).data('url');
     var standard_id = $('#post_standard_id').val();
     var brand_id = $('#post_brand_id').val();
@@ -137,7 +134,6 @@ $(document).ready(function(){
         }
       },
       success: function(data){
-        console.log('data')
         $("#form_select").html(data)
       }
     });
