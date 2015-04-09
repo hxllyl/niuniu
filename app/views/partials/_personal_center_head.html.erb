@@ -17,7 +17,7 @@
             <td colspan="2"><%= t('zc_place') -%>：<%= current_user.area_name %></td>
           </tr>
           <tr>
-            <td colspan="2"><strong class="tip">最近三个月成交<%= current_user.dealeds(:mouth) %>台，累计成交<%= current_user.dealeds(:total)%>台</strong></td>
+            <td colspan="2"><strong class="tip"><%= current_user.dealt_infos %></strong></td>
           </tr>
           <tr>
             <td colspan="2"><%= t('company') -%>：<%= current_user.company %></td>
