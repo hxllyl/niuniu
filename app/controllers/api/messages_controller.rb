@@ -26,7 +26,7 @@ class Api::MessagesController < Api::BaseController
     page = (params[:page].nil? or params[:page].to_i == 0) ? 1 : params[:page].to_i
     way  = params[:way]
     if way == 'system'
-      messages = @user.system_messages.order('updated_at desc').offset(page*page_size).limit(page_size)
+      messages = @user.system_messages.order('updated_at desc').offset((page - 1)*page_size).limit(page_size)
     end
     
     render json: { status: 200, notice: 'success', data: messages.map(&:for_api)}
