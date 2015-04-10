@@ -262,9 +262,11 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .detailPriceInfo { position: relative; padding-top: 16px; }
 .detailPriceInfo .time { font-size: 12px; color: #666; }
 .detailPriceInfo .seal { top: 20px; left: 200px; width: 58px; height: 44px; }
-.sourceGallery { margin-top: 20px; }
-.sourceGallery li { width: 100%; margin-bottom: 10px; }
-.sourceGallery li img { width: 100%; }
+.sourceGallery { width: 100%; margin-top: 20px; }
+.sourceGallery .carousel-inner li { width: 100%; margin-bottom: 10px; }
+.sourceGallery .carousel-inner li img { width: 100%; }
+.sourceGallery .btns li { width: 75px; height: 50px; margin: 0 4px; border-radius: 0; text-indent: inherit; overflow: hidden; }
+.sourceGallery .btns li.active { border: 2px solid #f4621b; }
 .followList li { padding: 8px 0; border-top: 1px solid #e6e6e6; }
 .followList li.first { border-top: none; }
 .followList li .photo { width: 44px; height: 44px; margin-right: 20px; border-radius: 50%; overflow: hidden; }

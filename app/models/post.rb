@@ -135,17 +135,21 @@ class Post < ActiveRecord::Base
   end
 
   # {front: 'image_url', side: 'image_url', obverse: 'image_url', inner: 'image_url'}
-  def photos
+  def photos(_type='large')
     hash = {}
     post_photos.each do |ele|
-      hash[ele._type.to_sym] = ele.image.url
+      hash[ele._type.to_sym] = ele.image.url(_type)
     end
 
     hash
   end
 
-  def photos_ary
-    [photos[:front], photos[:side], photos[:obverse], photos[:inner]].compact
+  def photos_ary(_type='large')
+    ary = []
+    [:front, :side, :obverse, :inner].each do |ele|
+      ary << photos(_type)[ele]
+    end
+    ary.compact
   end
 
   def to_hash
