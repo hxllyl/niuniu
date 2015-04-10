@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 # author: depp.yu
 require 'util'
 require 'csv'
@@ -9,7 +8,7 @@ namespace :util do
 
   desc '系统初始化数据'
   task init: :environment do
-    Rake::Task["util:brands"].invoke
+    # Rake::Task["util:brands"].invoke
     Rake::Task["util:areas"].invoke
     Rake::Task["util:base_cars"].invoke
   end
@@ -17,6 +16,8 @@ namespace :util do
   desc "数据导入"
   task base_cars: :environment do
     file_path = "#{Rails.root}/doc/base_car_data.xlsx"
+
+    brand_icons_dir = Rails.root + 'public' + 'brand_icons'
 
     import_data(file_path) { |roo|
       puts 'start import base_cars'
@@ -30,12 +31,15 @@ namespace :util do
        raise '规格 品牌 车型 车款 不能为空' if [columns[0],columns[1],columns[2],columns[4]].include?(nil)
 
        st = Standard.find_or_initialize_by(name: columns[0].chomp.strip)
-       st.save
+       st.save if st.new_record?
 
        br = Brand.find_or_initialize_by(name: columns[1].chomp.strip)
-       br.regions = columns[10].split(' ') if columns[10]
-       br.status = 1
-       br.save
+       if br.new_record?
+         br.status = 1
+         br.regions = columns[10].split(' ') if columns[10]
+         br.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{brand_icons_dir}/#{br.name}.png"))
+         br.save
+       end
 
        st.brands << br unless st.brands.include?(br)
        st.save
@@ -93,28 +97,28 @@ namespace :util do
     }
   end
 
-  desc "导入汽车品牌（临时任务）"
-  task brands: :environment do
-    domain  = 'http://iniuniu.com.cn'
-    tmp_dir = Rails.root + 'public' + 'uploads'
+  # desc "导入汽车品牌（临时任务）"
+  # task brands: :environment do
+  #   domain  = 'http://iniuniu.com.cn'
+  #   tmp_dir = Rails.root + 'public' + 'uploads'
 
-    csv_file = "#{Rails.root}/doc/brands.csv"
-    csv_text = File.read(csv_file)
+  #   csv_file = "#{Rails.root}/doc/brands.csv"
+  #   csv_text = File.read(csv_file)
 
-    csv = CSV.parse(csv_text, headers: true)
-    csv.each_with_index do |row, i|
-      ha = row.to_hash
-      brand = Brand.find_or_initialize_by(name: ha["name"], status: 0)
+  #   csv = CSV.parse(csv_text, headers: true)
+  #   csv.each_with_index do |row, i|
+  #     ha = row.to_hash
+  #     brand = Brand.find_or_initialize_by(name: ha["name"], status: 0)
 
-      system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
+  #     system("wget -O #{tmp_dir}/#{i}.jpg #{domain}#{ha['path']}")
 
-      brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/#{i}.jpg"))
-      begin
-        brand.save!
-      rescue ActiveRecord::RecordNotSaved => e
-        brand.errors.full_messages
-      end
-    end
-  end
+  #     brand.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{tmp_dir}/#{i}.jpg"))
+  #     begin
+  #       brand.save!
+  #     rescue ActiveRecord::RecordNotSaved => e
+  #       brand.errors.full_messages
+  #     end
+  #   end
+  # end
 
 end
