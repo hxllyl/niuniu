@@ -35,29 +35,31 @@ class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseC
     resource = User.new(params[:user])
     # build_resource
     # resource.skip_confirmation!
-    if resource.save
-      valid_code = ValidCode.find_by_mobile_and_code_and_status(resource[:mobile], params[:valid_code], 0)
+   ValidCode.transaction do
+     if resource.save
+        valid_code = ValidCode.find_by_mobile_and_code_and_status(resource[:mobile], params[:valid_code], 0)
 
-      raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') unless valid_code
+        raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') unless valid_code
 
-      valid_code.update(status: ValidCode::STATUS.keys[1])
+        valid_code.update(status: ValidCode::STATUS.keys[1])
 
-      sign_in resource
+        sign_in resource
 
-      render json:  {
-                      status:   200,
-                      notice:   'success',
-                      data:     {
-                                  user:  resource,
-                                  token: current_user.token
-                                }
-                    }
-    else
-      render json:  {
-                      status:   400,
-                      notice:   resource.errors
-                    }
-    end
+        render json:  {
+                        status:   200,
+                        notice:   'success',
+                        data:     {
+                                    user:  resource,
+                                    token: current_user.token
+                                  }
+                      }
+      else
+        render json:  {
+                        status:   400,
+                        notice:   resource.errors
+                      }
+      end
+   end
   rescue Errors::ValidCodeNotFoundError => vc_error
     render json: {
                    status: 500,

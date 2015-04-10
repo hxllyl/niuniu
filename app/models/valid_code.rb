@@ -26,6 +26,7 @@ class ValidCode < ActiveRecord::Base
   validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: { if: Proc.new{ |code| code._type == TYPES.keys[0] } }
   validates :status, inclusion: { in: STATUS.keys }
   
+  belongs_to :user, class_name: 'User'
   # scopes
   scope :actives, ->{ where(status: STATUS.keys[0]) }
   
