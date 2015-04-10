@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   has_many :user_messages, class_name: 'UserMessage'
   has_many :system_messages, through: :user_messages, source: :message
-  
+
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
 
   scope :valid_user, -> {where("status != #{STATUS.keys[2]}")}
   scope :normals, -> {where("users.role = ?", 'normal')}
-  
+
   accepts_nested_attributes_for :photos
 
   # class methods
@@ -298,11 +298,11 @@ class User < ActiveRecord::Base
     Post.where("id in (?) and _type=? and status=1", log_posts.views.order(updated_at: :desc).limit(5).map(&:post_id), _type)
   end
 
-  after_save :genrate_register_log
-  def genrate_register_log
-    log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
-    log.is_register = true
-    log.save
-  end
+  # after_create :genrate_register_log
+  # def genrate_register_log
+  #   log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
+  #   log.is_register = true
+  #   log.save
+  # end
 
 end
