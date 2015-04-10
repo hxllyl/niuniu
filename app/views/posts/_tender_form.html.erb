@@ -1,4 +1,4 @@
-<form action=<%= tender_post_path %> method='post'>
+<form action=<%= tender_post_path %> class="requireForm" method='post'>
   <div class="methodSelect quote row">
     <div class="tt clearfix">
       <h5 class="col-md-6">给他报价<span class="sm"></span></h5>
@@ -19,10 +19,10 @@
           <% else %>
             <div class="form-group form-inline col-md-6">
               <label class="radio selectTag">
-                <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %>><span><%= v %></span>
+                <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %> required="required"><span><%= v %></span>
               </label>
               <label class="selectInput">
-                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]">
+                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" required="required">
                 <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
               </label>
             </div>
