@@ -35,6 +35,7 @@ namespace :util do
 
        br = Brand.find_or_initialize_by(name: columns[1].chomp.strip)
        if br.new_record?
+         br.status = 1
          br.regions = columns[10].split(' ') if columns[10]
          br.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{brand_icons_dir}/#{br.name}.png"))
          br.save
