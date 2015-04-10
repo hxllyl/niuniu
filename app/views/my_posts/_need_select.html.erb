@@ -12,7 +12,7 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <select name="post[car_in_area]" class="form-control input-sm" id="car_area">
-          <%- @brand.regions.each do |ele| %>
+          <%- @brand && @brand.regions.each do |ele| %>
           <option value="<%= ele %>"><%= ele %></option>
           <% end %>
         </select>
