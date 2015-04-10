@@ -11,31 +11,35 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
    #super
    build_resource(sign_up_params)
-
-   resource.save
-   yield resource if block_given?
-   if resource.persisted?
-     if resource.active_for_authentication?
-       set_flash_message :notice, :signed_up if is_flashing_format?
-       sign_up(resource_name, resource)
-       respond_with resource, location: after_sign_up_path_for(resource)
-     else
-       set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-       expire_data_after_sign_in!
-       respond_with resource, location: after_inactive_sign_up_path_for(resource)
+   
+   
+  ValidCode.transaction do
+    if resource.save
+     yield resource if block_given?
+     if resource.persisted?
+       if resource.active_for_authentication?
+         set_flash_message :notice, :signed_up if is_flashing_format?
+         sign_up(resource_name, resource)
+         respond_with resource, location: after_sign_up_path_for(resource)
+       else
+         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+         expire_data_after_sign_in!
+         respond_with resource, location: after_inactive_sign_up_path_for(resource)
+       end
+     
+       valid_code = ValidCode.where(mobile: resource[:mobile], code: params[:valid_code], \
+                                    status: ValidCode::STATUS.keys[0]).first
+       raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') if valid_code.blank?                             
+       valid_code.update(status: ValidCode::STATUS.keys[1])
      end
-     
-     valid_code = ValidCode.where(mobile: resource[:mobile], code: params[:valid_code], \
-                                  status: ValidCode::STATUS.keys[0]).first
-     raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') if valid_code.blank?                             
-     valid_code.update(status: ValidCode::STATUS.keys[1])
-     
    else
      clean_up_passwords resource
      # set_minimum_password_length
      # respond_with resource
      redirect_to request.referrer || '/'
    end
+  end
+  
   rescue Errors::ValidCodeNotFoundError => vc_error
     flash[:error] = vc_error and redirect_to request.referrer || '/'
   rescue ActiveModel::Errors => ex
