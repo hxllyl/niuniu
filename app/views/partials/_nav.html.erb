@@ -35,7 +35,7 @@
           <li><a href="#">Action</a></li>
         </ul>
       </li>
-      <li class="last"><a href="#">联系客服</a></li>
+      <li class="last"><%= link_to '联系客服', current_user ? about_us_user_path(current_user) : '#' %></li>
     </ul>
   </div>
 </nav>

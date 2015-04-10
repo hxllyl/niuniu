@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20150409040356) do
     t.integer  "user_id",                               null: false
     t.integer  "status",                    default: 0
     t.string   "content",       limit: 225
-    t.integer  "operator_id",                           null: false
+    t.integer  "operator_id"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end

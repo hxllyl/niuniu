@@ -26,8 +26,9 @@ namespace :util do
           roo.cell(i,j)
         end
 
-
       begin
+       raise '规格 品牌 车型 车款 不能为空' if [columns[0],columns[1],columns[2],columns[4]].include?(nil)
+
        st = Standard.find_or_initialize_by(name: columns[0].chomp.strip)
        st.save
 
@@ -45,7 +46,7 @@ namespace :util do
        cm = CarModel.find_or_initialize_by(
               standard_id: st.id,
               brand_id: br.id,
-              name: columns[2].to_s.strip.chomp,
+              name: columns[2].to_s.split('.').first.strip.chomp,
               display_name: columns[3].to_s.strip.chomp
             )
        cm.save
