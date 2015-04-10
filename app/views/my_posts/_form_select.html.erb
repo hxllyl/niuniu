@@ -8,6 +8,7 @@
         <% else %>
           <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
+          <option value=''>请选择</option>
           <%- @standards.each do |standard| %>
             <%- if standard == @standard %>
               <option value="<%= standard.id %>" selected="selected"><%= standard[:name]%></option>
@@ -28,6 +29,7 @@
         <% else %>
           <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
+          <option value=''>请选择</option>
           <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
             <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}[letter].each do |brand| %>
               <%- if brand == @brand %>
@@ -48,95 +50,95 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $('#post_standard_id').change(function(){
-    var url = $(this).data('url');
-    var standard_id = $('#post_standard_id').val();
-    var _type = $('#post_type').val();
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var _type = $('#post_type').val();
 
-    $.ajax({
-      method: "GET",
-      url: url,
-      data: {
-        post: {
-          standard_id: standard_id,
-          _type: _type
-        }
-      },
-      success: function(data){
-        $("#form_select").html(data)
-      }
-    });
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
   });
 
   $('#post_brand_id').change(function(){
-    var url = $(this).data('url');
-    var standard_id = $('#post_standard_id').val();
-    var brand_id = $('#post_brand_id').val();
-    var _type = $('#post_type').val();
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var brand_id = $('#post_brand_id').val();
+      var _type = $('#post_type').val();
 
-    $.ajax({
-      method: "GET",
-      url: url,
-      data: {
-        post: {
-          standard_id: standard_id,
-          brand_id: brand_id,
-          _type: _type
-        }
-      },
-      success: function(data){
-        $("#form_select").html(data)
-      }
-    });
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            brand_id: brand_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
   });
 
   $('#post_car_model_id').change(function(){
-    var url = $(this).data('url');
-    var standard_id = $('#post_standard_id').val();
-    var brand_id = $('#post_brand_id').val();
-    var car_model_id = $('#post_car_model_id').val();
-    var _type = $('#post_type').val();
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var brand_id = $('#post_brand_id').val();
+      var car_model_id = $('#post_car_model_id').val();
+      var _type = $('#post_type').val();
 
-    $.ajax({
-      method: "GET",
-      url: url,
-      data: {
-        post: {
-          standard_id: standard_id,
-          brand_id: brand_id,
-          car_model_id: car_model_id,
-          _type: _type
-        }
-      },
-      success: function(data){
-        $("#form_select").html(data)
-      }
-    });
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            brand_id: brand_id,
+            car_model_id: car_model_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
   });
 
   $('#post_base_car_id').change(function(){
-    var url = $(this).data('url');
-    var standard_id = $('#post_standard_id').val();
-    var brand_id = $('#post_brand_id').val();
-    var car_model_id = $('#post_car_model_id').val();
-    var base_car_id = $('#post_base_car_id').val();
-    var _type = $('#post_type').val();
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var brand_id = $('#post_brand_id').val();
+      var car_model_id = $('#post_car_model_id').val();
+      var base_car_id = $('#post_base_car_id').val();
+      var _type = $('#post_type').val();
 
-    $.ajax({
-      method: "GET",
-      url: url,
-      data: {
-        post: {
-          standard_id: standard_id,
-          brand_id: brand_id,
-          car_model_id: car_model_id,
-          base_car_id: base_car_id,
-          _type: _type
-        }
-      },
-      success: function(data){
-        $("#form_select").html(data)
-      }
-    });
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            brand_id: brand_id,
+            car_model_id: car_model_id,
+            base_car_id: base_car_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
   });
 
   var offerGroup = $(".methodSelect").find(".form-group");

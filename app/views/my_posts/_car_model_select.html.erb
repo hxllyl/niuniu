@@ -8,7 +8,8 @@
         <% else %>
           <select name="post[car_model_id]" disabled class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
-          <%- @car_models.each do |car_model| %>
+          <option value=''>请选择</option>
+          <%- @car_models && @car_models.each do |car_model| %>
             <%- if @car_model == car_model %>
               <option value="<%= car_model.id %>" selected="selected"><%= car_model.name %></option>
             <% else %>
