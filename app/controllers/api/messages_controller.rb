@@ -74,10 +74,14 @@ class Api::MessagesController < Api::BaseController
   #   error_msg  错误消息
 
   def update_messages
-    raise '参数ids不存在或为空' if params[:ids].nil? or params[:ids].empty?
-
-    messages = @user.user_messages.where('user_messages.id in (?)', params[:ids]).update_all(status: UserMessage::STATUS.keys[1])
-
+    # raise '参数ids不存在或为空' if params[:ids].nil? or params[:ids].empty?
+    
+    if params[:ids].nil? or params[:ids].empty? 
+      @user.user_messages.update_all(status: UserMessage::STATUS.keys[1])
+    else
+      @user.user_messages.where('user_messages.id in (?)', params[:ids]).update_all(status: UserMessage::STATUS.keys[1])
+    end
+    
     render json: { status: 200, notice: 'success' }
   rescue => ex
     render json: { status: 500, notice: 'failed', error_msg: ex.message }
@@ -99,7 +103,7 @@ class Api::MessagesController < Api::BaseController
   def destroy_messages
     raise '参数ids不存在或为空' if params[:ids].nil? or params[:ids].empty?
 
-    @user.received_messages.where("messages.ids in (?)", params[:ids]).clear
+    @user.user_messages.where("user_messages.ids in (?)", params[:ids]).map(&:delete)
 
     render json: { status: 200, notice: 'success' }
   rescue => ex
@@ -123,8 +127,9 @@ class Api::MessagesController < Api::BaseController
   def device_methods
     raise 'register_id must be included' if params[:register_id].blank?
 
-    device = ActiveDevice.where(user_id: @user.id, register_id: params[:register_id]).first_or_initialize
+    device = ActiveDevice.where(user_id: @user.id, register_id: params[:register_id].to_s).first_or_initialize
     active = params[:method] == 'activating'
+    
     device.active = active
     device.save!
 
