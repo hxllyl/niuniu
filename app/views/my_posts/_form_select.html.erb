@@ -4,9 +4,9 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <%- if @post.new_record? %>
-          <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" required="required" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% else %>
-          <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" required="required" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
           <option value=''>请选择</option>
           <%- @standards.each do |standard| %>
@@ -25,9 +25,9 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <%- if @post.new_record? %>
-          <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id" required="required" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% else %>
-          <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id" required="required" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
           <option value=''>请选择</option>
           <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
