@@ -49,7 +49,7 @@ Rails.application.configure do
     Bullet.console = true
 
     Bullet.rails_logger = true
-  #   Bullet.add_footer = true
+    Bullet.add_footer = true
   #   # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
   end
 
