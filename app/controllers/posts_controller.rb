@@ -80,7 +80,7 @@ class PostsController < BaseController
     conds[:brand_id]    = @brand.id     if @brand
     conds[:car_model_id]= @car_model.id if @car_model
 
-    @posts = Post.includes(:user, :standard, :brand, :car_model, :base_car).where(conds).order(updated_at: :desc).page(params[:page]).per(10)
+    @posts = Post.needs.uncompleted.includes(:user, :standard, :brand, :car_model, :base_car).where(conds).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def show

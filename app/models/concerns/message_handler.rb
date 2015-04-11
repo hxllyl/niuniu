@@ -29,8 +29,11 @@ module Concerns
       options = {
         platform: JPush::Platform.all,
         audience: JPush::Audience.build(registration_id: reg_ids),
-        options:  JPush::Options.build(apns_production: false),
-        notification: JPush::Notification.new(alert: "#{j_msg}")
+        options:  JPush::Options.build(apns_production: true),
+        notification: JPush::Notification.build(
+          android: JPush::AndroidNotification.build(alert: "#{j_msg}"),
+          ios: JPush::IOSNotification.build(alert: "#{j_msg}", badge: "+1")
+        )
       }
       
       payload = JPush::PushPayload.new(options)
