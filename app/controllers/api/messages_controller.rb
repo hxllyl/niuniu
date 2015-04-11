@@ -124,7 +124,8 @@ class Api::MessagesController < Api::BaseController
     raise 'register_id must be included' if params[:register_id].blank?
 
     device = ActiveDevice.where(user_id: @user.id, register_id: params[:register_id]).first_or_initialize
-    device.active = params[:method] == 'activating'
+    active = params[:method] == 'activating'
+    device.active = active
     device.save!
 
     render json: { status: 200, notice: 'success' }
