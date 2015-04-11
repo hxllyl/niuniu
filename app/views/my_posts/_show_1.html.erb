@@ -54,7 +54,7 @@
                 </tr>
               </thead>
               <tbody>
-                <%- @post.tenders.each do |tender| %>
+                <%- @post.tenders.includes(user: [:area]).each do |tender| %>
                   <%- if tender.status == -1 %>
                     <tr>
                       <td><%= tender.user.try(:name_area) %></td>

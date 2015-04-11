@@ -26,14 +26,14 @@ class UsersController < BaseController
   end
 
   def show
-    @uncompleted_posts = current_user.posts.needs.valid.order(updated_at: :desc).page(params[:page]).per(10)
-    @completed_posts   = current_user.posts.needs.completed.order(updated_at: :desc)
-    @done_months       = current_user.posts.needs.where("updated_at >= ?", 3.months.from_now)
+    @uncompleted_posts = current_user.posts.needs.valid.includes(:standard, :brand, :car_model, :base_car).order(updated_at: :desc).page(params[:page]).per(10)
+    @completed_posts   = current_user.posts.needs.includes(:standard, :brand, :car_model, :base_car).completed.order(updated_at: :desc)
+    # @done_months       = current_user.posts.needs.where("updated_at >= ?", 3.months.from_now)
   end
 
   def my_tenders
-    @uncompleted_tenders = Tender.includes(:post).uncompleted.where(user_id: current_user.id).order('updated_at desc').page(params[:page]).per(10)
-    @completed_tenders = Tender.includes(:post).completed.where(user_id: current_user.id).order('updated_at desc')
+    @uncompleted_tenders = current_user.tenders.includes(post: [:user, :standard, :brand, :car_model, :base_car]).uncompleted.order('updated_at desc').page(params[:page]).per(10)
+    @completed_tenders = current_user.tenders.includes(post: [:user, :standard, :brand, :car_model, :base_car]).completed.order('updated_at desc').page(params[:page]).per(10)
   end
 
   def my_followers
