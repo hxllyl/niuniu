@@ -36,7 +36,7 @@
   </div>
   <div class="userDataTag">
     <%= render 'partials/user_profile' %>
-    <div class="link noread">
+    <div class="link <%= 'noread' if current_user.has_unread_sys_message? %>">
       <a href="<%= system_infos_user_path(current_user)%>"><%= t('sys_msgs') -%></a>
       <div class="dot"></div>
     </div>
