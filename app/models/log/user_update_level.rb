@@ -26,4 +26,11 @@ class Log::UserUpdateLevel < ActiveRecord::Base
     photos = users.photos.where('_type in (?)', types)        
   end
   
+  before_create :has_same_request?
+  
+  def has_same_request?
+    log = Log::UserUpdateLevel.find_by(user: user, start_level: start_level, end_level: end_level, status: STATUS.keys[0])
+    return if log
+  end
+
 end

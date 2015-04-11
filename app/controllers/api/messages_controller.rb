@@ -37,10 +37,10 @@ class Api::MessagesController < Api::BaseController
   # 反馈意见
   #
   # params:
-  #   message[sender_id]    [Integer] 发送人id
-  #   message[receiver_id]  [Integer] 收信人id
-  #   message[_type]        [Integer] 1 表示反馈意见
-  #   message[content]      [String] 反馈意见内容
+  #   feedback[sender_id]    [Integer] 发送人id
+  #   feedback[receiver_id]  [Integer] 收信人id
+  #   feedback[_type]        [Integer] 1 表示反馈意见
+  #   feedback[content]      [String] 反馈意见内容
   # Return:
   #   status: 状态码（200）
   #   notice: success
