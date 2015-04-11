@@ -8,4 +8,6 @@ class UserMessage < ActiveRecord::Base
   belongs_to :user, class_name: 'User'
   belongs_to :message, -> { where("messages._type = ?", Message::TYPES.keys[0])}, class_name: 'Message'
 
+  scope :unread, -> { where("status = 0") }
+
 end

@@ -284,7 +284,7 @@ class Api::UsersController < Api::BaseController
   #   error_msg:  [Strin]     error json
   def check_unread
     # LESLIE: 针对寻车， 需要显示有否对其报价， 针对报价， 显示有否已完成的寻车
-    info = { hunt: @user.has_unread_tenders?, tender: @user.has_unread_hunts?, system_msg: false  }
+    info = { hunt: @user.has_unread_tenders?, tender: @user.has_unread_hunts?, system_msg: @user.has_unread_sys_message?  }
     render json: {status: 200, notice: 'success', read_info: info }
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}

@@ -273,6 +273,10 @@ class User < ActiveRecord::Base
     unread_hunts.count > 0
   end
 
+  def has_unread_sys_message?
+    self.user_messages.unread.count > 0
+  end
+
   def user_avatar
     avatar.class == String ? avatar : avatar.image.try(:url)
   end
