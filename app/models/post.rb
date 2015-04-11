@@ -76,7 +76,7 @@ class Post < ActiveRecord::Base
   delegate :name, to: :brand, prefix: true
   delegate *USER_METHODS, to: :user, prefix: true, allow_nil: true
   delegate :NO, :to_human_name, :base_price, :style, to: :base_car, prefix: true
-  delegate :name, to: :car_model, prefix: true, allow_nil: true
+  delegate :name, :display_name, to: :car_model, prefix: true, allow_nil: true
 
   # class methods
   # 资源
@@ -224,18 +224,22 @@ class Post < ActiveRecord::Base
 
   def detail_title
     if _type == 1
-      ['寻', standard_name, brand_name, car_model_name, base_car_style, base_car_short_name].compact.join(' ')
+      ['寻', standard_name, brand_name, car_model_show_name, base_car_style, base_car_short_name].compact.join(' ')
     else
-      [brand_name, car_model_name, base_car_style, base_car_short_name].compact.join(' ')
+      [brand_name, car_model_show_name, base_car_style, base_car_short_name].compact.join(' ')
     end
   end
 
   def title
     if _type == 1
-      ['寻', standard_name, brand_name, car_model_name, base_car_short_name].compact.join(' ')
+      ['寻', standard_name, brand_name, car_model_show_name, base_car_short_name].compact.join(' ')
     else
-      [brand_name, car_model_name, base_car_short_name].compact.join(' ')
+      [brand_name, car_model_show_name, base_car_short_name].compact.join(' ')
     end
+  end
+
+  def car_model_show_name
+    car_model_display_name ? car_model_display_name : car_model_name
   end
 
   def base_car_short_name
