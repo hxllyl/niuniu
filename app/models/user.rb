@@ -65,8 +65,8 @@ class User < ActiveRecord::Base
   has_many :send_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1])}, class_name: 'Feedback', foreign_key: 'sender_id'
   has_many :received_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1]) }, class_name: 'Feedback', foreign_key: 'receiver_id'
 
-  has_many :user_messages, class_name: 'UserMessage'
-  has_many :system_messages, through: :user_messages, source: :message
+  has_many :user_messages, class_name: 'UserMessage'  
+  has_many :system_messages, through: :user_messages, source: :message #区别需求消息（报价，寻车）  用system_message这个名称 
 
   belongs_to :area, class_name: 'Area'
 
