@@ -26,7 +26,7 @@ class Api::MessagesController < Api::BaseController
     page = (params[:page].nil? or params[:page].to_i == 0) ? 1 : params[:page].to_i
     way  = params[:way]
     if way == 'system'
-      messages = @user.system_messages.order('updated_at desc').offset((page - 1)*page_size).limit(page_size)
+      messages = @user.user_messages.includes(:message).order('updated_at desc').offset((page - 1)*page_size).limit(page_size)
     end
 
     render json: { status: 200, notice: 'success', data: messages.map(&:for_api)}
@@ -76,7 +76,7 @@ class Api::MessagesController < Api::BaseController
   def update_messages
     raise '参数ids不存在或为空' if params[:ids].nil? or params[:ids].empty?
 
-    messages = @user.received_messages.where('messages.id in (?)', params[:ids]).update_all(status: Message::STATUS.keys[1])
+    messages = @user.user_messages.where('user_messages.id in (?)', params[:ids]).update_all(status: UserMessage::STATUS.keys[1])
 
     render json: { status: 200, notice: 'success' }
   rescue => ex
