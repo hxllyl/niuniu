@@ -16,14 +16,14 @@
               %th 首次联系时间
               %th 备注
               %th
-            - @users.each do |user|
+            - @mobiles.each do |ele|
               %tr
-                %td= user.id
-                %td= user.job_number
-                %td= user.mobile
-                %td= user.created_at.to_s(:db)
+                %td= ele.id
+                %td= ele.sender.job_number
+                %td= ele.mobile
+                %td= ele.created_at.to_s(:db)
                 %td 备注
-                %td= link_to '修改', edit_admin_user_path(user)
+                %td= link_to '修改', edit_admin_user_path(ele)
         .col-lg-6
           %table.table.table-responsive
             %tr
@@ -46,8 +46,8 @@
               %td 100
 
         .col-lg-12
-          - if @users.present?
+          - if @mobiles.present?
             .hr-line-dashed
 
           .text-center
-            = paginate @users
+            = paginate @mobiles

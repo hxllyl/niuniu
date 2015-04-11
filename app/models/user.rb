@@ -65,9 +65,9 @@ class User < ActiveRecord::Base
   has_many :send_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1])}, class_name: 'Feedback', foreign_key: 'sender_id'
   has_many :received_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1]) }, class_name: 'Feedback', foreign_key: 'receiver_id'
 
-  has_many :user_messages, class_name: 'UserMessage'
-  has_many :system_messages, through: :user_messages, source: :message
-  
+  has_many :user_messages, class_name: 'UserMessage'  
+  has_many :system_messages, through: :user_messages, source: :message #区别需求消息（报价，寻车）  用system_message这个名称 
+
   belongs_to :area, class_name: 'Area'
 
   has_many :log_posts, class_name: 'Log::Post'
@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
 
   scope :valid_user, -> {where("status != #{STATUS.keys[2]}")}
   scope :normals, -> {where("users.role = ?", 'normal')}
-  
+
   accepts_nested_attributes_for :photos
 
   # class methods
@@ -273,6 +273,10 @@ class User < ActiveRecord::Base
     unread_hunts.count > 0
   end
 
+  def has_unread_sys_message?
+    self.user_messages.unread.count > 0
+  end
+
   def user_avatar
     avatar.class == String ? avatar : avatar.image.try(:url)
   end
@@ -298,11 +302,11 @@ class User < ActiveRecord::Base
     Post.where("id in (?) and _type=? and status=1", log_posts.views.order(updated_at: :desc).limit(5).map(&:post_id), _type)
   end
 
-  after_save :genrate_register_log
-  def genrate_register_log
-    log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
-    log.is_register = true
-    log.save
-  end
+  # after_create :genrate_register_log
+  # def genrate_register_log
+  #   log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
+  #   log.is_register = true
+  #   log.save
+  # end
 
 end

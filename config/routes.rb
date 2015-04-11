@@ -91,7 +91,7 @@ Rails.application.routes.draw do
   resources :complaints, only: [ :create ]
   resources :comments, only: [ :create ]
 
-  namespace :api, defaults: {format: :json} do
+  namespace :api do
     devise_scope :user do
       post    'sessions'      => 'sessions#create',       :as => 'login'
       delete  'sessions'      => 'sessions#destroy',      :as => 'logout'
@@ -120,7 +120,7 @@ Rails.application.routes.draw do
       post  :update_all
       put  :change_position
       delete :destroy
-      put :del_my_post
+      put :del_my_tender
       get :search
       get :tender_status
       get :filter_brands

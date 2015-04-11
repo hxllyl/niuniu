@@ -5,6 +5,7 @@ $(document).ready(function(){
     e.preventDefault();
     $(this).tab("show");
   });
+  $(".carousel").carousel();
   /*翻页居中*/
   $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
   /*表单验证*/

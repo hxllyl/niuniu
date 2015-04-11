@@ -37,11 +37,26 @@
               <div class="info"><%= @post.remark %></div>
             </div>
           <% end %>
-          <ul class="sourceGallery">
-            <%- @post.photos_ary.each do |ele| %>
-              <li><%= image_tag(ele)%></li>
-            <% end %>
-          </ul>
+          <div id="showBanner" class="carousel slide sourceGallery" data-ride="carousel">
+            <ul class="carousel-inner" role="listbox">
+              <%- @post.photos_ary.each_with_index do |ele, i| %>
+                <li class="<%= i== 0 ? 'item active' : 'item' %>"><%= image_tag(ele)%></li>
+              <% end %>
+            </ul>
+            <ol class="carousel-indicators btns">
+              <%- @post.photos_ary('thumb').each_with_index do |ele, i| %>
+                <li data-target="#showBanner" data-slide-to="<%= i %>" class="<%= i == 0 ? 'active' : ''%>"><%= image_tag(ele, width: "75", height: "50")%></li>
+              <%end-%>
+            </ol>
+            <a class="left carousel-control" href="#showBanner" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">上一张</span>
+            </a>
+            <a class="right carousel-control" href="#showBanner" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">下一张</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
