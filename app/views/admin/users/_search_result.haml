@@ -2,6 +2,7 @@
 .search-result
   - if @mobile_log.new_record?
     = link_to '我来联系', contact_admin_users_path(mobile: @mobile_log.mobile), method: :post, class: 'btn btn-warning'
+    = link_to '取消', search_admin_users_path, class: 'btn'
   - else
     - if @mobile_log.is_register
       = "已注册，用户名为#{@mobile_log.user.name}"
