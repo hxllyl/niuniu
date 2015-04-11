@@ -22,7 +22,7 @@
                 <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %> required="required"><span><%= v %></span>
               </label>
               <label class="selectInput">
-                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" required="required">
+                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" required="required" maxlength="3">
                 <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
               </label>
             </div>
