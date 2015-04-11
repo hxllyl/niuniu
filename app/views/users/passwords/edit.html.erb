@@ -17,21 +17,21 @@
           <div class="form-group clearfix">
             <%= f.label :current_password, "原密码：", class: "col-sm-2 control-label" %>
             <div class="col-sm-6 prl0">
-              <%= f.password_field :current_password, autofocus: true, autocomplete: "off", class: "form-control" %>
+              <%= f.password_field :current_password, autofocus: true, autocomplete: "off", class: "form-control", name: "password", required: "required" %>
             </div>
             <div class="col-sm-4 tips"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#forget_step1">忘记密码</a></div>
           </div>
           <div class="form-group clearfix">
             <%= f.label :password, "新密码：", class: "col-sm-2 control-label" %>
             <div class="col-sm-6 prl0">
-              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              <%= f.password_field :password, autocomplete: "off", class: "form-control", name: "newpassword", required: "required" %>
             </div>
             <div class="col-sm-4 tips"></div>
           </div>
           <div class="form-group clearfix">
             <%= f.label :password_confirmation, "重复密码：", class: "col-sm-2 control-label" %>
             <div class="col-sm-6 prl0">
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", name: "confirmPassword", required: "required" %>
             </div>
             <div class="col-sm-4 tips"></div>
           </div>
@@ -82,11 +82,11 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码' %>
+          <%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码', name: "newpassword" %>
         </div>
 
         <div class="form-group">
-          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码" %>
+          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", name: "confirmPassword" %>
         </div>
       </div>
       <div class="modal-footer">
@@ -101,3 +101,61 @@
 <%= content_for :footers do %>
   <%= javascript_include_tag 'portal' %>
 <% end -%>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.passwordForm,#forget_step2').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空！'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: '密码不正确！'
+                    }
+                }
+            },
+            newpassword: {
+                validators: {
+                    notEmpty: {
+                        message: '新密码不能为空！'
+                    },
+                    different: {
+                        field: 'password',
+                        message: '不能与原密码相同！'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: '请重新输入新密码！'
+                    },
+                    identical: {
+                        field: 'newpassword',
+                        message: '输入的与新密码不同！'
+                    }
+                }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: '错误！',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            return value == sum;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

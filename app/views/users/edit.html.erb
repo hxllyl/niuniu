@@ -31,7 +31,6 @@
                 <label for="" class="col-sm-2 control-label">姓　　名：</label>
                 <div class="col-sm-10 prl0">
                   <%= f.text_field :name, class: 'form-control', id: '', placeholder: '输入不得超过6个字符', required: 'required', maxlength: '6' %>
-                  <span class="help-block with-errors"></span>
                 </div>
               </div>
               <div class="form-group clearfix">
@@ -40,11 +39,9 @@
                   <div class="row ptb0 mrl-15">
                     <div class="dropdown col-md-6">
                      <%= select_tag 'province', options_for_select(areas(level: :provinces), selected: current_user.area.parent.id), {class: 'form-control', id: 'province', prompt: '请选择省份', required: 'required'} -%>
-                     <span class="help-block with-errors"></span>
          			      </div>
                     <div class="dropdown col-md-6">
                      <%= f.select :area_id, options_for_select(options_cities(current_user.area.parent.id), selected: current_user.id), { prompt: '请选择城市' }, {class: 'form-control', id: 'city', required: 'required'} %>
-                     <span class="help-block with-errors"></span>
                     </div>
                   </div>
                 </div>
@@ -65,7 +62,7 @@
                       <p style='color:red;margin-top:6px;width:100px'>
                         个人手机认证
                       </p>
-                    <% end -%>  
+                    <% end -%>
                     <%= image_tag(current_user.level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?) %></div>
                   <a href="<%= my_level_user_path(current_user)%>" class="btn btn-default orange bfR"><span class="icon icon-upgrade"></span>升级</a>
                 </div>
