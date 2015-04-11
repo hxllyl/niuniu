@@ -1,0 +1,21 @@
+# encoding: utf-8
+
+# author: depp.yu
+
+zh-CN:
+  activerecord:
+    models:
+      photo: 图片
+    attributes:
+      photo:
+        image: 图片文件
+        _type: 图片类型
+    
+    errors:
+      models:
+        photo:
+          attributes:
+            image:
+              blank: 图片文件不能为空
+            _type:
+              blank: 图片类型不能为空       

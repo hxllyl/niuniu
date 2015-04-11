@@ -1,0 +1,107 @@
+<%= render partial: 'partials/personal_center_head' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <ul role="tablist" class="nav nav-tabs carInfoTabs sm">
+          <li role="presentation" class="active"><a href="#tabpanel1">未成交</a></li>
+          <li role="presentation"><a href="#tabpanel2">已成交</a></li>
+        </ul>
+        <div class="panel-body">
+          <div role="tabpanel" class="tab-pane active" id="tabpanel1">
+            <div class="sourceTab">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="30%">品牌/车型</th>
+                    <th width="10%">报价(万元)</th>
+                    <th width="10%">上牌地点</th>
+                    <th width="22%">外观/内饰</th>
+                    <th width="12%">发布人</th>
+                    <th width="10%">发布时间</th>
+                    <th width="6%">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @uncompleted_tenders.each do |tender|%>
+                    <tr>
+                      <td><%= link_to tender.post_title, my_tender_post_path(tender.post, tender_id: tender.id), class: 'name' %></td>
+                      <td><span class="num"><%= tender.price %></span></td>
+                      <td><%= tender.post_car_license_area -%></td>
+                      <td>
+                        <%= tender.post_color -%>
+                        <% if [tender.status, tender.post.status].include?(-1) %>
+                          <span class="seal seal_recall_part"></span>
+                        <% end %>
+                      </td>
+                      <td><%= tender.post.try(:user_name) -%>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) -%>
+                      </td>
+                      <td><%= human_time(tender.updated_at) %></td>
+                      <td>
+                        <%- unless tender.status == -1 %>
+                          <a href="#" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-way='tenders' data-toggle="modal" data-target="#alertModal">删除
+                          </a>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end -%>
+                </tbody>
+              </table>
+            </div>
+            <div class="pageList">
+              <%= paginate @uncompleted_tenders %>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tabpanel2">
+            <div class="sourceTab">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="30%">品牌/车型</th>
+                    <th width="10%">报价(万元)</th>
+                    <th width="10%">上牌地点</th>
+                    <th width="22%">外观/内饰</th>
+                    <th width="12%">发布人</th>
+                    <th width="10%">发布时间</th>
+                    <th width="6%">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @completed_tenders.each do |tender|%>
+                    <tr>
+                      <td><%= link_to tender.post_title, my_tender_post_path(tender.post, tender_id: tender.id), class: 'name' %></td>
+                      <td><span class="num"><%= tender.price %></span></td>
+                      <td><%= tender.post_car_license_area -%></td>
+                      <td><%= tender.post_color -%></td>
+                      <td><%= tender.post.try(:user_name) %>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) %>
+                      </td>
+
+                      <td><%= human_time(tender.updated_at) %></td>
+                      <td><a href="#" class="del modalBtn cancelBtn" data-id="<%= tender.id %>" data-type="tenders" data-clazz="tender" data-update='tenders' data-way='tenders' data-toggle="modal" data-target="#alertModal">删除</a></td>
+                    </tr>
+                  <% end -%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_search' -%>
+      <%= render partial: 'partials/right_history_list' %>
+    </div>
+
+  </div>
+</div>
+
+<%= render partial: 'del_modal' %>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>

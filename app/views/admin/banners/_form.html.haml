@@ -1,0 +1,51 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 Banner
+    %ol.breadcrumb
+      %li= link_to '返回列表', '#'
+      %li.active
+        %strong 新建 banner
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          = form_for [:admin, @banner], html: { class: 'form-horizontal' } do |f|
+            .form-group
+              = f.label :title, '标题: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_field :title, class: 'form-control'
+
+            .form-group
+              = f.label :poi, '位置: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.select :poi,  options_for_select(Banner::POI_OPTIONS), html: { class: 'form-control' }
+
+            .form-group
+              = f.label :begin_at, '有效期（开始）: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_field :begin_at, class: 'form-control'
+
+            .form-group
+              = f.label :end_at, '有效期（结束）: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_field :end_at, class: 'form-control'
+
+            .form-group
+              = f.label :redirect_way, '跳转至: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_field :redirect_way, class: 'form-control'
+
+            .form-group
+              = f.label :use, '用途(web 或者 App): ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.select :use,  options_for_select([['web', 'web'], ['app', 'app']]), include_blank: '', html: { class: 'form-control' }
+
+            .form-group
+              = f.label :image, '文件: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.file_field :image, class: 'form-control'
+
+            .form-group.col-sm-4.col-sm-offset-6
+              = f.submit '提交', class: 'btn btn-primary'

@@ -1,0 +1,27 @@
+# encoding: utf-8
+
+zh-CN:
+  activerecord:
+    models:
+      valid_code: 手机验证码
+    attributes:
+      valid_code:
+        mobile: 手机号码
+        code: 验证码
+        status: 验证码状态
+        _type: 验证码类型
+        
+    errors:
+      models:
+        valid_code:
+          attributes:
+            mobile:
+              blank: 手机号码不能为空
+              invalid: 手机号码不正确
+              taken: 该手机号码已被注册
+            code:
+              blank: 验证码不能未空
+              invalid: 验证码不正确
+              taken: 验证码不能重复      
+          
+        

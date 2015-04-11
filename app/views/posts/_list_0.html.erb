@@ -1,0 +1,104 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li class="active">市场资源</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">热门品牌/车型</h3>
+        </div>
+        <div class="panel-body souSelList">
+          <div class="carList clearfix">
+            <div class="tt">规格：</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <li><%= link_to '全部', resources_list_posts_path %></li>
+                <%- @standards.each do |sd| %>
+                  <li><%= link_to sd.name, resources_list_posts_path(st: sd.id) %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="carList clearfix">
+            <div class="tt">品牌：</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <%- @brands.each do |br| %>
+                  <li><%= link_to br.name, resources_list_posts_path(br: br.id) %></li>
+                <% end %>
+              </ul>
+              <p class="txtR"><%= link_to '[更多]', resources_list_posts_path, class: 'moreLink' %></p>
+            </div>
+          </div>
+          <div class="carList last clearfix">
+            <div class="tt">车型：</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <%- @car_models.each do |cm|%>
+                  <li><%= link_to cm.name, resources_list_posts_path(cm: cm.id) %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">全部资源（<%= @posts.total_count %>）</h3>
+        </div>
+        <div class="panel-body">
+          <div class="mySourceTab mt10">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+        <tbody>
+        <%- @posts.each do |post| %>
+            <tr>
+              <td>
+                <div class="box clearfix">
+                  <div class="infoM">
+                    <h5 class="name"><%= link_to post.title, post_path(post, {_type: 0}) %></a></h5>
+
+                    <div class="info clearfix">
+                      <div class="m"><%= post.st_rt %></div>
+                      <div class="m"><%= post.color %></div>
+                      <div class="m">
+                        <span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?) %></span><span><%= link_to post.owner, user_list_posts_path(user_id: post.user_id, _type: 0) %></span><span class="statu"><%= following?(post.user) %></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="infoPrice">
+                    <p>
+                      <span class="price"><%= post.show_price %></span>
+                      <span class="time"><%= post.publish_time %></span>
+                    </p>
+                    <%- if post.base_car.is_valid? && post.base_car_base_price.to_f != 0.0 %>
+                      <p>指导价：<%= post.base_price %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="remark clearfix">
+                  <div class="tt bfL">备注：</div>
+                  <div class="info"><%= post.remark %></div>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="pageList">
+      <%= paginate @posts %>
+    </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+      <%= render partial: 'partials/right_search' %>
+      <%= render partial: 'partials/right_history_list' %>
+    </div>
+  </div>
+</div>

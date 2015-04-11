@@ -1,0 +1,45 @@
+
+<div class="container userOverview">
+  <div class="userInfo clearfix">
+    <div class="photo bfL"><%= image_tag(current_user.avatar, alt: "", width: "108", height: "108")%></div>
+    <div class="detail">
+      <div class="clearfix"><span class="name"><%= current_user.name %></span><span class="type"><%= image_tag(current_user.level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?)%></span>
+        <% unless User::LEVELS.keys[3..4].include?(current_user.level) %>
+          <a href="<%= my_level_user_path(current_user) -%>" class="btn btn-default btn-xs orange"><span class="icon icon-upgrade"></span><%= t('upgrade') -%></a>
+        <% end -%>
+      </div>
+      <div class="detailTab">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td colspan="2"><%= t('self_introduction') -%>：<%= current_user.contact['self_introduction'] %></td>
+          </tr>
+          <tr>
+            <td colspan="2"><%= t('zc_place') -%>：<%= current_user.area_name %></td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong class="tip"><%= current_user.dealt_infos %></strong></td>
+          </tr>
+          <tr>
+            <td colspan="2"><%= t('company') -%>：<%= current_user.company %></td>
+          </tr>
+          <tr>
+            <td width="250"><%= t('position') -%>：<%= current_user.contact['position_header'] %></td>
+            <td width="250"><%= t('mobile') -%>：<span class="tip"><%= current_user.mobile %></span></td>
+          </tr>
+          <tr>
+            <td><%= t('wei_xin')%>：<%= current_user.contact['wx'] %></td>
+            <td>QQ：<%= current_user.contact['qq'] %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="userDataTag">
+    <%= render 'partials/user_profile' %>
+    <div class="link noread">
+      <a href="<%= system_infos_user_path(current_user)%>"><%= t('sys_msgs') -%></a>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <a href="<%= edit_user_path(current_user)%>" class="userArr"><span class="icon icon-edit"></span></a>
+</div>

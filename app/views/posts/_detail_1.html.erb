@@ -1,0 +1,83 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li class="active">寻车详情</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">寻车详情<span class="date bfR"><%= @post.updated_at.strftime('%Y/%m/%d %H:%M')%></span></h3>
+        </div>
+        <div class="panel-body sourceDetail pb200">
+          <div class="row">
+            <div class="col-md-8 con">
+              <h5 class="name"><%= @post.detail_title %></h5>
+              <div class="info">
+                <p><%= @post.app_area %></p>
+                <p><%= @post.color %></p>
+                <p>车辆所在区域要求：<%= @post.car_in_area %></p>
+                <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date]%></p>
+              </div>
+            </div>
+            <div class="col-md-4 con">
+              <div class="info">
+                <% if @post.discount_way != 5 %>
+                  <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
+                <% end %>
+                <%- if @post.base_car.is_valid? && @post.base_car_base_price.to_f != 0.0 %>
+                  <p>指导价：<%= @post.base_price %></p>
+                  <p class="hide" id="guidePrice"><%= @post.base_car_base_price.to_f %></p>
+                <% end %>
+                <%- if current_user != @post.user%>
+                  <div class="reportLink"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#myReport">我要举报</a></div>
+                <% end %>
+                <%- if @post.is_completed? %><div class="seal"><%= image_tag("seal_done_sm.png", alt: "", width: "100%")%></div><% end %>
+              </div>
+            </div>
+          </div>
+          <%- unless [nil, ''].include?(@post.remark) %>
+            <div class="remark">
+              <div class="tt bfL">备注：</div>
+              <div class="info"><%= @post.remark%></div>
+            </div>
+          <% end %>
+          <% if !@post.is_completed? && current_user != @post.user %>
+            <%= render @tender ? 'tender_info' : 'tender_form' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%- if current_user == @someone %>
+        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+        <%= render partial: 'partials/right_search' %>
+      <% else %>
+        <%= render partial: 'partials/right_user' %>
+        <%= render partial: 'partials/right_joint_followings' if current_user %>
+        <%= render partial: 'partials/right_his_resources' %>
+        <%= render partial: 'partials/right_his_needs' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render partial: 'complaints/complaint' if current_user != @someone %>
+
+<%= content_for :footers do %>
+  <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
+<% end -%>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".icon-message").click(function(){
+    var $name = $(this).attr('data-name');
+    var $parent_id   = $(this).attr('data-parent-id');
+
+    $("#comment_content").focus();
+    $("#comment_content").val("@" + $name + ':');
+    $('input#comment_parent_id').val($parent_id);
+  });
+});
+</script>

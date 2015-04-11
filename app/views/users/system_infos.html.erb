@@ -1,0 +1,39 @@
+<%= render partial: 'partials/personal_center_head' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">系统消息</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="systemMesList">
+            <% @sys_messages.each do |message|%>
+            <li class="<%= 'unread' if message.status == Message::STATUS.keys[0] %>">
+              <div class="info"><%= message.content %></div>
+              <div class="clearfix">
+                <div class="date bfL"><%= human_time(message.updated_at)%></div>
+
+                <a href="javascript:;" class="btn btn-link del bfR modalBtn cancelBtn" data-id="<%= message.id %>" data-type="received_messages" data-clazz="message" data-update="messages" data-toggle="modal" data-target="#alertModal"><span class="icon icon-del"></span>删除</a>
+
+              </div>
+            </li>
+            <% end -%>
+          </ul>
+          <div class="pageList">
+            <%= paginate @sys_messages %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_search' -%>
+    </div>
+
+  </div>
+</div>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>

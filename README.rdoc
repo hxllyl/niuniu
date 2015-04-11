@@ -3,26 +3,51 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+* Ruby version 2.1.2
 
-* Ruby version
+* Database PostgreSQL 9.4
 
-* System dependencies
+* Api doc gen
+  gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
 
-* Configuration
+  把api下sessions和registions类的继承关系换一下，运行rake doc:api会将生成文档输出路径
 
-* Database creation
+* Sunspot 全文检索工具（用于搜索 post 相关内容）
 
-* Database initialization
+  1.先安装 Java 环境
 
-* How to run the test suite
+  2.安装生成默认的配置信息
 
-* Services (job queues, cache servers, search engines, etc.)
+    rails generate sunspot_rails:install
 
-* Deployment instructions
+  3.运行Sunspot
 
-* ...
+    rake sunspot:solr:start #后台运行
+    rake sunspot:solr:run   #在前台运行
+
+  4.重建索引
+    cap staging solr:stop_all # 本地直接删除 solr 目录即可
+    cap staging solr:start
+    cap staging solr:reindex
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* init database and gen base infos
+
+  rake database:init
+  rake util:init
+  rake database:base_infos
+
+* deploy fail
+
+  Rake::Task["deploy:compile_assets"].clear_actions
+  task :compile_assets => [:set_rails_env] do
+    run_locally do
+      if capture("git --no-pager diff #{fetch(:previous_revision)} #{fetch(:current_revision)} app/assets vendor/assets").empty?
+         info "Skipping assets compilation"
+      else
+        invoke 'deploy:assets:precompile'
+        invoke 'deploy:assets:backup_manifest'
+      end
+    end
+  end
+

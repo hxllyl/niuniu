@@ -1,0 +1,23 @@
+<div class="panel panel-default contentBox bgf9">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title"><%= I18n.t('hot_resources') %></h3>
+	</div>
+	<div class="panel-body">
+		<ul class="row hotCar">
+			<%- @hot_resources.each do |post| %>
+				<li class="col-md-3">
+					<div class="thumbnail box">
+						<a href="<%= post_path(post, {_type: 0}) %>" class="imgBox"><%= image_tag(post.photos[:front], alt: "", width: "100%")%></a>
+						<div class="caption intro">
+							<h5 class="name"><%= link_to post.title, post_path(post, {_type: 0}) %></h5>
+							<p><%= post.standard_resource_type %></p>
+							<p class="price"><%= post.show_price %></p>
+							<p><%= post.user_company %></p>
+						</div>
+					</div>
+				</li>
+			<% end %>
+		</ul>
+		<div class="moreLink text-right"><%= link_to '更多 >>', posts_path(_type: 0) %></div>
+	</div>
+</div>

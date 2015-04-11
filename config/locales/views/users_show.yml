@@ -1,0 +1,25 @@
+# encoding: utf-8
+
+zh-CN:
+  i_posts: 我的寻车
+  i_tenders: 我的报价
+  i_followings: 我的关注
+  self_introduction: 自我评价
+  zc_place: 注册地
+  company: 公司名称
+  position: 职位
+  wei_xin: 微信
+  mobile: 联系电话
+  upgrade: 升级
+  sys_msgs: 系统消息
+  undone: 未完成
+  done: 已完成
+  custom_setting: 个人信息设置
+  account_manage: 账号管理
+  
+  identity: 身份证
+  hand_id: 手持身份证
+  visiting: 个人名片
+  room_outer: 展厅门头照
+  room_inner: 展厅内部照 
+  license: 营业执照原件

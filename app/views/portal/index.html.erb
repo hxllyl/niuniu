@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-9 mainBox">
+			<div id="carousel-example-generic" class="banner mb10 carousel slide" data-ride="carousel">
+			  <ol class="carousel-indicators">
+          <% @banners.count.times do |i|%>
+
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="<%= i == 0 ? 'active' : ''%>"></li>
+          <%end-%>
+			  </ol>
+
+			  <div class="carousel-inner" role="listbox">
+          <% @banners.each_with_index do |ban, i| %>
+    			      <div class="<%= i== 0 ? 'item active' : 'item' %>">
+    			      <a href="<%= ban.redirect_way || '#'%>" target="_blank"><%= image_tag(ban.image.url, alt: "", width: "100%")%></a>
+    			    </div>
+			    <%end%>
+			  </div>
+
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			    <span class="sr-only">上一张</span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			    <span class="sr-only">下一张</span>
+			  </a>
+			</div>
+
+
+			<%= render 'post_infos' %>
+			<%= render 'hot_resources' %>
+			<%= render 'newest_resources' %>
+			<%= render 'resources' %>
+		</div>
+		<div class="col-md-3 mainRight">
+			<%- if current_user %>
+				<%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+			<% else %>
+				<%= render partial: 'partials/right_login' %>
+			<% end %>
+			<%= render partial: 'partials/right_app_icon' %>
+			<%= render partial: 'partials/right_search' %>
+			<%= render partial: 'partials/right_history_list' if current_user %>
+		</div>
+	</div>
+</div>
+
+<%= content_for :footers do %>
+  <%= javascript_include_tag 'portal', 'data-turbolinks-track' => true %>
+<% end -%>
+

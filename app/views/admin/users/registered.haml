@@ -1,0 +1,58 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 已注册用户名录
+
+.wrapper.wrapper-content.animated.fadeInRight
+
+  .ibox.float-e-margins
+    .ibox-content
+      .row
+        .col-lg-12
+          %table.table.table-striped
+            %tr
+              %th 序号
+              %th 业务员工号
+              %th 姓名
+              %th 联系电话
+              %th{ style: 'width: 120px;'} 公司名称
+              %th 认证等级
+              %th 注册日期
+              %th 最后登录时间
+              %th 近一月累计成交
+              %th 累计成交
+              %th 备注
+              %th
+            - @users.each do |user|
+              %tr
+                %td= user.id
+                %td= user.job_number
+                %td= user.name
+                %td= user.mobile
+                %td= user.company
+                %td= user.level
+                %td= user.created_at.to_s(:db)
+                %td= user.last_sign_in_at.try(:to_s, :db)
+                %td= user.last_month_dealt
+                %td= user.sum_dealt
+                %td 备注
+                %td= link_to '修改', edit_admin_user_path(user)
+        .col-lg-4
+          %table.table.table-responsive
+            %tr
+              %th 后台分配的用户数：
+              %td 10000
+            %tr
+              %th{ style: 'width: 150px;'} 今日新增用户数
+              %td 50
+            %tr
+              %th 本月新增用户数
+              %td 50
+            %tr
+              %th 累计用户数
+              %td 50
+        .col-lg-12
+          - if @users.present?
+            .hr-line-dashed
+
+          .text-center
+            = paginate @users

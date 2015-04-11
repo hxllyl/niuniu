@@ -1,0 +1,32 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 系统通知
+    %ol.breadcrumb
+      %li= link_to '返回列表', admin_messages_path
+      %li.active
+        %strong 新建系统通知
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          = form_for [:admin, @message], html: { class: 'form-horizontal' } do |f|
+            .form-group
+
+              = f.label :receiver_group, '发送到用户组: ', class: 'col-sm-2 control-label'
+              .col-sm-10
+                = f.select :receiver_group, options_for_select(Message::receiver_groups.keys.to_a.map { |rg| [t("message.receiver_group.#{rg}"), rg] }), {}, class: 'form-control'
+            .form-group
+              = f.label :title, '标题: ', class: 'col-sm-2 control-label'
+              .col-sm-10
+                = f.text_field :title, class: 'form-control'
+
+            .form-group
+              = f.label :content, '内容: ', class: 'col-sm-2 control-label'
+              .col-sm-10
+                = f.text_area :content, size: '100x10', class: 'form-control'
+                %span.help-block.m-b-none 请不要超过70字
+            .form-group
+              .col-sm-4.col-sm-offset-2
+                = submit_tag '发送', class: 'btn btn-primary'

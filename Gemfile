@@ -17,16 +17,40 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # 支持js6语法包
 gem 'sprockets', '~> 3.0.0.beta'
-gem 'sprockets-es6', '~> 0.6.0'
+# gem 'sprockets-es6', '~> 0.6.0'
+
+# 图片处理 gem
+gem 'carrierwave'
+gem 'mini_magick'
+
+# 用 devise 处理用户login
+gem 'devise'
+
+# authorization user
+gem 'cancan'
+
+gem 'httpclient'
+
+# 导入导出
+gem 'roo', '~> 1.13.2'
+gem 'writeexcel', '~> 1.0.5'
+
+# https://github.com/amatsuda/kaminari
+gem 'kaminari'
+
+gem 'acts_as_list'
 
 # code formatter
 # gem 'rubocop'
@@ -40,6 +64,25 @@ gem 'sprockets-es6', '~> 0.6.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Deploy
+gem 'rvm'
+
+#gem 'rvm-capistrano'
+gem 'capistrano','~> 3.2.0'
+gem 'capistrano-ext'
+gem 'capistrano-unicorn', :require => false
+gem 'capistrano-rails'
+gem 'capistrano-bundler'
+gem 'capistrano-rvm'
+
+gem 'haml'
+gem 'font-awesome-rails'
+
+group :production do
+  gem 'unicorn-rails', '~> 2.2.0'
+  gem 'unicorn'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -49,14 +92,17 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  
-  #gem 'rubocop', git: 'git@github.com:bbatsov/rubocop.git', require: false
-  
+
+  # gem 'rubocop', git: 'git@github.com:bbatsov/rubocop.git', require: false
   gem 'rspec-rails', '~> 3.0'
+  gem 'pry-rails'
+
+  # fixtures replacement
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
+  gem 'capybara', '~> 2.3.0'
 end
 
-<<<<<<< Updated upstream
-=======
 group :development do
   # A static analysis security vulnerability scanner
   gem 'brakeman', require: false
@@ -73,7 +119,7 @@ group :development do
   # gem 'flamegraph' # 2.1 2.0 only
 
   #api doc
-   gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
+  # gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
 end
 
 # simple admin
@@ -100,4 +146,3 @@ gem 'ancestry'
 #jpush
 gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
 
->>>>>>> Stashed changes

@@ -1,0 +1,30 @@
+<div class="panel panel-default contentBox">
+
+  <div class="panel-heading lineTitle">
+    <h3 class="panel-title"><%= @post.new_record? ? '发布资源' : '编辑资源' %></h3>
+  </div>
+  <div class="panel-body">
+    <%- if @post.new_record? %>
+        <%= form_tag(user_my_posts_path, method: :post, multipart: true, class: "form-horizontal sourceForm") do %>
+            <%= render 'form_detail' %>
+        <% end %>
+    <% else %>
+        <%= form_tag(user_my_post_path(current_user, @post), method: :put, multipart: true, class: "form-horizontal sourceForm") do %>
+            <%= render 'form_detail' %>
+        <% end %>
+    <% end %></div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#post_photos').find('input[type="file"]').on('change', function(){
+      var n = $(this).attr('class').split(" ")[1];
+      if(this.files && this.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e){
+          $('#'+n).html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+});
+</script>

@@ -1,0 +1,78 @@
+<div class="panel panel-default contentBox bgf8">
+	<div class="panel-heading lineTitle">
+		<h3 class="panel-title"><%= t('login') %></h3>
+	</div>
+  <%= form_for(User.new, as: :user, url: session_path(:user),
+               html: {class: 'panel-body form-horizontal indexLogin'}) do |f| %>
+		<div class="form-group">
+			<%= f.text_field :mobile, class: "form-control input-sm", id: "", placeholder: "请输入手机号", value: cookies[:user_name] %>
+		</div>
+		<div class="form-group">
+			<%= f.password_field :password, class: "form-control input-sm", id: "", placeholder: "请输入密码" %>
+		</div>
+		<div class="checkbox">
+	    <label class="bfL">
+	      <%= check_box_tag :remember_name %><%= t('remember_me')%>
+	    </label>
+	    <div class="forget bfR"><a href="javascript:;" class="modalBtn" data-toggle="modal" data-target="#forget_step1"><%= t('forget_pw') %></a></div>
+	  </div>
+	  <ul class="subGroup row">
+	  	<li class="col-md-6">
+	  		<input type="submit" class="btn btn-default w100p orange btn_spacing" value="登录" />
+	  	</li>
+	  	<li class="col-md-6">
+	  		<button type="button" class="btn btn-default w100p btn_spacing modalBtn" role="button" data-toggle="modal" data-target="#reg_step1"><%= t('register_but') %></button>
+	  	</li>
+	  </ul>
+    <% end -%>
+</div>
+<!--forget-->
+<div class="modal box bs-example-modal-sm" id="forget_step1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <%= form_for(User.new, as: :user, url: reset_password_users_path, html: { method: :patch }) do |f| %>>
+    <%= hidden_field_tag :channel, 'reset_password' %>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title lineTitle">忘记密码</h4>
+      </div>
+      <div class="modal-body">
+	      <div class="buttonInput form-group">
+					<%= text_field_tag 'mobile', '', class: "form-control input pr84 mobile", placeholder: "请输入手机号" %>
+					<input type="button" class="btn btn-primary subBtn valid_code_but" value="获取验证码" />
+            <%= hidden_field_tag :_type,  '', value: ValidCode::TYPES.keys[1], id: nil, class: 'valid_type' %>
+          </div>
+        <div class="form-group">
+					<%= text_field_tag :valid_code, nil, class: "form-control valid-code", id:'' , placeholder: "请输入验证码"  -%>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default w100p orange modalBtn next-step" role="button" data-toggle="modal" data-target="#forget_step2" data-dismiss="modal" aria-label="Close" disabled="disabled" ><%= t('next_step') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal box bs-example-modal-sm" id="forget_step2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title lineTitle">忘记密码</h4>
+      </div>
+      <div class="modal-body">
+				<div class="form-group">
+					<%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码' %>
+				</div>
+
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码" %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit t('finish_but'), class: 'btn btn-default w100p orange btn_spacing' -%>
+      </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+<!--end-->

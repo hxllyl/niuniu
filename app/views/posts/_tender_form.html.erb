@@ -1,0 +1,127 @@
+<form action=<%= tender_post_path %> class="requireForm" method='post'>
+  <div class="methodSelect quote row">
+    <div class="tt clearfix">
+      <h5 class="col-md-6">给他报价<span class="sm"></span></h5>
+    </div>
+    <div class="quoteForm">
+      <div class="clearfix">
+        <%- Post::DISCOUNT_WAYS.select{|k, v| k != 5}.each do |k, v| %>
+          <%- if @post.base_car_base_price.to_f == 0.0 && k != 4 %>
+            <div class="form-group form-inline col-md-6">
+              <label class="radio selectTag disabled">
+                <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %> disabled><span><%= v %></span>
+              </label>
+              <label class="selectInput">
+                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" disabled>
+                <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
+              </label>
+            </div>
+          <% else %>
+            <div class="form-group form-inline col-md-6">
+              <label class="radio selectTag">
+                <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %> required="required"><span><%= v %></span>
+              </label>
+              <label class="selectInput">
+                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" required="required">
+                <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
+              </label>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="boardForm clearfix">
+    <h5 class="tt">报价备注：<span class="txtTips">（可输入颜色、配置、区域等详细内容）</span></h5>
+    <textarea class="form-control mt10" name='tender[remark]' maxlength="225"></textarea>
+  </div>
+  <input type="submit" class="btn btn-default btnW200 mt20 orange sub" id="" value="全部提交" />
+</form>
+<script type="text/javascript">
+$(document).ready(function(){
+  var offerGroup = $(".methodSelect").find(".form-group");
+  var offerInput = $(".selectInput").find("input[type='text']");
+  offerInput.attr("disabled", "true");
+  offerGroup.find(".selectTag").each(function (e) {
+      $(this).bind("click", function(){
+          if ($(this).hasClass("disabled")) return false;
+          offerGroup.find(".selectTag").removeClass("active");
+          $(this).addClass("active");
+          offerGroup.find(".selectInput").removeClass("active");
+          $(this).next(".selectInput").addClass("active");
+          offerGroup.find(".selectInput").find("input[type='text']").attr("disabled", "true");
+          $(this).next(".selectInput").find("input[type='text']").removeAttr("disabled");
+          $(this).next(".selectInput").find("input[type='text']").focus();
+      });
+  });
+  var gPrice = parseFloat($("#guidePrice").html());
+  if (isNaN(gPrice)) {
+      gPrice = 0;
+      $("#methodVal4").bind("focus blur keyup", function () {
+          $("#methodVal1,#methodVal2,#methodVal3").val("");
+      });
+  }
+  else {
+      $("#methodVal1").bind("focus keyup", function(){
+          if ($(this).val() > 100) {
+              $("#methodVal1").val(100);
+          }
+          $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
+          $("#methodVal3").val("");
+          $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
+      });
+      $("#methodVal2").bind("focus keyup", function(){
+          $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(1));
+          $("#methodVal3").val("");
+          if ($(this).val() > gPrice){
+              $(this).val(gPrice);
+              $("#methodVal4").val("");
+          }
+          else {
+              $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
+          }
+      });
+      $("#methodVal3").bind("focus keyup", function(){
+          var thisV = parseFloat($(this).val());
+          if (isNaN(thisV)) {
+              thisV = 0;
+          }
+          $("#methodVal1,#methodVal2").val("");
+          $("#methodVal4").val((gPrice + thisV).toFixed(2));
+      });
+
+      $("#methodVal4").bind("focus keyup", function(){
+          if ($(this).val() < gPrice) {
+              $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
+              $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(1));
+              $("#methodVal3").val("");
+          }
+          else {
+              $("#methodVal1,#methodVal2").val("");
+              $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
+          }
+      });
+  }
+  $("#methodRadios5").click(function () {
+      $(".selectInput").find("input.form-control").val("");
+  });
+
+  offerInput.each(function(){
+      var thisVal = $(this).val();
+      $(this).bind("click",function(){
+          $(this).select();
+      });
+      $(this).bind("keyup",function(){
+          clearNoNum(this);
+      });
+  });
+});
+
+function clearNoNum(obj){
+  obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
+  obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
+  obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
+  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
+  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+}
+</script>

@@ -1,0 +1,87 @@
+<%= render partial: 'partials/personal_center_head' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <ul role="tablist" class="nav nav-tabs carInfoTabs sm">
+          <li role="presentation" class="active"><a href="#tabpanel1">未成交</a></li>
+          <li role="presentation"><a href="#tabpanel2">已成交</a></li>
+        </ul>
+        <div class="panel-body">
+          <div role="tabpanel" class="tab-pane active" id="tabpanel1">
+            <div class="sourceTab">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="34%">品牌/车型</th>
+                    <th width="13%">报价人数(人)</th>
+                    <th width="13%">上牌地点</th>
+                    <th width="24%">外观/内饰</th>
+                    <th width="10%">发布时间</th>
+                    <th width="6%">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%- @uncompleted_posts.each do |post| %>
+                    <tr>
+                      <td><%= link_to post.title, user_my_post_path(current_user, post, _type: 1), class: 'name' %></td>
+                      <td><span class="num"><%= post.tenders.count %></span></td>
+                      <td><%= post.car_license_area %></td>
+                      <td><%= post.color %></td>
+                      <td><%= post.publish_time %></td>
+                      <td><a href="#" class="del modalBtn cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts" data-way='needs' data-toggle="modal" data-target="#alertModal">删除</td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <div class="pageList">
+              <%= paginate @uncompleted_posts %>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="tabpanel2">
+            <div class="sourceTab">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th width="34%">品牌/车型</th>
+                    <th width="13%">报价人数(人)</th>
+                    <th width="13%">上牌地点</th>
+                    <th width="24%">外观/内饰</th>
+                    <th width="10%">发布时间</th>
+                    <th width="6%">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%- @completed_posts.each do |post| %>
+                    <tr>
+                      <td><%= link_to post.title, user_my_post_path(current_user, post), class: 'name' %></td>
+                      <td><span class="num"><%= post.tenders.count %></span></td>
+                      <td><%= post.car_license_area %></td>
+                      <td><%= post.color %></td>
+                      <td><%= post.publish_time %></td>
+                      <td><a href="#" class="del modalBtn cancelBtn" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-update="posts" data-way='needs' data-toggle="modal" data-target="#alertModal">删除</td></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_search' -%>
+      <%= render partial: 'partials/right_history_list' %>
+    </div>
+
+  </div>
+</div>
+
+<%= render partial: 'del_modal' -%>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>

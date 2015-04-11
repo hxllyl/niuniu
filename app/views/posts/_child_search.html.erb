@@ -1,0 +1,30 @@
+<div class="carList clearfix">
+  <div class="tt">外观</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <%- @base_car.outer_color.each do |ele| %>
+        <li class=<%= @q_json[:oc] == ele ? 'current' : '' %>><a href="<%= resources_list_posts_path(@q_json.merge(oc: ele)) %>"><%= ele %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="carList clearfix">
+  <div class="tt">内饰</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <%- @base_car.inner_color.each do |ele| %>
+        <li class=<%= @q_json[:ic] == ele ? 'current' : '' %>><a href="<%= resources_list_posts_path(@q_json.merge(ic: ele)) %>"><%= ele %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="carList clearfix">
+  <div class="tt">状态</div>
+  <div class="listBox">
+    <ul class="list clearfix">
+      <%- Post::RESOURCE_TYPE.each do |k, v| %>
+        <li class=<%= @q_json[:rt] == k.to_s ? 'current' : '' %>><a href="<%= resources_list_posts_path(@q_json.merge(rt: k)) %>"><%= v %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

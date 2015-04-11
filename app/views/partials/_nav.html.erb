@@ -1,0 +1,41 @@
+<nav id="topBar" class="navbar navbar-default">
+  <div class="container topContent clearfix">
+    <h1 class="logo bfL"><a href="#"><%= image_tag("logo.png", alt: "") %></a></h1>
+    <ul class="nav navbar-nav">
+      <li class="<%= active?('portal', params[:controller]) %>"><a href=<%= root_path %>><span class="icon icon-home"></span>首页</a></li>
+      <% if current_user %>
+        <li class="<%= post_active?('my_posts', params[:controller], '0', params[:_type]) %>"><a href=<%= user_my_posts_path(current_user, _type: 0) %>><span class="icon icon-source"></span>我的资源</a></li>
+      <% else %>
+        <li class="<%= post_active?('my_posts', params[:controller], '0', params[:_type]) %>"><a href=<%= posts_path(_type: 0)%>><span class="icon icon-source"></span>我的资源</a></li>
+      <% end %>
+      <li class="<%= post_active?('posts', params[:controller], '0', params[:_type]) %>"><a href=<%= posts_path(_type: 0)%>><span class="icon icon-market"></span>市场资源</a></li>
+      <% if current_user %>
+        <li class="<%= post_active?('my_posts', params[:controller], '1', params[:_type]) %>"><a href=<%= new_user_my_post_path(user_id: current_user, _type: 1) %>><span class="icon icon-search"></span>我要寻车</a></li>
+      <%else%>
+        <li class="<%= post_active?('my_posts', params[:controller], '1', params[:_type]) %>"><a href=<%= posts_path(_type: 1)%>><span class="icon icon-search"></span>我要寻车</a></li>
+      <% end %>
+      <li class="<%= post_active?('posts', params[:controller], '1', params[:_type]) %>"><a href=<%= posts_path(_type: 1)%>><span class="icon icon-carInfo"></span>寻车信息</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-nav-right bfR">
+      <% if current_user %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon icon-user"></span><%= current_user.name %>
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href=<%= user_path(current_user) %>>个人中心</a></li>
+            <li><%= link_to t('sign_out'), destroy_user_session_path(), method: :delete %></li>
+          </ul>
+        </li>
+      <% end -%>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">使用帮助<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Action</a></li>
+        </ul>
+      </li>
+      <li class="last"><%= link_to '联系客服', current_user ? about_us_user_path(current_user) : '#' %></li>
+    </ul>
+  </div>
+</nav>

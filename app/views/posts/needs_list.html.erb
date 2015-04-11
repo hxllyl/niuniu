@@ -1,0 +1,149 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li class="active">寻车列表</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div role="tabpanel" class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <ul class="selectCrumb clearfix">
+            <%- if @standard %>
+              <li>
+                <span class="name"><%= @standard.name %></span>
+                <a href="<%= needs_list_posts_path %>" class="close" aria-label="Close">&times;</a>
+              </li>
+            <% end %>
+            <%- if @brand %>
+              <li>
+                <span class="name"><%= @brand.name %></span>
+                <a href="<%= needs_list_posts_path(st: @q_json[:st]) %>" class="close" aria-label="Close">&times;</a>
+              </li>
+            <% end %>
+            <%- if @car_model %>
+              <li>
+                <span class="name"><%= @car_model.name %></span>
+                <a href="<%= needs_list_posts_path(st: @q_json[:st], br: @q_json[:br]) %>" class="close" aria-label="Close">&times;</a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="panel-body">
+          <div class="carList clearfix">
+            <div class="tt">规格</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <% @standards.each do |std| %>
+                  <li class="<%= @standard == std ? 'current' : '' %>">
+                    <%= link_to std.name, needs_list_posts_path(@q_json.merge(st: std.id)) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="carList clearfix">
+            <div class="tt">品牌</div>
+            <div role="tabpanel" class="listBox">
+        <ul class="selectTag nav-tabs clearfix" role="tablist">
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
+          <li role="presentation">
+            <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
+          <% end %>
+        </ul>
+        <div class="tab-content">
+          <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
+            <% @brands.each do |brand| %>
+            <li class=<%= brand == @brand ? 'current' : ''%>>
+              <a href="<%= needs_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a>
+            </li>
+            <% end %>
+          </ul>
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
+          <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
+            <% brands.each do |brand| %>
+              <li><a href="<%= needs_list_posts_path(@q_json.merge(br: brand.id)) %>"><%= brand.name %></a></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+          <div class="carList clearfix">
+            <div class="tt">型号</div>
+            <div class="listBox">
+              <ul class="list clearfix">
+                <% @car_models.each do |car_model| %>
+                  <li class="<%= @car_model == car_model ? 'current' : '' %>">
+                    <%= link_to car_model.name, needs_list_posts_path(@q_json.merge(cm: car_model.id)) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">全部寻车（<%= @posts.total_count %>）</h3>
+        </div>
+        <div class="panel-body">
+          <div class="sourceTab">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="30%">品牌/车型</th>
+                  <th width="10%">上牌地点</th>
+                  <th width="26%">外观/内饰</th>
+                  <th width="24%">发布人</th>
+                  <th width="10%">发布时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, post_path(post.id, _type: 1)%></td>
+                    <td><%= post.car_license_area %></td>
+                    <td><%= post.color %></td>
+                    <td><%= post.owner %><span class="ml6"><%= image_tag(post.user.try(:level_icon), size: '40x16') if current_user.try(:is_show_icon?) %></span></td>
+                    <td><%= post.publish_time %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+            <%= paginate @posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
+      <%= render 'partials/right_search' %>
+      <%= render 'partials/right_history_list' %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".carList > .listBox").find(".toggleBtn").click(function(){
+    if ($(this).hasClass("active")){
+      $(this).removeClass("active").html("[更多]");
+      $(this).parents(".listBox").removeClass("current");
+    }
+    else {
+      $(this).addClass("active");
+      $(this).html("[收起]");
+      $(this).parents(".listBox").addClass("current");
+    }
+  });
+
+  $(".selectCrumb li .name").each(function(){
+    if($(this).text()==""){
+      $(this).parent().hide();
+    }
+  })
+});
+</script>

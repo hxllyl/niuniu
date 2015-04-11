@@ -1,0 +1,48 @@
+<%= render partial: 'partials/personal_center_head' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">我的关注</h3>
+        </div>
+        <div class="panel-body">
+          <div class="clearfix">
+
+            <%= form_tag my_followers_user_path(current_user), method: :get, class: 'searchBox w30p' do %>
+              <%= text_field_tag 'key', @key, class: "form-control input pr50", placeholder:"用户名或手机" %>
+              <%= submit_tag '搜索', class: "btn btn-primary subBtn" %>
+            <% end -%>
+          </div>
+          <ul class="row followersList">
+            <% @followings.each do |following|%>
+            <li class="col-md-4">
+              <div class="photo bfL"><a href=<%= user_list_posts_path(user_id: following.id, _type: 0)%>><%= image_tag(following.avatar, alt: "", size: '44x44')%></a></div>
+              <div class="info">
+                <h5 class="name"><%= link_to following.name_area, user_list_posts_path(user_id: following.id, _type: 0) %></a></h5>
+                <p class="tel"><%= User.human_attribute_name(:mobile)%>：<%= following.mobile%></p>
+              </div>
+              <div><a href="#" class="btn btn-default btn-xs modalBtn cancelBtn" data-id="<%= following.id %>" data-type="followings" data-clazz="user" data-update='followings' data-way='followings' data-toggle="modal" data-target="#alertModal">取消关注</a><div>
+            </li>
+            <% end -%>
+          </ul>
+          <div class="pageList">
+            <%= paginate @followings %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_search' -%>
+      <%= render partial: 'partials/right_history_list' %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'del_modal' %>
+
+<%= content_for :footers do  %>
+  <%= javascript_include_tag 'edit_user' -%>
+<% end -%>

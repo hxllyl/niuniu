@@ -1,0 +1,43 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li class="active">品牌筛选</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div id='current_infos'>
+        <%= render 'resources_infos' %>
+      </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
+      <%= render 'partials/right_search' %>
+      <%= render 'partials/right_history_list' %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+  var winUrl = window.location.search;
+  $(".souSelList").find(".list > li >a").click(function () {
+    //alert($.getUrlParam("brand_id"));
+    $(this).addClass("current").siblings().removeClass("current");
+  });
+
+  $(".selectCrumb li .name").each(function(){
+    if($(this).text()==""){
+      $(this).parent().hide();
+    }
+  })
+});
+
+(function ($) {
+  $.getUrlParam = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+  }
+})(jQuery);
+</script>

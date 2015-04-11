@@ -1,0 +1,41 @@
+<div class="panel panel-default contentBox bgf8">
+  <div class="panel-body indexUser">
+    <div class="userInfo clearfix">
+      <div class="photo bfL"><a href="<%= user_path(current_user) %>"><%= image_tag current_user.avatar, size: '78x78', alt: "我的头像" -%></a></div>
+      <div class="name">
+        <h5><%= link_to current_user.name + '(' + current_user.area.try(:name).to_s + ')', current_user %></h5>
+        <div class="clearfix"><span class="tag"><%= image_tag(current_user.level_icon, alt: "", width: '100%') if current_user.try(:is_show_icon?) %></span></div>
+      </div>
+    </div>
+    <ul class="row userData">
+      <li class="col-md-4 <%= 'noread' if current_user.has_unread_tenders? %>">
+        <a href="<%= user_path(current_user) %>">
+          <p class="data"><%= current_user.posts_with_type(Post::TYPES.keys[1]).count %></p>
+          <p class="tt"><%= I18n.t('i_post')%></p>
+        </a>
+        <div class="dot"></div>
+      </li>
+      <li class="col-md-4 <%= 'noread' if current_user.has_unread_hunts? %> ">
+        <a href="<%= my_tenders_user_path(current_user) %>">
+          <p class="data"><%= current_user.tenders.count %></p>
+          <p class="tt"><%= I18n.t('i_tender') %></p>
+        </a>
+        <div class="dot"></div>
+      </li>
+      <li class="col-md-4 last">
+        <a href="<%= my_followers_user_path(current_user) %>">
+          <p class="data"><%= current_user.followings.count %></p>
+          <p class="tt"><%= I18n.t('i_following') %></p>
+        </a>
+        <div class="dot"></div>
+      </li>
+    </ul>
+    <%- if hidden_button %>
+      <div class="userSubBtn">
+        <a href="<%= new_user_my_post_path(current_user, _type: 1) %>" type="button" class="btn btn-default btn-block red"><span class="icon icon-search"></span><%= I18n.t('post') %></a>
+        <a href="<%= new_user_my_post_path(current_user, _type: 0) %>" type="button" class="btn btn-default btn-block blue"><span class="glyphicon glyphicon-plus"></span><%= I18n.t('resource') %></a>
+      </div>
+    <% end %>
+    <div class="userArr"><span class="icon icon-user"></span></div>
+  </div>
+</div>

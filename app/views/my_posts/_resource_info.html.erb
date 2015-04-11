@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_appearance" class="col-md-4 control-label">外观</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
+          <%- @base_car && @base_car.outer_color.each do |ele| %>
+            <%- if @post && @post.outer_color == ele %>
+              <option value="<%= ele %>" selected="selected"><%= ele %></option>
+            <% else %>
+              <option value="<%= ele %>"><%= ele %></option>
+            <% end %>
+          <% end %>
+          <option value="set_outer_color">自定义</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_interior" class="col-md-4 control-label">内饰</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
+          <%- @base_car && @base_car.inner_color.each do |ele| %>
+            <%- if @post && @post.inner_color == ele %>
+              <option value="<%= ele %>" selected="selected"><%= ele %></option>
+            <% else%>
+              <option value="<%= ele %>"><%= ele %></option>
+            <% end %>
+          <% end %>
+          <option value="set_inner_color">自定义</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'resource_select' %>
+<%- unless @post.new_record? %>
+  <input class='hide' id="post_standard_id" name="post[standard_id]" value="<%= @post.standard_id %>">
+  <input class='hide' id="post_brand_id" name="post[brand_id]" value="<%= @post.brand_id %>">
+  <input class='hide' id="post_car_model_id" name="post[car_model_id]" value="<%= @post.car_model_id %>">
+  <input class='hide' id="post_base_car_id" name="post[base_car_id]" value="<%= @post.base_car_id %>">
+<% end %>
+
+<div class="methodSelect row">
+  <div class="tt clearfix">
+    <h5 class="col-md-6">报价方式</h5>
+    <%- if @base_car && @base_car.base_price.to_f != 0.0 %>
+      <h5 class="col-md-6">指导价：<span id="guidePrice"><%= @base_car.base_price.to_f %></span>万</h5>
+    <% end %>
+  </div>
+  <%= render @base_car && @base_car.base_price.to_f != 0.0 ? 'res_tender' : 'res_tender_by_itself' %>
+</div>

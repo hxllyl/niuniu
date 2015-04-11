@@ -1,0 +1,100 @@
+<div role="tabpanel" class="panel panel-default contentBox">
+  <input class="hide" id="current_resource_list" value="<%= resources_list_posts_path %>">
+  <div class="panel-heading lineTitle">
+    <ul class="selectCrumb clearfix">
+      <%- if @standard %>
+        <li>
+          <span class="name"><%= @standard.name %></span>
+          <a href="<%= resources_list_posts_path %>" class="close" aria-label="Close">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></a>
+        </li>
+      <% end %>
+      <%- if @brand %>
+        <li>
+          <span class="name"><%= @brand.name %></span>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st]) %>" class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></a>
+        </li>
+      <% end %>
+      <%- if @car_model %>
+        <li>
+          <span class="name"><%= @car_model.name %></span>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br]) %>" class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></a>
+        </li>
+      <% end %>
+      <%- if @base_car %>
+        <li>
+          <span class="name"><%= @base_car.style %></span>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm]) %>" class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="panel-body souSelList">
+    <div class="carList clearfix">
+      <div class="tt">规格</div>
+      <div class="listBox">
+        <ul class="list clearfix" id='standards_list'>
+          <% b_json = @q_json[:br] ? {br: @q_json[:br]} : {} %>
+          <% @standards.each do |std| %>
+          <li class=<%= @standard == std ? 'current' : '' %>>
+            <a href="<%= resources_list_posts_path(b_json.merge(st: std.id)) %>"><%= std.name %></a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="carList clearfix">
+      <div class="tt">品牌</div>
+      <div role="tabpanel" class="listBox">
+        <ul class="selectTag nav-tabs clearfix" role="tablist">
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
+          <li role="presentation">
+            <a href=<%= "#brand_#{letter}" %> aria-controls=<%= "brand_#{letter}" %> role="tab" data-toggle="tab"><%= letter %></a></li>
+          <% end %>
+        </ul>
+        <div class="tab-content">
+          <ul role="tabpanel" class="list tab-pane active clearfix" id="allBrand">
+            <% @brands.each do |brand| %>
+            <li class=<%= brand == @brand ? 'current' : ''%>>
+              <a href="<%= resources_list_posts_path(st: @q_json[:st], br: brand.id) %>"><%= brand.name %></a>
+            </li>
+            <% end %>
+          </ul>
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.each do |(letter, brands)| %>
+          <ul role="tabpanel" class="list tab-pane clearfix" id= <%="brand_#{letter}" %> >
+            <% brands.each do |brand| %>
+              <li><a href="<%= resources_list_posts_path(st: @q_json[:st], br: brand.id) %>"><%= brand.name %></a></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="carList clearfix">
+      <div class="tt">车型</div>
+      <div class="listBox">
+        <ul class="list clearfix">
+          <% @car_models.each do |car_model| %>
+          <li class=<%= @car_model == car_model ? 'current' : '' %>>
+            <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br], cm: car_model.id) %>"><%= car_model.name %></a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="carList clearfix">
+      <div class="tt">车款</div>
+      <div class="listBox">
+        <ul class="list clearfix">
+          <% @base_cars.each do |style| %>
+          <li class=<%= @base_car == style ? 'current' : '' %>>
+            <a href="<%= resources_list_posts_path(@q_json.merge(bc: style.id)) %>"><%= style.select_name %></a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <%= render 'child_search' if @standard && @brand && @car_model && @base_car %>
+  </div>
+</div>
+<%= render 'resources_list' if @base_car %>
+</div>

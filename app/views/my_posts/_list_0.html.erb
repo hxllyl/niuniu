@@ -1,0 +1,88 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to '首页', root_path %></li>
+    <li class="active">我的资源</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">我的资源</h3>
+        </div>
+        <div class="panel-body">
+          <div class="mySourceOpe clearfix">
+            <div class="bfL">
+              <a class="btn btn-default orange mr14" href="<%= new_user_my_post_path(current_user, _type: 0) %>" role="button">添加资源</a>
+              <div class="btn-group">
+                <%= select_tag 'brand', options_for_select(@brands.collect{|brand| [brand.name, brand.id]}, selected: @brand_id), class: 'form-control', id: 'brand_select', prompt:  '筛选(全部)', data_id: current_user.id -%>
+              </div>
+            </div>
+            <div class="bfR">
+            <%= form_tag user_my_posts_path(current_user), method: :get do %>
+            <%= hidden_field_tag 'brand_id', @brand_id %>
+            <%= hidden_field_tag '_type', @_type %>
+            <%= hidden_field_tag 'update_all', 'true' %>
+            <%= hidden_field_tag 'resource_ids', @posts.map(&:id) %>
+              <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.try(:publish_time) %></span></div>
+              <button class="btn btn-default bfR" type="submit"><span class="icon icon-refresh"></span>全部更新</button>
+              <% end-%>
+
+            </div>
+          </div>
+          <div class="mySourceTab mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <tbody>
+                <% @posts.each do |post| %>
+                  <tr data-id="<%= post.id%>">
+                    <td>
+                      <div class="box clearfix">
+                        <div class="infoM">
+                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %></h5>
+                          <div class="info clearfix">
+                            <div class="m"><%= post.standard_type %></div>
+                            <div class="m"><%= post.color %></div>
+                          </div>
+                        </div>
+                        <div class="infoPrice">
+                          <p>
+                            <span class="price"><%= post.show_price %></span>
+                            <span class="time"><%= post.publish_time %></span>
+                          </p>
+                          <%- if post.base_car.is_valid? && post.base_car_base_price.to_f != 0.0 %>
+                            <p>指导价：<%= post.base_price %></p>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="remark clearfix">
+                        <div class="tt bfL">备注：</div>
+                        <div class="info"><%= post.remark %></div>
+                      </div>
+                      <div class="btnGroups">
+                        <a class="btn btn-default btn-xs" href="<%= edit_user_my_post_path(current_user, post) %>" role="button">编辑</a>
+                        <a class="btn btn-default btn-xs upBtn" href="javascript:;" role="button">上移</a>
+                        <a class="btn btn-default btn-xs downBtn" href="javascript:;" role="button">下移</a>
+                        <a class="btn btn-default btn-xs cancelBtn modalBtn" href="javascript:;" role="button" data-id="<%= post.id %>" data-type="posts" data-clazz="post" data-way="resources" data-toggle="modal" data-target="#alertModal">删除</a>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+            <%= paginate @posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_mine', locals: {hidden_button: false} %>
+      <%= render partial: 'partials/right_search' %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'users/del_modal' %>
+

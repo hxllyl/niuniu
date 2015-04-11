@@ -1,0 +1,80 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li class="active">他的资源</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">他的资源</h3>
+        </div>
+        <div class="panel-body">
+          <div class="mySourceOpe">
+            <div class="btn-group">
+              <select name="" class="form-control" id="brands_select">
+                <option value="">筛选品牌</option>
+                <%- @brands.each do |brand| %>
+                  <%- if brand.id == params[:br].to_i %>
+                    <option value=<%= user_list_posts_path(@q_json.merge(br: brand.id)) %> selected><%= brand.name %></option>
+                  <% else %>
+                    <option value=<%= user_list_posts_path(@q_json.merge(br: brand.id)) %>><%= brand.name %></option>
+                  <% end %>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <div class="mySourceTab mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <tbody>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td>
+                      <div class="box clearfix">
+                        <div class="infoM">
+                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %></h5>
+                          <div class="info clearfix">
+                            <div class="m"><%= post.st_rt %></div><div class="m"><%= post.publish_time %></div>
+                          </div>
+                        </div>
+                        <div class="infoPrice">
+                          <p><span class="price"><%= post.show_price %></span><span class="time"><%= post.publish_time %></span></p>
+                          <%- if post.base_car.is_valid? && post.base_car_base_price.to_f != 0.0 %>
+                            <p>指导价：<%= post.base_price %></p>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="remark clearfix">
+                        <div class="tt bfL">备注：</div><div class="info"><%= post.remark %></div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+            <%= paginate @posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_user' %>
+      <%- if current_user %>
+        <%= render partial: 'partials/right_joint_followings' %>
+      <% end %>
+      <%= render partial: 'partials/right_his_needs' %>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#brands_select").change(function(){
+    document.location.href = $(this).val();
+  });
+});
+</script>

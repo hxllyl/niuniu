@@ -1,0 +1,43 @@
+# encoding: utf-8
+
+# author: depp.yu
+
+zh-CN:
+  default_title: 牛牛汽车
+  navigation: 导航
+  index:  首页
+  my_sources:  我的资源
+  market_sources: 市场资源
+  post: 我要寻车
+  post_info: 寻车信息
+
+  # 首页文字信息
+  hot_resources: 热门车源
+  new_resources: 最新车源
+  resources_list: 资源表
+  server_photo: 欢迎拨打服务电话
+  sign_out: 安全退出账号
+  datetime:
+    distance_in_words:
+      about_x_hours: "%{count}小时"
+  
+  success: 操作成功
+  failed: 操作失败
+  commit: 提交
+  
+  discount: 下
+  add: 加
+  point: 点
+  wan: 万    
+
+  # pagination
+  views:
+    pagination:
+      first: "第一页"
+      last: "最后一页"
+      previous: "上一页"
+      next: "下一页"
+      truncate: "&hellip;"
+  message:
+    receiver_group:
+      all_users: 所有用户

@@ -1,0 +1,87 @@
+<%= render partial: 'partials/personal_center_head' %>
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "个人中心", user_path(current_user) %></li>
+    <li><%= link_to "我的寻车", user_path(current_user) %></li>
+    <li class="active">查看报价</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">查看报价</h3>
+        </div>
+        <div class="panel-body">
+          <div class="sourceDetail">
+            <div class="row">
+              <div class="col-md-8 con">
+                <h5 class="name"><%= @post.detail_title %></h5>
+                <div class="info">
+                  <p><%= @post.app_area %></p>
+                  <p><%= @post.color %></p>
+                  <p>车辆所在区域要求：<%= @post.car_in_area %></p>
+                  <p>提车时间：<%= Post::TAKE_DATES[@post.take_car_date] %></p>
+                </div>
+              </div>
+              <div class="col-md-4 con">
+                <div class="info">
+                  <% if @post.discount_way != 5 %>
+                    <p class="price">期望的成交价：<span class="num"><%= @post.show_price %></span></p>
+                  <% end %>
+                  <%- if @post.base_car.is_valid? && @post.base_car_base_price.to_f != 0.0 %>
+                    <p>指导价：<%= @post.base_price %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <%- unless [nil, ''].include?(@post.remark) %>
+              <div class="row remark">
+                <div class="tt bfL">备注：</div>
+                <div class="info"><%= @post.remark %></div>
+              </div>
+            <% end %>
+          </div>
+          <div class="sourceTab">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="40%">报价方</th>
+                  <th width="40%">报价(万元)</th>
+                  <th width="10%">发布时间</th>
+                  <!-- <th width="10%">操作</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <%- @post.tenders.each do |tender| %>
+                  <%- if tender.status == -1 %>
+                    <tr>
+                      <td><%= tender.user.try(:name_area) %></td>
+                      <td><span class="num"><%= tender.price.to_f %></span><span class="seal seal_recall_part"></span></td>
+                      <td><%= tender.publish_time %></td>
+                    </tr>
+                  <% else %>
+                    <tr>
+                      <td><%= link_to tender.user.try(:name_area), his_tender_post_path(@post, tender_id: tender.id) %></td>
+                      <td><span class="num"><%= tender.price.to_f %></span><%- if tender.is_completed? %><span class="seal seal_done_part"></span><% end %></td>
+                      <td><%= tender.publish_time %></td>
+                      <!-- <td><a href="javascript:;" class="del modalBtn" data-toggle="modal" data-target="#alertModal">删除</a></td> -->
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+            <%=  %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_search' %>
+    </div>
+  </div>
+</div>
+<%= render partial: 'partials/complaint', locals: {resource_type: 'post', resource_id: @post.id} %>

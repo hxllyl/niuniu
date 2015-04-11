@@ -1,0 +1,47 @@
+# encoding: utf-8
+
+# author: depp.yu
+
+zh-CN:      
+  activerecord:
+    models:
+      user: 用户
+    attributes:
+      user:
+        name: 用户名
+        mobile: 手机号码
+        company: 公司名称
+        area_id: 所在地
+        role: 用户角色
+        password: 登录密码
+        password_confirmation: 重复登录密码  
+      
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: 用户名不能为空
+              too_long: 用户名太长
+            mobile:
+              blank: 手机号不能为空
+              taken: 手机号已经被注册
+              invalid: 手机号填写不正确
+            company:
+              blank: 公司名称不能为空
+              too_long: 公司名称太长
+            password:
+              too_short: 密码长度过短
+              blank: 密码不能为空
+            password_confirmation:
+              confirmation: 两次密码输入不一致
+            role:
+              inclusion: 用户角色不正确
+              blank: 角色不能为空
+            level:
+              inclusion: 用户等级不正确  
+              
+                   
+         
+             
+      

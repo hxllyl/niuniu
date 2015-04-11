@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_model" class="col-md-4 control-label">车型</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <%- if @post.new_record? %>
+          <select name="post[car_model_id]" class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% else %>
+          <select name="post[car_model_id]" disabled class="form-control input-sm" id="post_car_model_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% end %>
+          <option value=''>请选择</option>
+          <%- @car_models && @car_models.each do |car_model| %>
+            <%- if @car_model == car_model %>
+              <option value="<%= car_model.id %>" selected="selected"><%= car_model.name %></option>
+            <% else %>
+              <option value="<%= car_model.id %>"><%= car_model.name %></option>
+            <% end %>
+          <% end %>
+          <option value="set_car_model">自定义</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <%= render @base_car == 'set_base_car' ? 'base_car_input' : 'base_car_select'%>
+</div>

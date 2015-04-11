@@ -1,0 +1,59 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li><%= link_to '寻车信息', posts_path(_type: 1) %></li>
+    <li class="active">他的寻车</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <div class="panel panel-default contentBox">
+        <div class="panel-heading lineTitle">
+          <h3 class="panel-title">他的寻车</h3>
+        </div>
+        <div class="panel-body">
+          <div class="sourceTab">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+              <thead>
+                <tr>
+                  <th width="40%">品牌/车型</th>
+                  <th width="12%">上牌地点</th>
+                  <th width="13%">外观/内饰</th>
+                  <th width="25%">发布人</th>
+                  <th width="10%">发布时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%- @posts.each do |post| %>
+                  <tr>
+                    <td><%= link_to post.title, post_path(post, _type: 1), class: 'name' %></td>
+                    <td><%= post.car_license_area %></td>
+                    <td><%= post.color %></td>
+                    <td>
+                      <%= post.owner%>
+                      <%= image_tag(post.user.try(:level_icon), size: "40x16") if post.user.try(:is_show_icon?) %>
+                      <%- if post.is_completed? %>
+                        <div class="seal seal_done_part"></div>
+                      <% end %>
+                    </td>
+                    <td><%= post.publish_time %></td>
+                </tr>
+                <% end %>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="pageList">
+            <%= paginate @posts %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_user' %>
+      <%= render partial: 'partials/right_joint_followings' %>
+      <%= render partial: 'partials/right_his_resources' %>
+    </div>
+  </div>
+</div>
