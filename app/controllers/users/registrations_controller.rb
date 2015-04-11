@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         raise Errors::ValidCodeNotFoundError.new, t('exceps.not_found_valid_code') if valid_code.blank?
         valid_code.update(status: ValidCode::STATUS.keys[1])
 
-        log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
+        log = Log::ContactPhone.where(mobile: resource[:mobile]).first_or_initialize
         log.is_register = true
         log._type = 1
         log.save
