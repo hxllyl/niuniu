@@ -43,7 +43,7 @@ class Api::RegistrationsController < Devise::RegistrationsController #Api::BaseC
 
         valid_code.update(status: ValidCode::STATUS.keys[1])
 
-        log = Log::ContactPhone.where(mobile: self.mobile).first_or_initialize
+        log = Log::ContactPhone.where(mobile: resource[:mobile]).first_or_initialize
         log.is_register = true
         log._type = 1
         log.save
