@@ -107,7 +107,7 @@ class PostsController < BaseController
     conds[:brand_id] = params[:br] if params[:br]
 
     @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
-    @follows  = current_user.followings & @someone.followers if current_user
+    @follows  = current_user.followings & @someone.followers
   end
 
   # 资源表 首页中间最底部的链接
@@ -168,21 +168,21 @@ class PostsController < BaseController
   end
 
   def my_tender
-    @post       = Post.find_by_id(params[:id])
+    @post       = Post.includes(:user).find_by_id(params[:id])
     @someone    = @post.user
     @tender     = Tender.find_by_id(params[:tender_id])
 
     instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
-    @follows  = current_user.followings & @someone.followers if current_user
+    @follows  = current_user.followings & @someone.followers
   end
 
   def his_tender
-    @post       = Post.find_by_id(params[:id])
-    @tender     = Tender.find_by_id(params[:tender_id])
+    @post       = Post.includes(:user, :standard, :brand, :car_model, :base_car).find_by_id(params[:id])
+    @tender     = Tender.includes(:user).find_by_id(params[:tender_id])
     @someone    = @tender.user
 
     instrument 'user.has_read_hunt', post_id: @post, user_id: current_user.id
-    @follows  = current_user.followings & @someone.followers if current_user
+    @follows  = current_user.followings & @someone.followers
   end
 
 

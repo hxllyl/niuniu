@@ -61,14 +61,19 @@
       </div>
     </div>
     <div class="col-md-3 mainRight">
-      <%= render partial: 'partials/right_user' %>
-      <%= render partial: 'partials/right_joint_followings' %>
-      <%= render partial: 'partials/right_his_resources' %>
-      <%= render partial: 'partials/right_his_needs' %>
+      <%- if current_user == @someone %>
+        <%= render partial: 'partials/right_mine', locals: {hidden_button: true} %>
+        <%= render partial: 'partials/right_search' %>
+      <% else %>
+        <%= render partial: 'partials/right_user' %>
+        <%= render partial: 'partials/right_joint_followings' %>
+        <%= render partial: 'partials/right_his_resources' %>
+        <%= render partial: 'partials/right_his_needs' %>
+      <% end %>
     </div>
   </div>
 </div>
-<%= render partial: 'complaints/complaint'%>
+<%= render partial: 'complaints/complaint' if current_user != @someone  %>
 <%= content_for :footers do %>
   <%= javascript_include_tag 'posts', 'data-turbolinks-track' => true %>
 <% end -%>
