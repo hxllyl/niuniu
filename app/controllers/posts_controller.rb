@@ -22,14 +22,14 @@ class PostsController < BaseController
   # params: st=1&br=1&cm=1&bc=1&oc=xx&ic=xx&rt=xx
   def resources_list
     @standard   = Standard.includes(:brands).find_by_id(params[:st])
-    @brand      = Brand.includes(:car_models, :standards).find_by_id(params[:br])
+    @brand      = Brand.includes(:standards).find_by_id(params[:br])
     @car_model  = CarModel.includes(:base_cars, :standard, :brand).find_by_id(params[:cm])
     @base_car   = BaseCar.includes(:car_model, :brand, :standard).find_by_id(params[:bc])
 
-    @standards  = Standard.all
-    @brands     = @standard ? @standard.brands.valid : Brand.valid
-    @car_models = @brand ? @brand.car_models.valid : []
-    @base_cars  = @car_model ? @car_model.base_cars.valid.order(base_price: :asc) : []
+    @standards  = @brand      ? @brand.standards : Standard.all
+    @brands     = @standard   ? @standard.brands.valid : Brand.valid
+    @car_models = @brand && @standard ? CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid : []
+    @base_cars  = @car_model  ? @car_model.base_cars.valid.order(base_price: :asc) : []
 
     @q_json       = {}
     @q_json[:st]  = @standard.id   if @standard
@@ -62,29 +62,18 @@ class PostsController < BaseController
 
   # 寻车信息点击品牌进入寻车列表页
   def needs_list
-    @standard   = Standard.find_by_id(params[:st])
-    @brand      = Brand.find_by_id(params[:br])
-    @car_model  = CarModel.find_by_id(params[:cm])
+    @standard   = Standard.includes(:brands).find_by_id(params[:st])
+    @brand      = Brand.includes(:standards).find_by_id(params[:br])
+    @car_model  = CarModel.includes(:brand, :standard).find_by_id(params[:cm])
 
-    if @car_model
-      @standard, @brand = @car_model.standard, @car_model.brand
-      @car_models = CarModel.where(standard_id: @car_model.standard_id, brand_id: @car_model.brand_id).valid
-      @standards, @brands = @brand.standards, @standard.brands
-      @q_json = {cm: @car_model.id, br: @brand.id, st: @standard.id}
-    elsif @standard && @brand
-      @standards, @brands = @brand.standards, @standard.brands
-      @car_model, @car_models = nil, CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid
-      @q_json = {br: @brand.id, st: @standard.id}
-    elsif @standard
-      @standards, @brands, @car_models, @brand, @car_model = Standard.all, @standard.brands, [], nil, nil
-      @q_json = {st: @standard.id}
-    elsif @brand
-      @standards, @brands, @car_models, @standard, @car_model = @brand.standards, Brand.all, [], nil, nil
-      @q_json = {br: @brand.id}
-    else
-      @standards, @brands, @car_models = Standard.all, Brand.all, CarModel.valid.sample(30)
-      @q_json = {}
-    end
+    @standards  = @brand      ? @brand.standards : Standard.all
+    @brands     = @standard   ? @standard.brands.valid : Brand.valid
+    @car_models = @brand && @standard ? CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid : []
+
+    @q_json       = {}
+    @q_json[:st]  = @standard.id   if @standard
+    @q_json[:br]  = @brand.id      if @brand
+    @q_json[:cm]  = @car_model.id  if @car_model
 
     conds = {_type: 1, status: 1}
     conds[:standard_id] = @standard.id  if @standard
