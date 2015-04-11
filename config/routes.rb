@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     resources :banners
     resources :posts
+    resources :helpers, except: [ :show ]
 
     resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
@@ -91,7 +92,9 @@ Rails.application.routes.draw do
   resources :complaints, only: [ :create ]
   resources :comments, only: [ :create ]
 
-  namespace :api do
+  resources :helpers, only: [ :index, :show ]
+
+  namespace :api, :defaults => { :format => 'json' } do
     devise_scope :user do
       post    'sessions'      => 'sessions#create',       :as => 'login'
       delete  'sessions'      => 'sessions#destroy',      :as => 'logout'
@@ -99,6 +102,7 @@ Rails.application.routes.draw do
     end
 
     resources :banners, only: [:index]
+    resources :helpers, only: [ :index, :show ]
 
     resources :messages do
       post :device_methods, on: :collection
