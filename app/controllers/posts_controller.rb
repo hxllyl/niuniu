@@ -22,9 +22,9 @@ class PostsController < BaseController
   # params: st=1&br=1&cm=1&bc=1&oc=xx&ic=xx&rt=xx
   def resources_list
     @standard   = Standard.includes(:brands).find_by_id(params[:st])
-    @brand      = Brand.includes(:car_models).find_by_id(params[:br])
-    @car_model  = CarModel.includes(:base_cars).find_by_id(params[:cm])
-    @base_car   = BaseCar.find_by_id(params[:bc])
+    @brand      = Brand.includes(:car_models, :standards).find_by_id(params[:br])
+    @car_model  = CarModel.includes(:base_cars, :standard, :brand).find_by_id(params[:cm])
+    @base_car   = BaseCar.includes(:car_model, :brand, :standard).find_by_id(params[:bc])
 
     @standards  = Standard.all
     @brands     = @standard ? @standard.brands.valid : Brand.valid
@@ -46,7 +46,7 @@ class PostsController < BaseController
       @order_ele  = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
       @order_by   = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
 
-      @posts      = @base_car.posts.resources.where(conds).valid.order(@order_by).page(params[:page]).per(10)
+      @posts      = @base_car.posts.resources.valid.where(conds).order(@order_by).page(params[:page]).per(10)
     end
   end
 
