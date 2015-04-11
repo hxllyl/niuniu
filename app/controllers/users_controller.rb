@@ -88,6 +88,7 @@ class UsersController < BaseController
 
   def system_infos
     @sys_messages = current_user.system_messages.order('status asc ,updated_at desc').page(params[:page]).per(5)
+    instrument "user.has_read_sys_message", user_id: current_user.id
   end
 
   def my_level
