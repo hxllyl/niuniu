@@ -177,8 +177,8 @@ class Api::PostsController < Api::BaseController
     post      = Post.find_or_initialize_by(id: params[:post][:id])
     standard  = Standard.find_by_id(params[:post][:standard_id])
     brand     = Brand.find_by_id(params[:post][:brand_id])
-    car_model = CarModel.find_by_id(params[:post][:car_model_id])
-    base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
+    car_model = CarModel.where(id: params[:post][:car_model_id], standard_id: standard.id, brand_id: brand.id).first
+    base_car  = car_model ? BaseCar.where(standard_id: standard.id, brand_id: brand.id, id: params[:post][:base_car_id]).first : nil
 
     car_model = CarModel.create(
                   standard_id:  standard.id,
