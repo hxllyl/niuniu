@@ -6,9 +6,9 @@
     <ul class="followList">
       <%- @follows.each do |u| %>
         <li class="clearfix first">
-          <div class="photo bfL"><a href="#"><%= image_tag(u.avatar, alt: "", width: "100%")%></a></div>
+          <div class="photo bfL"><a href=<%= user_list_posts_path(user_id: u.id, _type: 0) %>><%= image_tag(u.avatar, alt: "", width: "100%")%></a></div>
           <div class="detail">
-            <h5 class="name"><a href="#"><%= u.name_area %></a></h5>
+            <h5 class="name"><a href=<%= user_list_posts_path(user_id: u.id, _type: 0) %>><%= u.name_area %></a></h5>
             <p class="tel">手机：<%= u.mobile %></p>
           </div>
         </li>

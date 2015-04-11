@@ -2,11 +2,7 @@
 class Admin::UsersController < Admin::BaseController
 
   def search
-    @mobile = params[:mobile]
-    if request.xhr?
-      @user = User.find_by_mobile(params[:mobile])
-      # @mobile = Log::ContactPhone.find_by_mobile(params[:mobile])
-    end
+    @mobile_log = Log::ContactPhone.find_or_initialize_by(mobile: params[:mobile])
 
     respond_to do |format|
       format.html

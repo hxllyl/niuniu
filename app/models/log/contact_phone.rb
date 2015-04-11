@@ -17,4 +17,8 @@ class Log::ContactPhone < ActiveRecord::Base
     User.find_by_mobile(mobile)
   end
 
+  def contacted?
+    _type == 0 && sender_id
+  end
+
 end

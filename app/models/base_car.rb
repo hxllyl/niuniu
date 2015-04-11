@@ -20,6 +20,7 @@ class BaseCar < ActiveRecord::Base
   delegate :name, to: :car_model, prefix: true
 
   scope :valid, -> { where(status: 1) }
+  scope :unvalid, -> { where(status: 0) }
 
   # instance_methods
   def to_human_name
