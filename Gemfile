@@ -55,3 +55,49 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 end
 
+<<<<<<< Updated upstream
+=======
+group :development do
+  # A static analysis security vulnerability scanner
+  gem 'brakeman', require: false
+  # check N + 1 query
+  gem 'bullet'
+  # find the dead routes and actions
+  gem 'traceroute'
+
+  gem 'meta_request'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'rack-mini-profiler', require: false
+  # gem 'flamegraph' # 2.1 2.0 only
+
+  #api doc
+   gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master'
+end
+
+# simple admin
+# gem 'rails_admin', git: "https://github.com/sferik/rails_admin.git", branch: 'master'
+
+
+# Plain Old Ruby Object
+gem 'virtus'
+
+# Null Object
+gem 'naught'
+
+# translate chinese to Pinyin
+gem 'chinese_pinyin'
+
+# search
+# gem 'sunspot_rails'
+# gem 'sunspot_solr'
+# gem 'pg_search'
+
+# nested
+gem 'ancestry'
+
+#jpush
+gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
+
+>>>>>>> Stashed changes

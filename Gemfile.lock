@@ -1,3 +1,19 @@
+<<<<<<< Updated upstream
+=======
+GIT
+  remote: git://github.com/jpush/jpush-api-ruby-client.git
+  revision: 87459b7cf9a5ade3d439f4911196e4fb3e158cd1
+  specs:
+    jpush (3.2.1)
+
+GIT
+  remote: git@github.com:season/rails_api_doc_generation.git
+  revision: 1e05e4f1c576ec4af64b0b48b5238f1bd0d46d3e
+  branch: master
+  specs:
+    api_doc_generation (0.4.4)
+
+>>>>>>> Stashed changes
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -171,6 +187,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+<<<<<<< Updated upstream
+=======
+  acts_as_list
+  ancestry
+  api_doc_generation!
+  better_errors
+  binding_of_caller
+  brakeman
+  bullet
+>>>>>>> Stashed changes
   byebug
   jbuilder (~> 2.0)
   jquery-rails
