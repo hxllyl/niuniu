@@ -239,7 +239,7 @@ class Post < ActiveRecord::Base
   end
 
   def car_model_show_name
-    car_model_display_name ? car_model_display_name : car_model_name
+    [nil, ''].include?(car_model_display_name) ? car_model_name : car_model_display_name
   end
 
   def base_car_short_name
