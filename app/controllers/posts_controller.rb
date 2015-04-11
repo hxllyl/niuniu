@@ -80,7 +80,7 @@ class PostsController < BaseController
     conds[:brand_id]    = @brand.id     if @brand
     conds[:car_model_id]= @car_model.id if @car_model
 
-    @posts = Post.where(conds).order(updated_at: :desc).page(params[:page]).per(10)
+    @posts = Post.includes(:user, :standard, :brand, :car_model, :base_car).where(conds).order(updated_at: :desc).page(params[:page]).per(10)
   end
 
   def show
@@ -112,7 +112,7 @@ class PostsController < BaseController
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-    @users = User.where("id" => Post.resources.valid.map(&:user_id)).page(params[:page]).per(10)
+    @users = User.includes(:area).where("id" => Post.resources.valid.includes(:brand).map(&:user_id)).page(params[:page]).per(10)
   end
 
   # 导出用户资源
