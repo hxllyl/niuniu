@@ -8,9 +8,9 @@ class MyPostsController < BaseController
     @_type = params[:_type]
     @brand_id = params[:brand_id]
     unless @brand_id.blank?
-      @posts = current_user.posts.joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").page(params[:page]).per(10)
+      @posts = current_user.posts.valid.includes(:standard, :base_car, :car_model).joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").page(params[:page]).per(10)
     else
-      @posts = current_user.posts.where(_type: @_type).page(params[:page]).per(10)
+      @posts = current_user.posts.valid.includes(:standard, :base_car, :car_model).where(_type: @_type).page(params[:page]).per(10)
     end
 
     if params[:update_all]
@@ -22,7 +22,7 @@ class MyPostsController < BaseController
       end
     end
 
-    @brands = current_user.posts.resources.map(&:brand).uniq
+    @brands = current_user.posts.resources.includes(:brand).map(&:brand).uniq
 
     respond_to do |format|
       format.html {}
