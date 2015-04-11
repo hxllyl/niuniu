@@ -4,6 +4,7 @@ class Tender < ActiveRecord::Base
 
   before_create :get_price
   after_create  :gen_tender_log
+  after_create  :update_need_time
 
   STATUS = {
     0  => '未成交',
@@ -44,6 +45,10 @@ class Tender < ActiveRecord::Base
 
   def gen_tender_log
     Log::Post.create(user_id: user_id, post_id: post_id, method_name: 'tender')
+  end
+
+  def update_need_time
+    post.update_attributes(updated_at: Time.now)
   end
 
   # 逻辑删除 物理删除用real_delete
@@ -126,16 +131,16 @@ class Tender < ActiveRecord::Base
   def make_create_message
     Message.make_system_message(generate_message(:create), post.user, Message::TYPES.keys[2])
   end
-  
-  
+
+
   after_update :make_message
-  def make_message  
+  def make_message
     if status == STATUS.keys[1]
       Message.make_system_message(generate_message(:dealed), user, Message::TYPES.keys[3])
       Message.make_system_message(generate_post_message, post.user, Message::TYPES.keys[4])
     end
   end
-  
+
 
   private
   def generate_message(type)

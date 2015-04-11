@@ -1,16 +1,11 @@
 .hr-line-dashed
 .search-result
-  - if @user.present?
-    -# TODO: logic for a. 已注册或已联系 b. 我来联系
-    = @user.name
-    -# TODO: add real logic & method
-    -# - if @user.registered?
-    -#   已注册
-    -# - elsif @user.contacted?
-    -#   已联系
-    -# - else
-    -#   = link_to '我来联系', '#'
+  - if @mobile_log.new_record?
+    = link_to '我来联系', contact_admin_users_path(mobile: @mobile_log.mobile), method: :post, class: 'btn btn-warning'
+    = link_to '取消', search_admin_users_path, class: 'btn'
   - else
-    -# 此手机号码不存在
-    -# b. 我来联系?
-    = link_to '我来联系', contact_admin_users_path(mobile: @mobile), method: :post, class: 'btn btn-warning'
+    - if @mobile_log.is_register
+      = "已注册，用户名为#{@mobile_log.user.name}"
+    - elsif @mobile_log.contacted?
+      = "已由#{@mobile_log.sender.job_number}已联系"
+

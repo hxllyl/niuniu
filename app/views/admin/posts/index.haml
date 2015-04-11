@@ -21,7 +21,7 @@
             %td 业务员工号
             %td= item.user.name
             %td
-            %td= link_to '查看', post_path(item), target: '_blank'
+            %td= link_to '查看', post_path(item, _type: item._type), target: '_blank'
             %td= link_to '关闭/打开', ''
 
       - if @posts.present?
@@ -30,4 +30,4 @@
       .text-center
         = paginate @posts
 
-         
+

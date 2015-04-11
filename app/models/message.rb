@@ -69,7 +69,7 @@ class Message < ActiveRecord::Base
       else
         if _type == TYPES.keys[0]
           jpush_message(content, ActiveDevice.active.pluck(:register_id))
-          users = User.valid_user.normals
+          users = User.valid_user
           self.users << users
         end
         
