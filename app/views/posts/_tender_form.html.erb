@@ -19,10 +19,10 @@
           <% else %>
             <div class="form-group form-inline col-md-6">
               <label class="radio selectTag">
-                <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %> required="required"><span><%= v %></span>
+                <input type="radio" name="tender[discount_way]" id="methodRadios<%= k %>" value=<%= k %> datatype="*"><span><%= v %></span>
               </label>
               <label class="selectInput">
-                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" required="required" maxlength="3">
+                <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" name="tender[discount_content]" maxlength="3">
                 <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
               </label>
             </div>

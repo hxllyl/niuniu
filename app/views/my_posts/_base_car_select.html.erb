@@ -3,9 +3,9 @@
   <div class="col-md-9 inputBox">
     <div class="dropdown w100p">
       <%- if @post.new_record? %>
-        <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> required="required">
+        <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> datatype="*">
       <% else %>
-        <select name="post[base_car_id]" disabled class="form-control input-sm" id="post_base_car_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> required="required">
+        <select name="post[base_car_id]" disabled class="form-control input-sm" id="post_base_car_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> datatype="*">
       <% end %>
         <option value=''>请选择</option>
         <%- @base_cars && @base_cars.order(base_price: :asc).each do |base_car| %>

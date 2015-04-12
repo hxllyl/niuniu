@@ -26,15 +26,5 @@ $(document).ready(function () {
       reader.readAsDataURL(this.files[0]);
     }
   });
-  $('#subBtn').click(function() {
-    if ($("#car_type_input").val() == "" || $("#car_style_input").val() == "" || $("#car_address_input").val() == ""){
-      $(this).attr("disabled",true);
-    }
-  });
-  $("#car_type_input,#car_style_input,#car_address_input").keyup(function(){
-    if($(this).val() != ""){
-      $('#subBtn').removeAttr("disabled");
-    }
-  });
 });
 </script>

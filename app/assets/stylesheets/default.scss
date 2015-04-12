@@ -471,6 +471,17 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .icon.icon-refresh { margin-right: 6px; }
 .help-block { margin: 0; font-size: 12px; }
 .txtTips { padding-top: 4px; font-size: 12px; color: #aeaeae; }
+.Validform_checktip { margin-left: 8px; line-height: 20px; height: 20px; overflow: hidden; color: #999; font-size: 12px; }
+.Validform_right { color: #71b83d; padding-left: 20px; background: url(images/right.png) no-repeat left center; }
+.Validform_wrong { color: red; padding-left: 20px; white-space: nowrap; background: url(images/error.png) no-repeat left center; }
+.Validform_loading { padding-left: 20px; background: url(images/onLoad.gif) no-repeat left center; }
+.Validform_error { background-color: #ffe7e7; }
+#Validform_msg { color: #7d8289; font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; width: 280px; -webkit-box-shadow: 2px 2px 3px #aaa; -moz-box-shadow: 2px 2px 3px #aaa; background: #fff; position: absolute; top: 0px; right: 50px; z-index: 99999; display: none; filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999'); box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1); }
+#Validform_msg .iframe { position: absolute; left: 0px; top: -1px; z-index: -1; }
+#Validform_msg .Validform_title { height: 34px; line-height: 34px; padding: 0 12px; border-width: 0; border-left: 4px solid #f4621b; border-radius: 0; font-size: 14px; font-weight: normal; background-color: #ededed; background-image: none; }
+#Validform_msg a.Validform_close:link, #Validform_msg a.Validform_close:visited { font-size: 18px; font-weight: bold; line-height: 1; color: #000; text-shadow: 0 1px 0 #fff; filter: alpha(opacity=20); opacity: .2; position: absolute; top: 8px; right: 8px; font-family: inherit; text-decoration: none; }
+#Validform_msg a.Validform_close:hover { color: #000; filter: alpha(opacity=80); opacity: .8; }
+#Validform_msg .Validform_info { padding: 15px 44px; font-size: 14px; }
 
 /*
 **page style end && class reset begin**

@@ -40,27 +40,27 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <%= f.password_field :password, class: 'form-control', id: '', placeholder: '请设置密码',required: 'required', name: "password" %>
+          <%= f.password_field :password, class: 'form-control', id: '', placeholder: '请设置密码', datatype:"*6-20", nullmsg:"请填写密码！", name: "password" %>
         </div>
 
         <div class="form-group">
-          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码",required: 'required', name: "confirmPassword" %>
+          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", datatype:"*6-20", recheck:"password", errormsg:"请填写与上一步相同的密码！" %>
         </div>
 
         <div class="form-group">
-          <%= f.text_field :name, class: 'form-control', id: '', placeholder: '请输入姓名',required: 'required' -%>
+          <%= f.text_field :name, class: 'form-control', id: '', placeholder: '请输入姓名', datatype:"*6-16" -%>
         </div>
         <div class="form-group">
-          <%= f.text_field :company, class: "form-control", id: "", placeholder: "请输入公司名称",required: 'required' -%>
+          <%= f.text_field :company, class: "form-control", id: "", placeholder: "请输入公司名称", datatype:"*6-16" -%>
         </div>
 
         <div class="form-group">
           <div class="row">
             <div class="dropdown col-md-6">
-              <%= select_tag 'province', options_for_select(areas(level: :provinces)), {class: 'form-control', id: 'province', prompt: '请选择省份',required: 'required'} -%>
+              <%= select_tag 'province', options_for_select(areas(level: :provinces)), {class: 'form-control', id: 'province', prompt: '请选择省份', datatype:"*"} -%>
             </div>
             <div class="dropdown col-md-6">
-              <%= f.select :area_id, [], { prompt: '请选择城市' }, {class: 'form-control', id: 'city',required: 'required'} %>
+              <%= f.select :area_id, [], { prompt: '请选择城市' }, {class: 'form-control', id: 'city', datatype:"*"} %>
             </div>
           </div>
         </div>
@@ -78,43 +78,12 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#reg_step2').bootstrapValidator({
-    message: 'This value is not valid',
-    feedbackIcons: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-      password: {
-        validators: {
-          notEmpty: {
-            message: '密码不能为空！'
-          }
-        }
-      },
-      confirmPassword: {
-        validators: {
-          notEmpty: {
-            message: '请重新输入新密码！'
-          },
-          identical: {
-            field: 'password',
-            message: '输入的与新密码不同！'
-          }
-        }
-      },
-      captcha: {
-        validators: {
-          callback: {
-            message: '错误！',
-            callback: function(value, validator) {
-              var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
-              return value == sum;
-            }
-          }
-        }
-      }
+  $("#reg_step2").find("input[type='submit']").on("click",function(){
+    if($("#reg_step2").find(".form-control").val() == ""){
+      return false;
+    }
+    else {
+      return true;
     }
   });
 });

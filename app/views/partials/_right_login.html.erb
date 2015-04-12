@@ -61,11 +61,11 @@
       </div>
       <div class="modal-body">
 				<div class="form-group">
-					<%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码', required: "required", name: "newpassword" %>
+					<%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码', datatype:"*6-20", nullmsg:"请填写密码！", name: "password"  %>
 				</div>
 
         <div class="form-group">
-          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", required: "required", name: "confirmPassword" %>
+          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", datatype:"*6-20", recheck:"password", errormsg:"请填写与上一步相同的密码！" %>
         </div>
       </div>
       <div class="modal-footer">
@@ -76,46 +76,3 @@
   </div>
 </div>
 <!--end-->
-<script type="text/javascript">
-$(document).ready(function(){
-  $('#forget_step2').bootstrapValidator({
-    message: 'This value is not valid',
-    feedbackIcons: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-      newpassword: {
-        validators: {
-          notEmpty: {
-            message: '新密码不能为空！'
-          }
-        }
-      },
-      confirmPassword: {
-        validators: {
-          notEmpty: {
-            message: '请重新输入新密码！'
-          },
-          identical: {
-            field: 'newpassword',
-            message: '输入的与新密码不同！'
-          }
-        }
-      },
-      captcha: {
-        validators: {
-          callback: {
-            message: '错误！',
-            callback: function(value, validator) {
-              var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
-              return value == sum;
-            }
-          }
-        }
-      }
-    }
-  });
-});
-</script>
