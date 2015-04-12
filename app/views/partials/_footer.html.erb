@@ -79,7 +79,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $("#reg_step2").find("input[type='submit']").on("click",function(){
-    if($("#reg_step2").find(".form-control").val() == ""){
+    if($("#reg_step2").find(".form-control").hasClass("Validform_error") == true || $("#reg_step2").find(".form-control").val() == ""){
       return false;
     }
     else {
