@@ -6,13 +6,12 @@ class Admin::BaseController < ApplicationController
   def current_staff
     # TODO: Fake current_staff, need add the real logic
     @current_staff ||= current_user
-    %w(sales admin super_admin).include?(@current_staff.role)
   end
 
   # TODO: add logic
   # Internal staff: sales, admin, super_admin
   def require_staff
-    unless current_staff
+    unless %w(sales admin super_admin).include?(current_staff.role)
       redirect_to root_path, alert: '很抱歉，您没有权限' and return
     end
   end
