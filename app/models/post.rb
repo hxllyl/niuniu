@@ -88,7 +88,7 @@ class Post < ActiveRecord::Base
   # 有效的
   scope :valid,     -> { where(status: 1) }
   # 未成交
-  scope :uncompleted, -> { where("status <> 3") }
+  scope :uncompleted, -> { where("posts.status <> 3") }
 
   scope :with_brand, ->(brand) { where(brand_id: brand) }
 
@@ -239,7 +239,7 @@ class Post < ActiveRecord::Base
   end
 
   def car_model_show_name
-    [nil, ''].include?(p.car_model_display_name) ? car_model_name : car_model_display_name
+    [nil, ''].include?(car_model_display_name) ? car_model_name : car_model_display_name
   end
 
   def base_car_short_name

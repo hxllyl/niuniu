@@ -23,7 +23,7 @@ class Api::PostsController < Api::BaseController
 
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
-    posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
+    posts = Post.where(conds).order(created_at: :desc).page(page).per(per)
 
     data = posts.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
     render json: {status: 200, notice: 'success', data: { posts: data } }
@@ -421,7 +421,7 @@ class Api::PostsController < Api::BaseController
   #   cid:      [Integer]   车型id
   #   sid:      [Integer]   规格id
   #   bid:      [Integer]   品牌id
-  #   style:    [String]    款式
+  #   style:    [Integer]   款式id
   #   icol:     [String]    内饰
   #   ocol:     [String]    外观
   #   status:   [Integer]   resource_type 期货还是现车
@@ -521,7 +521,7 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def filter_brand
-    hunts = Post.needs.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).page(params[:page] || 1).per(10)
+    hunts = Post.needs.uncompleted.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).order('posts.updated_at desc').page(params[:page] || 1).per(10)
     data = Array(hunts).map { |post| post.to_hash }
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }

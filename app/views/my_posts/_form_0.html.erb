@@ -16,15 +16,15 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function () {
-    $('#post_photos').find('input[type="file"]').on('change', function(){
-      var n = $(this).attr('class').split(" ")[1];
-      if(this.files && this.files[0]){
-        var reader = new FileReader();
-        reader.onload = function(e){
-          $('#'+n).html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
+  $('#post_photos').find('input[type="file"]').on('change', function(){
+    var n = $(this).attr('class').split(" ")[1];
+    if(this.files && this.files[0]){
+      var reader = new FileReader();
+      reader.onload = function(e){
+        $('#'+n).html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
+      };
+      reader.readAsDataURL(this.files[0]);
+    }
+  });
 });
 </script>

@@ -4,9 +4,9 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <%- if @post.new_record? %>
-          <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% else %>
-          <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
           <option value=''>请选择</option>
           <%- @standards.each do |standard| %>
@@ -25,9 +25,9 @@
     <div class="col-md-9 inputBox">
       <div class="dropdown w100p">
         <%- if @post.new_record? %>
-          <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% else %>
-          <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id", data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+          <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
         <% end %>
           <option value=''>请选择</option>
           <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
@@ -169,12 +169,12 @@ $(document).ready(function(){
               $("#methodVal1").val(100);
           }
           $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
-          $("#methodVal3").val("");
+          $("#methodVal3").val(0);
           $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
       });
       $("#methodVal2").bind("focus keyup", function(){
           $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(1));
-          $("#methodVal3").val("");
+          $("#methodVal3").val(0);
           if ($(this).val() > gPrice){
               $(this).val(gPrice);
               $("#methodVal4").val("");
@@ -188,7 +188,7 @@ $(document).ready(function(){
           if (isNaN(thisV)) {
               thisV = 0;
           }
-          $("#methodVal1,#methodVal2").val("");
+          $("#methodVal1,#methodVal2").val(0);
           $("#methodVal4").val((gPrice + thisV).toFixed(2));
       });
 
@@ -196,10 +196,10 @@ $(document).ready(function(){
           if ($(this).val() < gPrice) {
               $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
               $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(1));
-              $("#methodVal3").val("");
+              $("#methodVal3").val(0);
           }
           else {
-              $("#methodVal1,#methodVal2").val("");
+              $("#methodVal1,#methodVal2").val(0);
               $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
           }
       });
