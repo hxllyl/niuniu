@@ -40,18 +40,18 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <%= f.password_field :password, class: 'form-control', id: '', placeholder: '请设置密码', datatype:"*6-20", nullmsg:"请填写密码！", name: "password" %>
+          <%= f.password_field :password, class: 'form-control', id: '', placeholder: '请设置密码', datatype:"*6-20", nullmsg:"请设置密码！", name: "user[password]" %>
         </div>
 
         <div class="form-group">
-          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", datatype:"*6-20", recheck:"password", errormsg:"请填写与上一步相同的密码！" %>
+          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", datatype:"*6-20", recheck:"user[password]", nullmsg:"请重新输入密码！", errormsg:"请填写与上一步相同的密码！" %>
         </div>
 
         <div class="form-group">
-          <%= f.text_field :name, class: 'form-control', id: '', placeholder: '请输入姓名', datatype:"*6-16" -%>
+          <%= f.text_field :name, class: 'form-control', id: '', placeholder: '请输入姓名', datatype:"*2-16", nullmsg:"请输入姓名！", errormsg:"姓名长度请限制在2-16个字符！" -%>
         </div>
         <div class="form-group">
-          <%= f.text_field :company, class: "form-control", id: "", placeholder: "请输入公司名称", datatype:"*6-16" -%>
+          <%= f.text_field :company, class: "form-control", id: "", placeholder: "请输入公司名称", datatype:"*2-16", nullmsg:"请输入公司名称！", errormsg:"公司名称请限制在2-16个字符！" -%>
         </div>
 
         <div class="form-group">
@@ -70,7 +70,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= f.submit t('finish_but'), class: 'btn btn-default w100p orange btn_spacing' -%>
+        <div id="msgTips"></div>
+        <%= f.submit t('finish_but'), class: 'btn btn-default w100p mt6 orange btn_spacing' -%>
       </div>
       <% end -%>
     </div>
@@ -78,6 +79,15 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+  $("#reg_step2").Validform({
+    tiptype:function(msg,o,cssctl){
+      var objtip=$("#msgTips");
+      cssctl(objtip,o.type);
+      objtip.text(msg);
+    },
+    ajaxPost:true
+  });
+
   $("#reg_step2").find("input[type='submit']").on("click",function(){
     if($("#reg_step2").find(".form-control").hasClass("Validform_error") == true || $("#reg_step2").find(".form-control").val() == ""){
       return false;
