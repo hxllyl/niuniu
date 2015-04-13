@@ -521,7 +521,7 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def filter_brand
-    hunts = Post.needs.uncompleted.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).order(updated: :desc).page(params[:page] || 1).per(10)
+    hunts = Post.needs.uncompleted.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).order('posts.updated_at desc').page(params[:page] || 1).per(10)
     data = Array(hunts).map { |post| post.to_hash }
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }

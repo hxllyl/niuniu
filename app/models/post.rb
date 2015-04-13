@@ -88,7 +88,7 @@ class Post < ActiveRecord::Base
   # 有效的
   scope :valid,     -> { where(status: 1) }
   # 未成交
-  scope :uncompleted, -> { where("status <> 3") }
+  scope :uncompleted, -> { where("posts.status <> 3") }
 
   scope :with_brand, ->(brand) { where(brand_id: brand) }
 
