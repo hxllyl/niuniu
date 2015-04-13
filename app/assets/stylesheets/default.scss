@@ -127,7 +127,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .indexUser .userInfo .name .tag { float: left; width: 35px; height: 14px; margin-top: 6px; }
 .indexUser .userInfo .glyphicon { margin-right: 6px; }
 .indexUser .userDetail { line-height: 24px; color: #666; }
-.indexUser .userDetail p span, .indexUser .userDetail p strong { color: #ff791f; }
+.indexUser .userDetail p span, .indexUser .userDetail p strong { word-break: break-all; color: #ff791f; }
 .indexUser .userData { margin-bottom: 16px; }
 .indexUser .userData li { position: relative; padding: 0 10px; text-align: center; background: url(../imgs/line1x20.gif) no-repeat right center; }
 .indexUser .userData li.last { background: none; }
@@ -347,15 +347,16 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 
 /*userCenter style*/
 .userOverview { position: relative; height: 248px; margin-bottom: 10px; background: #f3f3f3 image_url("user/bannerBg.jpg") no-repeat right bottom; }
-.userOverview .userInfo { padding: 20px; }
+.userOverview .userInfo { padding: 14px 20px; }
 .userOverview .userInfo .photo { width: 118px; height: 118px; border: 5px solid #d3d3d3; border-radius: 50%; text-align: center; overflow: hidden; }
 .userOverview .userInfo .detail { display: inline-block; line-height: 20px; margin-left: 40px; }
 .userOverview .userInfo .detail .name { float: left; line-height: 22px; margin-right: 8px; font-size: 18px; font-weight: bold; color: #323232; }
 
 /*.userOverview .userInfo .detail .type { float: left; height: 22px; line-height: 22px; padding: 0 10px; margin-right: 8px; border-radius: 11px; font-size: 13px; color: #FFF; background-color: #b3b3b3; }*/
 .userOverview .userInfo .detail .type { float: left; width: 56px; height: 22px; margin-right: 8px; }
-.userOverview .userInfo .detailTab { margin-top: 8px; color: #666; }
+.userOverview .userInfo .detailTab { width: 600px; margin-top: 8px; color: #666; }
 .userOverview .userInfo .detailTab .tip { color: #ff791f; }
+.userOverview .userInfo .detailTab td { word-break: break-all; }
 .userDataTag { position: absolute; bottom: 0; left: 0; width: 100%; height: 56px; border: 1px solid #ccc; background: image_url('user/dataTagBg.png') repeat left top; }
 .userDataTag .list { position: absolute; bottom: 0; left: 50%; margin-left: -255px; }
 .userDataTag .list li { position: relative; float: left; padding: 0 40px; }
@@ -472,9 +473,9 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .help-block { margin: 0; font-size: 12px; }
 .txtTips { padding-top: 4px; font-size: 12px; color: #aeaeae; }
 .Validform_checktip { margin-left: 8px; line-height: 24px; height: 24px; overflow: hidden; color: #999; text-align: left; font-size: 12px; }
-.Validform_right { color: #71b83d; padding-left: 20px; background: url(images/right.png) no-repeat left center; }
-.Validform_wrong { color: red; padding-left: 20px; white-space: nowrap; background: url(images/error.png) no-repeat left center; }
-.Validform_loading { padding-left: 20px; background: url(images/onLoad.gif) no-repeat left center; }
+.Validform_right { color: #71b83d; padding-left: 20px; }
+.Validform_wrong { color: red; padding-left: 20px; white-space: nowrap; }
+.Validform_loading { padding-left: 20px; }
 .Validform_error { background-color: #ffe7e7; }
 #Validform_msg { color: #7d8289; font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; width: 280px; -webkit-box-shadow: 2px 2px 3px #aaa; -moz-box-shadow: 2px 2px 3px #aaa; background: #fff; position: absolute; top: 0px; right: 50px; z-index: 99999; display: none; filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999'); box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1); }
 #Validform_msg .iframe { position: absolute; left: 0px; top: -1px; z-index: -1; }
