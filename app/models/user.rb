@@ -59,8 +59,7 @@ class User < ActiveRecord::Base
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
 
-  belongs_to :customer_service, class_name: 'User'
-  has_many :customers, -> {where(role: 'sale')}, class_name: 'User', foreign_key: :customer_service_id
+  belongs_to :customer_service, class_name: 'Staff'
 
   has_many :send_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1])}, class_name: 'Feedback', foreign_key: 'sender_id'
   has_many :received_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1]) }, class_name: 'Feedback', foreign_key: 'receiver_id'
