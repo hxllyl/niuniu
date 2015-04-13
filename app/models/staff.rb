@@ -8,7 +8,7 @@ class Staff < User
 
   scope :customer_services, -> { where(role: 'staff') }
 
-  has_many :customers, -> {where(role: ['', 'normal', nil]}, class_name: 'User', foreign_key: :customer_service_id
+  has_many :customers, -> {where(role: 'normal')}, class_name: 'User', foreign_key: :customer_service_id
   has_many :feedbacks, class_name: 'Message', foreign_key: 'receiver_id'
 
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel', foreign_key: 'operator_id'

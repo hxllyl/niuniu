@@ -11,7 +11,7 @@ class PostsController < BaseController
     @brands     = Brand.valid.order(click_counter: :desc).limit(20)
     @car_models = CarModel.valid.order(click_counter: :desc).limit(40)
     if @_type.to_i == 1
-      @posts   = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(updated_at: :desc).page(params[:page]).per(10)
+      @posts   = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(created_at: :desc).page(params[:page]).per(10)
     else
       posts   = Post.resources.valid.includes(:user, :car_model, :standard, :base_car, :brand).order(updated_at: :desc).group_by(&:user_id).collect{|k, v| v.first}
       @posts  =  Kaminari.paginate_array(posts).page(params[:page]).per(10)

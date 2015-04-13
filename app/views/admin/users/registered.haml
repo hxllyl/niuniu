@@ -20,7 +20,6 @@
               %th 最后登录时间
               %th 近一月累计成交
               %th 累计成交
-              %th 备注
               %th
             - @mobiles.each do |ele|
               %tr
@@ -34,7 +33,6 @@
                 %td= ele.user.last_sign_in_at.try(:to_s, :db)
                 %td= ele.user.last_month_dealt
                 %td= ele.user.sum_dealt
-                %td 备注
                 %td= link_to '修改', edit_admin_user_path(ele.user)
         .col-lg-4
           %table.table.table-responsive

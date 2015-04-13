@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20150411131821) do
     t.integer  "sender_id"
     t.integer  "_type",                      default: 0
     t.boolean  "is_register",                default: false
+    t.integer  "reg_admin_id"
     t.datetime "last_contact_at"
     t.integer  "status"
     t.datetime "created_at",                                 null: false
