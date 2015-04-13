@@ -14,16 +14,15 @@
               %th 业务员工号
               %th 手机号
               %th 首次联系时间
-              %th 备注
-              %th
+              %th 操作
             - @mobiles.each do |ele|
               %tr
                 %td= ele.id
                 %td= ele.sender.job_number
                 %td= ele.mobile
                 %td= ele.created_at.to_s(:db)
-                %td 备注
-                %td= link_to '修改', edit_admin_user_path(ele)
+                %td
+                  = link_to '代注册', new_admin_user_path('user[mobile]' => ele.mobile, 'user[customer_service_id]' => ele.sender.id)
         .col-lg-6
           %table.table.table-responsive
             %tr

@@ -23,7 +23,7 @@ class Api::PostsController < Api::BaseController
 
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
-    posts = Post.where(conds).order(updated_at: :desc).page(page).per(per)
+    posts = Post.where(conds).order(created_at: :desc).page(page).per(per)
 
     data = posts.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
     render json: {status: 200, notice: 'success', data: { posts: data } }

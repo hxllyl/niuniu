@@ -4559,3 +4559,10 @@ body.skin-3 {
     display: none;
   }
 }
+
+/*new_user form styles*/
+#new_user label { float: left; width: 80px; line-height: 34px; text-transform: uppercase;}
+#new_user .form-control { float: left; width: 200px; margin-right: 8px; }
+#new_user .form-control.w100p {  width: 600px; }
+#new_user .subBtn { margin-left: 80px; color: #fff; background-color: #2f4050; }
+#new_user .subBtn:hover { background-color: #19222b; }

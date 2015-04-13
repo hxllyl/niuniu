@@ -1,0 +1,43 @@
+= form_for(@user, url: url) do |f|
+  .form-group.clearfix
+    = f.label '姓名'
+    = f.text_field :name, class: "form-control"
+  .form-group.clearfix
+    = f.label '手机号'
+    = f.text_field :mobile, class: "form-control", disabled: "disabled"
+  .form-group.clearfix
+    = f.label '密码'
+    = f.password_field :password, class: "form-control"
+  .form-group.clearfix
+    = f.label '注册地'
+    = select_tag 'province', options_for_select(areas(level: :provinces)), id: 'province', class: "form-control", prompt: '请选择省份'
+    = f.select :area_id, options_for_select([[@user.area.try(:name), @user.area.try(:id)]], selected: @user.area_id), {prompt: '请选择城市'}, {id: 'city', class: "form-control"}
+  .form-group.clearfix
+    = f.label '公司'
+    = f.text_field :company, class: "form-control"
+
+  = f.fields_for :contact do |c_f|
+    .form-group.clearfix
+      = c_f.label '公司地址'
+      = c_f.text_field :company_address, class: "form-control", value: @user.contact['company_address']
+    .form-group.clearfix
+      = c_f.label '职业'
+      = c_f.text_field :position_header, class: "form-control", value: @user.contact['position_header']
+    .form-group.clearfix
+      = c_f.label '微信'
+      = c_f.text_field :wx, class: "form-control", value: @user.contact['wx']
+      .form-group.clearfix
+      = c_f.label 'QQ'
+      = c_f.text_field :qq, class: "form-control", value: @user.contact['qq']
+    .form-group.clearfix
+      = c_f.label '自我简介'
+      = c_f.text_area :self_introduction, class: "form-control w100p", row: "4", value: @user.contact['self_introduction']
+
+  = f.hidden_field :reg_status, value: '3'
+  = f.hidden_field :customer_service_id
+  = f.hidden_field :role, value: 'normal'
+  = f.hidden_field :status, value: 1
+  .form-group.clearfix
+    = f.submit class: "btn btn-default subBtn"
+
+= javascript_include_tag "edit_user"
