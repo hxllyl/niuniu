@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20150411131821) do
     t.integer  "user_id",                               null: false
     t.integer  "status",                    default: 0
     t.string   "content",       limit: 225
-    t.integer  "operator_id"
+    t.integer  "operator_id",                           null: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20150411131821) do
 
   add_index "log_contact_phones", ["_type"], name: "index_log_contact_phones_on__type", using: :btree
   add_index "log_contact_phones", ["mobile"], name: "index_log_contact_phones_on_mobile", using: :btree
+  add_index "log_contact_phones", ["sender_id"], name: "index_log_contact_phones_on_sender_id", using: :btree
 
   create_table "log_posts", force: :cascade do |t|
     t.integer  "user_id",                     null: false
