@@ -1,0 +1,38 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 用户升级列表
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 发起人
+          %th 初始level
+          %th 升级level
+          %th 状态
+          %th 新建时间
+          %th 更新时间
+          %th 操作人
+          %th 操作
+
+        - @logs.each do |log|
+          %tr
+            %td= log.id
+            %td= log.user_name
+            %td= User::LEVELS[log.start_level]
+            %td= User::LEVELS[log.end_level]
+            %td= Log::UserUpdateLevel::STATUS[log.status]
+            %td= log.created_at.to_s(:db)
+            %td= log.updated_at.to_s(:db)
+            %td= log.operator_name
+            %td
+              = link_to "查看", admin_log_user_update_level_path(log), target: '_blank'        
+                 
+
+      - if @logs.present?
+        .hr-line-dashed
+
+      .text-center
+        = paginate @logs

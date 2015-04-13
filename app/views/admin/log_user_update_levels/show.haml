@@ -1,0 +1,18 @@
+%ul
+  - @types.each do |type|
+    %li
+      = image_tag @log.user.send("#{type}"), alt: '', size: '360x360'
+      
+- if @log.is_wait?
+  = link_to "通过", update_status_admin_log_user_update_level_path(@log, status: Log::UserUpdateLevel::STATUS.keys[1]), "data-method" => 'patch'
+  |
+  = link_to "不通过", update_status_admin_log_user_update_level_path(@log, status: Log::UserUpdateLevel::STATUS.keys[2]), "data-method" => 'patch'  
+- elsif @log.is_approved?
+  = link_to "待审核", update_status_admin_log_user_update_level_path(@log, status: Log::UserUpdateLevel::STATUS.keys[0]), "data-method" => 'patch'
+  |
+  = link_to "不通过", update_status_admin_log_user_update_level_path(@log, status: Log::UserUpdateLevel::STATUS.keys[2]), "data-method" => 'patch'
+- else
+  = link_to "待审核", update_status_admin_log_user_update_level_path(@log, status: Log::UserUpdateLevel::STATUS.keys[0]), "data-method" => 'patch'
+  |
+  = link_to "通过", update_status_admin_log_user_update_level_path(@log, status: Log::UserUpdateLevel::STATUS.keys[1]), "data-method" => 'patch'      
+ 

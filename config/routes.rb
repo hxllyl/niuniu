@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
   namespace :admin do
+    resources :log_user_update_levels do
+      member do
+        patch :update_status
+      end
+    end
+    
     resources :users do
       collection do
         get :search
@@ -20,6 +26,8 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
+    
+    
   end
 
   root 'portal#index'
