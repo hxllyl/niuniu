@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     end
 
     resources :banners
-    resources :posts
+    resources :posts do
+      member do
+        put :approve_base_car
+      end
+    end
     resources :helpers, except: [ :show ]
 
     resources :messages, only: [:index, :new, :create, :destroy]
