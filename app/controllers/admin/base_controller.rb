@@ -11,8 +11,9 @@ class Admin::BaseController < ApplicationController
   # TODO: add logic
   # Internal staff: sales, admin, super_admin
   def require_staff
-    unless %w(staff admin super_admin).include?(current_staff.role)
-      redirect_to root_path, alert: '很抱歉，您没有权限' and return
+    if current_staff.class != Staff
+      flash[:notice] = '很抱歉，您没有权限'
+      redirect_to root_path
     end
   end
 

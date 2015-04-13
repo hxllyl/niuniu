@@ -1,10 +1,10 @@
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-lg-9
-    %h2 管理员编辑代注册用户
+    %h2 管理员代注册
 
 .wrapper.wrapper-content.animated.fadeInRight
   .row
     .col-lg-12
       .ibox.float-e-margins
         .ibox-content
-          = render partial: 'form', locals: {url: admin_user_path}
+          = render partial: 'form', locals: {url: admin_users_path}
