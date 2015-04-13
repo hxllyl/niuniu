@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20150411131821) do
     t.integer  "sender_id"
     t.integer  "_type",                      default: 0
     t.boolean  "is_register",                default: false
+    t.integer  "reg_admin_id"
     t.datetime "last_contact_at"
     t.integer  "status"
     t.datetime "created_at",                                 null: false
@@ -267,28 +268,28 @@ ActiveRecord::Schema.define(version: 20150411131821) do
   add_index "photos", ["owner_id", "owner_type"], name: "index_photos_on_owner_id_and_owner_type", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "standard_id",                                                         null: false
-    t.integer  "brand_id",                                                            null: false
-    t.integer  "car_model_id",                                                        null: false
-    t.integer  "base_car_id",                                                         null: false
-    t.integer  "user_id",                                                             null: false
+    t.integer  "standard_id",                                                        null: false
+    t.integer  "brand_id",                                                           null: false
+    t.integer  "car_model_id",                                                       null: false
+    t.integer  "base_car_id",                                                        null: false
+    t.integer  "user_id",                                                            null: false
     t.integer  "_type"
-    t.string   "remark",           limit: 225
-    t.string   "outer_color",      limit: 60,                                         null: false
-    t.string   "inner_color",      limit: 60,                                         null: false
-    t.string   "car_license_area", limit: 60,                                         null: false
+    t.text     "remark"
+    t.string   "outer_color",      limit: 60,                                        null: false
+    t.string   "inner_color",      limit: 60,                                        null: false
+    t.string   "car_license_area", limit: 60,                                        null: false
     t.string   "car_in_area"
-    t.integer  "take_car_date",                                         default: 0
-    t.decimal  "expect_price",                 precision: 10, scale: 2, default: 0.0
-    t.integer  "discount_way",                                                        null: false
-    t.decimal  "discount_content",             precision: 10, scale: 2, default: 0.0
-    t.integer  "status",                                                default: 1
-    t.integer  "resource_type",                                                       null: false
-    t.integer  "sys_set_count",                                         default: 0
-    t.integer  "channel",                                               default: 0
+    t.integer  "take_car_date",                                        default: 0
+    t.decimal  "expect_price",                precision: 10, scale: 2, default: 0.0
+    t.integer  "discount_way",                                                       null: false
+    t.decimal  "discount_content",            precision: 10, scale: 2, default: 0.0
+    t.integer  "status",                                               default: 1
+    t.integer  "resource_type",                                                      null: false
+    t.integer  "sys_set_count",                                        default: 0
+    t.integer  "channel",                                              default: 0
     t.integer  "position"
-    t.datetime "created_at",                                                          null: false
-    t.datetime "updated_at",                                                          null: false
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
   end
 
   add_index "posts", ["_type"], name: "index_posts_on__type", using: :btree
@@ -309,15 +310,15 @@ ActiveRecord::Schema.define(version: 20150411131821) do
   add_index "standards", ["name"], name: "index_standards_on_name", using: :btree
 
   create_table "tenders", force: :cascade do |t|
-    t.integer  "post_id",                                                             null: false
-    t.integer  "user_id",                                                             null: false
-    t.decimal  "price",                        precision: 10, scale: 2, default: 0.0
-    t.integer  "discount_way",                                                        null: false
-    t.decimal  "discount_content",             precision: 10, scale: 2, default: 0.0
-    t.integer  "status",                                                default: 0
-    t.string   "remark",           limit: 225
-    t.datetime "created_at",                                                          null: false
-    t.datetime "updated_at",                                                          null: false
+    t.integer  "post_id",                                                 null: false
+    t.integer  "user_id",                                                 null: false
+    t.decimal  "price",            precision: 10, scale: 2, default: 0.0
+    t.integer  "discount_way",                                            null: false
+    t.decimal  "discount_content", precision: 10, scale: 2, default: 0.0
+    t.integer  "status",                                    default: 0
+    t.text     "remark"
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   add_index "tenders", ["post_id"], name: "index_tenders_on_post_id", using: :btree
@@ -349,27 +350,27 @@ ActiveRecord::Schema.define(version: 20150411131821) do
   add_index "user_messages", ["user_id"], name: "index_user_messages_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   limit: 15,               null: false
-    t.string   "mobile",                 limit: 15,               null: false
+    t.string   "name",                   limit: 15,                     null: false
+    t.string   "mobile",                 limit: 15,                     null: false
     t.integer  "_type"
     t.string   "company",                limit: 225
-    t.string   "role",                   limit: 30
+    t.string   "role",                   limit: 30,  default: "normal"
     t.integer  "reg_status",                         default: 0
-    t.integer  "area_id",                                         null: false
+    t.integer  "area_id",                                               null: false
     t.integer  "level",                              default: 0
     t.integer  "status",                             default: 0
     t.jsonb    "contact",                            default: {}
     t.string   "job_number",             limit: 15
     t.integer  "customer_service_id"
     t.string   "mask",                   limit: 10
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.string   "email",                              default: ""
-    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "encrypted_password",                 default: "",       null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,        null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"

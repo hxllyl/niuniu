@@ -291,9 +291,20 @@ class User < ActiveRecord::Base
 
   # 生成POST日志
   def gen_post_log(post, method_name)
-    # log_posts.create(method_name: method_name, post_id: post.id)
-    log = log_posts.find_or_initialize_by(method_name: method_name, post_id: post.id)
-    log.new_record? ? log.save : log.update_attributes(updated_at: Time.now)
+    if method_name == 'update_all'
+      log = log_posts.find_or_initialize_by(method_name: 'update_all')
+      if log.new_record?
+        log.post_id = post.id
+        log.save
+      else
+        log.update_attributes(updated_at: Time.now)
+      end
+    elsif method_name == 'view'
+      log = log_posts.find_or_initialize_by(method_name: 'view', post_id: post.id)
+      log.new_record? ? log.save : log.update_attributes(updated_at: Time.now)
+    else
+      log_posts.create(method_name: method_name, post_id: post.id)
+    end
   end
 
   # 最近浏览的
