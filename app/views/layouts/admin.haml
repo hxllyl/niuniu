@@ -40,6 +40,8 @@
               = link_to '寻车列表', admin_posts_path
             %li{ class: (:active if current_page?(controller: 'admin/banners', action: 'index')) }
               = link_to 'Banners', admin_banners_path
+            %li{ class: (:active if current_page?(controller: 'admin/helpers', action: 'index')) }
+              = link_to 'Helpers', admin_helpers_path
             -# TODO: Add real logic for 'normal_admin?', and remove '||= true'
             - if normal_admin? || true 
               %li{ class: (:active if current_page?(controller: 'admin/messages')) }

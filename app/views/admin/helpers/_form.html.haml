@@ -1,0 +1,27 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 Helper
+    %ol.breadcrumb
+      %li= link_to '返回列表', '#'
+      %li.active
+        %strong 新建 helper
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          = form_for [ :admin, @helper ], html: { class: 'form-horizontal' } do |f|
+            .form-group
+              = f.label :title, '标题: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_field :title, class: 'form-control'
+
+            .form-group
+              = f.label :content, '内容: ', class: 'col-sm-2 control-label'
+              .col-sm-2
+                = f.text_area :content
+
+
+            .form-group.col-sm-4.col-sm-offset-6
+              = f.submit '提交', class: 'btn btn-primary'
