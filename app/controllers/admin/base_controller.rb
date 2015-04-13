@@ -22,8 +22,8 @@ class Admin::BaseController < ApplicationController
     @current_staff.role == 'staff'
   end
 
-  helper_method :admin?
-  def admin?
+  helper_method :normal_admin?
+  def normal_admin?
     @current_staff.role == 'admin'
   end
 
