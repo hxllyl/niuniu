@@ -64,7 +64,7 @@ class Api::MessagesController < Api::BaseController
   #
   # Params:
   #   token:    [String] 用户的token
-  #   ids:      [Array] 消息的id 多个
+  #   ids:      [Array] 消息的id 多个 可选
   # Return:
   #   status:   200
   #   notice:   success
