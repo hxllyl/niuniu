@@ -19,7 +19,7 @@ module Services
       @standards = Standard.where(' name ILIKE :name', name: "%#{@query}%")
       @car_models = CarModel.where(' name ILIKE :name', name: "%#{ @query }%")
       # @base_cars = BaseCar.where("base_price LIKE :price OR style LIKE :style", price: /#{@query}/, style: "%#{@query}%")
-      @base_cars = BaseCar.where(' style ILIKE :style', style: "%#{@query}%")
+      @base_cars = BaseCar.where(" style ILIKE :style OR \"base_cars\".\"NO\" ILIKE :num OR base_price::TEXT  ILIKE :guiding_price", style: "%#{@query}%", num: "%#{@query}%", guiding_price: "%#{@query}%")
     end
 
     def search
