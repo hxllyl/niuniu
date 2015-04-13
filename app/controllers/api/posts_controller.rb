@@ -421,7 +421,7 @@ class Api::PostsController < Api::BaseController
   #   cid:      [Integer]   车型id
   #   sid:      [Integer]   规格id
   #   bid:      [Integer]   品牌id
-  #   style:    [String]    款式
+  #   style:    [Integer]   款式id
   #   icol:     [String]    内饰
   #   ocol:     [String]    外观
   #   status:   [Integer]   resource_type 期货还是现车
