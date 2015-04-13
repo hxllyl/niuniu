@@ -11,19 +11,19 @@ class Admin::BaseController < ApplicationController
   # TODO: add logic
   # Internal staff: sales, admin, super_admin
   def require_staff
-    unless %w(sales admin super_admin).include?(current_staff.role)
+    unless %w(staff admin super_admin).include?(current_staff.role)
       redirect_to root_path, alert: '很抱歉，您没有权限' and return
     end
   end
 
-  # ROLES = %w(normal sales admin super_admin) # 普通用户 业务员 普管 超管
-  helper_method :salesman?
-  def salesman?
-    @current_staff.role == 'sales'
+  # ROLES = %w(normal staff admin super_admin) # 普通用户 业务员 普管 超管
+  helper_method :staff?
+  def staff?
+    @current_staff.role == 'staff'
   end
 
-  helper_method :normal_admin?
-  def normal_admin?
+  helper_method :admin?
+  def admin?
     @current_staff.role == 'admin'
   end
 
