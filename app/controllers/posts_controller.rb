@@ -267,7 +267,7 @@ class PostsController < BaseController
     @post       = Post.find_by_id(params[:id])
     @standards  = Standard.all
     @standard   = @post.standard
-    @brands     = @standards.first.brands.valid
+    @brands     = @standard.brands
     @brand      = @post.brand
     @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
     @car_model  = @post.car_model
@@ -292,14 +292,14 @@ class PostsController < BaseController
 
     # 为资源库保存自定义的颜色
     Log::BaseCar.create(
-      user_id:      @user.id,
+      user_id:      @someone.id,
       base_car_id:  base_car.id,
       method_name:  'outer_color',
       content:      params[:post][:outer_color]
     ) unless base_car.outer_color.include?(params[:post][:outer_color])
 
     Log::BaseCar.create(
-      user_id:      @user.id,
+      user_id:      @someone.id,
       base_car_id:  base_car.id,
       method_name:  'inner_color',
       content:      params[:post][:inner_color]

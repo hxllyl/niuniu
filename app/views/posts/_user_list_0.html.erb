@@ -12,7 +12,7 @@
           <h3 class="panel-title">他的资源</h3>
         </div>
         <div class="panel-body">
-          <div class="mySourceOpe">
+          <div class="mySourceOpe clearfix">
             <div class="btn-group">
               <select name="" class="form-control" id="brands_select">
                 <option value="">筛选品牌</option>
@@ -25,7 +25,7 @@
                 <% end %>
               </select>
             </div>
-            <%= link_to '为他代发资源', new_post_path(user_id: @someone.id, _type: 0) if current_user.class == Staff %>
+            <%= link_to '为他代发资源', new_post_path(user_id: @someone.id, _type: 0), class: 'btn btn-default bfR' if current_user.class == Staff %>
           </div>
           <div class="mySourceTab mt10">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
@@ -35,7 +35,7 @@
                     <td>
                       <div class="box clearfix">
                         <div class="infoM">
-                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %></h5>
+                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %><%= link_to '编辑', edit_post_path(post, user_id: @someone.id), class: 'btn btn-default btn-xs ml6' %></h5>
                           <div class="info clearfix">
                             <div class="m"><%= post.st_rt %></div><div class="m"><%= post.publish_time %></div>
                           </div>

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class HelpersController < BaseController
 
 
@@ -5,7 +7,7 @@ class HelpersController < BaseController
 
   def show
     @helper = Helper.find params[:id]
-    render layout: false
+    # render layout: false
   end
 
   def index
