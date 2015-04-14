@@ -45,6 +45,7 @@
   </div>
 </div>
 <input class='hide' id="post_type" name="post[_type]" value="<%= @post_type %>">
+<input class='hide' id="user_id" name="user_id" value="<%= @someone.id %>">
 <%= render @car_model == 'set_car_model' ? 'car_model_input' : 'car_model_select'%>
 
 <script type="text/javascript">
@@ -157,13 +158,8 @@ $(document).ready(function(){
       });
   });
   var gPrice = parseFloat($("#guidePrice").html());
-  if (isNaN(gPrice) || !gPrice || gPrice == "") {
+  if (isNaN(gPrice)) {
       gPrice = 0;
-      $("#methodVal1,#methodVal2,#methodVal3,#methodVal4").bind("focus blur keyup", function () {
-          if ($(this).val() > 999) {
-              $(this).val(999);
-          }
-      });
       $("#methodVal4").bind("focus blur keyup", function () {
           $("#methodVal1,#methodVal2,#methodVal3").val("");
       });
@@ -190,10 +186,7 @@ $(document).ready(function(){
       });
       $("#methodVal3").bind("focus keyup", function(){
           var thisV = parseFloat($(this).val());
-          if (thisV > 999) {
-              $(this).val(999);
-          }
-          else if (isNaN(thisV)) {
+          if (isNaN(thisV)) {
               thisV = 0;
           }
           $("#methodVal1,#methodVal2").val(0);
@@ -201,10 +194,7 @@ $(document).ready(function(){
       });
 
       $("#methodVal4").bind("focus keyup", function(){
-          if ($(this).val() > 999) {
-              $(this).val(999);
-          }
-          else if ($(this).val() < gPrice) {
+          if ($(this).val() < gPrice) {
               $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
               $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(1));
               $("#methodVal3").val(0);

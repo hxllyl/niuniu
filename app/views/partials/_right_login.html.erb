@@ -27,7 +27,7 @@
   <% end -%>
 </div>
 <!--forget-->
-<%= form_for(User.new, as: :user, url: reset_password_users_path, html: { method: :patch }) do |f| %>>
+<%= form_for(User.new, as: :user, url: reset_password_users_path, html: { method: :patch }) do |f| %>
 <%= hidden_field_tag :channel, 'reset_password' %>
 <div class="modal box bs-example-modal-sm" id="forget_step1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">

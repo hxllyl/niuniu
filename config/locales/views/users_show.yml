@@ -16,10 +16,10 @@ zh-CN:
   done: 已完成
   custom_setting: 个人信息设置
   account_manage: 账号管理
-  
-  identity: 身份证
-  hand_id: 手持身份证
+
+  identity: 身份证正面
+  hand_id: 身份证反面
   visiting: 个人名片
   room_outer: 展厅门头照
-  room_inner: 展厅内部照 
+  room_inner: 展厅内部照
   license: 营业执照原件

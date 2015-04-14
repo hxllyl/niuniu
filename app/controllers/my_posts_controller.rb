@@ -14,7 +14,7 @@ class MyPostsController < BaseController
     end
 
     if params[:update_all]
-      if current_user.could_update_my_resoruces?
+      if current_user.could_update_my_resources?
         current_user.posts.resources.valid.update_all(updated_at: Time.now())
         current_user.gen_post_log(current_user.posts.resources.valid.first, 'update_all')
       else
@@ -126,7 +126,7 @@ class MyPostsController < BaseController
     @post       = Post.find_by_id(params[:id])
     @standards  = Standard.all
     @standard   = @post.standard
-    @brands     = @standards.first.brands.valid
+    @brands     = @standard.brands
     @brand      = @post.brand
     @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
     @car_model  = @post.car_model

@@ -1,0 +1,52 @@
+</div>
+<%- if @car_model == 'set_car_model'|| @base_car == 'set_base_car' %>
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_appearance" class="col-md-4 control-label">外观</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <input name="post[outer_color]" class="form-control input-sm" id="car_appearance" placeholder="输入不得超过8个字符" maxlength="8">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_interior" class="col-md-4 control-label">内饰</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <input name="post[inner_color]" class="form-control input-sm" id="car_interior" placeholder="输入不得超过8个字符" maxlength="8">
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_appearance" class="col-md-4 control-label">外观</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[outer_color]" class="form-control input-sm" id="car_appearance">
+          <%- @base_car && @base_car.outer_color.each do |ele| %>
+            <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+          <option value="set_outer_color">自定义</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_interior" class="col-md-4 control-label">内饰</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[inner_color]" class="form-control input-sm" id="car_interior">
+          <%- @base_car && @base_car.inner_color.each do |ele| %>
+          <option value="<%= ele %>"><%= ele %></option>
+          <% end %>
+          <option value="set_inner_color">自定义</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= render @post_type == 1 ? 'need_select' : 'resource_select' %>
+<%= render (@car_model == 'set_car_model'|| @base_car == 'set_base_car' || (@base_car && @base_car.base_price.to_f == 0.0)) ? 'tender_by_itself' : 'tender' %>

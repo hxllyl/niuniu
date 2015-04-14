@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="car_status" class="col-md-4 control-label">状态</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <select name="post[resource_type]" class="form-control input-sm" id="car_date">
+          <%- Post::RESOURCE_TYPE.each do |k, v|%>
+            <% next if k == -1 %>
+            <%- if @post && @post.resource_type == k %>
+              <option value="<%= k %>"selected="selected"><%= v %></option>
+            <% else %>
+              <option value="<%= k %>"><%= v %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

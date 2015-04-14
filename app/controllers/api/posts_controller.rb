@@ -341,7 +341,7 @@ class Api::PostsController < Api::BaseController
   #   error_msg: 错误信息
 
   def update_all
-    if @user.could_update_my_resoruces?
+    if @user.could_update_my_resources?
       posts = @user.posts.resources.where("id in (?)", params[:post_ids])
       posts.update_all(updated_at: Time.now)
       @user.gen_post_log(posts.first, 'update_all')
@@ -521,7 +521,7 @@ class Api::PostsController < Api::BaseController
   #   notice: [String]  failed
   #   error_msg: 错误信息
   def filter_brand
-    hunts = Post.needs.uncompleted.valid.includes(:brand).where("brands.name" => String(params[:brand_name])).order('posts.updated_at desc').page(params[:page] || 1).per(10)
+    hunts = Post.needs.uncompleted.valid.includes(:user, :brand).where("brands.name" => String(params[:brand_name])).order('posts.updated_at desc').page(params[:page] || 1).per(10)
     data = Array(hunts).map { |post| post.to_hash }
 
     render json: {status: 200, notice: 'success', data: { posts: data  } }
