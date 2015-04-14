@@ -1,3 +1,4 @@
+# encoding: utf-8
 # require 'pry'
 module Services
   class QueryPost
@@ -30,7 +31,7 @@ module Services
       std = posts[:standard_id].in( @standards.pluck(:id) )
       brd = posts[:brand_id].in( @brands.pluck(:id) )
       car = posts[:car_model_id].in( @car_models.pluck(:id) )
-      base = posts[:base_car_id].in( @brands.pluck(:id) )
+      base = posts[:base_car_id].in( @base_cars.pluck(:id) )
       cus_post = posts[:outer_color].matches( "%#{@query}%" ).or( posts[:inner_color].matches( "%#{@query}%" ) )
 
       Post.as_resource(@_type).valid.where(std.or(brd).or(car).or(base).or(cus_post))
