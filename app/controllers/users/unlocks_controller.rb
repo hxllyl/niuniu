@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Users::UnlocksController < Devise::UnlocksController
   # GET /resource/unlock/new
   # def new
