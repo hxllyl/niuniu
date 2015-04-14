@@ -141,6 +141,7 @@ class Api::MessagesController < Api::BaseController
 
   private
   def message_params
+    params[:feedback] = JSON(params[:feedback]) if params[:feedback].is_a?String
     params.require(:feedback).permit(:sender_id, :receiver_id, :title, :content, :_type)
   end
 
