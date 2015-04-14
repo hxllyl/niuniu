@@ -103,10 +103,10 @@ class Post < ActiveRecord::Base
   # instance methods
   def get_some_must_attr
     self.expect_price = case discount_way
-                          when 1 then base_car.base_price.to_f * (100 - discount_content.to_f) / 100
-                          when 2 then base_car.base_price.to_f - discount_content.to_f
-                          when 3 then base_car.base_price.to_f + discount_content.to_f
-                          when 4 then discount_content.to_f
+                          when 1 then (base_car.base_price.to_f * (100 - discount_content.to_f) / 100).round(2)
+                          when 2 then (base_car.base_price.to_f - discount_content.to_f).round(2)
+                          when 3 then (base_car.base_price.to_f + discount_content.to_f).round(2)
+                          when 4 then discount_content.to_f.round(2)
                           else
                             0.0
                         end
@@ -314,7 +314,7 @@ class Post < ActiveRecord::Base
   def show_price
     expect_price.to_f == 0.0 ? '电议' : "#{expect_price.to_f}万"
   end
-  
+
   def info_for_jpush
     [standard_name, brand_name, car_model_show_name, base_car_short_name].compact.join(' ')
   end

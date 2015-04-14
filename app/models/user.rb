@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   has_many :send_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1])}, class_name: 'Feedback', foreign_key: 'sender_id'
   has_many :received_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1]) }, class_name: 'Feedback', foreign_key: 'receiver_id'
 
-  has_many :user_messages, class_name: 'UserMessage' # 这个是系统消息与用户的关联表 个人系统消息删除只能删除这个关系
+  has_many :user_messages, class_name: 'UserMessage', dependent: :delete # 这个是系统消息与用户的关联表 个人系统消息删除只能删除这个关系
   has_many :system_messages, through: :user_messages, source: :message #区别需求消息（报价，寻车）  用system_message这个名称 这个是message实体表 删除操作 不能删这个
 
   belongs_to :area, class_name: 'Area'

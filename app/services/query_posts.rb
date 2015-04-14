@@ -34,7 +34,7 @@ module Services
       base = posts[:base_car_id].in( @base_cars.pluck(:id) )
       cus_post = posts[:outer_color].matches( "%#{@query}%" ).or( posts[:inner_color].matches( "%#{@query}%" ) )
 
-      Post.as_resource(@_type).valid.where(std.or(brd).or(car).or(base).or(cus_post))
+      Post.as_resource(@_type).valid.includes(:standard, :brand, :car_model, :base_car, :user).where(std.or(brd).or(car).or(base).or(cus_post))
     end
 
     def by_style_and_status_color

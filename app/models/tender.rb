@@ -36,9 +36,9 @@ class Tender < ActiveRecord::Base
 
   def get_price
     self.price =  case discount_way
-                    when 1 then post.base_car.base_price.to_f * (100 - discount_content.to_f) / 100
-                    when 2 then post.base_car.base_price.to_f - discount_content.to_f
-                    when 3 then post.base_car.base_price.to_f + discount_content.to_f
+                    when 1 then (post.base_car.base_price.to_f * (100 - discount_content.to_f) / 100).round(2)
+                    when 2 then (post.base_car.base_price.to_f - discount_content.to_f).round(2)
+                    when 3 then (post.base_car.base_price.to_f + discount_content.to_f).round(2)
                     when 4 then discount_content.to_f
                   end
   end

@@ -44,10 +44,22 @@ defaults: &defaults
   qx_login: 2062569822
   qx_password: 202084
   qx_tip: 欢迎您加入牛牛汽车，您的验证码是：
-  
+
   # jpush 测试账号
   app_key: 330de1b62fd033affa15166f
   master_secret: 2f04b114782b5de2d2cec5c3
+
+  # 寻车热门品牌
+  need_brands: 奔驰 宝马 奥迪 路虎 玛莎拉蒂 保时捷
+
+  # 资源热门品牌
+  resource_brands: 奔驰 宝马 奥迪 路虎 玛莎拉蒂 保时捷 大众 雷克萨斯
+
+  # 品牌
+  brands: 奔驰 宝马 奥迪 路虎 玛莎拉蒂 保时捷 大众 雷克萨斯 沃尔沃 宾利 凯迪拉克 特斯拉 丰田 斯巴鲁 英菲尼迪 迈巴赫 劳斯莱斯 MINI 福特
+
+  # 车型
+  car_models: 路虎极光 卡宴 总裁 x6 X5 X3 ML400 ML350 发现神行 揽胜 途锐 凯美瑞 汉兰达 翼虎 XJ XF MODELS XC90 XC60 途观 帕萨特 红杉第四代发现 Macan Q7 普拉多 埃尔法 古思特 R8 指南者 大切诺基 牧马人 野马 兰德酷路泽 Panamera 911 GLK
 
 development:
   <<: *defaults
