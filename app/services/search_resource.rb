@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SearchResource
   attr_reader :brand_id, :model_id, :standard_id
 

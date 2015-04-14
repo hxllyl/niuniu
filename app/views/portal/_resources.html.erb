@@ -17,7 +17,9 @@
 				<tbody>
 					<%- @users.each do |user| %>
 						<tr>
-							<td><%= link_to user.heading_show, user_list_posts_path(user_id: user.id, _type: 0), class: 'name' %></td>
+							<td>
+								<span><%= link_to user.heading_show, user_list_posts_path(user_id: user.id, _type: 0), class: 'name' %></span>
+								<span class="tag"><%= image_tag(user.level_icon, alt: "", width: "40") if user.try(:is_show_icon?) %></span></td>
 							<td><%= user.area_name %></td>
 							<td><%= user.brands_ary %></td>
 							<td>

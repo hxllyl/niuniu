@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::HelpersController < Admin::BaseController
   def index
     @helpers = Helper.order(updated_at: :desc).page params[:page]

@@ -379,6 +379,14 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .followersList li .info .tel { line-height: 22px; font-size: 12px; }
 .followersList li .cancelBtn { position: absolute; top: 12px; right: 12px; }
 
+/*helper style*/
+.helperBanner { height: 198px; padding: 10px 24px; margin-top: 10px; font-size: 18px; color: #343434; background: #fbf9f1 image_url('helper/banner.jpg') no-repeat 90% top; }
+.helperBanner .tt { margin: 30px 0 10px; font-size: 36px; font-weight: bold; }
+.helperInfo { padding-bottom: 80px; }
+.helperInfo li { position: relative; line-height: 1.8em; padding: 20px 0 30px; border-bottom: 1px solid #e6e6e6; color: #666; }
+.helperInfo li .q { font-size: 18px; font-weight: bold; color: #343434; }
+.helperInfo li .backTop { position: absolute; right: 0; bottom: 0; height: 24px; line-height: 24px; font-size: 12px; color: #458cc7; }
+
 /*accounts style*/
 .accountsSetting { margin-bottom: 10px; background-color: #ededed; }
 .accountsSetting .row { margin: 0; }

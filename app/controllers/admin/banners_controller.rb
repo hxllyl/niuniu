@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Admin::BannersController < Admin::BaseController
   def index
     @banners = Banner.order(updated_at: :desc).page params[:page]

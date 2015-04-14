@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 class Users::SessionsController < Devise::SessionsController
   before_filter :configure_sign_in_params, only: [:create]
   # after_filter  :after_sign_out_path_for, only: [:destory]

@@ -18,9 +18,9 @@
 				<thead>
 					<tr>
 						<th width="34%">品牌/车型</th>
-						<th width="12%">报价(万元)</th>
-						<th width="18%">状态</th>
-						<th width="14%">发布人</th>
+						<th width="10%">报价(万元)</th>
+						<th width="14%">状态</th>
+						<th width="20%">发布人</th>
 						<th width="12%">资源表</th>
 						<th width="10%">发布时间</th>
 					</tr>
@@ -32,8 +32,8 @@
 						<td><span class="price"><%= post.show_price %></span></td>
 						<td><%= post.standard_resource_type %></td>
 						<td>
-							<span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "100%") if current_user.try(:is_show_icon?) %></span>
 							<span><%= link_to post.owner, user_list_posts_path(user_id: post.user_id, _type: 0), class: 'name' %></span>
+							<span class="tag"><%= image_tag(post.user_level_icon, alt: "", width: "40") if post.user.try(:is_show_icon?) %></span>
 						</td>
 						<td>
 							<%= link_to '浏览', user_list_posts_path(user_id: post.user_id, _type: 0) %>
