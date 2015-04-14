@@ -35,7 +35,7 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
   
-  has_many :user_messages, class_name: 'UserMessage', dependent: :delete
+  has_many :user_messages, class_name: 'UserMessage', dependent: :nullify
   has_many :users, through: :user_messages, source: :user
   
   # belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
