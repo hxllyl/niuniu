@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ListApiPost
 
   attr_reader :cid, :sid, :bid, :style, :status, :icol, :ocol
