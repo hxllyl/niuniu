@@ -1,0 +1,242 @@
+<div class="row first">
+  <div class="form-group col-md-6">
+    <label for="car_standard" class="col-md-4 control-label">规格</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <%- if @post.new_record? %>
+          <select name="post[standard_id]" class="form-control input-sm" id="post_standard_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% else %>
+          <select name="post[standard_id]" disabled class="form-control input-sm" id="post_standard_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% end %>
+          <option value=''>请选择</option>
+          <%- @standards.each do |standard| %>
+            <%- if standard == @standard %>
+              <option value="<%= standard.id %>" selected="selected"><%= standard[:name]%></option>
+            <% else %>
+              <option value="<%= standard.id %>"><%= standard[:name]%></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="car_brand" class="col-md-4 control-label">品牌</label>
+    <div class="col-md-9 inputBox">
+      <div class="dropdown w100p">
+        <%- if @post.new_record? %>
+          <select name="post[brand_id]" class="form-control input-sm" id="post_brand_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% else %>
+          <select name="post[brand_id]" disabled class="form-control input-sm" id="post_brand_id" datatype="*" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%>>
+        <% end %>
+          <option value=''>请选择</option>
+          <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}.keys.sort.each do |letter| %>
+            <%- @brands.group_by {|e| Pinyin.t(e.name)[0].upcase}[letter].each do |brand| %>
+              <%- if brand == @brand %>
+                <option value="<%= brand.id %>" selected="selected"><%= "#{letter}#{brand.name}" %></option>
+              <% else %>
+                <option value="<%= brand.id %>"><%= "#{letter}#{brand.name}" %></option>
+              <% end %>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<input class='hide' id="post_type" name="post[_type]" value="<%= @post_type %>">
+<input class='hide' id="user_id" name="user_id" value="<%= @someone.id %>">
+<%= render @car_model == 'set_car_model' ? 'car_model_input' : 'car_model_select'%>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#post_standard_id').change(function(){
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var _type = $('#post_type').val();
+
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
+  });
+
+  $('#post_brand_id').change(function(){
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var brand_id = $('#post_brand_id').val();
+      var _type = $('#post_type').val();
+
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            brand_id: brand_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
+  });
+
+  $('#post_car_model_id').change(function(){
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var brand_id = $('#post_brand_id').val();
+      var car_model_id = $('#post_car_model_id').val();
+      var _type = $('#post_type').val();
+
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            brand_id: brand_id,
+            car_model_id: car_model_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
+  });
+
+  $('#post_base_car_id').change(function(){
+    if($(this).val()!=''){
+      var url = $(this).data('url');
+      var standard_id = $('#post_standard_id').val();
+      var brand_id = $('#post_brand_id').val();
+      var car_model_id = $('#post_car_model_id').val();
+      var base_car_id = $('#post_base_car_id').val();
+      var _type = $('#post_type').val();
+
+      $.ajax({
+        method: "GET",
+        url: url,
+        data: {
+          post: {
+            standard_id: standard_id,
+            brand_id: brand_id,
+            car_model_id: car_model_id,
+            base_car_id: base_car_id,
+            _type: _type
+          }
+        },
+        success: function(data){$("#form_select").html(data)}
+      });
+    }
+  });
+
+  var offerGroup = $(".methodSelect").find(".form-group");
+  var offerInput = $(".selectInput").find("input[type='text']");
+  offerInput.attr("disabled", "true");
+  offerGroup.find(".selectTag").each(function (e) {
+      $(this).bind("click", function(){
+          if ($(this).hasClass("disabled")) return false;
+          offerGroup.find(".selectTag").removeClass("active");
+          $(this).addClass("active");
+          offerGroup.find(".selectInput").removeClass("active");
+          $(this).next(".selectInput").addClass("active");
+          offerGroup.find(".selectInput").find("input[type='text']").attr("disabled", "true");
+          $(this).next(".selectInput").find("input[type='text']").removeAttr("disabled");
+          $(this).next(".selectInput").find("input[type='text']").focus();
+      });
+  });
+  var gPrice = parseFloat($("#guidePrice").html());
+  if (isNaN(gPrice)) {
+      gPrice = 0;
+      $("#methodVal4").bind("focus blur keyup", function () {
+          $("#methodVal1,#methodVal2,#methodVal3").val("");
+      });
+  }
+  else {
+      $("#methodVal1").bind("focus keyup", function(){
+          if ($(this).val() > 100) {
+              $("#methodVal1").val(100);
+          }
+          $("#methodVal2").val((gPrice * $(this).val() / 100).toFixed(2));
+          $("#methodVal3").val(0);
+          $("#methodVal4").val((gPrice - $("#methodVal2").val()).toFixed(2));
+      });
+      $("#methodVal2").bind("focus keyup", function(){
+          $("#methodVal1").val(($(this).val() / gPrice * 100).toFixed(1));
+          $("#methodVal3").val(0);
+          if ($(this).val() > gPrice){
+              $(this).val(gPrice);
+              $("#methodVal4").val("");
+          }
+          else {
+              $("#methodVal4").val((gPrice - $(this).val()).toFixed(2));
+          }
+      });
+      $("#methodVal3").bind("focus keyup", function(){
+          var thisV = parseFloat($(this).val());
+          if (isNaN(thisV)) {
+              thisV = 0;
+          }
+          $("#methodVal1,#methodVal2").val(0);
+          $("#methodVal4").val((gPrice + thisV).toFixed(2));
+      });
+
+      $("#methodVal4").bind("focus keyup", function(){
+          if ($(this).val() < gPrice) {
+              $("#methodVal2").val((gPrice - $(this).val()).toFixed(2));
+              $("#methodVal1").val(($("#methodVal2").val() / gPrice * 100).toFixed(1));
+              $("#methodVal3").val(0);
+          }
+          else {
+              $("#methodVal1,#methodVal2").val(0);
+              $("#methodVal3").val(($(this).val() - gPrice).toFixed(2));
+          }
+      });
+  }
+  $("#methodRadios5").click(function () {
+      $(".selectInput").find("input.form-control").val("");
+  });
+
+  offerInput.each(function(){
+      var thisVal = $(this).val();
+      $(this).bind("click",function(){
+          $(this).select();
+      });
+      $(this).bind("keyup",function(){
+          clearNoNum(this);
+      });
+  });
+
+  // 内饰外饰自定义
+  $('body').on('change', '#car_appearance', function(){
+    if ($(this).val() == "set_outer_color"){
+      $('#car_appearance').parent().html('<input type="text" class="form-control input-sm" name="post[outer_color]">')
+    }
+  });
+  $('body').on('change', '#car_interior', function(){
+    if ($(this).val() == "set_inner_color"){
+      $('#car_interior').parent().html('<input type="text" class="form-control input-sm" name="post[inner_color]">')
+    }
+  });
+});
+
+function clearNoNum(obj){
+  obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
+  obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
+  obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
+  obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
+  obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+}
+</script>

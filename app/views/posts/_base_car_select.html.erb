@@ -1,0 +1,24 @@
+<div class="form-group col-md-6">
+  <label for="car_style" class="col-md-4 control-label">款式</label>
+  <div class="col-md-9 inputBox">
+    <div class="dropdown w100p">
+      <%- if @post.new_record? %>
+        <select name="post[base_car_id]" class="form-control input-sm" id="post_base_car_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> datatype="*">
+      <% else %>
+        <select name="post[base_car_id]" disabled class="form-control input-sm" id="post_base_car_id" data-url=<%= get_select_infos_user_my_posts_path(current_user.id)%> datatype="*">
+      <% end %>
+        <option value=''>请选择</option>
+        <%- @base_cars && @base_cars.order(base_price: :asc).each do |base_car| %>
+          <%- if base_car == @base_car %>
+            <option value="<%= base_car.id %>" selected="selected"><%= base_car.select_name %></option>
+          <% else %>
+            <option value="<%= base_car.id %>"><%= base_car.select_name %></option>
+          <% end %>
+        <% end %>
+        <option value="set_base_car">自定义</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<%= render @post_type == 1 ? 'need_info' : 'resource_info' %>

@@ -1,0 +1,23 @@
+<div class="panel panel-default contentBox">
+  <div class="panel-heading lineTitle">
+    <h3 class="panel-title">我要寻车</h3>
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal sourceForm" action="<%= posts_path(user_id: @someone.id) %>" method="post">
+      <div id='form_select'>
+        <%= render 'form_select' %>
+      </div>
+      <div class="sFormBox clearfix">
+        <div class="sFormTag bfL">备注</div>
+        <div class="sFormArea">
+          <textarea class="form-control" rows="3" name="post[remark]"></textarea>
+          <p class="txtTips">（可输入配置，手续时间，生产日期，现车期货等其他详细要求）</p>
+        </div>
+      </div>
+      <div class="subGroup row">
+        <input type="submit" class="btn btn-default orange btn_spacing" id="subBtn" value="发布" />
+        <a href=<%= root_path %> class="btn btn-default btn_spacing">取消</a>
+      </div>
+    </form>
+  </div>
+</div>

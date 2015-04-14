@@ -1,0 +1,18 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to "首页", root_path %></li>
+    <li class="active">编辑资源</li>
+  </ol>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mainBox">
+      <%= render partial: "form_#{@post._type}" %>
+    </div>
+    <div class="col-md-3 mainRight">
+      <%= render partial: 'partials/right_user' %>
+      <%= render partial: 'partials/right_joint_followings' %>
+      <%= render partial: 'partials/right_his_needs' %>
+    </div>
+  </div>
+</div>

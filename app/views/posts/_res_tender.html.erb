@@ -1,0 +1,21 @@
+<%- Post::DISCOUNT_WAYS.each do |k, v| %>
+  <div class="form-group form-inline col-md-6">
+    <label class="<%= (@post && @post.discount_way == k) ? "radio selectTag active" : "radio selectTag" %>">
+      <%- if @post && @post.discount_way == k %>
+       <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value=<%= k %> checked='checked'><span><%= v %></span>
+      <% else %>
+        <input type="radio" name="post[discount_way]" id="methodRadios<%= k %>" value=<%= k %>><span><%= v %></span>
+     <% end %>
+    </label>
+    <%- unless k == 5 %>
+      <label class="selectInput">
+        <%- unless @post.new_record? %>
+          <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]" value="<%= @discount_contents[k-1]%>">
+        <% else %>
+          <input type="text" class="form-control input-sm" id="methodVal<%= k %>" placeholder="" disabled="true" name="post[discount_content]">
+        <% end %>
+        <div class="units"><%= k == 1 ? '点数' : '万元' %></div>
+      </label>
+    <% end %>
+  </div>
+<% end %>
