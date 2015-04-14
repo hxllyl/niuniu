@@ -131,7 +131,7 @@ class Api::MessagesController < Api::BaseController
     active = params[:method] == 'activating'
     
     device.active = active
-    device.register_id = params[:register_id]
+    device.register_id = params[:register_id].to_s
     device.save!
 
     render json: { status: 200, notice: 'success' }
