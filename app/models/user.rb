@@ -235,7 +235,7 @@ class User < ActiveRecord::Base
   end
 
   def name_area
-    name << "(" << area_name.to_s << ")"
+    name + "(" + area_name.to_s + ")"
   end
 
   def brands_ary
@@ -285,7 +285,7 @@ class User < ActiveRecord::Base
   end
 
   # 是否可以刷新资源列表
-  def could_update_my_resoruces?
+  def could_update_my_resources?
     !log_posts.update_resources.last || log_posts.update_resources.last.created_at < 1.hours.ago
   end
 
