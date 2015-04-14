@@ -101,12 +101,12 @@ class PostsController < BaseController
     @q_json   = params
     @_type    = params[:_type]
     @someone  = User.find_by_id(params[:user_id])
-    @brands   = @someone.posts.where(_type: @_type).map(&:brand).uniq
+    @brands   = @someone.posts.includes(:brand).where(_type: @_type).map(&:brand).uniq
 
     conds = {user_id: params[:user_id], _type: params[:_type].to_i, status: 1}
     conds[:brand_id] = params[:br] if params[:br]
 
-    @posts    = Post.where(conds).order(position: :desc).page(params[:page]).per(10)
+    @posts    = Post.includes(:user, :standard, :brand, :car_model, :base_car).where(conds).order(position: :desc).page(params[:page]).per(10)
     @follows  = current_user.followings & @someone.followers
   end
 
