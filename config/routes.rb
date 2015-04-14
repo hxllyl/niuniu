@@ -60,6 +60,8 @@ Rails.application.routes.draw do
     get :delete_relation, on: :collection
 
     patch :reset_password, on: :collection
+    
+    get :user_protocel, on: :collection
 
     resources :my_posts do
       member do

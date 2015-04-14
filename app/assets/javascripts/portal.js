@@ -8,6 +8,7 @@ $(function(){
   var countWait = 60;
 
   validCodeBut.attr("disabled",false);
+  
   validCodeBut.on('click', function(event){
     event.preventDefault();
     var objThis = $(this);
