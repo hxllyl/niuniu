@@ -1,6 +1,6 @@
 <footer id="foot">
   <div class="container copyright">
-    <p>版权所有©牛牛汽车 | <a href="http://niuniuqiche.com/" target="_blank">niuniuqiche.com</a> | 您的汽车生意圈！</p>
+    <p>版权所有©牛牛汽车 | <a href="http://niuniuqiche.com/" target="_blank">niuniuqiche.com</a> | 您的汽车生意圈！ | <%= link_to t('user_protocol'), user_protocel_users_path, target: '_blank' %></p>
     <p>沪ICP备<a href="http://miitbeian.gov.cn/" target="_blank">14044072号-1</a></p>
   </div>
 </footer>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="checkbox">
-          <input type="checkbox" checked="checked"><a href="#"><%= t('user_protocol') %></a>
+          <input type="checkbox" checked="checked"><%= link_to t('user_protocol'), user_protocel_users_path, target: '_blank' %>
         </div>
       </div>
       <div class="modal-footer">
