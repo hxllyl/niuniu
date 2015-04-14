@@ -18,7 +18,7 @@ class PortalController < BaseController
     @needs      = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(created_at: :desc).limit(8)
 
     # 四个品牌对就的寻车列表
-    @posts_with_brands = @need_brands[0..3].each_with_object({}) do |brand, ha|
+    @posts_with_brands = @need_brands.each_with_object({}) do |brand, ha|
                             posts = brand.posts.needs.valid.order(created_at: :desc).limit(8)
                             ha.merge!({brand.id => posts})
                             ha
