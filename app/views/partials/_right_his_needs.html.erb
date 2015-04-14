@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
     <ul class="carSourceHis">
-      <%- Array(@someone.posts.includes(:standard, :brand, :car_model, :base_car).try(:needs).try(:[], 0..2)).each_with_index do |post, index| %>
+      <%- Array(@someone.posts.includes(:user, :standard, :brand, :car_model, :base_car).try(:needs).try(:[], 0..2)).each_with_index do |post, index| %>
         <li class=<%= "first" if index == 0 %>>
           <h5 class="name"><%= link_to post.title, post_path(post, _type: 1) %></h5>
           <div class="info clearfix"><span class="bfL mr20"><%= post.app_area %></span><span class="bfL"><%= post.color %></span></div>

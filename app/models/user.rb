@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   # validates
   validates :name, presence: true, length: { maximum: 30 }
-  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: true
+  validates :mobile, presence: true, uniqueness: true # format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }
   validates :role,  presence: true , inclusion: { in: ->(clazz){ clazz.class::ROLES} }
   validates :company, presence: true, length: { maximum: 100 }
   validates :level, numericality: true, inclusion: { in: 0..4 }

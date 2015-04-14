@@ -24,13 +24,13 @@
 	  		<button type="button" class="btn btn-default w100p btn_spacing modalBtn" role="button" data-toggle="modal" data-target="#reg_step1"><%= t('register_but') %></button>
 	  	</li>
 	  </ul>
-    <% end -%>
+  <% end -%>
 </div>
 <!--forget-->
+<%= form_for(User.new, as: :user, url: reset_password_users_path, html: { method: :patch }) do |f| %>>
+<%= hidden_field_tag :channel, 'reset_password' %>
 <div class="modal box bs-example-modal-sm" id="forget_step1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
-    <%= form_for(User.new, as: :user, url: reset_password_users_path, html: { method: :patch }) do |f| %>>
-    <%= hidden_field_tag :channel, 'reset_password' %>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -61,18 +61,18 @@
       </div>
       <div class="modal-body">
 				<div class="form-group">
-					<%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码', datatype:"*6-20", nullmsg:"请填写密码！", name: "password"  %>
+					<%= f.password_field :password, class: 'form-control', id: '', placeholder: '请输入新密码', datatype:"*6-20", nullmsg:"请输入新密码！", errormsg:"请输入6-20个字符作为新密码！", name: "user[password]"  %>
 				</div>
 
         <div class="form-group">
-          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", datatype:"*6-20", recheck:"password", errormsg:"请填写与上一步相同的密码！" %>
+          <%= f.password_field :password_confirmation, class: "form-control", id: "", placeholder: "请重新输入密码", datatype:"*6-20", recheck:"user[password]", nullmsg:"请重新输入密码！", errormsg:"请填写与上一步相同的密码！" %>
         </div>
       </div>
       <div class="modal-footer">
         <%= f.submit t('finish_but'), class: 'btn btn-default w100p orange btn_spacing' -%>
       </div>
-      <% end -%>
     </div>
   </div>
 </div>
+<% end -%>
 <!--end-->

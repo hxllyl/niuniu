@@ -21,6 +21,6 @@
 <%= f.hidden_field :resource_id, value: @post.id %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 <%= f.hidden_field :resource_type, value: @post.class.to_s %>
-<%= f.text_area :content, class: "form-control", placeHolder: '不能超过225个字' %>
+<%= f.text_area :content, class: "form-control" %>
 <%= f.submit '留言', class: "btn btn-default btn-sm btn_spacing sub bfR", id: "" %>
 <% end -%>
