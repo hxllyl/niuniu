@@ -27,7 +27,7 @@
           </ul>
         </li>
       <% end -%>
-      <li><a href="#">使用帮助</a></li>
+      <li><%= link_to '使用帮助', helpers_path %></li>
       <li class="last"><%= link_to '联系客服', current_user ? about_us_user_path(current_user) : '#' %></li>
     </ul>
   </div>
