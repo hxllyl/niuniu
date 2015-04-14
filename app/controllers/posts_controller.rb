@@ -9,8 +9,8 @@ class PostsController < BaseController
     # 资源每人最新一条，寻车，所有
     @_type      = params[:_type]
     @standards  = Standard.all
-    @brands     = Brand.valid.order(click_counter: :desc).limit(20)
-    @car_models = CarModel.valid.order(click_counter: :desc).limit(40)
+    @brands     = Brand.where(name: APP_CONFIG['brands'].split(' '))
+    @car_models = CarModel.where(name: APP_CONFIG['car_models'].split(' '))
     if @_type.to_i == 1
       @posts   = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(created_at: :desc).page(params[:page]).per(10)
     else
