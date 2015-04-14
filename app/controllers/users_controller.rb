@@ -48,8 +48,8 @@ class UsersController < BaseController
 
   def delete_relation
     clazz = params[:clazz].classify.constantize
-
     object = clazz.find params[:id]
+    
     if clazz == Post
       if params[:way] == 'resources'
         object.update(status: Post::STATUS.keys[4]) if current_user.send("#{params[:type]}").resources.include?(object)
@@ -60,6 +60,8 @@ class UsersController < BaseController
     elsif clazz == Tender
       object.update(status: Tender::STATUS.keys[2]) if current_user.send("#{params[:type]}").include?(object)
       new_counter = current_user.send("#{params[:type]}").count
+    elsif clazz == UserMessage
+      UserMessage.find_by(user: current_user, message: object).delete
     else
       current_user.send("#{params[:type]}").delete object
       new_counter = current_user.send("#{params[:type]}").count
