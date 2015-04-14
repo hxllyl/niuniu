@@ -15,7 +15,7 @@ namespace :util do
 
   desc "数据导入"
   task base_cars: :environment do
-    file_path = "#{Rails.root}/doc/base_car_tests.xlsx"
+    file_path = "#{Rails.root}/doc/base_car_data.xlsx"
 
     brand_icons_dir = Rails.root + 'public' + 'brand_icons'
 
