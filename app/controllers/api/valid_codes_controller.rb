@@ -3,7 +3,9 @@
 class Api::ValidCodesController < Api::BaseController
 
   skip_before_filter :auth_user, only: [:index, :validate_code]
-
+  
+  before_action :is_registered, only: [:index]
+  
   # 手机验证码获取
   #
   # Params:
@@ -50,6 +52,7 @@ class Api::ValidCodesController < Api::BaseController
   # Error:
   #   status:    [Integer] 状态码(500)
   #   notice:    [String]  消息('failed')
+  
   def validate_code
     raise Errors::ArgumentsError.new, t('error_msgs.arguments_errors') \
             unless is_legal?(params[:mobile], :mobile) and is_legal?(params[:valid_code], :code)
@@ -76,6 +79,12 @@ class Api::ValidCodesController < Api::BaseController
       false
     end
   end
-
+  
+  def is_registered
+    if params[:type].to_i == ValidCode::TYPES.keys[1]
+      u = User.find_by(mobile: params[:mobile])
+      render json: { status: 500 , notice: 'failed', error_msg: "该号码还未注册，请先注册"} and return if u.blank?
+    end
+  end
 
 end
