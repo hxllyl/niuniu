@@ -10,9 +10,9 @@
     <div class="col-md-9 mainBox">
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
-          <h3 class="panel-title">他的寻车</h3>
+          <h3 class="panel-title bfL">他的寻车</h3>
+          <%= link_to '为他代发寻车', new_post_path(user_id: @someone.id, _type: 1), class: 'btn btn-default btn-xs mt6 bfR' if current_user.class == Staff %>
         </div>
-        <%= link_to '为他代发寻车', new_post_path(user_id: @someone.id, _type: 1) if current_user.class == Staff %>
         <div class="panel-body">
           <div class="sourceTab">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
