@@ -232,12 +232,12 @@ $(document).ready(function(){
   // 内饰外饰自定义
   $('body').on('change', '#car_appearance', function(){
     if ($(this).val() == "set_outer_color"){
-      $('#car_appearance').parent().html('<input type="text" class="form-control input-sm" name="post[outer_color]">')
+      $('#car_appearance').parent().html('<input type="text" class="form-control input-sm" name="post[outer_color]" placeholder="输入不得超过8个字符" maxlength="8" datatype="*1-8" nullmsg="请填写外观！">')
     }
   });
   $('body').on('change', '#car_interior', function(){
     if ($(this).val() == "set_inner_color"){
-      $('#car_interior').parent().html('<input type="text" class="form-control input-sm" name="post[inner_color]">')
+      $('#car_interior').parent().html('<input type="text" class="form-control input-sm" name="post[inner_color]" placeholder="输入不得超过8个字符" maxlength="8" datatype="*1-8" nullmsg="请填写内饰！">')
     }
   });
 });

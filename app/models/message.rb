@@ -35,7 +35,7 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
   
-  has_many :user_messages, class_name: 'UserMessage'
+  has_many :user_messages, class_name: 'UserMessage', dependent: :nullify
   has_many :users, through: :user_messages, source: :user
   
   # belongs_to :staff, -> { where(_type: TYPES.keys[1])} , class_name: 'Staff'
@@ -68,9 +68,9 @@ class Message < ActiveRecord::Base
         jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
       else
         if _type == TYPES.keys[0]
-          jpush_message(content, ActiveDevice.active.pluck(:register_id))
           users = User.valid_user
           self.users << users
+          # jpush_message(content, ActiveDevice.active.pluck(:register_id))
         end
         
         # NOTICE: In this case, this should put in a queue, now comment it

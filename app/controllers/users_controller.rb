@@ -60,7 +60,7 @@ class UsersController < BaseController
     elsif clazz == Tender
       object.update(status: Tender::STATUS.keys[2]) if current_user.send("#{params[:type]}").include?(object)
       new_counter = current_user.send("#{params[:type]}").count
-    elsif clazz == UserMessage
+    elsif clazz == Message
       UserMessage.find_by(user: current_user, message: object).delete
     else
       current_user.send("#{params[:type]}").delete object
