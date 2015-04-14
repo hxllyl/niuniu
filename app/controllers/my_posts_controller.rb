@@ -116,7 +116,7 @@ class MyPostsController < BaseController
     @post.user = current_user
 
     if @post.save
-      redirect_to @post._type == 0 ? user_my_posts_path(current_user, _type: 0) : current_user
+      redirect_to @post._type == 0 ? user_my_posts_path(current_user, _type: 0) : user_path(current_user)
     else
       render action: new, flash: @post.errors
     end
