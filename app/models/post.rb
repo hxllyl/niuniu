@@ -156,7 +156,7 @@ class Post < ActiveRecord::Base
     {
       id:                 id,
       user_id:            user_id,
-      user_name:          user_name,
+      user_name:          user.name_area,
       user_mobile:        user_mobile,
       user_company:       user_company,
       user_level:         User::LEVELS[user_level],

@@ -70,22 +70,22 @@ class Api::UsersController < Api::BaseController
   rescue => ex
     render json: {status: 500, notice: 'failed', error_msg: ex.message}
   end
-  
+
   # 用户的客服经理
   #
   # Params:
   #   token:    [String] 用户token
-  # Returns:
+  # Return:
   #   status:   200
   #   notice:   success
   #   data:     客服基本信息
-  # Errors:
+  # Error:
   #   status:   500
   #   notice:   failed
-  
+
   def customer_service
     customer_service = @user.customer_service
-    
+
     if customer_service
       render json: { status: 200, notice: 'success', data:  customer_service.to_hash}
     else
@@ -99,12 +99,12 @@ class Api::UsersController < Api::BaseController
   #  token:       [String]    valid token
   #  updated_at:  [DateTime]  更新时间
   #
-  # Returns:
+  # Return:
   #  status: [Integer]  200
   #  notice: [String]   success
   #  data:
   #
-  # Errors:
+  # Error:
   #  status:    [Integer]       500
   #  notice:    [String]        failed
   #  error_msg: [String]        error json
