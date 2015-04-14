@@ -27,5 +27,5 @@
 </div>
 <div class="subGroup row">
   <input type="submit" id="subBtn" class="btn btn-default orange btn_spacing" value="<%= @post.new_record? ? '发布' : '提交'%>"/>
-  <a href=<%= user_my_posts_path(current_user, _type: 0) %> class="btn btn-default btn_spacing">取消</a>
+  <a href=<%= user_list_posts_path(user_id: @someone.id, _type: 0) %> class="btn btn-default btn_spacing">取消</a>
 </div>

@@ -47,6 +47,7 @@
                           <% end %>
                         </div>
                       </div>
+                      <%= link_to '编辑', edit_post_path(post, user_id: @someone.id)%>
                       <div class="remark clearfix">
                         <div class="tt bfL">备注：</div><div class="info"><%= post.remark %></div>
                       </div>
