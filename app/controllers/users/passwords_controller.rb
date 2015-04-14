@@ -35,8 +35,9 @@ class Users::PasswordsController < Devise::PasswordsController
       flash[:notice] = '修改密码成功！'
     else
       clean_up_passwords(resource)
-      respond_with_navigational(resource){ render_with_scope :edit }
-      flash[:notice] = '修改密码未能成功！'
+      #respond_with_navigational(resource){ render_with_scope :edit }
+      flash[:notice] = '修改密码未能成功！请检查是否原密码正确或是两次输入新密码不一致'
+      redirect_to :back
     end
         
   end
