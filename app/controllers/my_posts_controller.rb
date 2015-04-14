@@ -126,7 +126,7 @@ class MyPostsController < BaseController
     @post       = Post.find_by_id(params[:id])
     @standards  = Standard.all
     @standard   = @post.standard
-    @brands     = @standards.first.brands.valid
+    @brands     = @standard.brands
     @brand      = @post.brand
     @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
     @car_model  = @post.car_model

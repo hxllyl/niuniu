@@ -137,7 +137,7 @@ class Tender < ActiveRecord::Base
   def make_message
     if status == STATUS.keys[1]
       Message.make_system_message(generate_message(:dealed), user, Message::TYPES.keys[3])
-      Message.make_system_message(generate_post_message, post.user, Message::TYPES.keys[4])
+      # Message.make_system_message(generate_post_message, post.user, Message::TYPES.keys[4])
     end
   end
 
@@ -155,11 +155,11 @@ class Tender < ActiveRecord::Base
                 EOF
               end
   end
-
-  def generate_post_message
-    message = <<-EOF
-    #{user_name} 和您寻的 #{post.info_for_jpush} 成交了。
-    EOF
-  end
+  
+  # def generate_post_message
+  #   message = <<-EOF
+  #   #{user_name} 和您寻的 #{post.info_for_jpush} 成交了。
+  #   EOF
+  # end
 
 end
