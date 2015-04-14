@@ -37,7 +37,7 @@ namespace :util do
        if br.new_record?
          br.status = 1
          br.regions = columns[10].split(' ') if columns[10]
-         br.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{brand_icons_dir}/#{br.name}.png"))
+         br.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{brand_icons_dir}/#{br.name}.png")) if File.exist?("#{brand_icons_dir}/#{br.name}.png")
          br.save
        end
 
