@@ -1,0 +1,31 @@
+<div id='form_select'>
+  <%= render 'form_select' %>
+</div>
+<div class="sFormBox clearfix">
+  <div class="sFormTag bfL">照片</div>
+  <ul class="row first sFormArea addImgGroups" id="post_photos">
+    <%- Post::PHOTOS.each do |k, v| %>
+        <li class="col-md-3">
+          <div class="thumbnail box">
+            <div class="img" id=<%= k %>>
+              <span class="alt"><%= v %></span><%= image_tag(@post.photos[k], alt: "", width: "100%") %></div>
+            <div class="fileInput">
+              <div class="fileBtn">添加照片<input type="file" class="button <%= k %>" name=<%= "post[post_photos][#{k}][]" %>/>
+              </div>
+            </div>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+</div>
+<div class="sFormBox mt-20 clearfix">
+  <div class="sFormTag bfL">备注</div>
+  <div class="sFormArea">
+    <textarea class="form-control" rows="3" name="post[remark]"><%= @post.remark %></textarea>
+    <p class="txtTips">（可输入选装配置，提车要求，手续时间等其他详细信息）</p>
+  </div>
+</div>
+<div class="subGroup row">
+  <input type="submit" id="subBtn" class="btn btn-default orange btn_spacing" value="<%= @post.new_record? ? '发布' : '提交'%>"/>
+  <a href=<%= user_my_posts_path(current_user, _type: 0) %> class="btn btn-default btn_spacing">取消</a>
+</div>

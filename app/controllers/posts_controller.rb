@@ -1,7 +1,8 @@
 # encoding: utf-8
 require_relative '../../app/services/query_posts'
 class PostsController < BaseController
-   skip_before_filter :verify_authenticity_token, only: [:tender, :complete]
+   skip_before_filter :verify_authenticity_token, only: [:tender, :complete, :create]
+   before_filter :auth_staff, only: [:new, :create, :edit, :update]
 
   def index
     # params[:_type] 资源类型 0 => 资源， 1 => 寻车
@@ -185,5 +186,142 @@ class PostsController < BaseController
     @follows  = current_user.followings & @someone.followers
   end
 
+
+  # provide actions(new create edit update) for Staff
+
+  def new
+    # params[:_type] 资源类型 0 => 资源， 1 => 寻车
+    @post = Post.new(_type: params[:_type])
+
+    @standards  = Standard.all
+    @standard   = Standard.first
+    @brands     = @standard.brands.valid
+    @brand      = @brands.first
+    @car_models = CarModel.where(standard_id: @standards.first.id, brand_id: @brand.id, status: 1)
+    @car_model  = @car_models.first
+    @base_cars  = @car_model.base_cars.valid
+    @base_car   = @base_cars.first
+    @post_type  = @post._type
+    @standard, @brand, @car_model, @base_car = *nil
+  end
+
+  def create
+    standard  = Standard.find_by_id(params[:post][:standard_id])
+    brand     = Brand.find_by_id(params[:post][:brand_id])
+    car_model = CarModel.where(id: params[:post][:car_model_id], standard_id: standard.id, brand_id: brand.id).first
+    base_car  = car_model ? BaseCar.where(standard_id: standard.id, brand_id: brand.id, id: params[:post][:base_car_id]).first : nil
+
+    car_model = CarModel.create(
+                  standard_id: standard.id,
+                  brand_id: brand.id,
+                  name: params[:post][:car_model_id],
+                  status: 0
+                ) unless car_model
+
+    base_car  = BaseCar.create(
+                  standard_id: standard.id,
+                  brand_id: brand.id,
+                  car_model_id: car_model.id,
+                  style: params[:post][:base_car_id],
+                  outer_color: [params[:post][:outer_color]],
+                  inner_color: [params[:post][:inner_color]],
+                  status: 0
+                ) unless base_car
+
+    # 为资源库保存自定义的颜色
+    Log::BaseCar.create(
+      user_id:      @someone.id,
+      base_car_id:  @user.id,
+      method_name:  'outer_color',
+      content:      params[:post][:outer_color]
+    ) unless base_car.outer_color.include?(params[:post][:outer_color])
+
+    Log::BaseCar.create(
+      user_id:      @someone.id,
+      base_car_id:  base_car.id,
+      method_name:  'inner_color',
+      content:      params[:post][:inner_color]
+    ) unless base_car.inner_color.include?(params[:post][:inner_color])
+
+    params.require(:post).permit!
+    params[:post][:car_model_id] = car_model.id
+    params[:post][:base_car_id]  = base_car.id
+
+    photos = params[:post].delete(:post_photos)
+    @post  = Post.new(params[:post])
+    photos && photos.each do |k, v|
+      @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+    end
+
+    @post.user = @someone
+    @post.channel = 1
+
+    if @post.save
+      redirect_to user_list_posts_path(user_id: @someone.id, _type: @post._type)
+    else
+      render action: new, flash: @post.errors
+    end
+  end
+
+  def edit
+    @post       = Post.find_by_id(params[:id])
+    @standards  = Standard.all
+    @standard   = @post.standard
+    @brands     = @standards.first.brands.valid
+    @brand      = @post.brand
+    @car_models = CarModel.where(standard_id: @standard.id, brand_id: @brand.id)
+    @car_model  = @post.car_model
+    @base_cars  = @car_model.base_cars
+    @base_car   = @post.base_car
+    @post_type  = @post._type
+
+    @discount_contents =  if @post.expect_price.to_f > @post.guiding_price.to_f
+                            [nil, nil, (@post.expect_price.to_f - @post.guiding_price.to_f).round(2)]
+                          else
+                            [((@post.guiding_price.to_f - @post.expect_price.to_f)/@post.guiding_price.to_f*100).round(2), (@post.guiding_price.to_f - @post.expect_price.to_f).round(2), nil]
+                          end
+    @discount_contents << @post.expect_price
+  end
+
+  def update
+    @post = Post.find_by_id(params[:id])
+    standard  = Standard.find_by_id(params[:post][:standard_id])
+    brand     = Brand.find_by_id(params[:post][:brand_id])
+    car_model = CarModel.find_by_id(params[:post][:car_model_id])
+    base_car  = BaseCar.find_by_id(params[:post][:base_car_id])
+
+    # 为资源库保存自定义的颜色
+    Log::BaseCar.create(
+      user_id:      @user.id,
+      base_car_id:  base_car.id,
+      method_name:  'outer_color',
+      content:      params[:post][:outer_color]
+    ) unless base_car.outer_color.include?(params[:post][:outer_color])
+
+    Log::BaseCar.create(
+      user_id:      @user.id,
+      base_car_id:  base_car.id,
+      method_name:  'inner_color',
+      content:      params[:post][:inner_color]
+    ) unless base_car.inner_color.include?(params[:post][:inner_color])
+
+    photos = params[:post].delete(:post_photos)
+    params.require(:post).permit!
+    @post.attributes = params[:post]
+    photos && photos.each do |k, v|
+      photo = @post.post_photos.find_by__type(k)
+      if photo
+        photo.update_attributes(image: v.first.values.first.tempfile)
+      else
+        @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+      end
+    end
+
+    if @post.save
+      redirect_to user_list_posts_path(user_id: @someone.id, _type: @post._type)
+    else
+      render action: edit, flash: @post.errors
+    end
+  end
 
 end

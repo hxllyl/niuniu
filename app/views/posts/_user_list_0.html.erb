@@ -25,6 +25,7 @@
                 <% end %>
               </select>
             </div>
+            <%= link_to '为他代发资源', new_post_path(user_id: @someone.id, _type: 0) if current_user.class == Staff %>
           </div>
           <div class="mySourceTab mt10">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
