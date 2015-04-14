@@ -33,4 +33,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def auth_staff
+    if current_user.class == Staff
+      @someone = User.find_by_id(params[:user_id])
+      return
+    else
+      flash[:notice] = "您无权访问此页面"
+      redirect_to root_path
+    end
+  end
+
 end

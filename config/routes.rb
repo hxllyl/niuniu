@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         patch :update_status
       end
     end
-    
+
     resources :users do
       collection do
         get :search
@@ -26,8 +26,8 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
-    
-    
+
+
   end
 
   root 'portal#index'
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get :delete_relation, on: :collection
 
     patch :reset_password, on: :collection
-    
+
     get :user_protocel, on: :collection
 
     resources :my_posts do
@@ -75,7 +75,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [ :index, :show ] do
+  resources :posts do
     collection do
       get :resources_list
       get :needs_list
