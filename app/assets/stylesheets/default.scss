@@ -294,7 +294,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 /*posts style*/
 .selectCrumb { }
 .selectCrumb li { float: left; height: 28px; line-height: 28px; padding: 0 10px; margin-top: 3px; margin-right: 6px; border: 1px solid #ccc; border-radius: 4px; color: #333; background-color: #f8f8f8; }
-.selectCrumb li .close { margin: 1px 0 0 8px; }
+.selectCrumb li .close { float: none; margin: 1px 0 0 8px; }
 .selectCrumb li.active { display: block; }
 .carList { padding: 10px 0; border-bottom: 1px dashed #e6e6e6; }
 .carList.last { border-bottom: none; }
@@ -351,8 +351,6 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .userOverview .userInfo .photo { width: 118px; height: 118px; border: 5px solid #d3d3d3; border-radius: 50%; text-align: center; overflow: hidden; }
 .userOverview .userInfo .detail { display: inline-block; line-height: 20px; margin-left: 40px; }
 .userOverview .userInfo .detail .name { float: left; line-height: 22px; margin-right: 8px; font-size: 18px; font-weight: bold; color: #323232; }
-
-/*.userOverview .userInfo .detail .type { float: left; height: 22px; line-height: 22px; padding: 0 10px; margin-right: 8px; border-radius: 11px; font-size: 13px; color: #FFF; background-color: #b3b3b3; }*/
 .userOverview .userInfo .detail .type { float: left; width: 56px; height: 22px; margin-right: 8px; }
 .userOverview .userInfo .detailTab { width: 600px; margin-top: 8px; color: #666; }
 .userOverview .userInfo .detailTab .tip { color: #ff791f; }
@@ -433,13 +431,14 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .aboutUsMain.row .photoBox .photo { width: 78px; height: 78px; margin: 0 auto; border-radius: 50%; overflow: hidden; }
 .aboutUsMain.row .photoBox .name { margin: 8px 0; font-size: 12px; color: #323232; }
 .aboutUsMain.row .photoBox .name span { margin-right: 6px; font-size: 14px; }
-
-/*.aboutUsMain.row .photoBox .tag { display: block; width: 36px; height: 14px; line-height: 14px; margin: 0 auto; border-radius: 7px; text-align: center; font-size: 8px; -webkit-transform: scale(0.8); -o-transform: scale(1); color: #FFF; background-color: #b3b3b3; }*/
 .aboutUsMain.row .photoBox .tag { display: block; width: 35px; height: 14px; margin: 0 auto; }
 .aboutUsMain.row .infoBox { color: #323232; }
 .aboutUsMain.row .infoBox td { height: 38px; line-height: 24px; }
 .aboutUsForm.row { margin-right: 25px; }
 .aboutBlank { padding: 100px 0; text-align: center; }
+.protocelInfo { padding: 50px 100px; line-height: 1.8em; color: #666; }
+.protocelInfo .tag { line-height: 1.8em; margin-bottom: 24px; font-weight: bold; font-size: 18px; color: #343434; }
+.protocelInfo .tt { margin-top: 24px; font-weight: bold; color: #333; }
 
 /*foot style*/
 #foot { padding-bottom: 40px; }
