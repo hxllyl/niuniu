@@ -160,8 +160,7 @@ class UsersController < BaseController
     flash[:error] = ex.message
     redirect_to '/'
   end
-
-
+  
   private
   def user_params
     params.require(:user).permit(:name, :role, :company, :area_id,

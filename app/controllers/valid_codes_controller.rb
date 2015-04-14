@@ -24,7 +24,7 @@ class ValidCodesController < BaseController
           @valid_code.send_code
           render json: { status: 'success', code: @valid_code.code }
         else
-          render json: { status: 'failed', error_msg: @valid_code.errors.full_messages.join('\n') }
+          render json: { status: 'failed', error_msg: "请输入正确的手机号码！" }
         end
       else
         render json: { status: 'failed', error_msg: "号码：#{@valid_code.mobile},已经被注册"}

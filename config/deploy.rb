@@ -3,7 +3,7 @@ set :use_sudo, false
 set :deploy_timestamped, true
 set :release_name, Time.now.localtime.strftime("%Y%m%d%H%M%S")
 set :keep_releases, 3
-set :rvm_ruby_version, "2.1.1"
+set :rvm_ruby_version, "2.2.0"
 set :current_path, current_path
 
 set :linked_files, %w{config/config.yml config/database.yml config/unicorn.rb config/boot.rb}
