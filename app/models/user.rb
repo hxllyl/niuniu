@@ -235,7 +235,7 @@ class User < ActiveRecord::Base
   end
 
   def name_area
-    name << "(" << area_name.to_s << ")"
+    name + "(" + area_name.to_s + ")"
   end
 
   def brands_ary
