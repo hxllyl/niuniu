@@ -314,5 +314,9 @@ class Post < ActiveRecord::Base
   def show_price
     expect_price.to_f == 0.0 ? '电议' : "#{expect_price.to_f}万"
   end
+  
+  def info_for_jpush
+    [standard_name, brand_name, car_model_show_name, base_car_short_name].compact.join(' ')
+  end
 
 end

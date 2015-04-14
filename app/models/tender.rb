@@ -147,18 +147,18 @@ class Tender < ActiveRecord::Base
     message = case type
               when :create then
                 <<-EOF
-                您所#{post.detail_title} 的车，牛牛汽车生意朋友圈的#{user_name}给您报了价。
+                #{user_name} 给您寻的 #{post.info_for_jpush} 报价了。
                 EOF
               when :dealed then
                 <<-EOF
-                您报价的#{post.detail_title} 的车, 已经与牛牛汽车生意朋友圈的#{post.user_name}达成了交易。
+                #{post.user_name} 和您报价的寻 #{post.info_for_jpush} 成交了。
                 EOF
               end
   end
 
   def generate_post_message
     message = <<-EOF
-    您所：#{post.detail_title} 的车，已经与牛牛汽车生意朋友圈的 #{post.user_name} 达成了交易。
+    #{user_name} 和您寻的 #{post.info_for_jpush} 成交了。
     EOF
   end
 

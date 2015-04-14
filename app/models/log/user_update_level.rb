@@ -5,11 +5,14 @@ class Log::UserUpdateLevel < ActiveRecord::Base
   STATUS = {
     0 => '待审核',
     1 => '审核通过',
-    2 => '审核不同'
+    2 => '审核不通过'
   }
   
   belongs_to :user, class_name: 'User'
   belongs_to :operator, class_name: 'Staff'
+  
+  delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :name, to: :operator, prefix: true, allow_nil: true
   
   def show_photos_with_level
     types = case end_level
@@ -32,5 +35,12 @@ class Log::UserUpdateLevel < ActiveRecord::Base
     log = Log::UserUpdateLevel.find_by(user: user, start_level: start_level, end_level: end_level, status: STATUS.keys[0])
     return if log
   end
-
+  
+  def is_wait?
+    status == STATUS.keys[0]
+  end
+  
+  def is_approved?
+    status == STATUS.keys[1]
+  end
 end
