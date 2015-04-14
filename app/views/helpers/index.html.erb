@@ -1,1 +1,19 @@
-helper/index
+<div class="container accountsMain">
+  <h5 class="title">使用帮助</h5>
+  <div class="helperBanner">
+    <div class="icon"><%= image_tag("helper/help_icon.png", alt: "") %></div>
+    <div class="tt">使用帮助</div>
+    <p>欢迎！感谢使用牛牛汽车,请详细阅读本《使用帮助》</p>
+  </div>
+  <ul class="helperInfo">
+    <%@helpers.each do |_help| %>
+      <li class="clearfix">
+        <div class="col-md-4 q"><%= _help.title %></div>
+        <div class="col-md-8 a"><%= _help.content %></div>
+        <a href="#topBar" class="backTop">↑ 返回顶层</a>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+

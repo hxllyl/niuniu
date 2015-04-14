@@ -10,7 +10,7 @@ class HelpersController < BaseController
 
   def index
     @helpers = Helper.all
-    render layout: false
+    # render layout: false
   end
 
 end

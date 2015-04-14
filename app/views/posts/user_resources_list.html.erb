@@ -26,7 +26,7 @@
               <tbody>
                 <%- @users.each do |user| %>
                   <tr>
-                    <td><%= user.heading_show %></td>
+                    <td><%= user.heading_show %><span class="tag"><%= image_tag(user.level_icon, alt: "", width: "40") if user.try(:is_show_icon?) %></span></td>
                     <td><%= user.area_name %></td>
                     <td><%= user.brands_ary %></td>
                     <td>
