@@ -51,7 +51,7 @@ namespace :util do
               standard_id: st.id,
               brand_id: br.id,
               name: columns[2].to_s.split('.').first.strip.chomp,
-              display_name: columns[3].to_s.split('.').first.strip.chomp
+              display_name: columns[3] ? columns[3].to_s.split('.').first.strip.chomp : nil
             )
        cm.save
 
@@ -60,7 +60,7 @@ namespace :util do
               brand_id: br.id,
               car_model_id: cm.id,
               style: columns[4].strip.chomp,
-              display_name: columns[5].to_s.split('.').first.strip.chomp,
+              display_name: columns[5].to_s.strip.chomp,
               NO: columns[6].to_i.to_s,
               base_price: columns[7].to_f
             )
