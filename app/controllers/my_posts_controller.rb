@@ -110,7 +110,7 @@ class MyPostsController < BaseController
     photos = params[:post].delete(:post_photos)
     @post  = Post.new(params[:post])
     photos && photos.each do |k, v|
-      @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+      @post.post_photos.new(_type: k, image: v.tempfile)
     end
 
     @post.user = current_user
@@ -170,9 +170,9 @@ class MyPostsController < BaseController
     photos && photos.each do |k, v|
       photo = @post.post_photos.find_by__type(k)
       if photo
-        photo.update_attributes(image: v.first.values.first.tempfile)
+        photo.update_attributes(image: v.tempfile)
       else
-        @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+        @post.post_photos.new(_type: k, image: v.tempfile)
       end
     end
 

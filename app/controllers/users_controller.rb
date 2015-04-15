@@ -49,7 +49,7 @@ class UsersController < BaseController
   def delete_relation
     clazz = params[:clazz].classify.constantize
     object = clazz.find params[:id]
-    
+
     if clazz == Post
       if params[:way] == 'resources'
         object.update(status: Post::STATUS.keys[4]) if current_user.send("#{params[:type]}").resources.include?(object)
@@ -108,12 +108,12 @@ class UsersController < BaseController
 
       img_box = params[t.to_sym]
 
-      next if img_box.blank? or img_box['_image'].blank?
+      next if img_box.blank? or img_box['image'].blank?
 
       if photo
-        photo.update(image: img_box[:_image], _type: img_box[:_type])
+        photo.update(image: img_box[:image], _type: img_box[:_type])
       else
-        current_user.photos << Photo.new(image: img_box[:_image], _type: img_box[:_type])
+        current_user.photos << Photo.new(image: img_box[:image], _type: img_box[:_type])
       end
     end
 
