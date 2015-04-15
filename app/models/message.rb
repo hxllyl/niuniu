@@ -67,10 +67,14 @@ class Message < ActiveRecord::Base
       if self.receiver
         jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
       else
-        if _type == TYPES.keys[0]
-          users = User.valid_user
-          self.users << users
-          # jpush_message(content, ActiveDevice.active.pluck(:register_id))
+        begin
+          if _type == TYPES.keys[0]
+            users = User.valid_user
+            self.users << users
+            jpush_message(content, ActiveDevice.active.pluck(:register_id))
+          end
+        rescue
+          nil
         end
         
         # NOTICE: In this case, this should put in a queue, now comment it

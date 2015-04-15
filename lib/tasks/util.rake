@@ -37,7 +37,7 @@ namespace :util do
        if br.new_record?
          br.status = 1
          br.regions = columns[10].split(' ') if columns[10]
-         br.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{brand_icons_dir}/#{br.name}.png"))
+         br.car_photo = CarPhoto.new(_type: 'brand', image: File.open("#{brand_icons_dir}/#{br.name}.png")) if File.exist?("#{brand_icons_dir}/#{br.name}.png")
          br.save
        end
 
@@ -51,7 +51,7 @@ namespace :util do
               standard_id: st.id,
               brand_id: br.id,
               name: columns[2].to_s.split('.').first.strip.chomp,
-              display_name: columns[3].to_s.strip.chomp
+              display_name: columns[3] ? columns[3].to_s.split('.').first.strip.chomp : nil
             )
        cm.save
 
