@@ -286,7 +286,7 @@ class User < ActiveRecord::Base
 
   # 是否可以刷新资源列表
   def could_update_my_resources?
-    !log_posts.update_resources.last || log_posts.update_resources.last.created_at < 1.hours.ago
+    log_posts.update_resources.last.nil? || log_posts.update_resources.last.updated_at < 1.minutes.ago
   end
 
   # 生成POST日志
