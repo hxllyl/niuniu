@@ -16,15 +16,19 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function () {
-  $('#post_photos').find('input[type="file"]').on('change', function(){
-    var n = $(this).attr('class').split(" ")[1];
-    if(this.files && this.files[0]){
-      var reader = new FileReader();
-      reader.onload = function(e){
-        $('#'+n).html('<div class="img" id='+n+'><span class="alt"></span><img src="'+e.target.result+'" width="140" height="94"></div>')
-      };
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
+  // $('#post_photos').find('input[type="file"]').on('change', function(){
+  //   var n = $(this).attr('class').split(" ")[1];
+  //   if(this.files && this.files[0]){
+  //     var reader = new FileReader();
+  //     reader.readAsDataURL(this.files[0]);
+  //     reader.onload = function(e){
+  //       $('.'+n).attr('src', e.target.result);
+  //     };
+  //   }
+  // });
+  $("#post_photo_front").uploadPreview({ Img: "post_front", Width: 140, Height: 94 });
+  $("#post_photo_side").uploadPreview({ Img: "post_side", Width: 140, Height: 94 });
+  $("#post_photo_obverse").uploadPreview({ Img: "post_obverse", Width: 140, Height: 94 });
+  $("#post_photo_inner").uploadPreview({ Img: "post_inner", Width: 140, Height: 94 });
 });
 </script>

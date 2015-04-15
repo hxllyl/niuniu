@@ -130,18 +130,19 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-    $('.button').on('change', function(){
-      var targetId = $(this).attr('target-id');
+    // $('.button').on('change', function(){
+    //   var targetId = $(this).attr('target-id');
 
-      if(this.files && this.files[0]){
+    //   if(this.files && this.files[0]){
 
-        var reader = new FileReader();
-        reader.onload = function(e){
-          $('#show-img').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
+    //     var reader = new FileReader();
+    //     reader.onload = function(e){
+    //       $('#show-img').attr('src', e.target.result);
+    //     };
+    //     reader.readAsDataURL(this.files[0]);
+    //   }
+    // });
+  $("#_image").uploadPreview({ Img: "show-img", Width: 140, Height: 94 });
 });
 </script>
 

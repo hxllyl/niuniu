@@ -8,9 +8,9 @@
         <li class="col-md-3">
           <div class="thumbnail box">
             <div class="img" id=<%= k %>>
-              <span class="alt"><%= v %></span><%= image_tag(@post.photos[k], alt: "", width: "100%") %></div>
+              <span class="alt"><%= v %></span><%= image_tag(@post.photos[k], alt: "", width: "100%", id: "post_#{k}") %></div>
             <div class="fileInput">
-              <div class="fileBtn">添加照片<input type="file" class="button <%= k %>" name=<%= "post[post_photos][#{k}][]" %>/>
+              <div class="fileBtn">添加照片<input type="file" class="button <%= k %>" name=<%= "post[post_photos][#{k}][]" %> id="<%= "post_photo_#{k}"%>"/>
               </div>
             </div>
           </div>
