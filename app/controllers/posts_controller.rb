@@ -10,7 +10,7 @@ class PostsController < BaseController
     @_type      = params[:_type]
     @standards  = Standard.all
     @brands     = Brand.where(name: APP_CONFIG['brands'].split(' '))
-    @car_models = CarModel.where(name: APP_CONFIG['car_models'].split(' '))
+    @car_models = CarModel.where(name: APP_CONFIG['car_models'].split(' ')).select("DISTINCT on (name) *")
     if @_type.to_i == 1
       @posts   = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(created_at: :desc).page(params[:page]).per(10)
     else
@@ -26,6 +26,8 @@ class PostsController < BaseController
     @brand      = Brand.includes(:standards).find_by_id(params[:br])
     @car_model  = CarModel.includes(:base_cars, :standard, :brand).find_by_id(params[:cm])
     @base_car   = BaseCar.includes(:car_model, :brand, :standard).find_by_id(params[:bc])
+
+    @standard, @brand = @car_model.standard, @car_model.brand if @car_model
 
     @standards  = @brand      ? @brand.standards : Standard.all
     @brands     = @standard   ? @standard.brands.valid : Brand.valid
@@ -69,6 +71,7 @@ class PostsController < BaseController
 
     @standards  = @brand      ? @brand.standards : Standard.all
     @brands     = @standard   ? @standard.brands.valid : Brand.valid
+    @standard, @brand = @car_model.standard, @car_model.brand if @car_model
     @car_models = @brand && @standard ? CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid : []
 
     @q_json       = {}
