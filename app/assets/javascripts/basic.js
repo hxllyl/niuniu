@@ -11,9 +11,8 @@ $(document).ready(function(){
   /*表单验证*/
   $("form,#forget_step2").Validform();
   /*placeholder兼容*/
-  $(function () {
-    $("input[placeholder]").inputTip();
-    $("input[type='button']").focus();
+  $(function() {
+    $('input, textarea').placeholder();
   });
   /*nav fixed*/
   $(window).scroll(function(){
