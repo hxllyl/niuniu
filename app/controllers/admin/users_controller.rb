@@ -18,7 +18,8 @@ class Admin::UsersController < Admin::BaseController
 
   def registered
     # TODO: Add logic for registered users 已注册用户
-    @mobiles = Log::ContactPhone.where(sender_id: current_staff.id, _type: 0, is_register: true).order('updated_at desc').page(params[:page]||1).per(30)
+    # @mobiles = Log::ContactPhone.where(sender_id: current_staff.id, _type: 0, is_register: true).order('updated_at desc').page(params[:page]||1).per(30)
+    @users = current_staff.customers.order('created_at desc').page(params[:page]||1).per(30)
   end
 
   def new
@@ -84,6 +85,10 @@ class Admin::UsersController < Admin::BaseController
       flash[:alert] = @contact_phone.errors.full_messages.join(', ')
       redirect_to search_admin_users_path(mobile: params[:mobile])
     end
+  end
+
+  def index
+    @users = User.normals.order(created_at: :desc).page(params[:page]||1).per(30)
   end
 
 end

@@ -1,6 +1,6 @@
 .row.wrapper.border-bottom.white-bg.page-heading
   .col-lg-9
-    %h2 已注册用户名录
+    %h2 用户列表
 
 .wrapper.wrapper-content.animated.fadeInRight
 
@@ -17,14 +17,13 @@
               %th{ style: 'width: 120px;'} 公司名称
               %th 认证等级
               %th 注册日期
-              / %th 最后登录时间
               %th 近一月累计成交
               %th 累计成交
               %th 操作
             - @users.each do |user|
               %tr
                 %td= user.id
-                %td= current_user.job_number
+                %td= user.customer_service.try(:job_number)
                 %td
                   = link_to user.name, user_list_posts_path(user_id: user.id, _type: 0), target: '_blank'
                 %td= user.mobile
@@ -36,23 +35,7 @@
                 %td= user.sum_dealt
                 %td
                   = link_to '修改', edit_admin_user_path(user)
-                  = link_to '代发资源', user_list_posts_path(user_id: user.id, _type: 0), target: '_blank'
-                  = link_to '代发寻车', user_list_posts_path(user_id: user.id, _type: 1), target: '_blank'
 
-        .col-lg-4
-          %table.table.table-responsive
-            %tr
-              %th 后台分配的用户数：
-              %td 10000
-            %tr
-              %th{ style: 'width: 150px;'} 今日新增用户数
-              %td 50
-            %tr
-              %th 本月新增用户数
-              %td 50
-            %tr
-              %th 累计用户数
-              %td 50
         .col-lg-12
           - if @users.present?
             .hr-line-dashed

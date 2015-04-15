@@ -29,7 +29,9 @@
                   %span.clear
                     %span.block.m-t-xs
                       %strong.font-bold
-                        = current_user.try(:username) || '管理员'
+                        = current_user.try(:name) || '管理员'
+            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'index')) }
+              = link_to '用户列表', admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'search')) }
               = link_to '手机号查询', search_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'contacted')) }
@@ -45,7 +47,7 @@
             %li{ class: (:active if current_page?(controller: 'admin/log_user_update_levels', action: 'index')) }
               = link_to '升级认证列表', admin_log_user_update_levels_path
             -# TODO: Add real logic for 'normal_admin?', and remove '||= true'
-            - if normal_admin? || true 
+            - if normal_admin? || true
               %li{ class: (:active if current_page?(controller: 'admin/messages')) }
                 = link_to '系统消息', admin_messages_path
 
@@ -69,6 +71,6 @@
                 %i.fa.fa-sign-out
                 安全退出当前帐号
 
-      
+
 
       = yield

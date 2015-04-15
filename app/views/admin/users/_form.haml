@@ -33,6 +33,11 @@
       = c_f.label '自我简介'
       = c_f.text_area :self_introduction, class: "form-control w100p", row: "4", value: @user.contact['self_introduction']
 
+  .form-group.clearfix
+    = f.label '指定业务员'
+    = f.collection_select :customer_service_id, Staff.customer_services, :id, :name, prompt: true
+
+
   = f.hidden_field :reg_status, value: '3'
   = f.hidden_field :customer_service_id
   = f.hidden_field :role, value: 'normal'
