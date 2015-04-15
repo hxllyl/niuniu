@@ -10,11 +10,6 @@ $(document).ready(function(){
   $(".pageList").css("margin-left", -$(".pageList").outerWidth(true)/2 + "px");
   /*表单验证*/
   $("form,#forget_step2").Validform();
-  /*placeholder兼容*/
-  $(function () {
-    $("input[placeholder]").inputTip();
-    $("input[type='button']").focus();
-  });
   /*nav fixed*/
   $(window).scroll(function(){
     var scrollTop = $(this).scrollTop();

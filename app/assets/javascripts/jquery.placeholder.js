@@ -1,75 +1,14 @@
-$.fn.extend({
-    /**
-     * 该方法为了解决不支持placeholder属性的浏览器下达到相似效果作用
-     * @param _color 文本框输入字体颜色,默认黑色
-     * @param _plaColor 文本框placeholder字体颜色，默认灰色#a3a3a3
-     */
-    inputTip: function (_color, _plaColor) {
-        _color = _color || "#000000";
-        _plaColor = _plaColor || "#a3a3a3";
-        function supportsInputPlaceholder() { // 判断浏览器是否支持html5的placeholder属性
-            var input = document.createElement('input');
-            return "placeholder" in input;
-        }
-
-        function showPassword(_bool, _passEle, _textEle) { // 密码框和文本框的转换
-            if (_bool) {
-                _passEle.show();
-                _textEle.hide();
-            } else {
-                _passEle.hide();
-                _textEle.show();
-            }
-        }
-
-        if (!supportsInputPlaceholder()) {
-            this.each(function () {
-                var thisEle = $(this);
-                var inputType = thisEle.attr("type")
-                var isPasswordInput = inputType == "password";
-                var isInputBox = inputType == "password" || inputType == "text";
-                if (isInputBox) { //如果是密码或文本输入框
-                    var isUserEnter = false; // 是否为用户输入内容,允许用户的输入和默认内容一样
-                    var placeholder = thisEle.attr("placeholder");
-
-                    if (isPasswordInput) { // 如果是密码输入框
-                        //原理：由于input标签的type属性不可以动态更改，所以要构造一个文本input替换整个密码input
-                        var textStr = "<input type='text' class='" + thisEle.attr("class") + "' style='" + (thisEle.attr("style") || "") + "' />";
-                        var textEle = $(textStr);
-                        textEle.css("color", _plaColor).val(placeholder).focus(
-                            function () {
-                                thisEle.focus();
-                            }).insertAfter(this);
-                        thisEle.hide();
-                    }
-                    thisEle.css("color", _plaColor).val("");//解决ie下刷新无法清空已输入input数据问题
-                    if (thisEle.val() == "") {
-                        thisEle.val(placeholder);
-                    }
-                    thisEle.focus(function () {
-                        if (thisEle.val() == placeholder && !isUserEnter) {
-                            thisEle.css("color", _color).val("");
-                            if (isPasswordInput) {
-                                showPassword(true, thisEle, textEle);
-                            }
-                        }
-                    });
-                    thisEle.blur(function () {
-                        if (thisEle.val() == "") {
-                            thisEle.css("color", _plaColor).val(placeholder);
-                            isUserEnter = false;
-                            if (isPasswordInput) {
-                                showPassword(false, thisEle, textEle);
-                            }
-                        }
-                    });
-                    thisEle.keyup(function () {
-                        if (thisEle.val() != placeholder) {
-                            isUserEnter = true;
-                        }
-                    });
-                }
-            });
-        }
-    }
-});
+/**
+ * jquery.placeholder http://matoilic.github.com/jquery.placeholder
+ *
+ * @version v0.2.4
+ * @author Mato Ilic <info@matoilic.ch>
+ * @copyright 2013 Mato Ilic
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ */
+(function(b,f,i){function l(){b(this).find(c).each(j)}function m(a){for(var a=a.attributes,b={},c=/^jQuery\d+/,e=0;e<a.length;e++)if(a[e].specified&&!c.test(a[e].name))b[a[e].name]=a[e].value;return b}function j(){var a=b(this),d;a.is(":password")||(a.data("password")?(d=a.next().show().focus(),b("label[for="+a.attr("id")+"]").attr("for",d.attr("id")),a.remove()):a.realVal()==a.attr("placeholder")&&(a.val(""),a.removeClass("placeholder")))}function k(){var a=b(this),d,c;placeholder=a.attr("placeholder");
+b.trim(a.val()).length>0||(a.is(":password")?(c=a.attr("id")+"-clone",d=b("<input/>").attr(b.extend(m(this),{type:"text",value:placeholder,"data-password":1,id:c})).addClass("placeholder"),a.before(d).hide(),b("label[for="+a.attr("id")+"]").attr("for",c)):(a.val(placeholder),a.addClass("placeholder")))}var g="placeholder"in f.createElement("input"),h="placeholder"in f.createElement("textarea"),c=":input[placeholder]";b.placeholder={input:g,textarea:h};!i&&g&&h?b.fn.placeholder=function(){}:(!i&&g&&
+!h&&(c="textarea[placeholder]"),b.fn.realVal=b.fn.val,b.fn.val=function(){var a=b(this),d;if(arguments.length>0)return a.realVal.apply(this,arguments);d=a.realVal();a=a.attr("placeholder");return d==a?"":d},b.fn.placeholder=function(){this.filter(c).each(k);return this},b(function(a){var b=a(f);b.on("submit","form",l);b.on("focus",c,j);b.on("blur",c,k);a(c).placeholder()}))})(jQuery,document,window.debug);
