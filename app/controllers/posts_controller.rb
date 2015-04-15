@@ -27,6 +27,10 @@ class PostsController < BaseController
     @car_model  = CarModel.includes(:base_cars, :standard, :brand).find_by_id(params[:cm])
     @base_car   = BaseCar.includes(:car_model, :brand, :standard).find_by_id(params[:bc])
 
+    @oc = params[:oc]
+    @ic = params[:ic]
+    @rt = params[:rt]
+
     @standard, @brand = @car_model.standard, @car_model.brand if @car_model
 
     @standards  = @brand      ? @brand.standards : Standard.all
@@ -42,9 +46,9 @@ class PostsController < BaseController
     if @base_car
       @q_json[:bc]          = @base_car.id
       conds                 = {status: 1}
-      conds[:outer_color]   = params[:oc] && @q_json[:oc] = params[:oc]  if params[:oc]
-      conds[:inner_color]   = params[:ic] && @q_json[:ic] = params[:ic]  if params[:ic]
-      conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
+      conds[:outer_color]   = @oc && @q_json[:oc] = @oc  if @oc
+      conds[:inner_color]   = @ic && @q_json[:ic] = @ic  if @ic
+      conds[:resource_type] = @rt && @q_json[:rt] = @rt  if @rt
 
       @order_ele  = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
       @order_by   = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
