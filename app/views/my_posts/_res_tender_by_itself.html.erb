@@ -26,16 +26,32 @@
     </label>
   </div>
   <div class="form-group form-inline col-md-6">
-    <label class="radio selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios4" value="4"><span>直接报价</span>
-    </label>
+    <%- if @post && @post.discount_way == 4 %>
+      <label class="radio selectTag active">
+        <input type="radio" name="post[discount_way]" id="methodRadios4" value="4" checked='checked'><span>直接报价</span>
+      </label>
+    <% else %>
+      <label class="radio selectTag">
+        <input type="radio" name="post[discount_way]" id="methodRadios4" value="4"><span>直接报价</span>
+      </label>
+    <% end %>
     <label class="selectInput">
-      <input type="text" class="form-control input-sm" id="methodVal4" placeholder="" name="post[discount_content]" autocomplete="off">
+      <%- if @post.new_record? %>
+        <input type="text" class="form-control input-sm" id="methodVal4" placeholder="" name="post[discount_content]" autocomplete="off">
+      <% else %>
+        <input type="text" class="form-control input-sm" id="methodVal4" placeholder="" name="post[discount_content]" autocomplete="off", value=<%= @post.discount_content.to_f %>>
+      <% end %>
       <div class="units">万元</div>
     </label>
   </div>
   <div class="form-group form-inline col-md-6">
+    <%- if @post && @post.discount_way == 5 %>
+      <label class="radio selectTag active">
+        <input type="radio" name="post[discount_way]" id="methodRadios5" value="5" checked='checked'><span>电议</span>
+      </label>
+    <% else %>
     <label class="radio selectTag">
-      <input type="radio" name="post[discount_way]" id="methodRadios5" value="5"><span>电议</span>
-    </label>
+        <input type="radio" name="post[discount_way]" id="methodRadios5" value="5"><span>电议</span>
+      </label>
+    <% end %>
   </div>

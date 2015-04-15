@@ -5,25 +5,52 @@
       <%- if @standard %>
         <li>
           <span class="name"><%= @standard.name %></span>
-          <a href="<%= resources_list_posts_path %>" class="close" aria-label="Close">&times;<input class="hide" id="standard_id" value="<%= @standard.id %>"></a>
+          <a href="<%= resources_list_posts_path %>" class="close" aria-label="Close">&times;</a>
         </li>
       <% end %>
       <%- if @brand %>
         <li>
           <span class="name"><%= @brand.name %></span>
-          <a href="<%= resources_list_posts_path(st: @q_json[:st]) %>" class="close" aria-label="Close">&times;<input class="hide" id="brand_id" value="<%= @brand.id %>"></a>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st]) %>" class="close" aria-label="Close">&times;</a>
         </li>
       <% end %>
       <%- if @car_model %>
         <li>
           <span class="name"><%= @car_model.name %></span>
-          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br]) %>" class="close" aria-label="Close">&times;<input class="hide" id="car_model_id" value="<%= @car_model.id %>"></a>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br]) %>" class="close" aria-label="Close">&times;</a>
         </li>
       <% end %>
       <%- if @base_car %>
         <li>
           <span class="name"><%= @base_car.style %></span>
-          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm]) %>" class="close" aria-label="Close">&times;<input class="hide" id="base_car_id" value="<%= @base_car.id %>"></a>
+          <a href="<%= resources_list_posts_path(st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm]) %>" class="close" aria-label="Close">&times;</a>
+        </li>
+      <% end %>
+      <%- if @oc %>
+        <li>
+          <span class="name"><%= @oc %></span>
+          <% q_hash = {st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm], bc: @q_json[:bc]} %>
+          <% q_hash[:rt] = @rt %>
+          <% q_hash[:ic] = @ic %>
+          <a href="<%= resources_list_posts_path(q_hash) %>" class="close" aria-label="Close">&times;</a>
+        </li>
+      <% end %>
+      <%- if @ic %>
+        <li>
+          <span class="name"><%= @ic %></span>
+          <% q_hash = {st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm], bc: @q_json[:bc]} %>
+          <% q_hash[:oc] = @oc %>
+          <% q_hash[:rt] = @rt %>
+          <a href="<%= resources_list_posts_path(q_hash) %>" class="close" aria-label="Close">&times;</a>
+        </li>
+      <% end %>
+      <%- if @rt %>
+        <li>
+          <span class="name"><%= Post::RESOURCE_TYPE[@rt.to_i] %></span>
+          <% q_hash = {st: @q_json[:st], br: @q_json[:br], cm: @q_json[:cm], bc: @q_json[:bc]} %>
+          <% q_hash[:oc] = @oc %>
+          <% q_hash[:ic] = @ic %>
+          <a href="<%= resources_list_posts_path(q_hash) %>" class="close" aria-label="Close">&times;</a>
         </li>
       <% end %>
     </ul>

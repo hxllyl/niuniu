@@ -79,6 +79,7 @@ class Tender < ActiveRecord::Base
       post_brand_img:           (post.brand.car_photo.image.try(:url) rescue ''),
       post_take_car_date:       Post::TAKE_DATES[post.take_car_date],
       post_base_car_price:      post.base_car_base_price.to_f,
+      post_status:              post.status,
 
       tender_id:                id,
       tender_user_id:           user_id,
@@ -155,7 +156,7 @@ class Tender < ActiveRecord::Base
                 EOF
               end
   end
-  
+
   # def generate_post_message
   #   message = <<-EOF
   #   #{user_name} 和您寻的 #{post.info_for_jpush} 成交了。

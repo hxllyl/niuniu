@@ -21,15 +21,15 @@ class Api::ValidCodesController < Api::BaseController
   #   error_msg: [String]  错误信息
   def index
     raise Errors::InvaildVaildCodeError.new, t('error_msgs.mobile_blank_or_not_formatted') \
-                                             unless is_legal?(params[:mobile], :mobile)
+                                             unless is_legal?(params[:mobile].strip, :mobile)
 
-    valid_code = ValidCode.where(mobile: params[:mobile], _type: params[:type]).first
+    valid_code = ValidCode.where(mobile: params[:mobile].strip, _type: params[:type]).first
 
     if valid_code and valid_code.is_valid?
       valid_code.send_code
       render json: { status: 'success', code: valid_code.code }
     else
-      valid_code = ValidCode.new(mobile: params[:mobile], _type: params[:type])
+      valid_code = ValidCode.new(mobile: params[:mobile].strip, _type: params[:type])
 
       if valid_code.save
         valid_code.send_code

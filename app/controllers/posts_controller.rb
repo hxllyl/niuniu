@@ -10,7 +10,7 @@ class PostsController < BaseController
     @_type      = params[:_type]
     @standards  = Standard.all
     @brands     = Brand.where(name: APP_CONFIG['brands'].split(' '))
-    @car_models = CarModel.where(name: APP_CONFIG['car_models'].split(' '))
+    @car_models = CarModel.where(name: APP_CONFIG['car_models'].split(' ')).select("DISTINCT on (name) *")
     if @_type.to_i == 1
       @posts   = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(created_at: :desc).page(params[:page]).per(10)
     else
@@ -27,6 +27,12 @@ class PostsController < BaseController
     @car_model  = CarModel.includes(:base_cars, :standard, :brand).find_by_id(params[:cm])
     @base_car   = BaseCar.includes(:car_model, :brand, :standard).find_by_id(params[:bc])
 
+    @oc = params[:oc]
+    @ic = params[:ic]
+    @rt = params[:rt]
+
+    @standard, @brand = @car_model.standard, @car_model.brand if @car_model
+
     @standards  = @brand      ? @brand.standards : Standard.all
     @brands     = @standard   ? @standard.brands.valid : Brand.valid
     @car_models = @brand && @standard ? CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid : []
@@ -40,9 +46,9 @@ class PostsController < BaseController
     if @base_car
       @q_json[:bc]          = @base_car.id
       conds                 = {status: 1}
-      conds[:outer_color]   = params[:oc] && @q_json[:oc] = params[:oc]  if params[:oc]
-      conds[:inner_color]   = params[:ic] && @q_json[:ic] = params[:ic]  if params[:ic]
-      conds[:resource_type] = params[:rt] && @q_json[:rt] = params[:rt]  if params[:rt]
+      conds[:outer_color]   = @oc && @q_json[:oc] = @oc  if @oc
+      conds[:inner_color]   = @ic && @q_json[:ic] = @ic  if @ic
+      conds[:resource_type] = @rt && @q_json[:rt] = @rt  if @rt
 
       @order_ele  = params[:order_by] ? Post::ORDERS[params[:order_by].to_sym] : nil
       @order_by   = params[:order_by] == 'expect_price' ? {expect_price: :asc} : {updated_at: :desc}
@@ -69,6 +75,7 @@ class PostsController < BaseController
 
     @standards  = @brand      ? @brand.standards : Standard.all
     @brands     = @standard   ? @standard.brands.valid : Brand.valid
+    @standard, @brand = @car_model.standard, @car_model.brand if @car_model
     @car_models = @brand && @standard ? CarModel.where(standard_id: @standard.id, brand_id: @brand.id).valid : []
 
     @q_json       = {}
@@ -113,7 +120,9 @@ class PostsController < BaseController
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-    @users = User.includes(:area).where("id" => Post.resources.valid.includes(:brand).map(&:user_id)).page(params[:page]).per(10)
+    user_ids  = Post.resources.valid.includes(:brand).order(updated_at: :desc).map(&:user_id).uniq
+    @user_ids = Kaminari.paginate_array(user_ids).page(params[:page]).per(10)
+    @users = User.includes(:area).where("id" => @user_ids)
   end
 
   # 导出用户资源

@@ -22,7 +22,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon icon-user"></span><%= current_user.name %>
             <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href=<%= user_path(current_user) %>>个人中心</a></li>
+            <li><%= link_to '个人中心', user_path(current_user) %></li>
+            <% if current_user.class == Staff %>
+              <li><%= link_to '进入后台管理页', search_admin_users_path %></li>
+            <% end %>
             <li><%= link_to t('sign_out'), destroy_user_session_path(), method: :delete %></li>
           </ul>
         </li>
