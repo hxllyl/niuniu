@@ -72,4 +72,18 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  # 指定业务员
+  def set_staff
+    @contact_phone = Log::ContactPhone.new(
+                mobile: params[:mobile],
+                sender_id: params[:staff_id]
+              )
+    if @contact_phone.save
+      redirect_to contacted_admin_users_path, notice: '已加入通讯录'
+    else
+      flash[:alert] = @contact_phone.errors.full_messages.join(', ')
+      redirect_to search_admin_users_path(mobile: params[:mobile])
+    end
+  end
+
 end

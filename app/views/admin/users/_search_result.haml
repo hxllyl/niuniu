@@ -1,8 +1,17 @@
 .hr-line-dashed
 .search-result
   - if @mobile_log.new_record?
-    = link_to '我来联系', contact_admin_users_path(mobile: @mobile_log.mobile), method: :post, class: 'btn btn-warning'
-    = link_to '取消', search_admin_users_path, class: 'btn'
+    = link_to '我来联系', contact_admin_users_path(mobile: @mobile_log.mobile), method: :post, class: 'btn btn-warning bfL'
+    .dropdown.bfl
+      %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+        指定业务员
+        %span.caret
+      %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu"}
+        - Staff.customer_services.each do |staff|
+          %li{:role => "presentation"}
+            = link_to staff.name, set_staff_admin_users_path(mobile: @mobile_log.mobile, staff_id: staff.id), method: :post, role: "menuitem", tabindex: "-1"
+
+    = link_to '取消', search_admin_users_path, class: 'btn bfL'
   - else
     - if @mobile_log.is_register
       = link_to "已注册，用户名为#{@mobile_log.user.name}, 点击详情", user_list_posts_path(user_id: @mobile_log.user.id, _type: 0), target: '_blank'
