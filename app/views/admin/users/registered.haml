@@ -17,7 +17,7 @@
               %th{ style: 'width: 120px;'} 公司名称
               %th 认证等级
               %th 注册日期
-              %th 最后登录时间
+              / %th 最后登录时间
               %th 近一月累计成交
               %th 累计成交
               %th 操作
@@ -31,11 +31,13 @@
                 %td= ele.user.company
                 %td= User::LEVELS[ele.user.level]
                 %td= ele.user.created_at.to_s(:db)
-                %td= ele.user.last_sign_in_at.try(:to_s, :db)
+                / %td= ele.user.last_sign_in_at.try(:to_s, :db)
                 %td= ele.user.last_month_dealt
                 %td= ele.user.sum_dealt
                 %td
                   = link_to '修改', edit_admin_user_path(ele.user)
+                  = link_to '代发资源', user_list_posts_path(user_id: ele.user.id, _type: 0), target: '_blank'
+                  = link_to '代发寻车', user_list_posts_path(user_id: ele.user.id, _type: 1), target: '_blank'
 
         .col-lg-4
           %table.table.table-responsive
