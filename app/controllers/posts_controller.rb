@@ -120,7 +120,9 @@ class PostsController < BaseController
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-    @users = User.includes(:area).where("id" => Post.resources.valid.includes(:brand).map(&:user_id)).page(params[:page]).per(10)
+    user_ids  = Post.resources.valid.includes(:brand).order(updated_at: :desc).map(&:user_id).uniq
+    @user_ids = Kaminari.paginate_array(user_ids).page(params[:page]).per(10)
+    @users = User.includes(:area).where("id" => @user_ids)
   end
 
   # 导出用户资源
@@ -257,7 +259,7 @@ class PostsController < BaseController
     photos = params[:post].delete(:post_photos)
     @post  = Post.new(params[:post])
     photos && photos.each do |k, v|
-      @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+      @post.post_photos.new(_type: k, image: v.tempfile)
     end
 
     @post.user = @someone
@@ -318,9 +320,9 @@ class PostsController < BaseController
     photos && photos.each do |k, v|
       photo = @post.post_photos.find_by__type(k)
       if photo
-        photo.update_attributes(image: v.first.values.first.tempfile)
+        photo.update_attributes(image: v.tempfile)
       else
-        @post.post_photos.new(_type: k, image: v.first.values.first.tempfile)
+        @post.post_photos.new(_type: k, image: v.tempfile)
       end
     end
 

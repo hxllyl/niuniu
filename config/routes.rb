@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         get :contacted
         get :registered
         post :contact
+        post :set_staff
       end
     end
 
