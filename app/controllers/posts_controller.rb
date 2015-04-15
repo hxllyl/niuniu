@@ -120,7 +120,9 @@ class PostsController < BaseController
 
   # 资源表 首页中间最底部的链接
   def user_resources_list
-    @users = User.includes(:area).where("id" => Post.resources.valid.includes(:brand).map(&:user_id)).page(params[:page]).per(10)
+    user_ids  = Post.resources.valid.includes(:brand).order(updated_at: :desc).map(&:user_id).uniq
+    @user_ids = Kaminari.paginate_array(user_ids).page(params[:page]).per(10)
+    @users = User.includes(:area).where("id" => @user_ids)
   end
 
   # 导出用户资源

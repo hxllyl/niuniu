@@ -24,7 +24,8 @@
                 </tr>
               </thead>
               <tbody>
-                <%- @users.each do |user| %>
+                <%- @user_ids.each do |u_id| %>
+                  <% user = @users.find_by_id(u_id) %>
                   <tr>
                     <td><%= user.heading_show %><span class="tag"><%= image_tag(user.level_icon, alt: "", width: "40") if user.try(:is_show_icon?) %></span></td>
                     <td><%= user.area_name %></td>
@@ -41,7 +42,7 @@
             </table>
           </div>
           <div class="pageList">
-            <%= paginate @users %>
+            <%= paginate @user_ids %>
           </div>
         </div>
       </div>
