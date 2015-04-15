@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module DeviseFailed
   
   class CustomFailure < Devise::FailureApp
@@ -10,6 +12,7 @@ module DeviseFailed
       if request.format == :json or request.content_type == 'application/json'
         json_failure
       else
+        flash[:error] = '找不到用户！'
         super
       end
     end
