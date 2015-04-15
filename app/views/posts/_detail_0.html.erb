@@ -48,14 +48,16 @@
                 <li data-target="#showBanner" data-slide-to="<%= i %>" class="<%= i == 0 ? 'active' : ''%>"><%= image_tag(ele, width: "75", height: "50")%></li>
               <%end-%>
             </ol>
-            <a class="left carousel-control" href="#showBanner" role="button" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">上一张</span>
-            </a>
-            <a class="right carousel-control" href="#showBanner" role="button" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">下一张</span>
-            </a>
+            <% unless @post.photos.empty? %>
+              <a class="left carousel-control" href="#showBanner" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">上一张</span>
+              </a>
+              <a class="right carousel-control" href="#showBanner" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">下一张</span>
+              </a>
+            <% end %>
           </div>
         </div>
       </div>
