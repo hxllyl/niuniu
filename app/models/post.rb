@@ -185,7 +185,7 @@ class Post < ActiveRecord::Base
       tenders_count:      tenders.count,
       status:             STATUS[status],
       resource_type:      RESOURCE_TYPE[resource_type],
-      tenders:            tenders.map(&:to_hash),
+      tenders:            tenders.order(created_at: :desc).map(&:to_hash),
       base_price:         base_car.base_price.to_f,
       user_name_area:     user.name_area,
       price_status:       base_price,
