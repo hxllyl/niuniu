@@ -15,7 +15,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%- @users.each do |user| %>
+					<%- @user_ids.each do |u_id| %>
+						<% user = @users.find_by_id(u_id) %>
 						<tr>
 							<td>
 								<span><%= link_to user.heading_show, user_list_posts_path(user_id: user.id, _type: 0), class: 'name' %></span>

@@ -12,14 +12,14 @@ class PortalController < BaseController
   def index
     @user = User.new unless current_user
 
-    # 最热品牌，寻车4个，资源8个
+    # 最热品牌，寻车6个，资源8个
     @need_brands = Brand.includes(:car_photo).where(name: APP_CONFIG['need_brands'].split(' '))
     # 寻车列表
     @needs      = Post.needs.valid.includes(:user, :car_model, :standard, :base_car, brand: [:car_photo]).order(created_at: :desc).limit(8)
 
-    # 四个品牌对就的寻车列表
+    # 6个品牌对就的寻车列表
     @posts_with_brands = @need_brands.each_with_object({}) do |brand, ha|
-                            posts = brand.posts.needs.valid.order(created_at: :desc).limit(8)
+                            posts = brand.posts.needs.valid.includes(:user, :car_model, :standard, :base_car).order(created_at: :desc).limit(8)
                             ha.merge!({brand.id => posts})
                             ha
                          end
@@ -38,8 +38,9 @@ class PortalController < BaseController
     end
 
     # 资源表
-    # @user_posts = Post.resources.valid.includes(:user).select("DISTINCT ON (user_id) *").order(updated_at: :desc).limit(10)
-    @users = User.where("id" => Post.resources.valid.order(updated_at: :desc).map(&:user_id).uniq[0..9])
+    # @user_posts = Post.resources.valid.select("DISTINCT on (user_id) *").order("updated_at desc")[0..9]
+    @user_ids = Post.resources.valid.order(updated_at: :desc).map(&:user_id).uniq[0..9]
+    @users = User.where("id" => @user_ids)
 
     @banners = Banner.order('banners.position')
   end
