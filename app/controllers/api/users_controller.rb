@@ -75,11 +75,11 @@ class Api::UsersController < Api::BaseController
   #
   # Params:
   #   token:    [String] 用户token
-  # Returns:
+  # Return:
   #   status:   200
   #   notice:   success
   #   data:     客服基本信息
-  # Errors:
+  # Error:
   #   status:   500
   #   notice:   failed
   
@@ -99,12 +99,12 @@ class Api::UsersController < Api::BaseController
   #  token:       [String]    valid token
   #  updated_at:  [DateTime]  更新时间
   #
-  # Returns:
+  # Return:
   #  status: [Integer]  200
   #  notice: [String]   success
   #  data:
   #
-  # Errors:
+  # Error:
   #  status:    [Integer]       500
   #  notice:    [String]        failed
   #  error_msg: [String]        error json
