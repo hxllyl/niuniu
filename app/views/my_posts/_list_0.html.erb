@@ -24,7 +24,6 @@
             <%= hidden_field_tag 'brand_id', @brand_id %>
             <%= hidden_field_tag '_type', @_type %>
             <%= hidden_field_tag 'update_all', 'true' %>
-            <%= hidden_field_tag 'resource_ids', @posts.map(&:id) %>
               <div class="updateTime mr20 bfL">最后更新时间：<span><%= @posts.first.try(:publish_time) %></span></div>
               <button class="btn btn-default bfR" type="submit"><span class="icon icon-refresh"></span>全部更新</button>
               <% end-%>
