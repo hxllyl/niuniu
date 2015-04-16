@@ -10,8 +10,10 @@ class Log::ContactPhone < ActiveRecord::Base
   validates :mobile, presence: true, uniqueness: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }
   # validates :sender_id, presence: true
   validates :_type,  presence: true, inclusion: {in: TYPES.keys}
+  
+  belongs_to :promoter, class_name: 'User'
 
-  belongs_to :sender, class_name: 'User' # 客服专员
+  belongs_to :sender, class_name: 'Staff' 
   belongs_to :reg_admin, class_name: 'Staff' #代注册的管理员
 
   def user

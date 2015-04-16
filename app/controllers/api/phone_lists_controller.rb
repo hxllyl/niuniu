@@ -31,7 +31,7 @@ class Api::PhoneListsController < Api::BaseController
       mobile = contact['mobile']
       u = User.find_by(mobile: mobile)
       hash = if u
-              log = Log::ContactPhone.find_by(sender: @user, mobile: mobile, _type:  Log::ContactPhone::TYPES.keys[1])
+              log = Log::ContactPhone.find_by(promoter: @user, mobile: mobile, _type:  Log::ContactPhone::TYPES.keys[1])
               {user_id: u.id, is_following: @user.following?(u), is_invite: log.present?}
              else
               {user_id: '', is_following: false, is_invite: false}
@@ -66,7 +66,7 @@ class Api::PhoneListsController < Api::BaseController
     SendInviteMessageJob.perform_later(@user, mobile)
     
     payload = {
-      sender: @user, 
+      promoter: @user, 
       mobile: mobile,
       _type:  Log::ContactPhone::TYPES.keys[1],
       last_contact_at: Time.now
