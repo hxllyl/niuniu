@@ -27,6 +27,9 @@
       = c_f.label 'QQ'
       = c_f.text_field :qq, class: "form-control", value: @user.contact['qq']
     .form-group.clearfix
+      = c_f.label '电话'
+      = c_f.text_field :phone, class: "form-control", value: @user.contact['phone']
+    .form-group.clearfix
       = c_f.label '公司地址'
       = c_f.text_field :company_address, class: "form-control", value: @user.contact['company_address']
     .form-group.clearfix
