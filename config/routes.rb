@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
     resources :base_cars
+    resources :complaints, only: [:index, :update]
   end
 
   root 'portal#index'

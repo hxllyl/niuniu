@@ -50,6 +50,8 @@
               = link_to 'Helpers', admin_helpers_path
             %li{ class: (:active if current_page?(controller: 'admin/log_user_update_levels', action: 'index')) }
               = link_to '升级认证列表', admin_log_user_update_levels_path
+            %li{ class: (:active if current_page?(controller: 'admin/complaints')) }
+              = link_to '投诉中心', admin_complaints_path
             -# TODO: Add real logic for 'normal_admin?', and remove '||= true'
             - if normal_admin? || true
               %li{ class: (:active if current_page?(controller: 'admin/messages')) }
