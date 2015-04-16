@@ -1,0 +1,41 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 车型库
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 规格
+          %th 品牌
+          %th 车型
+          %th 车款
+          %th 外饰
+          %th 内饰
+          %th 指导价/万
+          %th 地区
+          %th 操作
+        - @base_cars.each do |bc|
+          %tr
+            %td= bc.id
+            %td= bc.standard_name
+            %td= bc.brand_name
+            %td= bc.car_model_name
+            %td= bc.style
+            %td= bc.outer_color.join(' ')
+            %td= bc.inner_color.join(' ')
+            %td= bc.base_price.to_f
+            %td= bc.brand.regions.join(' ')
+            %td
+              = link_to '查看', '', target: '_blank'
+              = link_to '关闭', ''
+
+      - if @base_cars.present?
+        .hr-line-dashed
+
+      .text-center
+        = paginate @base_cars
+
+
