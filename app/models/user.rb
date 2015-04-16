@@ -318,14 +318,18 @@ class User < ActiveRecord::Base
   #   log.is_register = true
   #   log.save
   # end
-  
+
   # 用户登陆判断status
   def active_for_authentication?
     super and can_sign_in?
   end
-  
+
   def can_sign_in?
     status != -1
+  end
+
+  def valid?
+    status == 1
   end
 
 end

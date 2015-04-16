@@ -17,6 +17,8 @@ class Api::BaseController < ApplicationController
 
     raise 'not found valid user' unless @user
 
+    raise '您的身份已失效' unless @user.valid?
+
     rescue => e
     render json: {status: false, error: e.message}
   end
