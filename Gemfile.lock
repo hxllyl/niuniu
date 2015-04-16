@@ -68,6 +68,7 @@ GEM
       ruby_parser (~> 3.6.2)
       sass (~> 3.0)
       terminal-table (~> 1.4)
+    browser (0.8.0)
     builder (3.2.2)
     bullet (4.14.4)
       activesupport (>= 3.0.0)
@@ -327,6 +328,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   brakeman
+  browser
   bullet
   byebug
   cancan

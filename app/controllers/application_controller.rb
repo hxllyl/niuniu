@@ -43,4 +43,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  # 用于手机、移动页面的渲染
+  # if browser.mobile?
+  #   request.variant = :tablet
+  # end
+
 end

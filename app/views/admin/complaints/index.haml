@@ -1,0 +1,42 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 投诉中心
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 投诉人
+          %th 投诉类型
+          %th 投诉内容
+          %th 状态
+          %th 经办人
+          %th 操作
+        - @complaints.each do |ele|
+          %tr
+            %td= ele.id
+            %td= ele.user.name
+            %td= get_resource_name(ele.resource_type, ele.resource_id)
+            %td= ele.content
+            %td
+              .dropdown.bfL
+                %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button", "aria-expanded" => "false"}
+                  = Complaint::STATUS[ele.status]
+                  %span.caret
+                %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1", :role => "menu", "aria-labelledby" => "dLabel"}
+                  - Complaint::STATUS.each do |k, v|
+                    %li{:role => "presentation"}
+                      = link_to v, admin_complaint_path(ele, status: k), method: :put, role: "menuitem", tabindex: "-1"
+            %td= ele.operator.try(:name)
+            %td
+              = link_to '查看', get_resource_url(ele.resource_type, ele.resource_id), target: '_blank'
+
+      - if @complaints.present?
+        .hr-line-dashed
+
+      .text-center
+        = paginate @complaints
+
+

@@ -143,6 +143,8 @@ gem 'chinese_pinyin'
 # nested
 gem 'ancestry'
 
+gem 'browser'
+
 #jpush
 gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
 

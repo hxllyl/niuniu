@@ -61,11 +61,11 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 .banner .carousel-indicators li { border-color: #f4621b; }
 .banner .carousel-indicators .active { background-color: #f4621b; }
 .nav-tabs.carInfoTabs { height: 44px; padding: 2px 8px 0; border-bottom: none; color: #333; background-color: #ededed; }
-.nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 22px 0; border: none; color: #333; }
+.nav-tabs.carInfoTabs li a { height: 42px; line-height: 38px; padding: 4px 12px 0; border: none; color: #333; }
 .nav-tabs.carInfoTabs li a:hover { color: #f4621b; }
-.nav-tabs.carInfoTabs li a .icon { display: inline-block; width: 30px; margin-top: -4px; text-align: center; vertical-align: middle; }
+.nav-tabs.carInfoTabs li a .icon { display: inline-block; width: 60px; margin-top: -4px; text-align: center; vertical-align: middle; }
 .nav-tabs.carInfoTabs li a .icon img { width: 80%; }
-.nav-tabs.carInfoTabs li.active a { padding: 0 22px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
+.nav-tabs.carInfoTabs li.active a { padding: 0 12px; border-width: 0; border-top: 4px solid #f4621b; color: #f4621b; }
 .nav-tabs.carInfoTabs.sm { height: 34px; }
 .nav-tabs.carInfoTabs.sm li a { height: 32px; line-height: 28px; }
 .nav-tabs.carInfoTabs.sm li a .icon { height: 28px; }
