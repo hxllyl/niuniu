@@ -11,5 +11,14 @@ class Token < ActiveRecord::Base
   def set_expired
     expired_at = 7.days.from_now
   end
-    
+  
+  def for_api
+    {
+      status: status,
+      user_id: user_id,
+      value: value,
+      expired_at: expired_at.strftime("%Y-%m-%d %H:%M:%S")
+    }
+  end  
+  
 end

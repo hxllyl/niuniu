@@ -26,7 +26,7 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
         render json:  {
                         status:   200,
                         notice:   'success',
-                        data:     { token: current_user.token }
+                        data:     { token: current_user.token.for_api }
                       }
       }
     end
