@@ -34,6 +34,8 @@
               = link_to '内部员工列表', staff_list_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'index')) }
               = link_to '用户列表', admin_users_path
+            %li{ class: (:active if current_page?(controller: 'admin/base_cars')) }
+              = link_to '车型库管理', admin_base_cars_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'search')) }
               = link_to '手机号查询', search_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'contacted')) }

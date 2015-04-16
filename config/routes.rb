@@ -28,8 +28,7 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
-
-
+    resources :base_cars
   end
 
   root 'portal#index'
