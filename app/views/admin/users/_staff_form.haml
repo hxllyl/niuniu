@@ -4,7 +4,10 @@
     = f.text_field :name, class: "form-control"
   .form-group.clearfix
     = f.label '手机号'
-    = f.text_field :mobile, class: "form-control", readonly: "readonly"
+    = f.text_field :mobile, class: "form-control"
+  .form-group.clearfix
+    = f.label '工号'
+    = f.text_field :job_number, class: "form-control"
   .form-group.clearfix
     = f.label '密码'
     = f.password_field :password, class: "form-control"
@@ -18,28 +21,29 @@
 
   = f.fields_for :contact do |c_f|
     .form-group.clearfix
-      = c_f.label '公司地址'
-      = c_f.text_field :company_address, class: "form-control", value: @user.contact['company_address']
-    .form-group.clearfix
-      = c_f.label '职业'
-      = c_f.text_field :position_header, class: "form-control", value: @user.contact['position_header']
-    .form-group.clearfix
       = c_f.label '微信'
       = c_f.text_field :wx, class: "form-control", value: @user.contact['wx']
-      .form-group.clearfix
+    .form-group.clearfix
       = c_f.label 'QQ'
       = c_f.text_field :qq, class: "form-control", value: @user.contact['qq']
     .form-group.clearfix
-      = c_f.label '自我简介'
-      = c_f.text_area :self_introduction, class: "form-control w100p", row: "4", value: @user.contact['self_introduction']
+      = c_f.label '公司地址'
+      = c_f.text_field :company_address, class: "form-control", value: @user.contact['company_address']
+    .form-group.clearfix
+      = c_f.label '公司邮箱'
+      = c_f.text_field :company_email, class: "form-control", value: @user.contact['company_email']
+    .form-group.clearfix
+      = c_f.label '公司网站'
+      = c_f.text_field :web_site, class: "form-control", value: @user.contact['web_site']
+    .form-group.clearfix
+      = c_f.label '备注'
+      = c_f.text_area :remark, class: "form-control w100p", row: "4", value: @user.contact['remark']
 
   .form-group.clearfix
-    = f.label '指定业务员'
-    = f.collection_select :customer_service_id, Staff.customer_services, :id, :name, prompt: true
+    = f.label '分配角色'
+    = f.select :role, Staff::ROLES, prompt: true
 
-
-  = f.hidden_field :reg_status, value: '3'
-  = f.hidden_field :role, value: 'normal'
+  = f.hidden_field :mask, value: @user.mask
   = f.hidden_field :status, value: 1
   .form-group.clearfix
     = f.submit class: "btn btn-default subBtn"

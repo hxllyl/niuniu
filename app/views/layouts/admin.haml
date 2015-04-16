@@ -30,6 +30,8 @@
                     %span.block.m-t-xs
                       %strong.font-bold
                         = current_user.try(:name) || '管理员'
+            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'staff_list')) }
+              = link_to '内部员工列表', staff_list_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'index')) }
               = link_to '用户列表', admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'search')) }

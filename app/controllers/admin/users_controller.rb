@@ -23,22 +23,53 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def new
-    params.require(:user).permit!
-    @user = User.new(params[:user].merge(contact: {company_address: nil, position_header: nil, wx: nil, qq: nil}))
+    user_hash = if params[:mask] == 'Staff'
+                  {
+                    mask: 'Staff',
+                    contact: {
+                      wx:              nil,
+                      qq:              nil,
+                      remark:          nil,
+                      company_address: nil,
+                      phone:           nil,
+                      web_site:        nil,
+                      company_email:   nil
+                    }
+                  }
+                else
+                  params.require(:user).permit!
+                  params[:user].merge(
+                    contact:  {
+                                company_address:    nil,
+                                position_header:    nil,
+                                wx:                 nil,
+                                qq:                 nil,
+                                self_introduction:  nil
+                  })
+                end
+    @user = User.new(user_hash)
   end
 
   def create
-    params.require(:user).permit!
-
-    @user = User.new(params[:user])
+    if params[:staff]
+      params.require(:staff).permit!
+      @user = User.new(params[:staff])
+    else
+      params.require(:user).permit!
+      @user = User.new(params[:user])
+    end
 
     if @user.save
-      log = Log::ContactPhone.where(mobile: @user.mobile).first_or_initialize
-      log.is_register = true
-      log._type = 0
-      log.reg_admin = @current_staff
-      log.save
-      redirect_to registered_admin_users_path
+      if @user.mask.nil?
+        log = Log::ContactPhone.where(mobile: @user.mobile).first_or_initialize
+        log.is_register = true
+        log._type = 0
+        log.reg_admin = @current_staff
+        log.save
+        redirect_to registered_admin_users_path
+      else
+        redirect_to staff_list_admin_users_path
+      end
     else
       redirect_to :new, @user
     end
@@ -53,10 +84,17 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user = User.find_by_id(params[:id])
-    params.require(:user).permit!
-    @user.update_attributes(params[:user])
+    if @user.mask.nil?
+      params.require(:user).permit!
+      @user.update_attributes(params[:user])
 
-    redirect_to registered_admin_users_path
+      redirect_to registered_admin_users_path
+    else
+      params.require(:staff).permit!
+      @user.update_attributes(params[:staff])
+
+      redirect_to staff_list_admin_users_path
+    end
   end
 
   # 我来联系, 归入自己的通讯录
@@ -88,7 +126,11 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def index
-    @users = User.normals.order(created_at: :desc).page(params[:page]||1).per(30)
+    @users = User.normals.includes(:customer_service).order(created_at: :desc).page(params[:page]||1).per(30)
+  end
+
+  def staff_list
+    @staffs = Staff.order(created_at: :desc).page(params[:page]||1).per(30)
   end
 
 end

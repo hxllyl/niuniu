@@ -1,0 +1,33 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 内部员工列表
+
+.wrapper.wrapper-content.animated.fadeInRight
+  = link_to '新建员工', new_admin_user_path(mask: 'Staff')
+  .ibox.float-e-margins
+    .ibox-content
+      .row
+        .col-lg-12
+          %table.table.table-striped
+            %tr
+              %th 序号
+              %th 工号
+              %th 角色
+              %th 姓名
+              %th 联系电话
+              %th 操作
+            - @staffs.each do |staff|
+              %tr
+                %td= staff.id
+                %td= staff.job_number
+                %td= staff.role
+                %td= staff.name
+                %td= staff.mobile
+                %td= link_to '修改', edit_admin_user_path(staff)
+
+        .col-lg-12
+          - if @staffs.present?
+            .hr-line-dashed
+
+          .text-center
+            = paginate @staffs

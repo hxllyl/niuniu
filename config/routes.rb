@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get :registered
         post :contact
         post :set_staff
+        get :staff_list
       end
     end
 

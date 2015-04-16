@@ -2,7 +2,7 @@
 
 class Staff < User
 
-  ROLES = %(staff admin super_admin)
+  ROLES = %w(staff admin super_admin)
 
   validates :job_number, presence: true
 
