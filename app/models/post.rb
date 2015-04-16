@@ -86,7 +86,7 @@ class Post < ActiveRecord::Base
   # 已成交
   scope :completed, -> { where(status: 3) }
   # 有效的
-  scope :valid,     -> { where(status: 1) }
+  scope :valid,     -> { where("status = ? and expired_at > ?", 1, Time.now) }
   # 未成交
   scope :uncompleted, -> { where("posts.status <> 3") }
 
@@ -116,6 +116,7 @@ class Post < ActiveRecord::Base
     # 寻车的报价方式可以为空，当用户不选时，我们给其一个默认值
     self.discount_way  = 5 unless discount_way
     self.car_license_area = '' if _type == 0
+    self.expired_at = 7.days.since
   end
 
   # alias method names

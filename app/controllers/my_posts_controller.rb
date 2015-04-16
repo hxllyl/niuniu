@@ -15,7 +15,7 @@ class MyPostsController < BaseController
 
     if params[:update_all]
       if current_user.could_update_my_resources?
-        current_user.posts.resources.valid.update_all(updated_at: Time.now())
+        current_user.posts.resources.valid.update_all(updated_at: Time.now, expired_at: 7.days.since)
         current_user.gen_post_log(current_user.posts.resources.valid.first, 'update_all')
       else
         flash[:notice] = '对不起，您一个小时之内不能重复更新您的资源列表'

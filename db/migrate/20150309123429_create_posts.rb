@@ -27,6 +27,7 @@ class CreatePosts < ActiveRecord::Migration
       t.column :sys_set_count,   :integer, default: 0 #系统用于手动置顶
       t.column :channel, :integer, default: 0 # 用户自建还是系统创建 0 用户自建 1 系统创建
       t.column :position, :integer  # 客户定义资源位置
+      t.column :expired_at, :datetime # 过期日期 7 天
       t.timestamps null: false
     end
 

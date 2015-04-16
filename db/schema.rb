@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 20150411131821) do
     t.integer  "sys_set_count",                                        default: 0
     t.integer  "channel",                                              default: 0
     t.integer  "position"
+    t.datetime "expired_at"
     t.datetime "created_at",                                                         null: false
     t.datetime "updated_at",                                                         null: false
   end
