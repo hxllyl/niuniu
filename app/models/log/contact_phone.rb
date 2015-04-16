@@ -11,7 +11,7 @@ class Log::ContactPhone < ActiveRecord::Base
   # validates :sender_id, presence: true
   validates :_type,  presence: true, inclusion: {in: TYPES.keys}
 
-  belongs_to :sender, class_name: 'Staff' # 客服专员
+  belongs_to :sender, class_name: 'User' # 客服专员
   belongs_to :reg_admin, class_name: 'Staff' #代注册的管理员
 
   def user
