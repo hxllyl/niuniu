@@ -1,0 +1,32 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 车型列表
+
+.wrapper.wrapper-content.animated.fadeInRight
+  = link_to '新建车型'
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 规格
+          %th 品牌
+          %th 车型
+          %th 操作
+        - @cms.each do |cm|
+          %tr
+            %td= cm.id
+            %td= cm.standard.name
+            %td= cm.brand.name
+            %td= cm.name
+            %td
+              = link_to '编辑', ''
+              = link_to '关闭', ''
+
+      - if @cms.present?
+        .hr-line-dashed
+
+      .text-center
+        = paginate @cms
+
+

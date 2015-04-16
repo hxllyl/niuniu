@@ -11,5 +11,5 @@ class Token < ActiveRecord::Base
   def set_expired
     expired_at = 7.days.from_now
   end
-  
+    
 end
