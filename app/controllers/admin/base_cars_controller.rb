@@ -16,7 +16,7 @@ class Admin::BaseCarsController < Admin::BaseController
     @base_car = BaseCar.new(params[:base_car])
 
     if @base_car.save
-      redirect_to :admin_base_cars_path
+      redirect_to admin_base_cars_path
     else
       render action: new, flash: @base_car.errors
     end
@@ -30,9 +30,10 @@ class Admin::BaseCarsController < Admin::BaseController
 
   def update
     @base_car = BaseCar.find_by_id(params[:id])
+    params.require(:base_car).permit!
     @base_car.update_attributes(params[:base_car])
 
-    redirect_to :admin_base_cars_path
+    redirect_to admin_base_cars_path
   end
 
   def get_select_infos
