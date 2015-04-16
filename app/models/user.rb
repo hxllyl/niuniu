@@ -328,7 +328,7 @@ class User < ActiveRecord::Base
     status != -1
   end
 
-  def valid?
+  def is_valid
     status == 1
   end
   
