@@ -73,6 +73,7 @@ class Message < ActiveRecord::Base
             
             Thread.new do
               jpush_message(content, ActiveDevice.active.pluck(:register_id))
+              sleep 1
             end
             
           end
