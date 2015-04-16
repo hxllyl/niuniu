@@ -1,0 +1,64 @@
+= form_for(@base_car, url: @url) do |f|
+  .form-group.clearfix
+    = f.label '规格'
+    = f.select :standard_id, options_for_select(@standards.collect{|ele| [ele.name, ele.id]}, selected: @standard.try(:id)), prompt: '请选择规格', class: "form-control"
+  .form-group.clearfix
+    = f.label '品牌'
+    = f.select :brand_id, options_for_select(@brands.collect{|ele| [ele.name, ele.id]}, selected: @brand.try(:id)), prompt: '请选择品牌', class: "form-control"
+  .form-group.clearfix
+    = f.label '车型'
+    = f.select :car_model_id, options_for_select(@car_models.collect{|ele| [ele.name, ele.id]}, selected: @car_model.try(:id)), prompt: '请选择车型', class: "form-control"
+  .form-group.clearfix
+    = f.label '款式'
+    = f.text_field :style, class: "form-control"
+  .form-group.clearfix
+    = f.label '外饰'
+    = f.text_field :outer_color, class: "form-control"
+  .form-group.clearfix
+    = f.label '内饰'
+    = f.text_field :inner_color, class: "form-control"
+  .form-group.clearfix
+    = f.label '指导价'
+    = f.text_field :base_price, class: "form-control"
+
+  .form-group.clearfix
+    = f.submit class: "btn btn-default subBtn"
+
+:javascript
+  $(document).ready(function(){
+    $('#base_car_standard_id').change(function(){
+      if($(this).val()!=''){
+        var standard_id = $('#base_car_standard_id').val();
+
+        $.ajax({
+          method: "GET",
+          url: "get_select_infos",
+          data: {
+            base_car: {
+              standard_id: standard_id
+            }
+          },
+          success: function(data){$("#form_select").html(data)}
+        });
+      }
+    });
+
+    $('#base_car_brand_id').change(function(){
+      if($(this).val()!=''){
+        var standard_id = $('#base_car_standard_id').val();
+        var brand_id = $('#base_car_brand_id').val();
+
+        $.ajax({
+          method: "GET",
+          url: "get_select_infos",
+          data: {
+            base_car: {
+              standard_id: standard_id,
+              brand_id: brand_id
+            }
+          },
+          success: function(data){$("#form_select").html(data)}
+        });
+      }
+    });
+  });

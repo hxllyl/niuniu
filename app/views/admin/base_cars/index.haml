@@ -33,7 +33,7 @@
             %td= bc.base_price.to_f
             %td= bc.brand.regions.join(' ')
             %td
-              = link_to '查看', '', target: '_blank'
+              = link_to '编辑', edit_admin_base_car_path(bc), target: '_blank'
               = link_to '关闭', ''
 
       - if @base_cars.present?

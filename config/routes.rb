@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         get :st_list
         get :br_list
         get :cm_list
+        get :get_select_infos
       end
     end
     resources :complaints, only: [:index, :update]
