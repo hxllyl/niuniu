@@ -86,7 +86,7 @@ class Post < ActiveRecord::Base
   # 已成交
   scope :completed, -> { where(status: 3) }
   # 有效的
-  scope :valid,     -> { where("status = ? and expired_at > ?", 1, Time.now) }
+  scope :valid,     -> { where("posts.status = ? and posts.expired_at > ?", 1, Time.now) }
   # 未成交
   scope :uncompleted, -> { where("posts.status <> 3") }
 
