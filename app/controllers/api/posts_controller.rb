@@ -438,7 +438,7 @@ class Api::PostsController < Api::BaseController
 
     results = if params[:cid] && params[:style] # 认定为级联搜索
                 cond = params.slice(:cid, :icol, :ocol, :style, :status)
-                Services::QueryPost.new(cond).by_style_and_status_color
+                Services::QueryPost.new(cond).by_style_and_status_color(params[:page])
               elsif params[:q]
                 Services::QueryPost.new(params.slice(:q)).search_and_order_with_users(my_following_ids, params[:page])
               else

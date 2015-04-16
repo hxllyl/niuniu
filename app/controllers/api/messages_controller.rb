@@ -126,13 +126,22 @@ class Api::MessagesController < Api::BaseController
 
   def device_methods
     raise 'register_id must be included' if params[:register_id].blank?
-
-    device = ActiveDevice.where(user_id: @user.id).first_or_initialize
+    
+    raise 'token must be included' if params[:token].blank?
+    token = Token.find_by(value: params[:token])
+    raise 'cannot find token by the token value' if token.blank?
+    
+    user = token.user
+    raise 'cannot find user by the token' if user.blank?
+    
+    device = ActiveDevice.where(user: user).first_or_initialize
     active = params[:method] == 'activating'
     
     device.active = active
     device.register_id = params[:register_id].to_s
     device.save!
+    
+    ActiveDevice.where("register_id = ? and user_id != ?", params[:register_id], user.id).map{|de| de.update(active: false)}
 
     render json: { status: 200, notice: 'success' }
   rescue => ex

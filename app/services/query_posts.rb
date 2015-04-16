@@ -37,12 +37,13 @@ module Services
       Post.as_resource(@_type).valid.includes(:standard, :brand, :car_model, :base_car, :user).where(std.or(brd).or(car).or(base).or(cus_post))
     end
 
-    def by_style_and_status_color
+    def by_style_and_status_color(_page)
+      page = _page || 1
       res = Post.resources.valid.where(:base_car_id => @style, :car_model_id => @car_model_id)
       res = res.where(outer_color: @ocol) if @ocol
       res = res.where(inner_color: @icol) if @icol
       res = res.where(status: @status) if @status
-      res
+      res.page(page).per(PER)
     end
 
     def search_and_order_with_users(user_ids, _page, sort_by = 'updated_at' )
@@ -64,7 +65,7 @@ module Services
       end
 
       Post.resources.joins("join (VALUES #{values}) as x(id, ordering)  on posts.id = x.id ").\
-          order("x.ordering", order_ways.slice(sort_by)).page(page).per(10)
+          order("x.ordering", order_ways.slice(sort_by)).page(page).per(PER)
 
     end
   end
