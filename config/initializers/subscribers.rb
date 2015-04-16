@@ -17,10 +17,5 @@ ActiveSupport::Notifications.subscribe('user.has_read_sys_message') do |name, st
 end
 
 ActiveSupport::Notifications.subscribe('contact_phone.send_invite_message') do |name, start, finish, id, payload|
-  Rails.logger.debug('name = '+ name)
-  Rails.logger.debug('start = '+ start.strftime('%Y/%m/%d %H:%M'))
-  #Rails.logger.debug('end = ' + end.to_s)
-  Rails.logger.debug('id = '+ id.to_s)
-  Rails.logger.debug('payload = '+ payload.to_s)
   Log::ContactPhone.create(payload)
 end

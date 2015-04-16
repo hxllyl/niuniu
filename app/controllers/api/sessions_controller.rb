@@ -21,6 +21,8 @@ class Api::SessionsController < Devise::SessionsController #Api::BaseController 
   def create
     warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
     
+    current_user.token.update(expired_at: 7.days.from_now)
+    
     respond_to do |format| 
       format.json {
         render json:  {
