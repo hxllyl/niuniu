@@ -14,7 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :reg_status, :integer, default: 0 # 注册状态 0 web 1 ios 2 android 3 background
       t.references :area, class_name: 'Area', null: false # 外键 -- 引用area类
       t.column :level, :integer, default: 0 # 用户等级 0 => 个人, 1 => 认证资源, 2 => 认证综展, 3 => 4S
-      t.column :status, :integer, default: 0 # 新建状态, 1 => 后台审理通过, 2 => 后台审理未通过
+      t.column :status, :integer, default: 0 # 新建状态, 1 后台审理通过 -1 已删除
       t.column :contact, :jsonb, default: {} # 联系方式 qq wx
       t.column :job_number, :string, limit: 15 # 公司人员工号
       t.references :customer_service, class_name: 'Staff'
