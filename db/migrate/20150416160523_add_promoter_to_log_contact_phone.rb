@@ -2,6 +2,6 @@
 
 class AddPromoterToLogContactPhone < ActiveRecord::Migration
   def change
-    add_references :log_contact_phones, :promoter, class_name: 'User'
+    add_reference :log_contact_phones, :promoter, class_name: 'User'
   end
 end
