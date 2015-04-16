@@ -1,0 +1,30 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 规格列表
+
+.wrapper.wrapper-content.animated.fadeInRight
+  = link_to '新建规格'
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 规格
+          %th 关联品牌
+          %th 操作
+        - @sts.each do |st|
+          %tr
+            %td= st.id
+            %td= st.name
+            %td= st.brands.map(&:name).join(' ')
+            %td
+              = link_to '编辑', ''
+              = link_to '关闭', ''
+
+      - if @sts.present?
+        .hr-line-dashed
+
+      .text-center
+        = paginate @sts
+
+
