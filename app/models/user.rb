@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   after_create :gen_token # 在用户完成注册时生成一个token
   def gen_token
     salt  = "#{self.mobile}--#{self.password}"
-    token = self.tokens.build(value: Digest::SHA1.hexdigest(salt))
+    token = self.tokens.build(value: Digest::SHA1.hexdigest(salt), expired_at: 7.days.from_now)
     token.save
   end
 
