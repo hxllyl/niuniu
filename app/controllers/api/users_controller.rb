@@ -89,7 +89,7 @@ class Api::UsersController < Api::BaseController
     if customer_service
       render json: { status: 200, notice: 'success', data:  customer_service.to_hash}
     else
-      render json: { status: 200, notice: 'failed', data: {}}
+      render json: { status: 200, notice: 'success', data: {}}
     end
   end
 
