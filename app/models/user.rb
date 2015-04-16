@@ -331,5 +331,11 @@ class User < ActiveRecord::Base
   def valid?
     status == 1
   end
+  
+  before_create :set_status
+  
+  def set_status
+    self.status = 1
+  end
 
 end
