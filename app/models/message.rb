@@ -65,24 +65,22 @@ class Message < ActiveRecord::Base
   def push_message
     if _type != TYPES.keys[1]
       if self.receiver
-        jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
+        
+        Thread.new {
+          sleep 0.1
+          jpush_message(content, ActiveDevice.push_list(receiver).pluck(:register_id))
+        }
       else
-          if _type == TYPES.keys[0]
+        if _type == TYPES.keys[0]
             users = User.valid_user
             self.users << users
             
-            Thread.new do
-              sleep 0.5
+            Thread.new {
+              sleep 0.1
               jpush_message(content, ActiveDevice.active.pluck(:register_id))
-            end
+            }
             
-          end
-
-        
-        # NOTICE: In this case, this should put in a queue, now comment it
-        # real_receiver_users.each do |u|
-        #   jpush_message(content, u)
-        # end
+        end
       end
     end
   end
