@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Admin::BaseHelper
 
   def nav_class_name(item_name)
