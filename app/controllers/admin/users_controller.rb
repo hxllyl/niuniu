@@ -1,6 +1,6 @@
 # encoding: utf-8
-
 class Admin::UsersController < Admin::BaseController
+  before_filter :require_super_admin, only: [:staff_list]
 
   def search
     @mobile_log = Log::ContactPhone.find_or_initialize_by(mobile: params[:mobile])

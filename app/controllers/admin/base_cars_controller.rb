@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Admin::BaseCarsController < Admin::BaseController
+  before_filter :require_super_admin
 
   def index
     @base_cars = BaseCar.includes(:standard, :brand, :car_model).order(updated_at: :desc).page(params[:page]||1).per(30)

@@ -24,7 +24,7 @@ class Admin::BaseController < ApplicationController
       return
     else
       flash[:notice] = '很抱歉，您没有权限'
-      redirect_to root_path
+      redirect_to admin_root_path
     end
   end
 
@@ -33,7 +33,7 @@ class Admin::BaseController < ApplicationController
       return
     else
       flash[:notice] = '很抱歉，您没有权限'
-      redirect_to root_path
+      redirect_to admin_root_path
     end
   end
 
