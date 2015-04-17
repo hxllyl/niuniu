@@ -129,6 +129,8 @@ Rails.application.routes.draw do
 
   resources :helpers, only: [ :index, :show ]
 
+  resources :mobile_displays, only: [:index]
+
   namespace :api, :defaults => { :format => 'json' } do
     devise_scope :user do
       post    'sessions'      => 'sessions#create',       :as => 'login'
