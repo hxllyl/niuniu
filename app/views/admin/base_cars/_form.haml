@@ -21,6 +21,10 @@
     = f.label '指导价'
     = f.text_field :base_price, class: "form-control"
 
+  = f.hidden_field :id, value: @base_car.id
+
+  %input{type: 'hidden', id: 'get_select_url', value: "#{get_select_infos_admin_base_cars_path}"}
+
   .form-group.clearfix
     = f.submit class: "btn btn-default subBtn"
 
@@ -28,14 +32,17 @@
   $(document).ready(function(){
     $('#base_car_standard_id').change(function(){
       if($(this).val()!=''){
+        var url = $('#get_select_url').val();
         var standard_id = $('#base_car_standard_id').val();
+        var id = $('#base_car_id').val();
 
         $.ajax({
           method: "GET",
-          url: "get_select_infos",
+          url: url,
           data: {
             base_car: {
-              standard_id: standard_id
+              standard_id: standard_id,
+              id: id
             }
           },
           success: function(data){$("#form_select").html(data)}
@@ -45,16 +52,19 @@
 
     $('#base_car_brand_id').change(function(){
       if($(this).val()!=''){
+        var url = $('#get_select_url').val();
         var standard_id = $('#base_car_standard_id').val();
         var brand_id = $('#base_car_brand_id').val();
+        var id = $('#base_car_id').val();
 
         $.ajax({
           method: "GET",
-          url: "get_select_infos",
+          url: url,
           data: {
             base_car: {
               standard_id: standard_id,
-              brand_id: brand_id
+              brand_id: brand_id,
+              id: id
             }
           },
           success: function(data){$("#form_select").html(data)}

@@ -1,0 +1,39 @@
+= form_for(@cm, url: @url) do |f|
+  .form-group.clearfix
+    = f.label '规格'
+    = f.select :standard_id, options_for_select(@standards.collect{|ele| [ele.name, ele.id]}, selected: @standard.try(:id)), prompt: '请选择规格', class: "form-control"
+  .form-group.clearfix
+    = f.label '品牌'
+    = f.select :brand_id, options_for_select(@brands.collect{|ele| [ele.name, ele.id]}, selected: @brand.try(:id)), prompt: '请选择品牌', class: "form-control"
+  .form-group.clearfix
+    = f.label '名称'
+    = f.text_field :name, class: "form-control"
+  .form-group.clearfix
+    = f.label '呢称'
+    = f.text_field :display_name, class: "form-control"
+
+  = f.hidden_field :id, value: @cm.id
+
+  .form-group.clearfix
+    = f.submit class: "btn btn-default subBtn"
+
+:javascript
+  $(document).ready(function(){
+    $('#car_model_standard_id').change(function(){
+      if($(this).val()!=''){
+        var standard_id = $('#car_model_standard_id').val();
+        var id = $('#car_model_id').val();
+        $.ajax({
+          method: "GET",
+          url: "get_cm_select_infos",
+          data: {
+            car_model: {
+              standard_id: standard_id,
+              id:          id
+            }
+          },
+          success: function(data){$("#form_select").html(data)}
+        });
+      }
+    });
+  });

@@ -34,6 +34,18 @@ Rails.application.routes.draw do
         get :br_list
         get :cm_list
         get :get_select_infos
+        get :get_cm_select_infos
+        get :new_cm
+        get :new_br
+        get :new_st
+        get :edit_cm
+        get :edit_br
+        get :edit_st
+        post :create_cm
+        post :create_br
+        post :create_st
+        put :update_br
+        put :update_st
       end
     end
     resources :complaints, only: [:index, :update]

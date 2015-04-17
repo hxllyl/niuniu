@@ -3,7 +3,7 @@
     %h2 车型列表
 
 .wrapper.wrapper-content.animated.fadeInRight
-  = link_to '新建车型'
+  = link_to '新建车型', new_cm_admin_base_cars_path
   .ibox.float-e-margins
     .ibox-content
       %table.table.table-striped
@@ -20,7 +20,7 @@
             %td= cm.brand.name
             %td= cm.name
             %td
-              = link_to '编辑', ''
+              = link_to '编辑', edit_cm_admin_base_cars_path(car_model_id: cm.id)
               = link_to '关闭', ''
 
       - if @cms.present?
