@@ -450,6 +450,13 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .copyright p { line-height: 24px; color: #1a1a1a; }
 .copyright p a { color: #1a1a1a; }
 
+/*mobile style*/
+.mobileBg { background-color: #fafafa; }
+.mobileBox { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: image_url('mobile/bg.png') no-repeat center 20%; background-size: 60% auto; }
+.mobileBox .logo { width: 100%; padding-top: 20%; text-align: center; }
+.downloadBtn { position: absolute; bottom: 10%; width: 100%; }
+.downloadBtn .icon { margin-right: 8px; }
+
 /*input style*/
 .dropdown.w100p .btn { width: 100%; text-align: left; }
 .dropdown.w100p .btn .caret { float: right; margin-top: 8px; }
