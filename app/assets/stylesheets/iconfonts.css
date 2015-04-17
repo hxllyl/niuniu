@@ -10,22 +10,23 @@ line-height: 1;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-.icon-android:before { content: "\e60c"; }
-.icon-apple:before { content: "\e60d"; }
-.icon-del:before { content: "\e60e"; }
-.icon-edit:before { content: "\e60f"; }
-.icon-message:before { content: "\e610"; }
-.icon-money:before { content: "\e611"; }
-.icon-refresh:before { content: "\e612"; }
-.icon-level:before { content: "\e605"; }
-.icon-logo:before { content: "\e606"; }
-.icon-pw:before { content: "\e607"; }
-.icon-quit:before { content: "\e608"; }
-.icon-upgrade:before { content: "\e609"; }
-.icon-user:before { content: "\e60a"; }
-.icon-userInfo:before { content: "\e60b"; }
-.icon-carInfo:before { content: "\e600"; }
-.icon-home:before { content: "\e601"; }
-.icon-market:before { content: "\e602"; }
-.icon-search:before { content: "\e603"; }
-.icon-source:before { content: "\e604"; }
+.icon-android:before { content: "\e600"; }
+.icon-apple:before { content: "\e601"; }
+.icon-carInfo:before { content: "\e602"; }
+.icon-del:before { content: "\e603"; }
+.icon-download:before { content: "\e604"; }
+.icon-edit:before { content: "\e605"; }
+.icon-home:before { content: "\e606"; }
+.icon-level:before { content: "\e607"; }
+.icon-logo:before { content: "\e608"; }
+.icon-market:before { content: "\e609"; }
+.icon-message:before { content: "\e60a"; }
+.icon-money:before { content: "\e60b"; }
+.icon-pw:before { content: "\e60c"; }
+.icon-quit:before { content: "\e60d"; }
+.icon-refresh:before { content: "\e60e"; }
+.icon-search:before { content: "\e60f"; }
+.icon-source:before { content: "\e610"; }
+.icon-upgrade:before { content: "\e611"; }
+.icon-user:before { content: "\e612"; }
+.icon-userInfo:before { content: "\e613"; }
