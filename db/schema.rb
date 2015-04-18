@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411131821) do
+ActiveRecord::Schema.define(version: 20150416160523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,7 @@ ActiveRecord::Schema.define(version: 20150411131821) do
     t.integer  "status"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.integer  "promoter_id"
   end
 
   add_index "log_contact_phones", ["_type"], name: "index_log_contact_phones_on__type", using: :btree
