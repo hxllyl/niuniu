@@ -30,32 +30,33 @@
                     %span.block.m-t-xs
                       %strong.font-bold
                         = current_user.try(:name) || '管理员'
-            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'staff_list')) }
-              = link_to '内部员工列表', staff_list_admin_users_path
-            %li{ class: (:active if current_page?(controller: 'admin/users', action: 'index')) }
-              = link_to '用户列表', admin_users_path
-            %li{ class: (:active if current_page?(controller: 'admin/base_cars')) }
-              = link_to '车型库管理', admin_base_cars_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'search')) }
               = link_to '手机号查询', search_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'contacted')) }
               = link_to '已联系未注册名录', contacted_admin_users_path
             %li{ class: (:active if current_page?(controller: 'admin/users', action: 'registered')) }
               = link_to '已注册用户名录', registered_admin_users_path
-            %li{ class: (:active if current_page?(controller: 'admin/posts', action: 'index')) }
-              = link_to '寻车列表', admin_posts_path
-            %li{ class: (:active if current_page?(controller: 'admin/banners', action: 'index')) }
-              = link_to 'Banners', admin_banners_path
-            %li{ class: (:active if current_page?(controller: 'admin/helpers', action: 'index')) }
-              = link_to 'Helpers', admin_helpers_path
-            %li{ class: (:active if current_page?(controller: 'admin/log_user_update_levels', action: 'index')) }
-              = link_to '升级认证列表', admin_log_user_update_levels_path
-            %li{ class: (:active if current_page?(controller: 'admin/complaints')) }
-              = link_to '投诉中心', admin_complaints_path
             -# TODO: Add real logic for 'normal_admin?', and remove '||= true'
-            - if normal_admin? || true
-              %li{ class: (:active if current_page?(controller: 'admin/messages')) }
-                = link_to '系统消息', admin_messages_path
+            - if admin? || super_admin?
+              %li{ class: (:active if current_page?(controller: 'admin/users', action: 'index')) }
+                = link_to '用户列表', admin_users_path
+              %li{ class: (:active if current_page?(controller: 'admin/banners', action: 'index')) }
+                = link_to 'Banners', admin_banners_path
+              %li{ class: (:active if current_page?(controller: 'admin/log_user_update_levels', action: 'index')) }
+                = link_to '升级认证列表', admin_log_user_update_levels_path
+              %li{ class: (:active if current_page?(controller: 'admin/helpers', action: 'index')) }
+                = link_to 'Helpers', admin_helpers_path
+              - if super_admin?
+                %li{ class: (:active if current_page?(controller: 'admin/users', action: 'staff_list')) }
+                  = link_to '内部员工列表', staff_list_admin_users_path
+                %li{ class: (:active if current_page?(controller: 'admin/posts', action: 'index')) }
+                  = link_to '寻车列表', admin_posts_path
+                %li{ class: (:active if current_page?(controller: 'admin/base_cars')) }
+                  = link_to '车型库管理', admin_base_cars_path
+                %li{ class: (:active if current_page?(controller: 'admin/complaints')) }
+                  = link_to '投诉中心', admin_complaints_path
+                %li{ class: (:active if current_page?(controller: 'admin/messages')) }
+                  = link_to '系统消息', admin_messages_path
 
     #page-wrapper.gray-bg
       .row.flash-wrapper

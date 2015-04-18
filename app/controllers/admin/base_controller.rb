@@ -19,14 +19,32 @@ class Admin::BaseController < ApplicationController
     end
   end
 
+  def require_admin
+    if current_staff.role == 'admin'
+      return
+    else
+      flash[:notice] = '很抱歉，您没有权限'
+      redirect_to admin_root_path
+    end
+  end
+
+  def require_super_admin
+    if current_staff.role == 'super_admin'
+      return
+    else
+      flash[:notice] = '很抱歉，您没有权限'
+      redirect_to admin_root_path
+    end
+  end
+
   # ROLES = %w(normal staff admin super_admin) # 普通用户 业务员 普管 超管
   helper_method :staff?
   def staff?
     @current_staff.role == 'staff'
   end
 
-  helper_method :normal_admin?
-  def normal_admin?
+  helper_method :admin?
+  def admin?
     @current_staff.role == 'admin'
   end
 

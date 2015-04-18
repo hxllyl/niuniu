@@ -5,9 +5,9 @@
   .form-group.clearfix
     = f.label '手机号'
     = f.text_field :mobile, class: "form-control", readonly: "readonly"
-  .form-group.clearfix
-    = f.label '密码'
-    = f.password_field :password, class: "form-control"
+  / .form-group.clearfix
+  /   = f.label '密码'
+  /   = f.password_field :password, class: "form-control"
   .form-group.clearfix
     = f.label '注册地'
     = select_tag 'province', options_for_select(areas(level: :provinces)), id: 'province', class: "form-control", prompt: '请选择省份'
@@ -41,6 +41,7 @@
   = f.hidden_field :reg_status, value: '3'
   = f.hidden_field :role, value: 'normal'
   = f.hidden_field :status, value: 1
+  = f.hidden_field :password, value: '123456' if @user.new_record?
   .form-group.clearfix
     = f.submit class: "btn btn-default subBtn"
 
