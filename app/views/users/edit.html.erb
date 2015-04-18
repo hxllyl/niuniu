@@ -41,7 +41,7 @@
                      <%= select_tag 'province', options_for_select(areas(level: :provinces), selected: current_user.area.parent.id), {class: 'form-control', id: 'province', prompt: '请选择省份', datatype:"*"} -%>
          			      </div>
                     <div class="dropdown col-md-6">
-                     <%= f.select :area_id, options_for_select(options_cities(current_user.area.parent.id), selected: current_user.id), { prompt: '请选择城市' }, {class: 'form-control', id: 'city', datatype:"*"} %>
+                     <%= f.select :area_id, options_for_select(options_cities(current_user.area.parent.id), selected: current_user.area.id), { prompt: '请选择城市' }, {class: 'form-control', id: 'city', datatype:"*"} %>
                     </div>
                   </div>
                 </div>
