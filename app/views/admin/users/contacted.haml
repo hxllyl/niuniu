@@ -20,7 +20,7 @@
                 %td= ele.id
                 %td= ele.sender.job_number
                 %td= ele.mobile
-                %td= ele.created_at.to_s(:db)
+                %td= ele.created_at.strftime("%Y-%m-%d %H:%M")
                 %td
                   = link_to '代注册', new_admin_user_path('user[mobile]' => ele.mobile, 'user[customer_service_id]' => ele.sender.id)
         .col-lg-6

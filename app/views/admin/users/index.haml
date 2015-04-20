@@ -17,6 +17,7 @@
               %th{ style: 'width: 120px;'} 公司名称
               %th 认证等级
               %th 注册日期
+              %th 最后一次登录时间
               %th 近一月累计成交
               %th 累计成交
               %th 操作
@@ -29,8 +30,8 @@
                 %td= user.mobile
                 %td= user.company
                 %td= User::LEVELS[user.level]
-                %td= user.created_at.to_s(:db)
-                / %td= ele.user.last_sign_in_at.try(:to_s, :db)
+                %td= user.created_at.strftime("%Y-%m-%d %H:%M")
+                %td= user.last_sign_in_at.strftime("%Y-%m-%d %H:%M") if user.last_sign_in_at
                 %td= user.last_month_dealt
                 %td= user.sum_dealt
                 %td
