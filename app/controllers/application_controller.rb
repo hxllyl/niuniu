@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   extend Forwardable
 
-  before_action :redirect_to_mobile_page
+  before_action :redirect_to_mobile_page, if: proc { request.url !~ /mobile_displays/ }
 
   def_delegator ActiveSupport::Notifications, :instrument
 
@@ -53,7 +53,8 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_mobile_page
     if browser.mobile?
-      redirect_to mobile_displays_path
+      Rails.logger.info request.referrer
+      redirect_to mobile_displays_path # if request.request_uri !~ /mobile_displays/
     end
   end
 
