@@ -53,7 +53,6 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_mobile_page
     if browser.mobile?
-      Rails.logger.info request.referrer
       redirect_to mobile_displays_path # if request.request_uri !~ /mobile_displays/
     end
   end
