@@ -16,6 +16,10 @@ Rails.application.routes.draw do
         post :set_staff
         get :staff_list
       end
+      member do
+        get :edit_staff
+        patch :update_staff
+      end
     end
 
     resources :banners

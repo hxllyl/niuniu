@@ -133,4 +133,18 @@ class Admin::UsersController < Admin::BaseController
     @staffs = Staff.order(created_at: :desc).page(params[:page]||1).per(30)
   end
 
+  def edit_staff
+    @user = User.find_by_id(params[:id])
+  end
+
+  def update_staff
+    @user = User.find_by_id(params[:id])
+
+    params.require(:user).permit!
+
+    @user.update_attributes(params[:user])
+
+    redirect_to staff_list_admin_users_path
+  end
+
 end

@@ -1,0 +1,21 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 编辑角色
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-content
+          = form_for(@user, url: update_staff_admin_user_path) do |f|
+            .form-group.clearfix
+              = f.label '工号'
+              = f.text_field :job_number, class: "form-control"
+            .form-group.clearfix
+              = f.label '分配角色'
+              = f.select :role, Staff::ROLES[0, 2], prompt: true
+
+            = f.hidden_field :mask, value: 'Staff'
+
+            .form-group.clearfix
+              = f.submit class: "btn btn-default subBtn"
