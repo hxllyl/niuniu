@@ -7,6 +7,7 @@ class Api::BaseController < ApplicationController
 
   protect_from_forgery with: :null_session
   skip_before_filter :verify_authenticity_token
+  skip_before_action :redirect_to_mobile_page
 
   def auth_user
     @token = Token.find_by_value(params[:token])

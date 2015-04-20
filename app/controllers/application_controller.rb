@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   extend Forwardable
 
+  before_action :redirect_to_mobile_page
+
   def_delegator ActiveSupport::Notifications, :instrument
 
   NullObject = Naught.build
@@ -48,5 +50,11 @@ class ApplicationController < ActionController::Base
   # if browser.mobile?
   #   request.variant = :tablet
   # end
+
+  def redirect_to_mobile_page
+    if browser.mobile?
+      redirect_to mobile_displays_path
+    end
+  end
 
 end
