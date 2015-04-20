@@ -44,7 +44,7 @@
 
   .form-group.clearfix
     = f.label '分配角色'
-    = f.select :role, Staff::ROLES, prompt: true
+    = f.select :role, Staff::ROLES[0, 2], prompt: true
 
   = f.hidden_field :mask, value: @user.mask
   = f.hidden_field :status, value: 1
