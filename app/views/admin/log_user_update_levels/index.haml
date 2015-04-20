@@ -24,12 +24,12 @@
             %td= User::LEVELS[log.start_level]
             %td= User::LEVELS[log.end_level]
             %td= Log::UserUpdateLevel::STATUS[log.status]
-            %td= log.created_at.to_s(:db)
-            %td= log.updated_at.to_s(:db)
+            %td= log.created_at.strftime("%Y-%m-%d %H:%M")
+            %td= log.updated_at.strftime("%Y-%m-%d %H:%M")
             %td= log.operator_name
             %td
-              = link_to "查看", admin_log_user_update_level_path(log), target: '_blank'        
-                 
+              = link_to "查看", admin_log_user_update_level_path(log), target: '_blank'
+
 
       - if @logs.present?
         .hr-line-dashed

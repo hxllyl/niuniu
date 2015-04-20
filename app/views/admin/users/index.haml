@@ -29,8 +29,7 @@
                 %td= user.mobile
                 %td= user.company
                 %td= User::LEVELS[user.level]
-                %td= user.created_at.to_s(:db)
-                / %td= ele.user.last_sign_in_at.try(:to_s, :db)
+                %td= user.created_at.strftime("%Y-%m-%d %H:%M")
                 %td= user.last_month_dealt
                 %td= user.sum_dealt
                 %td
