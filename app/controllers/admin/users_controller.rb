@@ -148,4 +148,12 @@ class Admin::UsersController < Admin::BaseController
     redirect_to staff_list_admin_users_path
   end
 
+  def update_remark
+    @mobile = Log::ContactPhone.find_by_id(params[:id])
+    @mobile.remark = params[:remark]
+    @mobile.save
+
+    redirect_to :back
+  end
+
 end

@@ -24,8 +24,8 @@
                 %td= ele.mobile
                 %td= ele.created_at.strftime("%Y-%m-%d %H:%M")
                 %td
-                  %form
-                    %textarea{type: 'text', class: 'remarkInput bfL'}
+                  %form{action: update_remark_admin_user_path(ele), method: 'patch'}
+                    %textarea{type: 'text', class: 'remarkInput bfL', name: 'remark'}
                       = ele.remark
                     %input{type: 'submit', class: 'btn btn-primary btn-xs bfL remarkSub'}
                 - if admin? || super_admin?
