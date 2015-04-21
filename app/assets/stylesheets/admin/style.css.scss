@@ -1139,4 +1139,7 @@ body.skin-3 { background: #3e2c42; }
 #new_user .subBtn { margin-left: 80px; color: #fff; background-color: #2f4050; }
 #new_user .subBtn:hover { background-color: #19222b; }
 .search-result .btn-warning, .search-result .dropdown { margin-right: 8px; }
+.remarkInput { border: transparent; }
+.remarkInput.active { border: 1px solid #1ab394; }
+.remarkSub { display: none; margin: 11px 0 0 8px; }
 .bfL { float: left; }

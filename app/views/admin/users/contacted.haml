@@ -23,7 +23,11 @@
                 %td= ele.sender.job_number
                 %td= ele.mobile
                 %td= ele.created_at.strftime("%Y-%m-%d %H:%M")
-                %td= ele.remark
+                %td
+                  %form
+                    %textarea{type: 'text', class: 'remarkInput bfL'}
+                      = ele.remark
+                    %input{type: 'submit', class: 'btn btn-primary btn-xs bfL remarkSub'}
                 - if admin? || super_admin?
                   %td= link_to '代注册', new_admin_user_path('user[mobile]' => ele.mobile, 'user[customer_service_id]' => ele.sender.id)
         .col-lg-6
@@ -53,3 +57,14 @@
 
           .text-center
             = paginate @mobiles
+
+:javascript
+  $(document).ready(function(){
+    $('.remarkInput').focus(function(){
+      $(this).addClass('active');
+      $(this).next('.remarkSub').show();
+    });
+    $('.remarkInput').blur(function(){
+      $(this).removeClass('active');
+    });
+  });
