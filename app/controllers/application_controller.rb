@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def auth_staff
-    if current_user.class == Staff
+    if current_user.class == Staff && current_user.role != 'staff'
       @someone = User.find_by_id(params[:user_id])
       return
     else

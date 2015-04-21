@@ -11,7 +11,7 @@
       <div class="panel panel-default contentBox">
         <div class="panel-heading lineTitle">
           <h3 class="panel-title bfL">他的寻车</h3>
-          <%= link_to '为他代发寻车', new_post_path(user_id: @someone.id, _type: 1), class: 'btn btn-default btn-xs mt6 bfR' if current_user.class == Staff %>
+          <%= link_to '为他代发寻车', new_post_path(user_id: @someone.id, _type: 1), class: 'btn btn-default btn-xs mt6 bfR' if current_user.class == Staff && current_user.role != 'staff' %>
         </div>
         <div class="panel-body">
           <div class="sourceTab">

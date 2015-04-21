@@ -25,7 +25,7 @@
                 <% end %>
               </select>
             </div>
-            <%= link_to '为他代发资源', new_post_path(user_id: @someone.id, _type: 0), class: 'btn btn-default bfR' if current_user.class == Staff %>
+            <%= link_to '为他代发资源', new_post_path(user_id: @someone.id, _type: 0), class: 'btn btn-default bfR' if current_user.class == Staff && current_user.role != 'staff' %>
           </div>
           <div class="mySourceTab mt10">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
@@ -35,7 +35,7 @@
                     <td>
                       <div class="box clearfix">
                         <div class="infoM">
-                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %><%= link_to '编辑', edit_post_path(post, user_id: @someone.id), class: 'btn btn-default btn-xs ml6' if current_user.class == Staff %></h5>
+                          <h5 class="name"><%= link_to post.title, post_path(post, _type: 0) %><%= link_to '编辑', edit_post_path(post, user_id: @someone.id), class: 'btn btn-default btn-xs ml6' if current_user.class == Staff && current_user.role != 'staff' %></h5>
                           <div class="info clearfix">
                             <div class="m"><%= post.st_rt %></div><div class="m"><%= post.publish_time %></div>
                           </div>
