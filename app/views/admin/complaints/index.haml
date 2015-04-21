@@ -17,7 +17,7 @@
         - @complaints.each do |ele|
           %tr
             %td= ele.id
-            %td= ele.user.name
+            %td= ele.user.try(:name)
             %td= get_resource_name(ele.resource_type, ele.resource_id)
             %td= ele.content
             %td
