@@ -16,7 +16,10 @@
     = link_to '取消', search_admin_users_path, class: 'btn bfL'
   - else
     - if @mobile_log.is_register
-      = link_to "已注册，用户名为#{@mobile_log.user.name}, 点击详情", user_list_posts_path(user_id: @mobile_log.user.id, _type: 0), target: '_blank'
+      - if staff?
+        = "已注册，用户名为#{@mobile_log.user.name}"
+      - else
+        = link_to "已注册，用户名为#{@mobile_log.user.name}, 点击详情", user_list_posts_path(user_id: @mobile_log.user.id, _type: 0), target: '_blank'
     - elsif @mobile_log.contacted?
       = "已由#{@mobile_log.sender.job_number}已联系"
 

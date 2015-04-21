@@ -74,11 +74,9 @@
             %li
               %span.m-r-sm.text-muted.welcome-message 欢迎登录牛牛汽车后台管理
             %li
-              = link_to '#', method: :delete, class: :delete do
+              = link_to destroy_user_session_path, method: :delete, class: :delete do
                 %i.fa.fa-sign-out
                 安全退出当前帐号
-
-
 
       = yield
 
