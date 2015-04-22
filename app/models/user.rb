@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
   has_many :complaints, class_name: 'Complaint'
   has_many :operations, class_name: 'Complaint', foreign_key: :operator_id # 投诉操作列表
   # 用户专属于客服
-  
+
   has_many :log_contact_phones, class_name: 'Log::ContactPhone', foreign_key: 'promoter_id'
-  
+
   belongs_to :customer_service, class_name: 'Staff'
 
   has_many :send_feedbacks, ->{ where("messages._type = ?", Message::TYPES.keys[1])}, class_name: 'Feedback', foreign_key: 'sender_id'
@@ -333,11 +333,13 @@ class User < ActiveRecord::Base
   def is_valid
     status == 1
   end
-  
+
   before_create :set_status
-  
+
   def set_status
     self.status = 1
+    log = Log::ContactPhone.find_by_mobile(self.mobile)
+    self.customer_service_id = log.sender_id if log.try(:sender_id)
   end
 
 end
