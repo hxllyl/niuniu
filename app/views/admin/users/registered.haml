@@ -24,7 +24,7 @@
             - @users.each do |user|
               %tr
                 %td= user.id
-                %td= current_user.job_number
+                %td= user.customer_service.try(:job_number)
                 %td
                   = link_to user.name, user_list_posts_path(user_id: user.id, _type: 0), target: '_blank'
                 %td= user.mobile

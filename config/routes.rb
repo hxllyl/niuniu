@@ -25,7 +25,11 @@ Rails.application.routes.draw do
 
     resources :banners
     resources :posts do
+      collection do
+        get :resources_list
+      end
       member do
+        put :update_sys
         put :approve_base_car
       end
     end

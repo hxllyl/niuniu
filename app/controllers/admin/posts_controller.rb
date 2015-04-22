@@ -23,4 +23,15 @@ class Admin::PostsController < Admin::BaseController
     redirect_to :back
   end
 
+  def resources_list
+    @posts = Post.resources.valid.includes(:user, :standard, :brand, :car_model, :base_car).order('sys_set_count desc').page(params[:page]||1).per(30)
+  end
+
+  def update_sys
+    post = Post.find_by_id(params[:id])
+    post.update_attributes(sys_set_count: Post.valid.resources.map(&:sys_set_count).max.succ)
+
+    redirect_to :back
+  end
+
 end

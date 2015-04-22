@@ -40,6 +40,8 @@
             - if admin? || super_admin?
               %li{ class: (:active if current_page?(controller: 'admin/users', action: 'index')) }
                 = link_to '用户列表', admin_users_path
+              %li{ class: (:active if current_page?(controller: 'admin/posts', action: 'resources_list')) }
+                = link_to '资源列表', resources_list_admin_posts_path
               %li{ class: (:active if current_page?(controller: 'admin/log_user_update_levels', action: 'index')) }
                 = link_to '升级认证列表', admin_log_user_update_levels_path
               - if super_admin?
