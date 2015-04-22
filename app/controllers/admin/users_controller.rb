@@ -149,7 +149,14 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def index
-    @users = User.normals.includes(:customer_service).order(created_at: :desc).page(params[:page]||1).per(30)
+    @mobile = params[:mobile] && params[:mobile] != "" ? params[:mobile] : nil
+    @level  = params[:level] && params[:level]!= "" ? params[:level] : nil
+
+    conds = {role: 'normal'}
+    conds[:mobile] = @mobile if @mobile
+    conds[:level]  = @level  if @level
+
+    @users = User.where(conds).includes(:customer_service).order(created_at: :desc).page(params[:page]||1).per(30)
   end
 
   def staff_list
@@ -171,9 +178,16 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update_remark
-    @mobile = Log::ContactPhone.find_by_id(params[:id])
-    @mobile.remark = params[:remark]
-    @mobile.save
+    mobile = Log::ContactPhone.find_by_id(params[:id])
+    mobile.remark = params[:remark]
+    mobile.save
+
+    redirect_to :back
+  end
+
+  def update_status
+    user = User.find_by_id(params[:id])
+    user.update_attributes(status: params[:status].to_i)
 
     redirect_to :back
   end

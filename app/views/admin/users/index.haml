@@ -8,11 +8,11 @@
     .ibox-content
       .row
         .col-lg-12.searchTag
-          = form_tag params, method: :get, remote: true, class: 'form-horizontal' do
+          = form_tag params, action: 'index', method: :get, class: 'form-horizontal' do
             .col-md-6
-              = text_field_tag :mobile, @mobile||nil, type: 'mobile', class: 'form-control input-lg', placeholder: '输入手机号码'
+              = text_field_tag :mobile, @mobile, type: 'mobile', class: 'form-control input-lg', placeholder: '输入手机号码'
             .col-md-4
-              = select_tag(:method_id, options_for_select([["等级", "等级"], ["等级", "等级"]]), class: "form-control input-lg", prompt: "请选择等级")
+              = select_tag(:level, options_for_select(User::LEVELS.collect{|ele| [ele[1], ele[0]]}, @level), class: "form-control input-lg", prompt: "请选择等级")
             .col-md-2
               %button.btn.btn-lg.btn-primary{ type: 'submit'} 查询
         .col-lg-12
@@ -21,6 +21,7 @@
               %th 序号
               %th 业务员工号
               %th 姓名
+              %th 状态
               %th 联系电话
               %th{ style: 'width: 120px;'} 公司名称
               %th 认证等级
@@ -34,6 +35,7 @@
                 %td= user.customer_service.try(:job_number)
                 %td
                   = link_to user.name, user_list_posts_path(user_id: user.id, _type: 0), target: '_blank'
+                %td= User::STATUS[user.status]
                 %td= user.mobile
                 %td= user.company
                 %td= User::LEVELS[user.level]
@@ -42,6 +44,10 @@
                 %td= user.dealt_infos
                 %td
                   = link_to '修改', edit_admin_user_path(user)
+                  - if user.is_valid
+                    = link_to '关闭', update_status_admin_user_path(user, status: -1)
+                  - else
+                    = link_to '恢复', update_status_admin_user_path(user, status: 1)
                   = link_to '修改角色', edit_staff_admin_user_path(user)
 
         .col-lg-12

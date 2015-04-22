@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         get :edit_staff
         patch :update_staff
         get :update_remark
+        get :update_status
       end
     end
 

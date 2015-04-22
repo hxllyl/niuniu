@@ -42,6 +42,10 @@
                 = link_to '资源列表', resources_list_admin_posts_path
               %li{ class: (:active if current_page?(controller: 'admin/log_user_update_levels', action: 'index')) }
                 = link_to '升级认证列表', admin_log_user_update_levels_path
+              %li{ class: (:active if current_page?(controller: 'admin/messages')) }
+                = link_to '系统消息', admin_messages_path
+              %li{ class: (:active if current_page?(controller: 'admin/complaints')) }
+                = link_to '投诉中心', admin_complaints_path
               - if super_admin?
                 %li{ class: (:active if current_page?(controller: 'admin/users', action: 'staff_list')) }
                   = link_to '内部员工列表', staff_list_admin_users_path
@@ -51,14 +55,11 @@
                   = link_to '寻车列表', admin_posts_path
                 %li{ class: (:active if current_page?(controller: 'admin/base_cars')) }
                   = link_to '车型库管理', admin_base_cars_path
-                %li{ class: (:active if current_page?(controller: 'admin/complaints')) }
-                  = link_to '投诉中心', admin_complaints_path
                 %li{ class: (:active if current_page?(controller: 'admin/helpers', action: 'index')) }
                   = link_to 'Helpers', admin_helpers_path
                 %li{ class: (:active if current_page?(controller: 'admin/banners', action: 'index')) }
                   = link_to 'Banners', admin_banners_path
-                %li{ class: (:active if current_page?(controller: 'admin/messages')) }
-                  = link_to '系统消息', admin_messages_path
+
 
     #page-wrapper.gray-bg
       .row.flash-wrapper

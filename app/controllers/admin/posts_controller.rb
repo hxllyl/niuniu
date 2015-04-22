@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Admin::PostsController < Admin::BaseController
-  before_filter :require_super_admin
+  before_filter :require_super_admin, except: [:resources_list, :update_sys]
 
   def index
     unvalid_bc_ids = BaseCar.unvalid.map(&:id)
