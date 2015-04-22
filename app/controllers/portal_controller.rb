@@ -25,7 +25,7 @@ class PortalController < BaseController
                          end
 
     # 最热车源
-    @hot_resources = Post.resources.valid.includes(:user, :standard, :brand, :car_model, :base_car, :post_photos).order(sys_set_count: :desc).limit(8)
+    @hot_resources = Post.where(id: HotPost.all.map(&:post_id)).includes(:user, :standard, :brand, :car_model, :base_car, :post_photos).order(sys_set_count: :desc).limit(8)
 
     # 最新车源
     @resource_brands  = Brand.includes(:car_photo).where(name: APP_CONFIG['resource_brands'].split(' '))
