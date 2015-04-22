@@ -8,6 +8,7 @@
       %table.table.table-striped
         %tr
           %th ID
+          %th 资源ID
           %th 客户姓名
           %th 规格
           %th 品牌
@@ -19,6 +20,7 @@
           / %th 操作
         - @hot_posts.each do |p|
           %tr
+            %td= p.id
             %td= p.post.id
             %td= p.post.user_name
             %td= p.post.standard_name
@@ -32,24 +34,11 @@
               / = link_to '置顶', update_sys_admin_post_path(post), method: :put
               / = link_to '关闭', admin_post_path(p.post),  method: :delete, data: {confirm: '确定删除？'}
 
-      = form_tag params, action: "", method: :get do
+      = form_tag params, action: "update_hot_posts", method: :get do
         .row
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
-          .col-md-3.form-group
-            = text_field_tag "", nil, class: "form-control"
+          -@hot_posts.each do |hp|
+            .col-md-3.form-group
+              = text_field_tag "post_ids[#{hp.id}]", hp.post_id, class: "form-control"
         .form-group.clearfix
           = submit_tag "提交", class: "btn btn-primary subBtn"
 

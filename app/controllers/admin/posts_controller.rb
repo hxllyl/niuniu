@@ -36,7 +36,11 @@ class Admin::PostsController < Admin::BaseController
 
   # 限八个
   def hot_resources
-    @hot_posts = HotPost.all.includes(post: [:user, :standard, :brand, :car_model, :base_car])
+    !params[:post_ids].empty? && params[:post_ids].each do |k, v|
+      hot_post = HotPost.find_by_id(k)
+      hot_post.update_attributes(post_id: v) if hot_post
+    end
+    @hot_posts = HotPost.includes(post: [:user, :standard, :brand, :car_model, :base_car]).order('created_at asc')
   end
 
 end
