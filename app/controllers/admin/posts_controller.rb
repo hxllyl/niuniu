@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Admin::PostsController < Admin::BaseController
-  before_filter :require_super_admin, except: [:resources_list, :update_sys]
+  before_filter :require_super_admin, except: [:resources_list, :update_sys, :hot_resources]
 
   def index
     unvalid_bc_ids = BaseCar.unvalid.map(&:id)
@@ -24,7 +24,7 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def resources_list
-    @posts = Post.resources.valid.includes(:user, :standard, :brand, :car_model, :base_car).order('sys_set_count desc').page(params[:page]||1).per(30)
+    @posts = Post.resources.valid.includes(:user, :standard, :brand, :car_model, :base_car).order('updated_at desc').page(params[:page]||1).per(30)
   end
 
   def update_sys
@@ -32,6 +32,11 @@ class Admin::PostsController < Admin::BaseController
     post.update_attributes(sys_set_count: Post.valid.resources.map(&:sys_set_count).max.succ)
 
     redirect_to :back
+  end
+
+  # 限八个
+  def hot_resources
+    @hot_posts = HotPost.all.includes(post: [:user, :standard, :brand, :car_model, :base_car])
   end
 
 end

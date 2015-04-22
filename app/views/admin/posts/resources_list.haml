@@ -29,7 +29,7 @@
             %td= Post::RESOURCE_TYPE[post.resource_type]
             %td= post.publish_time
             %td
-              = link_to '置顶', update_sys_admin_post_path(post), method: :put
+              / = link_to '置顶', update_sys_admin_post_path(post), method: :put
               = link_to '关闭', admin_post_path(post),  method: :delete, data: {confirm: '确定删除？'}
 
       - if @posts.present?

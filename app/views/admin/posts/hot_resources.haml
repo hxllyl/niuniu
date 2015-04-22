@@ -1,0 +1,38 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 资源列表
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 客户姓名
+          %th 规格
+          %th 品牌
+          %th 车型
+          %th 款式
+          %th 颜色
+          %th 状态
+          %th 发布时间
+          / %th 操作
+        - @hot_posts.each do |p|
+          %tr
+            %td= p.post.id
+            %td= p.post.user_name
+            %td= p.post.standard_name
+            %td= p.post.brand_name
+            %td= p.post.car_model_name
+            %td= p.post.base_car_style
+            %td= p.post.color
+            %td= Post::RESOURCE_TYPE[p.post.resource_type]
+            %td= p.post.publish_time
+            %td
+              / = link_to '置顶', update_sys_admin_post_path(post), method: :put
+              / = link_to '关闭', admin_post_path(p.post),  method: :delete, data: {confirm: '确定删除？'}
+
+      - if @hot_posts.present?
+        .hr-line-dashed
+
+

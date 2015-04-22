@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :posts do
       collection do
         get :resources_list
+        get :hot_resources
       end
       member do
         put :update_sys
