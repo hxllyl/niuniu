@@ -3,7 +3,7 @@ class Admin::ComplaintsController < Admin::BaseController
   before_filter :require_ad
 
   def index
-    @complaints = Complaint.includes(:resource, :user, :operator).valid.order(updated_at: :desc).page(params[:page]||1).per(30)
+    @complaints = Complaint.valid.order(updated_at: :desc).page(params[:page]||1).per(30)
   end
 
   def update
