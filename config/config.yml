@@ -50,10 +50,10 @@ defaults: &defaults
   master_secret: 2f04b114782b5de2d2cec5c3
 
   # 寻车热门品牌
-  need_brands: 奔驰 宝马 奥迪 路虎 玛莎拉蒂 保时捷
+  need_brands: 奔驰 宝马 奥迪 路虎 保时捷
 
   # 资源热门品牌
-  resource_brands: 奔驰 宝马 奥迪 路虎 玛莎拉蒂 保时捷 大众 雷克萨斯
+  resource_brands: 奔驰 宝马 奥迪 路虎 保时捷 大众 雷克萨斯
 
   # 品牌
   brands: 奔驰 宝马 奥迪 路虎 玛莎拉蒂 保时捷 大众 雷克萨斯 沃尔沃 宾利 凯迪拉克 特斯拉 丰田 斯巴鲁 英菲尼迪 迈巴赫 劳斯莱斯 MINI 福特
