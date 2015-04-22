@@ -15,6 +15,7 @@
           %th 款式
           %th 颜色
           %th 状态
+          %th 是否有照片
           %th 发布时间
           %th 操作
         - @posts.each do |post|
@@ -27,6 +28,11 @@
             %td= post.base_car_style
             %td= post.color
             %td= Post::RESOURCE_TYPE[post.resource_type]
+            %td
+              - if post.photos.empty?
+                无
+              - else
+                = link_to '有', post_path(post, _type: 0), target: '_blank'
             %td= post.publish_time
             %td
               / = link_to '置顶', update_sys_admin_post_path(post), method: :put
