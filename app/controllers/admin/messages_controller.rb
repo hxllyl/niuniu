@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Admin::MessagesController < Admin::BaseController
-  before_filter :require_admin
+  before_filter :require_ad
 
   def index
     @messages = Message.all.includes(:sender, :receiver).

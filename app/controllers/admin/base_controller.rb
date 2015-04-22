@@ -37,6 +37,15 @@ class Admin::BaseController < ApplicationController
     end
   end
 
+  def require_ad
+    if %(super_admin admin).include?(current_staff.role)
+      return
+    else
+      flash[:notice] = '很抱歉，您没有权限'
+      redirect_to admin_root_path
+    end
+  end
+
   # ROLES = %w(normal staff admin super_admin) # 普通用户 业务员 普管 超管
   helper_method :staff?
   def staff?
