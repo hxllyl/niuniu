@@ -15,7 +15,7 @@
           %th 款式
           %th 颜色
           %th 状态
-          %th 发布时间
+          %th{colspan: "2"} 发布时间
           / %th 操作
         - @hot_posts.each do |p|
           %tr
@@ -31,6 +31,27 @@
             %td
               / = link_to '置顶', update_sys_admin_post_path(post), method: :put
               / = link_to '关闭', admin_post_path(p.post),  method: :delete, data: {confirm: '确定删除？'}
+
+      = form_tag params, action: "", method: :get do
+        .row
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+          .col-md-3.form-group
+            = text_field_tag "", nil, class: "form-control"
+        .form-group.clearfix
+          = submit_tag "提交", class: "btn btn-primary subBtn"
 
       - if @hot_posts.present?
         .hr-line-dashed
