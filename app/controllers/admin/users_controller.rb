@@ -17,13 +17,13 @@ class Admin::UsersController < Admin::BaseController
     conds[:sender_id] = current_staff.id if staff?
     @mobiles = Log::ContactPhone.where(conds).order('updated_at desc').page(params[:page]||1).per(30)
     @show_datas = staff? ?  [
-                              current_staff.log_contact_phones.unregister.today.count,
-                              current_staff.log_contact_phones.unregister.month.count,
-                              current_staff.log_contact_phones.unregister.count
+                              current_staff.log_contact_phones.today.count,
+                              current_staff.log_contact_phones.month.count,
+                              current_staff.log_contact_phones.count
                             ] : [
-                              Log::ContactPhone.unregister.today.count,
-                              Log::ContactPhone.unregister.month.count,
-                              Log::ContactPhone.unregister.count
+                              Log::ContactPhone.today.count,
+                              Log::ContactPhone.month.count,
+                              Log::ContactPhone.count
                             ]
   end
 
