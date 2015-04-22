@@ -36,7 +36,7 @@ class Admin::PostsController < Admin::BaseController
 
   # 限八个
   def hot_resources
-    !params[:post_ids].empty? && params[:post_ids].each do |k, v|
+    params[:post_ids] && params[:post_ids].each do |k, v|
       hot_post = HotPost.find_by_id(k)
       hot_post.update_attributes(post_id: v) if hot_post
     end
