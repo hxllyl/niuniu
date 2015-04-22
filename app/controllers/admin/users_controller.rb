@@ -16,11 +16,33 @@ class Admin::UsersController < Admin::BaseController
     conds = {_type: 0, is_register: false}
     conds[:sender_id] = current_staff.id if staff?
     @mobiles = Log::ContactPhone.where(conds).order('updated_at desc').page(params[:page]||1).per(30)
+    @show_datas = staff? ?  [
+                              current_staff.log_contact_phones.unregister.today.count,
+                              current_staff.log_contact_phones.unregister.month.count,
+                              current_staff.log_contact_phones.unregister.count
+                            ] : [
+                              Log::ContactPhone.unregister.today.count,
+                              Log::ContactPhone.unregister.month.count,
+                              Log::ContactPhone.unregister.count
+                            ]
   end
 
   def registered
     # TODO: Add logic for registered users 已注册用户
-    @users = current_staff.customers.order('created_at desc').page(params[:page]||1).per(30)
+    @users =  if staff?
+                current_staff.customers.order('created_at desc').page(params[:page]||1).per(30)
+              else
+                 User.where("customer_service_id is not NULL").order('created_at desc').page(params[:page]||1).per(30)
+              end
+    @show_datas = staff? ?  [
+                              current_staff.customers.today.count,
+                              current_staff.customers.month.count,
+                              current_staff.customers.count
+                            ] : [
+                              User.where("customer_service_id is not NULL").today.count,
+                              User.where("customer_service_id is not NULL").month.count,
+                              User.where("customer_service_id is not NULL").count
+                            ]
   end
 
   def new

@@ -12,4 +12,5 @@ class Staff < User
   has_many :feedbacks, class_name: 'Message', foreign_key: 'receiver_id'
 
   has_many :log_user_update_levels, class_name: 'Log::UserUpdateLevel', foreign_key: 'operator_id'
+  has_many :log_contact_phones,     class_name: 'Log::ContactPhone',    foreign_key: 'sender_id'
 end

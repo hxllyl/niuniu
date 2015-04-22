@@ -33,23 +33,14 @@
         .col-lg-6
           %table.table.table-responsive
             %tr
-              %th 总数量
-              %td{ colspan: 3 } 10000
-            %tr
               %th{ style: 'width: 100px;'} 今日新增数
-              %td 50
-              %th{ style: 'width: 100px;'} 今日注册数
-              %td 100
+              %td= @show_datas[0]
             %tr
               %th 本月新增数
-              %td 50
-              %th 本月注册数
-              %td 100
+              %td= @show_datas[1]
             %tr
               %th 累计新增数
-              %td 50
-              %th 累计注册数
-              %td 100
+              %td= @show_datas[2]
 
         .col-lg-12
           - if @mobiles.present?

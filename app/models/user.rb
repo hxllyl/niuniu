@@ -79,8 +79,10 @@ class User < ActiveRecord::Base
   has_many :active_devices, class_name: 'ActiveDevice' # jpush 用户设备
   has_many :valid_codes, class_name: 'ValidCode', dependent: :nullify
 
-  scope :valid_user, -> {where("status != #{STATUS.keys[2]}")}
-  scope :normals, -> {where("users.role = ?", 'normal')}
+  scope :valid_user,  -> {where("status != #{STATUS.keys[2]}")}
+  scope :normals,     -> {where("users.role = ?", 'normal')}
+  scope :today,       -> { where("created_at > ?", Time.now.beginning_of_day) }
+  scope :month,       -> { where("created_at > ?", Time.now.beginning_of_month) }
 
   accepts_nested_attributes_for :photos
 
