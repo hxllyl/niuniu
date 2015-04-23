@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         patch :update_staff
         get :update_remark
         get :update_status
+        patch :update_role
       end
     end
 

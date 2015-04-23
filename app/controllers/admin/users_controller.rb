@@ -192,4 +192,11 @@ class Admin::UsersController < Admin::BaseController
     redirect_to :back
   end
 
+  def update_role
+    staff = Staff.find_by_id(params[:id])
+    staff.update_attributes(role: params[:role])
+
+    redirect_to :back
+  end
+
 end
