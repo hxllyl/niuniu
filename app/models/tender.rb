@@ -155,6 +155,7 @@ class Tender < ActiveRecord::Base
                 #{post.user_name} 和您报价的寻 #{post.info_for_jpush} 成交了。
                 EOF
               end
+    message = message.strip          
   end
 
   # def generate_post_message
