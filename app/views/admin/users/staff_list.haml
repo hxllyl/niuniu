@@ -8,7 +8,7 @@
     .ibox-content
       .row
         .col-lg-12
-          %table.table.table-striped
+          %table.table.table-striped.listTable
             %tr
               %th 序号
               %th 工号
@@ -21,7 +21,13 @@
               %tr
                 %td= staff.id
                 %td= staff.job_number
-                %td= staff.role
+                %td
+                  = form_for '' do |f|
+                    .row.tabSelect
+                      .col-sm-8
+                        = select_tag(:name, options_for_select([["1", "1"], ["2", "2"]]), class: "form-control input-sm", prompt: staff.role)
+                      .col-sm-4
+                        = f.submit:'确认', class: 'btn btn-primary btn-sm'
                 %td= staff.name
                 %td= staff.mobile
                 %td= staff.is_valid ? '正常' : '已关闭'
