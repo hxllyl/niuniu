@@ -42,9 +42,9 @@
       = c_f.label '备注'
       = c_f.text_area :remark, class: "form-control w100p", row: "4", value: @user.contact['remark']
 
-  .form-group.clearfix
-    = f.label '分配角色'
-    = f.select :role, Staff::ROLES[0, 2], prompt: true
+  / .form-group.clearfix
+  /   = f.label '分配角色'
+  /   = f.select :role, Staff::ROLES[0, 2], prompt: true
 
   = f.hidden_field :mask, value: @user.mask
   = f.hidden_field :status, value: 1
