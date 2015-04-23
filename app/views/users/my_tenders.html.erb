@@ -36,7 +36,7 @@
                         <% end %>
                       </td>
                       <td><%= tender.post.try(:user_name) -%>
-                          <%= image_tag(tender.post.user.level_icon, size: '40x16') if current_user.try(:is_show_icon?) -%>
+                          <%= image_tag(tender.post.user.level_icon, size: '40x16') if tender.post.user.try(:is_show_icon?) -%>
                       </td>
                       <td><%= human_time(tender.updated_at) %></td>
                       <td>
