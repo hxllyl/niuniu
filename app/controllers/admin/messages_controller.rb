@@ -27,7 +27,7 @@ class Admin::MessagesController < Admin::BaseController
       @message.destroy
       
       # author: depp
-      UserMessage.where(message: @message).delete_all
+      UserMessage.where(message: @message).map(&:delete)
       # end
       
       redirect_to admin_messages_path, notice: '已删除'
