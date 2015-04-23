@@ -66,6 +66,14 @@ class Admin::BaseCarsController < Admin::BaseController
     render partial: 'form'
   end
 
+  def update_status
+    bc        = BaseCar.find_by_id(params[:id])
+    bc.status = params[:status].to_i
+    bc.save
+
+    redirect_to :back
+  end
+
   def st_list
     @sts = Standard.includes(:brands).page(params[:page]||1).per(30)
   end

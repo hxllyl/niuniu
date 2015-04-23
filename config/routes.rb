@@ -40,6 +40,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :new, :create, :destroy]
     root 'users#search'
     resources :base_cars do
+      member do
+        get :update_status
+      end
       collection do
         get :st_list
         get :br_list

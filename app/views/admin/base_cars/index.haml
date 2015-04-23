@@ -20,6 +20,7 @@
           %th 内饰
           %th 指导价/万
           %th 地区
+          %th 状态
           %th 操作
         - @base_cars.each do |bc|
           %tr
@@ -32,9 +33,13 @@
             %td= bc.inner_color.join(' ')
             %td= bc.base_price.to_f
             %td= bc.brand.regions.join(' ')
+            %td= bc.is_valid? ? '有效' : '已删除'
             %td
               = link_to '编辑', edit_admin_base_car_path(bc), target: '_blank'
-              = link_to '关闭', ''
+              - if bc.is_valid?
+                = link_to '关闭', update_status_admin_base_car_path(bc, status: 0)
+              - else
+                = link_to '恢复', update_status_admin_base_car_path(bc, status: 1)
 
       - if @base_cars.present?
         .hr-line-dashed
