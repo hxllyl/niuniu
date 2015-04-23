@@ -12,6 +12,7 @@
           %th 规格
           %th 品牌
           %th 车型
+          %th 昵称
           %th 操作
         - @cms.each do |cm|
           %tr
@@ -19,6 +20,7 @@
             %td= cm.standard.name
             %td= cm.brand.name
             %td= cm.name
+            %td= cm.display_name
             %td
               = link_to '编辑', edit_cm_admin_base_cars_path(car_model_id: cm.id)
               = link_to '关闭', ''
