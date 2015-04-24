@@ -72,10 +72,10 @@ class Message < ActiveRecord::Base
         }
       else
         if _type == TYPES.keys[0]
-            users = User.valid_user
-            self.users << users
-            
             Thread.new {
+              users = User.valid_user
+              self.users << users
+              
               sleep 0.1
               jpush_message(content, ActiveDevice.active.pluck(:register_id))
             }
