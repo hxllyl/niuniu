@@ -107,9 +107,15 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user = User.find_by_id(params[:id])
-    if @user.mask.nil?
+    if @user.mask.blank? or @user.mask != 'Staff'
       params.require(:user).permit!
       @user.update_attributes(params[:user])
+      if params[:_image].present?
+        avatar = @user.photos.where(_type: 'avatar').first_or_initialize 
+        avatar.image = params[:_image]
+        avatar._type = 'avatar'
+        avatar.save
+      end
 
       redirect_to registered_admin_users_path
     else
