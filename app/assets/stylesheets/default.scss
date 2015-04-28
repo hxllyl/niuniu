@@ -56,7 +56,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 /*index style*/
 .mainBox { padding-right: 5px; }
 .contentBox { margin-bottom: 10px; border-color: #ccc; border-radius: 0; box-shadow: none; }
-.banner { height: 152px; overflow: hidden; }
+.banner { height: auto; overflow: hidden; }
 .banner .carousel-indicators { bottom: 10px; }
 .banner .carousel-indicators li { border-color: #f4621b; }
 .banner .carousel-indicators .active { background-color: #f4621b; }
