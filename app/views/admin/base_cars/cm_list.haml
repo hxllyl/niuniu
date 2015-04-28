@@ -23,7 +23,12 @@
             %td= cm.display_name
             %td
               = link_to '编辑', edit_cm_admin_base_cars_path(car_model_id: cm.id)
-              = link_to '关闭', ''
+              - if cm.status == 1
+                = link_to '关闭', update_cm_admin_base_cars_path(id: cm.id, way: 'close'), 'data-method' => :patch
+              - elsif cm.status == -1
+                = link_to '恢复', update_cm_admin_base_cars_path(id: cm.id, way: 'reopen'), 'data-method' => :patch
+                  
+              
 
       - if @cms.present?
         .hr-line-dashed

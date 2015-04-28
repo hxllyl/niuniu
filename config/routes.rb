@@ -64,6 +64,7 @@ Rails.application.routes.draw do
         post :create_st
         put :update_br
         put :update_st
+        patch :update_cm
       end
     end
     resources :complaints, only: [:index, :update]

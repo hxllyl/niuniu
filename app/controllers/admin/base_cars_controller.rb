@@ -86,8 +86,15 @@ class Admin::BaseCarsController < Admin::BaseController
 
   def edit_st
   end
-
+  
   def update_st
+  end
+  
+  def update_cm
+    @cm = CarModel.find params[:id]
+    status = params[:way] == 'close' ? -1 : 1
+    @cm.update_attribute(:status, status)
+    redirect_to :back
   end
 
   def br_list
