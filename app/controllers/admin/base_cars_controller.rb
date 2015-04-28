@@ -30,7 +30,7 @@ class Admin::BaseCarsController < Admin::BaseController
   end
 
   def update
-    if params[:id] == 'update_cm'
+    if params[:id] == 'edit_cm'
       @cm = CarModel.find_by_id(params[:car_model][:id])
       params[:car_model].delete(:id)
       params.require(:car_model).permit!
@@ -86,8 +86,15 @@ class Admin::BaseCarsController < Admin::BaseController
 
   def edit_st
   end
-
+  
   def update_st
+  end
+  
+  def update_cm
+    @cm = CarModel.find params[:id]
+    status = params[:way] == 'close' ? -1 : 1
+    @cm.update_attribute(:status, status)
+    redirect_to :back
   end
 
   def br_list
@@ -128,16 +135,16 @@ class Admin::BaseCarsController < Admin::BaseController
   end
 
   def edit_cm
-    @cm, @url = CarModel.find_by_id(params[:car_model_id]), update_cm_admin_base_cars_path
+    @cm, @url = CarModel.find_by_id(params[:car_model_id]), edit_cm_admin_base_cars_path
     @standard, @brand = @cm.standard, @cm.brand
     @standards, @brands = Standard.all, @standard.brands
   end
 
   def get_cm_select_infos
-    if params[:car_model][:id].nil?
+    if params[:car_model][:id].blank?
       @cm, @url = CarModel.new, create_cm_admin_base_cars_path
     else
-      @cm, @url = CarModel.find_by_id(params[:car_model][:id]), update_cm_admin_base_cars_path(car_model_id: params[:car_model][:id])
+      @cm, @url = CarModel.find_by_id(params[:car_model][:id]), edit_cm_admin_base_cars_path(car_model_id: params[:car_model][:id])
     end
 
     @standard   = Standard.find_by_id(params[:car_model][:standard_id])

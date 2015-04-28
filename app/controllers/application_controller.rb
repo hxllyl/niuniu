@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def redirect_to_mobile_page
-    if browser.mobile?
+    if browser.mobile? && !params[:controller].include?('api')
       redirect_to mobile_displays_path # if request.request_uri !~ /mobile_displays/
     end
   end

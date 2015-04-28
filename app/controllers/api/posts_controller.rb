@@ -19,11 +19,11 @@ class Api::PostsController < Api::BaseController
   #   status: [Integer] 400
   #   Notice: [String]  请重新再试
   def list
-    conds = {_type: params[:_type], status: 1 }
+    conds = {_type: params[:_type]}
 
     page = params[:page] ? params[:page] : 1
     per  = params[:per]  ? params[:per]  : 10
-    posts = Post.where(conds).order(created_at: :desc).page(page).per(per)
+    posts = Post.valid.where(conds).order(created_at: :desc).page(page).per(per)
 
     data = posts.map { |post| post.to_hash.merge!( is_following: @user.following?(post.user) ) }
     render json: {status: 200, notice: 'success', data: { posts: data } }

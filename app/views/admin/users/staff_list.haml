@@ -22,18 +22,21 @@
                 %td= staff.id
                 %td= staff.job_number
                 %td
-                  = form_for '' do |f|
-                    .row.tabSelect
-                      .col-sm-8
-                        = select_tag(:name, options_for_select([["1", "1"], ["2", "2"]]), class: "form-control input-sm", prompt: staff.role)
-                      .col-sm-4
-                        = f.submit:'确认', class: 'btn btn-primary btn-sm'
+                  - if staff.role == 'super_admin'
+                    = staff.role
+                  - else
+                    = form_for staff, url: update_role_admin_user_path(staff), method: 'patch' do |f|
+                      .row.tabSelect
+                        .col-sm-8
+                          = select_tag(:role, options_for_select([['staff', 'staff'], ['admin', 'admin']]), class: "form-control input-sm", prompt: staff.role)
+                        .col-sm-4
+                          = f.submit:'确认', class: 'btn btn-primary btn-sm'
                 %td= staff.name
                 %td= staff.mobile
                 %td= staff.is_valid ? '正常' : '已关闭'
                 %td
                   = link_to '修改', edit_admin_user_path(staff)
-                  - if staff != current_user
+                  - unless staff.role == 'super_admin'
                     - if staff.is_valid
                       = link_to '关闭', update_status_admin_user_path(staff, status: -1)
                     - else

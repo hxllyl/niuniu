@@ -6,7 +6,7 @@ class SendInviteMessageJob < ActiveJob::Base
   include Concerns::MessageHandler   
   
   def perform(user, mobile)
-    unless mobile.present? and (mobile =~ /(\A1[3|4|5|8][0-9]{9}\z)/) == 0
+    unless mobile.present? and (mobile =~ /(\A1[3|4|5|7|8][0-9]{9}\z)/) == 0
       Rails::logger.info ("#{Time.now}----#{mobile},发送失败")
     else
       msg =<<-EOF

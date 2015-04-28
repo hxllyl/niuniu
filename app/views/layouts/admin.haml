@@ -48,6 +48,8 @@
                 = link_to '系统消息', admin_messages_path
               %li{ class: (:active if current_page?(controller: 'admin/complaints')) }
                 = link_to '投诉中心', admin_complaints_path
+              %li{ class: (:active if current_page?(controller: 'admin/feedbacks')) }
+                = link_to '意见反馈', admin_feedbacks_path  
               - if super_admin?
                 %li{ class: (:active if current_page?(controller: 'admin/users', action: 'staff_list')) }
                   = link_to '内部员工列表', staff_list_admin_users_path

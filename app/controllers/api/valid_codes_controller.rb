@@ -72,7 +72,7 @@ class Api::ValidCodesController < Api::BaseController
   def is_legal?(str, type)
     case type
     when :mobile then
-      str.present? and (str =~ /(\A1[3|4|5|8][0-9]{9}\z)/) == 0
+      str.present? and (str =~ /(\A1[3|4|5|7|8][0-9]{9}\z)/) == 0
     when :code then
       str.present? and (str =~ /(\A\w{6}\z)/) == 0
     else

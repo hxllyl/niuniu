@@ -12,6 +12,7 @@
           %th 规格
           %th 品牌
           %th 车型
+          %th 昵称
           %th 操作
         - @cms.each do |cm|
           %tr
@@ -19,9 +20,15 @@
             %td= cm.standard.name
             %td= cm.brand.name
             %td= cm.name
+            %td= cm.display_name
             %td
               = link_to '编辑', edit_cm_admin_base_cars_path(car_model_id: cm.id)
-              = link_to '关闭', ''
+              - if cm.status == 1
+                = link_to '关闭', update_cm_admin_base_cars_path(id: cm.id, way: 'close'), 'data-method' => :patch
+              - elsif cm.status == -1
+                = link_to '恢复', update_cm_admin_base_cars_path(id: cm.id, way: 'reopen'), 'data-method' => :patch
+                  
+              
 
       - if @cms.present?
         .hr-line-dashed

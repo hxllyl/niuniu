@@ -1,4 +1,4 @@
-= form_for(@user, url: @user.new_record? ? admin_users_path : admin_user_path) do |f|
+= form_for(@user, url: @user.new_record? ? admin_users_path : admin_user_path,  html: { multipart: true }) do |f|
   .form-group.clearfix
     = f.label '姓名'
     = f.text_field :name, class: "form-control"
@@ -36,8 +36,17 @@
   .form-group.clearfix
     = f.label '指定业务员'
     = f.collection_select :customer_service_id, Staff.customer_services, :id, :name, prompt: true
-
-
+    
+  .form-group.clearfix
+    .col-md-3.photoArea
+      .photo.show-img
+        = image_tag(@user.avatar, alt: "", width: "180", height: "180", id: 'show-img')
+      
+      = label_tag '修改头像'
+      %br
+      = file_field_tag :_image, value: @user.avatar, type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg', 'target-id' => 'show-img'
+      = hidden_field_tag :_type, 'avatar' 
+    
   = f.hidden_field :reg_status, value: '3'
   = f.hidden_field :role, value: 'normal'
   = f.hidden_field :status, value: 1

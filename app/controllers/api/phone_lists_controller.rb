@@ -59,7 +59,7 @@ class Api::PhoneListsController < Api::BaseController
   #   error_msg: 错误信息
 
   def send_invite_message
-    raise '手机号码不正确' if params[:mobile].blank? and (params[:mobile] =~ /(\A1[3|4|5|8][0-9]{9}\z)/) == 0
+    raise '手机号码不正确' if params[:mobile].blank? and (params[:mobile] =~ /(\A1[3|4|5|7|8][0-9]{9}\z)/) == 0
 
     mobile = params[:mobile]
     

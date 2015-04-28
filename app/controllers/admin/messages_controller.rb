@@ -25,6 +25,11 @@ class Admin::MessagesController < Admin::BaseController
     @message = Message.find_by_id(params[:id])
     if @message.present?
       @message.destroy
+      
+      # author: depp
+      UserMessage.where(message: @message).map(&:delete)
+      # end
+      
       redirect_to admin_messages_path, notice: '已删除'
     else
       redirect_to admin_messages_path, alert: '未找到此系统通知'
