@@ -1,0 +1,31 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-9
+    %h2 意见反馈
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .ibox.float-e-margins
+    .ibox-content
+      %table.table.table-striped
+        %tr
+          %th ID
+          %th 反馈人
+          %th 反馈客服
+          %th 反馈内容
+          %th 状态
+
+          %th 操作
+        - @feedbacks.each do |ele|
+          %tr
+            %td= ele.id
+            %td= ele.sender.try(:name)
+            %td= ele.receiver.try(:name)
+            %td= ele.content
+            %td= ele.status == 0 ? '反馈' : ''
+            %td 
+              
+
+      - if @feedbacks.present?
+        .hr-line-dashed
+
+      .text-center
+        = paginate @feedbacks

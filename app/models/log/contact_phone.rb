@@ -7,7 +7,7 @@ class Log::ContactPhone < ActiveRecord::Base
     1 => '用户'
   }
 
-  validates :mobile, presence: true, uniqueness: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }
+  validates :mobile, presence: true, uniqueness: true, format: { with:  /\A1[3|4|5|7|8][0-9]{9}\z/ }
   # validates :sender_id, presence: true
   validates :_type,  presence: true, inclusion: {in: TYPES.keys}
 

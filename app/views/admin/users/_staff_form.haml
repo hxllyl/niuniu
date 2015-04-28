@@ -1,4 +1,9 @@
-= form_for(@user, url: @user.new_record? ? admin_users_path : admin_user_path) do |f|
+= form_for(@user, url: @user.new_record? ? admin_users_path : admin_user_path, html: { multipart: true }) do |f|
+
+  = f.hidden_field :mask, value: @user.mask
+  = f.hidden_field :status, value: 1
+  = f.hidden_field :password, value: '123456' if @user.new_record?
+  
   .form-group.clearfix
     = f.label '姓名'
     = f.text_field :name, class: "form-control"
@@ -41,14 +46,20 @@
     .form-group.clearfix
       = c_f.label '备注'
       = c_f.text_area :remark, class: "form-control w100p", row: "4", value: @user.contact['remark']
+    
+  .form-group.clearfix
+    .col-md-3.photoArea
+      .photo.show-img
+        = image_tag(@user.avatar, alt: "", width: "180", height: "180", id: 'show-img')
+  
+      = label_tag '修改头像'
+      %br
+      = file_field_tag :_image, value: @user.avatar, type: :file, multiple: true, class: 'button', accept: 'image/png,image/gif,image/jpeg, image/jpg', 'target-id' => 'show-img'
+      = hidden_field_tag :_type, 'avatar'  
 
   / .form-group.clearfix
   /   = f.label '分配角色'
   /   = f.select :role, Staff::ROLES[0, 2], prompt: true
-
-  = f.hidden_field :mask, value: @user.mask
-  = f.hidden_field :status, value: 1
-  = f.hidden_field :password, value: '123456' if @user.new_record?
   .form-group.clearfix
     = f.submit class: "btn btn-default subBtn"
 

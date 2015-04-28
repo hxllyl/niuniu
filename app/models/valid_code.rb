@@ -23,7 +23,7 @@ class ValidCode < ActiveRecord::Base
   
   # validates
   validates :code, presence: true, uniqueness: true, format: { with: /\A\w{6}\z/ }
-  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|8][0-9]{9}\z/ }, uniqueness: { if: Proc.new{ |code| code._type == TYPES.keys[0] } }
+  validates :mobile, presence: true, format: { with:  /\A1[3|4|5|7|8][0-9]{9}\z/ }, uniqueness: { if: Proc.new{ |code| code._type == TYPES.keys[0] } }
   validates :status, inclusion: { in: STATUS.keys }
   
   belongs_to :user, class_name: 'User'

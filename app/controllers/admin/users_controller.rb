@@ -76,10 +76,18 @@ class Admin::UsersController < Admin::BaseController
   def create
     if params[:staff]
       params.require(:staff).permit!
-      @user = User.new(params[:staff])
+      @user = Staff.new(params[:staff])
+      @user.role = 'staff'
     else
       params.require(:user).permit!
       @user = User.new(params[:user])
+    end
+    
+    if params[:_image].present?
+      avatar = @user.photos.where(_type: 'avatar').first_or_initialize 
+      avatar.image = params[:_image]
+      avatar._type = 'avatar'
+      avatar.save
     end
 
     if @user.save
@@ -94,7 +102,8 @@ class Admin::UsersController < Admin::BaseController
         redirect_to staff_list_admin_users_path
       end
     else
-      redirect_to :new, @user
+      logger.info "errors message:" + @user.errors.full_messages.join('\n')
+      render :new
     end
   end
 
@@ -107,16 +116,18 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user = User.find_by_id(params[:id])
+    
+    if params[:_image].present?
+      avatar = @user.photos.where(_type: 'avatar').first_or_initialize 
+      avatar.image = params[:_image]
+      avatar._type = 'avatar'
+      avatar.save
+    end
+    
     if @user.mask.blank? or @user.mask != 'Staff'
       params.require(:user).permit!
       @user.update_attributes(params[:user])
-      if params[:_image].present?
-        avatar = @user.photos.where(_type: 'avatar').first_or_initialize 
-        avatar.image = params[:_image]
-        avatar._type = 'avatar'
-        avatar.save
-      end
-
+      
       redirect_to registered_admin_users_path
     else
       params.require(:staff).permit!

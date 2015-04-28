@@ -6,6 +6,9 @@ Rails.application.routes.draw do
         patch :update_status
       end
     end
+    
+    resources :feedbacks, only: [:index] do
+    end
 
     resources :users do
       collection do
