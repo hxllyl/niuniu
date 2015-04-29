@@ -456,6 +456,7 @@ a.userArr:link, a.userArr:visited, a.userArr:hover, a.userArr:active { text-deco
 .mobileBox .logo { width: 100%; padding-top: 20%; text-align: center; }
 .downloadBtn { position: absolute; bottom: 10%; width: 100%; }
 .downloadBtn .icon { margin-right: 8px; }
+#popweixin { display: none; position: fixed; z-index: 1; width: 100%; height: 100%; color: #fff; background-color: rgba(0,0,0,0.5);}
 
 /*input style*/
 .dropdown.w100p .btn { width: 100%; text-align: left; }
