@@ -26,7 +26,7 @@ class UsersController < BaseController
   end
 
   def show
-    @uncompleted_posts = current_user.posts.needs.valid.includes(:standard, :brand, :car_model, :base_car).order(updated_at: :desc).page(params[:page]).per(10)
+    @uncompleted_posts = current_user.posts.needs.uncompleted.includes(:standard, :brand, :car_model, :base_car).order(updated_at: :desc).page(params[:page]).per(10)
     @completed_posts   = current_user.posts.needs.includes(:standard, :brand, :car_model, :base_car).completed.order(updated_at: :desc).page(params[:page]).per(10)
     # @done_months       = current_user.posts.needs.where("updated_at >= ?", 3.months.from_now)
   end

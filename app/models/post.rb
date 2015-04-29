@@ -96,6 +96,9 @@ class Post < ActiveRecord::Base
 
   scope :as_resource, ->(type) { where(_type: type) }
 
+  # 我的寻车，我的资源，只滤掉已删除的
+  scope :mine, -> { where("posts.status <> -1") }
+
   acts_as_list scope: :user
 
   # validates_inclusion_of :resource_type, in: RESOURCE_TYPE.keys, message: 'must be 0 or 1 when _type = 0', if: -> { _type == 0 }
