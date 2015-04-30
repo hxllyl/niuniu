@@ -45,7 +45,7 @@ class Api::PostsController < Api::BaseController
   #   Notice: [String]  请重新再试
   def my_list
 
-    posts = @user.posts.where(_type: params[:_type]).order(updated_at: :desc)
+    posts = @user.posts.mine.where(_type: params[:_type]).order(updated_at: :desc)
 
     if params[:_type] == '1' # 仅针对寻车
       instrument 'user.has_read_tender', post_id: posts.pluck(:id)

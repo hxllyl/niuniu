@@ -8,15 +8,15 @@ class MyPostsController < BaseController
     @_type = params[:_type]
     @brand_id = params[:brand_id]
     unless @brand_id.blank?
-      @posts = current_user.posts.valid.includes(:standard, :base_car, :car_model).joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").page(params[:page]).per(10)
+      @posts = current_user.posts.mine.includes(:standard, :base_car, :car_model).joins(:brand).where("brands.id = #{@brand_id} and posts._type = #{@_type}").page(params[:page]).per(10)
     else
-      @posts = current_user.posts.valid.includes(:standard, :base_car, :car_model).where(_type: @_type).page(params[:page]).per(10)
+      @posts = current_user.posts.mine.includes(:standard, :base_car, :car_model).where(_type: @_type).page(params[:page]).per(10)
     end
 
     if params[:update_all]
       if current_user.could_update_my_resources?
-        current_user.posts.resources.valid.update_all(updated_at: Time.now, expired_at: 7.days.since)
-        current_user.gen_post_log(current_user.posts.resources.valid.first, 'update_all')
+        current_user.posts.resources.mine.update_all(updated_at: Time.now, expired_at: 7.days.since)
+        current_user.gen_post_log(current_user.posts.resources.mine.first, 'update_all')
       else
         flash[:notice] = '对不起，您一个小时之内不能重复更新您的资源列表'
       end
