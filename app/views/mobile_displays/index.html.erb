@@ -19,7 +19,10 @@
     <a href="javascript:;" class="btn btn-default btn-lg orange" id="appDlLink"><span class="icon icon-download"></span>立即下载</a>
   </section>
 </section>
-<section id="popweixin">请从Safari打开链接！</section>
+<section id="popweixin">
+  <p>如果无法直接下载</p>
+  <p>请从Safari打开链接！</p>
+</section>
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -28,15 +31,6 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
-
-// function a(){
-//   var ua = navigator.userAgent.toLowerCase();
-//   if (/iphone|ipod/.test(ua)) {
-//     if(/micromessenger/.test(ua)){
-//       document.getElementById("popweixin").style.display = "block";
-//     }
-//   }
-// }
 
 var appLinkBtn = document.getElementById('appDlLink');
 var u = navigator.userAgent,
@@ -49,13 +43,28 @@ appLinkBtn.onclick = function(){
 }
 
 function downApp(){
+  var ua = navigator.userAgent.toLowerCase();
   if (isiOS){
-    window.location = 'https://appsto.re/cn/fxXB5.i';
+    //if(/micromessenger/.test(ua)){
+      document.getElementById('popweixin').style.display = 'block';
+    //}
+    //else {
+      //window.location = 'https://appsto.re/cn/fxXB5.i';
+    //}
   }
   else if (isAndroid){
-    window.location = 'https://appsto.re/cn/fxXB5.i';
+    window.location = 'http://shouji.baidu.com/soft/item?docid=7726633&from=landing&f=search_app_%E7%89%9B%E7%89%9B%E6%B1%BD%E8%BD%A6%40list_1_image%401%40search_sug_app_btn_search';
   }
 }
+
+// function a(){
+//   var ua = navigator.userAgent.toLowerCase();
+//   if (/iphone|ipod/.test(ua)) {
+//     if(/micromessenger/.test(ua)){
+//       document.getElementById("popweixin").style.display = "block";
+//     }
+//   }
+// }
 </script>
 </body>
 </html>
