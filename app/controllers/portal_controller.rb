@@ -42,7 +42,7 @@ class PortalController < BaseController
     @user_ids = Post.resources.valid.order(updated_at: :desc).map(&:user_id).uniq[0..9]
     @users = User.where("id" => @user_ids)
 
-    @banners = Banner.order('banners.position')
+    @banners = Banner.use_web.order('banners.position')
   end
 
   # 首页搜索

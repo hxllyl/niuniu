@@ -15,7 +15,7 @@ class Api::BannersController < Api::BaseController
   #   status: [Integer] 400
   #   notice: [String]  请重新再试
   def index
-    banners = Banner.valid
+    banners = Banner.use_app
     render json: { status: 200, notice: 'success', data: {  banners: banners.map(&:to_hash) } }
   rescue => e
     render json: { status: 200, notice: 'failed' }
