@@ -6,20 +6,23 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>牛牛汽车</title>
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 <%= stylesheet_link_tag    'default', media: 'all', 'data-turbolinks-track' => true %>
 <%= stylesheet_link_tag    'iconfonts', media: 'all', 'data-turbolinks-track' => true %>
-<title>牛牛汽车</title>
 </head>
 
 <body class="mobileBg">
 <section class="mobileBox">
   <section class="logo"><%= image_tag("mobile/logo.png", alt: "", width: "70%") %></section>
   <section class="txtC downloadBtn">
-    <a href="https://appsto.re/cn/fxXB5.i" class="btn btn-default btn-lg orange"><span class="icon icon-download"></span>立即下载</a>
+    <a href="javascript:;" class="btn btn-default btn-lg orange" id="appDlLink"><span class="icon icon-download"></span>立即下载</a>
   </section>
 </section>
-<section id="popweixin">请从Safari打开链接！</section>
+<section id="popweixin">
+  <p>如果无法直接下载</p>
+  <p>请从Safari打开链接！</p>
+</section>
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -28,6 +31,31 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
+
+var appLinkBtn = document.getElementById('appDlLink');
+var u = navigator.userAgent,
+    app = navigator.appVersion;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+appLinkBtn.onclick = function(){
+  downApp();
+}
+
+function downApp(){
+  var ua = navigator.userAgent.toLowerCase();
+  if (isiOS){
+    //if(/micromessenger/.test(ua)){
+      document.getElementById('popweixin').style.display = 'block';
+    //}
+    //else {
+      //window.location = 'https://appsto.re/cn/fxXB5.i';
+    //}
+  }
+  else if (isAndroid){
+    window.location = 'http://shouji.baidu.com/soft/item?docid=7726633&from=landing&f=search_app_%E7%89%9B%E7%89%9B%E6%B1%BD%E8%BD%A6%40list_1_image%401%40search_sug_app_btn_search';
+  }
+}
 
 // function a(){
 //   var ua = navigator.userAgent.toLowerCase();
