@@ -15,6 +15,7 @@ class Admin::UsersController < Admin::BaseController
     # TODO: Add logic for contacted users 已联系用户
     conds = {_type: 0, is_register: false}
     conds[:sender_id] = current_staff.id if staff?
+    conds[:mobile] = params[:mobile] if params[:mobile].present?
     @mobiles = Log::ContactPhone.where(conds).order('updated_at desc').page(params[:page]||1).per(30)
     @show_datas = staff? ?  [
                               current_staff.log_contact_phones.today.count,
@@ -30,10 +31,13 @@ class Admin::UsersController < Admin::BaseController
   def registered
     # TODO: Add logic for registered users 已注册用户
     @users =  if staff?
-                current_staff.customers.order('created_at desc').page(params[:page]||1).per(30)
+                current_staff.customers.order('last_sign_in_at desc').page(params[:page]||1).per(30)
               else
-                 User.where("customer_service_id is not NULL").order('created_at desc').page(params[:page]||1).per(30)
+                 User.where("customer_service_id is not NULL").order('last_sign_in_at desc').page(params[:page]||1).per(30)
               end
+    
+    @users = @users.where(mobile: params[:mobile]) if params[:mobile].present?
+              
     @show_datas = staff? ?  [
                               current_staff.customers.today.count,
                               current_staff.customers.month.count,
@@ -213,6 +217,14 @@ class Admin::UsersController < Admin::BaseController
     staff = Staff.find_by_id(params[:id])
     staff.update_attributes(role: params[:role])
 
+    redirect_to :back
+  end
+  
+  def update_user_remark
+    user = User.find params[:id]
+    user.contact[:remark] = params[:remark]
+    user.save
+     
     redirect_to :back
   end
 

@@ -21,19 +21,19 @@
         - @hot_posts.each do |p|
           %tr
             %td= p.id
-            %td= p.post.id
-            %td= p.post.user_name
-            %td= p.post.standard_name
-            %td= p.post.brand_name
-            %td= p.post.car_model_name
-            %td= p.post.base_car_style
-            %td= p.post.color
-            %td= Post::RESOURCE_TYPE[p.post.resource_type]
-            %td= p.post.publish_time
+            %td= p.post_id
+            %td= p.post.try(:user_name)
+            %td= p.post.try(:standard_name)
+            %td= p.post.try(:brand_name)
+            %td= p.post.try(:car_model_name)
+            %td= p.post.try(:base_car_style)
+            %td= p.post.try(:color)
+            %td= Post::RESOURCE_TYPE[p.post.try(:resource_type)]
+            %td= p.post.try(:publish_time)
             %td
               / = link_to '置顶', update_sys_admin_post_path(post), method: :put
               / = link_to '关闭', admin_post_path(p.post),  method: :delete, data: {confirm: '确定删除？'}
-
+      .text-danger 若下架且无资源替换时，请设置为0
       = form_tag params, action: "update_hot_posts", method: :get do
         .row
           -@hot_posts.each do |hp|

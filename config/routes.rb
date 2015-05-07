@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get :update_remark
         get :update_status
         patch :update_role
+        get :update_user_remark
       end
     end
 
