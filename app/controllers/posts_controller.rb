@@ -240,7 +240,7 @@ class PostsController < BaseController
     # 为资源库保存自定义的颜色
     Log::BaseCar.create(
       user_id:      @someone.id,
-      base_car_id:  @user.id,
+      base_car_id:  base_car.id,
       method_name:  'outer_color',
       content:      params[:post][:outer_color]
     ) unless base_car.outer_color.include?(params[:post][:outer_color])

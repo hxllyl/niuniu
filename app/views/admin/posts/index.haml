@@ -22,7 +22,7 @@
           %tr
             %td= post.id
             %td= post.created_at.to_s(:db)
-            %td 业务员工号
+            %td= post.user.customer_service.try(:job_number)
             %td= post.owner
             %td= Post::TYPES[post._type]
             %td= post.standard_name
