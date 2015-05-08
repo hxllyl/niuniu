@@ -30,10 +30,13 @@ class Admin::UsersController < Admin::BaseController
 
   def registered
     # TODO: Add logic for registered users 已注册用户
+    
+    @sort_way = params[:sort_way] || 'created_at'
+    
     @users =  if staff?
-                current_staff.customers.order('last_sign_in_at desc').page(params[:page]||1).per(30)
+                current_staff.customers.order("#{@sort_way} desc").page(params[:page]||1).per(30)
               else
-                 User.where("customer_service_id is not NULL").order('last_sign_in_at desc').page(params[:page]||1).per(30)
+                 User.where("customer_service_id is not NULL").order("#{@sort_way} desc").page(params[:page]||1).per(30)
               end
     
     @users = @users.where(mobile: params[:mobile]) if params[:mobile].present?
@@ -101,6 +104,8 @@ class Admin::UsersController < Admin::BaseController
         log._type = 0
         log.reg_admin = @current_staff
         log.save
+        @user.contact[:remark] = log.remark
+        @user.save
         redirect_to registered_admin_users_path
       else
         redirect_to staff_list_admin_users_path
