@@ -135,6 +135,13 @@ class PostsController < BaseController
     format    = workbook.add_format(color: 'blue', align: 'center', font: '80')
     worksheet = workbook.add_worksheet
 
+    # set row column
+    worksheet.set_row(0, 30, 5)
+    worksheet.set_row(1, 20, 5)
+    worksheet.set_column(0, 0, 50)
+    worksheet.set_column(1, 3, 20)
+    worksheet.set_column(4, 0, 50)
+
     worksheet.write('A1', "#{user.name}的资源表（下载时间: #{Time.now.strftime("%Y/%m/%d")}）", format)
     worksheet.write('A2', "联系电话: #{user.mobile}", format)
     worksheet.write(2, 0, %w(品牌/车型/款式 外观/内饰 规格/状态 价格 备注))
