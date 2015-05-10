@@ -34,9 +34,9 @@ class Admin::UsersController < Admin::BaseController
     @sort_way = params[:sort_way] != 'created_at' ? "#{params[:sort_way]} asc" : 'created_at desc' 
     
     @users =  if staff?
-                current_staff.customers.order("#{@sort_way}").page(params[:page]||1).per(30)
+                current_staff.customers.order(@sort_way).page(params[:page]||1).per(30)
               else
-                 User.where("customer_service_id is not NULL").order("#{@sort_way}").page(params[:page]||1).per(30)
+                 User.where("customer_service_id is not NULL").order(@sort_way).page(params[:page]||1).per(30)
               end
     
     @users = @users.where(mobile: params[:mobile]) if params[:mobile].present?
