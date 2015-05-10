@@ -31,10 +31,10 @@ class Admin::UsersController < Admin::BaseController
   def registered
     # TODO: Add logic for registered users 已注册用户
     
-    @sort_way = params[:sort_way] || 'created_at'
+    @sort_way = params[:sort_way].present? ? "#{params[:sort_way]} asc" : 'created_at desc' 
     
     @users =  if staff?
-                current_staff.customers.order("#{@sort_way} desc").page(params[:page]||1).per(30)
+                current_staff.customers.order("#{@sort_way}").page(params[:page]||1).per(30)
               else
                  User.where("customer_service_id is not NULL").order("#{@sort_way} desc").page(params[:page]||1).per(30)
               end
