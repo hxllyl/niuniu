@@ -31,7 +31,11 @@ class Admin::UsersController < Admin::BaseController
   def registered
     # TODO: Add logic for registered users 已注册用户
     
-    @sort = params[:sort_way] != 'created_at' ? "#{params[:sort_way]} asc" : 'created_at desc' 
+    if params[:sort_way]
+      @sort = params[:sort_way] != 'created_at' ? "#{params[:sort_way]} asc" : 'created_at desc' 
+    else
+      @sort = 'created_at desc'
+    end
     
     @sort_way = params[:sort_way] || 'created_at'
     
