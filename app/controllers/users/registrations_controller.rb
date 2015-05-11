@@ -35,9 +35,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
         valid_code.update(status: ValidCode::STATUS.keys[1])
 
         log = Log::ContactPhone.where(mobile: resource[:mobile]).first_or_initialize
+
         log.is_register = true
         log._type = 1
         log.save
+      
+        resource.contact[:remark] = log.remark
+        resource.save  
       end
     else
       clean_up_passwords resource
